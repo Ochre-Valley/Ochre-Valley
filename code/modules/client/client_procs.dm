@@ -446,7 +446,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		add_admin_verbs()
 		to_chat(src, get_message_output("memo"))
 		adminGreet()
-	if(mob && reconnecting)
+	//OV Edit: Just use the whitelist code here, but check for a linked ckey instead
+	var/ckeylinked = amia_whitelistcheck(ckey)
+	if(mob && reconnecting && ckeylinked)
 		var/area/joined_area = get_area(mob.loc)
 		if(joined_area)
 			joined_area.reconnect_game(mob)
@@ -456,8 +458,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		log_admin("[ckey] was denied a connection due to not being whitelisted.")
 		qdel(src)
 		return 0
-	//OV Edit: Just use the whitelist code above us, but check for a linked ckey instead
-	else if(!amia_whitelistcheck(ckey))
+	else if(!ckeylinked)
 		src << "Your CKey has not been linked to the discord yet. Please join the Ochre Valley Discord and use the \\linkckey command before trying to join."
 		message_admins("[ckey] was denied a connection due to not having their ckey linked.")
 		log_admin("[ckey] was denied a connection due to not having their ckey linked.")
