@@ -456,6 +456,12 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		log_admin("[ckey] was denied a connection due to not being whitelisted.")
 		qdel(src)
 		return 0
+	else if(!amia_whitelistcheck(ckey))
+		src << "Your CKey has not been linked to the discord yet. Please join the Ochre Valley Discord and use the \\linkckey command before trying to join."
+		message_admins("[ckey] was denied a connection due to not having their ckey linked.")
+		log_admin("[ckey] was denied a connection due to not having their ckey linked.")
+		qdel(src)
+		return 0
 
 	add_verbs_from_config()
 	var/cached_player_age = set_client_age_from_db(tdata) //we have to cache this because other shit may change it and we need it's current value now down below.
