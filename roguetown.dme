@@ -2918,6 +2918,7 @@
 #include "modular\piercing\misc.dm"
 #include "modular\piercing\piercing.dm"
 #include "modular\piercing\piercings.dm"
+#include "modular_ochre\code\modules\client\client_defines_ov.dm"
 #include "modular\piercing\supply.dm"
 #include "statpacks\agile.dm"
 #include "statpacks\mental.dm"
