@@ -249,6 +249,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	migrant  = new /datum/migrant_pref(src)
 	familiar_prefs = new /datum/familiar_prefs(src)
 
+	if(!sizecat)
+		sizecat = new /datum/sizecat/none
+
 	for(var/custom_name_id in GLOB.preferences_custom_names)
 		custom_names[custom_name_id] = get_default_name(custom_name_id)
 
@@ -496,7 +499,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Dominance:</b> <a href='?_src_=prefs;preference=domhand'>[domhand == 1 ? "Left-handed" : "Right-handed"]</a><BR>"
 			//Caustic edit
-			dat += "<b>Size Category:</b> <a href='?_src_=prefs;preference=sizecat;task=input'>[sizecat]</a><BR>"
+			dat += "<b>Size Category:</b> [sizecat.name]<BR>" //OV EDIT - No longer needs to be a button
 			dat += "<b>Pickup able:</b> <a href='?_src_=prefs;preference=pickupable'>[pickupable == 1 ? "Yes" : "No"]</a><BR>"
 			//Caustic edit end
 			dat += "<b>Food Preferences:</b> <a href='?_src_=prefs;preference=culinary;task=menu'>Change</a><BR>"
@@ -2476,6 +2479,24 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(new_body_size)
 						new_body_size = clamp(new_body_size * 0.01, BODY_SIZE_MIN, BODY_SIZE_MAX)
 						features["body_size"] = new_body_size
+						//OV edit
+						switch(new_body_size)
+							if(0 to 0.45)
+								sizecat = new /datum/sizecat/micro
+								to_chat(user, span_alert("You are now considered a micro."))
+							if(0.45 to 0.85)
+								sizecat = new /datum/sizecat/small
+								to_chat(user, span_alert("You are now considered small."))
+							if(0.85 to 1.15)
+								sizecat = new /datum/sizecat/none
+								to_chat(user, span_alert("You are now considered a normal height."))
+							if(1.15 to 1.5)
+								sizecat = new /datum/sizecat/giant
+								to_chat(user, span_alert("You are now considered a giant."))
+							if(1.5 to INFINITY)
+								sizecat = new /datum/sizecat/macro
+								to_chat(user, span_alert("You are now considered a macro."))
+						//OV edit end
 				//Caustic edit
 				if("sizecat")
 					select_sizecat(user)

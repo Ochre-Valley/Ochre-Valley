@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added the ability to choose any scale you want from 25% to 200%. Size categories are now determined by the size that you choose and still apply all the stats and traits that they normally would."

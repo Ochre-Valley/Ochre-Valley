@@ -9,8 +9,8 @@
 	custom_text = "Increases your sprite size."
 
 /datum/sizecat/giant/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.transform = recipient.transform.Scale(1.25, 1.25)
-	recipient.transform = recipient.transform.Translate(0, (0.25 * 16))
+//	recipient.transform = recipient.transform.Scale(1.25, 1.25) //OV REMOVE - Determined by sprite scale now
+//	recipient.transform = recipient.transform.Translate(0, (0.25 * 16)) //OV REMOVE
 	recipient.update_transform()
 	recipient.change_stat(STATKEY_STR, 1)
 	recipient.change_stat(STATKEY_CON, 1)
@@ -23,8 +23,8 @@
 	custom_text = "Greatly increases your sprite size. Makes you stronger and more durable but reduces your movement speed. Your speed stat remains unaffected."
 
 /datum/sizecat/macro/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.transform = recipient.transform.Scale(2, 2)
-	recipient.transform = recipient.transform.Translate(0, (0.25 * 35))
+//	recipient.transform = recipient.transform.Scale(2, 2) //OV REMOVE
+//	recipient.transform = recipient.transform.Translate(0, (0.25 * 35)) //OV REMOVE
 	recipient.update_transform()
 	recipient.change_stat(STATKEY_STR, 2)
 	recipient.change_stat(STATKEY_CON, 2)
@@ -38,8 +38,8 @@
 	custom_text = "Reduces your sprite size.  Your stealth and agility is strengthened.  Your strength and durability will be lower than average."
 
 /datum/sizecat/small/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.transform = recipient.transform.Scale(0.75, 0.75)
-	recipient.transform = recipient.transform.Translate(0, (0.5 * -5))
+//	recipient.transform = recipient.transform.Scale(0.75, 0.75) //OV REMOVE
+//	recipient.transform = recipient.transform.Translate(0, (0.5 * -5)) //OV REMOVE
 	recipient.update_transform()
 	recipient.change_stat(STATKEY_STR, -2)
 	recipient.change_stat(STATKEY_WIL, -2)
@@ -57,8 +57,8 @@
 	custom_text = "Greatly reduces your sprite size. Your stealth and agility will be strengthened greatly, however your strength, durability, and movement speed will be reduced greatly."
 
 /datum/sizecat/micro/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.transform = recipient.transform.Scale(0.2, 0.2)
-	recipient.transform = recipient.transform.Translate(0, (0.25 * 8))
+//	recipient.transform = recipient.transform.Scale(0.2, 0.2) //OV REMOVE
+//	recipient.transform = recipient.transform.Translate(0, (0.25 * 8)) //OV REMOVE
 	recipient.update_transform()
 	recipient.change_stat(STATKEY_STR, -5) // Lets try keeping stat maluses to -5, and explore other options if this isnt enough for them.
 	recipient.change_stat(STATKEY_WIL, -5)

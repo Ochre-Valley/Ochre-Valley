@@ -1,0 +1,12 @@
+{
+	"file": "roguetown.dme",
+	"scannable_directory": "_maps/",
+	"subdirectories": true,
+	"excluded_files": [],
+	"forbidden_includes": [
+		"_maps/cove_world.dm",
+		"_maps/dun_world.dm",
+		"_maps/roguetest.dm",
+		"_maps/map_files/roguetest/map_adjustment_roguetest.dm"
+	]
+}

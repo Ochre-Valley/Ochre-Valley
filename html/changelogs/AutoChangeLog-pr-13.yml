@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Fixes a teeny tiny mistake I made that killed the server on first launch :D"

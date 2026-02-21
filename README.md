@@ -1,9 +1,9 @@
-# CAUSTIC COVE
+# OCHRE VALLEY
 
 | Website                   | Link                                           |
 |---------------------------|------------------------------------------------|
-| Discord | [https://discord.gg/ApEsEhBAMm](https://discord.gg/ApEsEhBAMm)
-| Code    | [https://github.com/CausticCove/CC](https://github.com/CausticCove/CC)    |
+| Discord | (N/A FOR NOW)
+| Code    | [https://github.com/Ochre-Valley/Ochre-Valley](https://github.com/Ochre-Valley/Ochre-Valley)    |
 | Wiki    | [https://azurepeak.miraheze.org/wiki/Main_Page](https://azurepeak.miraheze.org/wiki/Main_Page) |
 
 ## LICENSE

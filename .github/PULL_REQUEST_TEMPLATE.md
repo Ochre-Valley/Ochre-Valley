@@ -6,15 +6,15 @@
 <!--
 Just a reminder to keep up the best practices, and to ensure that everyone has an easier time as a result! Please doublecheck that they were done!
 -->
-- [ ] Try to modularize as much as possible. <!--  Do this by putting stuff in the modular caustic folder, and modifying Azure code by calling your code from the places where you could put the code, for an example-->
-- [ ] Mark the start and end of edits outside the caustic modular folder (if applicable) for changes made.
+- [ ] Try to modularize as much as possible. <!--  Do this by putting stuff in the modular ochre folder, and modifying Azure code by calling your code from the places where you could put the code, for an example-->
+- [ ] Mark the start and end of edits outside the ochre modular folder (if applicable) for changes made.
 <!--
 Do this one like so
 
 Azure
-///Caustic edit
+///Ochre edit
 Your code
-///Caustic edit end
+///Ochre edit end
 Azure
 
 This makes it easier for maintainers to keep track of what's ours.
