@@ -31,10 +31,11 @@
 
 	if(GLOB.rogue_round_id)
 		to_chat(src, span_info("ROUND ID: [GLOB.rogue_round_id]"))
-
-	if(client.is_new_player())
-		to_chat(src, span_userdanger("Due to an invasion of goblins trying to play ROGUETOWN, you need to register your discord account or support us on patreon to join."))
-		to_chat(src, span_info("We dislike discord too, but it's necessary. To register your discord or patreon, please click the 'Register' tab in the top right of the window, and then choose one of the options."))
+	//OV Edit
+	if(!client.checkCkeyLink())
+		to_chat(src, span_userdanger("You have not linked your CKey to the Ochre Valley discord!"))
+		to_chat(src, span_info("Use the \\linkckey command on the server to get yourself added to the whitelist"))
+	//OV Edit End
 	else
 		var/shown_patreon_level = client.patreonlevel()
 		if(!shown_patreon_level)

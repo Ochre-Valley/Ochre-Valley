@@ -55,7 +55,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(!client)
 		return
 
-	if(client.is_new_player())
+	if(!client.is_registered)//OV Edit
 		return
 
 	if(SSticker.HasRoundStarted())

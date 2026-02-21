@@ -39,7 +39,7 @@
 	set waitfor = 0
 	if(!parent)
 		return
-	if(parent.is_new_player())
+	if(!parent.is_registered)//OV Edit
 		return
 
 	// Set up the dummy for its photoshoot
