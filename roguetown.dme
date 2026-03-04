@@ -3036,6 +3036,7 @@
 #include "modular\piercing\supply.dm"
 #include "modular_causticcove\code\modules\antagonists\roguetown\villains\werewolf\werewolf_transformation_resist.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_accessories.dm"
+#include "modular_ochrevalley\code\modules\mob\living\simple_animal\vore.dm"
 #include "modular_ochrevalley\code\modules\rogueclothes\neck.dm"
 #include "statpacks\agile.dm"
 #include "statpacks\mental.dm"

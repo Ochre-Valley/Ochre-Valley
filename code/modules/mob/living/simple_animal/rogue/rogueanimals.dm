@@ -123,9 +123,16 @@
 
 /mob/living/simple_animal/hostile/retaliate/rogue/AttackingTarget()
 	//If you can't act and dont have a player stop moving.
+	//OV edit
+	if(currently_eating)
+		return
+	if(vore_active)
+		if(vore_surrendered(target))
+			return
 	if(!can_act && !client)
 		return FALSE
 	return ..()
+	//OV edit end
 
 /mob/living/simple_animal/hostile/retaliate/rogue/proc/eat_bodies()
 	var/mob/living/L

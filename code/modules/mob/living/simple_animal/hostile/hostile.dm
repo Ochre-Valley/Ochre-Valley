@@ -307,6 +307,7 @@
 
 	if(binded)
 		return FALSE
+
 	if(rapid_melee > 1)
 		var/datum/callback/cb = CALLBACK(src, PROC_REF(CheckAndAttack))
 		var/delay = SSnpcpool.wait / rapid_melee

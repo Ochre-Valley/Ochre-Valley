@@ -68,6 +68,8 @@
 	var/chomp_cd = 0
 	var/chomp_roll = 0
 
+	vore_active = 1 //OV ADD
+
 //new ai, old ai off
 	AIStatus = AI_OFF
 	can_have_ai = FALSE

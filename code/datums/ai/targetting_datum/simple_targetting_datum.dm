@@ -36,6 +36,11 @@
 
 	if(isturf(the_target.loc) && living_mob.z != the_target.z)
 		return FALSE
+	
+	//OV edit
+	if(isbelly(the_target.loc))
+		return FALSE
+	//OV edit end
 
 	if(isliving(the_target)) //Targetting vs living mobs
 		var/mob/living/L = the_target
