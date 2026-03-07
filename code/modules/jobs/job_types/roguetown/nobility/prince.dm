@@ -4,7 +4,7 @@
 	flag = PRINCE
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 2
+	total_positions = 4 // OV Edit, the nobility demands more heirs. Now get busy. :>
 	spawn_positions = 2
 	f_title = "Princess"
 	allowed_races = RACES_ALL_KINDS //Caustic edit from RACES_NO_CONSTRUCT
