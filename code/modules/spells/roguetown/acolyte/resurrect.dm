@@ -87,10 +87,11 @@
 			)
 			target.gib()
 			return TRUE
+		to_chat(user, span_notice("You feel the energies of life flow through you, and into [target.name]... All that's left is hope for the best...")) //CC Edit: Feedback
 		if(alert(target, "They are calling for you. Are you ready?", "Revival", "I need to wake up", "Don't let me go") != "I need to wake up")
 			target.visible_message(span_notice("Nothing happens. They are not being let go."))
 			return FALSE
-		target.adjustOxyLoss(-target.getOxyLoss()) //Ye Olde CPR
+		target.setOxyLoss(0, TRUE, TRUE) //Ye Olde CPR //OV Edit, commenting to mark as changed on CC Revival bugfix thread 334
 		if(!target.revive(full_heal = FALSE))
 			to_chat(user, span_warning("Nothing happens."))
 			revert_cast()

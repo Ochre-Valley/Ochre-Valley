@@ -104,6 +104,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	//We do this here so anything that doesn't want to persist can clear itself
 	var/list/old_comp_lookup = comp_lookup?.Copy()
 	var/list/old_signal_procs = signal_procs?.Copy()
+	if(!path) //CC Edit: This shouldn't runtime yet here we are... it's already checked above, so the path was nulled sometime between here and there? Logs don't lie.
+		return
 	var/turf/W = new path(src)
 
 	// WARNING WARNING

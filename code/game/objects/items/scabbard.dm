@@ -719,7 +719,7 @@
 
 /obj/item/rogueweapon/scabbard/gwstrap/getonmobprop(tag)
 	..()
-	if(!hol_comp.sheathed)
+	if(!hol_comp || !hol_comp.sheathed) //CC Edit: Checking if we have hol_comp in the first place
 		return
 	if(istype(hol_comp.sheathed, /obj/item/rogueweapon/estoc) || istype(hol_comp.sheathed, /obj/item/rogueweapon/greatsword))
 		switch(tag)
