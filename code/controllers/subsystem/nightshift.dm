@@ -138,3 +138,5 @@ SUBSYSTEM_DEF(nightshift)
 		if(!stat)
 			to_chat(src, span_warning("Staying alive in these uncertain times is it's own achievement. With the spark of my mind intact, and the embers of my heart and soul burning bright, at least at the moment, I feel slightly better about todae."))
 			mind.sleep_adv.retained_dust += 100	//Free skillpoint for you <3 //CC Edit End //OV Edit: Marked CC Edit ending
+			
+
