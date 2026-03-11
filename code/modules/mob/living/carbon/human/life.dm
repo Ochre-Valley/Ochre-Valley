@@ -55,7 +55,7 @@
 				remove_stress(/datum/stressevent/sleepytime)
 				if(mind)
 					mind.sleep_adv.advance_cycle()
-					handle_sleep_triumphs()
+					//handle_sleep_triumphs() CC Edit: Moving these to nightshift.dm //OV REMOVE: Noting this was removed above and moved to indicated file
 	if(leprosy == 1)
 		adjustToxLoss(2)
 	else if(leprosy == 2)

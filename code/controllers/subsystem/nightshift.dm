@@ -89,8 +89,10 @@ SUBSYSTEM_DEF(nightshift)
 		if("day")
 			if(HAS_TRAIT(src, TRAIT_VAMP_DREAMS))
 				apply_status_effect(/datum/status_effect/debuff/vamp_dreams)
+				handle_sleep_triumphs() //CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
 			if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 				apply_status_effect(/datum/status_effect/debuff/sleepytime)
+				handle_sleep_triumphs()//CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
 			if(HAS_TRAIT(src, TRAIT_INFINITE_STAMINA))
 				handle_sleep_triumphs()
 			if(HAS_TRAIT(src, TRAIT_NOSLEEP))
@@ -102,9 +104,11 @@ SUBSYSTEM_DEF(nightshift)
 			if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 				add_stress(/datum/stressevent/night_owl)
 			else
+				handle_sleep_triumphs()//CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
 				apply_status_effect(/datum/status_effect/debuff/sleepytime)
 				add_stress(/datum/stressevent/sleepytime)
 
+///CC Edit: Moving dreampoints to whenever triumph gets dispensed
 /mob/living/carbon/human/proc/handle_sleep_triumphs()
 	if(!mind)
 		return
@@ -115,4 +119,22 @@ SUBSYSTEM_DEF(nightshift)
 	if(mind.assigned_role != "Unassigned" && istype(mind.assigned_role, /datum/job) && (mind.assigned_role.title in towner_jobs)) //If you play a towner-related role, you get an additonal triumph
 		triumphs_to_add++
 	adjust_triumphs(triumphs_to_add)
-	to_chat(src, span_danger("Nights Survived: \Roman[allmig_reward]"))
+	to_chat(src, span_notice("An another dae passes in Azuria...\nNights Survived: \Roman[allmig_reward]. \n"))
+	
+	var/int = mind.current.STAINT
+	
+	if(int < 10)
+		to_chat(src, span_boldwarning("I'm trying my best to learn, even if it is a little difficult..."))
+	else
+		to_chat(src, span_notice("I reflect on my journey, my experiences, and the lessons others, and lyfe has taught me..."))
+	if(mind.sleep_adv)
+		mind.sleep_adv.retained_dust += mind.current.STAINT * DREAM_DUST_PER_INT //25% dream points for each int
+		switch(mind.sleep_adv.retained_dust)
+			if(0 to 500)
+				to_chat(src, span_notice("I managed to focus on learning a thing or two lately, but to really solidify the lessons, I think I'll need to meditate and dream on it..."))
+			else
+				to_chat(src, span_notice("My mind has been absorbing knoweledge like a sponge... whatever that is. Curiosity drives me forwards, but reality holds me back... I really should reflect on my lessons now, if I want to realize my potential"))
+
+		if(!stat)
+			to_chat(src, span_warning("Staying alive in these uncertain times is it's own achievement. With the spark of my mind intact, and the embers of my heart and soul burning bright, at least at the moment, I feel slightly better about todae."))
+			mind.sleep_adv.retained_dust += 100	//Free skillpoint for you <3 //CC Edit End //OV Edit: Marked CC Edit ending

@@ -151,13 +151,15 @@
 	var/dream_dust = retained_dust
 	dream_dust += BASE_DREAM_DUST
 
+	/*
+	//CC Edit: Move this to nightshift.dm
 	var/int = mind.current.STAINT
 	dream_dust += mind.current.STAINT * DREAM_DUST_PER_INT //25% dream points for each int
 	if(int < 10)
 		to_chat(mind.current, span_boldwarning("My shallow imagination makes them dull..."))
 	else if (int > 10)
 		to_chat(mind.current, span_notice("My creative thinking enhances them..."))
-
+	*/ //CC Edit End //OV Edit: Marked end of CC Edit
 	var/stress_median = stress_amount / stress_cycles
 
 	if(stress_median <= -1)
