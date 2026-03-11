@@ -73,7 +73,7 @@
 	cmode_music = 'sound/music/frei_lancer.ogg'
 	outfit = /datum/outfit/job/roguetown/mercenary/freelancer_lancer
 	subclass_languages = list(/datum/language/aavnic)//Your character could not have possibly "graduated" without atleast some basic knowledge of Aavnic.
-	allowed_patrons = list(/datum/patron/old_god)
+	//allowed_patrons = list(/datum/patron/old_god) //CC Edit - Remove Patron Limits //OV Remove: Making this in-line with upstream
 	traits_applied = list(TRAIT_BADTRAINER, TRAIT_FENCERDEXTERITY, TRAIT_INTELLECTUAL)
 	subclass_stats = list(
 		STATKEY_CON = 2,
