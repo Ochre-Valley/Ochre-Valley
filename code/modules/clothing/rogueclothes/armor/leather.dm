@@ -249,34 +249,28 @@
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	sellprice = 100
 
+//OV edit start
 /obj/item/clothing/suit/roguetown/armor/leather/bikini
 	name = "leather corslet"
 	desc = "Flexible cowhide armor. Lightweight, better than nothing. Trimmed to protect the heart and hips."
-	body_parts_covered = CHEST|GROIN
 	icon_state = "leatherkini"
 	item_state = "leatherkini"
-	allowed_sex = list(FEMALE, MALE)
-	allowed_race = CLOTHED_RACES_TYPES
 	color = "#7D6653"
-	sellprice = 18 //This covers like, nothing.
+
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded/bikini
 	name = "studded leather corslet"
 	desc = "Studded leather is the most durable of all hides and leathers and about as light. Trimmed to protect the heart and hips."
-	body_parts_covered = CHEST|GROIN
 	icon_state = "studleatherkini"
 	item_state = "studleatherkini"
-	allowed_sex = list(MALE, FEMALE)
-	allowed_race = CLOTHED_RACES_TYPES
+
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide/bikini
 	name = "hide corslet"
 	desc = "A light armor of wildbeast hide. Far more durable than leather. Trimmed to protect the heart and hips."
-	body_parts_covered = CHEST|GROIN
-	icon_state = "hidearmorkini"
+	icon_state = "hide"
 	item_state = "hidearmorkini"
-	allowed_sex = list(MALE, FEMALE)
-	allowed_race = CLOTHED_RACES_TYPES
+//OV edit end
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"

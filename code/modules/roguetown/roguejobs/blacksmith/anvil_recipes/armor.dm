@@ -708,19 +708,15 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/iron, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/full/fluted/legacy
 
-/datum/anvil_recipe/armor/steel/platebikini
-	name = "Half-Plate Corslet, Steel (+1 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
-	req_blade = /obj/item/blade/steel_plate
-	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/hide/cured)
+//OV edit start
+/datum/anvil_recipe/armor/steel/halfplate/platebikini
+	name = "Half-Plate Corslet, Steel (+2 Steel, +1 Cured Leather)"
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/bikini
 
-/datum/anvil_recipe/armor/steel/fullplatebikini
-	name = "Full-Plate Corslet, Steel (+2 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
-	req_blade = /obj/item/blade/steel_plate
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/hide/cured)
+/datum/anvil_recipe/armor/steel/fullplate/fullplatebikini
+	name = "Full-Plate Corslet, Steel (+3 Steel, +1 Cured Leather)"
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/full/bikini
+//OV end
 
 /datum/anvil_recipe/armor/steel/coatplates
 	name = "Coat Of Plates, Steel (+1 Steel, +1 Cured Leather)"
