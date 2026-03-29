@@ -271,3 +271,19 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	clip_mask_state = "clip_mask_goat"
 
 	has_taur_color = TRUE
+
+/obj/item/bodypart/taur/biglegs
+	name = "Big Legs"
+
+	offset_x = -16
+	taur_icon_state = "biglegs_s"
+
+	has_taur_color = TRUE
+
+/obj/item/bodypart/taur/biglegsstanced
+	name = "Big Legs, Stanced"
+
+	offset_x = -16
+	taur_icon_state = "biglegsstanced_s"
+
+	has_taur_color = TRUE
