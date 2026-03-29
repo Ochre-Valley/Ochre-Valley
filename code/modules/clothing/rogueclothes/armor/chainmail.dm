@@ -109,13 +109,18 @@
 	smeltresult = /obj/item/ingot/aaslag
 	sellprice = 15 //Still ew. AAslag.
 
-//OV edit start
 /obj/item/clothing/suit/roguetown/armor/chainmail/bikini
 	name = "chainmail corslet"	// corslet, from the old French 'cors' or bodice, with the diminutive 'let', used to describe lightweight military armor since 1500. Chosen here to replace 'bikini', an extreme anachronism.
 	desc = "For the daring, affording maille's protection with light weight."
 	icon_state = "chainkini"
 	item_state = "chainkini"
-//OV edit end
+//OV removal start
+// 	allowed_sex = list(MALE, FEMALE)
+// 	allowed_race = CLOTHED_RACES_TYPES
+// 	body_parts_covered = CHEST|GROIN
+// 	armor_class = ARMOR_CLASS_LIGHT //placed in the medium category to keep it with its parent obj
+// 	sellprice = 18 //Uhhh? Yeah go for it?...
+//OV removal end
 
 //HEAVY ARMOR//
 

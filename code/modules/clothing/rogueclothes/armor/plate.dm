@@ -432,7 +432,16 @@
 	name = "full-plate corset"
 	desc = "Breastplate, pauldrons, couters, cuisses.. did you forget something?"
 	icon_state = "platekini"
-//OV edit end
+	// OV removal start 
+	// allowed_sex = list(MALE, FEMALE)
+	// body_parts_covered = CHEST|GROIN|LEGS|ARMS
+	// equip_delay_self = 8 SECONDS
+	// unequip_delay_self = 8 SECONDS
+	// equip_delay_other = 3 SECONDS
+	// strip_delay = 6 SECONDS
+	// smelt_bar_num = 3
+	// sellprice = 60 //Wow this is breezy.
+	// OV removal start 
 
 /obj/item/clothing/suit/roguetown/armor/heartfelt
 	slot_flags = ITEM_SLOT_ARMOR
@@ -514,13 +523,20 @@
 
 
 // MEDIUM
-//OV edit start
+// OV start end
 /obj/item/clothing/suit/roguetown/armor/plate/bikini
 	name = "half-plate corslet"
 	desc = "A high breastplate and hip armor allowing flexibility and great protection, save for the stomach."
+//	body_parts_covered = CHEST|GROIN
 	icon_state = "halfplatekini"
-	item_state = "halfplatekini"
-//OV edit end
+	item_state = "halfplatekini"	
+// 	armor = ARMOR_CUIRASS // Identical to steel cuirass, but covering the groin instead of the vitals.
+// 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL	// Identical to steel cuirasss. Same steel price.
+// 	allowed_sex = list(MALE, FEMALE)
+// 	armor_class = ARMOR_CLASS_MEDIUM
+// 	smelt_bar_num = 2
+// 	sellprice = 45 // Wow you're... Kinda exposed here.
+// OV removal end
 
 /obj/item/clothing/suit/roguetown/armor/plate/cuirass
 	slot_flags = ITEM_SLOT_ARMOR
