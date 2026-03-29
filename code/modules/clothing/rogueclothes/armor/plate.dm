@@ -523,7 +523,7 @@
 
 
 // MEDIUM
-// OV start end
+// OV removal start
 /obj/item/clothing/suit/roguetown/armor/plate/bikini
 	name = "half-plate corslet"
 	desc = "A high breastplate and hip armor allowing flexibility and great protection, save for the stomach."
