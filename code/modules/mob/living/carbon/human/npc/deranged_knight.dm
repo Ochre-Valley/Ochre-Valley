@@ -28,10 +28,13 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	var/preset = "matthios"
 	var/forced_preset = "" // If set, force a specific preset instead of randomizing.
+	var/obj/item/outfit_weapon
 
+	// CC Edit Start
 	//We are the biggest and baddest for boss fights... We're smart, and well trained.
 	smart_combatant = TRUE
 	special_attacker = TRUE
+	// CC Edit End
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/retaliate(mob/living/L)
 	var/newtarg = target
@@ -59,22 +62,17 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 	is_silent = TRUE
-	var/head = get_bodypart(BODY_ZONE_HEAD)
-	RegisterSignal(head, COMSIG_MOB_DISMEMBER, PROC_REF(handle_drop_limb))
 
-/mob/living/carbon/human/species/human/northern/deranged_knight/Destroy()
-	var/head = get_bodypart(BODY_ZONE_HEAD)
-	if(head)
-		UnregisterSignal(head, COMSIG_MOB_DISMEMBER)
-	return ..()
-
-/// Snowflake DK behavior for decaps. Yes, they turn to dust prior to decaps.
-/mob/living/carbon/human/species/human/northern/deranged_knight/proc/handle_drop_limb(obj/item/bodypart/bodypart, special)
-	if(!istype(bodypart, /obj/item/bodypart/head))
+/mob/living/carbon/human/species/human/northern/deranged_knight/proc/outfit_dk(datum/outfit/outfit)
+	if(!outfit)
 		return
-
-	death(FALSE, TRUE) // No, you won't loot that tasty helmet.
-	return COMPONENT_CANCEL_DISMEMBER
+	equipOutfit(outfit)
+	// Apply dust-on-drop to all equipped gear so it can't be looted via dismemberment or stripping.
+	// TRAIT_NODROP on held items prevents grab disarming.
+	for(var/obj/item/equipped_item in get_equipped_items() + held_items)
+		equipped_item.AddComponent(/datum/component/item_on_drop/dust)
+	for(var/obj/item/held_item in held_items)
+		ADD_TRAIT(held_item, TRAIT_NODROP, TRAIT_GENERIC)
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/after_creation()
 	..()
@@ -85,7 +83,6 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRIT_THRESHOLD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_STUCKITEMS, TRAIT_GENERIC)
 	if(forced_preset)
 		preset = forced_preset
 	else
@@ -101,18 +98,18 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 	switch(preset)
 		if("graggar")
 			ADD_TRAIT(src, TRAIT_HORDE, TRAIT_GENERIC)
-			equipOutfit(new /datum/outfit/job/roguetown/quest_miniboss/graggar)
+			outfit_dk(new /datum/outfit/job/roguetown/quest_miniboss/graggar)
 		if ("matthios")
 			ADD_TRAIT(src, TRAIT_FREEMAN, TRAIT_GENERIC)
-			equipOutfit(new /datum/outfit/job/roguetown/quest_miniboss/matthios)
+			outfit_dk(new /datum/outfit/job/roguetown/quest_miniboss/matthios)
 		if ("zizo")
 			ADD_TRAIT(src, TRAIT_CABAL, TRAIT_GENERIC)
-			equipOutfit(new /datum/outfit/job/roguetown/quest_miniboss/zizo)
+			outfit_dk(new /datum/outfit/job/roguetown/quest_miniboss/zizo)
 		if ("hedgeknight")
 			if(prob(50))
-				equipOutfit(new /datum/outfit/job/roguetown/quest_miniboss/hedge_knight)
+				outfit_dk(new /datum/outfit/job/roguetown/quest_miniboss/hedge_knight)
 			else
-				equipOutfit(new /datum/outfit/job/roguetown/quest_miniboss/blacksteel)
+				outfit_dk(new /datum/outfit/job/roguetown/quest_miniboss/blacksteel)
 			// No special trait for hedgeknight, he's just a generic tough guy.
 
 	gender = pick(MALE,FEMALE)
@@ -210,6 +207,10 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 	. = ..()
 	if(!gibbed)
 		dust(FALSE, FALSE, TRUE)
+	if(outfit_weapon)
+		if(iscarbon(outfit_weapon.loc))
+			to_chat(loc, span_warning("[outfit_weapon]'s energies fade, as [src] breathes their last, and it crumbles to dust.."))
+		QDEL_NULL(outfit_weapon)
 
 /datum/outfit/job/roguetown/quest_miniboss/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()

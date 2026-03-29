@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - qol: "Last words should prefbreak you significantly less."

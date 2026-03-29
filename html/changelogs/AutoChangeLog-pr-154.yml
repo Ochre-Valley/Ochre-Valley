@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Enables colouring of background of character preview by clicking on your character."

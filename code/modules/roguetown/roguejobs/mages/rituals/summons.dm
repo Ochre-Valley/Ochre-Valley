@@ -15,7 +15,7 @@
 	else
 		summoned = new mob_to_summon(loc)
 		ADD_TRAIT(summoned, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
-		summoned.status_flags += GODMODE//It's not meant to be killable until released from it's planar binding.
+		summoned.status_flags |= GODMODE//It's not meant to be killable until released from it's planar binding. // OV Edit: this is a bitflag use bitflag ops
 		summoned.candodge = FALSE
 		animate(summoned, color = "#ff0000",time = 5)
 		summoned.move_resist = MOVE_FORCE_EXTREMELY_STRONG

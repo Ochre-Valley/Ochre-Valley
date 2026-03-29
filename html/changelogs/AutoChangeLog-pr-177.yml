@@ -1,0 +1,4 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscdel: "Removed event occurences for unwelcome Random Spawn Antags"

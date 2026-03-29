@@ -4,7 +4,7 @@
 |---------------------------|------------------------------------------------|
 | Discord | [https://discord.gg/qpf3BtBUXq](https://discord.gg/qpf3BtBUXq)
 | Code    | [https://github.com/Ochre-Valley/Ochre-Valley](https://github.com/Ochre-Valley/Ochre-Valley)    |
-| Wiki    | [https://azurepeak.miraheze.org/wiki/Main_Page](https://azurepeak.miraheze.org/wiki/Main_Page) |
+| Wiki    | [https://ochrevalley.miraheze.org/wiki/Main_Page](https://ochrevalley.miraheze.org/wiki/Main_Page) |
 
 ## LICENSE
 Original Fork Originates from [commit c28b351807bad950d2b323ada048190844bbda32](https://github.com/tgstation/tgstation/commit/c28b351807bad950d2b323ada048190844bbda32).

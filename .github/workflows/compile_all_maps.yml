@@ -11,7 +11,7 @@ jobs:
   compile_all_stations:
     name: Compile All Station Maps
     runs-on: ubuntu-22.04
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
   compile_all_templates:
     name: Compile All Templates
     runs-on: ubuntu-22.04
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -67,7 +67,7 @@ jobs:
   compile_all_dungeons:
     name: Compile All Dungeons
     runs-on: ubuntu-22.04
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4

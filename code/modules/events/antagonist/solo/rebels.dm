@@ -13,7 +13,7 @@
 
 	denominator = 50 // adds 1 possible rebel for every 50 players
 
-	max_occurrences = 1
+	max_occurrences = 0 //OV Edit: Disabled. Was 1.
 
 	earliest_start = 0 SECONDS
 

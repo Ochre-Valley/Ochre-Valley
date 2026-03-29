@@ -140,7 +140,7 @@ GLOBAL_LIST_EMPTY(last_words)
 //		addtimer(CALLBACK(client, PROC_REF(ghostize), 1, src), 150)
 		add_client_colour(/datum/client_colour/monochrome)
 		client.verbs.Add(GLOB.ghost_verbs)
-		if(last_words)
+		if(last_words && !istype(src.loc, /obj/belly)) //OV Edit: Oh god, why were we letting vore deaths cause last words?
 			GLOB.last_words |= last_words
 
 	for(var/s in ownedSoullinks)

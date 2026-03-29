@@ -3,8 +3,8 @@
 	triumph_count = 0
 	var/organs_consumed = 0
 	var/hearts_consumed = 0
-	var/organs_required = 2
-	var/hearts_required = 1
+	var/organs_required = 10 //OV EDIT - Round removes are against our rules
+	var/hearts_required = 0 //OV EDIT
 
 /datum/objective/consume_organs/on_creation()
 	. = ..()

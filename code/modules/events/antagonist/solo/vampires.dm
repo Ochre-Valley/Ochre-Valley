@@ -10,7 +10,7 @@
 	shared_occurence_type = SHARED_HIGH_THREAT
 
 	weight = 0 // CC edit: Disabled. Was 4
-	max_occurrences = 1
+	max_occurrences = 0 //OV Edit: Disabled. Was 1
 
 	denominator = 80
 

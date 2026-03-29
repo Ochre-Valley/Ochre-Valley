@@ -377,3 +377,12 @@
 	color_keys = 3
 	color_key_names = list("Ears", "Inner", "Tips")
 	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER, BODY_ADJ_LAYER)
+// OV ADD
+/datum/sprite_accessory/ears/big/ochre/bunny_tall
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/ears/ears_32x64.dmi'
+	icon_state = "bunny_tall"
+	name = "Bunny Tall"
+	color_keys = 2
+	color_key_names = list("Ears","Inner")
+	relevant_layers = list(BODY_ADJ_LAYER)
+//OV Add End: Adding in Bunny Ears Tall from Virgo

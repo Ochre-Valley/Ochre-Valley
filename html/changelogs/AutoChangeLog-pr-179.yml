@@ -1,0 +1,4 @@
+author: "ShadowLarkens"
+delete-after: True
+changes:
+  - bugfix: "Mage summons no longer can become stuck in godmode"

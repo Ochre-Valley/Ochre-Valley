@@ -1,0 +1,4 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added new bunny ears + modular DMI spritebox"

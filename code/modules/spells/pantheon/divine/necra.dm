@@ -213,6 +213,10 @@
 			var/mob/living/carbon/human/B = C
 			if(B.buried)
 				continue
+		//OV edit - Skip bodies in THE VORE PIT
+		if(C.z == 1 && C.y == 1 && C.x == 1)
+			continue
+		//OV edit end
 		var/time_dead = 0
 		if(C.timeofdeath)
 			time_dead = world.time - C.timeofdeath

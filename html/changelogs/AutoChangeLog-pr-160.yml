@@ -1,0 +1,4 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added ROLEPLAY_ADS to the default toggle listing for New Player Preferences"

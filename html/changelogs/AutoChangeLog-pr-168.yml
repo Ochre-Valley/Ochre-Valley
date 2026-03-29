@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Locate Corpse will no longer look for bodies in the vore pit"

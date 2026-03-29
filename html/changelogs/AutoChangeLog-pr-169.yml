@@ -1,0 +1,5 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - balance: "Conjure tool now has a limited selection if your acane magic skill is below journeyman"
+  - balance: "Swapped restoration and conjure tool for malumites, so devotees have a miracle they can actually use."
