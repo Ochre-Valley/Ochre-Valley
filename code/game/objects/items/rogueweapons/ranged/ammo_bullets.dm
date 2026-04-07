@@ -319,7 +319,7 @@
 // GUNPOWDER AMMO
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
-	damage = 60 //OV Edit - Damage Tweaks
+	damage = 40 //OV Edit - Damage Tweaks
 	damage_type = BRUTE
 	icon_state = "musketball_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
@@ -340,6 +340,15 @@
 	icon = 'icons/roguetown/weapons/ranged/sling_mob.dmi'
 	icon_state = "musketball"
 	dropshrink = 0.5
+	embedding = list( // OV Edit Start: Arquebus Bullet Rework
+		"embedded_fall_chance" = 0, // It's not coming out on its own.
+		"embedded_pain_multiplier" = 6,
+		"embedded_fall_pain_multiplier" = 10, // Shouldn't happen, but let's cover our bases.
+		"embedded_impact_pain_multiplier" = 12,
+		"embedded_unsafe_removal_pain_multiplier" = 20, // Pretty metal but also a bad idea. A surgeon can do this without hurting you.
+		"embedded_unsafe_removal_time" = 30, // No time to dig your fingers in around the bullet in a melee.
+		"embedded_bloodloss" = 1
+	) // OV Edit End
 	possible_item_intents = list(/datum/intent/use)
 	max_integrity = 0.1
 
