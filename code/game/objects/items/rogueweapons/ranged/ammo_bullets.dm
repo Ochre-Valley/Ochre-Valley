@@ -343,6 +343,7 @@
 	possible_item_intents = list(/datum/intent/use)
 	max_integrity = 0.1
 
+
 //mob projectiles
 /obj/projectile/bullet/reusable/arrow/orc
 	armor_penetration = PEN_LIGHT
