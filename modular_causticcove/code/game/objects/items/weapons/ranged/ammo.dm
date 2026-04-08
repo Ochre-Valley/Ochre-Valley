@@ -20,13 +20,10 @@
 		var/mob/living/M = target
 		if(isitem(src.dropped))
 			var/obj/item/I = src.dropped
-			var/selzone
+			var/mob/living/shooter
 			if(ismob(src.firer))
-				var/mob/living/shooter = firer
-				selzone = shooter.zone_selected
-			else
-				selzone = null
-			I.do_special_attack_effect(src.firer, src.def_zone, null, M, selzone)
+				shooter = firer
+			I.do_special_attack_effect(src.firer, src.def_zone, null, M, shooter?.zone_selected)
 // OV Edit End
 
 /obj/item/ammo_casing/caseless/rogue/bullet
