@@ -16,7 +16,7 @@
 // This lets a bullet item transfer special effects to the target when the bullet projectile hits; e.g., silver bullets setting deadites on fire.
 /obj/projectile/bullet/reusable/bullet/on_hit(atom/target, blocked)
 	. = ..()
-	if(!blocked && ismob(target))
+	if(blocked != 100 && ismob(target))
 		var/mob/living/M = target
 		if(isitem(src.dropped))
 			var/obj/item/I = src.dropped
