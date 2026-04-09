@@ -3411,6 +3411,7 @@
 #include "modular_ochrevalley\code\datums\loadout\loadout_hats.dm"
 #include "modular_ochrevalley\code\modules\admin\player_effects.dm"
 #include "modular_ochrevalley\code\datums\loadout\mind_ov.dm"
+#include "modular_ochrevalley\code\game\objects\items\weapons\ranged\ammo.dm"
 #include "modular_ochrevalley\code\modules\client\client_ov.dm"
 #include "modular_ochrevalley\code\modules\logging\log_category.dm"
 #include "modular_ochrevalley\code\modules\logging\log_entry.dm"
