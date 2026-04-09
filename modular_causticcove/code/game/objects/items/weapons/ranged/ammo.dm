@@ -6,6 +6,7 @@
 	damage = 40 // Lower than a broadhead arrow, but the embedding behavior makes up for it.
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	armor_penetration = PEN_BSTEEL
+	npc_simple_damage_mult = 2.5
 
 /obj/projectile/bullet/reusable/bullet/silver
 	name = "silver ball"
