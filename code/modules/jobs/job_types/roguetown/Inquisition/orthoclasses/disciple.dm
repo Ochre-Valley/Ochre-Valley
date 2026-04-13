@@ -1,6 +1,6 @@
 /datum/advclass/disciple
-	name = "Disciple"
-	tutorial = "Psydonite monks, practiced in both martiality and scripture. Spilling blood on sacred grounds is considered 'sinful' to the clergymen, though no qualms are spared towards knocking someone's lights out."
+	name = "Orator" //OV Edit - was "Disciple"
+	tutorial = "Once you have been a monk or priest of PSYDON, but your wanderlust got the better of you. Joining the Missionata, you now preach before wayward children and aberrants - and have learned to knock their lights out when they try to silence you with violence." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/disciple

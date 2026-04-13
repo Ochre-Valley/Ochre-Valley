@@ -4,7 +4,7 @@
 	desc = "Another crewmember, small enough to fit in your hand."
 	icon_state = "micro"
 	//icon_override = 'icons/inventory/head/mob.dmi' //Caustic - We'd need new sprites for these, possibly.
-	slot_flags = ITEM_SLOT_SHOES|ITEM_SLOT_HEAD|ITEM_SLOT_HIP|ITEM_SLOT_BACK_L|ITEM_SLOT_BACK_R
+	slot_flags = ITEM_SLOT_SHOES|ITEM_SLOT_HEAD|ITEM_SLOT_HIP|ITEM_SLOT_BACK_L|ITEM_SLOT_BACK_R|ITEM_SLOT_MOUTH //OV EDIT - Adds ability to put micros in the mouth slot
 	w_class = WEIGHT_CLASS_SMALL
 	lefthand_file = null // No in-hand sprites (for now, anyway, we could totally add some)
 	righthand_file = null

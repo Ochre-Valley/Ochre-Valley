@@ -1,6 +1,6 @@
 /datum/advclass/confessor
-	name = "Confessor"
-	tutorial = "Psydonite hunters, unmatched in the fields of subterfuge and investigation. There is no suspect too powerful to investigate, no room too guarded to infiltrate, and no weakness too hidden to exploit."
+	name = "Redactus" //OV Edit - was "Confessor"
+	tutorial = "Emissaries of the Otavan Faith, they are tasked to find relics and enemies to Humenkind. Maybe once you were an inquisitorial Confessor or just a really good relic hunter. Now you use your skills of subterfuge and investigation to protect those who cannot protect themselves." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/confessor

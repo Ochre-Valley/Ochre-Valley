@@ -46,6 +46,9 @@ export const ControlSmites = (props) => {
       <Button fluid onClick={() => act('elder_smite')}>
         Elder Smite
       </Button>
+      <Button fluid onClick={() => act('item_tf')}>
+        Item TF
+      </Button>
     </Section>
   );
 };

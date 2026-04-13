@@ -55,6 +55,7 @@
 		/obj/item/alch/bone = 3,
 		/obj/item/alch/viscera = 2,
 	)
+	capture_difficulty = 100 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/saiga/undead/death()
 	unbuckle_all_mobs()

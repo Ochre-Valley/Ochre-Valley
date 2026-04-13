@@ -1,8 +1,8 @@
 /datum/virtue/utility/noble
 	name = "Nobility"
 	desc = "By birth, blade or brain, I am noble known to the royalty of these lands, and have all the benefits associated with it. I've cleverly stashed away a healthy amount of coinage, alongside a familial heirloom."
-	restricted = TRUE
-	races = list(/datum/species/construct, /datum/species/dullahan)
+	//restricted = TRUE //OV Edit - Changed for species selection
+	//races = list(/datum/species/construct, /datum/species/dullahan) //OV Edit - Commented out for Character Creation
 	added_traits = list(TRAIT_NOBLE)
 	added_skills = list(list(/datum/skill/misc/reading, 1, 6))
 	added_stashed_items = list("Heirloom Amulet" = /obj/item/clothing/neck/roguetown/ornateamulet/noble,
@@ -358,7 +358,7 @@
 	)
 	added_stashed_items = list("Bag of Leechbait" = /obj/item/storage/roguebag/leechbait)
 
-/datum/virtue/feytouched/apply_to_human(mob/living/carbon/human/recipient)
+/datum/virtue/utility/feytouched/apply_to_human(mob/living/carbon/human/recipient)
     ..() // Apply traits, stats, and languages first
     if(!recipient.mind)
         return

@@ -44,6 +44,7 @@
 					chest.remove_bodypart_feature(underwear.undies_feature)
 					underwear.forceMove(get_turf(src))
 					src.put_in_hands(underwear)
+					SEND_SIGNAL(underwear, COMSIG_ITEM_UNDERWEAR_REMOVE, src) //OV ADD
 					underwear = null
 		if((user.zone_selected == BODY_ZONE_L_LEG) || (user.zone_selected == BODY_ZONE_R_LEG))
 			if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
@@ -55,6 +56,7 @@
 					chest.remove_bodypart_feature(legwear_socks.legwears_feature)
 					legwear_socks.forceMove(get_turf(src))
 					src.put_in_hands(legwear_socks)
+					SEND_SIGNAL(legwear_socks, COMSIG_ITEM_UNDERWEAR_REMOVE, src) //OV ADD
 					legwear_socks = null
 		if(user.zone_selected == BODY_ZONE_CHEST)
 			if(!piercings_item)
@@ -67,6 +69,7 @@
 				chest.remove_bodypart_feature(piercings_item.piercings_feature)
 				piercings_item.forceMove(get_turf(src))
 				src.put_in_hands(piercings_item)
+				SEND_SIGNAL(piercings_item, COMSIG_ITEM_UNDERWEAR_REMOVE, src) //OV ADD
 				piercings_item = null
 				regenerate_icons()
 #endif
@@ -699,7 +702,7 @@
 			visible_message(span_warning("[src] dry heaves!"), \
 							span_danger("I try to throw up, but there's nothing in your stomach!"))
 		if(stun)
-			Immobilize(200)
+			Immobilize(59) //OV Edit: Bring this in line with normal stun from vomitting.
 		return 1
 	..()
 

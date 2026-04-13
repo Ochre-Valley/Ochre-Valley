@@ -209,15 +209,18 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			to_chat(C, span_notice("No active admins are online, your adminhelp was sent to the admin irc."))
 			
 		*/
+		//OV Edit: Send all the ahelps
+		/*
 		var/list/admemes = get_admin_counts(0)["present"]
 		if(admemes.len <= 0)
 			log_admin_private("No readminned admemes are present...")
-			heard_by_no_admins = TRUE //OV Edit: Need this back
-			if(CONFIG_GET(flag/amia_enabled))
-				log_admin_private("Automatic Mia is enabled, sending their whines to discord.")
-				to_chat(C, span_notice("No active admins are online. Your ahelp will try to be relayed to the admin channel now. Thank you for your patience"))
-				amia_ahelprelay(id,initiator_ckey,msg)
-
+		*/
+		heard_by_no_admins = TRUE
+		if(CONFIG_GET(flag/amia_enabled))
+			log_admin_private("Automatic Mia is enabled, sending their whines to discord.")
+			//to_chat(C, span_notice("No active admins are online. Your ahelp will try to be relayed to the admin channel now. Thank you for your patience"))
+			amia_ahelprelay(id,initiator_ckey,msg)
+		//OV Edit End
 
 		///CAUSTIC EDIT END
 

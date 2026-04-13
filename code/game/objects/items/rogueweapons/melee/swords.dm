@@ -7,7 +7,7 @@
 	force = 22
 	force_wielded = 25
 	possible_item_intents = list(/datum/intent/sword/cut/arming, /datum/intent/sword/thrust/arming, /datum/intent/sword/strike)
-	gripped_intents = null
+	gripped_intents = list(/datum/intent/sword/cut/arming, /datum/intent/sword/thrust/arming, /datum/intent/sword/strike)
 	damage_deflection = 14
 	icon_state = "sword1"
 	sheathe_icon = "sword1"
@@ -292,10 +292,22 @@
 	max_integrity = 500
 	equip_delay_self = 0
 	unequip_delay_self = 0//Same as avantyne sword
+	is_silver = TRUE
 
 /obj/item/rogueweapon/sword/long/crusader/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_UNDIVIDED, "SWORD")
+
+/obj/item/rogueweapon/sword/long/crusader/ComponentInitialize()
+	AddComponent(\
+		/datum/component/silverbless,\
+		pre_blessed = BLESSING_TENNITE,\
+		silver_type = SILVER_TENNITE,\
+		added_force = 0,\
+		added_blade_int = 0,\
+		added_int = 0,\
+		added_def = 1,\
+	)
 
 /obj/item/rogueweapon/sword/long/death
 	color = CLOTHING_BLACK

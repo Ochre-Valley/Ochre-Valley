@@ -44,6 +44,8 @@
 		/obj/item/bodypart/taur/altnagatailmaw,
 		/obj/item/bodypart/taur/fatnaga,
 		/obj/item/bodypart/taur/bunny,
+		/obj/item/bodypart/taur/biglegs,
+		/obj/item/bodypart/taur/biglegsstanced,
 	)
 	///Caustic edit end
 	default_features = MANDATORY_FEATURE_LIST
@@ -106,11 +108,11 @@
 		/datum/customizer/bodypart_feature/legwear,
 		/datum/customizer/bodypart_feature/piercing,
 		/datum/customizer/organ/penis/anthro,
-		/datum/customizer/organ/breasts/human,
+		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/vagina/human_anthro,
 		//Caustic edit
-		/datum/customizer/organ/belly/human,
-		/datum/customizer/organ/butt/human,
+		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/tail/anthro,
 		/datum/customizer/organ/tail_feature/anthro,
@@ -175,14 +177,16 @@
 		//Caustic edit end
 	)
 
-	restricted_virtues = list(/datum/virtue/utility/noble, /datum/virtue/utility/hollow)
+	restricted_virtues = list(/datum/virtue/utility/hollow) //OV Edit - removed nobility restriction
 
 /datum/species/construct/metal/check_roundstart_eligible()
 	return TRUE
 
+//CC Add start
 /datum/species/construct/on_species_gain(mob/living/carbon/foreign, datum/species/old_species)
 	..()
 	foreign.AddComponent(/datum/component/abberant_eater, list(/obj/item/rogueore/coal), TRUE)
+//CC Add end
 
 /datum/species/construct/metal/get_skin_list()
 	return list(

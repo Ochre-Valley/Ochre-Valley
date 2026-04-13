@@ -759,13 +759,6 @@
 "fQ" = (
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/eventarea)
-"gd" = (
-/obj/effect/landmark/mapGenerator/rogue/forest{
-	endTurfX = 128;
-	endTurfY = 128
-	},
-/turf/closed/mineral/rogue/bedrock,
-/area/rogue/indoors/town/church/chapel)
 "gm" = (
 /turf/open/floor/rogue/ruinedwood/platform,
 /area/rogue/indoors/eventarea)
@@ -2163,7 +2156,7 @@ Jg
 Jg
 Jg
 tB
-gd
+Gx
 "}
 (2,1,1) = {"
 rQ

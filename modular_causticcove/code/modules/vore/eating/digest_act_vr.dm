@@ -6,6 +6,12 @@
 /obj/item/proc/digest_act(atom/movable/item_storage = null, touchable_amount, splashing = 0)
 	if(!digestable)
 		return FALSE
+	
+	//OV edit
+	if(mob_possession)
+		if(!mob_possession.digestable)
+			return FALSE
+	//OV edit end
 
 	var/g_damage = 1
 	if(digest_stage == null)
@@ -77,6 +83,11 @@
 			soundfile = pick('modular_causticcove/sound/cvore/vore/shortgurgles/gurgle_s1.ogg', 'modular_causticcove/sound/cvore/vore/shortgurgles/gurgle_s2.ogg', 'modular_causticcove/sound/cvore/vore/shortgurgles/gurgle_s3.ogg')
 		playsound(src, soundfile, vol = g_sound_volume, vary = 1, falloff = VORE_SOUND_FALLOFF, frequency = noise_freq, pref_toggle = "eating_noises")
 		//Allow those turned into items to become the recycled item
+		//OV edit
+		if(mob_possession)
+			B.digestion_death(mob_possession)
+			mob_possession = null
+		//OV edit end
 		/*var/recycled = B?.recycle(src)
 		if(!recycled) //Caustic - Recycle-based Vore Code Item Handling here
 			for(var/mob/living/voice/V in possessed_voice) // Delete voices.

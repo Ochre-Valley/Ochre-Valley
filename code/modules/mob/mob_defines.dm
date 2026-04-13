@@ -321,6 +321,7 @@
 
 	var/datum/weakref/offered_item_ref
 
+
 	var/client/aghosted = null //OV ADD
 
 	/// cooldown for the next time this person can offer

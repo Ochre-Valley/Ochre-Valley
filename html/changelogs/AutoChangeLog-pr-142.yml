@@ -1,0 +1,8 @@
+author: "SpadesNeil"
+delete-after: True
+changes:
+  - code_imp: "The arquebus no longer requires a great weapon strap to be worn on your back."
+  - code_imp: "Removes gwstrap from Ashigaru and Armbrustschutze Garten."
+  - bugfix: "Ashigaru subclass no longer drops things when spawning in because its inventory is no longer overloaded."
+  - balance: "The arquebus has a draw time that now matches what it was with the great weapon strap."
+  - balance: "The arquebus has an inventory draw time that is 4 seconds. If somehow you ever manage to shove this into a bag, it shouldn't be easy or quick to get out of the bag."

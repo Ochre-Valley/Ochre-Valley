@@ -1,4 +1,0 @@
-author: "WeNeedMorePhoron"
-delete-after: True
-changes:
-  - rscadd: "Improved the balloon alert + visible message for when you enter hardcrit. It now categorizes the primary damage source (Bleedout, Suffocation, Poison, Burn and Brute Damage) and send the appropriate message."

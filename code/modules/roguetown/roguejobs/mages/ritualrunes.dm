@@ -333,9 +333,10 @@ GLOBAL_LIST(teleport_runes)
 	desc = "subtype used for arcane rituals- you should not be seeing this."
 	magictype = "arcyne"
 	can_be_scribed = FALSE
+	var/require_mage_user = TRUE // OV Add
 
 /obj/effect/decal/cleanable/roguerune/arcyne/attack_hand(mob/living/user)
-	if(!isarcyne(user))
+	if(!isarcyne(user) && require_mage_user) // OV Edit: require_mage_user
 		to_chat(user, span_warning("You aren't able to understand the words of [src]."))
 		return
 	. = ..()

@@ -52,6 +52,7 @@
 	var/light_check_delay = 3 SECONDS
 	var/sneak_cooldown = 0
 	var/sneak_cooldown_delay = 30 SECONDS
+	capture_difficulty = 2 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/lamia/Initialize()
 	. = ..()

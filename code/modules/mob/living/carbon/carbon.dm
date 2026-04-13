@@ -1391,6 +1391,7 @@
 	if(!.)
 		return
 	if(mouth?.muteinmouth)
+		to_chat(src, span_warning("I can't speak with an object in my mouth!")) //OV ADD
 		return FALSE
 	for(var/obj/item/grabbing/grab in grabbedby)
 		if((grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH) && (get_location_accessible(src, BODY_ZONE_PRECISE_MOUTH)))

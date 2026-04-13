@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "You will no longer drown if you are in a belly, laying down and your pred goes into water."

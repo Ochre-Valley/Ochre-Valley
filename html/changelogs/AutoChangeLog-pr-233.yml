@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - balance: "Make bloodless vomit immobilization not effectively a stunlock."

@@ -887,7 +887,7 @@
 // Indigestable items are removed, and M is deleted.
 /obj/belly/proc/digestion_death(mob/living/M)
 	digested_prey_count++
-	log_attack(owner, M, "Digested in [lowertext(name)]")
+	log_attack("[key_name(owner)] digested [key_name(M)] in [lowertext(name)]") // OV Edit: JSON Logging
 
 	// If digested prey is also a pred... anyone inside their bellies gets moved up.
 	if(is_vore_predator(M))

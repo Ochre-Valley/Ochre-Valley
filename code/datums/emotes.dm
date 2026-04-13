@@ -74,6 +74,15 @@
 		for(var/mob/living/M in range(user, targetrange))
 			if(M != user)
 				mobsadjacent += M
+		//OV Edit: Let held micros be targetable
+		for(var/thing in user.contents)
+			if(!istype(thing,/obj/item/holder/micro))
+				continue
+			var/obj/item/holder/micro/M = thing
+			if(M.held_mob == src)
+				continue
+			mobsadjacent |= M.held_mob
+		//OV Edit End
 		if(mobsadjacent.len)
 			chosenmob = input("[key] who?") in mobsadjacent
 		if(chosenmob)

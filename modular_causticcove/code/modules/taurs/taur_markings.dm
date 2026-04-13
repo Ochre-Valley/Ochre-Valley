@@ -17,6 +17,8 @@
 		/datum/sprite_accessory/tail_feature/taur/fatnaga,
 		/datum/sprite_accessory/tail_feature/taur/caustic/bunny,
 		/datum/sprite_accessory/tail_feature/taur/caustic/deerbelly,
+		/datum/sprite_accessory/tail_feature/taur/biglegs,
+		/datum/sprite_accessory/tail_feature/taur/biglegsstanced,
 	)
 
 /obj/item/organ/tail_feature/taur_markings
@@ -120,3 +122,13 @@
 /datum/sprite_accessory/tail_feature/large_snake
 	icon = 'modular_causticcove/icons/mob/taurs/large_snake_markings.dmi'
 	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
+
+/datum/sprite_accessory/tail_feature/taur/biglegs
+	name = "Big Legs Marking"
+	icon = 'modular_causticcove/icons/mob/taurs/biglegs_markings.dmi'
+	icon_state = "biglegs_norm"
+
+/datum/sprite_accessory/tail_feature/taur/biglegsstanced
+	name = "Big Legs, Stanced Marking"
+	icon = 'modular_causticcove/icons/mob/taurs/biglegsstanced_markings.dmi'
+	icon_state = "biglegs_stanced"

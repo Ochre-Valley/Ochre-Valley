@@ -27,6 +27,8 @@
 		/obj/item/bodypart/taur/otie,
 		/obj/item/bodypart/taur/wolf,
 		/obj/item/bodypart/taur/fatwolf,
+		/obj/item/bodypart/taur/biglegs,
+		/obj/item/bodypart/taur/biglegsstanced,
 	)
 	///Caustic edit end
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID

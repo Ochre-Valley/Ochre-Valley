@@ -185,6 +185,7 @@
 		//CC End
 		//OV Add Start
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
+		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		//OV Add End
 		)
 
@@ -259,6 +260,7 @@
 		//CC End
 		//OV Add Start
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
+		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		//OV Add End
 	)
 
@@ -355,5 +357,6 @@
 		/datum/sprite_accessory/ears/lynx,
 		//OV Add Start
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
+		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		//OV Add End
 		)

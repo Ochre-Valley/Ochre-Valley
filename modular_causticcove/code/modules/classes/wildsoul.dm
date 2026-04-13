@@ -77,6 +77,7 @@
 	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 	shoes = /obj/item/clothing/shoes/roguetown/boots/furlinedanklets
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
+	gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltl = /obj/item/rogueweapon/huntingknife/stoneknife
 	H.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/dense(H)
@@ -186,11 +187,11 @@
 	head = /obj/item/clothing/head/roguetown/roguehood
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	pants = /obj/item/clothing/under/roguetown/loincloth/brown
-	r_hand = /obj/item/clothing/neck/roguetown/collar/leather/nomagic //either for "they tried and failed to capture me" roleplay or for people who REALLY want a challenge
 	give_feral_eyes(H)
 	if(H.mind)
 		H.mind.AddSpell(new /datum/action/cooldown/spell/nondetection) // Makes sense for them to have the tools to be hidden.
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/blindness)
+		r_hand = /obj/item/clothing/neck/roguetown/collar/leather/nomagic //either for "they tried and failed to capture me" roleplay or for people who REALLY want a challenge
 	H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 
 /datum/advclass/wildsoul/zad

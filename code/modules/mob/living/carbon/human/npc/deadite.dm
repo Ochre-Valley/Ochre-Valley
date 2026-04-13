@@ -9,6 +9,7 @@
 	ambushable = FALSE
 	wander = TRUE
 	infected = TRUE
+	capture_difficulty = 100 //OV ADD
 
 /mob/living/carbon/human/species/npc/deadite/Initialize()
 	. = ..()

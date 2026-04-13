@@ -1,4 +1,0 @@
-author: "gatorceres"
-delete-after: True
-changes:
-  - bugfix: "fyritius, swampweed, and pumpkin patches now automatically repeat if there's something to loot but you failed the roll"

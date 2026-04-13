@@ -1,5 +1,5 @@
 /datum/job/roguetown/inquisitor
-	title = "Inquisitor"
+	title = "Arch-Lector" //OV Edit - Was "Inquisitor"
 	flag = INQUISITOR
 	department_flag = INQUISITION
 	faction = "Station"
@@ -8,7 +8,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_SHUNNED_UP		//Would you trust a machine to handle a role that requires non-logical intuition and commanding? Maybe. Could undo this if the community likes it. Purpose-built supermachines sound cool, too.
 	allowed_patrons = list(/datum/patron/old_god) //Requires your character's patron to be Psydon. This role is explicitly designed to be played by Psydonites, only, and almost everything they have - down to the equipment and statblock - is rooted in Psydonism. Do NOT make this accessable to other faiths, unless you go through the efforts of redesigning it from the ground up.
-	tutorial = "You are a puritan of unmatched aptitude, adherent to the Psydonic doctrine and entrusted with the authority to lead a local sect. Otava - the largest Psydonic kingdom left on this world - has seen it fit to treat you like a silver-tipped olive branch, gifted to Azuria to ward off the encroaching darkness. Tread carefully when pursuing your missives, lest the faithless strap you to the pyre as well."
+	tutorial = "You are a fervent adherent to the doctrine of PSYDON and entrusted to be an agent of the Missionata Psydonia, the missionary organisation of Otava - the largest Psydonic kingdom left on this world. They have entrusted you to represent the True Faith to the heathen world, to extend the hope and endurance it brings, to protect the flock and maintain cordial relations. You dance a narrow path between zeal and diplomacy in a world of wayward heathens, so be delicate, 'lest you end up strapped onto a pyre." //OV Edit per Lore Doc
 	whitelist_req = TRUE
 	cmode_music = 'sound/music/inquisitorcombat.ogg'
 	selection_color = JCOLOR_INQUISITION
@@ -26,7 +26,7 @@
 	)
 
 /datum/outfit/job/roguetown/inquisitor
-	name = "Inquisitor"
+	name = "Arch-Lector" //OV Edit - Was "Inquisitor"
 	jobtype = /datum/job/roguetown/inquisitor
 	job_bitflag = BITFLAG_HOLY_WARRIOR	//Counts as church.
 	allowed_patrons = list(/datum/patron/old_god)
@@ -34,8 +34,8 @@
 //// The Inquisitor. Jack of all trades, master of none. Respectable assortment of skills, stats, and equipment; good at both subterfuge and combat. Functions very well on their own, and even better with a full sect.
 
 /datum/advclass/inquisitor/inspector
-	name = "Inquisitor"
-	tutorial = "Investigators and diplomats, oft-selected from Confessors who've shown their aptitude in a variety of skills. A precise strike is all that's needed to forward the Orthodoxy's missive; whether it's struck with a diplomat's charm or a rapier's tip, however, is up to you."
+	name = "Arch-Lector" //OV Edit - Was "Inquisitor"
+	tutorial = "Relic hunters and diplomats, selected from a wide range of able candidates, they have shown their aptitude to spread the word of Psydon - a torch in the darkness, an inquisitive mind separating truth from fiction, they are the outstretched hand of Otava to faithful and wayward alike. Preach the word of Psydon and strike fear into the Archdevil's minions." //OV Edit per Lore Doc
 	outfit = /datum/outfit/job/roguetown/inquisitor/inspector
 	subclass_languages = list(/datum/language/otavan)
 	category_tags = list(CTAG_INQUSITOR)
@@ -139,7 +139,7 @@
 
 /datum/advclass/inquisitor/ordinator
 	name = "Ordinator"
-	tutorial = "Adjudicator-Sergeants, hailing from the neighboring Psydonic Orders. Oft-mistaken for golems due to the lethargy imposed by their blessed plate armor, these holy knights have forsaken every other pursuit for a singular purpose: to break the inhumen against their knee."
+	tutorial = "Templar-Knights of Psydonian Orders and Adjudicator-Sergeants. Oft-mistaken for golems due to the lethargy imposed by their blessed plate armour, these holy warriors have sworn an oath for a monomaniacal purpose - to be a bulwark against Darkness and break evil against their knee." //OV Edit per Lore Doc
 	outfit = /datum/outfit/job/roguetown/inquisitor/ordinator
 	subclass_languages = list(/datum/language/otavan)
 	cmode_music = 'sound/music/combat_inqordinator.ogg'

@@ -710,4 +710,51 @@
 		for(var/obj/item/natural/worms/F in get_turf(src))
 			qdel(F)
 
+//OV edit
+/////EASTER EGGS
+/obj/item/natural/easter_egg
+	name = "unstable leyline mote"
+	icon = 'modular_ochrevalley/icons/roguetown/items/natural.dmi'
+	icon_state = "easter_egg"
+	possible_item_intents = list(/datum/intent/use)
+	desc = "A mysterious egg imbued with the energy of leylines."
+	force = 0
+	throwforce = 0
+	obj_flags = null
+	color = "#f05bd2"
+	bundling_time = 1 SECONDS
+	firefuel = null
+	resistance_flags = null
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	experimental_inhand = TRUE
+	sellprice = 2
+	bundletype = /obj/item/natural/bundle/easter_egg
 
+/obj/item/natural/bundle/easter_egg
+	name = "stack of unstable leyline motes"
+	icon = 'modular_ochrevalley/icons/roguetown/items/natural.dmi'
+	icon_state = "easter_egg1"
+	possible_item_intents = list(/datum/intent/use)
+	desc = "Mysterious eggs imbued with the energy of leylines."
+	force = 0
+	throwforce = 0
+	maxamount = 10
+	obj_flags = null
+	color = null
+	firefuel = null
+	resistance_flags = null
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	experimental_inhand = TRUE
+	stacktype = /obj/item/natural/easter_egg
+	stackname = "leyline motes"
+	icon1 = "easter_egg1"
+	icon2 = "easter_egg2"
+//OV edit end

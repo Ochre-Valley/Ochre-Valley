@@ -40,6 +40,9 @@
 		return
 	if(!TR.latent_ambush)
 		to_chat(user, span_notice("The sound of the horn fades into the distance. Nothing stirs. All is calm."))
+		//OV Add - Logging
+		user.log_message("blew \the [src], but failed to spawn any ambush mobs.", LOG_ATTACK, color="red")
+		//OV Add End
 		return
 	user.visible_message(span_userdanger("[user] is about to sound [src]!"))
 	user.apply_status_effect(/datum/status_effect/debuff/clickcd, 5 SECONDS) // We don't want them to spam the message.
@@ -104,23 +107,13 @@
 				player.playsound_local(get_turf(player), 'sound/items/horn/signalhorn.ogg', 35, FALSE, pressure_affected = FALSE)
 		to_chat(player, span_warning("I hear the horn of the Wardens somewhere [dirtext]"))
 
-	//OV Add Start
-	var/mobs_spawned = 0 // OV Add
-	var/random_ambushes = 4 + rand(0,2) // 4 - 6 ambushes
-	var/did_ambush = FALSE
-	for(var/i = 0, i < random_ambushes, i++)
-		var/silent = (i != 0)
-		var/success = user.consider_ambush(TRUE, TRUE, min_dist = WARDEN_AMBUSH_MIN, max_dist = WARDEN_AMBUSH_MAX, silent = silent)
-		if(success)
-			did_ambush = TRUE
-			mobs_spawned++ // OV Add
-	// OV Edit Start
-	if(did_ambush)
-		user.log_message("blew \the [src], spawning [mobs_spawned] ambush mobs around [user.p_them()].", LOG_ATTACK, color="red")
-	else
-		user.log_message("blew \the [src], but failed to spawn any ambush mobs.", LOG_ATTACK, color="red")
-	// OV Edit End
-	return did_ambush
+	// Single budget call — the budget system already scales with player count and latent threat.
+	// budget_multiplier_floor = rand(3, 6) guarantees 3-6 natural ambush equivalents at the region's full pool.
+	//OV Add - Logging
+	user.log_message("blew \the [src], spawning ambush mobs around [user.p_them()].", LOG_ATTACK, color="red")
+	//OV Add End
+
+	return user.consider_ambush(always = TRUE, ignore_cooldown = TRUE, min_dist = WARDEN_AMBUSH_MIN, max_dist = WARDEN_AMBUSH_MAX, budget_multiplier_floor = rand(3, 6))
 
 #undef WARDEN_AMBUSH_MIN
 #undef WARDEN_AMBUSH_MAX

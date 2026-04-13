@@ -68,6 +68,7 @@
 
 	limb_destroyer = TRUE
 //	stat_attack = UNCONSCIOUS
+	capture_difficulty = 5 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/dragon/Initialize()
 	. = ..()
@@ -234,6 +235,7 @@
 		/obj/item/clothing/ring/gold = 4)
 	head_butcher = /obj/item/natural/head/dragon/broodmother
 	damage_coeff = list(BRUTE = 1, BURN = 0.0, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+	capture_difficulty = INFINITY //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/dragon/broodmother/Initialize()
 	. = ..()

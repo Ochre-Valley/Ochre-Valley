@@ -14,5 +14,6 @@
 	special_attacker = TRUE
 
 /mob/living/carbon/human/species/hobgoblin/npc/ambush
+	ambush_faction = "goblins"
 	wander = TRUE
 	//attack_speed = 1 //Unused var from npc AI? If it gets used in the future uncomment this.

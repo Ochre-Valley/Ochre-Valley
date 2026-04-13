@@ -39,6 +39,8 @@
 		/datum/sprite_accessory/tail_feature/taur/caustic/bunny,
 		/datum/sprite_accessory/tail_feature/taur/caustic/deerbelly,
 		/datum/sprite_accessory/tail_feature/taur/alrauneflower,
+		/datum/sprite_accessory/tail_feature/taur/biglegs,
+		/datum/sprite_accessory/tail_feature/taur/biglegsstanced,
 		/// CAUSTIC EDIT END
 		)
 

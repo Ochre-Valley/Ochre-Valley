@@ -139,6 +139,11 @@
 
 /mob/living/carbon/human/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	..()
+
+	//OV edit - Don't drown someone who's in a belly
+	if(isbelly(loc))
+		return FALSE
+	//OV edit end
 	
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
 		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))

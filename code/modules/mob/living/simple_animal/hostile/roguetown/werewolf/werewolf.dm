@@ -63,6 +63,7 @@
 	can_have_ai = FALSE
 	ai_controller = /datum/ai_controller/volf
 	melee_cooldown = WOLF_ATTACK_SPEED
+	capture_difficulty = 10 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/werewolf_npc/Initialize()
 	. = ..()

@@ -1,5 +1,0 @@
-author: "Draganfrukts"
-delete-after: True
-changes:
-  - bugfix: "Freifechter sabers no longer penetrate plate armour"
-  - balance: "performing an uszkodzić now takes over 2x longer"

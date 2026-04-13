@@ -1,0 +1,5 @@
+author: "ShadowLarkens"
+delete-after: True
+changes:
+  - rscadd: "Tieflings can now have wings"
+  - rscadd: "Aasimar can now have tails"

@@ -26,6 +26,8 @@
 		/obj/item/bodypart/taur/feline,
 		/obj/item/bodypart/taur/tempest,
 		/obj/item/bodypart/taur/fatfeline,
+		/obj/item/bodypart/taur/biglegs,
+		/obj/item/bodypart/taur/biglegsstanced,
 	)
 	///Caustic edit end
 	possible_ages = ALL_AGES_LIST

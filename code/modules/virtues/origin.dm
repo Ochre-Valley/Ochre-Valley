@@ -196,6 +196,7 @@
 				/datum/species/dwarf/mountain,
 				/datum/species/dwarf/gnome,
 				/datum/species/goblinp,
+				/datum/species/dullahan, // OV ADD
 				/datum/species/anthromorphsmall
 )
 	origin_desc = "Underdwellers are those who are descendants of their lengthy lineage that settled, lived and toiled in the darkest and deepest \

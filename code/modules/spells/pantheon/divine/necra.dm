@@ -193,7 +193,7 @@
 
 /obj/effect/proc_holder/spell/self/locate_dead
 	name = "Locate Corpse"
-	desc = "Invoke the Undermaiden's guidance to sense the direction of those within her domain who lack proper burial. She may also reveal the earthbound, though seeking those newly claimed risks her displeasure.<br><br>Costs 20 Devotion to use, and the sustain cost varies on corpse freshness."
+	desc = "Invoke the Undermaiden's guidance to sense the direction of those within her domain who lack proper burial. She may also reveal the earthbound to hurry the recovery of their wayward souls.<br><br>Costs 20 Devotion to use, and the sustain cost is lessened when tracking lingering souls." //OV Edit - Dialogue changed from AP Standard
 	overlay_state = "necraeye"
 	sound = 'sound/magic/whiteflame.ogg'
 	cast_without_targets = TRUE
@@ -225,11 +225,11 @@
 	var/is_departed = (is_player && !has_ghost)
 	var/is_forsaken = (!is_player)
 	if(minutes_dead < 5 && is_earthbound) // fresh + earthbound = VERY BAD
-		score -= 15
+		score += 15 //OV Edit - Changed - to +
 	if(is_forsaken || is_departed) // forsaken or departed = good, this means it's only 2 minutes till they're valid
-		score += 3
+		score += 6 //OV Edit - Changed 3 to 6
 	if(is_skeleton) // skeletons start on neutral, unless they're players
-		score += 2
+		score += 6 //OV Edit - Changed 2 to 6
 
 	return score
 
@@ -472,20 +472,16 @@ var/global/mob/_corpse_sort_ref = null
 	user.last_necra_ping = 0
 
 	switch(judgement)
-		// OV Edit - No hand slapping from Necra!
 		if(NECRA_HATES)
-			// to_chat(user, span_purple("<i>You feel utterly scorned as your breath is nearly completely taken away.</i>"))
-			// user.Jitter(10)
-			// user.emote("breathgasp")
-			// user.adjustOxyLoss(40)
-			to_chat(user, span_purple("<i>A cold, indifferent presence answers to your pleas. You feel her hand.</i>"))
+			to_chat(user, span_purple("<i>You feel utterly scorned as your breath is nearly completely taken away.</i>"))
+			user.Jitter(10)
+			user.emote("breathgasp")
+			user.adjustOxyLoss(40)
 
 		if(NECRA_DISAPPROVES)
-			// to_chat(user, span_purple("<i>The Undermaiden answers your pleas with clear disapproval.</i>"))
-			// user.emote("whimper")
-			// user.Jitter(5)
-			to_chat(user, span_purple("<i>A cold, indifferent presence answers to your pleas. You feel her hand.</i>"))
-		// Ov Edit End - moves hate and disapproval into neutral dialogue so that Necra's less of a bitch about finding dead bodies.
+			to_chat(user, span_purple("<i>The Undermaiden answers your pleas with clear disapproval.</i>"))
+			user.emote("whimper")
+			user.Jitter(5)
 
 		if(NECRA_NEUTRAL)
 			to_chat(user, span_purple("<i>A cold, indifferent presence answers to your pleas. You feel her hand.</i>"))

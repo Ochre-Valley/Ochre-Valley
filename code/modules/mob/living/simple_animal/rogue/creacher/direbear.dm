@@ -66,6 +66,8 @@
 	can_have_ai = FALSE
 	ai_controller = /datum/ai_controller/direbear
 
+	capture_difficulty = 2 //OV ADD
+
 /mob/living/simple_animal/hostile/retaliate/rogue/direbear/get_sound(input)
 	switch(input)
 		if("aggro")

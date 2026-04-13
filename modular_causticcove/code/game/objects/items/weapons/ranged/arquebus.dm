@@ -19,13 +19,13 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	wlength = WLENGTH_LONG
-	slot_flags = null
+	slot_flags = ITEM_SLOT_BACK // OV Edit - Removing CC edit that makes this null.
 	w_class = WEIGHT_CLASS_BULKY
 	randomspread = 1
 	spread = 0
-	equip_delay_self = 1.5 SECONDS
-	unequip_delay_self = 1.5 SECONDS
-	inv_storage_delay = 1.5 SECONDS
+	equip_delay_self = 2 SECONDS // OV Edits - Rebalances these values.
+	unequip_delay_self = 2 SECONDS // OV Edit
+	inv_storage_delay = 4 SECONDS // OV Edit, although I have no idea when you'll ever use this.
 	can_parry = TRUE
 	minstr = 6
 	walking_stick = TRUE

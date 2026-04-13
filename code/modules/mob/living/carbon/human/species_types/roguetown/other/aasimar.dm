@@ -67,6 +67,9 @@
 		/datum/customizer/organ/belly/human,
 		/datum/customizer/organ/butt/human,
 		//Caustic edit end
+		// OV Edit start
+		/datum/customizer/organ/tail/demihuman,
+		// OV Edit End
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,

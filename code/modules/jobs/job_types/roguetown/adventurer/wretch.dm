@@ -77,7 +77,7 @@
 	if(same_job_respawn_delay && M.ckey)
 		GLOB.job_respawn_delays[M.ckey] = world.time + same_job_respawn_delay
 	// Delayed slot reopen after 1 hour — subclass always reopens, global slot only if garrison criteria met
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(wretch_delayed_slot_reopen), M.advjob), 1 HOURS)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(wretch_delayed_slot_reopen), M.advjob), 1 MINUTES) //OV Edit - 1 Hour to 1 Minute
 
 // Proc for wretch to select a bounty
 /proc/wretch_select_bounty(mob/living/carbon/human/H)

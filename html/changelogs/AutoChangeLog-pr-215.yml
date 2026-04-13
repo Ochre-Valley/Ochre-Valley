@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - balance: "Micros now have -2 Wil and somewhat boosted move speed, Smalls have -1 Wil"

@@ -1,0 +1,4 @@
+author: "Ryumi"
+delete-after: True
+changes:
+  - rscadd: "Revenants can now take the Underdweller origin."
