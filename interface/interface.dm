@@ -228,22 +228,20 @@ Hotkey-Mode: (hotkey-mode must be on)
 		if(!ishuman(mob))
 			return
 		var/mob/living/carbon/human/C = mob
-		var/has_old_ad = FALSE
-		if(LAZYACCESS(GLOB.roleplay_ads,C.mobid))
-			to_chat(C, span_info(LAZYACCESS(GLOB.roleplay_ads,C.mobid)))
-			has_old_ad = TRUE
-		var/msg = input("Set an advertisement for what kind of roleplay you are looking to engage in. Others will be able to see it with the Roleplay Ad (View) command. Do not abuse this. Leave empty and press OK to remove your roleplay ad.", "I LOVE TO ROLEPLAY") as message|null
+		// OV Edit Start
+		var/current_ad = get_character_ad_value(C, C.client?.prefs, C.mind)
+		if(current_ad)
+			to_chat(C, span_info(current_ad))
+		var/msg = input("Set an advertisement for what kind of roleplay you are looking to engage in. Others will be able to see it with the Roleplay Ad (View) command. Do not abuse this. Leave empty and press OK to remove your roleplay ad.", "I LOVE TO ROLEPLAY", current_ad) as message|null
+		if(isnull(msg))
+			return
+		set_character_ad_value(C, C.client?.prefs, C.mind, msg, TRUE)
 		if(msg)
-			LAZYSET(GLOB.roleplay_ads,C.mobid,"<b>[C.real_name]</b> - [msg]<BR>")
 			to_chat(C, span_info("Roleplay ad set."))
 			log_game("[C] has set their Roleplay Ad to '[msg]'.")
-			for(var/client/advertisee in (GLOB.clients - src))
-				if(!(advertisee.prefs.toggles & ROLEPLAY_ADS))
-					continue
-				to_chat(advertisee, span_info("[C.real_name] has set a roleplay ad."))
-		else if(has_old_ad)
-			LAZYREMOVE(GLOB.roleplay_ads,C.mobid)
+		else
 			to_chat(C, span_info("Roleplay ad removed."))
+		// OV Edit End
 
 /client/verb/changefps()
 	set category = "Options"

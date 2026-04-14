@@ -17,6 +17,7 @@ GLOBAL_LIST_INIT(zizoconstruct_aggro, world.file2list("strings/rt/zconstructaggr
 	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK, INTENT_SPECIAL) //intents given incase of player controlled
 	possible_rmb_intents = list(/datum/rmb_intent/feint, /datum/rmb_intent/aimed, /datum/rmb_intent/strong, /datum/rmb_intent/weak)
 	resize = 1.2
+	capture_difficulty = 5 //OV ADD
 
 /mob/living/carbon/human/species/construct/metal/zizoconstruct/ambush
 	aggressive=1

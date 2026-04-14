@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	allowed_races = RACES_ALL_KINDS
 	allowed_patrons = list(/datum/patron/old_god) //Requires the character to be a practicing Psydonite.
-	tutorial = "Once, you were alone in this monastery; a chapel of stone, protecting a shard of Psydon's divinity. Now, you've a whole sect to shepherd - and their propensity for violence oft-clashes with your own vows of pacifism. Temper the floch with your wisdom, siphon away their wounds with your blessings, and guide the wayard towards absolution."
+	tutorial = "Once, you were alone in your endurance against the darkness of the world. Now you have a flock to shepherd and protect with the shard of PSYDON's divinity entrusted to you. Temper their zeal with kindness, for you have sworn absolute pacifism, while they have no such compunctions. Guide the flock with your wisdom, take their pain and syphon their wounds with your blessings and bring the light of hope, redemption and absolution to the world until the paradise-to-come." //OV Edit per Lore Doc
 	selection_color = JCOLOR_INQUISITION
 	outfit = /datum/outfit/job/roguetown/absolver
 	display_order = JDO_ABSOLVER
@@ -35,7 +35,7 @@
 
 /datum/advclass/absolver
 	name = "Absolver"
-	tutorial = "Once, you were alone in this monastery; a chapel of stone, protecting a shard of Psydon's divinity. Now, you've a whole sect to shepherd - and their propensity for violence oft-clashes with your own vows of pacifism. Temper the floch with your wisdom, siphon away their wounds with your blessings, and guide the wayard towards absolution."
+	tutorial = "Once, you were alone in your endurance against the darkness of the world. Now you have a flock to shepherd and protect with the shard of PSYDON's divinity entrusted to you. Temper their zeal with kindness, for you have sworn absolute pacifism, while they have no such compunctions. Guide the flock with your wisdom, take their pain and syphon their wounds with your blessings and bring the light of hope, redemption and absolution to the world until the paradise-to-come." //OV Edit per Lore Doc
 	outfit = /datum/outfit/job/roguetown/absolver/basic
 	subclass_languages = list(/datum/language/otavan)
 	category_tags = list(CTAG_ABSOLVER)

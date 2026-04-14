@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new portal stone and arcana recipe. These stones are much like sending stones, except instead of allowing sound to pass through, the pass sensations or even body parts..."
+  - bugfix: "Also fixes a bug I found where removing legwear via the stripping menu removed underwear instead"

@@ -4,29 +4,30 @@
 /datum/species/harpy
 	name = "Harpy"
 	id = SPEC_ID_HARPY
+	base_name = "Beastvolk" //OV Add - Species Consolidation
 	desc = "Harpies, or less ceremoniously known as 'magpies,' resemble the despised hollow-kin in appearance at first glance. \
 	One would rightfully assume they are similar in nature- with accuracy even, much to the harpies' chagrin. \
 	Harpies have been uplifted and reconnected to divinity by Eora, having developed culture of music and song which caught the attention of such a goddess. \
 	Their songs and voices may be their own, or proud mimicking other voices they've heard with unnatural accuracy. \
-	\
 	Whilst harpies may fly, their freedom is weighed by corruption of fleshcrafting to this day. Complete open-air freedom is still foreign to them. \
 	Harpies tend to live and gather in colonies at the tops of great sequoia forests and in nearby cliffs. Due to their laden flight, they must employ use of updrafts and proximity to large objects or structures to bolster their limited range and air-dancing performances. \
 	Their serene songs and blissful music can be heard echoing far below, guiding travelers and thieves both to respite... or treasure. For as lifted into grace as they might be, these 'magpies' earn such a nickname from instinctual Matthiosan greed and love for anything that shines. \
 	Yet if one can work past that distrust and compensate them well, harpies make for unparalleled couriers. \
-	\
-	Harpies and Feculents often find themselves in conflict, mirroring the quarrels of their patrons, whether of conscious faith or not."
+	Harpies and Feculents often find themselves in conflict, mirroring the quarrels of their patrons, whether of conscious faith or not.<br> \
+	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 PER | +1 INT </b></span><br>"
 
 	skin_tone_wording = "Heritage"
 	default_color = "FFFFFF"
 
-	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
-
+	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY, MUTCOLORS)
+	attack_verb = "slash"
 	use_skintones = TRUE
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 
 	limbs_icon_m = 'modular_causticcove/icons/roguetown/harpies/m/harpy.dmi'
 	limbs_icon_f = 'modular_causticcove/icons/roguetown/harpies/f/harpy.dmi'
-
+	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi' //OV Add
+	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi' //OV Add
 	soundpack_m = /datum/voicepack/male
 	soundpack_f = /datum/voicepack/female
 
@@ -43,7 +44,7 @@
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
 
-	race_bonus = list(STAT_STRENGTH = -2, STAT_PERCEPTION = 3, STAT_INTELLIGENCE = 1, STAT_CONSTITUTION = -2, STAT_ENDURANCE = 0, STAT_SPEED = 3, STAT_FORTUNE = 0)
+	race_bonus = list(STAT_PERCEPTION = 1, STAT_INTELLIGENCE = 1) //OV Edit - Cleaned up bonuses in-line with other racials
 
 	enflamed_icon = "widefire"
 
@@ -73,8 +74,15 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
+		/datum/customizer/bodypart_feature/legwear,
+		/datum/customizer/bodypart_feature/piercing,
 		/datum/customizer/organ/tail/harpy,
+		/datum/customizer/organ/ears/anthro, //OV Add
+		/datum/customizer/organ/horns/anthro, //OV Add
+		/datum/customizer/organ/frills/anthro, //OV Add
 		/datum/customizer/organ/wings/harpy,
+		/datum/customizer/organ/neck_feature/anthro, //OV Add
+		/datum/customizer/organ/snout/harpy, //OV Add - CC Sync
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/belly/animal,
@@ -92,19 +100,16 @@
 		/datum/body_marking_set/bellysocks,
 		/datum/body_marking_set/gradient,
 	)
+	//OV Edit Start - Brought body_markings and descriptor_choices in line with Wild Kin
 	body_markings = list(
 		/datum/body_marking/flushed_cheeks,
 		/datum/body_marking/eyeliner,
-		/datum/body_marking/tonage,
-		/datum/body_marking/socklonger,
-		/datum/body_marking/tips,
-		/datum/body_marking/nose,
-		/datum/body_marking/bangs,
-		/datum/body_marking/bun,
 		/datum/body_marking/plain,
 		/datum/body_marking/tiger,
 		/datum/body_marking/tiger/dark,
 		/datum/body_marking/sock,
+		/datum/body_marking/socklonger,
+		/datum/body_marking/tips,
 		/datum/body_marking/bellyscale,
 		/datum/body_marking/bellyscaleslim,
 		/datum/body_marking/bellyscalesmooth,
@@ -118,25 +123,31 @@
 		/datum/body_marking/backspots,
 		/datum/body_marking/front,
 		/datum/body_marking/drake_eyes,
+		/datum/body_marking/tonage,
 		/datum/body_marking/spotted,
+		/datum/body_marking/nose,
 		/datum/body_marking/harlequin,
 		/datum/body_marking/harlequinreversed,
+		/datum/body_marking/bangs,
+		/datum/body_marking/bun,
 		/datum/body_marking/gradient,
 	)
 
 	descriptor_choices = list(
+		/datum/descriptor_choice/trait,
+		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
-		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
 		/datum/descriptor_choice/face_exp,
-		/datum/descriptor_choice/skin,
+		/datum/descriptor_choice/skin_all,
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one_wild,
 		/datum/descriptor_choice/prominent_two_wild,
 		/datum/descriptor_choice/prominent_three_wild,
 		/datum/descriptor_choice/prominent_four_wild,
 	)
+	//OV Edit End
 
 /datum/species/harpy/get_hairc_list()
 	return sortList(list(

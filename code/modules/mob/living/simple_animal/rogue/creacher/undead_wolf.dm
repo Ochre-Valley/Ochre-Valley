@@ -72,6 +72,8 @@
 	can_have_ai = FALSE
 	ai_controller = /datum/ai_controller/undead/wolf
 
+	capture_difficulty = 100 //OV ADD
+
 /mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead/AttackingTarget() //7+1d6 vs con to knock ppl down
 	. = ..()
 

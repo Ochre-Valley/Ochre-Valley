@@ -1,6 +1,6 @@
 /obj/item/organ/vocal_cords/harpy
 	name = "harpy's song"
-	icon_state = "harpysong"		//Pulsating heart energy thing.
+	icon_state = "voice_of_god" //OV Add - CC Upstream Sync
 	desc = "The blessed essence of harpysong. How did you get this... you monster!"
 	actions_types = list(/datum/action/item_action/organ_action/use/harpy_sing)
 
@@ -15,11 +15,11 @@
 	. = ..()
 	M.adjust_skillrank(/datum/skill/misc/music, -1, TRUE)
 
-/* /datum/action/item_action/organ_action/use/harpy_sing //OV Edit - commented out pending rework
+/datum/action/item_action/organ_action/use/harpy_sing
 	name = "Harpy's song"
 	desc = "Project your voice through song."
-	icon = 'icons/mob/actions/bardsongs.dmi'
-	icon_state = "melody_t1_base" */
+	/*icon = 'icons/mob/actions/bardsongs.dmi' //OV Edit - Commented out
+	icon_state = "melody_t1_base"*/
 
 /datum/action/item_action/organ_action/use/harpy_sing/Trigger()
 	if(do_after(owner, 2 SECONDS, owner))
@@ -31,6 +31,7 @@
 	desc = "Project your voice through song."
 	icon = 'icons/mob/actions/bardsongs.dmi'
 	icon_state = "melody_t1_base"
+	experimental_inhand = FALSE //OV Add - CC sync
 	
 	item_flags = ABSTRACT | DROPDEL
 	slot_flags = null
@@ -50,14 +51,17 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/wings/wide/harpywings,
 		/datum/sprite_accessory/wings/wide/harpywingsalt1,
+		/datum/sprite_accessory/wings/wide/harpywingsalt2, //OV Add
 		/datum/sprite_accessory/wings/wide/harpywings_top,
 		/datum/sprite_accessory/wings/wide/harpywingsalt1_top,
+		/datum/sprite_accessory/wings/wide/harpywingsalt2_top, //OV Add
 		/datum/sprite_accessory/wings/large/harpyswept,
 		/datum/sprite_accessory/wings/large/harpyswept_alt,
 		/datum/sprite_accessory/wings/large/harpyfluff,
 		/datum/sprite_accessory/wings/large/harpyfolded,
 		/datum/sprite_accessory/wings/large/harpyowl,
-	)
+		/datum/sprite_accessory/wings/large/harpybat_alt, //OV Add
+		)
 
 /datum/customizer/organ/tail/harpy
 	customizer_choices = list(/datum/customizer_choice/organ/tail/harpy)
@@ -76,3 +80,30 @@
 		/datum/sprite_accessory/tail/haven,
 		/datum/sprite_accessory/tail/swallow,
 	)
+
+//OV Add - CC Upstream Sync
+/datum/customizer/organ/snout/harpy
+	name = "Beak"
+	allows_disabling = TRUE
+	default_disabled = TRUE
+	customizer_choices = list(/datum/customizer_choice/organ/snout/harpy)
+
+/datum/customizer_choice/organ/snout/harpy
+	name = "Harpy Beak"
+	organ_type = /obj/item/organ/snout/beak
+	sprite_accessories = list(
+		/datum/sprite_accessory/snout/bird,
+		/datum/sprite_accessory/snout/bigbeak,
+		/datum/sprite_accessory/snout/bigbeakshort,
+		/datum/sprite_accessory/snout/slimbeak,
+		/datum/sprite_accessory/snout/slimbeakshort,
+		/datum/sprite_accessory/snout/slimbeakalt,
+		/datum/sprite_accessory/snout/hookbeak,
+		/datum/sprite_accessory/snout/hookbeakbig,
+		/datum/sprite_accessory/snout/toucan,
+		/datum/sprite_accessory/snout/sbeak,
+		/datum/sprite_accessory/snout/front/bird,
+		/datum/sprite_accessory/snout/front/bigbeak,
+		/datum/sprite_accessory/snout/front/toucan,
+		)
+//OV Add End

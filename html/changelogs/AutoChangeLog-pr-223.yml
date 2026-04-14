@@ -1,0 +1,7 @@
+author: "EeviKat"
+delete-after: True
+changes:
+  - qol: "Character Directory profile viewing now uses the Examine Closer panel."
+  - qol: "You can now view advertisements from the Examine Closer panel by clicking the scroll symbol in the top right. It will be highlighted with a soft golden glow if the character has an advertisement active."
+  - qol: "Improved the layout of the Character Directory table."
+  - bugfix: "Advertisements set in character creation or the lobby should now become active immediately when joining a round."

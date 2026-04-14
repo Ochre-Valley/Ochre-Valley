@@ -7,6 +7,9 @@
 	var/datum/preferences/pref = null
 
 	var/is_playing = FALSE
+	// OV Edit Start
+	var/open_character_ad_on_open = FALSE
+	// OV Edit End
 
 	var/mob/viewing
 
@@ -33,6 +36,38 @@
 	if(!ui)
 		ui = new(user, src, "ExaminePanel")
 		ui.open()
+
+// OV Edit Start
+/datum/examine_panel/proc/get_character_ad()
+	if(ishuman(holder))
+		var/raw_character_ad = holder.client?.prefs?.directory_ad
+		if(isnull(raw_character_ad))
+			raw_character_ad = holder.mind?.directory_ad
+		if(raw_character_ad)
+			return parsemarkdown_basic(html_encode(raw_character_ad), hyperlink = TRUE)
+	else if(pref?.directory_ad)
+		return parsemarkdown_basic(html_encode(pref.directory_ad), hyperlink = TRUE)
+
+	return ""
+
+/proc/refresh_character_ad_examine_panels(mob/living/carbon/human/holder_mob, datum/preferences/holder_prefs, datum/mind/holder_mind)
+	for(var/datum/tgui/ui as anything in SStgui.all_uis)
+		if(!istype(ui?.src_object, /datum/examine_panel))
+			continue
+
+		var/datum/examine_panel/panel = ui.src_object
+		var/panel_matches_character = FALSE
+
+		if(holder_mob && panel.holder == holder_mob)
+			panel_matches_character = TRUE
+		else if(holder_prefs && (panel.pref == holder_prefs || panel.holder?.client?.prefs == holder_prefs))
+			panel_matches_character = TRUE
+		else if(holder_mind && panel.holder?.mind == holder_mind)
+			panel_matches_character = TRUE
+
+		if(panel_matches_character)
+			ui.send_update()
+// OV Edit End
 
 /datum/examine_panel/familiar/ui_static_data(mob/user) //altered and condensed version used for familiars. sorry
 
@@ -87,7 +122,11 @@
 
 /datum/examine_panel/familiar/ui_data(mob/user)
 	var/list/data = list( 
+		// OV Edit Start
+		"character_ad" = "",
 		"is_playing" = is_playing,
+		"start_with_character_ad" = FALSE,
+		// OV Edit End
 	)
 	return data
 
@@ -195,7 +234,11 @@
 
 /datum/examine_panel/ui_data(mob/user)
 	var/list/data = list(
+		// OV Edit Start
+		"character_ad" = get_character_ad(),
 		"is_playing" = is_playing,
+		"start_with_character_ad" = open_character_ad_on_open,
+		// OV Edit End
 	)
 	return data
 

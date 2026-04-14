@@ -1,6 +1,6 @@
 /datum/advclass/psydoniantemplar // A templar, but for the Inquisition
 	name = "Adjudicator"
-	tutorial = "Psydonite knights, clad in fluted chainmaille and blessed with the capacity to invoke lesser miracles. In lieu of greater miracles and rituals, they compensate through martial discipline and blessed weaponry."
+	tutorial = "Psydonite knights, clad in silvered chainmaille and blessed with the capacity to invoke lesser miracles. You have sworn an oath to be the shield for the weak, the arm of the faithful, the protection of HIS holy places and above all to drive back the darkness of the Archdevil." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/psydoniantemplar

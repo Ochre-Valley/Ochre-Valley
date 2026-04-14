@@ -31,6 +31,7 @@
 	var/sound1 = 'sound/mobs/abyssal/abyssal_idle.ogg'
 	var/sound2 = 'sound/mobs/abyssal/abyssal_teleport.ogg'
 	var/desummon_timer = 8 SECONDS
+	capture_difficulty = 2
 
 /mob/living/simple_animal/hostile/rogue/dreamfiend/major
 	icon = 'icons/mob/abyssal_medium.dmi'
@@ -49,6 +50,8 @@
 	desummon_timer = 12 SECONDS
 
 	attack_sound = list('sound/mobs/abyssal/abyssal_attack.ogg','sound/mobs/abyssal/abyssal_attack2.ogg')
+
+	capture_difficulty = 4 //OV ADD
 
 /mob/living/simple_animal/hostile/rogue/dreamfiend/ancient
 	icon = 'icons/mob/abyssal_large.dmi'

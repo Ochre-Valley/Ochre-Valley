@@ -140,6 +140,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		say_dead(original_message)
 		return
 	//OV edit - Check subtles for muffling BEFORE emotes
+	if(check_portal_clothing(original_message, forced))
+		return
+
 	if(check_subtler(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
 		return
 
@@ -155,6 +158,14 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else if(stat == UNCONSCIOUS && !forced)
 		if(!(unconscious_allowed_modes[message_mode]))
 			return
+	
+	//OV edit
+	if(isitem(loc))
+		var/obj/item/the_item = loc
+		if(the_item.mob_possession == src)
+			the_item.say(message, message_mode = message_mode)
+			return
+	//OV edit end
 
 	// language comma detection.
 	var/datum/language/message_language = get_message_language(message)

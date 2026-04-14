@@ -823,10 +823,17 @@
 	if(!I)
 		to_chat(src, span_notice("You are not holding anything."))
 		return
+	
+	//OV edit
+	if(I.mob_possession)
+		if(!I.mob_possession.devourable)
+			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
+			return
+	//OV edit end
 
 	//if(I.) //Caustic - Potential Whitelist can go here.
 
-	if(!(I.grid_height <= world.icon_size || I.grid_height <= world.icon_size))
+	if(!(I.grid_height <= world.icon_size || I.grid_width <= world.icon_size)) //OV EDIT
 		to_chat(src,span_warning("You can't eat such a large thing !"))//yet <-- YET???
 		return
 

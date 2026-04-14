@@ -63,6 +63,7 @@
 	ai_controller = /datum/ai_controller/minotaur
 
 //	stat_attack = UNCONSCIOUS
+	capture_difficulty = 2 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/minotaur/Initialize()
 	. = ..()

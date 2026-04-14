@@ -1,0 +1,4 @@
+author: "ShadowLarkens"
+delete-after: True
+changes:
+  - config: "Rounds now *always* end at 4 hours, 15 minutes."

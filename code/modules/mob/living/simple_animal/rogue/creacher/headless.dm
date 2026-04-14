@@ -59,6 +59,7 @@
 	var/stomach_burn_delay = 10
 	var/swallow_cooldown = 0
 	var/swallow_cooldown_delay = 30 SECONDS
+	capture_difficulty = 2 //OV ADD
 
 /mob/living/simple_animal/hostile/retaliate/rogue/headless/Initialize()
 	. = ..()

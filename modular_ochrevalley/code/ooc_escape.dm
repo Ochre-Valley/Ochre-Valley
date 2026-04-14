@@ -16,7 +16,15 @@
 
 	var/atom/where = loc
 	var/msg = "has OOC escaped. "
+	if(istype(where, /obj/item/capture_crystal))
+		var/obj/item/capture_crystal/old_crystal = where
+		old_crystal.Destroy()
+		old_crystal.visible_message(span_warning("The crystal shatters!"))
 	forceMove(get_turf(src))
+	if(isitem(where))
+		var/obj/item/the_loc = where
+		if(the_loc.mob_possession)
+			the_loc.mob_possession = null
 	if(isbelly(where))	//For vore
 		if(pulledby)
 			pulledby.stop_pulling()

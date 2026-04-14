@@ -57,6 +57,7 @@
 	var/list/minions = list(
 		/mob/living/carbon/human/species/skeleton/npc/mediumspread/lich = 60,
 	)
+	capture_difficulty = INFINITY //OV ADD
 
 /mob/living/simple_animal/hostile/boss/lich/Initialize()
 	projectiletype = /obj/projectile/bullet/reusable/deepone

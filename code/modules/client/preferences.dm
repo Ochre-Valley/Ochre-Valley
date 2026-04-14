@@ -1560,46 +1560,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			var/tooltip = href_list["tooltip"]
 			to_chat(user, span_notice(virtuetwo.choice_tooltips[tooltip]))
 
-	else if(href_list["preference"] == "subvirtue")
-		var/task = href_list["task"]
-		if(task == "input")
-			if(length(virtue.picked_choices) < virtue.max_choices)
-				var/list/subchoices = virtue.extra_choices.Copy()
-				for(var/choice in subchoices)
-					if(choice in virtue.picked_choices)
-						subchoices.Remove(choice)
-				var/result = tgui_input_list(user, "What strength shall you wield?", "VIRTUES", subchoices)
-				if(result)
-					virtue.picked_choices.Add(result)
-		else if(task == "remove")
-			var/index = text2num(href_list["index"])
-			if(index && (index >= 1) && (index <= virtue.picked_choices.len))
-				var/v_to_remove = virtue.picked_choices[index]
-				virtue.picked_choices.Remove(v_to_remove)
-		else if(task == "tooltip")
-			var/tooltip = href_list["tooltip"]
-			to_chat(user, span_notice(virtue.choice_tooltips[tooltip]))
-
-	else if(href_list["preference"] == "subvirtue_two")
-		var/task = href_list["task"]
-		if(task == "input")
-			if(length(virtuetwo.picked_choices) < virtuetwo.max_choices)
-				var/list/subchoices = virtuetwo.extra_choices.Copy()
-				for(var/choice in subchoices)
-					if(choice in virtuetwo.picked_choices)
-						subchoices.Remove(choice)
-				var/result = tgui_input_list(user, "What strength shall you wield?", "VIRTUES", subchoices)
-				if(result)
-					virtuetwo.picked_choices.Add(result)
-		else if(task == "remove")
-			var/index = text2num(href_list["index"])
-			if(index && (index >= 1) && (index <= virtuetwo.picked_choices.len))
-				var/v_to_remove = virtuetwo.picked_choices[index]
-				virtuetwo.picked_choices.Remove(v_to_remove)
-		else if(task == "tooltip")
-			var/tooltip = href_list["tooltip"]
-			to_chat(user, span_notice(virtuetwo.choice_tooltips[tooltip]))
-
 	//OV Add start
 	else if(href_list["preference"] == "subvirtue_extra")
 		var/task = href_list["task"]
@@ -2916,8 +2876,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						directory_pvp = new_choice
 				if("directory_ad")
 					var/new_dir_ad = tgui_input_text(user, "Input an ad for your style of ERP to show in the character directory:", "Directory Ad", directory_ad, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
-					if(new_dir_ad)
-						directory_ad = new_dir_ad
+					// OV Edit Start
+					if(!isnull(new_dir_ad))
+						set_character_ad_value(ishuman(user) ? user : null, src, user?.mind, new_dir_ad)
+					// OV Edit End
 				
 				//OV edit end
 
