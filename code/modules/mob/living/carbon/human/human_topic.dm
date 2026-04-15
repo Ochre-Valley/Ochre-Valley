@@ -41,17 +41,35 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		var/obj/item/I = locate(href_list["embedded_object"]) in L.embedded_objects
 		if(!I) //no item, no limb, or item is not in limb or in the person anymore
 			return
+		// OV Edit Start: Digging embedded objects out with a knife.
+		var/obj/item/A = usr.get_active_held_item()
+		var/foundstab = FALSE
+		if(A)
+			for(var/X in A.possible_item_intents)
+				var/datum/intent/D = new X
+				if(D.blade_class in GLOB.stab_bclasses)
+					foundstab = TRUE
+					break
 		var/time_taken = I.embedding.embedded_unsafe_removal_time*I.w_class
+		var/with_what = ""
+		if (foundstab)
+			time_taken = ceil(time_taken/2) // It's faster to dig it out with a tool instead of your fingers.
+			with_what = " with the [A]"
 		if(usr == src)
-			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [usr.p_their()] [L.name].</span>","<span class='warning'>I attempt to remove [I] from my [L.name]...</span>")
+			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [usr.p_their()] [L.name][with_what].</span>","<span class='warning'>I attempt to remove [I] from my [L.name][with_what]...</span>")
 		else
-			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.name].</span>","<span class='warning'>I attempt to remove [I] from [src]'s [L.name]...</span>")
+			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.name][with_what].</span>","<span class='warning'>I attempt to remove [I] from [src]'s [L.name][with_what]...</span>")
 		if(do_after(usr, time_taken, needhand = TRUE, target = src))
 			if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
 				return
 			var/hort = FALSE
-			hort = L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-			usr.put_in_hands(I)
+			if(foundstab)
+				hort = L.receive_damage(ceil(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class/2)) // Hurts less. Surgery is still better though.
+				L.remove_embedded_object(I) // This drops the embedded item without touching it: good for vampyres and silver.
+			else
+				hort = L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
+				usr.put_in_hands(I)
+			// OV Edit End
 			if (hort)
 				emote("pain", TRUE)
 			playsound(loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
