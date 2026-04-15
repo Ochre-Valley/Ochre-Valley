@@ -60,13 +60,14 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [usr.p_their()] [L.name][with_what].</span>","<span class='warning'>I attempt to remove [I] from my [L.name][with_what]...</span>")
 		else
 			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.name][with_what].</span>","<span class='warning'>I attempt to remove [I] from [src]'s [L.name][with_what]...</span>")
+		// OV Edit End
 		if(do_after(usr, time_taken, needhand = TRUE, target = src))
 			if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
 				return
 			var/hort = FALSE
+			// OV Edit Start: Digging embedded objects out with a knife.
 			if(foundstab)
 				hort = L.receive_damage(ceil(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class/2)) // Hurts less. Surgery is still better though.
-				L.remove_embedded_object(I) // This drops the embedded item without touching it: good for vampyres and silver.
 			else
 				hort = L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
 				usr.put_in_hands(I)
