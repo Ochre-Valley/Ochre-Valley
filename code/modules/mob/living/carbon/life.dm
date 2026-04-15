@@ -227,6 +227,7 @@
 			if(prob(embedded.embedding.embedded_pain_chance))
 				bodypart.receive_damage(embedded.w_class*embedded.embedding.embedded_pain_multiplier)
 				to_chat(src, span_danger("[embedded] in my [bodypart.name] hurts!"))
+				embedded.do_special_attack_effect(null, bodypart, null, src, null, TRUE) // OV Edit: Fix embedded silver
 
 			if(prob(embedded.embedding.embedded_fall_chance))
 				bodypart.receive_damage(embedded.w_class*embedded.embedding.embedded_fall_pain_multiplier)
