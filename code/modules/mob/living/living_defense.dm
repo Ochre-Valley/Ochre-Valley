@@ -221,6 +221,8 @@
 
 			if(P.embedchance && !check_projectile_embed(P, def_zone, armor))
 				P.handle_drop()
+			
+			P.do_special_projectile_effect(P.firer, get_bodypart(check_zone(def_zone)), src, def_zone) // OV Edit: Projectile Special Effects
 
 		else
 			P.handle_drop()
