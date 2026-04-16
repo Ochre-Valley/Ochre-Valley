@@ -23,30 +23,6 @@
     poisonamount = null
 
 // Black Powder
-/obj/projectile/bullet/reusable/bullet
-	damage = 40 // Lower than a broadhead arrow, but the embedding behavior makes up for it.
-	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
-	armor_penetration = PEN_BSTEEL
-	npc_simple_damage_mult = 2.5
-
-/obj/projectile/bullet/reusable/bullet/silver
-	name = "silver ball"
-	damage = 40
-	icon_state = "musketball_proj"
-	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/silver
-
-// This lets a bullet item transfer special effects to the target when the bullet projectile hits; e.g., silver bullets setting deadites on fire.
-/obj/projectile/bullet/reusable/bullet/on_hit(atom/target, blocked)
-	. = ..()
-	if(blocked != 100 && ismob(target))
-		var/mob/living/M = target
-		if(isitem(src.dropped))
-			var/obj/item/I = src.dropped
-			var/mob/living/shooter
-			if(ismob(src.firer))
-				shooter = firer
-			I.do_special_attack_effect(src.firer, src.def_zone, null, M, shooter?.zone_selected)
-
 /obj/item/ammo_casing/caseless/rogue/bullet
 	name = "arquebus shot"
 	desc = "A small metal sphere to be fired from a gun."
@@ -63,8 +39,19 @@
 
 /obj/item/ammo_casing/caseless/rogue/bullet/silver
 	name = "silver arquebus shot"
-	desc = "A small silver sphere. This should go well inside vampyres, nitebeasts, and deadites."
+	desc = "Purest silver, worked into a sphere that fits comfortably in the fist. </br>'No mark I strike ever rises again.'"
 	projectile_type = /obj/projectile/bullet/reusable/bullet/silver
 	icon = 'icons/roguetown/weapons/ranged/sling_mob.dmi'
 	icon_state = "silverbullet"
 	is_silver = TRUE
+
+/obj/projectile/bullet/reusable/bullet
+	damage = 40 // Lower than a broadhead arrow, but the embedding behavior makes up for it.
+	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
+	armor_penetration = PEN_BSTEEL
+	npc_simple_damage_mult = 2.5
+
+/obj/projectile/bullet/reusable/bullet/silver
+	name = "silver ball"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/silver
+	is_silver_proj = TRUE
