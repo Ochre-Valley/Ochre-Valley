@@ -55,7 +55,6 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if (foundstab)
 			time_taken = ceil(time_taken/2) // It's faster to dig it out with a tool instead of your fingers.
 			with_what = " with the [A]"
-			A.do_special_attack_effect(usr, L, null, src, usr.zone_selected) // I'll just dig it out with my SILVER dagger...
 		if(usr == src)
 			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [usr.p_their()] [L.name][with_what].</span>","<span class='warning'>I attempt to remove [I] from my [L.name][with_what]...</span>")
 		else
@@ -67,6 +66,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			var/hort = FALSE
 			// OV Edit Start: Digging embedded objects out with a knife.
 			if(foundstab)
+				A.do_special_attack_effect(usr, L, null, src, usr.zone_selected) // I'll just dig it out with my SILVER dagger...
 				hort = L.receive_damage(ceil(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class/2)) // Hurts less. Surgery is still better though.
 			else
 				hort = L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
