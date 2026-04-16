@@ -1,14 +1,26 @@
 // OV File
 
 // Arrows
+/obj/item/ammo_casing/caseless/rogue/arrow/silver
+	is_silver = TRUE // Yes, it's silver.
+	is_silver_tipped = TRUE // Nowhere near where you handle it though.
+
 /obj/projectile/bullet/reusable/arrow/silver
     is_silver_proj = TRUE // Vampyres, nitebeasts, and deadites can handle the shaft but not the tip.
     poisontype = null // No need to inject the target with holy water now.
     poisonamount = null
 
 // Bolts
+/obj/item/ammo_casing/caseless/rogue/bolt/holy
+	is_silver = TRUE
+	is_silver_tipped = TRUE
+
 /obj/projectile/bullet/reusable/bolt/holy
     is_silver_proj = TRUE // This one is silver and has holy water in it.
+
+/obj/item/ammo_casing/caseless/rogue/bolt/silver
+	is_silver = TRUE
+	is_silver_tipped = TRUE
 
 /obj/projectile/bullet/reusable/bolt/silver
     is_silver_proj = TRUE
