@@ -3453,6 +3453,7 @@
 #include "modular_ochrevalley\code\vore_verb.dm"
 
 
+#include "modular_ochrevalley\code\__DEFINES\components.dm"
 #include "modular_ochrevalley\code\datums\stress\negative_events.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_accessories.dm"
 #include "modular_ochrevalley\code\game\items\capture_crystals.dm"
@@ -3464,6 +3465,9 @@
 #include "modular_ochrevalley\code\game\items\portal_clothes.dm"
 #include "modular_ochrevalley\code\modules\admin\player_effects.dm"
 #include "modular_ochrevalley\code\datums\loadout\mind_ov.dm"
+#include "modular_ochrevalley\code\game\objects\items\weapons\ranged\ammo.dm"
+#include "modular_ochrevalley\code\game\objects\items\items.dm"
+#include "modular_ochrevalley\code\game\objects\items\quiver.dm"
 #include "modular_ochrevalley\code\modules\client\client_ov.dm"
 #include "modular_ochrevalley\code\modules\logging\log_category.dm"
 #include "modular_ochrevalley\code\modules\logging\log_entry.dm"
@@ -3477,6 +3481,7 @@
 #include "modular_ochrevalley\code\modules\jobs\job_types\roguetown\adventurer\types\combat\spellblade_pre_rework.dm"
 #include "modular_ochrevalley\code\modules\jobs\job_types\roguetown\garrison\legacywarden.dm"
 #include "modular_ochrevalley\code\modules\mob\mob_helpers.dm"
+#include "modular_ochrevalley\code\modules\projectiles\projectile.dm"
 #include "modular_ochrevalley\code\modules\reagents\stew_recipes.dm"
 #include "modular_ochrevalley\code\modules\reagents\teabuffs.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\antennas.dm"
@@ -3490,6 +3495,7 @@
 #include "modular_ochrevalley\code\modules\mob\living\living.dm"
 #include "modular_ochrevalley\code\modules\rogueclothes\neck.dm"
 #include "modular_ochrevalley\code\modules\roguetown\roguecrafting\crafting\ammo_and_ranged.dm"
+#include "modular_ochrevalley\code\modules\roguetown\roguejobs\engineer\anvil_recipes\mechanical.dm"
 #include "modular_ochrevalley\code\modules\reagents\drink_reagents.dm"
 #include "modular_ochrevalley\virtues\combat.dm"
 #include "modular_ochrevalley\virtues\utility.dm"

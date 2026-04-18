@@ -1,0 +1,69 @@
+// OV File
+
+// Arrows
+/obj/item/ammo_casing/caseless/rogue/arrow/silver
+	is_silver = TRUE // Yes, it's silver.
+	is_silver_tipped = TRUE // Nowhere near where you handle it though.
+
+/obj/projectile/bullet/reusable/arrow/silver
+    is_silver_proj = TRUE // Vampyres, nitebeasts, and deadites can handle the shaft but not the tip.
+    poisontype = null // No need to inject the target with holy water now.
+    poisonamount = null
+
+// Bolts
+/obj/item/ammo_casing/caseless/rogue/bolt/holy
+	is_silver = TRUE
+	is_silver_tipped = TRUE
+
+/obj/projectile/bullet/reusable/bolt/holy
+    is_silver_proj = TRUE // This one is silver and has holy water in it.
+
+/obj/item/ammo_casing/caseless/rogue/bolt/silver
+	is_silver = TRUE
+	is_silver_tipped = TRUE
+
+/obj/projectile/bullet/reusable/bolt/silver
+    is_silver_proj = TRUE
+    poisontype = null
+    poisonamount = null
+
+// Heavy Bolts
+// This one has a silver body too. No touching, vampyres!
+/obj/projectile/bullet/reusable/heavy_bolt/silver
+    is_silver_proj = TRUE
+    poisontype = null
+    poisonamount = null
+
+// Black Powder
+/obj/item/ammo_casing/caseless/rogue/bullet
+	name = "arquebus shot"
+	desc = "A small metal sphere to be fired from a gun."
+	dropshrink = 0.9
+	embedding = list(
+		"embedded_fall_chance" = 0, // It's not coming out on its own.
+		"embedded_pain_multiplier" = 6,
+		"embedded_fall_pain_multiplier" = 10, // Shouldn't happen, but let's cover our bases.
+		"embedded_impact_pain_multiplier" = 12,
+		"embedded_unsafe_removal_pain_multiplier" = 20, // Pretty metal but also a bad idea. A surgeon can do this without hurting you.
+		"embedded_unsafe_removal_time" = 30, // No time to dig your fingers in around the bullet in a melee.
+		"embedded_bloodloss" = 1
+	)
+
+/obj/item/ammo_casing/caseless/rogue/bullet/silver
+	name = "silver arquebus shot"
+	desc = "Purest silver, worked into a sphere that fits comfortably in the fist. </br>'No mark I strike ever rises again.'"
+	projectile_type = /obj/projectile/bullet/reusable/bullet/silver
+	icon = 'icons/roguetown/weapons/ranged/sling_mob.dmi'
+	icon_state = "silverbullet"
+	is_silver = TRUE
+
+/obj/projectile/bullet/reusable/bullet
+	damage = 40 // Lower than a broadhead arrow, but the embedding behavior makes up for it.
+	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
+	armor_penetration = PEN_BSTEEL
+	npc_simple_damage_mult = 2.5
+
+/obj/projectile/bullet/reusable/bullet/silver
+	name = "silver ball"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/silver
+	is_silver_proj = TRUE
