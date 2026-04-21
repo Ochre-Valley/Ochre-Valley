@@ -319,16 +319,16 @@
 // GUNPOWDER AMMO
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
-	damage = 70 //OV Edit - Damage Tweaks 4.13.26
+	damage = 30
 	damage_type = BRUTE
 	icon_state = "musketball_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	range = 30
-	hitsound = 'sound/combat/hits/hi_bolt (3).ogg' //OV Edit - Gun stuff
+	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
 	embedchance = 100
 	woundclass = BCLASS_PIERCE
 	flag = "piercing"
-	armor_penetration = PEN_BSTEEL //OV Edit - Gun Adjustments
+	armor_penetration = PEN_NONE
 	speed = 0.1
 	npc_simple_damage_mult = 2 // I know this isn't used in Azure Peak but trust me some downstream guys are going to thank me for this because everything that uses it shoots so fucking slow that even volves are hard to kill.
 
