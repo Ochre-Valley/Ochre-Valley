@@ -1,5 +1,5 @@
 /datum/job/roguetown/inquisitor
-	title = "Arch-Lector" //OV Edit - Was "Inquisitor"
+	title = "Inquisitor"
 	flag = INQUISITOR
 	department_flag = INQUISITION
 	faction = "Station"

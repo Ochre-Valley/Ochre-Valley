@@ -1247,6 +1247,10 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				I.sellprice = 0
 				I.smeltresult = null
 				I.salvage_result = null
+			//OV Add Start
+			else
+				user.mind.adjust_triumphs(-LI.triumph_cost)
+			//OV Add End
 			// Apply metadata (color, custom name, custom desc)
 			if(metadata["color"])
 				I.add_atom_colour(metadata["color"], FIXED_COLOUR_PRIORITY)

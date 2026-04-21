@@ -159,6 +159,7 @@
 		/datum/sprite_accessory/tail/kitsune_three,
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
+		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/orca,
@@ -252,6 +253,7 @@
 		/datum/sprite_accessory/tail/kitsune_three,
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
+		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/orca,

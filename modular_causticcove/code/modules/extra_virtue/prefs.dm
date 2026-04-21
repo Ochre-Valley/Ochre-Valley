@@ -91,7 +91,7 @@
 		var/datum/virtue/virtue_chosen = virtue_choices[result]
 		extravirtue = new virtue_chosen.type
 		to_chat(user, process_virtue_text(virtue_chosen))
-		if(!istype(virtue, /datum/virtue/combat/rotcured) && !istype(extravirtue, /datum/virtue/combat/rotcured))
+		if(!istype(virtue, /datum/virtue/combat/rotcured) && !istype(virtuetwo, /datum/virtue/combat/rotcured) && !istype(extravirtue, /datum/virtue/combat/rotcured)) //OV Edit - Rotcured Color Catch for Extra Virtue
 			if(skin_tone == SKIN_COLOR_ROT)
 				var/new_tone = random_skin_tone()
 				skin_tone = new_tone

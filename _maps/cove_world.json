@@ -10,7 +10,6 @@
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0,
-	"matthios_dungeon": 1,
 	"shuttles": {
 	    "cargo": "cargo_rogue",
 	    "ferry": "ferry_base",

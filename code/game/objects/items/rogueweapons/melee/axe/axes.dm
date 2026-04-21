@@ -50,8 +50,8 @@
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
 	smelt_bar_num = 2
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/thrust, /datum/intent/axe/bash/battle)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/bash/battle)
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/bash/battle)
+	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/chop/heavy, /datum/intent/axe/bash/battle)
 	minstr = 9
 	wdefense = 4
 	sellprice = 40 //Nice.
@@ -60,7 +60,7 @@
 	force = 30
 	force_wielded = 40
 	wbalance = WBALANCE_HEAVY
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/thrust, /datum/intent/axe/bash/battle)
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/bash/battle)
 	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/bash/battle)
 	name = "oath"
 	desc = "A hefty, steel-forged axe marred by the touch of countless Wardens. Despite its weathered etchings and worn grip, the blade has been honed to a razor's edge and you can see your reflection in the finely polished metal."
@@ -92,7 +92,7 @@
 				return list("shrink" = 0.5,"sx" = 1,"sy" = -1,"nx" = 1,"ny" = -1,"wx" = 4,"wy" = -1,"ex" = -1,"ey" = -1,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0,)
 
 /obj/item/rogueweapon/stoneaxe/woodcut
-	name = "axe"
+	name = "iron axe"
 	force = 20
 	force_wielded = 26
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/axe/bash)
@@ -303,9 +303,13 @@
 
 /datum/intent/axe/cut/long
 	reach = 2
+	swingdelay = 0.4 SECONDS
 
 /datum/intent/axe/chop/long
 	reach = 2
+	damfactor = 1.2
+	demolition_mod = 2
+	swingdelay = 1.2 SECONDS
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel/woodcutter
 	name = "woodcutter's axe"
@@ -523,7 +527,7 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/sweep)
+	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/chop/heavy, /datum/intent/axe/sweep)
 	name = "bronze greataxe"
 	desc = "A massive staff with a bronze axhead mantled onto the wood. It splits and carves from afar with lethal force; be it lumber or limbs."
 	icon_state = "bronzegreataxe"
@@ -560,8 +564,7 @@
 	max_blade_int = 350
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 125 //OH MY GOD ITS SILVER!?
-	minstr_req = TRUE
+	sellprice = 125 //OH MY GOD ITS SILVER!? //CC Edit
 
 /obj/item/rogueweapon/greataxe/silver/ComponentInitialize()
 	AddComponent(\
@@ -588,8 +591,7 @@
 	max_blade_int = 350
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
-	sellprice = 200
-	minstr_req = TRUE
+	sellprice = 200 //CC Edit
 
 /obj/item/rogueweapon/greataxe/psy/ComponentInitialize()
 	AddComponent(\
@@ -622,10 +624,9 @@
 	desc = "A large axe with a twinned axhead of steel, requiring both hands to properly swing. It carves, chops, and cleaves from \
 	afar. </br>'Crush your enemies, see them driven before you, and hear the lamentations of the women..'"
 	icon_state = "doublegreataxe"
-	max_blade_int = 175
+	max_blade_int = 230
 	sellprice = 125
 	minstr = 13
-	minstr_req = TRUE
 
 /obj/item/rogueweapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"
@@ -633,11 +634,10 @@
 	power, it is only your hands that can determine whether it will defy fate.. ..or fufill it."
 	icon_state = "graggargaxe"
 	minstr = 12
-	minstr_req = FALSE //Retains same performance as before, as a precaution.
 	force = 20
 	force_wielded = 40
-	max_blade_int = 250
-	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/sweep)
+	max_blade_int = 270
+	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/chop/heavy, /datum/intent/axe/sweep)
 	sellprice = 100 //Heretical... //CC Edit
 
 /obj/item/rogueweapon/greataxe/steel/doublehead/graggar/Initialize()
@@ -657,6 +657,7 @@
 	minstr = 14 //Double-headed greataxe with extra durability. Rare dungeon loot in minotaur dungeons; no longer drops from every single minotaur.
 	sellprice = 200 //Treasure reward and- Holy shit. that's a lot of STR requirement.
 	wbalance = WBALANCE_HEAVY
+	minstr_req = TRUE
 
 /obj/item/rogueweapon/stoneaxe/woodcut/troll
 	name = "crude heavy axe"

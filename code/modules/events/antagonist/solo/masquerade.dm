@@ -8,6 +8,8 @@
 	roundstart = TRUE
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
+	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_guarantee_flags = STORYTELLER_FAVOR_MASQUERADE
 
 	weight = 12
 
@@ -15,6 +17,8 @@
 
 	base_antags = 2
 	maximum_antags = 4
+
+	max_occurrences = 0 //OV Edit: Disabled. Was not listed
 
 	earliest_start = 0 SECONDS
 

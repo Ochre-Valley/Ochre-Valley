@@ -2,24 +2,24 @@
 "as" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "cl" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "fZ" = (
 /mob/living/carbon/human/species/orc/npc/footsoldier,
 /turf/open/floor/rogue/dirt/road,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "hr" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /mob/living/carbon/human/species/orc/npc/marauder,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "ih" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -27,14 +27,14 @@
 	pixel_y = 0
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "ji" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "mA" = (
 /obj/structure/chair/wood/rogue/throne,
 /obj/item/clothing/ring/active/nomag,
@@ -43,17 +43,17 @@
 	name = "Orc Chief"
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "ni" = (
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "pF" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /mob/living/carbon/human/species/orc/npc/marauder,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "qI" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
@@ -82,11 +82,11 @@
 	},
 /obj/item/roguegem/random,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "qW" = (
 /mob/living/carbon/human/species/orc/npc/footsoldier,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "tg" = (
 /obj/item/flint{
 	pixel_y = 4;
@@ -95,25 +95,25 @@
 /obj/structure/table/wood/crafted,
 /obj/item/clothing/mask/rogue/ragmask,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "tP" = (
 /turf/closed/wall/mineral/rogue/decowood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "vi" = (
 /turf/open/transparent/openspace,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "vl" = (
 /obj/machinery/light/rogue/campfire/densefire,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "vD" = (
 /obj/structure/roguetent,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "vF" = (
 /obj/item/rogueweapon/shovel,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "wr" = (
 /obj/structure/toilet,
 /obj/item/natural/poo{
@@ -128,19 +128,19 @@
 	},
 /mob/living/carbon/human/species/orc/npc/footsoldier,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "wJ" = (
 /obj/machinery/light/rogue/candle/l,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "BM" = (
 /obj/structure/ladder,
 /turf/open/floor/rogue/naturalstone,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Cg" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Cn" = (
 /obj/structure/table/wood/crafted,
 /obj/item/clothing/mask/cigarette/rollie/nicotine{
@@ -150,100 +150,100 @@
 	pixel_y = 7
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "CV" = (
 /mob/living/carbon/human/species/orc/npc/marauder,
 /turf/open/floor/rogue/dirt/road,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Dd" = (
 /obj/structure/roguewindow,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "DD" = (
 /obj/structure/table/wood{
 	dir = 1;
 	icon_state = "longtable"
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "EU" = (
 /obj/structure/fluff/walldeco/innsign{
 	pixel_x = 32
 	},
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Fq" = (
 /turf/closed/mineral/rogue/bedrock,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Fr" = (
 /obj/item/clothing/shoes/roguetown/boots/nobleboot,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "FC" = (
 /obj/machinery/light/rogue/firebowl,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ha" = (
 /obj/structure/ladder,
 /obj/structure/ladder,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Hr" = (
 /mob/living/carbon/human/species/orc/npc/marauder,
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "HV" = (
 /turf/open/floor/rogue/naturalstone,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "If" = (
 /obj/structure/mineral_door/wood/window,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ig" = (
 /obj/structure/stairs,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "IJ" = (
 /obj/structure/chair/stool/rogue,
 /mob/living/carbon/human/species/orc/npc/berserker,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Kd" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "KW" = (
 /obj/machinery/light/rogue/oven/south,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Lj" = (
 /obj/structure/bed/rogue/shit,
 /mob/living/simple_animal/hostile/retaliate/rogue/orc,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ln" = (
 /turf/closed/wall/mineral/rogue/tent,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "MQ" = (
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "NI" = (
 /mob/living/carbon/human/species/orc/npc/berserker,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "OX" = (
 /obj/structure/gate/bars/preopen,
 /turf/open/floor/rogue/dirt/road,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "PN" = (
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "PP" = (
 /obj/structure/fluff/railing/fence,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Rc" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/clothing/shoes/roguetown/boots/nobleboot,
@@ -251,14 +251,14 @@
 /obj/item/clothing/cloak/half/rider,
 /obj/item/clothing/suit/roguetown/armor/leather/vest/black,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ro" = (
 /obj/machinery/light/rogue/candle{
 	pixel_y = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ug" = (
 /obj/item/reagent_containers/glass/cup/skull{
 	pixel_x = -9
@@ -272,28 +272,28 @@
 	pixel_x = 12
 	},
 /turf/open/floor/rogue/dirt/road,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Wm" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
 	},
 /obj/item/clothing/neck/roguetown/collar/bell_collar,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "XK" = (
 /turf/closed/wall/mineral/rogue/wooddark,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Yl" = (
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/ruinedwood,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "Ze" = (
 /turf/open/floor/rogue/dirt/road,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 "ZQ" = (
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/dirt,
-/area/rogue)
+/area/rogue/under/tomb/cave)
 
 (1,1,1) = {"
 Fq

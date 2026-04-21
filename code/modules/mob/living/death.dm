@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(last_words)
 
 /mob/living/death(gibbed, nocutscene = FALSE)
 	var/was_dead_before = stat == DEAD
-	stat = DEAD
+	set_stat(DEAD)
 	unset_machine()
 	timeofdeath = world.time
 	tod = station_time_timestamp()
@@ -160,22 +160,25 @@ GLOBAL_LIST_EMPTY(last_words)
 	// AZURE EDIT BEGIN: necra acolyte/priest deathsight trait
 	// this was a player that just died, so do the honors
 	if (client)
-		//Cove edit start
-		if (!istype(src.loc, /obj/belly))
-			if(istype(src, /mob/living/simple_animal))
+		//Caustic Edit Start - Only send whispers for deaths _not_ in a Player's Belly. NPC ones we do want to send.
+		if(istype(src.loc, /obj/belly))
+			var/mob/living/belly_owner = src.loc.loc //The loc of the belly is the one who has it in them.blockscharging
+			if(belly_owner && belly_owner.client) //Just verify that it cast properly and then check for a client present, then it was likely a death in a scene.
 				return
-		//Cove edit end
+		if(istype(src, /mob/living/simple_animal))
+			return
+		//Caustic Edit End
 		// Stop necrans from freaking out from digestion and unrevivable simplemob deaths
-			if (!gibbed && !( (src.mind && src.mind.has_antag_datum(/datum/antagonist/zombie)) || (src.mind && src.mind.has_antag_datum(/datum/antagonist/skeleton)) || HAS_TRAIT(src, TRAIT_SECONDLIFE) )) // because I hate being jumpscared by "OOH SOMEONE DIED IN THE CHURCH" when they're just killing a deadite with burn rot to rez them
-				var/locale = prepare_deathsight_message()
-				for (var/mob/living/player in GLOB.player_list)
-					if (player.stat == DEAD || isbrain(player)) 
-						continue
-					if (HAS_TRAIT(player, TRAIT_DEATHSIGHT))
-						if (HAS_TRAIT(player, TRAIT_CABAL))
-							to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
-						else
-							to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turn towards [locale] for but a brief, singular moment."))
+		if (!gibbed && !( (src.mind && src.mind.has_antag_datum(/datum/antagonist/zombie)) || (src.mind && src.mind.has_antag_datum(/datum/antagonist/skeleton)) || HAS_TRAIT(src, TRAIT_SECONDLIFE) )) // because I hate being jumpscared by "OOH SOMEONE DIED IN THE CHURCH" when they're just killing a deadite with burn rot to rez them
+			var/locale = prepare_deathsight_message()
+			for (var/mob/living/player in GLOB.player_list)
+				if (player.stat == DEAD || isbrain(player))
+					continue
+				if (HAS_TRAIT(player, TRAIT_DEATHSIGHT))
+					if (HAS_TRAIT(player, TRAIT_CABAL))
+						to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
+					else
+						to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turn towards [locale] for but a brief, singular moment."))
 	// AZURE EDIT END
 
 	return TRUE

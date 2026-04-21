@@ -22,10 +22,6 @@
 	if(!CheckAdminHref(href, href_list))
 		return
 
-	if(href_list["mass_direct"])
-		if(mass_direct_handle_topic(href_list))
-			return
-
 	// Open Heal Panel from Player Panel
 	if(href_list["heal_panel"])
 		var/mob/living/M = locate(href_list["heal_panel"])
@@ -965,6 +961,9 @@
 		for(var/datum/job/job in SSjob.occupations)
 			if(job.title == Add)
 				job.total_positions += 1
+				job.spawn_positions = job.total_positions
+				if(job.uses_storyteller_slot_caps())
+					job.admin_slot_override = TRUE
 				break
 
 		src.manage_free_slots()
@@ -983,8 +982,14 @@
 				if(!newtime)
 					to_chat(src.owner, "Setting to amount of positions filled for the job")
 					job.total_positions = job.current_positions
+					job.spawn_positions = job.total_positions
+					if(job.uses_storyteller_slot_caps())
+						job.admin_slot_override = TRUE
 					break
 				job.total_positions = newtime
+				job.spawn_positions = newtime
+				if(job.uses_storyteller_slot_caps())
+					job.admin_slot_override = TRUE
 
 		src.manage_free_slots()
 
@@ -997,6 +1002,9 @@
 		for(var/datum/job/job in SSjob.occupations)
 			if(job.title == Remove && job.total_positions - job.current_positions > 0)
 				job.total_positions -= 1
+				job.spawn_positions = job.total_positions
+				if(job.uses_storyteller_slot_caps())
+					job.admin_slot_override = TRUE
 				break
 
 		src.manage_free_slots()
@@ -1010,6 +1018,9 @@
 		for(var/datum/job/job in SSjob.occupations)
 			if(job.title == Unlimit)
 				job.total_positions = -1
+				job.spawn_positions = -1
+				if(job.uses_storyteller_slot_caps())
+					job.admin_slot_override = TRUE
 				break
 
 		src.manage_free_slots()
@@ -1023,6 +1034,9 @@
 		for(var/datum/job/job in SSjob.occupations)
 			if(job.title == Limit)
 				job.total_positions = job.current_positions
+				job.spawn_positions = job.total_positions
+				if(job.uses_storyteller_slot_caps())
+					job.admin_slot_override = TRUE
 				break
 
 		src.manage_free_slots()
@@ -1396,9 +1410,6 @@
 									var/mob/living/simple_animal/SA = spawned_mob
 									SA.toggle_ai(AI_OFF)
 									SA.can_have_ai = FALSE
-								if(ishuman(spawned_mob))
-									var/mob/living/carbon/human/H = spawned_mob
-									H.mode = NPC_AI_OFF
 								if(spawned_mob.ai_controller)
 									QDEL_NULL(spawned_mob.ai_controller)
 							if(where == "inhand" && isliving(usr) && isitem(O))

@@ -4,7 +4,7 @@
 /datum/species/harpy
 	name = "Harpy"
 	id = SPEC_ID_HARPY
-	base_name = "Beastvolk" //OV Add - Species Consolidation
+	base_name = "Harpy"
 	desc = "Harpies, or less ceremoniously known as 'magpies,' resemble the despised hollow-kin in appearance at first glance. \
 	One would rightfully assume they are similar in nature- with accuracy even, much to the harpies' chagrin. \
 	Harpies have been uplifted and reconnected to divinity by Eora, having developed culture of music and song which caught the attention of such a goddess. \

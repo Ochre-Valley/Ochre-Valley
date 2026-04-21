@@ -1,5 +1,5 @@
 /datum/job/roguetown/orthodoxist
-	title = "Missionata" //OV Edit - Was "Orthodoxist"
+	title = "Orthodoxist"
 	flag = ORTHODOXIST
 	department_flag = INQUISITION
 	faction = "Station"

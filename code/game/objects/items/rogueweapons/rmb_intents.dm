@@ -135,8 +135,6 @@
 		return
 	if(user.incapacitated())
 		return
-	if(!user.mind)
-		return
 	if(user.has_status_effect(/datum/status_effect/debuff/specialcd))
 		return
 
@@ -193,7 +191,7 @@
 	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
 		return
 	var/mob/living/L = target
-	user.visible_message(span_notice("[user] attempts to feint an attack at [target]!"))
+	user.visible_message(span_danger("[user] feints an attack at [target]!"))
 	var/perc = 50
 	var/obj/item/I = user.get_active_held_item()
 	var/ourskill = 0
@@ -202,7 +200,7 @@
 	if(I)
 		if(I.associated_skill)
 			ourskill = user.get_skill_level(I.associated_skill)
-		if(L.skills)
+		if(L.mind)
 			I = L.get_active_held_item()
 			if(I?.associated_skill)
 				theirskill = L.get_skill_level(I.associated_skill)

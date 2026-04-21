@@ -19,3 +19,5 @@
 		mind.directory_gendertag = client.prefs.directory_gendertag
 		mind.directory_sexualitytag = client.prefs.directory_sexualitytag
 		mind.directory_pvp = client.prefs.directory_pvp
+		if(ishuman(src))
+			set_character_ad_value(src, client.prefs, mind, client.prefs.directory_ad)

@@ -54,10 +54,20 @@
 	log_combat(src, victim, "drank blood from ")
 
 	if(!VDrinker)
-		if(!HAS_TRAIT(src, TRAIT_HORDE) && !HAS_TRAIT(src, TRAIT_NASTY_EATER))
+		if(!HAS_TRAIT(src, TRAIT_HORDE) && !HAS_TRAIT(src, TRAIT_NASTY_EATER) && !HAS_TRAIT(src, TRAIT_LYFE_DRINK)) //OV Add: LYFE_DRINK for Vice
 			to_chat(src, span_warning("I'm going to puke..."))
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
+		//OV ADD Start
+		if(HAS_TRAIT(src, TRAIT_LYFE_DRINK))
+			var/gained_food = 100
+			if(victim.mind)
+				gained_food = gained_food * CLIENT_VITAE_MULTIPLIER
+				victim.blood_volume = max(victim.blood_volume - 45, 0)
+				src.apply_status_effect(/datum/status_effect/buff/mealbuff)
+			adjust_nutrition(gained_food)
+			adjust_hydration(gained_food)
 		return
+		//OV Add End: Hemovore Nutrient and Hydration procs, piggybacking off Vamp Multipliers
 
 	if(victim.mind?.has_antag_datum(/datum/antagonist/werewolf) || (victim.stat != DEAD && victim.mind?.has_antag_datum(/datum/antagonist/zombie)))
 		to_chat(src, span_danger("I'm going to puke..."))

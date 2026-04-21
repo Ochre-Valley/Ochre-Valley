@@ -255,6 +255,7 @@
 		/datum/sprite_accessory/ears/big/sandfox_large,
 		/datum/sprite_accessory/ears/lynx,
 		/datum/sprite_accessory/ears/zorzor,
+		/datum/sprite_accessory/ears/naja_hood,
 		//CC Start
 		/datum/sprite_accessory/ears/big/caustic/bunny_large,
 		//CC End
@@ -278,6 +279,7 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/cobrahood,
 		/datum/sprite_accessory/ears/cobrahoodears,
+		/datum/sprite_accessory/ears/naja_hood,
 		)
 
 // ---- Tiefling

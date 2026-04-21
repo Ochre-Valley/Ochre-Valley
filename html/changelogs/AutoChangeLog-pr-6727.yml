@@ -1,0 +1,4 @@
+author: "WeNeedMorePhoron"
+delete-after: True
+changes:
+  - bugfix: "You can test Tomb of Alotheos / Matthios on Roguetest by running the options that is not labeled \"No Dungeons\" now."

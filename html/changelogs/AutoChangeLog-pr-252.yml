@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - server: "Change to fetchmanifest topic call, makes output fancier"

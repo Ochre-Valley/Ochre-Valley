@@ -101,7 +101,7 @@
 		if("Militia Goedendag (Pair)")
 			H.put_in_hands(new /obj/item/rogueweapon/woodstaff/militia)
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/woodstaff/militia, SLOT_BACK_L)
-			H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_EXPERT)
+			H.adjust_skillrank_up_to(/datum/skill/combat/staves, SKILL_LEVEL_EXPERT)
 		//OV edit
 		if("Greatsword (Iron)")
 			H.put_in_hands(new /obj/item/rogueweapon/greatsword/iron)

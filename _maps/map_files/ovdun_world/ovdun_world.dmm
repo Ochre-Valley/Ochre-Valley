@@ -11934,7 +11934,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town)
 "cCl" = (
-/obj/structure/roguemachine/scomm/receive_only/l{
+/obj/structure/roguemachine/scomm/l{
 	scom_tag = "Wardens - 1st Floor"
 	},
 /obj/effect/decal/cleanable/debris/stony,
@@ -40536,7 +40536,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/mountains/decap)
 "iBV" = (
-/obj/structure/roguemachine/scomm/receive_only/l{
+/obj/structure/roguemachine/scomm/l{
 	scom_tag = "Wardens - 1st Floor"
 	},
 /turf/open/floor/rogue/blocks/stonered/tiny,
@@ -47483,7 +47483,7 @@
 /turf/open/water/swamp/deep,
 /area/rogue/outdoors/bog/south)
 "jYw" = (
-/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged,
+/mob/living/carbon/human/species/orc/npc/archer,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/orcdungeon)
 "jYC" = (
@@ -73374,7 +73374,7 @@
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/magician)
 "pkN" = (
-/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged,
+/mob/living/carbon/human/species/orc/npc/archer,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/orcdungeon)
 "pkO" = (
@@ -80962,7 +80962,7 @@
 /area/rogue/under/underdark/north)
 "qPM" = (
 /obj/structure/rack/rogue,
-/obj/item/quiver/arrows/bronze,
+/obj/item/quiver/bronzearrows,
 /turf/open/floor/rogue/churchrough,
 /area/rogue/under/cave/scarymaze)
 "qPQ" = (
@@ -90913,7 +90913,7 @@
 	},
 /area/rogue/under/town/sewer)
 "sSr" = (
-/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged,
+/mob/living/carbon/human/species/orc/npc/archer,
 /turf/open/floor/rogue/tile/bfloorz,
 /area/rogue/under/cave/orcdungeon)
 "sSs" = (
@@ -102130,8 +102130,6 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "viz" = (
-/obj/structure/fluff/railing/wood/east,
-/obj/structure/fluff/statue/small,
 /turf/open/floor/rogue/concrete,
 /area/rogue/outdoors/town/roofs/keep)
 "viC" = (
@@ -102144,7 +102142,7 @@
 /turf/open/floor/rogue/metal,
 /area/rogue/outdoors/mountains/decap/minotaurfort)
 "viP" = (
-/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged,
+/mob/living/carbon/human/species/orc/npc/archer,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/under/cave/orcdungeon)
 "viW" = (
@@ -104357,7 +104355,7 @@
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/outdoors/beach/central)
 "vGw" = (
-/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged,
+/mob/living/carbon/human/species/orc/npc/archer,
 /turf/open/floor/rogue/wood,
 /area/rogue/under/cave/orcdungeon)
 "vGz" = (
@@ -115163,12 +115161,11 @@
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/mountains/decap/stepbelow)
 "xVP" = (
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
-	dir = 6
-	},
-/turf/open/floor/rogue/grasscold,
-/area/rogue/outdoors/exposed/magiciantower)
+/obj/structure/fluff/railing/wood/east,
+/obj/structure/fluff/statue/small,
+/obj/structure/fluff/railing/wood/north,
+/turf/open/floor/rogue/concrete,
+/area/rogue/outdoors/town/roofs/keep)
 "xVQ" = (
 /obj/structure/fluff/signage{
 	dir = 1;
@@ -291744,11 +291741,11 @@ dkS
 sGj
 sGj
 sGj
-uVQ
+cwZ
+cwZ
+cwZ
+cwZ
 dkS
-dkS
-dkS
-dCg
 pZB
 nsY
 aez
@@ -292195,12 +292192,12 @@ uzz
 wiv
 noW
 uAz
-vcs
-jos
-bCc
-nti
-xVP
-kSR
+sGj
+uVQ
+dkS
+dkS
+dkS
+dCg
 rvR
 nsY
 jHo
@@ -406104,7 +406101,7 @@ nTJ
 hdd
 kus
 mVO
-mZn
+rDp
 nTJ
 oSt
 nTJ
@@ -406553,10 +406550,10 @@ usE
 lMY
 wFM
 nTJ
-lpY
 kus
-jYE
-orm
+kus
+mVO
+mZn
 nTJ
 pNy
 boM
@@ -407005,10 +407002,10 @@ oSt
 oSt
 nTJ
 nTJ
-nTJ
-ilF
-ilF
-nTJ
+lpY
+kus
+jYE
+orm
 nTJ
 vmi
 vmi
@@ -407456,12 +407453,12 @@ pNy
 pNy
 pNy
 pYK
-vmi
-pEK
-pNy
-pNy
-pYK
-vmi
+nTJ
+nTJ
+ilF
+ilF
+nTJ
+nTJ
 vmi
 vmi
 vmi
@@ -522264,11 +522261,11 @@ gak
 gak
 nTJ
 viz
-vFA
-vFA
-vFA
-vFA
-tfL
+viz
+viz
+viz
+viz
+viz
 nTJ
 qQo
 bDg
@@ -522715,13 +522712,13 @@ vmi
 vmi
 vmi
 baR
-pNy
-pNy
-pNy
-pNy
-pNy
-pNy
-eKO
+xVP
+vFA
+vFA
+vFA
+vFA
+tfL
+nTJ
 rEw
 hJN
 ukG
@@ -523173,7 +523170,7 @@ vmi
 vmi
 vmi
 vmi
-tRE
+eKO
 rLV
 nBA
 ukG

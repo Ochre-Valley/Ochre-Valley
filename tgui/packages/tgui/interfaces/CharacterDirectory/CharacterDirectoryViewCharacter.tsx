@@ -1,4 +1,5 @@
 // OV FILE
+// Old/redundant in-directory description renderer retained for reference.
 import { Box, Button, Section, Table } from 'tgui-core/components';
 
 import { getTagColor } from './constants';

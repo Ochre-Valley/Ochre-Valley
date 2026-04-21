@@ -201,7 +201,8 @@
 	icon_state = "silver"
 	sellprice = 30
 	last_used = 0
-	is_silver = FALSE //temporary measure to prevent people from easily metachecking vampyres. Replace with a more sophisticated alternative if-or-when available.
+	is_silver = TRUE
+	is_lesser_silver = TRUE
 	force = 10
 	throwforce = 15
 
@@ -214,20 +215,23 @@
 	desc = "A silver cup, its surface adorned with intricate carvings and runes."
 	icon_state = "scup"
 	sellprice = 20
-	is_silver = FALSE //Ditto.
-	volume = 15
+	is_silver = TRUE
+	is_lesser_silver = TRUE
 	force = 5
 	throwforce = 10
 
+//OV Add Start
 /obj/item/reagent_containers/glass/cup/silver/pewtersmall //as above but smaller
 	name = "pewter cup"
 	desc = "A pewter cup, cheaper than silver, but with a similar shine!"
 	icon_state = "scup"
 	sellprice = 20
-	is_silver = FALSE //Ditto.
+	is_silver = TRUE
+	is_lesser_silver = TRUE
 	volume = 15
 	force = 5
 	throwforce = 10
+//OV Add End
 
 /obj/item/reagent_containers/glass/cup/golden
 	name = "golden goblet"

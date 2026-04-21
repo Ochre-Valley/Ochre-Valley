@@ -16,7 +16,6 @@
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	a_intent = INTENT_HELP
 	possible_mmb_intents = list(INTENT_SPECIAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
-	possible_rmb_intents = list(/datum/rmb_intent/feint, /datum/rmb_intent/swift, /datum/rmb_intent/riposte, /datum/rmb_intent/strong) //Strong intent for strong mob...
 
 //////////////////   BODYPARTS	//////////////////
 	//I am going to experiment with pain with Hobgoblins, and eventually spread to other mobs if this feels right.
@@ -62,14 +61,6 @@
 	icon_state = "hobgoblin_skel_head"
 	sellprice = 2
 
-/mob/living/carbon/human/species/hobgoblin/handle_combat()
-	if(mode == NPC_AI_HUNT)
-		if(prob(5)) //WE ARE FEARSOME!!!
-			if(prob(50))
-				emote("laugh")
-			else 
-				emote("warcry")
-	. = ..()
 
 /mob/living/carbon/human/species/hobgoblin/update_body()
 	remove_overlay(BODY_LAYER)
@@ -122,6 +113,8 @@
 
 /mob/living/carbon/human/species/hobgoblin/after_creation()
 	..()
+	AddComponent(/datum/component/ai_aggro_system)
+	SEND_SIGNAL(src, COMSIG_MOB_MODIFY_AGGRO_LINES, GLOB.goblin_aggro, TRUE)
 	gender = MALE
 	if(src.dna && src.dna.species)
 		src.dna.species.soundpack_m = new /datum/voicepack/other/goblin() //REMINDER TO UPDATE!!!
@@ -160,21 +153,13 @@
 
 /datum/outfit/job/roguetown/npc/hobgoblin/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/chance_zjumper = 25 //We are REALLY smart compared to goblins; Let us chase after these puny adventurers!!!
-	var/chance_treeclimber = 50
 
 	H.STASTR = 9 
 	H.STAINT = 5 //Somewhat smart buggers!
-	H.STACON = 12
-	H.STAWIL = 14
+	H.STACON = 10
+	H.STAWIL = 10
 	H.STASPD = 8 //But a little slow, considering that they're more tanky than bitey...
 
-	if(prob(chance_zjumper))
-		ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
-		H.find_targets_above = TRUE
-	if(prob(chance_treeclimber))
-		H.tree_climber = TRUE
-		H.find_targets_above = TRUE // so they can taunt
 
 	var/loadout = rand(1,10)
 	//If they can make metal/plate armor, they 100% can make metal / iron weapons.

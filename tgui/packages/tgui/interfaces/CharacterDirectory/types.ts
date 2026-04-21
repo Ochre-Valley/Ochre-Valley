@@ -13,6 +13,7 @@ export type Data = {
 };
 
 export type mobEntry = {
+  ckey: string;
   name: string;
   species: string;
   ooc_notes_favs: string;

@@ -9,14 +9,15 @@ import type { mobEntry } from './types';
 
 export const CharacterDirectoryList = (props: {
   directory: mobEntry[];
-  onOverlay: React.Dispatch<React.SetStateAction<mobEntry | null>>;
+  onOpenAd: (name: string, ad: string) => void;
 }) => {
   const { act } = useBackend();
 
-  const { onOverlay, directory } = props;
+  const { directory, onOpenAd } = props;
 
   const [sortId, setSortId] = useState<string>('name');
   const [sortOrder, setSortOrder] = useState<boolean>(true);
+  const [hoveredAction, setHoveredAction] = useState<string | null>(null);
 
   return (
     <Section
@@ -29,7 +30,9 @@ export const CharacterDirectoryList = (props: {
     >
       <Table>
         <Table.Row bold>
-          <Table.Cell collapsing>Photo</Table.Cell>
+          <Table.Cell collapsing textAlign="center">
+            Photo
+          </Table.Cell>
           <SortButton
             ourId="name"
             sortId={sortId}
@@ -93,7 +96,10 @@ export const CharacterDirectoryList = (props: {
           >
             PvP Opt-In
           </SortButton>
-          <Table.Cell collapsing textAlign="right">
+          <Table.Cell collapsing textAlign="center">
+            Ad
+          </Table.Cell>
+          <Table.Cell collapsing textAlign="center">
             View
           </Table.Cell>
         </Table.Row>
@@ -102,59 +108,98 @@ export const CharacterDirectoryList = (props: {
             const i = sortOrder ? 1 : -1;
             return a[sortId].localeCompare(b[sortId]) * i;
           })
-          .map((character, i) => (
-            <Table.Row key={i} backgroundColor={getTagColor(character.tag)} textColor={"black"}>
-              <Table.Cell verticalAlign="middle">
-                {character.photo ? (
-                  <Stack
-                    align="center"
-                    justify="center"
-                    backgroundColor="black"
-                    overflow="hidden"
-                  >
-                    <Stack.Item>
-                      <Image
-                        fixErrors
-                        src={character.photo.substring(
-                          1,
-                          character.photo.length - 1,
-                        )}
-                        height="64px"
-                      />
-                    </Stack.Item>
-                  </Stack>
-                ) : null}
-              </Table.Cell>
-              <Table.Cell p={1} verticalAlign="middle">
-                {character.name}
-              </Table.Cell>
-              <Table.Cell verticalAlign="middle">
-                {character.species}
-              </Table.Cell>
-              <Table.Cell verticalAlign="middle">{character.tag}</Table.Cell>
-              <Table.Cell verticalAlign="middle">
-                {character.gendertag}
-              </Table.Cell>
-              <Table.Cell verticalAlign="middle">
-                {character.sexualitytag}
-              </Table.Cell>
-              <Table.Cell verticalAlign="middle">{character.erptag}</Table.Cell>
-              <Table.Cell verticalAlign="middle">
-                {character.pvptag}
-              </Table.Cell>
-              <Table.Cell verticalAlign="middle" collapsing textAlign="right">
-                <Button
-                  onClick={() => onOverlay(character)}
-                  color="transparent"
-                  textColor="black"
-                  icon="sticky-note"
-                  mr={1}
-                >
-                  View
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          ))}
+          .map((character, i) => {
+            const hasCharacterAd = !!character.character_ad?.trim();
+            const adActionId = `${character.ckey}-ad`;
+            const viewActionId = `${character.ckey}-view`;
+
+            return (
+              <Table.Row key={i} backgroundColor={getTagColor(character.tag)} textColor="black">
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.photo ? (
+                    <Stack
+                      align="center"
+                      justify="center"
+                      backgroundColor="black"
+                      overflow="hidden"
+                    >
+                      <Stack.Item>
+                        <Image
+                          fixErrors
+                          src={character.photo.substring(
+                            1,
+                            character.photo.length - 1,
+                          )}
+                          height="64px"
+                        />
+                      </Stack.Item>
+                    </Stack>
+                  ) : null}
+                </Table.Cell>
+                <Table.Cell p={1} verticalAlign="middle">
+                  {character.name}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle">
+                  {character.species}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.tag}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.gendertag}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.sexualitytag}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.erptag}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" textAlign="center">
+                  {character.pvptag}
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" collapsing textAlign="center">
+                  <Button
+                    onClick={() => onOpenAd(character.name, character.character_ad)}
+                    onMouseEnter={() => setHoveredAction(adActionId)}
+                    onMouseLeave={() => setHoveredAction((current) => current === adActionId ? null : current)}
+                    color="transparent"
+                    textColor="black"
+                    icon="scroll"
+                    tooltip={hasCharacterAd ? 'View advertisement' : 'No advertisement set'}
+                    disabled={!hasCharacterAd}
+                    style={{
+                      backgroundColor: hoveredAction === adActionId
+                        ? 'rgba(255, 255, 255, 0.16)'
+                        : 'transparent',
+                      borderRadius: '3px',
+                      ...(!hasCharacterAd ? {
+                        opacity: 0.55,
+                        filter: 'brightness(1.15)',
+                      } : undefined),
+                    }}
+                  />
+                </Table.Cell>
+                <Table.Cell verticalAlign="middle" collapsing textAlign="center">
+                  <Button
+                    onClick={() => act('openExamine', { ckey: character.ckey })}
+                    onMouseEnter={() => setHoveredAction(viewActionId)}
+                    onMouseLeave={() => setHoveredAction((current) => current === viewActionId ? null : current)}
+                    color="transparent"
+                    textColor="black"
+                    icon="eye"
+                    tooltip="View character profile"
+                    style={{
+                      backgroundColor: hoveredAction === viewActionId
+                        ? 'rgba(255, 255, 255, 0.16)'
+                        : 'transparent',
+                      borderRadius: '3px',
+                    }}
+                  />
+                </Table.Cell>
+              </Table.Row>
+            );
+          })
+        }
       </Table>
     </Section>
   );

@@ -43,7 +43,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = FALSE
-	max_integrity = 250
+	max_integrity = 350
 	item_flags = DROPDEL
 
 /mob/living/carbon/human/species/wildshape/hag/gain_inherent_skills()
@@ -52,10 +52,10 @@
 		STASTR = 12
 		STACON = 15
 		STAWIL = 15
-		STAPER = 10
+		STAPER = 12
 		STASPD = 8
 		adjust_skillrank(/datum/skill/combat/wrestling, SKILL_LEVEL_JOURNEYMAN, TRUE)
-		adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_JOURNEYMAN, TRUE)
+		adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, TRUE)
 		adjust_skillrank(/datum/skill/misc/swimming, SKILL_LEVEL_JOURNEYMAN, TRUE)
 		adjust_skillrank(/datum/skill/misc/athletics, SKILL_LEVEL_MASTER, TRUE)
 		adjust_skillrank(/datum/skill/misc/sneaking, SKILL_LEVEL_EXPERT, TRUE)
@@ -63,6 +63,12 @@
 		AddSpell(new /obj/effect/proc_holder/spell/self/hagclaws) 
 		apply_status_effect(/datum/status_effect/debuff/hag_bog_tether/wildshape)
 	//faction |= list("hag", "spiders")
+	// OV Add Start - Bandaid fix for hags not getting the correct mob setup until it's fixed upstream
+	real_name = "True Hag"
+	desc = "Godless, ancient, pure evyl. Run."
+	gender = stored_mob.gender
+	pronouns = stored_mob.pronouns
+	// OV Add End
 
 /datum/species/hag_true_form
 	name = "True Hag"
@@ -145,7 +151,7 @@
 	icon = 'icons/roguetown/weapons/misc32.dmi'
 	max_blade_int = 600
 	max_integrity = 600
-	force = 25
+	force = 27
 	block_chance = 0
 	wdefense = 6
 	blade_dulling = DULLING_SHAFT_WOOD

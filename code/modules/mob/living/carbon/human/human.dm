@@ -104,8 +104,6 @@
 	breath_remaining = 10
 	addtimer(CALLBACK(src, PROC_REF(update_breath_hud)), 1)
 
-	our_cells = new(interesting_dist, interesting_dist, 1)
-	set_new_cells()
 
 /mob/living/carbon/human/ZImpactDamage(turf/T, levels)
 	var/obj/item/bodypart/affecting
@@ -147,7 +145,6 @@
 	dna.initialize_dna()
 
 /mob/living/carbon/human/Destroy()
-	STOP_PROCESSING(SShumannpc, src)
 	QDEL_NULL(physiology)
 	QDEL_NULL(sunder_light_obj)
 	GLOB.human_list -= src
@@ -797,37 +794,20 @@
 			set_species(newtype)
 
 /mob/living/carbon/human/MouseDrop_T(atom/dragged, mob/living/user)
-	if(pulling == dragged && stat == CONSCIOUS)
-		if(isliving(dragged))
-			/*if(user.grab_state && user.voremode) //Caustic - Commenting this out to instead implement it like Chompers has it
-				if(ismob(user.pulling))
-					vore_attackby(dragged, user)
-					user.vore_attackby(user, dragged, src) // User, Pulled, Predator target (which can be user, pulling, or src)
-					return TRUE*/
-			//Pick them up. Pick. Them. Up.
-			/*if(ishuman(dragged) && ishuman(user)) //Caustic - We should be handling this the Chomp way now!
-				var/mob/living/carbon/human/userhuman = user
-				var/mob/living/carbon/human/targethuman = dragged
-				if(targethuman.small_enough(userhuman) && user.grab_state)
-					if(targethuman.attempt_scoop(userhuman))
-						return TRUE*/
-			//If they dragged themselves and we're currently aggressively grabbing them try to piggyback (not on cmode)
-			if(user == dragged && can_piggyback(target))
-				if(cmode)
-					to_chat(dragged, span_warning("[src] won't let you on!"))
-					return FALSE
-				piggyback(dragged)
+	if(istype(dragged, /mob/living))
+		var/mob/living/target = dragged
+		if(stat == CONSCIOUS)
+			var/has_grab = FALSE
+			var/obj/item/grabbing/grab = get_active_held_item()
+			if(istype(grab) && grab.grabbed == target)
+				has_grab = TRUE
+			// If the target is grabbed and can be firemanned, we fireman carry them
+			if(has_grab && can_be_firemanned(target))
+				fireman_carry(target)
 				return TRUE
-			//If you dragged them to you and you're aggressively grabbing try to carry them
-			else if(user != dragged && can_be_firemanned(dragged))
-				var/obj/G = get_active_held_item()
-				if(G)
-					if(istype(G, /obj/item/grabbing))
-						fireman_carry(dragged)
-						return TRUE
-		else if(istype(dragged, /obj/item/bodypart/head/dullahan/))
-			var/obj/item/bodypart/head/dullahan/item_head = dragged
-			item_head.show_inv(user)
+	else if(istype(dragged, /obj/item/bodypart/head/dullahan/))
+		var/obj/item/bodypart/head/dullahan/item_head = dragged
+		item_head.show_inv(user)
 	. = ..()
 
 /mob/living/carbon/human/RightMouseDrop_T(atom/dragged, mob/living/user)
@@ -1080,6 +1060,16 @@
 	. = ..()
 	if(race)
 		set_species(race)
+
+/mob/living/carbon/human/species/LateInitialize()
+	. = ..()
+	var/turf/turf = get_turf(loc)
+	if(turf)
+		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
+			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
+				GLOB.weatherproof_z_levels |= "[turf.z]"
+		if("[turf.z]" in GLOB.weatherproof_z_levels)
+			SSmatthios_mobs.register_mob(src)
 
 //Vrell - Moving this here to fix load order bugs
 /mob/living/carbon/human/has_penis()

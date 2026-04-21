@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Fixed a bug where players would stay muffled after escaping a muffling belly with OOC escape."

@@ -275,7 +275,6 @@
 			if(R.craftsound)
 				playsound(T, R.craftsound, 100, TRUE)
 			var/time2use = 10
-			//var/numberoftries = 0
 			for(var/i = 1 to 100)
 				if(do_after(user, time2use, target = user))
 					contents = get_surroundings(user)
@@ -301,7 +300,6 @@
 					if(i == 100 && prob2craft > 0)
 						prob2craft = 100
 					if(!prob(prob2craft))
-						//numberoftries++
 						if(user.client?.prefs.showrolls)
 							to_chat(user, span_danger("I've failed to craft \the [R.name]... [prob2craft]%"))
 							continue
@@ -315,8 +313,6 @@
 							I.CheckParts(parts, R)
 							I.OnCrafted(user.dir, user)
 							I.add_fingerprint(user)
-							//Remove for now but can be brought back in a later time if people want.
-							//handle_modifiers(I, user, numberoftries, R) //This handles the modifiers for crafted items! Does not work for turfs.
 					else
 						if(ispath(R.result, /turf))
 							var/turf/X = T.PlaceOnTop(R.result)
@@ -664,101 +660,8 @@
 				construct_item_repeatable(user, r)
 				user.mind.lastrecipe = r
 
-//NO RNG IS PRESENT FOR A REASON AS CRAFTING IS TYPICALLY RESERVED FOR MASS PRODUCTION. 
-//If you intend on changing this, please, *DO NOT* add any RNG here for QoL purposes.
-/datum/component/personal_crafting/proc/handle_modifiers(item, user, numberoftries, recipe)
-	var/datum/crafting_recipe/current_recipe = recipe
-	var/mob/living/crafting_user = user
-	var/craft_attempts
-	var/skill_quality
-	var/total_requirements
-	var/skill_level = crafting_user.get_skill_level(current_recipe.skillcraft)
 
-	//Get total item requirements for the recipe. Bigger recipes are harder to make.
-	for(var/path as anything in current_recipe.reqs)
-		total_requirements += 1
 
-	//Every attempt you fail, lose quality by 0.5. Every 2 fails is 1 quality lost. INT will be your friend, PER slightly helps.
-	if(!numberoftries)
-		numberoftries = 1
-	for(var/i in 1 to numberoftries)
-		skill_quality--
-	craft_attempts = ceil(numberoftries / total_requirements)
-	skill_quality -= floor(craft_attempts * 0.5)
-
-	//Int and PER are important values for crafters. Helps improve item quality tremendously. Int scales twice as hard.
-	if(crafting_user.mind)
-		skill_quality += (skill_level + ((crafting_user.STAINT / 5) + (crafting_user.STAPER / 10)))
-
-	skill_quality = floor((skill_quality / total_requirements))
-
-	//We cannot craft items worse than our skill level. Legendary crafting always makes Staunch items.
-	//Perfect items can be made by utilizing your INT and PER values to encourage towner roles to utilize more INT and PER if they want to craft max.
-	if(skill_level)
-		skill_quality = max(skill_level / 2, skill_quality)
-
-	var/modifier
-	switch(skill_quality)
-	//Literally. The worst you can possibly do. You have no skills. You fucked up the crafting a lot. You should seek a shop or towner.
-		if(-INFINITY to CRAFTING_LEVEL_MIN)
-			modifier = 0.5
-		if((CRAFTING_LEVEL_MIN - 1) to CRAFTING_LEVEL_SPOIL)
-			modifier = 0.6
-		if(CRAFTING_LEVEL_AWFUL)
-			modifier = 0.75
-		if(CRAFTING_LEVEL_CRUDE)
-			modifier = 0.85
-		if(CRAFTING_LEVEL_ROUGH)
-			modifier = 0.9
-		if(CRAFTING_LEVEL_COMPETENT) //No modifiers. Journeyman.
-			modifier = 1
-		if(CRAFTING_LEVEL_FINE)
-			modifier = 1.1
-		if(CRAFTING_LEVEL_FLAWLESS)
-			modifier = 1.2
-		if(CRAFTING_LEVEL_LEGENDARY to (CRAFTING_LEVEL_MAX - 1))
-			modifier = 1.3
-		if(CRAFTING_LEVEL_MAX to INFINITY) //Can only achieve this is above the max level!
-			modifier = 1.4
-			//Consider this masterwork for now. Will remove if it's too easy.
-			record_round_statistic(STATS_MASTERWORKS_FORGED)
-
-	if(!modifier)
-		return
-
-	var/obj/I = item
-	I.name = initial(I.name) // Reset the name first
-	if(modifier != 1)
-		switch(modifier)
-			if(0.5)
-				I.desc = "[initial(I.desc)] It looks absolutely terrible. Who would want this?"
-			if(0.6)
-				I.desc = "[initial(I.desc)] It looks ruined!"
-			if(0.75)
-				I.desc = "[initial(I.desc)] It looks awful!"
-			if(0.85)
-				I.desc = "[initial(I.desc)] It looks crudely made."
-			if(0.9)
-				I.desc = "[initial(I.desc)] It looks rough."
-			if(1.1)
-				I.desc = "[initial(I.desc)] It looks decent."
-			if(1.2)
-				I.desc = "[initial(I.desc)] It looks to be of quality."
-			if(1.3)
-				I.desc = "[initial(I.desc)] It looks rather staunch!"
-			if(1.4)
-				I.desc = "[initial(I.desc)] It looks perfect in every way!"
-
-	I.sellprice *= modifier
-
-	//For non-crafter roles, punish the integrity of the item created. Mainly aimed towards weapons and armors.
-	if(modifier < 1)
-		I.max_integrity *= modifier
-		I.obj_integrity *= modifier
-
-	if(istype(I, /obj/item/reagent_containers)) //Can't bend the shape right? Sucks to be you. Go seek your mages or use the shop!
-		var/obj/item/reagent_containers/R = I
-		R.volume *= modifier 
 
 /client/verb/toggle_legacycraft()
 	set name = "Toggle legacy craft"
