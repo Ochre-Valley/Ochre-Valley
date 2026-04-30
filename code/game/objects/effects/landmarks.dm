@@ -244,7 +244,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/tapster
-	name = "Tapster"
+	name = "Barman" //OV Edit - Name Consistency was Tapster
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/gravedigger //UNUSED / DELETE LATER WITH MAP EDITOR

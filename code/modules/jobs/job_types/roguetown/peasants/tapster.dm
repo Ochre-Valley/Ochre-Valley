@@ -1,6 +1,7 @@
 /datum/job/roguetown/tapster
-	title = "Tapster"
-	f_title = "Tapster"
+	title = "Barman" //OV Edit - Masculine Title
+	f_title = "Barmaid" //OV Edit - Feminine Title
+	n_title = "Barkeep" //OV Add - Neutral Title
 	flag = TAPSTER
 	department_flag = PEASANTS
 	faction = "Station"
@@ -27,7 +28,7 @@
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/tapster
-	name = "Tapster"
+	name = "Barkeep"
 	tutorial = "You have a simple role at the Azurian Pint; please. You wait tables and help guests, clean the rooms, grow and brew more drink, and assist in the kitchens as need be. Bring a smile to the masses--and those cheapsake townsfolk and adventures might just give you an extra coin...assuming you've not already pilfered their pouch while they're in a drunken stupor off your latest brew."
 	outfit = /datum/outfit/job/roguetown/tapster/basic
 	category_tags = list(CTAG_TAPSTER)

@@ -183,7 +183,7 @@
 	name = "innkeeper miniature flagpole"
 	controlled_role = "innkeeper"
 	flag_color = "#800020" // Burgundy
-	authorized_jobs = list("Towner", "Innkeeper", "Tapster", "Cook")
+	authorized_jobs = list("Towner", "Innkeeper", "Barman", "Cook") //OV Edit - Tapster changed to Barman
 
 /obj/item/mini_flagpole/tailor
 	name = "tailor miniature flagpole"

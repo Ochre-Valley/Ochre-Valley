@@ -54,7 +54,7 @@
 
 /obj/item/parcel/proc/get_area_jobs(area_type)
 	var/static/list/area_jobs = list(
-		/area/rogue/indoors/town/tavern = list("Innkeeper", "Tapster", "Cook"),
+		/area/rogue/indoors/town/tavern = list("Innkeeper", "Barman", "Cook"), //OV Edit - Tapster changed to Barman
 		/area/rogue/indoors/town/bath = list("Bathhouse Attendant", "Bathmaster"),
 		/area/rogue/indoors/town/church = list("Bishop", "Acolyte", "Templar", "Sexton", "Martyr"),
 		/area/rogue/indoors/town/dwarfin = list("Guildmaster", "Guildsman"),

@@ -150,7 +150,7 @@ GLOBAL_LIST_INIT(bathhouse_positions, list(
 GLOBAL_LIST_INIT(peasant_positions, list( //Serfs / peasants / generic towners
 	"Bathhouse Attendant",
 	"Cook",
-	"Tapster",
+	"Barman", //OV Edit - Name Consistency was Tapster
 	"Servant",
 	"Shophand",
 	"Soilson",
