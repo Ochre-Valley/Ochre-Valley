@@ -33,10 +33,11 @@
 		rmb_stam_penalty = 1.5	//Uses a modifer instead of a flat addition, less than weapons no matter what rn. 50% extra stam cost basically.
 	if(isliving(A))
 		var/mob/living/L = A
-		//Caustic Edit - Add Scooping of Micros
+		/*//Caustic Edit - Add Scooping of Micros //OV Edit - Commented out Pending Optimization
 		if(used_intent.type == INTENT_HELP && !cmode && !L.cmode && L.attempt_to_scoop(src) && !on_fire)
 			return
 		//Caustic Edit End
+		*/
 		if(!used_intent.noaa)
 			playsound(get_turf(src), pick(GLOB.unarmed_swingmiss), 100, FALSE)
 //			src.emote("attackgrunt")

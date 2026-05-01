@@ -245,7 +245,7 @@
  * Attempt to scoop up this mob up into M's hands, if the size difference is large enough.
  * @return false if normal code should continue, 1 to prevent normal code.
  */
-/mob/living/proc/attempt_to_scoop(mob/living/M, mob/living/G, ignore_size = FALSE) //second one is for the Grabber, only exists for animals to self-grab
+/*/mob/living/proc/attempt_to_scoop(mob/living/M, mob/living/G, ignore_size = FALSE) //second one is for the Grabber, only exists for animals to self-grab //OV Edit - Temp Disable Pending Optimization
 	if(src == M)
 		return FALSE
 	if(!(pickup_pref && M.pickup_pref && M.pickup_active))
@@ -273,7 +273,7 @@
 			return TRUE
 		else
 			return FALSE; // Unable to scoop, let other code run
-
+*/
 #define STEP_TEXT_OWNER(x) "[replacetext(x,"%prey",tmob)]"
 #define STEP_TEXT_PREY(x) "[replacetext(x,"%owner",src)]"
 /**
