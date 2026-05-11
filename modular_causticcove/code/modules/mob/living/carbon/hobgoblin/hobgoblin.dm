@@ -114,6 +114,7 @@
 /mob/living/carbon/human/species/hobgoblin/after_creation()
 	..()
 	AddComponent(/datum/component/ai_aggro_system)
+	ADD_TRAIT(src, TRAIT_HARDSOLE, INNATE_TRAIT)
 	SEND_SIGNAL(src, COMSIG_MOB_MODIFY_AGGRO_LINES, GLOB.goblin_aggro, TRUE)
 	gender = MALE
 	if(src.dna && src.dna.species)
@@ -135,7 +136,7 @@
 	for(var/datum/charflaw/cf in src.charflaws)
 		QDEL_NULL(cf)
 	update_body()
-	faction = list("orcs")
+	faction = list(FACTION_ORCS)
 	name = "hoblin"
 	real_name = "hoblin"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
@@ -143,6 +144,7 @@
 	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
+	AddComponent(/datum/component/npc_death_line, GLOB.npc_death_lines_goblin, 25)
 	if(hobgob_outfit)
 		var/datum/outfit/O = new hobgob_outfit
 		if(O)

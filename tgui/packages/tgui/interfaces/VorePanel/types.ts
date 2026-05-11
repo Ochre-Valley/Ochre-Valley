@@ -310,6 +310,7 @@ export type PrefData = {
   resizable: BooleanLike;
   feeding: BooleanLike;
   absorbable: BooleanLike;
+  digest_leave_remains: BooleanLike;
   allowmobvore: BooleanLike;
   allowtemp: BooleanLike;
   permit_healbelly: BooleanLike;
@@ -420,10 +421,10 @@ export type AestMessageData = {
   aest_subtab: string;
   max_length: number;
   active_message:
-    | string
-    | string[]
-    | null
-    | Record<string | number, string | number>; // The record is an ancient data corruption, it's not valid!
+  | string
+  | string[]
+  | null
+  | Record<string | number, string | number>; // The record is an ancient data corruption, it's not valid!
   set_action: string;
   tooltip: string;
   sub_action?: string;
@@ -459,6 +460,7 @@ export type LocalPrefs = {
   resize: PreferenceData;
   steppref: PreferenceData;
   vore_fx: PreferenceData;
+  remains: PreferenceData;
   pickuppref: PreferenceData;
   spontaneous_tf: PreferenceData;
   mind_transfer: PreferenceData;

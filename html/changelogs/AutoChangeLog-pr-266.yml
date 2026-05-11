@@ -1,0 +1,6 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added 3 new quick toggle verbs for toggling Vore FX and spont prey/pred."
+  - qol: "Changed the name of Damage/Remove Prey's Organ to just be \"Damage Prey's Organ\" as the name is so long that it messes with the whole formatting."
+  - qol: "Removed the Abilities.Vore tab, moving everything into the Vore tab."

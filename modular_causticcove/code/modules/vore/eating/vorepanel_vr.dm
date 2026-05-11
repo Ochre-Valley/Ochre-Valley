@@ -482,6 +482,12 @@
 				host.client.prefs_vr.absorbable = host.absorbable
 			unsaved_changes = TRUE
 			return TRUE
+		if("toggle_leaveremains")
+			host.digest_leave_remains = !host.digest_leave_remains
+			if(host.client.prefs_vr)
+				host.client.prefs_vr.digest_leave_remains = host.digest_leave_remains
+			unsaved_changes = TRUE
+			return TRUE
 		if("toggle_mobvore")
 			host.allowmobvore = !host.allowmobvore
 			if(host.client.prefs_vr)
@@ -754,10 +760,10 @@
 	// Only allow indirect belly viewers to examine
 	if(user in OB)
 		if(isliving(target))
-			if(params["option"] in list("Examine","Help Out","Devour"))
+			if(params["option"] in list("Examine","Help Out","Devour","ERP"))
 				intent = params["option"]
 			else
-				intent = tgui_alert(user, "What do you want to do to them?","Query",list("Examine","Help Out","Devour"))
+				intent = tgui_alert(user, "What do you want to do to them?","Query",list("Examine","Help Out","Devour","ERP"))
 
 		else if(isitem(target))
 			if(params["option"] in list("Examine","Use Hand"))
@@ -834,6 +840,19 @@
 					OB.handle_absorb_langs(M, OB.owner)
 				TB.nom_atom(M)
 
+		if("ERP") // let's fugg
+			if(host.stat || host.absorbed || M.absorbed)
+				to_chat(user, span_warning("You can't do that in your state!"))
+				return TRUE
+
+			if(!ishuman(host) || !ishuman(M))
+				to_chat(user, span_warning("Sex is not allowed for you or them."))
+				return FALSE
+
+			var/mob/living/carbon/human/human_host = host
+			human_host.try_initiate_sex(M)
+			return TRUE
+
 /datum/vore_look/proc/pick_from_outside(mob/user, params)
 	var/intent
 
@@ -882,7 +901,7 @@
 		var/mob/living/datarget = target
 		if(datarget.client)
 			available_options += "Process"
-		available_options += "Health"
+		available_options += "Health Bar"
 	if((params["option"] in available_options))
 		intent = params["option"]
 	else
@@ -1075,7 +1094,7 @@
 					T.update_icon()
 					//announce_ghost_joinleave(T.mind, 0, "They now occupy their body again.")
 			return TRUE
-		if("Health")
+		if("Health Bar")
 			var/mob/living/ourtarget = target
 			ourtarget.chat_healthbar(user) //OV EDIT
 			return TRUE
@@ -1085,7 +1104,7 @@
 
 			if(ourtarget.digestable)
 				process_options += "Digest"
-				//process_options += "Break Bone"
+				process_options += "Break Bone"
 
 			if(ourtarget.absorbable)
 				process_options += "Absorb"
@@ -1111,8 +1130,8 @@
 			switch(ourchoice)
 				if("Digest")
 					return b.instant_digest(user, ourtarget)
-				/*if("Break Bone")
-					return b.instant_break_bone(user, ourtarget)*/
+				if("Break Bone")
+					return b.instant_break_bone(user, ourtarget)
 				if("Absorb")
 					return b.instant_absorb(user, ourtarget)
 				if("Knockout")

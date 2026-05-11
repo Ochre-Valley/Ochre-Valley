@@ -1,0 +1,4 @@
+author: "tank8673"
+delete-after: True
+changes:
+  - rscadd: "Added a bunch of new bird sprites! go check the PR, and check the original PR from virgo to see the whole list"

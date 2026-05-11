@@ -62,7 +62,9 @@
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
 		/datum/customizer/organ/wings/anthro,
-		/datum/customizer/organ/ears/elf,
+		/datum/customizer/organ/ears/wings,
+		/datum/customizer/organ/horns/wings,
+		/datum/customizer/organ/snout/wings,
 		//Caustic edit
 		/datum/customizer/organ/belly/human,
 		/datum/customizer/organ/butt/human,

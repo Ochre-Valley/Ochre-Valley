@@ -1563,3 +1563,25 @@
 	verbage = "constructs"
 	skillcraft = /datum/skill/craft/carpentry
 	craftdiff = 2
+
+//OV edit
+/datum/crafting_recipe/roguetown/structure/bookcase
+	name = "bookcase"
+	category = "Misc"
+	result = /obj/structure/bookcase
+	reqs = list(/obj/item/natural/wood/plank = 3)
+	verbage_simple = "construct"
+	verbage = "constructs"
+	skillcraft = /datum/skill/craft/carpentry
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/structure/drawer
+	name = "drawer"
+	category = "Containers"
+	result = /obj/structure/closet/crate/drawer
+	reqs = list(/obj/item/natural/wood/plank = 2)
+	verbage_simple = "construct"
+	verbage = "constructs"
+	skillcraft = /datum/skill/craft/carpentry
+	craftdiff = 3
+//OV edit end

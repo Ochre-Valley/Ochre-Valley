@@ -6,14 +6,12 @@
 	resistance_flags = FIRE_PROOF
 	blocksound = PLATEHIT
 	max_integrity = ARMOR_INT_SIDE_STEEL
-	blade_dulling = DULLING_BASH
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	sellprice = 17
 
 	grid_width = 64
 	grid_height = 32
@@ -29,7 +27,15 @@
 	icon_state = "igauntlets"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
-	sellprice = 12
+
+/obj/item/clothing/gloves/roguetown/plate/iron/banded
+	name = "banded iron gauntlets"
+	desc = "A pair of leather gloves layered under a fur wrap with an iron plate hastily tightened together on both ends. It's primarily worn in the cold north, where armor has to sometimes be cobbled together due to logistical shortages."
+	drop_sound = 'sound/foley/dropsound/scrap_drop.ogg'
+	pickup_sound = 'sound/foley/equip/scrap_equip.ogg'
+	equip_sound = 'sound/foley/equip/scrap_equip.ogg'
+	icon_state = "bandedgloves"
+	item_state = "bandedgloves"
 
 /obj/item/clothing/gloves/roguetown/plate/aalloy
 	name = "decrepit plate gauntlets"
@@ -41,76 +47,100 @@
 	material_category = ARMOR_MAT_PLATE
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
-	sellprice = 5 //CC Edit
 
 /obj/item/clothing/gloves/roguetown/plate/paalloy
 	name = "ancient plate gauntlets"
 	desc = "Polished gilbranze mechanisms, meticulously interconnected to shroud splayed hands. 'Mercy' and 'innocence' are concepts paraded by the unenlightened; spill their blood without guilt, so that the world may yet be remade in Her image." 
 	icon_state = "agauntlets"
 	smeltresult = /obj/item/ingot/aaslag
-	sellprice = 5
 
 /obj/item/clothing/gloves/roguetown/plate/graggar
 	name = "vicious gauntlets"
 	desc = "Fluted gauntlets, razor-tipped and fluidic in motion. Most are led to believe that 'might makes right', yet Graggar's truth is far more succinct - 'might makes'. Murder is the ultimate force; the only difference between you and them is that they're too afraid to admit it."
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	icon_state = "graggarplategloves"
-	sellprice = 44 //Heretical~
+	smeltresult = /obj/item/ingot/component/graggar
 
 /obj/item/clothing/gloves/roguetown/plate/graggar/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
+
+/obj/item/clothing/gloves/roguetown/plate/graggar/heavy
+	name = "vicious plated gauntlets"
+	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the lyfe that once was - and now, a stinging reminder of what could've been."
+	icon_state = "graggarplategloves_heavy"
+	smeltresult = /obj/item/ingot/component/graggar
+
+/*/obj/item/clothing/gloves/roguetown/plate/graggar/heavy/Initialize() //OV Edit Start - Armor Remove Maint
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+
+/obj/item/clothing/gloves/roguetown/plate/graggar/heavy/dropped(mob/living/carbon/human/user)
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)*/ //OV Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/matthios
 	name = "gilded gauntlets"
 	desc = "Many a man his life hath sold,"
 	icon_state = "matthiosgloves"
 	max_integrity = ARMOR_INT_SIDE_ANTAG
+	smeltresult = /obj/item/ingot/component/matthios
 
-/* //Caustic Edit - Allow dropping of Heretic Armors (so fun can happen :P)
 /obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Remove Maint
+	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
-/obj/item/clothing/gloves/roguetown/plate/matthios/dropped(mob/living/carbon/human/user)
+/*/obj/item/clothing/gloves/roguetown/plate/matthios/dropped(mob/living/carbon/human/user) //OV Edit Start - Armor Remove Maint
 	. = ..()
 	if(QDELETED(src))
 		return
-	qdel(src)
-*/ //Caustic Edit End
+	qdel(src)*/ //OV Edit End
 
-// OV edit start
-/obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
-	. = ..()
-	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
-// OV edit end
 
 /obj/item/clothing/gloves/roguetown/plate/zizo
 	name = "avantyne gauntlets"
-	desc = "Unknowing truths, veiling the hands that prayed. Called forth from the edge of what should be known, in Her name."
-	icon_state = "zizogauntlets"
-	max_integrity = ARMOR_INT_SIDE_ANTAG
+	desc = "A razor-tipped finger was all it took to splay the divine fillament; now, it is time to bring down the wrath of God's hand in full. </br> Do mind the forearm's guards, however - they \
+	tend to leave a stinging bruise, whenever used to parry an incoming strike."
+	icon_state = "zizoplategauntlets_med"
+	max_integrity = ARMOR_INT_SIDE_STEEL
 	chunkcolor = "#363030"
 	material_category = ARMOR_MAT_PLATE
-	sellprice = 44 //CC Edit
+	armor_class = ARMOR_CLASS_MEDIUM
+	smeltresult = /obj/item/ingot/component/zizo
 
-/* //Caustic Edit - Allow dropping of Heretic Armors (so fun can happen :P)
-/obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-
-/obj/item/clothing/gloves/roguetown/plate/zizo/dropped(mob/living/carbon/human/user)
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)
-*/ //Caustic Edit End
-
-// OV edit start
 /obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
-// OV edit end
+
+/obj/item/clothing/gloves/roguetown/plate/zizo/dropped(mob/living/carbon/human/user)
+	return ..()
+
+/obj/item/clothing/gloves/roguetown/plate/zizo/heavy
+	name = "avantyne plate gauntlets"
+	desc = "Unknowing truths, veiling the hands that prayed. Called forth from the edge of what should be known, in Her name."
+	icon_state = "zizogauntlets"
+	max_integrity = ARMOR_INT_SIDE_ANTAG
+	smeltresult = /obj/item/ingot/component/zizo
+
+/obj/item/clothing/gloves/roguetown/plate/zizo/heavy/Initialize()
+	. = ..()
+	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Remove Maint
+
+/*/obj/item/clothing/gloves/roguetown/plate/zizo/heavy/dropped(mob/living/carbon/human/user) //OV Edit Start - Armor Remove Maint
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)*/ //OV Edit End
+
+/obj/item/clothing/gloves/roguetown/plate/avantyne
+	name = "avantyne-threaded gloves"
+	desc = "Incongruent silks from a tymeline-most-doomed, woven to cradle the palms of God's successor. Softer than silk, yet unfettered by the blows from those who know no better."
+	icon_state = "zizoplategauntlets_med"
+	smeltresult = /obj/item/ingot/avantyne
+	armor = ARMOR_PLATE_BSTEEL
 
 /obj/item/clothing/gloves/roguetown/plate/shadowgauntlets
 	name = "darkplate gauntlets"
@@ -131,7 +161,6 @@
 	color = "#FFFFFF"
 	detail_color = "#FFFFFF"
 	var/picked = FALSE
-	sellprice = 30
 
 /obj/item/clothing/gloves/roguetown/plate/kote/attack_right(mob/user)
 	..()

@@ -1,5 +1,3 @@
-#define GUILDMASTER_ANNOUNCEMENT_COOLDOWN (2 MINUTES)
-
 /datum/job/roguetown/guildmaster
 	title = "Guildmaster"
 	flag = GUILDMASTER
@@ -43,7 +41,6 @@
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
 		STATKEY_INT = 1,
-		STATKEY_PER = 2
 	)
 	age_mod = /datum/class_age_mod/guildmaster
 	subclass_skills = list(
@@ -51,12 +48,12 @@
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/labor/lumberjacking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/labor/mining = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/masonry = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE, //caustic edit
 		/datum/skill/craft/blacksmithing = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_MASTER,
@@ -84,12 +81,12 @@
 	if(H.mind)
 		// Skillset is a combo of Artificer + Blacksmith with Labor Skills.
 		// And Tailor / Leathercrafting
-		H.verbs += /mob/living/carbon/human/proc/guild_announcement
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
 		pants = /obj/item/clothing/under/roguetown/trou/artipants
 		shoes = /obj/item/clothing/shoes/roguetown/boots/nobleboot
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/artificer
 		backl = /obj/item/storage/backpack/rogue/backpack
+		id = /obj/item/scomstone
 		backpack_contents = list(
 			/obj/item/rogueweapon/hammer/iron = 1,
 			/obj/item/rogueweapon/tongs = 1,
@@ -99,46 +96,12 @@
 			/obj/item/blueprint/mace_mushroom = 1
 			)
 		belt = /obj/item/storage/belt/rogue/leather
-		neck = /obj/item/storage/belt/rogue/pouch/coins/rich //cc edit start
-		beltl = /obj/item/storage/magebag/starter //cc edit end
+		beltl = /obj/item/storage/belt/rogue/pouch/coins/rich
 		beltr = /obj/item/storage/keyring/guildmaster
-		/* H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/prestidigitation) //OV Edit AP Merge 4.2.26 - Commented out pending rework
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/enchant_weapon)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/conjure_weapon)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/conjure_armor) */
-		ADD_TRAIT(H, TRAIT_MASTER_CARPENTER, TRAIT_GENERIC)		
-		ADD_TRAIT(H, TRAIT_MASTER_MASON, TRAIT_GENERIC)	
-		SStreasury.give_money_account(ECONOMIC_UPPER_CLASS, H, "Savings.")
+	ADD_TRAIT(H, TRAIT_MASTER_CARPENTER, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MASTER_MASON, TRAIT_GENERIC)
+	if(H.mind)
+		SStreasury.grant_savings(ECONOMIC_UPPER_CLASS, H)
 
 /datum/outfit/job/roguetown/guildmaster/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
-
-/mob/living/carbon/human/proc/guild_announcement()
-	set name = "Announcement"
-	set category = "GUILDMASTER"
-	if(stat)
-		return
-	var/announcementinput = input("Bellow to the Peaks", "Make an Announcement") as text|null
-	if(announcementinput)
-		if(!src.can_speak_vocal())
-			to_chat(src,span_warning("I can't speak!"))
-			return FALSE
-		if(!istype(get_area(src), /area/rogue/indoors/town/dwarfin))//Nuh uh
-			to_chat(src, span_warning("I can only speak from within the Guild."))
-			return FALSE
-		if (!COOLDOWN_FINISHED(src, guildmaster_announcement))
-			to_chat(src, span_warning("You must wait before speaking again."))
-			return FALSE
-		visible_message(span_warning("[src] takes a deep breath, preparing to make an announcement."))
-		if(do_after(src, 15 SECONDS, target = src)) // Reduced to 15 seconds from 30 on the original Herald PR. 15 is well enough time for sm1 to shove you.
-			say(announcementinput)
-			var/sanitized_input = trim(copytext(sanitize(announcementinput), 1, MAX_MESSAGE_LEN))
-			var/accented_input = treat_message_accent(sanitized_input, strings("accent_universal_ov.json", "universal"), 1) // OV Edit: use our own word list
-			var/treated_input = treat_message(accented_input, /datum/language/common)
-			priority_announce("[treated_input]", "The Guildmaster Heralds", 'sound/misc/bell.ogg', sender = src)
-			COOLDOWN_START(src, guildmaster_announcement, GUILDMASTER_ANNOUNCEMENT_COOLDOWN)
-		else
-			to_chat(src, span_warning("Your announcement was interrupted!"))
-			return FALSE
-
-#undef GUILDMASTER_ANNOUNCEMENT_COOLDOWN

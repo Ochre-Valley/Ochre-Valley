@@ -330,6 +330,9 @@
 	var/personal_nutrition_modifier = M.get_digestion_nutrition_modifier()
 	var/pred_digestion_efficiency = owner.get_digestion_efficiency_modifier()
 
+	if((mode_flags & DM_FLAG_LEAVEREMAINS) && M.digest_leave_remains)
+		handle_remains_leaving(M)
+
 	digestion_death(M)
 	if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && reagents.total_volume < reagents.maximum_volume) // digestion producing reagents
 		owner_adjust_nutrition((nutrition_percent / 100) * compensation * 3 * personal_nutrition_modifier)

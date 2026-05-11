@@ -41,7 +41,7 @@
 	inherent_traits = list(
 						TRAIT_NOBREATH,
 						TRAIT_ZOMBIE_IMMUNE,
-						TRAIT_BLOODLOSS_IMMUNE,
+						//TRAIT_BLOODLOSS_IMMUNE,
 						TRAIT_EASYDISMEMBER,
 						TRAIT_REGROW_LIMBS,
 						)
@@ -239,7 +239,7 @@
 	if(ishuman(caster))
 		var/mob/living/carbon/human/human_caster = caster
 		shape.color = "#[human_caster.dna.features["mcolor"]]"
-	H = new(shape,src,caster)
+	H = new(shape,src,caster,shape)
 	shape.name = "[shape]"
 	shape.faction = caster.faction
 
@@ -255,10 +255,15 @@
 		return ..()
 	shape = loc
 	if(!istype(shape))
+		to_chat(caster, "Initialize failure: please report: | stored=[caster] shape=[shape]")
 		CRASH("shapeshift holder created outside mob/living")
 	stored = caster
 	if(stored.mind)
 		stored.mind.transfer_to(shape)
+
+	rebuild_perception(shape)
+	hard_reset_spatial(shape)
+
 	stored.forceMove(src)
 	stored.notransform = TRUE
 	shape.visible_message(span_warning("[stored] has lost their form, they are vulnerable and near death."),span_warningbig("You have been near killed, you can no longer maintain your form. You will need to be revived to return to your humen form."))
@@ -266,31 +271,54 @@
 	slink = soullink(/datum/soullink/shapeshift, stored , shape)
 	slink.source = src
 
+	shape.mob_belly_transfer(stored)
+	VORE_PREF_TRANSFER(shape, stored)
+
 /obj/shapeshift_holder/ooze_death/restore(death=FALSE, knockout=0)
 	if(restoring || QDELETED(src))
 		return
 
 	restoring = TRUE
-	qdel(slink)
-	if (stored)
-		stored.forceMove(get_turf(src))
-		stored.notransform = FALSE
 
-		// leave a track to indicate something has shifted out here
-		var/obj/effect/track/the_evidence = new(stored.loc)
-		the_evidence.handle_creation(stored)
-		the_evidence.track_type = "expanding animal tracks into humanoid footprints"
-		the_evidence.ambiguous_track_type = "curious footprints"
-		the_evidence.base_diff = 6
+	if(slink)
+		qdel(slink)
+		slink = null
 
-	if(shape && shape.mind)
-		shape.mind?.transfer_to(stored)
-	stored.revive(full_heal = TRUE, admin_revive = FALSE)
-	to_chat(stored, span_notice("Bug notice: If you can no longer see emotes, move to a different z level and back (up/down a level). This is a known bug."))
-	stored.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/ooze)
-	stored.Knockdown(200)
-	stored.Stun(200)
-	stored.apply_status_effect(/datum/status_effect/debuff/revived)
-	stored.adjust_fire_stacks(2)
+	if(!stored)
+		qdel(src)
+		return
+
+	var/mob/living/temp = stored
+	stored = null
+
+	var/turf/original_turf = get_turf(src)
+
+	if(original_turf)
+		temp.forceMove(original_turf)
+		hard_reset_spatial(temp)
+	
+	if(isbelly(shape.loc))
+		var/obj/belly/B = shape.loc
+		temp.forceMove(B)
+
+	temp.notransform = FALSE
+
+	var/datum/mind/M = temp?.mind || shape?.mind
+	if(M)
+		M.transfer_to(temp)
+
+	rebuild_perception(temp)
+
+	temp.revive(full_heal = TRUE, admin_revive = FALSE)
+	to_chat(temp, span_notice("Bug notice: If you can no longer see emotes, move to a different z level and back (up/down a level). This is a known bug."))
+	temp.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/ooze)
+	temp.Knockdown(200)
+	temp.Stun(200)
+	temp.apply_status_effect(/datum/status_effect/debuff/revived)
+	temp.adjust_fire_stacks(2)
+	
+	temp.mob_belly_transfer(shape)
+	VORE_PREF_TRANSFER(temp, shape)
+
 	qdel(shape)
 	shape = null

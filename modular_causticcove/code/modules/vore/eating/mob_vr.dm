@@ -4,7 +4,7 @@
 	var/feeding = TRUE					// Can the mob be vorishly force fed or fed to others?
 	var/absorbable = TRUE				// Are you allowed to absorb this person?
 	var/resizable = TRUE				// Can other people resize you? (Usually ignored for self-resizes)
-	//var/digest_leave_remains = FALSE	// Will this mob leave bones/skull/etc after the melty demise?
+	var/digest_leave_remains = FALSE	// Will this mob leave bones/skull/etc after the melty demise?
 	var/allowmobvore = TRUE				// Will simplemobs attempt to eat the mob?
 	var/allowtemp = TRUE				// Can they be affected by belly temperature?
 	var/obj/belly/vore_selected			// Default to no vore capability.

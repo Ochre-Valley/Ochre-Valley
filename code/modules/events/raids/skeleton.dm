@@ -1,8 +1,11 @@
+// OV Add Start: We've disabled this event.
+#error This file has been deliberately disabled by Ochre Valley and must remain unticked!
+// OV Add End
 /datum/round_event_control/worldsiege
 	name = "Skeleton Siege"
 	typepath = /datum/round_event/worldsiege
 	weight = 10
-	max_occurrences = 1
+	max_occurrences = 0 //OV Edit - Not Needed Currently
 	min_players = 4
 	earliest_start = 35 MINUTES
 	tags = list(TAG_HAUNTED, TAG_COMBAT, TAG_RAID)

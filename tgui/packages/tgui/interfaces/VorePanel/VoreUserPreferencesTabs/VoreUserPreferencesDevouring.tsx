@@ -82,6 +82,12 @@ export const VoreUserPreferencesDevouring = (props: {
               tooltipPosition="left"
             />
           </Stack.Item>
+          <Stack.Item basis="32%">
+            <VoreUserPreferenceItem
+              spec={preferences.remains}
+              tooltipPosition="right"
+            />
+          </Stack.Item>
           <Stack.Item basis="32%" grow>
             <VoreUserPreferenceItem
               spec={preferences.toggle_digest_pain}

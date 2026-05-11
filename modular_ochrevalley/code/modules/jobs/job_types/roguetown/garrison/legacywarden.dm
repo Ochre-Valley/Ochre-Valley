@@ -1,4 +1,4 @@
-/datum/advclass/warden/ranger
+/*/datum/advclass/warden/ranger //OV Edit - Commented out AP Merge 4.17.26
 	name = "Ranger"
 	tutorial = "You are a ranger, a hunter who volunteered to become a part of the wardens. You have experience using bows and daggers."
 	outfit = /datum/outfit/job/roguetown/warden/ranger
@@ -168,4 +168,4 @@
 		if(helmchoice != "None")
 			mask = hoods[hoodchoice]
 	if(H.mind)
-		SStreasury.give_money_account(ECONOMIC_LOWER_MIDDLE_CLASS, H, "Savings.")
+		SStreasury.give_money_account(ECONOMIC_LOWER_MIDDLE_CLASS, H, "Savings.")*/

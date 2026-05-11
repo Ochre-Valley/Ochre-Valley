@@ -5,7 +5,7 @@
 		"resizable" = owner.resizable,
 		"feeding" = owner.feeding,
 		"absorbable" = owner.absorbable,
-		//"digest_leave_remains" = owner.digest_leave_remains,
+		"digest_leave_remains" = owner.digest_leave_remains,
 		"allowmobvore" = owner.allowmobvore,
 		"allowtemp" = owner.allowtemp,
 		"permit_healbelly" = owner.permit_healbelly,

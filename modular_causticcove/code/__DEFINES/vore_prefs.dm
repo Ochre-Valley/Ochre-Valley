@@ -13,6 +13,7 @@
 	target.show_vore_fx = source.show_vore_fx;											\
 	target.selective_preference = source.selective_preference;							\
 	target.size_strip_preference = source.size_strip_preference;						\
+	target.digest_leave_remains = source.digest_leave_remains;							\
 	target.digest_pain = source.digest_pain;											\
 	target.noisy_full = source.noisy_full;												\
 	target.eating_privacy_global = source.eating_privacy_global;						\

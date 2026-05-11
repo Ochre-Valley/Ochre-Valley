@@ -1,7 +1,0 @@
-author: "WeNeedMorePhoron"
-delete-after: True
-changes:
-  - bugfix: "AI probably a bit more fair when it comes to detecting you in stealth"
-  - bugfix: "AI should no longer stand up while unconscious"
-  - bugfix: "AI turns on Cmode properly and will dodge and parry again."
-  - balance: "You no longer faint in and out of consciousness at low blood level before you reach the bled out condition (Also fixes AI spam)"

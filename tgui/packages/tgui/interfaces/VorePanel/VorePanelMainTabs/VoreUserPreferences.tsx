@@ -35,6 +35,7 @@ export const VoreUserPreferences = (props: { prefs: PrefData }) => {
     resizable,
     step_mechanics_active,
     show_vore_fx,
+    digest_leave_remains,
     pickup_mechanics_active,
     allow_spontaneous_tf,
     allow_mind_transfer,
@@ -434,6 +435,23 @@ export const VoreUserPreferences = (props: { prefs: PrefData }) => {
       content: {
         enabled: 'Show Vore FX',
         disabled: 'Do Not Show Vore FX',
+      },
+    },
+    remains: {
+      action: 'toggle_leaveremains',
+      test: digest_leave_remains,
+      tooltip: {
+        main: '',
+        enable:
+          'Regardless of Predator Setting, you will not leave remains behind.' +
+          ' Click this to allow leaving remains.',
+        disable:
+          'Your Predator must have this setting enabled in their belly modes to allow remains to show up,' +
+          ' if they do not, they will not leave your remains behind, even with this on. Click to disable remains.',
+      },
+      content: {
+        enabled: 'Allow Leaving Remains',
+        disabled: 'Do Not Allow Leaving Remains',
       },
     },
     pickuppref: {

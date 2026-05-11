@@ -44,7 +44,6 @@
 	inv_storage_delay = 1.5 SECONDS
 	edelay_type = 1
 	special = /datum/special_intent/shin_swipe
-	sellprice = 40 //Your best friend!
 
 /obj/item/rogueweapon/sword/Initialize()
 	. = ..()
@@ -74,7 +73,6 @@
 	max_blade_int = 250
 	max_integrity = 200
 	sheathe_icon = "bronzesword" //Placeholder. Close enough.
-	sellprice = 15 // CC Edit
 
 /obj/item/rogueweapon/sword/falx
 	name = "falx"
@@ -87,7 +85,6 @@
 	gripped_intents = null
 	minstr = 4
 	wdefense = 6
-	sellprice = 20
 
 /obj/item/rogueweapon/sword/falx/stalker
 	name = "stalker falx"
@@ -136,6 +133,35 @@
 	wdefense = 4
 	sellprice = 10
 
+/obj/item/rogueweapon/sword/zizo
+	name = "avantyne arming sword"
+	desc = "The cardinal sin, coalesced into a crystalline crucifix. In Her name, your will shall be projected unto the worshippers of lesser gods; and by your \
+	hand, they shall bend the knee to progress."
+	icon_state = "zizoarming"
+	sheathe_icon = "zizoarming"
+	force = 25
+	force_wielded = 30
+	smeltresult = /obj/item/ingot/component/zizo
+
+/obj/item/rogueweapon/sword/zizo/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "SWORD")
+
+/obj/item/rogueweapon/sword/avantyne
+	name = "avantyne-threaded arming sword"
+	desc = "Anger and spite, channeled into a blade that defies both wisdom and purity. Seldom does such power come without a price, however; are you ready to pay it?"
+	icon_state = "zizoarming"
+	sheathe_icon = "zizoarming"
+	possible_item_intents = list(/datum/intent/sword/cut/arming, /datum/intent/sword/thrust/short, /datum/intent/sword/strike)
+	gripped_intents = list(/datum/intent/sword/cut/arming, /datum/intent/sword/thrust/arming, /datum/intent/sword/strike)
+	force = 25
+	force_wielded = 30
+	max_blade_int = 300
+	max_integrity = 300
+	equip_delay_self = 0
+	unequip_delay_self = 0
+	smeltresult = /obj/item/ingot/avantyne
+
 /obj/item/rogueweapon/sword/long
 	name = "longsword"
 	desc = "A lethal and perfectly balanced weapon. The longsword is the protagonist of endless tales and myths \
@@ -169,7 +195,6 @@
 	wdefense_wbonus = 4
 	smeltresult = /obj/item/ingot/steel
 	special = /datum/special_intent/side_sweep
-	sellprice = 100 //Long and pricy!
 
 /obj/item/rogueweapon/sword/long/Initialize()
 	. = ..()
@@ -262,7 +287,6 @@
 	icon_state = "feder"
 	throwforce = 5
 	thrown_bclass = BCLASS_BLUNT
-	sellprice = 7
 
 /obj/item/rogueweapon/sword/long/church
 	name = "see longsword"
@@ -359,17 +383,33 @@
 	desc = "A wicked, unconventional, and otherwordly blade that was created by no swordsmith - a manifestation of hate for the state of this world that follows no design principles but spite and anger."
 	icon_state = "zizosword"
 	sheathe_icon = "zizosword"
-	force = 30
-	force_wielded = 35
+	force = 35
+	force_wielded = 40
 	max_blade_int = 400
 	max_integrity = 500
 	equip_delay_self = 0
 	unequip_delay_self = 0
-	sellprice = 300 //Heretical!!!
+	wdefense_wbonus = 7
+	smeltresult = /obj/item/ingot/component/zizo
 
 /obj/item/rogueweapon/sword/long/zizo/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "SWORD")
+
+/obj/item/rogueweapon/sword/long/avantyne
+	name = "avantyne-threaded longsword"
+	desc = "A parasitic mandate to progress, borne through the cultivation of crystalline metastasis. This otherworldly blade is stronger and sharper than any \
+	mortal-made masterwork, yet comes at a cost that has yet to be realized."
+	icon_state = "zizolongsword"
+	sheathe_icon = "zizolongsword"
+	force = 30
+	force_wielded = 35
+	max_blade_int = 400
+	max_integrity = 400
+	equip_delay_self = 0
+	unequip_delay_self = 0
+	wdefense_wbonus = 5
+	smeltresult = /obj/item/ingot/avantyne
 
 /obj/item/rogueweapon/sword/long/heirloom
 	name = "old longsword"
@@ -380,7 +420,6 @@
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/chop)
 	icon_state = "heirloom"
 	sheathe_icon = "heirloom"
-	sellprice = 150 //Price in history... And also old mechanics!
 
 /obj/item/rogueweapon/sword/long/heirloom/getonmobprop(tag)
 	. = ..()
@@ -416,6 +455,16 @@
 	static_price = TRUE
 	max_integrity = 999
 	max_blade_int = 9999
+
+/obj/item/rogueweapon/sword/long/judgement/ascendant/tester
+	name = "DEBUG TEST SWORD - DO NOT USE IN ROUND"
+	desc = "A ridiculous admin-spawn test weapon that one-shots anything. If you are holding this in a real round, something has gone badly wrong."
+	force = 999
+	force_wielded = 999
+	max_integrity = 999
+	max_blade_int = 9999
+	sellprice = 0
+	static_price = TRUE
 
 /obj/item/rogueweapon/sword/long/judgement/vlord
 	name = "\"Ichor Fang\""
@@ -488,7 +537,6 @@
 	max_blade_int = 330 
 	smelt_bar_num = 2 // 1 bar loss
 	vorpal = TRUE // snicker snack this shit cuts heads off effortlessly (DO NOT PUT THIS ON ANYTHING ELSE UNLESS IT'S SUPER FUCKING RARE!!!)
-	sellprice = 60 //CC Edit
 
 /datum/intent/sword/thrust/exe
 	swingdelay = 4	//Slight delay to stab; big and heavy.
@@ -518,8 +566,7 @@
 	desc = "An incredibly unusual executioner's sword clad in gold and brass. Two separate blades protude outwards and join near its intricately decorated crossguard. This weapon calls for order."
 	icon_state = "astratasword"
 	max_integrity = 200
-	vorpal = TRUE // snicker snack this shit cuts heads off effortlessly (DO NOT PUT THIS ON ANYTHING ELSE UNLESS IT'S SUPER FUCKING RARE!!!)
-	sellprice = 150 //Astrata! //CC edit
+	vorpal = TRUE
 
 /obj/item/rogueweapon/sword/long/exe/getonmobprop(tag)
 	. = ..()
@@ -545,7 +592,6 @@
 	smeltresult = /obj/item/ingot/gold // It is the most valuable component
 	max_blade_int = 363 
 	smelt_bar_num = 2
-	sellprice = 200
 
 /obj/item/rogueweapon/sword/long/exe/cloth/rmb_self(mob/user)
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -634,7 +680,6 @@
 	dropshrink = 1
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
-	sellprice = 150
 
 /obj/item/rogueweapon/sword/long/psysword/ComponentInitialize()
 	AddComponent(\
@@ -670,7 +715,6 @@
 	dropshrink = 1
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 160
 
 /obj/item/rogueweapon/sword/long/silver/ComponentInitialize()
 	AddComponent(\
@@ -697,7 +741,6 @@
 	gripped_intents = list(/datum/intent/sword/cut/rend, /datum/intent/sword/chop/heavy, /datum/intent/sword/thrust/heavy, /datum/intent/sword/strike)
 	smeltresult = /obj/item/ingot/silver
 	is_silver = TRUE
-	sellprice = 180
 
 /obj/item/rogueweapon/sword/long/kriegmesser/silver/ComponentInitialize()
 	AddComponent(\
@@ -724,7 +767,6 @@
 	gripped_intents = list(/datum/intent/sword/cut/rend, /datum/intent/sword/chop/heavy, /datum/intent/sword/thrust/heavy, /datum/intent/sword/strike)
 	smeltresult = /obj/item/ingot/silverblessed
 	is_silver = TRUE
-	sellprice = 180
 
 /obj/item/rogueweapon/sword/long/kriegmesser/psy/preblessed/ComponentInitialize()
 	AddComponent(\
@@ -784,7 +826,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_width = 32
 	grid_height = 96
-	sellprice = 30
 
 /obj/item/rogueweapon/sword/short/kazengun
 	name = "steel kodachi"
@@ -820,7 +861,6 @@
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 	randomize_blade_int_on_init = TRUE
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/short/pashortsword
 	name = "ancient shortsword"
@@ -828,7 +868,6 @@
 	icon_state = "ashortsword"
 	sheathe_icon = "ashortsword"
 	smeltresult = /obj/item/ingot/aaslag
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/short/broken
 	name = "aged shortsword"
@@ -851,7 +890,6 @@
 	wdefense = 6
 	w_class = WEIGHT_CLASS_BULKY // Did not fit in a bag before path rework. Does not fit in a bag now either.
 	sheathe_icon = "falchion"
-	sellprice = 20
 
 /obj/item/rogueweapon/sword/short/gladius
 	name = "gladius"
@@ -862,7 +900,6 @@
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/bronze
 	wdefense = 3
-	sellprice = 15
 
 /obj/item/rogueweapon/sword/short/gladius/decorated
 	name = "decorated gladius"
@@ -895,7 +932,6 @@
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 	randomize_blade_int_on_init = TRUE
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/short/gladius/pagladius
 	name = "ancient gladius"
@@ -910,7 +946,6 @@
 	icon_state = "iswordshort_d"
 	sheathe_icon = "iswordshort_d"
 	max_integrity = 75
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/short/psy
 	name = "psydonic shortsword"
@@ -924,7 +959,6 @@
 	wbalance = WBALANCE_SWIFT
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
-	sellprice = 150
 
 /obj/item/rogueweapon/sword/short/psy/ComponentInitialize()
 	AddComponent(\
@@ -961,7 +995,6 @@
 	wbalance = WBALANCE_SWIFT
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 100
 
 /obj/item/rogueweapon/sword/short/silver/ComponentInitialize()
 	AddComponent(\
@@ -984,7 +1017,6 @@
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust, /datum/intent/axe/chop)
 	minstr = 5
 	wdefense = 4
-	sellprice = 30
 
 /obj/item/rogueweapon/sword/short/messer/duelist
 	name = "dueling messer"
@@ -1014,7 +1046,6 @@
 	swingsound = BLADEWOOSH_SMALL
 	wdefense = 3
 	wbalance = WBALANCE_SWIFT
-	sellprice = 25
 
 /obj/item/rogueweapon/sword/short/messer/alt
 	name = "steel hunting sword"
@@ -1033,7 +1064,6 @@
 	minstr = 4
 	wdefense = 2
 	smeltresult = /obj/item/ingot/copper
-	sellprice = 16
 
 /obj/item/rogueweapon/sword/short/messer/bronze
 	name = "makhaira"
@@ -1063,7 +1093,6 @@
 	wdefense = 7		//Same as rapier
 	wbalance = WBALANCE_SWIFT
 	special = /datum/special_intent/shin_swipe
-	sellprice = 30
 
 /datum/intent/sword/cut/sabre
 	clickcd = 8		//Faster than sword by 4
@@ -1108,7 +1137,6 @@
 	minstr = 6
 	icon_state = "shashka"
 	sheathe_icon = "shashka"
-	sellprice = 30
 
 /datum/intent/sword/cut/sabre/master
 	name = "pokrajać"
@@ -1160,7 +1188,6 @@
 	force = 25	//Base is 22
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust, /datum/intent/sword/chop/falx)
 	max_integrity = 200
-	sellprice = 30
 
 /obj/item/rogueweapon/sword/sabre/alloy
 	name = "decrepit khopesh"
@@ -1173,14 +1200,12 @@
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 	randomize_blade_int_on_init = TRUE
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/sabre/palloy
 	name = "ancient khopesh"
 	desc = "A polished hook-sword, forged from gilbronze. The Comet Syon's glare once graced this blade; now, it's wielded by those who can't even remember what came before His sacrifice."
 	smeltresult = /obj/item/ingot/aaslag
 	icon_state = "akhopesh"
-	sellprice = 10
 
 /obj/item/rogueweapon/sword/sabre/elf
 	name = "elvish saber"
@@ -1198,7 +1223,6 @@
 	is_silver = TRUE //One of the rare silver-edged weapons that has a positive damage boost, due to it requiring both silver and gold to create.
 	smeltresult = /obj/item/ingot/gold
 	smelt_bar_num = 1
-	sellprice = 200 //Gold elvish
 
 /obj/item/rogueweapon/sword/sabre/elf/ComponentInitialize()
 	AddComponent(\
@@ -1221,7 +1245,6 @@
 	wdefense = 8
 	smeltresult = /obj/item/ingot/drow
 	smelt_bar_num = 1
-	sellprice = 500 //Mythril!? What is MYTHRIL!? WE WANT MYTHRIL!!!
 
 /obj/item/rogueweapon/sword/sabre/shamshir
 	name = "shamshir"
@@ -1237,7 +1260,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	dropshrink = 0.75
-	sellprice = 20
 
 /obj/item/rogueweapon/sword/sabre/shamshir/getonmobprop(tag)
 	. = ..()
@@ -1265,7 +1287,7 @@
 	inhand_y_dimension = 64
 	dropshrink = 0.75
 	max_blade_int = 230
-	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/thrust/rapier/lunge, /datum/intent/sword/cut/rapier)
+	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier, /datum/intent/sword/thrust/rapier/lunge)
 	gripped_intents = null
 	special = /datum/special_intent/piercing_lunge
 	parrysound = list(
@@ -1277,7 +1299,6 @@
 	minstr = 6
 	wdefense = 7
 	wbalance = WBALANCE_SWIFT
-	sellprice = 33 //Rapier..!
 
 /obj/item/rogueweapon/sword/rapier/vaquero
 	name = "cup-hilt rapier"
@@ -1375,11 +1396,12 @@
 	damfactor = 1.3
 	penfactor = PEN_BSTEEL
 
-	swingdelay_type = SWINGDELAY_CANCEL
+	swingdelay_type = SWINGDELAY_CANCELSLOW
 	canparry = FALSE
 	candodge = FALSE
 
 	swingdelay = 0.8 SECONDS
+	clickcd = 1.5 SECONDS
 
 /obj/item/rogueweapon/sword/rapier/dec
 	name = "decorated rapier"
@@ -1403,7 +1425,6 @@
 	wdefense = 8
 	smeltresult = /obj/item/ingot/silver
 	is_silver = TRUE
-	sellprice = 100
 
 /obj/item/rogueweapon/sword/rapier/silver/ComponentInitialize()
 	AddComponent(\
@@ -1429,7 +1450,6 @@
 	wdefense = 8
 	smeltresult = /obj/item/ingot/silverblessed
 	is_silver = TRUE
-	sellprice = 150
 
 /obj/item/rogueweapon/sword/rapier/psy/ComponentInitialize()
 	AddComponent(\
@@ -1487,12 +1507,11 @@
 	to the siege that smashed the Mad Duke's keep to rubble, and burnt the Duke himself to cinders."
 	icon_state = "lordrap"
 	sheathe_icon = "lordrapier"
-	//CC edit
-	sellprice = 222
-	max_integrity = 500
-	max_blade_int = 500
+	sellprice = 150
+	max_integrity = 300
+	max_blade_int = 300
 	wdefense = 7
-	//CC edit end
+
 /obj/item/rogueweapon/sword/rapier/eora
 	name = "\"Heartstring\""
 	desc = "A specialty-made bilbo hilt rapier made in service to Lady Eora. For the time when soft words can no longer be spoken, and hearts are to be pierced."
@@ -1529,6 +1548,16 @@
 	item_state = "staffblade"
 	sheathe_icon = "staffblade"
 
+/obj/item/rogueweapon/sword/rapier/avantyne
+	name = "avantyne-threaded rapier"
+	desc = "Graceful yet grotesque, this piercing shard of spite ignores the art of fencing in favor of the art of suffering. To wield it is to let your coldest grudges guide your hand."
+	icon_state = "zizorapier"
+	sheathe_icon = "zizorapier"
+	force = 25
+	max_blade_int = 250
+	max_integrity = 200
+	smeltresult = /obj/item/ingot/avantyne
+
 /obj/item/rogueweapon/sword/cutlass
 	name = "cutlass"
 	desc = "The mariner's special: A short, broad sabre with a slightly curved blade optimized for slashing."
@@ -1539,7 +1568,6 @@
 	wdefense = 6
 	wbalance = WBALANCE_SWIFT
 	sheathe_icon = "cutlass"
-	sellprice = 22 //CC Edit
 
 /obj/item/rogueweapon/sword/silver
 	name = "silver arming sword"
@@ -1555,7 +1583,6 @@
 	smelt_bar_num = 2
 	max_blade_int = 230
 	max_integrity = 200
-	sellprice = 100
 
 /obj/item/rogueweapon/sword/silver/ComponentInitialize()
 	AddComponent(\
@@ -1629,7 +1656,6 @@
 	force_wielded = 26
 	max_integrity = 100
 	smeltresult = /obj/item/ingot/copper
-	sellprice = 50
 
 /obj/item/rogueweapon/sword/long/oathkeeper
 	name = "Oathkeeper"
@@ -1681,7 +1707,6 @@
 	wdefense = 7
 	max_blade_int = 777
 	max_integrity = 999
-	sellprice = 300 //Wow that's a lot of integrity.
 
 /obj/item/rogueweapon/sword/long/holysee/ComponentInitialize()
 	AddComponent(\
@@ -1845,15 +1870,19 @@
 	name = "ruma hwando"
 	desc = "A foreign steel single-edged sword with cloud patterns on the groove. The Ruma Clan's insignia is engraved on the blade."
 	icon_state = "eastsword2"
+	force = 27
+	max_integrity = 200
+	sharpness_mod = 2
+	sellprice = 50
 
 /obj/item/rogueweapon/sword/sabre/mulyeog/rumacaptain
-	force = 30
 	name = "samjeongdo"
 	desc = "A gold-stained sword with cloud patterns on the groove. One of a kind. It is a symbol of status within the Ruma clan."
 	icon_state = "eastsword3"
-	max_integrity = 180
+	force = 27
+	max_integrity = 200
 	sharpness_mod = 2
-	wdefense = 4
+	sellprice = 150
 
 /obj/item/rogueweapon/sword/sabre/hook
 	force = 20
@@ -2058,7 +2087,6 @@
 	max_integrity = 100
 	max_blade_int = 100
 	smeltresult = /obj/item/ingot/iron
-	sellprice = 60
 
 /obj/item/rogueweapon/sword/long/shotel/iron/getonmobprop(tag)
 	. = ..()
@@ -2085,7 +2113,7 @@
 	force = 25 // same as elvish sabre
 	max_integrity = 200 // more integrity because blacksteel, a bit less than the flamberge
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
-	sellprice = 150 // lets not make it too profitable
+	sellprice = 100 // lets not make it too profitable
 	smeltresult = /obj/item/ingot/blacksteel
 
 /obj/item/rogueweapon/sword/sabre/bane
@@ -2119,11 +2147,11 @@
 	name = "blacksteel arming sword"
 	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly compliments its wielder's grasp. It is the culmination of Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero.. or a truer villain."
 	icon_state = "bs_sword"
+	sheathe_icon = "bs_sword"
 	smeltresult = /obj/item/ingot/blacksteel
 	force = 25
 	force_wielded = 30
-	sheathe_icon = "bs_swordregal"
-	wdefense = 7
+	wdefense = 6
 	max_integrity = 350
 	max_blade_int = 350
 	sellprice = 150
@@ -2132,6 +2160,8 @@
 	name = "decorated blacksteel arming sword"
 	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that's been meticulously engraved with its commissoner's heraldry. It is a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword your eyes'll ever lay upon."
 	icon_state = "bs_swordregal"
+	sheathe_icon = "bs_swordregal"
+	wdefense = 7
 	sellprice = 250
 
 /obj/item/rogueweapon/sword/short/gronn
@@ -2168,3 +2198,21 @@
 	sellprice = 50
 	sheathe_icon = "elfsword"
 	max_blade_int = 300
+
+//Banded iron sword that I don't want to chuck in the middle of the file again
+/obj/item/rogueweapon/sword/short/iron/banded
+	name = "banded iron sword"
+	desc = "A rather heavy slab of iron for separating brigands from their ill-gotten gold. It's extremely heavy and only really allows cutting, yet it swings surprisingly fast - at the cost of force output."
+	icon_state = "bandedsword"
+	possible_item_intents = list(
+		/datum/intent/sword/cut/short/banded,
+		/datum/intent/sword/chop/powerstrike
+		)
+	wdefense = 4
+	minstr = 10
+	force = 7	//This sword gets its real damage values from its intents. IYKYK.
+	sellprice = 25
+	blade_int = 350	//You're gonna cut. A lot.
+	max_integrity = 110	//Iron arming sword + 10
+	pickup_sound = 'sound/foley/equip/scrap_equip.ogg'
+	equip_sound = 'sound/foley/equip/scrap_equip.ogg'

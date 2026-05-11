@@ -103,7 +103,7 @@
 		/datum/customizer/organ/tail/demihuman,
 		/datum/customizer/organ/tail_feature/anthro,
 		/datum/customizer/organ/wings/anthro,
-		/datum/customizer/organ/neck_feature/anthro, //Caustic Edit - Add Fluff feature option to Half-Kin
+		/datum/customizer/organ/neck_feature/anthro,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,

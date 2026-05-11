@@ -10,12 +10,14 @@
 	category_tags = list(CTAG_MERCENARY)
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
+	//OV edit
 	subclass_stats = list(
-		STATKEY_WIL = 3,
+		STATKEY_WIL = 2,
 		STATKEY_STR = 1,
-		STATKEY_SPD = 3,
-		STATKEY_PER = 2
+		STATKEY_SPD = 2,
+		STATKEY_PER = 1
 	)
+	//OV edit end
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,

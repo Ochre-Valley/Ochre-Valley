@@ -14,3 +14,17 @@
 	color_keys = 2
 	color_key_names = list("Ears","Inner")
 	relevant_layers = list(BODY_ADJ_LAYER)
+
+/datum/sprite_accessory/ears/big/ochre/feather_horns
+	icon_state = "feather_horns"
+	name = "Feather Horns"
+	color_keys = 2
+	color_key_names = list("Horns","Fluff")
+	relevant_layers = list(BODY_ADJ_LAYER)
+
+/datum/sprite_accessory/ears/big/ochre/party_plume
+	icon_state = "party_plume"
+	name = "Party Plume"
+	color_keys = 3
+	color_key_names = list("One","Two","Three")
+	relevant_layers = list(BODY_ADJ_LAYER)

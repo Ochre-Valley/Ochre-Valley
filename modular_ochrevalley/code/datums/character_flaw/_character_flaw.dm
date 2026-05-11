@@ -1,3 +1,19 @@
+GLOBAL_LIST_INIT(dendor_touched_animals, list(
+	"mouse",
+	"cat",
+	"cabbit",
+	"volf",
+	"honeyspider",
+	"rat",
+	"rakkun",
+	"venard",
+	"cow",
+	"bull",
+	"chicken",
+	"lynx",
+	"badger"
+))
+
 /datum/charflaw/hemovore
 	name = "Hemovore"
 	desc = "Be it by birth or curse, I can only gain sustenance through the blood of the living"
@@ -12,3 +28,87 @@
 		REMOVE_TRAIT(H, TRAIT_NOHUNGER, TRAIT_VIRTUE)
 		REMOVE_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 		to_chat(H, span_danger("My hunger brays at the back of my mind."))
+
+/datum/charflaw/dendor_touched
+	name = "Dendor Touched"
+	desc = "Cursed by Dendor, you transform into an animal every time you enter total darkness."
+	var/starting_leeway = 5 MINUTES				//How long after spawning do they start TFing
+	var/next_check = 0							//Time of next check
+	var/check_interval = 10 SECONDS				//How often to check (when not in countdown)
+	var/animal_curse = "mouse"					//Animal they TF into
+	var/last_transform = 0						//Last time they TFd
+	var/time_since_transform = 0				//Used to calculate how long since last TF
+	var/transform_stress_time = 60 MINUTES		//How long without TFing before they start getting debuffed
+	var/countdown = 0							//A countdown up to 4 on ticks when in darkness to ensure they are actually in dark and not just experiencing a lighting blip
+	var/animal_colour = "#FFFFFF"				//Colour overlay of animal form
+
+/datum/charflaw/dendor_touched/on_mob_creation(mob/user)
+	next_check = world.time + starting_leeway
+	last_transform = world.time
+	
+/datum/charflaw/dendor_touched/flaw_on_life(mob/user)
+	if(!user)
+		return
+	if(!ishuman(user))
+		return
+	if(user.stat || !isturf(user.loc))
+		return
+	if(world.time > next_check)
+		if(countdown > 4)
+			animal_tf(user)
+		else
+			check_buildup(user)
+
+/datum/charflaw/dendor_touched/apply_post_equipment(mob/user)
+	if(user.mind)
+		if(user.client.prefs?.cursed_animal)
+			animal_curse = user.client.prefs?.cursed_animal
+			animal_colour = user.client.prefs?.cursed_animal_colour
+		user.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/dendor_touched)
+
+/datum/charflaw/dendor_touched/proc/animal_tf(mob/user)
+	countdown = 0
+	if(world.time > next_check)
+		next_check = world.time + check_interval
+		var/turf/our_turf = get_turf(user)
+		var/turf_light = our_turf.get_lumcount()
+		if(turf_light > 0.04)
+			time_since_transform = world.time - last_transform
+			var/mob/living/L = user
+			if(time_since_transform > transform_stress_time)
+				L.add_stress(/datum/stressevent/dendor_touched)
+				L.apply_status_effect(/datum/status_effect/debuff/dendor_touched)
+			return
+		var/mob/living/carbon/human/cursed = user
+		var/obj/shapeshift_holder/dendor_touched/H = locate() in cursed
+		last_transform = world.time
+		time_since_transform = 0
+		if(!H)
+			cursed.drop_all_held_items()
+			var/shapeshift_type = /mob/living/simple_animal/hostile/retaliate/rogue/dendor_touched
+			var/mob/living/shape = new shapeshift_type(cursed.loc)
+			cursed.remove_stress(/datum/stressevent/dendor_touched)
+			cursed.remove_status_effect(/datum/status_effect/debuff/dendor_touched)
+
+			H = new(shape,null,cursed,shape)
+			shape.name = "[animal_curse]"
+			shape.icon_state = "[animal_curse]"
+			shape.color = animal_colour
+			
+			for(var/obj/effect/proc_holder/spell/targeted/shapeshift/the_spell in shape.mind.spell_list)
+				the_spell.charge_counter = 0
+				the_spell.start_recharge()
+
+			return
+
+/datum/charflaw/dendor_touched/proc/check_buildup(mob/user)
+	var/turf/our_turf = get_turf(user)
+	var/turf_light = our_turf.get_lumcount()
+	if(turf_light > 0.04)
+		next_check = world.time + check_interval
+		countdown = 0
+		return
+	if(countdown == 1)
+		to_chat(user, span_warning("I can feel my animal form being drawn out in the darkness..."))
+	countdown = countdown + 1
+	next_check = world.time + 5

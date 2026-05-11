@@ -277,7 +277,8 @@
 	. = ..()
 	spark_act()
 
-//OV edit
+//OV edit 
+
 /obj/item/flashlight/flare/torch/attack(mob/living/M, mob/user)
 	if(isooze(M) && can_fix_ooze)
 		singe(M, user)
@@ -290,7 +291,7 @@
 	var/mob/living/doctor = user
 	var/mob/living/patient = target
 	if(!on)
-		to_chat(user, span_warning("[src] needs to lit!"))
+		to_chat(user, span_warning("[src] needs to be lit!"))
 		return
 	var/list/sewable
 	var/obj/item/bodypart/affecting

@@ -1,8 +1,11 @@
+// OV Add Start: We've disabled this event.
+#error This file has been deliberately disabled by Ochre Valley and must remain unticked!
+// OV Add End
 /datum/round_event_control/worldsiege/goblin
 	name = "Goblin Siege"
 	typepath = /datum/round_event/worldsiege/goblin
 	weight = 10
-	max_occurrences = 1
+	max_occurrences = 0 //OV Edit - Not Needed Currently
 	min_players = 4
 	todreq = null
 	earliest_start = 35 MINUTES

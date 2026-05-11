@@ -29,7 +29,7 @@
 		handle_digestion_death(target)
 	return TRUE
 
-/*/obj/belly/proc/instant_break_bone(mob/user, mob/living/target)
+/obj/belly/proc/instant_break_bone(mob/user, mob/living/target)
 	if(!ishuman(target))
 		to_chat(user, span_warning("\The [target] has no breakable organs."))
 		return FALSE
@@ -44,13 +44,41 @@
 		to_chat(user, span_warning("\The [target] is no longer in \the [src]."))
 		return FALSE
 	var/mob/living/carbon/human/human_target = target
-	var/obj/item/organ/external/target_organ = pick(human_target.get_fracturable_organs())
-	if(!target_organ)
+	var/list/possible_targets = human_target.get_fracturable_organs()
+	if(!LAZYLEN(possible_targets)) // why does pick runtime on empty lists....
 		to_chat(user, span_warning("\The [target] has no breakable organs."))
 		return FALSE
-	to_chat(user, span_warning("You break [target]'s [target_organ]!"))
-	target_organ.fracture()
-	return TRUE*/
+
+	var/obj/item/bodypart/BP = pick(possible_targets)
+	var/wound_path = /datum/wound/fracture
+	// Apply body-part-specific wound variants
+	if(BP.body_zone == BODY_ZONE_HEAD)
+		wound_path = /datum/wound/fracture/head
+	else if(BP.body_zone == BODY_ZONE_CHEST)
+		wound_path = /datum/wound/fracture/chest
+
+	var/datum/wound/modified_wound = new wound_path()
+	modified_wound.bleed_rate = 0
+
+	to_chat(user, span_warning("You break [target]'s [BP]!"))
+	BP.add_wound(modified_wound)
+	return TRUE
+
+/mob/living/carbon/human/proc/get_fracturable_organs()
+	. = list()
+
+	for(var/obj/item/bodypart/BP as anything in bodyparts)
+		var/wound_path = /datum/wound/fracture
+		// Apply body-part-specific wound variants
+		if(BP.body_zone == BODY_ZONE_HEAD)
+			wound_path = /datum/wound/fracture/head
+		else if(BP.body_zone == BODY_ZONE_CHEST)
+			wound_path = /datum/wound/fracture/chest
+
+		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound_path]
+		if(!primordial_wound.can_apply_to_bodypart(BP))
+			continue
+		. += BP
 
 /obj/belly/proc/instant_absorb(mob/user, mob/living/target)
 	if(tgui_alert(target, "\The [user] is attempting to instantly absorb you. Is this something you are okay with happening to you?","Instant Absorb", list("No", "Yes")) != "Yes")

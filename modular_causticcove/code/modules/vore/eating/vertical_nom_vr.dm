@@ -1,7 +1,7 @@
 /mob/living/verb/vertical_nom()
 	set name = "Nom from Above"
 	set desc = "Allows you to eat people who are below your tile or adjacent one. Requires passability."
-	set category = "Abilities.Vore"
+	set category = "Vore" //OV EDIT
 
 	if(stat == DEAD || IsParalyzed() || IsImmobilized() || IsStun() || IsKnockdown())
 		to_chat(src, span_notice("You cannot do that while in your current state."))

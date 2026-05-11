@@ -116,7 +116,7 @@
 
 /mob/living/verb/print_healthbars()
 	set name = "Print Prey Healthbars"
-	set category = "Abilities.Vore"
+	set category = "Vore" //OV EDIT
 
 	var/nuffin = TRUE
 

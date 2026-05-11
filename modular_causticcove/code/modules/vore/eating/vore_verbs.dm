@@ -50,9 +50,9 @@
 	return ..(target)
 
 /mob/living/verb/shred_limb()
-	set name = "Damage/Remove Prey's Organ"
+	set name = "Damage Prey's Organ" //OV EDIT
 	set desc = "Severely damages prey's organ. If the limb is already severely damaged, it will be torn off."
-	set category = "Abilities.Vore"
+	set category = "Vore" //OV EDIT
 
 	//can_shred() will return a mob we can shred, if we can shred any.
 	var/mob/living/carbon/human/T = can_shred()
@@ -126,9 +126,9 @@
 		log_combat(src,T,"Shredded (hardvore)")
 
 /mob/living/proc/shred_limb_temp()
-	set name = "Damage/Remove Prey's Organ (beartrap)"
+	set name = "Damage Prey's Organ (beartrap)" //OV EDIT
 	set desc = "Severely damages prey's organ. If the limb is already severely damaged, it will be torn off."
-	set category = "Abilities.Vore"
+	set category = "Vore" //OV EDIT
 	shred_limb()
 
 /mob/verb/toggle_vore_health_bars()
@@ -162,3 +162,40 @@
 	if(client?.prefs)
 		client.prefs.belch_noises = !client.prefs.belch_noises
 		to_chat(src, span_notice("You [client.prefs.belch_noises ? "will" : "will not"] hear burps and belches."))
+
+//OV edit
+/mob/verb/toggle_vore_fx()
+	set name = "Toggle Vore FX"
+	set category = "Vore"
+
+	show_vore_fx = !show_vore_fx
+	if(client.prefs_vr)
+		client.prefs_vr.show_vore_fx = show_vore_fx
+	if (isbelly(loc))
+		var/obj/belly/B = loc
+		B.vore_fx(src, TRUE)
+	else
+		clear_fullscreen("belly")
+	if(!hud_used.hud_shown)
+		toggle_hud_vis()
+	
+	to_chat(src, span_notice("You [show_vore_fx ? "will now" : "will no longer"] see vore belly overlays. NOTE: This preferences has NOT been saved, to save please use the vore panel."))
+
+/mob/verb/toggle_spont_pred()
+	set name = "Toggle Spont Pred"
+	set category = "Vore"
+
+	can_be_drop_pred = !can_be_drop_pred
+	if(client.prefs_vr)
+		client.prefs_vr.can_be_drop_pred = can_be_drop_pred
+	to_chat(src, span_notice("You [can_be_drop_pred ? "will now" : "will not"] vore other players spontaneously. NOTE: This preferences has NOT been saved, to save please use the vore panel."))
+
+/mob/verb/toggle_spont_prey()
+	set name = "Toggle Spont Prey"
+	set category = "Vore"
+
+	can_be_drop_prey = !can_be_drop_prey
+	if(client.prefs_vr)
+		client.prefs_vr.can_be_drop_prey = can_be_drop_prey
+	to_chat(src, span_notice("You [can_be_drop_prey ? "will now" : "will not"] be vored by other players spontaneously. NOTE: This preferences has NOT been saved, to save please use the vore panel."))
+//OV edit end

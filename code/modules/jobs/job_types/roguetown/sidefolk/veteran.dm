@@ -18,10 +18,6 @@
 	max_pq = null
 	round_contrib_points = 2
 
-	//Caustic Edit
-	job_traits = list(TRAIT_GOODTRAINER)
-	//Caustic Edit end
-
 	cmode_music = 'sound/music/combat_veteran.ogg'
 	job_subclasses = list(
 		/datum/advclass/veteran/battlemaster,
@@ -275,6 +271,7 @@
 
 	category_tags = list(CTAG_VETERAN)
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_NOBLE)
+	noble_income = 15
 	subclass_stats = list(
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,

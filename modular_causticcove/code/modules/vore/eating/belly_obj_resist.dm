@@ -15,6 +15,13 @@
 	*/
 	//OV edit end
 
+	//OV edit
+	if(mode_flags & DM_FLAG_LEWD_STRUGGLES)
+		var/datum/component/arousal/CAR = owner.GetComponent(/datum/component/arousal)
+		if(CAR)
+			CAR.adjust_arousal(src, 20)
+	//OV edit end
+
 	if(displayed_message_flags & MS_FLAG_STRUGGLE_OUTSIDE)
 		resist_struggle_outside(living_prey)
 

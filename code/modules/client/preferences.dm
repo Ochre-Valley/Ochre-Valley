@@ -63,6 +63,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/preferred_map = null
 	var/pda_style = MONO
 	var/pda_color = "#808000"
+	var/topjob = null
 
 	var/uses_glasses_colour = 0
 
@@ -142,6 +143,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/lobbymusicvol = 50
 	var/ambiencevol = 50
 	var/mastervol = 50
+	var/stopdroning = FALSE
 
 	var/anonymize = TRUE
 	var/masked_examine = TRUE //OV Edit: Because being able to see preferences is soorta important
@@ -245,6 +247,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/noble_gossip
 
 	var/averse_chosen_faction = "Inquisition"
+	var/cursed_animal = "mouse" //OV ADD
+	var/cursed_animal_colour = "#FFFFFF" //OV ADD
 
 	var/datum/voicepack/temp_vp
 
@@ -254,6 +258,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	/// Per-character theme override for examine panel viewers
 	var/examine_theme
+
+	/// Whether we can see the feint HUD bar.
+	var/feint_hud = FALSE 
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -413,7 +420,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<td style='width:33%;text-align:left'>"
 			dat += "</td>"
 			dat += "<td style='width:33%;text-align:center'>"
-			dat += "<a href='?_src_=prefs;preference=lore_primer'>* Lore Primer *</a>"
+			dat += "<a href='?_src_=prefs;preference=lore_primer'>Lore Primer</a>"
 			dat += "</td>"
 			dat += "<td style='width:33%;text-align:right'>"
 			///Caustic edit
@@ -637,6 +644,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(charflaws.len)
 				for(var/i = 1 to charflaws.len)
 					var/datum/charflaw/cf = charflaws[i]
+					if(!cf)
+						continue
 					var/warning = ""
 					if(cf.needs_extra_vice && charflaws.len < 2)
 						warning = "<font color = '#910505'>"
@@ -658,6 +667,21 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				if(!averse_chosen_faction)
 					averse_chosen_faction = "Inquisition"
 				dat += "<b>Loathed Group:</b> <a href='?_src_=prefs;preference=charflaw_averse_choice;task=input'>[averse_chosen_faction]</a><BR>"
+			
+			//OV edit
+			var/has_dendor_touched = FALSE
+			for(var/datum/charflaw/cf in charflaws)
+				if(istype(cf, /datum/charflaw/dendor_touched))
+					has_dendor_touched = TRUE
+					break
+			if(has_dendor_touched)
+				if(!cursed_animal)
+					cursed_animal = "mouse"
+				if(!cursed_animal_colour)
+					cursed_animal_colour = "#FFFFFF"
+				dat += "<b>Cursed Animal:</b> <a href='?_src_=prefs;preference=charflaw_cursed_animal_choice;task=input'>[cursed_animal]</a><BR>"
+				dat += "<b>Cursed Animal Color:</b><span style='border: 1px solid #161616; background-color: [cursed_animal_colour];'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=charflaw_cursed_animal_colour;task=input'>Change</a><BR>"
+			//OV edit end
 			var/datum/faith/selected_faith = GLOB.faithlist[selected_patron?.associated_faith]
 			dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
@@ -1166,6 +1190,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/mob/dead/new_player/P = user
 					if(istype(P))
 						P.topjob = job.title
+						topjob = job.title
 				if(JP_MEDIUM)
 					prefLevelLabel = "Medium"
 					prefLevelColor = "green"
@@ -1868,18 +1893,21 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				// LETHALSTONE EDIT: add statpack selection
 				if ("statpack")
 					var/list/statpacks_available = list()
+					var/list/statpack_descriptions = list()
 					for (var/path as anything in GLOB.statpacks)
 						var/datum/statpack/statpack = GLOB.statpacks[path]
 						if (!statpack.name)
 							continue
 						var/index = statpack.name
 						if(length(statpack.stat_array))
-							index += " \n[statpack.generate_modifier_string()]"
+							var/modifier_string = statpack.generate_modifier_string()
+							index += " [modifier_string]"
+							statpack_descriptions[index] = modifier_string
 						statpacks_available[index] = statpack
 
 					statpacks_available = sort_list(statpacks_available)
 
-					var/statpack_input = tgui_input_list(user, "How shall your strengths manifest?", "STATPACK", statpacks_available, statpack)
+					var/statpack_input = tgui_input_list(user, "How shall your strengths manifest?", "STATPACK", statpacks_available, statpack, descriptions = statpack_descriptions)
 					if (statpack_input)
 						var/datum/statpack/statpack_chosen = statpacks_available[statpack_input]
 						statpack = statpack_chosen
@@ -2681,6 +2709,19 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/choice = tgui_input_list(user, "Who do you loathe?", "AVERSION", GLOB.averse_factions)
 					if(choice)
 						averse_chosen_faction = choice
+				
+				//OV edit
+				if("charflaw_cursed_animal_choice")
+					var/choice = tgui_input_list(user, "Which animal are you cursed to be? NOTE: All animals have the same stats, this is a cosmetic choice.", "DENDOR TOUCHED", GLOB.dendor_touched_animals)
+					if(choice)
+						cursed_animal = choice
+				
+				if("charflaw_cursed_animal_colour")
+					var/new_animal_colour = color_pick_sanitized(user, "Choose your character's cursed animal form color. NOTE: We recommend using light shades for colours as they add ontop of existing sprite colours.", "Character Preference","[cursed_animal_colour]")
+					if(new_animal_colour)
+						new_animal_colour = sanitize_hexcolor(new_animal_colour)
+						cursed_animal_colour = "#[new_animal_colour]"
+				//OV edit end
 
 				if("race_bonus_select")
 					if(length(pref_species.custom_selection))
@@ -3139,7 +3180,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						if(S)
 							for(var/i=1, i<=max_save_slots, i++)
 								var/name
+								var/suffix
 								S.cd = "/character[i]"
+								S["topjob"] >> suffix
 								var/nickname = S["nickname"]
 								var/realname = S["real_name"]
 								if(!realname)
@@ -3148,6 +3191,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 									name = "[i] - [realname][nickname ? " ([nickname])" : ""]"
 								if(loaded_slot == i)
 									choices_default = name
+								if(suffix)
+									name += " — [suffix]"
 								choices[name] = i
 					var/choice = tgui_input_list(user, "CHOOSE A HERO","CAUSTIC COVE", choices, choices_default)
 					// Caustic Edit End
@@ -3495,10 +3540,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 /datum/preferences/proc/LorePopup(mob/user)
 	if(!user || !user.client)
 		return
-	var/list/dat = list()
 	var/datum/browser/noclose/popup  = new(user, "lore_primer", "<div align='center'>Lore Primer</div>", 650, 900)
-	dat += GLOB.roleplay_readme
-	popup.set_content(dat.Join())
+	popup.set_content(build_lore_primer_content())
 	popup.open(FALSE)
 
 //OV edit

@@ -76,7 +76,7 @@
 		/datum/customizer/bodypart_feature/underwear,
 		/datum/customizer/bodypart_feature/legwear,
 		/datum/customizer/bodypart_feature/piercing,
-		/datum/customizer/organ/horns/anthro,
+		/datum/customizer/organ/horns/tiefling,
 		//Caustic edit
 		// /datum/customizer/organ/tail/tiefling,
 		/datum/customizer/organ/tail/demihuman,

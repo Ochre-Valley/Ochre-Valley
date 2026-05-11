@@ -1,0 +1,6 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - bugfix: "fixed missing shields"
+  - bugfix: "Heretic spellblade gets normal avantyne longsword."
+  - bugfix: "Avantyne garments sprite."

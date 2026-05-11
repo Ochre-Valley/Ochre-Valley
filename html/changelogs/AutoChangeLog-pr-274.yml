@@ -1,0 +1,6 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - rscadd: "16 new tea/coffee blends"
+  - balance: "Manabloom tea is now caffeinated, and mint tea gives +1 INT"
+  - bugfix: "Water-derived teas can now be taken as a favorite/hated drink"

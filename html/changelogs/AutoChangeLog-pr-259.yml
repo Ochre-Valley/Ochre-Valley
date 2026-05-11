@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Prevents oozes from attempting to perform cauterising surgery on themselves rather than torch healing to close wounds."

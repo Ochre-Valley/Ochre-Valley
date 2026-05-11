@@ -13,7 +13,7 @@
 //
 /mob/living/simple_animal/proc/animal_nom(mob/living/T in living_mobs_in_view(1))
 	set name = "Animal Nom"
-	set category = "Abilities.Vore" // Moving this to abilities from IC as it's more fitting there
+	set category = "Vore" //OV EDIT // Moving this to abilities from IC as it's more fitting there
 	set desc = "Since you can't grab, you get a verb!"
 
 	if(vore_active && !voremob_loaded) // On-demand belly loading.

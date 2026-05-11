@@ -61,6 +61,8 @@
 		/datum/sprite_accessory/wings/large/harpyfolded,
 		/datum/sprite_accessory/wings/large/harpyowl,
 		/datum/sprite_accessory/wings/large/harpybat_alt, //OV Add
+		/datum/sprite_accessory/wings/ochre/wingarms_speckles, //OV Add
+		/datum/sprite_accessory/wings/ochre/wingarms_2tone, //OV Add
 		)
 
 /datum/customizer/organ/tail/harpy
@@ -79,6 +81,7 @@
 		/datum/sprite_accessory/tail/forked_long,
 		/datum/sprite_accessory/tail/haven,
 		/datum/sprite_accessory/tail/swallow,
+		/datum/sprite_accessory/tail/ochre/narrowtail_2color, //OV Add
 	)
 
 //OV Add - CC Upstream Sync
@@ -105,5 +108,13 @@
 		/datum/sprite_accessory/snout/front/bird,
 		/datum/sprite_accessory/snout/front/bigbeak,
 		/datum/sprite_accessory/snout/front/toucan,
+		/datum/sprite_accessory/snout/ochre/short_beak,
+		/datum/sprite_accessory/snout/ochre/parrot_beak,
+		/datum/sprite_accessory/snout/ochre/thin_beak,
+		/datum/sprite_accessory/snout/ochre/finch_beak,
+		/datum/sprite_accessory/snout/ochre/pelican_beak,
+		/datum/sprite_accessory/snout/ochre/toucan_beak_alt,
+		/datum/sprite_accessory/snout/ochre/raptor_beak_small,
+		/datum/sprite_accessory/snout/ochre/raptor_beak_large,
 		)
 //OV Add End

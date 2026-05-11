@@ -1,0 +1,16 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added the target region name to the bottom of a contract scroll"
+  - rscadd: "Made poor coin pouch always guaranteed to start with 10m so you can engage in Le Gameplay Loop"
+  - rscadd: "Removed accidental testing changes I left in that let you take 12 quests at once and restored the (2 quests per 10 minutes) cooldown I built in. Oops."
+  - rscadd: "Being in a fellowship with 2 / 3+ now increases the maximum amount of contracts you can take to 3 or 4 at once."
+  - rscadd: "Adjusted stockpile amount - including silver ore and ingot demands (no supply!!) and starting cinnabar stock and starting cloth and fiber stock to enable tailor to do something at the beginning"
+  - rscadd: "Can't take quest given to you manually if you have no account to avoid edge case"
+  - rscadd: "Changed Rural Taxes formula, linearly interpolating (in reverse) from 50m to 150m per 6 minutes from 50 pop to 12 pop, to make lowpop easier."
+  - rscadd: "Remove gold transmutation from gods influence."
+  - rscadd: "Changed urgent order to scale off shortage price instead of a flat 2.5x, which is generally higher. Doesn't compounds to prevent mad $$"
+  - rscadd: "Standing orders - and urgent one in specific, are announced on SCOM"
+  - rscadd: "Changed rural taxes to a daily tick instead of 6 minutes tick, made it higher (500m baseline scaling to 750m at 12 pop) to reduce micromanagement and avoid unmanaged economy collapse, especially in lowpop, in line with my design goal of making Keep not have an ultra hard time funding normal outlay but luxury spending (such as full plate beest or princess spending 500m on their lover) is something that SOMEONE have to actively work for or tax for"
+  - rscadd: "Rewrote the economy guide again and fixed numerous typos and pretentious wording"
+  - rscadd: "Changed the autoprice formula to always have withdrawal always at: 1.25 * import price or a +1, and deposit always at 0.75 * export price or -1m, whichever is higher. This should make it much more intuitive and enable future expansion of auto import / auto export to manage the economy automatically, and prevent one selfish actor mass depositing from bankrupting the Crown. It also makes lowpop management easier."

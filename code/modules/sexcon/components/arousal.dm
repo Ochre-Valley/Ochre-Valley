@@ -161,6 +161,13 @@
 	var/datum/sex_session/highest_priority = return_highest_priority_action(parent_sessions, parent)
 	var/mob/living/carbon/human/climaxer
 	var/mob/living/carbon/human/partner 
+
+	//OV edit
+	if(!highest_priority)
+		vore_ejaculate()
+		return
+	//OV edit end
+
 	var/datum/sex_action/action = SEX_ACTION(highest_priority.current_action)
 
 	if(action.flipped)
@@ -202,6 +209,14 @@
 	parent.add_stress(/datum/stressevent/thrill)
 	if(prob(1))
 		parent.emote("groan", forced = TRUE)
+
+//OV edit
+/datum/component/arousal/proc/vore_ejaculate()
+	var/mob/living/mob = parent
+	mob.emote("moan", forced = TRUE)
+	mob.add_stress(/datum/stressevent/cumgood)
+	set_arousal(parent, 0, TRUE)
+//OV edit end
 
 /datum/component/arousal/proc/handle_climax(climax_type, mob/living/carbon/human/climaxer, mob/living/carbon/human/partner, action)
 
@@ -303,8 +318,8 @@
 		adjust_arousal(parent, -dt * SPENT_AROUSAL_RATE)
 
 /datum/component/arousal/proc/is_spent()
-	if(charge < CHARGE_FOR_CLIMAX)
-		return TRUE
+	// if(charge < CHARGE_FOR_CLIMAX) // OV Removal
+	// 	return TRUE // OV Removal: No more "I'm too spent!"
 	return FALSE
 
 /datum/component/arousal/proc/update_pink_screen()

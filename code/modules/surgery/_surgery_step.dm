@@ -95,7 +95,7 @@
 		return FALSE
 	if(!user.Adjacent(target))
 		return FALSE
-	if(!tool_check(user, tool))
+	if(!tool_check(user, tool, target)) //OV ADD
 		return FALSE
 	if(!validate_tech(user, target, target_zone, intent))
 		return FALSE
@@ -210,7 +210,7 @@
 
 	return TRUE
 
-/datum/surgery_step/proc/tool_check(mob/user, obj/item/tool)
+/datum/surgery_step/proc/tool_check(mob/user, obj/item/tool, mob/living/target) //OV EDIT
 	SHOULD_CALL_PARENT(TRUE)
 	var/implement_type = FALSE
 	if(accept_hand && (!tool))
@@ -228,6 +228,8 @@
 				implement_type = key
 				break
 			if((key == TOOL_HOT) && (tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST))
+				if(isooze(target) && istype(tool, /obj/item/flashlight/flare/torch)) //OV ADD - Oozes get a fancy sort of wound closing with torches
+					break //OV ADD
 				implement_type = key
 				break
 
@@ -379,7 +381,7 @@
 	if(tool)
 		speed_mod *= tool.toolspeed
 	if(implements_speed)
-		var/implement_type = tool_check(user, tool)
+		var/implement_type = tool_check(user, tool, target) //OV EDIT
 		if(implement_type)
 			speed_mod *= implements_speed[implement_type] || 1
 	speed_mod *= get_speed_location_modifier(target)
@@ -394,7 +396,7 @@
 /datum/surgery_step/proc/get_success_probability(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/success_prob = 100
 	if(implements)
-		var/implement_type = tool_check(user, tool)
+		var/implement_type = tool_check(user, tool, target) //OV EDIT
 		if(implement_type)
 			success_prob *= (implements[implement_type]/100) || 1
 	success_prob *= get_location_modifier(target)

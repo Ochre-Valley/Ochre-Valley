@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - balance: "Disables lockpicking in the inn and baths, as these are private areas and almost always a rule break. This comes up often enough that it is worth disabling."

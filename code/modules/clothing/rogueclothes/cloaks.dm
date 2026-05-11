@@ -159,7 +159,7 @@
 			pic.color = get_detail_color()
 		add_overlay(pic)
 
-/obj/item/clothing/cloak/tabard/sleevedtabard
+/obj/item/clothing/cloak/sleevedtabard
 	name = "Sleeved Tabard"
 	desc = " A tabard with a light sleeve and pauldron sewn on, it lacks the explicit detailing of other tabards in exchange."
 	color = null 
@@ -1471,6 +1471,15 @@
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
 	sellprice = 25  //Heretical...
+
+/obj/item/clothing/cloak/graggar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "CLOAK", "RENDERED ASUNDER")
+
+/obj/item/clothing/cloak/graggar/heavy
+	name = "vicious halfcloak"
+	desc = "Sorrow begets spite; and when one has nothing else to lose, spite is all that's needed for Man to defy God."
+	icon_state = "graggarcloak_heavy"
 
 /obj/item/clothing/cloak/graggar/Initialize()
 	. = ..()

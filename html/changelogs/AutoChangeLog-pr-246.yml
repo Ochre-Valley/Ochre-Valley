@@ -1,0 +1,4 @@
+author: "KillianKirilenko"
+delete-after: True
+changes:
+  - bugfix: "restored the aetherknife spell as a 2pt utility spell"

@@ -191,7 +191,7 @@
 						log_mail_send(user, sentfrom, send2place)
 						visible_message(span_warning("[user] sends something."))
 						playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-						SStreasury.give_money_treasury(1, "Mail Income")
+						SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income")
 						record_round_statistic(STATS_TAXES_COLLECTED, 1)
 						coin_loaded -= 1
 						if(coin_loaded <= 0)
@@ -215,7 +215,7 @@
 						log_mail_send(user, sentfrom, send2place)
 						visible_message(span_warning("[user] sends something."))
 						playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-						SStreasury.give_money_treasury(1, "Mail Income")
+						SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income")
 						record_round_statistic(STATS_TAXES_COLLECTED, 1)
 						coin_loaded -= 1
 						if(coin_loaded <= 0)
@@ -231,6 +231,17 @@
 				coin_loaded = 0
 				update_icon()
 			return TRUE
+		//OV Edit: Faxes! Er- I mean missives!
+		if("missive")
+			if(istype(user,/mob/living)) //To apply the status, prevents other possible issues too, maybe.
+				var/mob/living/H = user
+				if(!H.has_status_effect(/datum/status_effect/debuff/missivecooldown))
+					if(dofax(user))
+						H.apply_status_effect(/datum/status_effect/debuff/missivecooldown)
+				else
+					to_chat(H, span_warning("I've sent a missive too recently! I should wait a bit longer."))
+			return TRUE
+		//OV Edit End
 
 /obj/structure/roguemachine/mail/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/merctoken))

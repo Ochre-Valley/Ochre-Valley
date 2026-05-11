@@ -77,5 +77,5 @@
 // Comment this to remove the SCOM restrictions
 //#define USES_SCOM_RESTRICTION
 // Comment this to remove traits based skill gating (The traits exist, but it will not have any effect)
-//#define USES_TRAIT_SKILL_GATING
+#define USES_TRAIT_SKILL_GATING //OV Edit - Renabled
 

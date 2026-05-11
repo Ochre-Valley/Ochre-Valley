@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Fix for the hags death gameloop potentially being broken by oozes, who do not die in a normal way."

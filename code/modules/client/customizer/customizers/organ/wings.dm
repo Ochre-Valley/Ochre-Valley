@@ -20,6 +20,7 @@
 		/datum/sprite_accessory/wings/bat,
 		/datum/sprite_accessory/wings/feathery,
 		/datum/sprite_accessory/wings/featheryv2,
+		/datum/sprite_accessory/wings/pinioned,
 		/datum/sprite_accessory/wings/wide/succubus,
 		/datum/sprite_accessory/wings/fairy,
 		/datum/sprite_accessory/wings/bee,
@@ -42,6 +43,7 @@
 		/datum/sprite_accessory/wings/large/harpyfolded,
 		/datum/sprite_accessory/wings/large/harpyowl,
 		/datum/sprite_accessory/wings/large/harpybat_alt,
+		/datum/sprite_accessory/wings/ochre/speckled_tricolor, // OV Add
 		)
 
 /datum/customizer/organ/wings/moth

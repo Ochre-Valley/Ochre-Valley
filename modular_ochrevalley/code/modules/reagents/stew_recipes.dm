@@ -6,7 +6,7 @@
 
 /datum/stew_recipe/minttea
 	inputs = list(/obj/item/alch/mentha)
-	output = /datum/reagent/water/minttea
+	output = /datum/reagent/water/bufftea/minttea
 	cooktime = STEW_COOKING_TIME / 4
 
 /datum/stew_recipe/wormwoodtea
@@ -36,7 +36,7 @@
 
 /datum/stew_recipe/bloomtea
 	inputs = list(/obj/item/reagent_containers/food/snacks/grown/manabloom)
-	output = /datum/reagent/water/bloomtea
+	output = /datum/reagent/consumable/caffeine/bloomtea
 	cooktime = STEW_COOKING_TIME / 4
 
 /datum/stew_recipe/eorantea
@@ -68,5 +68,87 @@
 	inputs = list(/obj/item/alch/matricaria)
 	output = /datum/reagent/water/chamomiletea
 	cooktime = STEW_COOKING_TIME / 4
+
+//Blend recipes
+/datum/stew_recipe/raneshenbitters
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/raneshenbitters)
+	output = /datum/reagent/consumable/caffeine/raneshenbitter
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/eoragrace
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/eoragrace)
+	output = /datum/reagent/water/eorasgracetea
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/eoralovefake
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/eoralovefake)
+	output = /datum/reagent/water/eorasloveteafake
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/eoralove
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/eoralove)
+	output = /datum/reagent/water/eorasloveteatrue
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/ravoxcalm
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/ravoxcalm)
+	output = /datum/reagent/consumable/caffeine/ravoxtea
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/mocha
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/mocha)
+	output = /datum/reagent/consumable/caffeine/mocha
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/gerevine
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/gerevine)
+	output = /datum/reagent/water/gerevine
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/schorle
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/schorle)
+	output = /datum/reagent/consumable/caffeine/schorle
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/baothablend
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/baothablend)
+	output = /datum/reagent/water/boathablend
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/forgottenlove
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/forgottenlove)
+	output = /datum/reagent/water/forgottenlove
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/chai
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/chai)
+	output = /datum/reagent/consumable/caffeine/chai
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/volfmilk
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/volfmilk)
+	output = /datum/reagent/water/volfmilk
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/frukkte
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/frukkte)
+	output = /datum/reagent/water/icetea
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/barleytea
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/barleytea)
+	output = /datum/reagent/water/barleytea
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/kvass
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/kvass)
+	output = /datum/reagent/water/kvass
+	cooktime = STEW_COOKING_TIME / 4
+
+/datum/stew_recipe/avantare
+	inputs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/avantare)
+	output = /datum/reagent/water/avantare
+	cooktime = STEW_COOKING_TIME / 4
+
 #undef STEW_COOKING_TIME
 

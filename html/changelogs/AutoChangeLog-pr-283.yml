@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "This updates Ooze shapeshifting code to match the recent upstream changes. This also makes it so that they won't get stuck in infinite death loops."

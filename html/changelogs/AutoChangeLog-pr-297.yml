@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - bugfix: "Scom will no longer announce jobless players."
