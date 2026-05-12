@@ -63124,6 +63124,10 @@
 /obj/structure/fluff/railing/border/east,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/magician)
+"mAC" = (
+/obj/structure/roguemachine/goldface/public/toys,
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town/bath)
 "mAG" = (
 /obj/structure/bars/passage/shutter/open{
 	max_integrity = 999999;
@@ -153903,7 +153907,7 @@ dqc
 qfv
 oiI
 rqY
-rqY
+mAC
 uIl
 uIl
 pNQ

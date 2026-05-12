@@ -3535,6 +3535,7 @@
 #include "modular_causticcove\code\modules\spells\components\temper_clothing.dm"
 #include "modular_causticcove\code\modules\spells\spell_types\wizard\conjure\conjure_tool.dm"
 #include "modular_causticcove\code\modules\taurs\taur_bodyparts.dm"
+#include "modular_ochrevalley\code\modules\cargo\packrogue\kink_stuff.dm"
 #include "modular_causticcove\code\modules\taurs\taur_markings.dm"
 #include "modular_causticcove\code\modules\vices\combat_adverse.dm"
 #include "modular_causticcove\code\modules\vices\mind_broken.dm"
