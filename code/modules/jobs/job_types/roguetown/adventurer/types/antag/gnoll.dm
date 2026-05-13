@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 4 //OV Edit - Increased Spawn Count
 	spawn_positions = 4 //OV Edit - Increased Spawn Count
-	allowed_races = RACES_SHUNNED_UP
+	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)
 	tutorial = "You have proven yourself worthy to Graggar, and he's granted you his blessing most divine. Now you hunt for worthy opponents, seeking out those strong enough to make you bleed."
 	outfit = null
 	outfit_female = null

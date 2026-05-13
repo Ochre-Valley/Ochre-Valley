@@ -48,7 +48,7 @@
 		"Noc Moonlight Dance" = /datum/status_effect/buff/moonlightdance,
 		"Xylix Joy" = /datum/status_effect/buff/xylix_joy,
 		"Astratan Gaze" = /datum/status_effect/buff/astrata_gaze,
-		"Astratan Fire Resistance" = /datum/status_effect/buff/dragonhide/fireresist,
+		"Astratan Fire Resistance" = /datum/status_effect/buff/dragonhide/astrata,
 		"Abyssal strength" = /datum/status_effect/buff/abyssal,
 		"Matthios Equalize" = /datum/status_effect/buff/equalizebuff,
 		"Graggar Bloodrage" = /datum/status_effect/buff/bloodrage,

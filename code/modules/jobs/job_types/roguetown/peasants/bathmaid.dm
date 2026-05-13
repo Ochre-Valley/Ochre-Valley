@@ -9,7 +9,7 @@
 	spawn_positions = 5
 
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - allow all
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 
 

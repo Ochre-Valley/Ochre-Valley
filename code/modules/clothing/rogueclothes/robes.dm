@@ -42,7 +42,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/astrata
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "sun robe"
-	desc = ""
+	desc = "Just as Her radiance rises upon each morning, so too will order reign across the kingdoms."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "astratarobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -58,7 +58,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/undivided
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "undivided robe"
-	desc = ""
+	desc = "Undivided, we stand - a Pantheon of Ten, shepherding Psydonia's flock towards providence."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "undividedrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -72,7 +72,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/ravox
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "ravox robe"
-	desc = ""
+	desc = "None are above justice; none are beneath redemption."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "ravoxrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -102,7 +102,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/noc
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "moon robe"
-	desc = ""
+	desc = "Knowledge from within and without, cradled in the moonlight."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "nocrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -117,7 +117,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/necromancer
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "necromancer robes"
-	desc = ""
+	desc = "Fetch me their souls!"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "necromrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -148,7 +148,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/necra
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "mourning robe"
-	desc = ""
+	desc = "Memento mori; remember this, for you too will eventually die."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "necrarobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -415,7 +415,7 @@
 	color = CLOTHING_SCARLET
 
 /obj/item/clothing/suit/roguetown/shirt/robe/bared
-	name = "Bared Robe"
+	name = "bared robe"
 	desc = "A robe of basic cloth, it's chest bared open to expose what lay underneath."
 	icon_state = "openrobe"
 	item_state = "openrobe"

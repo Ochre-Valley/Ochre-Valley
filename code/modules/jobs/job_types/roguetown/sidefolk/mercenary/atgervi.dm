@@ -2,7 +2,7 @@
 	name = "Atgervi"
 	tutorial = "You are a Varangian of the Gronn Highlands. Warrior-Traders most known for their exploits into the Raneshen Empire, which will be forever remembered by historians."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervi
 	subclass_languages = list(/datum/language/gronnic)
 	cmode_music = 'sound/music/combat_vagarian.ogg'
@@ -61,7 +61,6 @@
 				backr = /obj/item/rogueweapon/shield/atgervi
 				beltl = /obj/item/rogueweapon/scabbard/sword
 	// END CC EDIT
-	H.mind.current.faction += "[H.name]_faction"
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi
 	gloves = /obj/item/clothing/gloves/roguetown/angle/atgervi
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/atgervi
@@ -103,7 +102,7 @@
 	name = "Atgervi Shaman"
 	tutorial = "You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast Gods through ritualistic violence, rather than idle prayer."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervi_shaman
 	subclass_languages = list(/datum/language/gronnic)
 	cmode_music = 'sound/music/combat_shaman2.ogg'
@@ -137,7 +136,6 @@
 	..()
 	H.set_blindness(0)
 	to_chat(H, span_warning("You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast gods through ritualistic violence, rather than idle prayer."))
-	H.mind?.current.faction += "[H.name]_faction"
 	H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 
 	head = /obj/item/clothing/head/roguetown/helmet/leather/shaman_hood

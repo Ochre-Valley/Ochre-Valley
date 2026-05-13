@@ -2,7 +2,7 @@
 	name = "Guild Thug"
 	tutorial = "You've been hired by the Merchant's Guild to be their brawn. Valued for your strength and little else, you assist the Merchant in hauling heavy goods, or strong arming potential thiefs."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	
 	outfit = /datum/outfit/job/roguetown/adventurer/guildthug
 	category_tags = list(CTAG_SHOPHAND)
 	subclass_stats = list(
@@ -62,7 +62,7 @@
 	name = "Guild Informant"
 	tutorial = "You started as a basic street urchin sneaking and stealing as you needed. On one fateful day you chose to steal from the Merchant's Guild, and now find yourself indebted to their service. Now, you serve as their eyes and ears on the streets of the city."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+
 	outfit = /datum/outfit/job/roguetown/adventurer/guildinformant
 	category_tags = list(CTAG_SHOPHAND)
 	subclass_stats = list(
@@ -114,7 +114,7 @@
 	name = "Hired Servant"
 	tutorial = "You are an expert courtier, though find yourself in the service to an aristocrat rather than nobility. Your ability to cater to your Merchant's needs are unparalleled."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+
 	outfit = /datum/outfit/job/roguetown/adventurer/hiredservant
 	category_tags = list(CTAG_SHOPHAND)
 	subclass_stats = list(
@@ -173,7 +173,7 @@
 	name = "Shop Lackey"
 	tutorial = "You were once a beggar on the street struggling to find your next meal. The Merchant's Guild offered you a roof in exchange for your labor. Now you find yourself as little more than an indentured servant to the Merchant and their whims."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+
 	outfit = /datum/outfit/job/roguetown/adventurer/shoplackey
 	category_tags = list(CTAG_SHOPHAND)
 	subclass_stats = list(

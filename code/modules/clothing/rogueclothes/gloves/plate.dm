@@ -60,6 +60,7 @@
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	icon_state = "graggarplategloves"
 	smeltresult = /obj/item/ingot/component/graggar
+	unenchantable = TRUE
 
 /obj/item/clothing/gloves/roguetown/plate/graggar/Initialize()
 	. = ..()
@@ -87,6 +88,7 @@
 	icon_state = "matthiosgloves"
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	smeltresult = /obj/item/ingot/component/matthios
+	unenchantable = TRUE
 
 /obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
 	. = ..()
@@ -110,6 +112,7 @@
 	material_category = ARMOR_MAT_PLATE
 	armor_class = ARMOR_CLASS_MEDIUM
 	smeltresult = /obj/item/ingot/component/zizo
+	unenchantable = TRUE
 
 /obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
 	. = ..()
@@ -136,11 +139,12 @@
 	qdel(src)*/ //OV Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/avantyne
-	name = "avantyne-threaded gloves"
-	desc = "Incongruent silks from a tymeline-most-doomed, woven to cradle the palms of God's successor. Softer than silk, yet unfettered by the blows from those who know no better."
+	name = "avantyne-threaded sleevegloves"
+	desc = "Incongruent silks from a tymeline-most-doomed, woven by Man to cradle the palms of God's successor. Softer than silk, yet unfettered by the blows from those who know no better."
 	icon_state = "zizoplategauntlets_med"
 	smeltresult = /obj/item/ingot/avantyne
 	armor = ARMOR_PLATE_BSTEEL
+	body_parts_covered = HANDS|ARMS
 
 /obj/item/clothing/gloves/roguetown/plate/shadowgauntlets
 	name = "darkplate gauntlets"

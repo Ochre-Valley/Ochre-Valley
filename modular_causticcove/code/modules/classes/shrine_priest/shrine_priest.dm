@@ -2,7 +2,7 @@
 	name = "Shrine Priest"
 	tutorial = "Your a Shrine Priest someone trained in the mystical arts of Kazegun not a farmer or commonfolk, the rituals you preform to comune with spirits or lay them to rest. Weither it be through prayer, or a dance of miracles and blade. For one reason or another you have left Kazegun wether to pursue a better life, coin or just seeking a fresh start."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = NON_DWARVEN_RACE_TYPES //no dwarf sprites
+	forbidden_races = list(RACES_SMALL) //no dwarf sprites
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_priest
 	subclass_languages = list(/datum/language/kazengunese)

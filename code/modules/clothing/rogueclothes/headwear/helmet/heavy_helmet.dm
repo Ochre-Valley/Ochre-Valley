@@ -10,9 +10,10 @@
 	block2add = FOV_BEHIND
 	smeltresult = /obj/item/ingot/steel
 	max_integrity = ARMOR_INT_HELMET_HEAVY_STEEL
-	armor_class = ARMOR_CLASS_MEDIUM	//Heavy helmets require at least medium armor training. Stops no-armor training plate-headgear users.
+	//armor_class = ARMOR_CLASS_MEDIUM	//Heavy helmets require at least medium armor training. Stops no-armor training plate-headgear users. //OV Edit - Re-adding the exemption PENDING REMOVAL
 	smelt_bar_num = 1
 	stack_fovs = TRUE
+	material_category = ARMOR_MAT_PLATE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/ComponentInitialize()
 	..()
@@ -1206,6 +1207,7 @@
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 	smeltresult = /obj/item/ingot/component/matthios
+	unenchantable = TRUE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/matthios/Initialize()
 	. = ..()
@@ -1219,6 +1221,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDESNOUT|HIDEHAIR|HIDEFACIALHAIR
 	var/active_item = FALSE
 	smeltresult = /obj/item/ingot/component/graggar
+	unenchantable = TRUE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/Initialize()
 	. = ..()
@@ -1231,6 +1234,7 @@
 	if(slot == SLOT_HEAD)
 		active_item = TRUE
 		ADD_TRAIT(user, TRAIT_BITERHELM, TRAIT_GENERIC)
+		to_chat(user, span_red("The bascinet's visor chitters, and your jaw tightens with symbiotic intent.."))
 
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/dropped(mob/living/user)
 	..()
@@ -1238,12 +1242,14 @@
 		return
 	active_item = FALSE
 	REMOVE_TRAIT(user, TRAIT_BITERHELM, TRAIT_GENERIC)
+	to_chat(user, span_red("..and like that, the bascinet's visor goes dormant once more - a strange pressure, relieved from your jaw."))
 
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/skull
 	name = "vicious skullhelm"
 	desc = "Nigh lyke a crushed skull worn with pride; as sturdy as one that has seen fractures.. and survived them, too. Godliness was never meant to be tainted with minds so fragile and passionate."
 	icon_state = "graggarplatehelm_heavy"
 	smeltresult = /obj/item/ingot/component/graggar
+	unenchantable = TRUE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/matthios/Initialize()
 	. = ..()
@@ -1259,10 +1265,11 @@
 	material_category = ARMOR_MAT_PLATE
 	toggle_icon_state = TRUE
 	smeltresult = /obj/item/ingot/component/zizo
+	unenchantable = TRUE
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo/frogge
 	name = "avantyne froggemund"
-	desc = "A monolithic, suffocating cage of avantyne that narrows one's perspective to a single, hateful point. It grants the wearer the clarity of a predator, blinding them to everything but the object of their malice."
+	desc = "A monolithic, suffocating cage of darksteel that narrows one's perspective to a single, hateful point. It grants the wearer the clarity of a predator, blinding them to everything but the object of their malice."
 	icon_state = "zizofrogmouth"
 	flags_inv = HIDEFACE|HIDESNOUT|HIDEEARS|HIDEHAIR
 	body_parts_covered = HEAD|EARS|HAIR
@@ -1278,7 +1285,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo/bascinet
 	name = "avantyne bascinet"
-	desc = "A bascinet threaded from an darksteel alloy, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too long..</br>‎<font color='FF0000'>..and something will look back.</font>"
+	desc = "A darksteeled bascinet, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too long..</br>‎<font color='FF0000'>..and something will look back.</font>"
 	icon_state = "zizobascinet"
 	item_state = "zizobascinet"
 	flags_inv = HIDEFACE|HIDESNOUT|HIDEEARS|HIDEHAIR
@@ -1295,8 +1302,9 @@
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
 
 /obj/item/clothing/head/roguetown/helmet/heavy/avantyne
-	name = "avantyne veil"
+	name = "avantyne-threaded veil"
 	desc = "A veil threaded from an otherworldly alloy, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too long.. </br>‎  <font color='FF0000'>..and something will look back.</font>."
+	body_parts_covered = FULL_HEAD|NECK
 	icon_state = "zizoplatehelm_med"
 	item_state = "zizoplatehelm_med"
 	flags_inv = HIDEFACE|HIDESNOUT|HIDEEARS

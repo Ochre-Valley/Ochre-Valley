@@ -6,7 +6,7 @@
 	total_positions = 4
 	spawn_positions = 4
 
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - allows all
 	spells = list()
 	advclass_cat_rolls = list(CTAG_WAPPRENTICE = 20)
 

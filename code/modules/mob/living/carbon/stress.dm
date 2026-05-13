@@ -223,6 +223,8 @@
 	stress_freakout()*/
 
 /mob/living/carbon/proc/stress_freakout()
+	if(HAS_TRAIT(src, TRAIT_NOMOOD))
+		return
 	to_chat(src, span_boldred("I PANIC!!!"))
 	Stun(2 SECONDS)
 	blur_eyes(2)

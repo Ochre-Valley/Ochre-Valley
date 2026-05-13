@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - allow all
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_PHYSICIAN
 	tutorial = "You are the Head Physician, master of the city clinic of Azure Peak \

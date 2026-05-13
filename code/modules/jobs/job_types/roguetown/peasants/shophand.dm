@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - allow all
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT)
 	is_quest_giver = TRUE

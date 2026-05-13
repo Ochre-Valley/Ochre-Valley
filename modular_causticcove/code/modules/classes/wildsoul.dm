@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 5 // Wildman McCryptid should be slightly rare, given they get so much more than adventurer with 90% of the same freedoms.
 	spawn_positions = 5
-	allowed_races = RACES_NO_CONSTRUCT
+	forbidden_races = list(RACES_CONSTRUCT)
 	tutorial = "You've never been one for the comforts of society. Whether born and raised in the wild, or having eschewed the comforts of the city after some incident, you've learned to survive on your own within Dendor's realm. You still need to live carefully, though; you're part of an ecosystem you're not above, and for every creature you hunt, another will make you its hunted."
 	outfit = null 
 	outfit_female = null 
@@ -193,7 +193,6 @@
 	give_feral_eyes(H)
 	if(H.mind)
 		H.mind.AddSpell(new /datum/action/cooldown/spell/nondetection) // Makes sense for them to have the tools to be hidden.
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/blindness)
 		r_hand = /obj/item/clothing/neck/roguetown/collar/leather/nomagic //either for "they tried and failed to capture me" roleplay or for people who REALLY want a challenge
 	H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 

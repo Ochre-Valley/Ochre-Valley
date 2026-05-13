@@ -2,7 +2,7 @@
 	name = "Shrine Guardian"
 	tutorial = "You were once a guardian of your shrine in Kazengun. Something has forced you out, if it be maurauding ronin, or too many beasts for you to handle. You are skilled in polearms and bows, using an awkward battle style for hit and run tactics."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = NON_DWARVEN_RACE_TYPES //no dwarf sprites
+	forbidden_races = list(RACES_SMALL) //no dwarf sprites
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)

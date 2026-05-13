@@ -112,7 +112,6 @@
 #define LIPS			5
 #define NOBLOOD			6
 #define NOTRANSSTING	7
-#define INVISBLOOD		8 //OV ADD
 /// Used if we want the mutant colour to be only used by mutant bodyparts. Don't combine this with MUTCOLORS, or it will be useless.
 #define MUTCOLORS_PARTSONLY	8
 #define NOZOMBIE		9
@@ -133,6 +132,7 @@
 #define OLDGREY			21
 #define NO_ORGAN_FEATURES			22
 #define NO_BODYPART_FEATURES			23
+#define INVISBLOOD		50 //OV ADD - Ooze Feature to stop blood drips, used only for oozes
 
 //organ defines
 #define STANDARD_ORGAN_THRESHOLD 	100

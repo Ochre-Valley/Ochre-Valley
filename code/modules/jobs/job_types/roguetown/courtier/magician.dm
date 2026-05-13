@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = RACES_ALL_KINDS //Caustic edit from RACES_NO_CONSTRUCT
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)		//Nobility, no construct //OV Edit - Allow all for good or ill
 	allowed_sexes = list(MALE, FEMALE)
 	spells = list()
 	display_order = JDO_MAGICIAN
