@@ -23159,6 +23159,10 @@
 "eIv" = (
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/exposed/magiciantower)
+"eIx" = (
+/obj/structure/roguemachine/goldface/public/toys,
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town/bath)
 "eIA" = (
 /obj/structure/fluff/railing/border/west,
 /turf/open/transparent/openspace,
@@ -154954,7 +154958,7 @@ dqc
 qfv
 oiI
 rqY
-rqY
+eIx
 uIl
 uIl
 pNQ
