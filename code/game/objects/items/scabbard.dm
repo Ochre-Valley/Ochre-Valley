@@ -608,9 +608,18 @@
 	possible_item_intents = list(SHIELD_BASH, SHIELD_BLOCK)
 	can_parry = TRUE
 	sewrepair = FALSE
-	wdefense = 3
+	wdefense = 4 ///OV edit, from 3 to 4 to make sure offhand parrying functions when used alongside the 3 wdef steel dagger
 
-	max_integrity = 0
+	max_integrity = 220 ///OV edit, on par with the sword scabbards
+
+///OV edit start, variant sheath for the Sasu with improved defence. Exists so that the Eastern Assassin adventurer is not rocking 6 wdef on knife scaling.
+
+/obj/item/rogueweapon/scabbard/sheath/kazengun/reinforced
+	name = "reinforced lacquer sheath"
+	desc = "A simple lacquered sheath with additional reinforcement, for shorter eastern-styled blades."
+	wdefense = 6 ///Less than a sword sheath at 8, or a parrying dagger at 9, so still a weaker duelist and room to buy upgrades.
+
+///OV edit end
 
 /obj/item/rogueweapon/scabbard/sheath/courtphysician
 	name = "fancy cane"

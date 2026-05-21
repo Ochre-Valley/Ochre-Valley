@@ -99,6 +99,6 @@
 		/obj/item/roguekey/mercenary = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
 		/obj/item/rogueweapon/huntingknife/idagger/steel/kazengun = 1,
-		/obj/item/rogueweapon/scabbard/sheath/kazengun = 1,
+		/obj/item/rogueweapon/scabbard/sheath/kazengun/reinforced = 1, ///OV edit for improved variant sheath
 		)
 	H.merctype = 9
