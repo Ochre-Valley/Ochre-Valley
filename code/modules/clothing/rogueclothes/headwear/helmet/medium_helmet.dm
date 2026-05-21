@@ -163,9 +163,6 @@
 	body_parts_covered = HEAD|HAIR|EARS
 	sellprice = 25
 
-/obj/item/clothing/head/roguetown/helmet/sallet/ComponentInitialize()
-	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
-
 /obj/item/clothing/head/roguetown/helmet/sallet/attackby(obj/item/W, mob/living/user, params)
 	..()
 	if(istype(W, /obj/item/natural/feather) && !detail_tag)
