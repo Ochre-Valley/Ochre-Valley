@@ -608,9 +608,9 @@
 	possible_item_intents = list(SHIELD_BASH, SHIELD_BLOCK)
 	can_parry = TRUE
 	sewrepair = FALSE
-	wdefense = 3
+	wdefense = 6 ///OV change, from 3. Less than sword sheath at 8 and parry daggers at 9.
 
-	max_integrity = 0
+	max_integrity = 220 ///OV change, from infinite. Same as sword sheath on the gui-in and seonjang.
 
 /obj/item/rogueweapon/scabbard/sheath/courtphysician
 	name = "fancy cane"
