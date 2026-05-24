@@ -54,17 +54,13 @@
 	)
 
 /datum/job/roguetown/wretch/special_job_check(mob/dead/new_player/player)
-    /*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
-    */
 	return ..()
 
 /datum/job/roguetown/wretch/special_check_latejoin(client/C)
-    /*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
-    */
 	return ..()
 
 /datum/job/roguetown/wretch/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -166,7 +162,6 @@
 		result["tier2_extra"] = 0
 		result["final_slots"] = 0
 		return result
-    */
 
 	// Tier 1: Population scaling, +1 per 10 players above 40, capped per pantheon
 	var/slots = 5
