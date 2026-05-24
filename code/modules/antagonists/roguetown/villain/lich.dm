@@ -50,6 +50,7 @@
 	var/STAINT = 10
 	var/STAWIL = 10
 	var/STAPER = 10
+	can_roll = FALSE // OV Add
 
 /datum/antagonist/lich/get_antag_cap_weight()
 	return 3
