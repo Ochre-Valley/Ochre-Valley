@@ -30,6 +30,8 @@
 	. = ..()
 	if(!.)
 		return
+	if(!SSgamemode.antag_can_roll(antag_datum))
+		return FALSE
 	var/is_hard_roundstart = roundstart && (storyteller_antag_flags & STORYTELLER_ANTAG_VILLAIN)
 	if(is_hard_roundstart && players_amt < HARD_ANTAG_MIN_POP)
 		return FALSE
@@ -41,6 +43,8 @@
 		return FALSE
 
 /datum/round_event_control/antagonist/solo/proc/get_antag_amount()
+	if(!SSgamemode.antag_can_roll(antag_datum))
+		return 0
 	var/people = SSgamemode.get_correct_popcount()
 	var/storyteller_cap = SSgamemode.story_antag_slot_cap(antag_datum, roundstart = roundstart)
 	if(storyteller_cap > 0)
@@ -62,6 +66,11 @@
 
 /datum/round_event_control/antagonist/solo/return_failure_string(players_amt)
 	. =..()
+	if(!SSgamemode.antag_can_roll(antag_datum))
+		if(.)
+			. += ", "
+		. += "Antagonist roll disabled"
+		return .
 	var/is_hard_roundstart = roundstart && (storyteller_antag_flags & STORYTELLER_ANTAG_VILLAIN)
 	if(is_hard_roundstart && players_amt < HARD_ANTAG_MIN_POP)
 		if(.)

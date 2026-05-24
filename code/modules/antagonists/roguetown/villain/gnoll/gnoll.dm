@@ -30,6 +30,7 @@
 	job_rank = ROLE_GNOLL
 	storyteller_antag_flags = STORYTELLER_ANTAG_SOFT
 	storyteller_favor_flags = STORYTELLER_FAVOR_GNOLL
+	can_roll = FALSE
 
 /datum/antagonist/gnoll/on_gain()
 	greet()

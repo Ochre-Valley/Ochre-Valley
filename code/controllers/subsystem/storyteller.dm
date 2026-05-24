@@ -1225,10 +1225,19 @@ SUBSYSTEM_DEF(gamemode)
 		return 1
 	return storyteller_favors_antag(storyteller_favor_flags, storyteller_type, roundstart) ? STORYTELLER_STANDARD_FAVOR_MULTIPLIER : 1
 
+/datum/controller/subsystem/gamemode/proc/antag_can_roll(antag_datum)
+	if(!ispath(antag_datum, /datum/antagonist))
+		return TRUE
+	return initial(antag_datum:can_roll)
+
 /datum/controller/subsystem/gamemode/proc/storyteller_event_weight(datum/round_event_control/event, base_weight, storyteller_type = null)
 	if(!event)
 		return 0
 	base_weight = max(0, round(base_weight))
+	if(istype(event, /datum/round_event_control/antagonist/solo))
+		var/datum/round_event_control/antagonist/solo/antag_event = event
+		if(!antag_can_roll(antag_event.antag_datum))
+			return 0
 	storyteller_type = story_policy_type(event.roundstart, storyteller_type)
 	if(!storyteller_type)
 		return base_weight
@@ -1256,6 +1265,8 @@ SUBSYSTEM_DEF(gamemode)
 	var/failure_reason = event.return_failure_string(player_count)
 	if(length(failure_reason))
 		return failure_reason
+	if(!antag_can_roll(event.antag_datum))
+		return "disabled by antagonist roll settings"
 	if(storyteller_blocks_antag(event.storyteller_antag_flags, event.roundstart, storyteller_type))
 		return "blocked by storyteller antag flags"
 	if(storyteller_blocks_type(event.storyteller_guarantee_flags, storyteller_type, event.roundstart))
@@ -1278,10 +1289,14 @@ SUBSYSTEM_DEF(gamemode)
 /datum/controller/subsystem/gamemode/proc/storyteller_picked_roundstart_antag(antag_datum)
 	if(!ispath(antag_datum, /datum/antagonist))
 		return FALSE
+	if(!antag_can_roll(antag_datum))
+		return FALSE
 	var/datum/round_event_control/antagonist/solo/roundstart_event = current_roundstart_event
 	if(!roundstart_event)
 		return FALSE
 	if(!ispath(roundstart_event.antag_datum, /datum/antagonist))
+		return FALSE
+	if(!antag_can_roll(roundstart_event.antag_datum))
 		return FALSE
 	return ispath(roundstart_event.antag_datum, antag_datum) || ispath(antag_datum, roundstart_event.antag_datum)
 
@@ -1294,6 +1309,8 @@ SUBSYSTEM_DEF(gamemode)
 	return story_antag_open_slots(roundstart_event.antag_datum, get_correct_popcount())
 
 /datum/controller/subsystem/gamemode/proc/storyteller_unlocks_scaled_antag_slots(antag_datum, storyteller_favor_flags = null)
+	if(!antag_can_roll(antag_datum))
+		return FALSE
 	if(storyteller_picked_roundstart_antag(antag_datum))
 		return TRUE
 	if(isnull(storyteller_favor_flags) && ispath(antag_datum, /datum/antagonist))
@@ -1310,10 +1327,14 @@ SUBSYSTEM_DEF(gamemode)
 /datum/controller/subsystem/gamemode/proc/story_antag_min_players(antag_datum)
 	if(!ispath(antag_datum, /datum/antagonist))
 		return 0
+	if(!antag_can_roll(antag_datum))
+		return 0
 	return max(0, initial(antag_datum:storyteller_min_players))
 
 /datum/controller/subsystem/gamemode/proc/story_antag_open_slots(antag_datum, player_count = null)
 	if(!ispath(antag_datum, /datum/antagonist))
+		return FALSE
+	if(!antag_can_roll(antag_datum))
 		return FALSE
 	if(!initial(antag_datum:override_candidatereq))
 		return FALSE
@@ -1340,6 +1361,8 @@ SUBSYSTEM_DEF(gamemode)
 /datum/controller/subsystem/gamemode/proc/story_antag_slot_cap(antag_datum, roundstart = FALSE, storyteller_type = null)
 	if(!ispath(antag_datum, /datum/antagonist))
 		return 0
+	if(!antag_can_roll(antag_datum))
+		return 0
 	storyteller_type = story_policy_type(roundstart, storyteller_type)
 	var/storyteller_antag_flags = initial(antag_datum:storyteller_antag_flags)
 	if(storyteller_blocks_antag(storyteller_antag_flags, roundstart, storyteller_type))
@@ -1354,6 +1377,8 @@ SUBSYSTEM_DEF(gamemode)
 	return default_cap
 /datum/controller/subsystem/gamemode/proc/story_antag_slots(slot_count, antag_datum, player_count = null)
 	if(slot_count <= 0)
+		return 0
+	if(!antag_can_roll(antag_datum))
 		return 0
 	if(isnull(player_count))
 		player_count = get_correct_popcount()

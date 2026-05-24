@@ -47,11 +47,15 @@
 	)
 
 /datum/job/roguetown/gnoll/special_job_check(mob/dead/new_player/player)
+	if(!SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
+		return FALSE
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
 	return ..()
 
 /datum/job/roguetown/gnoll/special_check_latejoin(client/C)
+	if(!SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
+		return FALSE
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
 	return ..()
@@ -108,6 +112,9 @@
 
 /proc/gnollslot_calc()
 	var/list/result = list()
+	if(!SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
+		result["final_slots"] = 0
+		return result
 	if(is_storyteller_soft_antag_blocked())
 		result["final_slots"] = 0
 		return result

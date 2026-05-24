@@ -17,17 +17,19 @@
 /datum/round_event_control/antagonist/migrant_wave/banditsorgnolls/preRunEvent()
 	if(is_storyteller_soft_antag_blocked())
 		return EVENT_CANT_RUN
+	if(is_storyteller_villain_blocked() && !SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
+		return EVENT_CANT_RUN
 	return ..()
 
 /datum/round_event/migrant_wave/banditsorgnolls/start()
-	var/gnolls_disabled = (SSgamemode.current_storyteller?.preferred_gnoll_mode == GNOLL_SCALING_NONE)
-	var/evilmode
-	if(gnolls_disabled)
-		evilmode = "bandits"
-	else if(is_storyteller_villain_blocked())
-		evilmode = "gnolls"
-	else
-		evilmode = pick("gnolls", "bandits")
+	var/list/evil_modes = list()
+	if(!is_storyteller_villain_blocked())
+		evil_modes += "bandits"
+	if(SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
+		evil_modes += "gnolls"
+	if(!length(evil_modes))
+		return
+	var/evilmode = pick(evil_modes)
 	if(evilmode == "bandits")
 		var/datum/job/bandit_job = SSjob.GetJob("Bandit")
 		var/bandit_maxcap = max(SSgamemode.story_antag_slot_cap(/datum/antagonist/bandit), bandit_job.total_positions)

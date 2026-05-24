@@ -35,6 +35,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/list/storyteller_maxcaps
 	var/storyteller_min_players = 0
 	var/override_candidatereq = FALSE
+	var/can_roll = TRUE
 
 /datum/antagonist/New()
 	GLOB.antagonists += src
