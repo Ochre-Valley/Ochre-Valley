@@ -12,6 +12,7 @@
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "bandit"
+	can_roll = FALSE // OV Add
 	confess_lines = list(
 		"FREEDOM!!!",
 		"I WILL NOT LIVE IN YOUR WALLS!",

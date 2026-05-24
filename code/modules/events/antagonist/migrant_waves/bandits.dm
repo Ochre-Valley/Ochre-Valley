@@ -23,7 +23,7 @@
 
 /datum/round_event/migrant_wave/banditsorgnolls/start()
 	var/list/evil_modes = list()
-	if(!is_storyteller_villain_blocked())
+	if(!is_storyteller_villain_blocked() && SSgamemode.antag_can_roll(/datum/antagonist/bandit)) // OV Edit: Check if bandits can roll
 		evil_modes += "bandits"
 	if(SSgamemode.antag_can_roll(/datum/antagonist/gnoll))
 		evil_modes += "gnolls"
