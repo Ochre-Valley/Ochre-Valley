@@ -162,6 +162,7 @@
 		result["tier2_extra"] = 0
 		result["final_slots"] = 0
 		return result
+	*/
 
 	// Tier 1: Population scaling, +1 per 10 players above 40, capped per pantheon
 	var/slots = 5
