@@ -883,23 +883,23 @@ SUBSYSTEM_DEF(gamemode)
 	if(!ispath(storyteller_type, /datum/storyteller))
 		return misc
 	if(storyteller_type == /datum/storyteller/psydon)
-		misc += "No villains, no soft antags, no wretches"
+		misc += "No villains, no soft antags, except wretches who can still appear" // OV Edit: Specified that wretches are still enabled, as Psydon allows wretches here
 	if(storyteller_type == /datum/storyteller/eora)
 		misc += "Hard antags disabled"
+	/*OV Remove: Remove references to bandits to avoid confusion, as we have them disabled
 	if(storyteller_type == /datum/storyteller/ravox)
 		misc += "Bandit cap increased to 4"
 	if(storyteller_type == /datum/storyteller/xylix)
 		misc += "Bandit cap increased to 4"
 	if(storyteller_type == /datum/storyteller/matthios)
 		misc += "Bandit cap increased to 6"
+	*/
 	if(storyteller_type == /datum/storyteller/noc)
 		misc += "Werewolf roundstart cap set to 1"
 	if(storyteller_type == /datum/storyteller/astrata)
 		misc += "Masquerade can roll with 2 roundstart slots"
 	if(storyteller_type == /datum/storyteller/graggar)
 		misc += "Gnolls and assassins open at 3 slots"
-	if(storyteller_type == /datum/storyteller/abyssor)
-		misc += "Adds 2 roundstart dreamwalkers"
 	if(story_hardequal(storyteller_type))
 		misc += "Hard antags roll at equal chance"
 	if(story_hardonly(storyteller_type))
@@ -1078,26 +1078,34 @@ SUBSYSTEM_DEF(gamemode)
 	switch(storyteller_type)
 		if(/datum/storyteller/noc)
 			return STORYTELLER_FAVOR_WEREWOLF
+		/* OV Remove
 		if(/datum/storyteller/ravox)
 			return STORYTELLER_FAVOR_BANDIT
 		if(/datum/storyteller/necra)
 			return STORYTELLER_FAVOR_LICH
+		*/
 		if(/datum/storyteller/xylix)
 			return STORYTELLER_FAVOR_HARD_ANTAGS
 		if(/datum/storyteller/astrata)
 			return STORYTELLER_FAVOR_MASQUERADE
+		/* OV Remove
 		if(/datum/storyteller/abyssor)
 			return STORYTELLER_FAVOR_DREAMWALKER
+		*/
 		if(/datum/storyteller/dendor)
 			return STORYTELLER_FAVOR_WEREWOLF
+		/* OV Remove
 		if(/datum/storyteller/zizo)
 			return STORYTELLER_FAVOR_LICH
 		if(/datum/storyteller/baotha)
 			return STORYTELLER_FAVOR_VAMPIRE_LORD
+		*/
 		if(/datum/storyteller/graggar)
 			return STORYTELLER_FAVOR_GNOLL | STORYTELLER_FAVOR_ASSASSIN
+		/* OV Remove
 		if(/datum/storyteller/matthios)
 			return STORYTELLER_FAVOR_BANDIT
+		*/
 	return STORYTELLER_FAVOR_NONE
 
 /datum/controller/subsystem/gamemode/proc/story_hardonly(storyteller_type)
