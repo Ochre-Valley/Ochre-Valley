@@ -1869,7 +1869,6 @@
 #include "code\modules\events\antagonist\solo\_base.dm"
 #include "code\modules\events\antagonist\solo\assassins.dm"
 #include "code\modules\events\antagonist\solo\bandits.dm"
-#include "code\modules\events\antagonist\solo\dreamwalker.dm"
 #include "code\modules\events\antagonist\solo\lich.dm"
 #include "code\modules\events\antagonist\solo\masquerade.dm"
 #include "code\modules\events\antagonist\solo\rebels.dm"
