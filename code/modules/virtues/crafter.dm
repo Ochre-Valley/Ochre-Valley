@@ -126,7 +126,8 @@
 		"Mining Skill (+3, Up to Legendary)" = list(/datum/skill/labor/mining, TRAIT_SMITHING_EXPERT),
 		"Lumberjacking Skill (+3, Up to Legendary)" = /datum/skill/labor/lumberjacking,
 		"Stashed Steel Axe" = /obj/item/rogueweapon/stoneaxe/woodcut/steel/woodcutter,
-		"Stashed Steel Pickaxe" = /obj/item/rogueweapon/pick/steel
+		"Stashed Steel Pickaxe" = /obj/item/rogueweapon/pick/steel,
+		"Stashed Bronze Dolabra" = /obj/item/rogueweapon/pick/bronze /// OV edit, worse than both other tools at their job, but can do both jobs.
 	)
 
 /datum/virtue/utility/apprentice/apply_to_human(mob/living/carbon/human/recipient)
