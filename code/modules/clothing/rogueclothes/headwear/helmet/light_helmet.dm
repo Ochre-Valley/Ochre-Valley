@@ -236,4 +236,5 @@
 	sellprice = 10 
 
 /obj/item/clothing/head/roguetown/mentorhat/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)  //Ov edit
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_HONORBOUND)
