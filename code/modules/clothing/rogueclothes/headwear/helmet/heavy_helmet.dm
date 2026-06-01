@@ -1257,10 +1257,6 @@
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "HELM", "RENDERED ASUNDER")
-	//OV edit start
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
-	//OV edit end
 
 /obj/item/clothing/head/roguetown/helmet/heavy/graggar/equipped(mob/living/user, slot)
 	. = ..()
@@ -1289,10 +1285,6 @@
 /obj/item/clothing/head/roguetown/helmet/heavy/matthios/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "VISAGE")
-	//OV edit start
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
-	//OV edit end
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo
 	name = "avantyne barbute"
@@ -1335,10 +1327,6 @@
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "HELMET")
-	//OV edit start
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
-	//OV edit end
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo/ComponentInitialize()
 	. = ..()
