@@ -140,7 +140,179 @@
 			visible_message(span_warning("[user]'s attack is redirected to [mount]'s chest!"))
 			user.zone_selected = BODY_ZONE_CHEST
 			return mount.attackby(I, user, params)
+	// OV Edit Start
+	if(IsPetrified() && istype(I, /obj/item/rogueweapon/hammer))
+		if(hammer_sculpt_petrified(user))
+			return TRUE
+		var/obj/item/bodypart/reattach_limb = get_petrified_reattachable_bodypart(user)
+		if(reattach_limb)
+			user.visible_message(span_notice("[user] begins hammering [reattach_limb] back onto [src]."), span_notice("I begin hammering [reattach_limb] back onto [src]."))
+			playsound(get_turf(src), 'sound/items/bsmith1.ogg', 100, FALSE)
+			if(do_after(user, 5 SECONDS, target = src))
+				if(!QDELETED(reattach_limb) && user.is_holding(reattach_limb) && IsPetrified() && can_reattach_petrified_bodypart(reattach_limb))
+					user.temporarilyRemoveItemFromInventory(reattach_limb, TRUE)
+					reattach_limb.attach_limb(src, TRUE)
+					playsound(get_turf(src), 'sound/items/bsmith3.ogg', 100, FALSE)
+					user.visible_message(span_notice("[user] hammers [reattach_limb] back onto [src]."), span_notice("I hammer [reattach_limb] back onto [src]."))
+			return TRUE
+		if(hammer_remove_petrified_bodypart(user))
+			return TRUE
+		hammer_repair_petrified(user)
+		return TRUE
+	// OV Edit End
 	return ..()
+
+// OV Edit Start
+/mob/living/carbon/human/attack_right(mob/user, params)
+	if(hammer_pose_petrified(user))
+		return TRUE
+	return ..()
+
+/mob/living/carbon/human/proc/get_petrified_reattachable_bodypart(mob/living/user)
+	if(!user)
+		return null
+	for(var/obj/item/bodypart/held_bodypart as anything in user.held_items)
+		if(can_reattach_petrified_bodypart(held_bodypart))
+			return held_bodypart
+	return null
+
+/mob/living/carbon/human/proc/can_reattach_petrified_bodypart(obj/item/bodypart/reattach_limb)
+	if(!istype(reattach_limb))
+		return FALSE
+	if(get_bodypart(reattach_limb.body_zone))
+		return FALSE
+	if(reattach_limb.original_owner == src)
+		return TRUE
+	if(istype(reattach_limb, /obj/item/bodypart/head) && reattach_limb.name == "[real_name]'s head")
+		return TRUE
+	return FALSE
+
+/mob/living/carbon/human/proc/hammer_sculpt_petrified(mob/living/user)
+	if(!user || user.zone_selected != BODY_ZONE_PRECISE_STOMACH)
+		return FALSE
+	if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		return TRUE
+	var/obj/item/held = user.get_active_held_item()
+	if(!istype(held, /obj/item/rogueweapon/hammer))
+		to_chat(user, span_warning("I need to keep holding the hammer."))
+		return TRUE
+	if(!perform_mirror_transform(src, user, TRUE))
+		return TRUE
+	if(QDELETED(src) || !IsPetrified())
+		return TRUE
+	refresh_petrified_visual_state()
+	if(QDELETED(user))
+		return TRUE
+	held = user.get_active_held_item()
+	if(Adjacent(user) && istype(held, /obj/item/rogueweapon/hammer))
+		playsound(get_turf(src), 'sound/items/bsmith2.ogg', 100, FALSE)
+		user.visible_message(span_notice("[user] sculpts [src]'s petrified form with [held]."), span_notice("I sculpt [src]'s petrified form with [held]."))
+	return TRUE
+
+/mob/living/carbon/human/proc/hammer_pose_petrified(mob/user)
+	if(!IsPetrified() || !user || user.zone_selected != BODY_ZONE_PRECISE_STOMACH)
+		return FALSE
+	var/obj/item/held = user.get_active_held_item()
+	if(!istype(held, /obj/item/rogueweapon/hammer))
+		return FALSE
+	if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		return TRUE
+	var/new_pose = tgui_input_text(user, "Set [src]'s pose (MARKDOWN AVAILABLE):", "SET POSE", pose_text, multiline = FALSE, encode = FALSE, bigmodal = TRUE, max_length = 256)
+	if(isnull(new_pose))
+		return TRUE
+	if(QDELETED(src) || QDELETED(user) || !IsPetrified())
+		return TRUE
+	if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		return TRUE
+	held = user.get_active_held_item()
+	if(!istype(held, /obj/item/rogueweapon/hammer))
+		to_chat(user, span_warning("I need to keep holding the hammer."))
+		return TRUE
+	if(!length(new_pose))
+		pose_text = ""
+		user.visible_message(span_notice("[user] smooths [src]'s pose away with [held]."), span_notice("I clear [src]'s pose."))
+		return TRUE
+	pose_text = parsemarkdown_basic(new_pose)
+	user.visible_message(span_notice("[user] sets [src]'s pose with careful taps of [held]."), span_notice("I set [src]'s pose."))
+	return TRUE
+
+/mob/living/carbon/human/proc/hammer_remove_petrified_bodypart(mob/living/user)
+	if(!user)
+		return FALSE
+	var/target_zone = check_zone(user.zone_selected)
+	if(!(target_zone in list(BODY_ZONE_HEAD, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)))
+		return FALSE
+	var/obj/item/bodypart/bodypart = get_bodypart(user.zone_selected)
+	if(!bodypart || bodypart.body_zone != target_zone)
+		to_chat(user, span_warning("[src] has no petrified limb there to remove."))
+		return TRUE
+	user.visible_message(span_notice("[user] begins carefully working [bodypart] free from [src]'s petrified body."), span_notice("I begin carefully working [bodypart] free from [src]'s petrified body."))
+	playsound(get_turf(src), 'sound/items/bsmith1.ogg', 100, FALSE)
+	if(!do_after(user, 5 SECONDS, target = src))
+		return TRUE
+	if(QDELETED(src) || QDELETED(user) || QDELETED(bodypart))
+		return TRUE
+	if(!IsPetrified() || bodypart.owner != src || check_zone(user.zone_selected) != target_zone)
+		return TRUE
+	var/obj/item/held = user.get_active_held_item()
+	if(!istype(held, /obj/item/rogueweapon/hammer))
+		to_chat(user, span_warning("I need to keep holding the hammer."))
+		return TRUE
+	if(bodypart.drop_limb(FALSE))
+		refresh_petrified_visual_state()
+		playsound(get_turf(src), 'sound/items/bsmith3.ogg', 100, FALSE)
+		user.visible_message(span_notice("[user] carefully removes [bodypart] from [src]'s petrified body."), span_notice("I carefully remove [bodypart] from [src]'s petrified body."))
+	return TRUE
+
+/mob/living/carbon/human/proc/has_petrified_repair_damage()
+	if(!IsPetrified())
+		return FALSE
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(bodypart.brute_dam || bodypart.burn_dam || length(bodypart.wounds) || bodypart.disabled != BODYPART_NOT_DISABLED)
+			return TRUE
+	return FALSE
+
+/mob/living/carbon/human/proc/repair_petrified_tick()
+	var/list/damaged_parts = list()
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(bodypart.brute_dam || bodypart.burn_dam || length(bodypart.wounds) || bodypart.disabled != BODYPART_NOT_DISABLED)
+			damaged_parts += bodypart
+	if(!length(damaged_parts))
+		return FALSE
+	var/obj/item/bodypart/repairing = pick(damaged_parts)
+	repairing.heal_damage(15, 15, 0, null, FALSE)
+	if(!repairing.brute_dam && !repairing.burn_dam)
+		repairing.wounds = null
+		repairing.disabled = BODYPART_NOT_DISABLED
+	update_damage_overlays()
+	updatehealth()
+	return TRUE
+
+/mob/living/carbon/human/proc/hammer_repair_petrified(mob/living/user)
+	if(!has_petrified_repair_damage())
+		to_chat(user, span_warning("[src] does not need repairs."))
+		return
+	user.visible_message(span_notice("[user] begins hammering cracks and fractures smooth in [src]'s petrified body."), span_notice("I begin hammering cracks and fractures smooth in [src]'s petrified body."))
+	do
+		if(!IsPetrified() || QDELETED(src) || QDELETED(user))
+			return
+		if(!Adjacent(user))
+			to_chat(user, span_warning("I need to stay close to repair [src]."))
+			return
+		var/obj/item/held = user.get_active_held_item()
+		if(!istype(held, /obj/item/rogueweapon/hammer))
+			to_chat(user, span_warning("I need to keep holding the hammer."))
+			return
+		if(!do_after(user, CLICK_CD_MELEE, target = src))
+			return
+		playsound(get_turf(src), pick('sound/items/bsmith1.ogg', 'sound/items/bsmith2.ogg', 'sound/items/bsmith3.ogg'), 100, FALSE)
+		if(repair_petrified_tick())
+			user.visible_message(span_info("[user] repairs some of the damage in [src]'s petrified body."), span_info("I repair some of the damage in [src]'s petrified body."))
+		if(!has_petrified_repair_damage())
+			user.visible_message(span_info("[user] finishes repairing [src]'s petrified body."), span_info("I finish repairing [src]'s petrified body."))
+			return
+	while(has_petrified_repair_damage())
+// OV Edit End
 
 /mob/living/carbon/human/attack_animal(mob/living/simple_animal/M)
 	if(buckled && istype(buckled, /mob/living/carbon/human))

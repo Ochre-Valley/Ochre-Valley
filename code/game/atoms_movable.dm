@@ -242,6 +242,47 @@
 	pulling.Move(get_step(pulling.loc, move_dir), move_dir, glide_size)
 	return TRUE
 
+// OV Edit Start
+/atom/movable/proc/get_pushed_pulled_atom()
+	return null
+
+/atom/movable/proc/step_pushed_pulled_atom(atom/newloc, direct)
+	var/atom/movable/pushed_pullee = get_pushed_pulled_atom()
+	if(!pushed_pullee || pushed_pullee != pulling)
+		return TRUE
+	if(QDELETED(pushed_pullee))
+		return TRUE
+	if(!(direct in GLOB.cardinals))
+		return TRUE
+	var/turf/target_turf = get_turf(newloc)
+	if(!target_turf || get_turf(pushed_pullee) != target_turf)
+		return TRUE
+	if(pushed_pullee.anchored || pushed_pullee.move_resist > move_force || !pushed_pullee.Adjacent(src))
+		stop_pulling()
+		return FALSE
+	if(isliving(pushed_pullee))
+		var/mob/living/pushed_living = pushed_pullee
+		if(pushed_living.buckled && pushed_living.buckled.buckle_prevents_pull)
+			stop_pulling()
+			return FALSE
+	var/turf/push_turf = get_step(target_turf, direct)
+	if(!push_turf)
+		return FALSE
+	var/old_pushed_dir
+	if(isliving(pushed_pullee))
+		old_pushed_dir = pushed_pullee.dir
+	pushed_pullee.moving_from_pull = src
+	var/push_succeeded = pushed_pullee.Move(push_turf, direct, glide_size)
+	if(QDELETED(pushed_pullee))
+		return FALSE
+	pushed_pullee.moving_from_pull = null
+	if(old_pushed_dir && !QDELETED(pushed_pullee))
+		pushed_pullee.setDir(old_pushed_dir)
+	if(!push_succeeded)
+		return FALSE
+	return pushed_pullee
+// OV Edit End
+
 /mob/living/Move_Pulled(atom/A)
 	. = ..()
 	if(!. || !isliving(A))
@@ -339,6 +380,9 @@
 		pulled = pulledby
 	var/atom/oldloc = loc
 	var/direction_to_move = direct
+	// OV Edit Start
+	var/push_result
+	// OV Edit End
 
 //Early override for some cases like diagonal movement
 	if(glide_size_override)
@@ -348,7 +392,11 @@
 	if(loc != newloc)
 		if (!(direct & (direct - 1))) //Cardinal move
 			lastcardinal = direct
-			. = ..()
+			// OV Edit Start
+			push_result = step_pushed_pulled_atom(newloc, direct)
+			if(push_result)
+				. = ..()
+			// OV Edit End
 		else //Diagonal move, split it into cardinal moves
 			if (direct & NORTH)
 				if (direct & EAST)
@@ -415,7 +463,7 @@
 
 	if(.)
 		Moved(oldloc, direct)
-	if(. && pulled && pulledby == pulled && pulled.cmode && pulled.grab_state < GRAB_AGGRESSIVE) //NICHE case of being in a first tier grab state.
+	if(. && !moving_from_pull && pulled && pulledby == pulled && pulled.cmode && pulled.grab_state < GRAB_AGGRESSIVE) //NICHE case of being in a first tier grab state. //OV Edit
 		if(!pulledby || QDELETED(pulledby))
 			return
 		if(pulledby.anchored)
@@ -432,6 +480,17 @@
 			return
 		if(pulling.anchored)
 			stop_pulling()
+		// OV Edit Start
+		else if(push_result == pulling)
+			if(get_dist(src, pulling) > 1)
+				stop_pulling()
+			else
+				if(isliving(src) && isliving(pulling))
+					var/mob/living/pusher = src
+					var/mob/living/pushed_living = pulling
+					pusher.set_pull_offsets(pushed_living, grab_state)
+				check_pulling()
+		// OV Edit End
 		else
 			var/pull_dir = get_dir(src, pulling)
 			if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))

@@ -51,6 +51,10 @@
 
 #define STATUS_EFFECT_IMMOBILIZED /datum/status_effect/incapacitating/immobilized //the affected is unable to move
 
+// OV Edit Start
+#define STATUS_EFFECT_PETRIFIED /datum/status_effect/petrified //the affected is a living statue
+// OV Edit End
+
 #define STATUS_EFFECT_PARALYZED /datum/status_effect/incapacitating/paralyzed //the affected is unable to move, use items, or stand up.
 
 #define STATUS_EFFECT_UNCONSCIOUS /datum/status_effect/incapacitating/unconscious //the affected is unconscious

@@ -3,7 +3,8 @@
 	set name = "OOC Escape"
 	set category = "OOC"
 
-	if(isturf(src.loc))	//Doesn't work if you aren't contained in some way
+	var/datum/status_effect/petrified/petrified = IsPetrified()
+	if(isturf(src.loc) && !petrified)	//Doesn't work if you aren't contained in some way, unless petrification is what trapped you.
 		to_chat(src,span_warning("You are already on the ground. OOC Escape can not help you here."))
 		return
 	
@@ -16,6 +17,14 @@
 
 	var/atom/where = loc
 	var/msg = "has OOC escaped. "
+	if(petrified)
+		if(admin_remove_petrification())
+			visible_message(span_notice("[src]'s petrified body softens back into living flesh."), span_notice("My petrified body softens back into living flesh."))
+			msg += "Their petrification was reversed. "
+		if(isturf(where))
+			msg += "They were on \the [where]. [ADMIN_JMP(src)]"
+			log_and_message_admins(msg)
+			return
 	if(istype(where, /obj/item/capture_crystal))
 		var/obj/item/capture_crystal/old_crystal = where
 		old_crystal.Destroy()

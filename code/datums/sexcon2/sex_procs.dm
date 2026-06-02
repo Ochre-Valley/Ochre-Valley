@@ -40,6 +40,16 @@
 /mob/living/proc/start_sex_session(mob/living/target)
 	if(!target)
 		return
+	// OV Edit Start
+	if(target == src && ishuman(src))
+		var/mob/living/carbon/human/human_user = src
+		var/mob/living/carbon/human/head_target = human_user.get_held_petrified_head_target()
+		if(head_target)
+			target = head_target
+	if(target.IsPetrified() && !target.is_petrified_sensitive())
+		to_chat(src, span_warning("[target] is not sensitive to that while petrified."))
+		return
+	// OV Edit End
 	var/datum/sex_session/old_session = get_sex_session(src, target)
 	if(old_session)
 		old_session.ui_interact(src)
@@ -69,6 +79,31 @@
 /mob/living/proc/can_do_sex()
 	return TRUE
 
+// OV Edit Start
+/mob/living/carbon/human/proc/get_held_petrified_head_target()
+	for(var/obj/item/held_item as anything in held_items)
+		if(!istype(held_item, /obj/item/bodypart/head))
+			continue
+		var/obj/item/bodypart/head/held_head = held_item
+		var/mob/living/carbon/human/head_owner = held_head.original_owner
+		if(!istype(head_owner) || QDELETED(head_owner) || head_owner.stat == DEAD)
+			continue
+		if(head_owner.IsPetrified())
+			return head_owner
+	return null
+
+/mob/living/carbon/human/proc/get_held_petrified_head_for(mob/living/carbon/human/target)
+	if(!target || QDELETED(target) || target.stat == DEAD || !target.IsPetrified())
+		return null
+	for(var/obj/item/held_item as anything in held_items)
+		if(!istype(held_item, /obj/item/bodypart/head))
+			continue
+		var/obj/item/bodypart/head/held_head = held_item
+		if(held_head.original_owner == target && is_holding(held_head))
+			return held_head
+	return null
+// OV Edit End
+
 /mob/living/carbon/human/MiddleMouseDrop_T(atom/movable/dragged, mob/living/user)
 	var/mob/living/carbon/human/target = src
 	var/mob/living/carbon/human/human_user = user
@@ -85,15 +120,29 @@
 	if(!human_user.can_do_sex)
 		to_chat(user, "<span class='warning'>I can't do this.</span>")
 		return
-	var/may_bang = client && client.prefs && client.prefs.sexable == TRUE
+	// OV Edit Start
+	if(target == human_user)
+		var/mob/living/carbon/human/head_target = human_user.get_held_petrified_head_target()
+		if(head_target)
+			target = head_target
+	var/may_bang = target.client && target.client.prefs && target.client.prefs.sexable == TRUE
+	// OV Edit End
 	#ifdef LOCALTEST
 		may_bang = TRUE
 	#endif
 
 	if(!may_bang) // Don't bang someone that doesn't want it.
-		to_chat(user, "<span class='warning'>[src] doesn't wish to be touched. (Their ERP preference under options)</span>")
-		to_chat(src, "<span class='warning'>[user] failed to touch you. (Your ERP preference under options)</span>")
+		// OV Edit Start
+		to_chat(user, "<span class='warning'>[target] doesn't wish to be touched. (Their ERP preference under options)</span>")
+		to_chat(target, "<span class='warning'>[user] failed to touch you. (Your ERP preference under options)</span>")
+		// OV Edit End
 		return
+
+	// OV Edit Start
+	if(target.IsPetrified() && !target.is_petrified_sensitive())
+		to_chat(user, span_warning("[target] is not sensitive to that while petrified."))
+		return
+	// OV Edit End
 
 	if(!user.start_sex_session(target))
 		to_chat(user, "<span class='warning'>I'm already sexing.</span>")

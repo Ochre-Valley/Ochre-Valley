@@ -41,6 +41,9 @@
 		var/mob/living/M = locate(href_list["heal_target"])
 		if(M)
 			M.fully_heal(admin_revive = TRUE)
+			// OV Edit Start
+			M.admin_remove_petrification()
+			// OV Edit End
 			message_admins("[key_name_admin(usr)] fully healed [key_name_admin(M)].")
 			log_admin("[key_name(usr)] fully healed [key_name(M)].")
 			show_heal_panel(M)
@@ -832,6 +835,9 @@
 			return
 
 		L.revive(full_heal = TRUE, admin_revive = TRUE)
+		// OV Edit Start
+		L.admin_remove_petrification()
+		// OV Edit End
 		message_admins(span_danger("Admin [key_name_admin(usr)] healed / revived [key_name_admin(L)]!"))
 		log_admin("[key_name(usr)] healed / Revived [key_name(L)].")
 

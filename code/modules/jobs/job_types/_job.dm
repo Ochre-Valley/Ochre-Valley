@@ -74,7 +74,7 @@
 
 	//allowed sex/race for picking
 	var/list/allowed_sexes = list(MALE, FEMALE)
-	var/list/allowed_races = RACES_ALL_KINDS
+	var/list/forbidden_races
 	var/list/allowed_patrons
 	var/list/allowed_ages = ALL_AGES_LIST
 
@@ -178,10 +178,15 @@
 
 	var/townie_contract_gate_exempt = FALSE
 
-/// Either flag exempts. Job-level is "this whole job has no town rotation" (Adventurer,
-/// Mercenary, Vagabond, Court Agent). Advclass-level is "this specific subclass deserves
-/// the exemption within an otherwise non-exempt job" (Hunter / Witch / Levy / Thug under
-/// Pilgrim). Pilgrim/Blacksmith etc. land at FALSE on both sides.
+	///
+	var/quest_claim_barred = FALSE
+
+/proc/is_quest_claim_barred(mob/user)
+	if(!user?.mind)
+		return FALSE
+	var/datum/job/J = user.job ? SSjob.GetJob(user.job) : null
+	return J?.quest_claim_barred ? TRUE : FALSE
+
 /proc/is_townie_contract_gate_exempt(mob/user)
 	if(!user?.mind)
 		return FALSE
@@ -226,7 +231,7 @@
 
 //Only override this proc
 //H is usually a human unless an /equip override transformed it
-/datum/job/proc/after_spawn(mob/living/H, mob/M, latejoin = FALSE)
+/datum/job/proc/after_spawn(mob/living/H, mob/M, latejoin = FALSE, announce = TRUE)//OV Edit
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src)
 	//do actions on H but send messages to M as the key may not have been transferred_yet
@@ -284,8 +289,8 @@
 			used_title = f_title
 		if((H.titles_pref == TITLES_N) && n_title) //OV Add: Gender Neutral Revamp
 			used_title = n_title //OV Add: Gender Neutral Revamp
-		//OV Add: Don't announce roleless players (Mostly for testing stuff)
-		if(used_title != "NOPE")
+		//OV Add: Don't announce roleless players (Mostly for testing stuff), also allow for unannounced entries
+		if(used_title != "NOPE" && announce)
 			scom_announce("[H.real_name] the [used_title] arrives to Azure Peak.")
 		//OV Add End
 
@@ -305,7 +310,7 @@
 	if(cmode_music)
 		H.cmode_music = cmode_music
 
-	if (!hidden_job)
+	if (!hidden_job && announce) //OV Edit: Don't add unannounced players to manifest
 		var/mob_name = H.real_name
 		var/mob_rank
 		if (obsfuscated_job)

@@ -1,5 +1,12 @@
 //The code execution of the emote datum is located at code/datums/emotes.dm
 /mob/proc/emote(act, m_type = null, message = null, intentional = FALSE, forced = FALSE, targetted = FALSE, custom_me = FALSE, animal = FALSE)
+	// OV Edit Start
+	if(intentional && !custom_me && isliving(src))
+		var/mob/living/living_user = src
+		if(living_user.IsPetrified() && living_user.get_message_origin() == living_user)
+			to_chat(src, span_warning("I can't do that while petrified."))
+			return
+	// OV Edit End
 	var/oldact = act
 	act = lowertext(act)
 	var/param = message
@@ -18,9 +25,7 @@
 
 	// autopunctuation
 	if((act == "me" || act == "subtle") && !client?.prefs?.no_autopunctuate)
-		var/ending = copytext(param, length(param), (length(param) + 1))
-		if(ending && !GLOB.correct_punctuation[ending])
-			param += "."
+		param = autopunct_bare(param)
 
 	var/list/key_emotes = GLOB.emote_list[act]
 	var/mute_time = 0
@@ -44,7 +49,11 @@
 
 /atom/movable/proc/send_speech_emote(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode, original_message)
 	var/rendered = compose_message(src, message_language, message, , spans, message_mode)
-	for(var/_AM in get_hearers_in_view(range, source))
+	// OV Edit End
+	var/list/listening = get_hearers_in_view(range, source)
+	add_remote_hearing_atom_listeners(listening, source, range)
+	for(var/_AM in listening)
+	//OV Edit End
 		var/atom/movable/AM = _AM
 		AM.Hear(rendered, src, message_language, message, , spans, message_mode)
 //	if(intentional)

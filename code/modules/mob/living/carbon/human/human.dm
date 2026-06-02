@@ -32,6 +32,11 @@
 					held_item.melee_attack_chain(user, src, params)
 		return
 	if(user == src)
+		//OV Add Start
+		if(IsPetrified())
+			to_chat(src, span_warning("You cannot do this while petrified."))
+			return
+		//OV Add End
 		if(get_num_arms(FALSE) < 1)
 			return
 		if(user.zone_selected == BODY_ZONE_PRECISE_GROIN)
@@ -188,6 +193,20 @@
 		dat += "<tr><td><A href='?src=[REF(src)];item=[SLOT_HANDCUFFED]'>Remove [handcuffed]</A></td></tr>"
 	if(legcuffed)
 		dat += "<tr><td><A href='?src=[REF(src)];item=[SLOT_LEGCUFFED]'>Remove [legcuffed]</A></td></tr>"
+
+	// OV Edit Start
+	if(IsPetrified() && isliving(user))
+		var/mob/living/living_user = user
+		var/obj/item/grabbing/posture_grab = living_user.get_grabbed_petrified_posture_grab(src)
+		if(posture_grab?.grabbed == src)
+			var/posture_action = (mobility_flags & MOBILITY_STAND) ? "Lay Down" : "Stand Up"
+			var/posture_target = (mobility_flags & MOBILITY_STAND) ? "lay" : "stand"
+			dat += "<tr><td><A href='?src=[REF(src)];petrified_posture=[posture_target]'>[posture_action]</A></td></tr>"
+			if(ishuman(living_user))
+				var/mob/living/carbon/human/human_user = living_user
+				if(human_user.can_be_firemanned(src))
+					dat += "<tr><td><A href='?src=[REF(src)];petrified_carry=1'>Carry</A></td></tr>"
+	// OV Edit End
 
 	dat += "<tr><td><hr></td></tr>"
 
@@ -464,6 +483,15 @@
 			R.fields["name"] = newname
 
 /mob/living/carbon/human/get_total_tint()
+	// OV Edit Start
+	var/obj/item/bodypart/head/petrified_view_head = get_petrified_view_head()
+	if(petrified_view_head)
+		if(petrified_view_head.eyes)
+			. = petrified_view_head.eyes.tint
+		else
+			. = INFINITY
+		return
+	// OV Edit End
 	if(isdullahan(src))
 		var/datum/species/dullahan/species = dna.species
 		var/obj/item/bodypart/head/dullahan/user_head = species.my_head
@@ -816,7 +844,7 @@
 			if(istype(grab) && grab.grabbed == target)
 				has_grab = TRUE
 			// If the target is grabbed and can be firemanned, we fireman carry them
-			if(has_grab && can_be_firemanned(target))
+			if(has_grab && !target.IsPetrified() && can_be_firemanned(target)) //OV Edit
 				fireman_carry(target)
 				return TRUE
 	else if(istype(dragged, /obj/item/bodypart/head/dullahan/))

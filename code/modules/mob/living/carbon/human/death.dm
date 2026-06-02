@@ -179,7 +179,7 @@
 
 		if(!gibbed && yeae)
 			for(var/mob/living/carbon/human/HU in viewers(7, src))
-				if(HU.marriedto == src)
+				if(HU.marriedto == name) // OV Edit: Fix bug
 					HU.adjust_triumphs(-1)
 
 	. = ..()
@@ -214,7 +214,7 @@
 		if(CA != src && !HAS_TRAIT(CA, TRAIT_BLIND))
 			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 				continue
-			if(CA.marriedto == src)
+			if(CA.marriedto == name) // OV Edit: Fix bug
 				CA.adjust_triumphs(-1)
 			CA.add_stress(/datum/stressevent/viewgib)
 	return ..()

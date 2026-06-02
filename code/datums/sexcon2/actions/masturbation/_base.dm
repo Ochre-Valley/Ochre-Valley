@@ -8,6 +8,10 @@
 	. = ..()
 	if(!.)
 		return FALSE
+	//OV Add Start
+	if(user.IsPetrified())
+		return FALSE
+	//OV Add End
 	var/locked = user.get_active_precise_hand()
 	if(check_sex_lock(user, locked))
 		return FALSE

@@ -6,6 +6,12 @@
 */
 /mob/living/carbon/UnarmedAttack(atom/A, proximity, params)
 
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return
+	// OV Edit End
+
 	if(!has_active_hand()) //can't attack without a hand.
 		to_chat(src, span_warning("I lack working hands."))
 		return
@@ -99,6 +105,12 @@
 	if(stat)
 		return
 
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return
+	// OV Edit End
+
 	if(!has_active_hand()) //can't attack without a hand.
 		to_chat(src, span_warning("I lack working hands."))
 		return
@@ -164,6 +176,11 @@
 
 /mob/living/MiddleClickOn(atom/A, params)
 	..()
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return
+	// OV Edit End
 	if(!mmb_intent)
 		if(!A.Adjacent(src))
 			return
@@ -240,6 +257,10 @@
 
 /mob/living/carbon/human/RangedAttack(atom/A, mouseparams)
 	. = ..()
+	// OV Edit Start
+	if(IsPetrified())
+		return
+	// OV Edit End
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
@@ -263,6 +284,11 @@
 	Animals & All Unspecified
 */
 /mob/living/UnarmedAttack(atom/A)
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return
+	// OV Edit End
 	if(!isliving(A))
 		if(used_intent.type == INTENT_GRAB)
 			var/obj/structure/AM = A

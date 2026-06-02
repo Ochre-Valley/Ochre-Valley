@@ -8,6 +8,33 @@
 	key_third_person = "blushes"
 	message = "blushes."
 
+/datum/emote/living/vomit
+	key = "vomit"
+	key_third_person = "vomits"
+	message = "pukes!"
+	emote_type = EMOTE_VISIBLE
+	show_runechat = TRUE
+
+/mob/living/carbon/human/verb/emote_vomit()
+	set name = "Vomit"
+	set category = "Emotes"
+	emote("vomit", intentional = TRUE)
+
+/datum/emote/living/vomit/run_emote(mob/user, params, type_override, intentional, targetted, animal)
+	if(!iscarbon(user))
+		return FALSE
+	if(isconstruct(user))
+		return FALSE
+
+	var/mob/living/carbon/vomiter = user
+
+	if(vomiter.has_stress_event(/datum/stressevent/vomitself))
+		to_chat(vomiter, span_warning("I already puked once. It won't come out!"))
+		return FALSE
+
+	vomiter.vomit(20, FALSE, TRUE, 1, TRUE, FALSE, FALSE, TRUE)
+	return TRUE
+
 /datum/emote/living/pray
 	key = "pray"
 	key_third_person = "prays"
@@ -44,6 +71,11 @@
 	var/follower_ident = "[follower.key]/([follower.real_name]) (follower of [patron])"
 	message_admins("[follower_ident] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] [ADMIN_PLAYEREFFECTS(follower)] prays: [span_info(prayer)]")
 	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
+	// OV Edit Start - Send a special prayer notification sound to staff
+	for(var/client/C in GLOB.admins)
+		if(C.prefs.toggles & SOUND_PRAYERS)
+			SEND_SOUND(C, sound('modular_ochrevalley/sounds/misc/gm_prayer.ogg'))
+	// OV Edit End
 
 	follower.whisper(prayer)
 
@@ -391,6 +423,7 @@
 	message_muffled = "makes a muffled groan."
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 // Attack blip played randomly.
 /datum/emote/living/attack
@@ -698,6 +731,7 @@
 	message_muffled = "makes a muffled laugh."
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
@@ -776,6 +810,7 @@
 	message_muffled = "makes a muffled noise in attempt to scream!"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /mob/living/carbon/human/verb/emote_scream()
 	set name = "Scream"
@@ -803,6 +838,7 @@
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/scream/painscream/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
@@ -828,6 +864,7 @@
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/scream/agony/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
@@ -845,6 +882,7 @@
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/scream/firescream/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
@@ -885,6 +923,7 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/drown
 	key = "drown"
@@ -900,6 +939,7 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/paincrit/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
@@ -918,6 +958,7 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/painmoan
 	key = "painmoan"
@@ -925,6 +966,7 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/groin
 	key = "groin"
@@ -932,6 +974,7 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	show_runechat = FALSE
+	needs_emotion = TRUE
 
 /datum/emote/living/fatigue
 	key = "fatigue"
@@ -1611,7 +1654,12 @@
 			return
 
 		// A COMSIG here would be nice, in my attempts it sadly didn't work out well for the relay.
-		var/atom/movable/emotelocation = user
+		//OV Edit Start
+		var/atom/movable/message_origin = user.get_message_origin()
+		if(!message_origin)
+			message_origin = user
+		var/atom/movable/emotelocation = message_origin
+		//OV Edit End
 		var/mob/living/carbon/human/human
 		if(ishuman(user))
 			human = user
@@ -1621,10 +1669,15 @@
 		if(isdullahan(user))
 			dullahan = human.dna.species
 			vision = human.getorganslot(ORGAN_SLOT_HUD)
-			if(dullahan.headless && vision.viewing_head)
+			if(emotelocation == user && dullahan.headless && vision.viewing_head) //OV Edit
 				emotelocation = dullahan.my_head
 
 		user.log_message(msg, LOG_EMOTE)
+		//OV Add Start
+		var/emote_display_name = "[emotelocation]"
+		if(message_origin != user)
+			emote_display_name = user.GetVoice()
+		//OV Add End
 		var/pre_color_msg = msg
 		if (use_params_for_runechat) // apply puncutation stripping here where appropriate
 			var/static/regex/regex = regex(@"[,.!?]", "g")
@@ -1635,9 +1688,9 @@
 			var/color_to_use = human.voice_color
 			if(human.voicecolor_override)
 				color_to_use = human.voicecolor_override
-			msg = "<span style='color:#[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emotelocation]</b></span> " + msg
+			msg = "<span style='color:#[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emote_display_name]</b></span> " + msg //OV Edit
 		else
-			msg = "<b>[emotelocation]</b> " + msg
+			msg = "<b>[emote_display_name]</b> " + msg //OV Edit
 		for(var/mob/M in GLOB.dead_mob_list)
 			if(!M.client || isnewplayer(M))
 				continue
@@ -1955,3 +2008,17 @@
 		
 	to_chat(src, span_warning("You can't [direction == UP ? "emerge" : "dive"] here."))
 	return FALSE
+
+//OV edit
+/datum/emote/living/stomach_growl
+	key = "stomach_growl"
+	message = "emits a rumbling growl from their middle."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+
+/mob/living/carbon/human/verb/emote_stomach_growl()
+	set name = "Stomach Growl"
+	set category = "Noises"
+
+	emote("stomach_growl", intentional = TRUE)
+//OV edit end

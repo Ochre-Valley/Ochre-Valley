@@ -36,4 +36,4 @@
 	base_antags = 2
 	maximum_antags = 2
 	max_occurrences = 1
-	allowed_storytellers = list(/datum/storyteller/abyssor)
+	//allowed_storytellers = list(/datum/storyteller/abyssor) // OV Edit: Stop storytellers from injecting this antagonist

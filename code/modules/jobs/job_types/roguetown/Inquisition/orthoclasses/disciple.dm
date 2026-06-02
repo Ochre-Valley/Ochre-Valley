@@ -2,7 +2,7 @@
 	name = "Orator" //OV Edit - was "Disciple"
 	tutorial = "Once you have been a monk or priest of PSYDON, but your wanderlust got the better of you. Joining the Missionata, you now preach before wayward children and aberrants - and have learned to knock their lights out when they try to silence you with violence." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	
 	outfit = /datum/outfit/job/roguetown/disciple
 	subclass_languages = list(/datum/language/otavan)
 	category_tags = list(CTAG_ORTHODOXIST)
@@ -18,9 +18,9 @@
 		STATKEY_SPD = -1
 	)
 	subclass_skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
@@ -79,7 +79,7 @@
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/otavan
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/psythorns
 	neck = /obj/item/clothing/neck/roguetown/psicross/silver
-	id = /obj/item/clothing/ring/signet/silver
+	id = /obj/item/clothing/ring/signet/psy
 
 	shoes = /obj/item/clothing/shoes/roguetown/boots/psydonboots
 	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/disciple

@@ -1,7 +1,7 @@
 //OV FILE
 //This is where everything that fits nowhere else goes? I think? Who really knows so who really cares.
 #define span_orange(str) ("<span class='orange'>" + str + "</span>")
-#define span_yellow(str) ("<span class='yellow'>" + str + "</span>")
+//#define span_yellow(str) ("<span class='yellow'>" + str + "</span>") //Outdated Per AP Merge 5.8.26
 #define span_details(title, content) ("<details>"+"<summary>" + title + "</summary>" + content + "</details>")
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc

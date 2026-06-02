@@ -8,7 +8,7 @@
 	spawn_positions = 1
 	spells = list()
 	vice_restrictions = list(/datum/charflaw/unintelligible)
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - allow all
 	allowed_ages = ALL_AGES_LIST
 	cmode_music = 'sound/music/cmode/towner/combat_towner3.ogg'
 

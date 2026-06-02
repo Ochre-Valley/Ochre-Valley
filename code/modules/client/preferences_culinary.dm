@@ -88,7 +88,7 @@
 		if("confirm_drink")
 			var/drink_type = text2path(href_list["drink_type"])
 			var/preference_type = href_list["preference_type"]
-			if(ispath(drink_type, /datum/reagent/consumable))
+			if(ispath(drink_type, /datum/reagent)) //OV Edit: Allow all reagents to work here
 				var/opposite_preference = (preference_type == CULINARY_FAVOURITE_DRINK) ? CULINARY_HATED_DRINK : CULINARY_FAVOURITE_DRINK
 				if(culinary_preferences[opposite_preference] == drink_type)
 					to_chat(user, span_warning("You can't set the same drink as both favorite and hated!"))

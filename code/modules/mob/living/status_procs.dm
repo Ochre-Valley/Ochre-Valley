@@ -130,6 +130,11 @@
 		doing = 0
 		return has_status_effect(STATUS_EFFECT_IMMOBILIZED)
 
+// OV Edit Start
+/mob/living/proc/IsPetrified()
+	return petrified_status_effect
+// OV Edit End
+
 /mob/living/proc/AmountImmobilized() //How many deciseconds remain in our Immobilized status effect
 	var/datum/status_effect/incapacitating/immobilized/I = IsImmobilized()
 	if(I)

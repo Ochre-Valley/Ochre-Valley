@@ -523,8 +523,15 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 // Used for methods where input via arg doesn't work
 /client/proc/get_adminhelp()
-	var/msg = input(src, "Please describe your problem concisely and an admin will help as soon as they're able.", "Adminhelp contents") as message|null
-	adminhelp(msg)
+	// OV Edit Start - Try to direct players to mhelp if their F1 is for a mechanical question. This is my way of politely reminding the playerbase that mhelp exists for this exact purpose
+	var/choice = tgui_alert(src, "Please use Mentorhelp if you are asking a question about game mechanics before asking the staff team.", "Admins or Mentors?", list("Admin Help", "Mentor Help"))
+	switch(choice)
+		if ("Admin Help")
+			var/msg = tgui_input_text(src, "Please describe your problem concisely and an admin will help as soon as they're able.", "Adminhelp contents", multiline = TRUE, prevent_enter = TRUE, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+			adminhelp(msg)
+		if ("Mentor Help")
+			mentorhelp()
+	// OV Edit End
 
 /client/verb/adminhelp(msg as message)
 	set category = "-Admin-"

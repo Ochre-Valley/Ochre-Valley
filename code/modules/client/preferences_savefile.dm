@@ -157,6 +157,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["buttons_locked"]		>> buttons_locked
 	S["windowflash"]		>> windowflashing
 	S["be_special"] 		>> be_special
+	S["no_storyteller_events"] >> no_storyteller_events
 	S["triumphs"]			>> triumphs
 	S["musicvol"]			>> musicvol
 	S["lobbymusicvol"]		>> lobbymusicvol
@@ -328,6 +329,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["buttons_locked"], buttons_locked)
 	WRITE_FILE(S["windowflash"], windowflashing)
 	WRITE_FILE(S["be_special"], be_special)
+	WRITE_FILE(S["no_storyteller_events"], no_storyteller_events)
 	WRITE_FILE(S["default_slot"], default_slot)
 	WRITE_FILE(S["toggles"], toggles)
 	WRITE_FILE(S["chat_toggles"], chat_toggles)
@@ -622,6 +624,16 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["highlight_color"]	>> highlight_color
 	S["taur_type"]			>> taur_type
 	S["taur_color"]			>> taur_color
+	// OV Edit Start
+	S["petrification_presets"] >> petrification_presets
+	S["petrification_selected_name"] >> petrification_selected_name
+	S["petrification_selected_color"] >> petrification_selected_color
+	S["petrification_permanent"] >> petrification_permanent
+	S["petrification_sensitive"] >> petrification_sensitive
+	petrification_permanent = petrification_permanent ? TRUE : FALSE
+	petrification_sensitive = petrification_sensitive ? TRUE : FALSE
+	sanitize_petrification_presets()
+	// OV Edit End
 
 /datum/preferences/proc/_load_familiar_prefs(S)
 	S["familiar_names"]					>> familiar_prefs.familiar_names
@@ -755,6 +767,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["preset_bounty_poster_key"] >> preset_bounty_poster_key
 	S["preset_bounty_severity_key"] >> preset_bounty_severity_key
 	S["preset_bounty_severity_b_key"] >> preset_bounty_severity_b_key
+	S["preset_bounty_severity_v_key"] >> preset_bounty_severity_v_key
 	S["preset_bounty_crime"] >> preset_bounty_crime
 
 	//OV edit
@@ -765,6 +778,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["directory_sexualitytag"] >> directory_sexualitytag
 	S["directory_pvp"] >> directory_pvp
 	S["directory_ad"] >> directory_ad
+
+	S["badge_gng"] >> badge_gng
+	S["badge_vore"] >> badge_vore
+	S["badge_willing"] >> badge_willing
+	S["badge_sexuality"] >> badge_sexuality
+	S["badge_erp"] >> badge_erp
+	S["badge_lean"] >> badge_lean
+	S["badge_type"] >> badge_type
 	//OV edit end
 
 	S["img_gallery"]	>> img_gallery
@@ -939,6 +960,16 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["highlight_color"]		, highlight_color)
 	WRITE_FILE(S["taur_type"]			, taur_type)
 	WRITE_FILE(S["taur_color"]			, taur_color)
+	// OV Edit Start
+	sanitize_petrification_presets()
+	WRITE_FILE(S["petrification_presets"], petrification_presets)
+	WRITE_FILE(S["petrification_selected_name"], petrification_selected_name)
+	WRITE_FILE(S["petrification_selected_color"], petrification_selected_color)
+	var/petrification_permanent_saved = petrification_permanent ? TRUE : FALSE
+	var/petrification_sensitive_saved = petrification_sensitive ? TRUE : FALSE
+	WRITE_FILE(S["petrification_permanent"], petrification_permanent_saved)
+	WRITE_FILE(S["petrification_sensitive"], petrification_sensitive_saved)
+	// OV Edit End
 	WRITE_FILE(S["culinary_preferences"], culinary_preferences)
 	WRITE_FILE(S["topjob"]				, topjob)
 
@@ -993,6 +1024,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["preset_bounty_poster_key"] , preset_bounty_poster_key)
 	WRITE_FILE(S["preset_bounty_severity_key"] , preset_bounty_severity_key)
 	WRITE_FILE(S["preset_bounty_severity_b_key"] , preset_bounty_severity_b_key)
+	WRITE_FILE(S["preset_bounty_severity_v_key"] , preset_bounty_severity_v_key)
 	WRITE_FILE(S["preset_bounty_crime"] , preset_bounty_crime)
 	WRITE_FILE(S["flavortext"] , html_decode(flavortext))
 	WRITE_FILE(S["ooc_notes"] , html_decode(ooc_notes))
@@ -1031,6 +1063,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["directory_sexualitytag"] , directory_sexualitytag)
 	WRITE_FILE(S["directory_pvp"] , directory_pvp) //OV ADD
 	WRITE_FILE(S["directory_ad"] , directory_ad)
+
+	WRITE_FILE(S["badge_gng"] , badge_gng)
+	WRITE_FILE(S["badge_vore"] , badge_vore)
+	WRITE_FILE(S["badge_willing"] , badge_willing)
+	WRITE_FILE(S["badge_sexuality"] , badge_sexuality)
+	WRITE_FILE(S["badge_erp"] , badge_erp)
+	WRITE_FILE(S["badge_lean"] , badge_lean)
+	WRITE_FILE(S["badge_type"] , badge_type)
 	//OV edit end
 
 	WRITE_FILE(S["gear_list"], gear_list)

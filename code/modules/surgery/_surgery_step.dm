@@ -103,6 +103,8 @@
 		return FALSE
 	if(!validate_target(user, target, target_zone, intent))
 		return FALSE
+	
+	log_admin("[user] starts surgery step on [target]: [src]") //OV ADD
 
 	return TRUE
 

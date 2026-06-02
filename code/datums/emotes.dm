@@ -33,6 +33,9 @@
 	/// Whether this emote is filtered by our "hear animal noises" preference.
 	var/is_animal = FALSE
 
+	/// If true, emote will check for detached trait and not run if the user has it and the emote wasn't intentional. Used for emotes that require emotional investment to make sense, like crying or laughing.
+	var/needs_emotion = FALSE
+
 	/// For ranged targeted emotes, range of 2 is for adjacents
 	var/targetrange = 2 
 
@@ -66,12 +69,20 @@
 	. = TRUE
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
+	//OV Add Start
+	var/atom/movable/message_origin = user.get_message_origin()
+	if(!message_origin)
+		message_origin = user
+	//OV Add End
 	if(only_forced_audio && intentional)
 		return FALSE
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/M in range(user, targetrange))
+		//OV Edit Start
+		var/atom/target_origin = get_turf(message_origin) || message_origin
+		for(var/mob/living/M in range(target_origin, targetrange))
+		//OV Edit End
 			if(M != user)
 				mobsadjacent += M
 		//OV Edit: Let held micros be targetable
@@ -86,7 +97,7 @@
 		if(mobsadjacent.len)
 			chosenmob = input("[key] who?") in mobsadjacent
 		if(chosenmob)
-			if(user.Adjacent(chosenmob))
+			if(target_origin.Adjacent(chosenmob)) //OV Edit
 				params = chosenmob.name
 				adjacentaction(user, chosenmob)
 			else if(targetrange > 2) //if it's a ranged targeted emote
@@ -103,7 +114,7 @@
 		return
 
 	// A COMSIG here would be nice, in my attempts it sadly didn't work out well for the relay.
-	var/atom/movable/emotelocation = user
+	var/atom/movable/emotelocation = message_origin //OV Edit
 	var/mob/living/carbon/human/human
 	if(ishuman(user))
 		human = user
@@ -113,7 +124,7 @@
 	if(isdullahan(user))
 		dullahan = human.dna.species
 		vision = human.getorganslot(ORGAN_SLOT_HUD)
-		if(dullahan.headless && vision.viewing_head)
+		if(emotelocation == user && dullahan.headless && vision.viewing_head) //OV Edit
 			emotelocation = dullahan.my_head
 
 
@@ -135,10 +146,19 @@
 				emotelocation = dullahan.my_head
 			else// if(!vision.viewing_head)
 				emotelocation = user
+		//OV Add Start
+		if(message_origin != user)
+			emotelocation = message_origin
+		//OV Add End
 
 		playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
 	if(!nomsg)
 		user.log_message(msg, LOG_EMOTE)
+		//OV Add Start
+		var/emote_display_name = "[emotelocation]"
+		if(message_origin != user)
+			emote_display_name = user.GetVoice()
+		//OV Add End
 		var/pre_color_msg = msg
 		if (use_params_for_runechat) // apply puncutation stripping here where appropriate
 			var/static/regex/regex = regex(@"[,.!?]", "g")
@@ -150,13 +170,13 @@
 			var/color_to_use = human.voice_color
 			if(human.voicecolor_override)
 				color_to_use = human.voicecolor_override
-			styled_name = "<span style='color:#[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emotelocation]</b></span>"
+			styled_name = "<span style='color:#[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emote_display_name]</b></span>" //OV Edit
 		else
-			styled_name = "<b>[emotelocation]</b>"
+			styled_name = "<b>[emote_display_name]</b>" //OV Edit
 		// If the message contains $n, substitute it with the name instead of prepending
 		if(findtext(msg, "$n"))
 			msg = trim(replacetext(msg, "$n", styled_name))
-			pre_color_msg = trim(replacetext(pre_color_msg, "$n", "[emotelocation]"))
+			pre_color_msg = trim(replacetext(pre_color_msg, "$n", "[emote_display_name]")) //OV Edit
 		else
 			msg = "[styled_name] [msg]"
 		for(var/mob/M in GLOB.dead_mob_list)
@@ -249,8 +269,14 @@
 		else
 			// familiars get to do emotes with their weird planar being anatomy, so that they can caw and such
 			if(istype(user, /mob/living/simple_animal/pet/familiar))
-				var/datum/voicepack/pack2use = (user.gender==MALE)? /datum/voicepack/male : /datum/voicepack/female
-				return pack2use.get_sound(key)
+				var/mob/living/simple_animal/pet/familiar/fam = user
+				var/possible_sounds = fam.voice_pack.get_sound(key)
+				var/used_sound
+				if(islist(possible_sounds))
+					used_sound = pick(possible_sounds)
+				else
+					used_sound = possible_sounds
+				return used_sound
 			if(key != "burp" || user.client.prefs.belch_noises) //CC Edit - Belch Noises
 				return user.get_sound(key)
 
@@ -319,6 +345,9 @@
 				return FALSE
 //			to_chat(user, span_warning("I cannot [key] while restrained!"))
 			return FALSE
+
+	if(needs_emotion && HAS_TRAIT(user, TRAIT_DETACHED) && !intentional)
+		return FALSE
 
 	if(intentional && HAS_TRAIT(user, TRAIT_EMOTEMUTE))
 		return FALSE

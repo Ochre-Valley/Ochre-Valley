@@ -416,6 +416,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		alert("Cannot revive a ghost")
 		return
 	M.revive(full_heal = TRUE, admin_revive = TRUE)
+	// OV Edit Start
+	M.admin_remove_petrification()
+	// OV Edit End
 
 	log_admin("[key_name(usr)] healed / revived [key_name(M)]")
 	var/msg = span_danger("Admin [key_name_admin(usr)] healed / revived [ADMIN_LOOKUPFLW(M)]!")

@@ -139,6 +139,9 @@
 /proc/log_chat(text)
 	CRASH("Deprecated log_chat")
 
+/proc/log_craft(text)
+	logger.Log(LOG_CATEGORY_GAME_CRAFT, text)
+
 /proc/log_vote(text)
 	logger.Log(LOG_CATEGORY_GAME_VOTE, text)
 

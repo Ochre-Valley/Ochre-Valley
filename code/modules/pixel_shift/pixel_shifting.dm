@@ -16,6 +16,15 @@
 	if(.)
 		return
 	var/mob/M = user.mob
+	// OV Edit Start
+	if(isliving(M))
+		var/mob/living/L = M
+		if(L.IsPetrified())
+			L.shifting = FALSE
+			L.unpixel_shift()
+			to_chat(L, span_warning("I can't shift while petrified."))
+			return TRUE
+	// OV Edit End
 	M.shifting = TRUE
 	return TRUE
 
@@ -37,6 +46,12 @@
 		is_shifted = FALSE
 		pixel_x = get_standard_pixel_x_offset() + base_pixel_x
 		pixel_y = get_standard_pixel_y_offset() + base_pixel_y
+	// OV Edit Start
+	if(IsPetrified())
+		shifting = FALSE
+		pixelshift_layer = 0
+		layer = lying ? LYING_MOB_LAYER : initial(layer)
+	// OV Edit End
 
 /mob/proc/pixel_shift(direction)
 	return
@@ -50,6 +65,12 @@
 	return ..()
 
 /mob/living/pixel_shift(direction)
+	// OV Edit Start
+	if(IsPetrified())
+		shifting = FALSE
+		unpixel_shift()
+		return
+	// OV Edit End
 	passthroughable = NONE
 	if(CHECK_BITFIELD(direction, NORTH))
 		if(pixel_y <= PIXEL_SHIFT_MAXIMUM + base_pixel_y)

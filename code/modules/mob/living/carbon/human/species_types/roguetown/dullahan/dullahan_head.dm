@@ -182,7 +182,11 @@
 		if(worn_item)
 			user_dullahan.equip_to_slot(worn_item, text2num(item_slot))
 	head_items = list()
-	return ..()
+//OV Edit Start
+	. = ..()
+	user_dullahan.refresh_hearing_atom_override()
+	return .
+//OV Edit End
 
 /obj/item/bodypart/head/dullahan/proc/insert_worn_items()
 	// Sorry. Roguetown hardcodes variables and I don't want to do that.
@@ -233,6 +237,7 @@
 			. = ..()
 
 			human.put_in_hand(src, hand_index)
+			user.refresh_hearing_atom_override() //OV Add
 
 			// Clear the grabbedby list properly
 			grabbedby.Cut()
@@ -245,6 +250,7 @@
 		insert_worn_items()
 
 	. = ..()
+	user.refresh_hearing_atom_override() //OV Add
 
 /obj/item/bodypart/head/dullahan/update_icon_dropped()
 	var/list/standing = get_limb_icon(1)

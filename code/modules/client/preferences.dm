@@ -155,6 +155,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/no_language_fonts = FALSE
 	var/no_language_icon = FALSE
 	var/no_redflash = FALSE
+	var/no_storyteller_events = FALSE
 
 	var/lastclass
 
@@ -240,6 +241,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/preset_bounty_poster_key
 	var/preset_bounty_severity_key
 	var/preset_bounty_severity_b_key
+	var/preset_bounty_severity_v_key
 	var/preset_bounty_crime
 
 	var/rumour
@@ -261,6 +263,16 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	/// Whether we can see the feint HUD bar.
 	var/feint_hud = FALSE 
+
+	//OV edit
+	var/badge_gng = "No"
+	var/badge_vore = "Unset"
+	var/badge_willing = "Unset"
+	var/badge_sexuality = "Unset"
+	var/badge_erp = "No" 
+	var/badge_lean = "Unset"
+	var/badge_type = "Unset"
+	//OV edit end
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -300,6 +312,21 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		directory_sexualitytag = "Unset"
 	if(!directory_pvp)
 		directory_pvp = "No PvP"
+	
+	if(!badge_gng)
+		badge_gng = "No"
+	if(!badge_vore)
+		badge_vore = "Unset"
+	if(!badge_willing)
+		badge_willing = "Unset"
+	if(!badge_sexuality)
+		badge_sexuality = "Unset"
+	if(!badge_erp)
+		badge_erp = "No" 
+	if(!badge_lean)
+		badge_lean = "Unset"
+	if(!badge_type)
+		badge_type = "Unset"
 	//OV edit end
 
 	//Set the race to properly run race setter logic
@@ -361,6 +388,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	reset_descriptors()
 	virtue_origin = new pref_species.origin_default
 	taur_type = null
+	var/datum/charflaw/no_flaw = new /datum/charflaw/noflaw()
+	charflaws = list(no_flaw)
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
@@ -794,6 +823,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br><b>Sexuality Tag:</b> <a href='?_src_=prefs;preference=directory_sexualitytag;task=input'>[directory_sexualitytag || "Unset"]</a>"
 			dat += "<br><b>PvP Opt-In:</b> <a href='?_src_=prefs;preference=directory_pvp;task=input'>[directory_pvp || "No PvP"]</a>"
 			dat += "<br><b>Directory Ad:</b> <a href='?_src_=prefs;preference=directory_ad;task=input'>Set</a>"
+			dat += "<br><br><b>Preference Badges:</b> <a href='?_src_=prefs;preference=pref_badges;task=menu'>Open Menu</a>"
 			dat += "</td>"
 			dat += "</td>"
 			dat += "</tr></table>"
@@ -834,6 +864,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 						dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS]</font><br>"
 					else
 						dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;preference=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Storyteller:</b> <a href='?_src_=prefs;preference=storyteller'>[no_storyteller_events ? "Disabled" : "Enabled"]</a>"
+
 			dat += "</td></tr></table>"
 
 		if(2) //OOC Preferences
@@ -1434,6 +1466,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			[GLOB.bandit_severities[preset_bounty_severity_b_key] || "None"]\
 		</a>"
 
+		dat += "<br><b>Crime Severity (Vagabond):</b> "
+		dat += "<a href='?_src_=prefs;preference=preset_bounty_severity_v_key;task=input'>\
+			[GLOB.vagabond_severities[preset_bounty_severity_v_key] || "None"]\
+		</a>"
+
 		dat += "<br><b>Crime:</b> "
 		dat += "<a href='?_src_=prefs;preference=preset_bounty_crime;task=input'>\
 			[preset_bounty_crime || "None"]\
@@ -1443,6 +1480,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	if(preset_bounty_severity_b_key && !GLOB.bandit_severities[preset_bounty_severity_b_key])
 		preset_bounty_severity_b_key = null
+
+	if(preset_bounty_severity_v_key && !GLOB.vagabond_severities[preset_bounty_severity_v_key])
+		preset_bounty_severity_v_key = null
 
 	if(preset_bounty_poster_key && !GLOB.bounty_posters[preset_bounty_poster_key])
 		preset_bounty_poster_key = null
@@ -1624,7 +1664,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			for(var/key in cf_list)
 				if(cf_list[key] == /datum/charflaw/noflaw)
 					cf_list.Remove(key)
-					break
+				else
+					var/datum/charflaw/cf = cf_list[key]
+					cf = new cf()
+					if(length(cf.restricted_species) && (pref_species.type in cf.restricted_species))
+						cf_list.Remove(key)
 
 			for(var/datum/charflaw/cf in charflaws)
 				for(var/key in cf_list)
@@ -1675,6 +1719,25 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	else if(href_list["preference"] == "descriptors")
 		show_descriptors_ui(user)
 		return
+	//OV edit
+	else if(href_list["preference"] == "pref_badges")
+		if(!badge_gng)
+			badge_gng = "No"
+		if(!badge_vore)
+			badge_vore = "Unset"
+		if(!badge_willing)
+			badge_willing = "Unset"
+		if(!badge_sexuality)
+			badge_sexuality = "Unset"
+		if(!badge_erp)
+			badge_erp = "No" 
+		if(!badge_lean)
+			badge_lean = "Unset"
+		if(!badge_type)
+			badge_type = "Unset"
+		show_pref_badge_ui(user)
+		return
+	//OV edit end
 
 	else if(href_list["preference"] == "lore_primer")
 		LorePopup(user)
@@ -1782,6 +1845,12 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			handle_descriptors_topic(user, href_list)
 			show_descriptors_ui(user)
 			return
+		//OV edit
+		if("change_pref_badge")
+			handle_pref_badge_topic(user, href_list)
+			show_pref_badge_ui(user)
+			return
+		//OV edit end
 		if("change_culinary_preferences")
 			handle_culinary_topic(user, href_list)
 			show_culinary_ui(user)
@@ -2600,6 +2669,15 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						preset_bounty_severity_b_key = sev_choices[choice]
 					return
 
+				if("preset_bounty_severity_v_key")
+					var/list/sev_choices = list()
+					for(var/key in GLOB.vagabond_severities)
+						sev_choices[GLOB.vagabond_severities[key]] = key
+					var/choice = input(user, "How wanted are you?", "Meager Bounty Amount") as null|anything in sev_choices
+					if(choice)
+						preset_bounty_severity_v_key = sev_choices[choice]
+					return
+
 				if("preset_bounty_crime")
 					preset_bounty_crime = input(user, "What is your crime?", "Crime") as text|null
 					return
@@ -3065,6 +3143,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					else
 						be_special += be_special_type
 
+				if("storyteller")
+					no_storyteller_events = !no_storyteller_events
+
 				if("toggle_random")
 					var/random_type = href_list["random_type"]
 					if(randomise[random_type])
@@ -3385,7 +3466,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	character.char_accent = char_accent
 
-	apply_customizers_to_character(character)
+	// Customizers are already applied inside set_species() (both the species-change path via
+	// on_species_gain, and the same-species short-circuit). Re-applying here doubled the work.
 
 	if(culinary_preferences)
 		apply_culinary_preferences(character)

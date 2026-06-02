@@ -58,16 +58,21 @@
 
 	listeners += SSmobs.dead_players_by_zlevel[source_z]
 	listeners += muffled_listeners
+	//OV Add Start
+	if(ignore_walls)
+		add_remote_hearing_atom_listeners(listeners, turf_source, maxdistance)
+	//OV Add End
 	. = list()
 
 	for(var/mob/M as anything in listeners)
-		var/turf/turf_check = get_turf(M)
-		// Check relay instead.
-		if(isdullahan(M))
-			var/mob/living/carbon/human = M
-			var/datum/species/dullahan/dullahan = human.dna.species
-			if(dullahan.headless)
-				turf_check = get_turf(dullahan.my_head)
+		//OV Edit Start
+		var/atom/movable/hearing_atom = M.get_hearing_atom()
+		if(!hearing_atom)
+			hearing_atom = M
+		var/turf/turf_check = get_turf(hearing_atom)
+		if(!turf_check)
+			continue
+		//OV Edit End
 
 		if(quiet)
 			if(turf_check.z != turf_source.z)
@@ -132,13 +137,18 @@
 	if(!S.channel)
 		S.channel = SSsounds.random_available_channel()
 
-	var/obj/item/bodypart/head/dullahan/user_head
-	if(isdullahan(src))
-		var/mob/living/carbon/human = src
-		var/datum/species/dullahan/dullahan = human.dna.species
-		if(dullahan.headless)
-			user_head = dullahan.my_head
-			muffled = istype(user_head.loc, /obj/structure/closet) || istype(user_head.loc, /obj/item/storage/)
+	//OV Edit Start
+	var/atom/movable/hearing_atom = get_hearing_atom()
+	if(!hearing_atom)
+		hearing_atom = src
+	if(hearing_atom != src)
+		if(istype(hearing_atom, /obj/item/bodypart/head))
+			var/obj/item/bodypart/head/hearing_head = hearing_atom
+			if(hearing_head.get_remote_view_container())
+				muffled = TRUE
+		if(istype(hearing_atom.loc, /obj/structure/closet) || istype(hearing_atom.loc, /obj/item/storage/))
+			muffled = TRUE
+	//OV Edit End
 
 	if(muffled)
 		S.environment = 11
@@ -168,7 +178,7 @@
 
 	S.volume = vol2use
 
-	var/area/A = get_area(get_turf(src))
+	var/area/A = get_area(get_turf(hearing_atom)) //OV Edit
 	if(A)
 		if(A.soundenv != -1)
 			S.environment = A.soundenv
@@ -179,10 +189,11 @@
 		S.frequency = frequency
 
 	if(isturf(turf_source))
-		// Check distance to relay instead.
-		var/atom/movable/tocheck = user_head ? user_head : src
-
-		var/turf/T = get_turf(tocheck)
+	//OV Edit Start
+		var/turf/T = get_turf(hearing_atom)
+		if(!T)
+			return FALSE
+	//OV Edit End
 
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
@@ -210,7 +221,7 @@
 
 		if(S.volume <= 0)
 			return FALSE //No sound
-		var/atom/our_turf = get_turf(src)
+		var/atom/our_turf = get_turf(hearing_atom) //OV Edit
 		var/dx = turf_source.x - our_turf.x
 		if(dx <= 1 && dx >= -1)
 			S.x = 0

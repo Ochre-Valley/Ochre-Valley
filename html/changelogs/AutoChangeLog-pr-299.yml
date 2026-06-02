@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Quick ERP pref badges in character examines, set in character setup."
+  - rscadd: "PvP pref icon shown at top of examine."

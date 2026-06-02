@@ -279,6 +279,13 @@
 			pickring.removefromring(user)
 			to_chat(user, span_warning("You clumsily drop a lockpick off the ring as you try to pick the lock with it."))
 		return
+	// OV Edit Start
+	if(istype(W, /obj/item/grabbing) && isliving(user))
+		var/obj/item/grabbing/grab = W
+		var/mob/living/living_user = user
+		if(grab.stash_petrified_torso_in_open_container(src, living_user))
+			return TRUE
+	// OV Edit End
 	if(src.tool_interact(W,user))
 		return 1 // No afterattack
 	else

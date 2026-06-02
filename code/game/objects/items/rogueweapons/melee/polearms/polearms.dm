@@ -1116,7 +1116,8 @@
 	icon_state = "quarterstaff"
 	associated_skill = /datum/skill/combat/staves
 	max_integrity = 150
-	sellprice = 10 /// Wood
+	smeltresult = /obj/item/ash
+	sellprice = 10 /// Wood //CC edit
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/iron
 	name = "iron quarterstaff"
@@ -1127,7 +1128,8 @@
 	icon_state = "quarterstaff_iron"
 	associated_skill = /datum/skill/combat/staves
 	max_integrity = 200
-	sellprice = 20 //Okay; Iron, nie!
+	smeltresult = /obj/item/ingot/iron
+	sellprice = 20 //Okay; Iron, nie! //CC edit
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/steel
 	name = "steel quarterstaff"
@@ -1138,7 +1140,8 @@
 	icon_state = "quarterstaff_steel"
 	associated_skill = /datum/skill/combat/staves
 	max_integrity = 200
-	sellprice = 40 //Steel!!
+	smeltresult = /obj/item/ingot/steel
+	sellprice = 40 //Steel!! //CC edit
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/silver
 	name = "silver quarterstaff"
@@ -1150,7 +1153,8 @@
 	associated_skill = /datum/skill/combat/staves
 	max_integrity = 250
 	is_silver = TRUE
-	sellprice = 80 //Oh wow! Silver!
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 80 //Oh wow! Silver! //CC edit
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/silver/ComponentInitialize()
 	AddComponent(\

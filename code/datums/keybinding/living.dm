@@ -305,6 +305,13 @@
 	var/mob/living/M = user.mob
 	if(!isliving(M))
 		return FALSE
+	// OV Edit Start
+	if(M.IsPetrified())
+		M.unpixel_shift()
+		M.pixelshift_layer = 0
+		to_chat(M, span_warning("I can't shift while petrified."))
+		return TRUE
+	// OV Edit End
 	if(M.pixelshift_layer <= 0.04)
 		M.is_shifted = TRUE
 		M.pixelshift_layer = M.pixelshift_layer + 0.01
@@ -322,6 +329,13 @@
 	var/mob/living/M = user.mob
 	if(!isliving(M))
 		return FALSE
+	// OV Edit Start
+	if(M.IsPetrified())
+		M.unpixel_shift()
+		M.pixelshift_layer = 0
+		to_chat(M, span_warning("I can't shift while petrified."))
+		return TRUE
+	// OV Edit End
 	if(M.pixelshift_layer >= -0.04)
 		M.is_shifted = TRUE
 		M.pixelshift_layer = M.pixelshift_layer - 0.01

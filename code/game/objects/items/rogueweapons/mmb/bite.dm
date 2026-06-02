@@ -12,6 +12,11 @@
 
 /datum/intent/bite/on_mmb(atom/target, mob/living/user, params)
 	var/datum/species/dullahan/user_species
+	// OV Edit Start
+	if(user.IsPetrified())
+		to_chat(user, span_warning("I can't move my jaw while petrified."))
+		return
+	// OV Edit End
 	if(user.stat == DEAD || user.stat == UNCONSCIOUS || user.stat == SOFT_CRIT)
 		to_chat(user, span_warning("I cannot move my jaw."))
 		return
@@ -86,7 +91,7 @@
 	next_attack_msg.Cut()
 
 	user.do_attack_animation(src, "bite")
-	playsound(user, 'sound/gore/flesh_eat_01.ogg', 100)
+	playsound(user, 'sound/gore/flesh_eat_01.ogg', vol = 50, vary = FALSE, extrarange = -2, ignore_walls = FALSE, quiet = TRUE)
 	var/nodmg = FALSE
 	var/dam2do = 10*(user.STASTR/20)
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
@@ -115,7 +120,7 @@
 //nodmg if we don't have strongbite
 //nodmg if our teeth can't break through their armour
 	if(!nodmg)
-		playsound(src, "smallslash", 100, TRUE, -1)
+		playsound(src, "smallslash", vol = 50, vary = FALSE, extrarange = -1, ignore_walls = FALSE, quiet = TRUE)
 		if(ishuman(src) && user.mind)
 			var/mob/living/carbon/human/bite_victim = src
 			/*
@@ -161,6 +166,10 @@
 
 // Checking if the unit can bite
 /mob/living/carbon/human/proc/can_bite()
+	// OV Edit Start
+	if(IsPetrified())
+		return FALSE
+	// OV Edit End
 	// if(mouth?.muteinmouth && mouth?.type != /obj/item/grabbing/bite) // This one allows continued first biting rather than having to chew
 	if(mouth?.muteinmouth)
 		return FALSE
@@ -207,7 +216,9 @@
 		return
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
-		if(C != grabbee || C.incapacitated() || C.stat == DEAD)
+		// OV Edit Start
+		if(C != grabbee || C.incapacitated() || C.stat == DEAD || C.IsPetrified())
+		// OV Edit End
 			qdel(src)
 			return 1
 		if(modifiers["right"])
@@ -223,6 +234,12 @@
 ///Chewing after bite
 ///User is the one biting.
 /obj/item/grabbing/bite/proc/bitelimb(mob/living/carbon/human/user) //implies limb_grabbed and sublimb are things
+	// OV Edit Start
+	if(user.IsPetrified())
+		qdel(src)
+		return
+	// OV Edit End
+
 	var/datum/species/dullahan/user_species
 	if(isdullahan(user) && ishuman(grabbed))
 		var/mob/living/carbon/human/target_human = grabbed
@@ -253,7 +270,7 @@
 	C.next_attack_msg.Cut()
 	user.do_attack_animation(C, "bite")
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
-		playsound(C.loc, "smallslash", 100, FALSE, -1)
+		playsound(C.loc, "smallslash", vol = 50, vary = FALSE, extrarange = -1, ignore_walls = FALSE, quiet = TRUE)
 		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed, crit_message = TRUE)
 		if(user.mind && caused_wound)
 			/*
@@ -300,6 +317,12 @@
 
 //this is for carbon mobs being drink only
 /obj/item/grabbing/bite/proc/drinklimb(mob/living/user) //implies limb_grabbed and sublimb are things
+	// OV Edit Start
+	if(user.IsPetrified())
+		qdel(src)
+		return
+	// OV Edit End
+
 	if(!user.Adjacent(grabbed))
 		qdel(src)
 		return

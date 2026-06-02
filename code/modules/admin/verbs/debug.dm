@@ -280,6 +280,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_traits;target=[REF(H)]'>Apply Traits</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_examine_title;target=[REF(H)]'>Apply Examine Title</A><br>"
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_all;target=[REF(H)]'>Apply All</A> | "
+	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_all;no_announce=1;target=[REF(H)]'>Apply All (No Announce)</A> | " //OV Edit: Version of apply all that doesn't announce
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=clean_slate;target=[REF(H)]'>Clean Slate</A>"
 	
 	body += "</body></html>"
@@ -574,7 +575,12 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 					qdel(I)
 				for(var/obj/item/I in H.held_items)
 					qdel(I)
-			apply_full_job_loadout(H, job_path)
+			//OV Edit Start: Check if we announce this or not
+			if(href_list["no_announce"])
+				apply_full_job_loadout(H, job_path, FALSE)
+			else
+				apply_full_job_loadout(H, job_path, TRUE)
+			//OV Edit End
 			show_loadout_panel(H)
 		
 		if("clean_slate")
@@ -653,7 +659,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 	return dresscode
 
 // Apply full job loadout including stats, skills, traits, and spells
-/client/proc/apply_full_job_loadout(mob/living/carbon/human/H, job_type_path)
+/client/proc/apply_full_job_loadout(mob/living/carbon/human/H, job_type_path, announce = TRUE) //OV Edit: Option to silence arrival announcement and not add to manifest
 	if(!ishuman(H))
 		return
 	
@@ -773,7 +779,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 	// Call after_spawn if job exists (latejoin=TRUE to skip spawn protection and ready-up bonuses)
 	if(job_datum && hascall(job_datum, "after_spawn"))
 		H.islatejoin = TRUE  // Mark as latejoin to prevent ready-up bonuses
-		job_datum.after_spawn(H, H, TRUE)
+		job_datum.after_spawn(H, H, TRUE, announce) //OV Edit: Don't announce when we apply loadouts
 	
 	// Call after_spawn for migrant roles if it exists
 	if(is_migrant)
@@ -1364,12 +1370,16 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		if (I.hard_deletes)
 			dellog += "<li>Total Hard Deletes [I.hard_deletes]</li>"
 			dellog += "<li>Time Spent Hard Deleting: [I.hard_delete_time]ms</li>"
+			dellog += "<li>Highest Time Spent Hard Deleting: [I.hard_delete_max]ms</li>"
 		if (I.slept_destroy)
 			dellog += "<li>Sleeps: [I.slept_destroy]</li>"
 		if (I.no_respect_force)
 			dellog += "<li>Ignored force: [I.no_respect_force]</li>"
 		if (I.no_hint)
 			dellog += "<li>No hint: [I.no_hint]</li>"
+		if(LAZYLEN(I.extra_details))
+			var/details = I.extra_details.Join("</li><li>")
+			dellog += "<li>Extra Info: <ul><li>[details]</li></ul>"
 		dellog += "</ul></li>"
 
 	dellog += "</ol>"

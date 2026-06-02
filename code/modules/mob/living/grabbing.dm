@@ -575,9 +575,67 @@
 						playsound(C.loc, T.attacked_sound, 100, FALSE, -1)
 						smashlimb(T, user)
 
+// OV Edit Start
+/obj/item/grabbing/proc/stash_petrified_torso_in_open_container(obj/O, mob/living/user)
+	var/obj/structure/closet/container = O
+	if(!istype(container) || !container.opened)
+		return FALSE
+	if(!user || grabbee != user)
+		return FALSE
+	if(!valid_check())
+		return TRUE
+	var/mob/living/carbon/human/target = grabbed
+	if(!istype(target) || QDELETED(target) || !target.IsPetrified())
+		return FALSE
+	user.changeNext_move(CLICK_CD_GRABBING)
+	if(!user.canUseTopic(container, BE_CLOSE, NO_DEXTERITY))
+		return TRUE
+	if(!target.can_stash_petrified_torso())
+		to_chat(user, span_warning("[target] is too unwieldy to stash in [container] like this."))
+		return TRUE
+	target.update_mobility()
+	if(container.contents.len >= container.storage_capacity)
+		to_chat(user, span_warning("[container] is too full."))
+		return TRUE
+	if(!container.insertion_allowed(target))
+		to_chat(user, span_warning("[target] will not fit in [container]."))
+		return TRUE
+	var/atom/drop_spot = container.drop_location()
+	if(!drop_spot)
+		to_chat(user, span_warning("There is nowhere to put [target] in [container]."))
+		return TRUE
+	container.add_fingerprint(user)
+	target.forceMove(drop_spot)
+	if(user.pulling == target)
+		user.stop_pulling(FALSE)
+	var/list/grabs_to_clear = list(src)
+	for(var/obj/item/held_item as anything in user.held_items)
+		if(!istype(held_item, /obj/item/grabbing))
+			continue
+		var/obj/item/grabbing/held_grab = held_item
+		if(held_grab.grabbee == user && held_grab.grabbed == target)
+			grabs_to_clear |= held_grab
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_user = user
+		var/obj/item/grabbing/mouth_grab
+		if(istype(carbon_user.mouth, /obj/item/grabbing))
+			mouth_grab = carbon_user.mouth
+		if(mouth_grab && mouth_grab.grabbee == user && mouth_grab.grabbed == target)
+			grabs_to_clear |= mouth_grab
+	for(var/obj/item/grabbing/grab as anything in grabs_to_clear)
+		if(!QDELETED(grab))
+			qdel(grab)
+	user.visible_message(span_notice("[user] stashes [target]'s petrified torso in [container]."), span_notice("I stash [target]'s petrified torso in [container]."))
+	return TRUE
+// OV Edit End
+
 /obj/item/grabbing/attack_obj(obj/O, mob/living/user)
 	if(!valid_check())
 		return
+	// OV Edit Start
+	if(stash_petrified_torso_in_open_container(O, user))
+		return TRUE
+	// OV Edit End
 	if(user.badluck(5))
 		badluckmessage(user)
 		user.stop_pulling(TRUE)

@@ -1,0 +1,4 @@
+author: "ShadowLarkens"
+delete-after: True
+changes:
+  - bugfix: "Married people witnessing their partner's death lose a triumph correctly now."

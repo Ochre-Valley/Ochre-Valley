@@ -166,7 +166,20 @@
 						remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 
 			if(blood_volume <= BLOOD_VOLUME_BAD)
-				adjustOxyLoss(blood_volume <= BLOOD_VOLUME_SURVIVE ? 3 : 1)
+				var/oxy_amt = blood_volume <= BLOOD_VOLUME_SURVIVE ? 3 : 1
+				if(!client)
+					oxy_amt *= 3
+				adjustOxyLoss(oxy_amt)
+				if(world.time >= last_gasp)
+					last_gasp = world.time + rand(3 SECONDS, 9 SECONDS)
+					if(ishuman(src))
+						var/mob/living/carbon/human/H = src
+						H.deathgasp_noise() // wanton noise pollution, blame RYON >:(
+						if(H.mind) // NPC filter //OV Edit - Removed || H.mind.key for runtimes?
+							H.deathgasp_visual()
+							if(prob(50)) // mostly to halve the potential chatlog spam, we don't care if it never appears or always appear, on the former, tough luck, on the latter, drama queen
+								emote(pick("struggles to breathe, deathly pale!"))
+
 			else if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 				if(getOxyLoss())
 					adjustOxyLoss(-1.6)
@@ -184,6 +197,10 @@
 		adjust_bloodpool(BLOODPOL_REGEN, FALSE)
 
 /mob/living/proc/get_bleed_rate()
+	// OV Edit Start
+	if(IsPetrified())
+		return FALSE
+	// OV Edit End
 	if (!blood_volume)
 		return FALSE //the blood bag is empty, brother.
 	var/bleed_rate = 0
@@ -195,6 +212,10 @@
 	return bleed_rate
 
 /mob/living/carbon/get_bleed_rate()
+	// OV Edit Start
+	if(IsPetrified())
+		return 0
+	// OV Edit End
 	var/bleed_rate = 0
 	if (!blood_volume) // if we have no blood, we can't rightly bleed, can we?
 		return 0
@@ -206,6 +227,10 @@
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)
+	// OV Edit Start
+	if(IsPetrified())
+		return FALSE
+	// OV Edit End
 	if(!blood_volume)
 		return FALSE
 	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
@@ -229,7 +254,7 @@
 		amt = amt / 4 // Helps yield condition not be a bloodloss failure state. Approx to grabbing all of your bodyparts at once
 	blood_volume = max(blood_volume - amt, 0)
 	record_round_statistic(STATS_BLOOD_SPILT, amt)
-	if(isturf(src.loc))
+	if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
 		add_drip_floor(src.loc, amt)
 	var/vol2use
 	if(amt > 1)
@@ -246,6 +271,10 @@
 	return TRUE
 
 /mob/living/carbon/human/bleed(amt)
+	// OV Edit Start
+	if(IsPetrified())
+		return FALSE
+	// OV Edit End
 	amt *= physiology.bleed_mod
 	if(!(NOBLOOD in dna.species.species_traits))
 		return ..()
@@ -258,6 +287,12 @@
 /mob/living/carbon/human/restore_blood()
 	blood_volume = BLOOD_VOLUME_NORMAL
 	bleed_rate = 0
+
+/mob/living/proc/get_blood_color()
+	return
+
+/mob/living/carbon/human/get_blood_color()
+	return dna?.species?.blood_color || BLOOD_COLOR_RED
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -341,6 +376,10 @@
 		return /datum/reagent/blood
 
 /mob/living/carbon/human/get_blood_id()
+	// OV Edit Start
+	if(IsPetrified())
+		return
+	// OV Edit End
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		return
 	if(dna?.species)
@@ -391,7 +430,12 @@
 		W.water_volume = 10
 		W.update_icon()
 		return
-	new /obj/effect/decal/cleanable/blood/splatter(T)
+	var/current_blood_color = get_blood_color() || BLOOD_COLOR_RED
+	new /obj/effect/decal/cleanable/blood/splatter(T, current_blood_color)
+	for(var/obj/effect/decal/cleanable/blood/B in T)
+		if(istype(B, /obj/effect/decal/cleanable/blood/footprints))
+			continue
+		B.set_blood_color(current_blood_color)
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
 
 //to add splatters of blood onto nearby walls. When provided a certain force amount, also increases the range at which blood can appear on the walls.
@@ -409,7 +453,8 @@
 		T = get_turf(src)
 	for(var/turf/closed/w in orange(abs(force_distance), T))
 		var/loc = get_step(T, M)
-		new /obj/effect/decal/cleanable/blood/splatter/walls(loc)
+		var/obj/effect/decal/cleanable/blood/splatter/walls/wall_blood = new(loc)
+		wall_blood.set_blood_color(get_blood_color())
 		if(spill_amount > 0)
 			spill_amount--
 			continue
@@ -436,23 +481,62 @@
 			return
 	var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
 	if(P)
+		P.set_blood_color(get_blood_color())
 		P.blood_vol += amt
 		P.update_icon()
 	else
 		var/obj/effect/decal/cleanable/blood/drip/D = locate() in T
 		if(D)
+			D.set_blood_color(get_blood_color())
 			D.blood_vol += amt
 			D.drips++
 			D.update_icon()
 		else
-			new /obj/effect/decal/cleanable/blood/drip(T)
+			D = new(T)
+			D.set_blood_color(get_blood_color())
 
 //OV edit
 /mob/living/carbon/human/add_drip_floor(turf/T, amt)
+	// OV Edit Start
+	if(IsPetrified())
+		return
+	// OV Edit End
 	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits))
 		..()
 //OV edit end
 
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
+	// OV Edit Start
+	if(IsPetrified())
+		return
+	// OV Edit End
 	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits)) //OV EDIT
 		..()
+
+/mob/living/carbon/human/proc/deathgasp_visual()
+	var/le_gasp = pick("gasp", "choke", "gag", "wheeze", "gurgle", "sputter")
+	var/gasp_color = "#ffffff"
+	switch(getOxyLoss())
+		if(0 to 20)
+			gasp_color = "#00ff40"
+		if(21 to 40)
+			gasp_color = "#c8ff00"
+		if(41 to 60)
+			gasp_color = "#eeff00"
+		if(61 to 80)
+			gasp_color = "#ff9100"
+		if(81 to INFINITY)
+			gasp_color = "#ff0000"
+	var/gasptext = "<font color='[gasp_color]'>*[le_gasp]!* (dying)</font>"
+	filtered_balloon_alert(TRAIT_COMBAT_AWARE, gasptext, show_self = FALSE)
+	skill_filtered_balloon_alert(/datum/skill/misc/medicine, SKILL_LEVEL_APPRENTICE, gasptext, 0, 0)
+
+/mob/living/carbon/human/proc/deathgasp_noise()
+	var/gaspnoise = null
+	if(gender == MALE)
+		gaspnoise = pick('sound/vo/male/gen/mchoke1.ogg', 'sound/vo/male/gen/mchoke2.ogg', 'sound/vo/male/gen/mchoke3.ogg', 'sound/vo/male/gen/mchoke4.ogg')
+	else if(gender == FEMALE)
+		gaspnoise = pick('sound/vo/female/gen/femchoke1.ogg', 'sound/vo/female/gen/femchoke2.ogg', 'sound/vo/female/gen/femchoke3.ogg', 'sound/vo/female/gen/femchoke4.ogg')
+
+	if(gaspnoise && !(HAS_TRAIT(src, TRAIT_NOBREATH)))
+		playsound(get_turf(src), gaspnoise, 90, FALSE)

@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a item TF rune chalk with a cooldown that can be purchased in the silverface or chosen in loadout."

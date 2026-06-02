@@ -45,4 +45,8 @@
 	set name = "Masturbate"
 	set category = "IC"
 
+	if(IsPetrified())
+		to_chat(src, span_warning("You cannot do this while petrified."))
+		return
+
 	try_initiate_sex(src)

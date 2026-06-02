@@ -69,7 +69,9 @@
 			return FALSE
 
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
-	if(affecting && dismember_wound && !isooze(C)) //OV EDIT - Oozes don't get wounds left behind when bits fall off
+	// OV Edit Start
+	if(affecting && dismember_wound && !isooze(C) && !C.IsPetrified()) //OV EDIT - Oozes don't get wounds left behind when bits fall off
+	// OV Edit End
 		affecting.add_wound(dismember_wound)
 	else if(affecting && dismember_wound && isooze(C))
 		C.visible_message(span_danger("[C]'s wound closes rapidly to stem the flow of plasm."))
@@ -85,10 +87,14 @@
 				stress2give = /datum/stressevent/viewsinpunish
 
 	if(body_zone == BODY_ZONE_HEAD)
+		// OV Edit Start
+		if(C.IsPetrified())
+			C.visible_message(span_danger("<B>[C]'s petrified head is [pick("knocked free", "sheared off", "severed", "separated")]!</B>"))
 		// decaps should happen in two phases: the first one inflicts a spinal column sever, killing them instantly.
 		// if they're already spinal-severed, THEN the head is removed.
 		// extra note: we only do this for mobs with a mind, aka not NPCS. npcs always get insta-decapped as before
-		if (owner?.client && !vorpal && !guillotine_execution && two_stage_death && !grievously_wounded)
+		else if (owner?.client && !vorpal && !guillotine_execution && two_stage_death && !grievously_wounded)
+		// OV Edit End
 			if (owner?.construct)
 				C.visible_message(span_danger("<b>[C]'s wrought skull is <span class='crit'>CLEFT NIGH IN TWAIN</span> by a fearsome blow, crumbling into a <span class='crit'>CLOUD of DUST!</span></b>"))
 				C.death()
@@ -111,7 +117,9 @@
 	if(!HAS_TRAIT(C, TRAIT_NOPAIN))
 		C.emote("painscream")
 
-	if(!(NOBLOOD in C.dna?.species?.species_traits) && !(INVISBLOOD in C.dna?.species?.species_traits)) //OV EDIT
+	// OV Edit Start
+	if(!C.IsPetrified() && !(NOBLOOD in C.dna?.species?.species_traits) && !(INVISBLOOD in C.dna?.species?.species_traits)) //OV EDIT
+	// OV Edit End
 		add_mob_blood(C)
 
 	if(stress2give && C.mind) //Shouldn't be freaking out over a boglin getting their shit rocked.
@@ -153,7 +161,9 @@
 		return TRUE
 
 	var/turf/location = C.loc
-	if(istype(location))
+	// OV Edit Start
+	if(!C.IsPetrified() && istype(location))
+	// OV Edit End
 		C.add_splatter_floor(location)
 		C.add_splatter_wall(user, location, force = 2, spill_amount = 3) //Garunteed at least 2 tile distance of blood spattering on the walls, and up to 3 walls to splat.
 	var/direction = pick(GLOB.cardinals)
@@ -189,6 +199,10 @@
 
 	var/atom/drop_location = owner.drop_location()
 	var/mob/living/carbon/was_owner = owner
+	// OV Edit Start
+	if(!original_owner)
+		original_owner = was_owner
+	// OV Edit End
 	update_limb(dropping_limb = TRUE)
 
 	if(length(wounds))
@@ -261,7 +275,10 @@
 	return TRUE
 
 /obj/item/organ/brain/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	Remove(C) //Changeling brain concerns are now handled in Remove
+	// OV Edit Start
+	var/petrified_owner = C?.IsPetrified()
+	Remove(C, special = petrified_owner, no_id_transfer = petrified_owner) //Keep petrified victims attached to their statue body.
+	// OV Edit End
 	forceMove(LB)
 	if(istype(LB))
 		LB.brain = src
@@ -388,6 +405,9 @@
 		C.update_inv_pants()
 
 /obj/item/bodypart/head/drop_limb(special)
+	// OV Edit Start
+	var/mob/living/carbon/human/petrified_owner = ishuman(owner) ? owner : null
+	// OV Edit End
 	if(!special)
 		//Drop all worn head items
 		var/list/worn_items = list(
@@ -408,6 +428,34 @@
 
 	name = "[owner.real_name]'s head"
 	. = ..()
+	// OV Edit Start
+	if(. && petrified_owner?.IsPetrified())
+		petrified_owner.force_petrified_head_vision(src)
+	// OV Edit End
+
+// OV Edit Start
+/obj/item/bodypart/head/forceMove(atom/destination)
+	var/mob/living/carbon/human/petrified_owner = ishuman(original_owner) ? original_owner : null
+	var/was_petrified_view_head = (petrified_owner?.get_petrified_view_head() == src)
+	. = ..()
+	if(was_petrified_view_head && petrified_owner?.IsPetrified())
+		petrified_owner.refresh_petrified_head_vision()
+
+/obj/item/bodypart/head/proc/get_remote_view_container()
+	var/atom/current = loc
+	while(current && !isturf(current))
+		if(istype(current, /obj/structure/closet))
+			return current
+		current = current.loc
+	return null
+
+/obj/item/bodypart/head/get_remote_view_fullscreens(mob/user)
+	var/atom/remote_view_container = get_remote_view_container()
+	if(remote_view_container)
+		remote_view_container.get_remote_view_fullscreens(user)
+		return
+	user.clear_fullscreen("remote_view", 0)
+// OV Edit End
 
 //Attach a limb to a human and drop any existing limb of that type.
 /obj/item/bodypart/proc/replace_limb(mob/living/carbon/C, special)
@@ -508,7 +556,13 @@
 	real_name = ""
 	name = initial(name)
 
-	return ..()
+	// OV Edit Start
+	. = ..()
+	if(. && ishuman(C))
+		var/mob/living/carbon/human/H = C
+		H.clear_petrified_head_vision(src)
+	return .
+	// OV Edit End
 
 //Regenerates all limbs. Returns amount of limbs regenerated
 /mob/living/proc/regenerate_limbs(noheal, excluded_limbs)

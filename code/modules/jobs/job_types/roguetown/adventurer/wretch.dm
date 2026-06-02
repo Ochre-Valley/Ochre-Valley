@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	allowed_races = RACES_ALL_KINDS
+	
 	tutorial = "Somewhere in your lyfe, you fell to the wrong side of civilization. Hounded by the consequences of your actions, you spend your daes prowling the roads for easy marks and loose purses, scraping to get by."
 	outfit = null
 	outfit_female = null
@@ -54,13 +54,17 @@
 	)
 
 /datum/job/roguetown/wretch/special_job_check(mob/dead/new_player/player)
+    /*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
+    */
 	return ..()
 
 /datum/job/roguetown/wretch/special_check_latejoin(client/C)
+    /*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
+    */
 	return ..()
 
 /datum/job/roguetown/wretch/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -147,6 +151,11 @@
 	var/list/result = list()
 	var/player_count = override_player_count || length(GLOB.joined_player_list)
 	result["player_count"] = player_count
+	var/cap = SSgamemode.current_storyteller?.wretch_slot_cap
+	if(isnull(cap))
+		cap = 10
+	result["cap"] = cap
+    /*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		result["tier1_slots"] = 0
 		result["major_antag_active"] = FALSE
@@ -157,12 +166,13 @@
 		result["tier2_extra"] = 0
 		result["final_slots"] = 0
 		return result
+    */
 
-	// Tier 1: Population scaling, +1 per 10 players above 40, max 10
+	// Tier 1: Population scaling, +1 per 10 players above 40, capped per pantheon
 	var/slots = 5
 	if(player_count > 40)
 		slots += floor((player_count - 40) / 10)
-	slots = min(slots, 10)
+	slots = min(slots, cap)
 	result["tier1_slots"] = slots
 
 	// Check for major round antagonists (lich, vampire lord, any bandits) — hard cap at tier 1
@@ -175,7 +185,7 @@
 			break
 	result["major_antag_active"] = major_antag_active
 
-	// Tier 2: Garrison-gated expansion from 10 to 15
+	// Tier 2: Garrison-gated expansion above 10, bounded by per-pantheon cap.
 	var/garrison_count = SSgamemode.garrison
 	var/holy_count = SSgamemode.holy_warrior
 	var/acolyte_count = SSgamemode.half_combatant
@@ -186,11 +196,11 @@
 	result["combat_total"] = combat_count
 
 	var/tier2_max = 0
-	if(slots >= 10 && !major_antag_active)
-		tier2_max = min(max(0, combat_count - 10), 5)
+	if(slots >= 10 && cap > 10 && !major_antag_active)
+		tier2_max = min(max(0, combat_count - 10), 5, cap - slots)
 		slots += tier2_max
 	result["tier2_extra"] = tier2_max
-	result["final_slots"] = max(0, slots)
+	result["final_slots"] = max(0, min(slots, cap))
 
 	return result
 
@@ -228,10 +238,17 @@
 	var/player_count = override_player_count || length(GLOB.joined_player_list)
 	result["player_count"] = player_count
 
-	var/slots = 20
+	// Adventurer slots absorb the wretch headroom each pantheon forfeits below the original 15-slot ceiling.
+	var/cap = SSgamemode.current_storyteller?.wretch_slot_cap
+	if(isnull(cap))
+		cap = 10
+	var/wretch_offset = max(0, 15 - cap)
+	result["wretch_offset"] = wretch_offset
+
+	var/slots = 20 + wretch_offset
 	if(player_count > 70)
 		slots += floor((player_count - 70) / 10) * 2
-	slots = min(slots, 40)
+	slots = min(slots, 40 + wretch_offset)
 	result["final_slots"] = slots
 
 	return result

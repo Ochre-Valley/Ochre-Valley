@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - balance: "Small characters cannot pass through mobs on combat mode, but now only have -2 CON and no WIL reduction"

@@ -22,7 +22,8 @@
 
 	grid_width = 32
 	grid_height = 64
-	sellprice = 3
+	throw_on_break = TRUE
+	sellprice = 3 //CC edit
 
 /obj/item/clothing/shoes/ComponentInitialize()
 	. = ..()

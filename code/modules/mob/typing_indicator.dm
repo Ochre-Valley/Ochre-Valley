@@ -9,12 +9,17 @@ GLOBAL_DATUM_INIT(shared_typing_indicator, /obj/effect/overlay/typing_indicator,
 	if(((!typing_indicator_enabled || (stat != CONSCIOUS)) && !force) || typing_indicator_current)
 		return
 	typing_indicator_current = GLOB.shared_typing_indicator
+	//OV Add Start
+	typing_indicator_holder = get_message_origin()
+	if(!typing_indicator_holder)
+		typing_indicator_holder = src
+	//OV Add End
 	log_message("started typing", LOG_ATTACK)
-	// KEEP_TOGETHER on the mob so vis_contents children inherit our transform (giant virtue, etc).
-	if(!(appearance_flags & KEEP_TOGETHER))
-		appearance_flags |= KEEP_TOGETHER
+	// KEEP_TOGETHER on the display atom so vis_contents children inherit its transform (giant virtue, etc). //OV Edit
+	if(!(typing_indicator_holder.appearance_flags & KEEP_TOGETHER)) //OV Edit
+		typing_indicator_holder.appearance_flags |= KEEP_TOGETHER //OV Edit
 		typing_indicator_added_keep_together = TRUE
-	vis_contents += typing_indicator_current
+	typing_indicator_holder.vis_contents += typing_indicator_current //OV Edit
 	typing_indicator_timerid = addtimer(CALLBACK(src, PROC_REF(clear_typing_indicator)), timeout_override, TIMER_STOPPABLE)
 
 /**
@@ -23,11 +28,15 @@ GLOBAL_DATUM_INIT(shared_typing_indicator, /obj/effect/overlay/typing_indicator,
 /mob/proc/clear_typing_indicator()
 	if(!typing_indicator_current)
 		return
-	vis_contents -= typing_indicator_current
+	//OV Add Start
+	var/atom/movable/indicator_holder = typing_indicator_holder || src
+	indicator_holder.vis_contents -= typing_indicator_current
+	//OV Add End
 	if(typing_indicator_added_keep_together)
-		appearance_flags &= ~KEEP_TOGETHER
+		indicator_holder.appearance_flags &= ~KEEP_TOGETHER //OV Edit
 		typing_indicator_added_keep_together = FALSE
 	typing_indicator_current = null
+	typing_indicator_holder = null //OV Add
 	if(typing_indicator_timerid)
 		deltimer(typing_indicator_timerid)
 		typing_indicator_timerid = null

@@ -176,4 +176,6 @@
 				used = list('sound/vo/LizardThump.ogg')
 			if("coo") // OV Add: Coo emote
 				used = list('modular_ochrevalley/sounds/vo/mobs/bird/dovecoo.ogg') // OV Add: Coo emote
+			if("stomach_growl") //OV ADD
+				used = list('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg','sound/vo/hungry4.ogg') //OV ADD
 	return used

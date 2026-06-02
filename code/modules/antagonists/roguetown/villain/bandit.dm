@@ -19,8 +19,8 @@
 	)
 	rogue_enabled = TRUE
 	has_tempo = TRUE
-	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
-	storyteller_favor_flags = STORYTELLER_FAVOR_BANDIT
+	storyteller_antag_flags = STORYTELLER_ANTAG_NONE // OV Edit: Stop storytellers from injecting this antagonist
+	storyteller_favor_flags = STORYTELLER_FAVOR_NONE // OV Edit: Stop storytellers from injecting this antagonist
 	override_candidatereq = TRUE
 	storyteller_min_players = CHARACTER_INJECTION_MIN_POP
 	storyteller_slot_scaling = 2

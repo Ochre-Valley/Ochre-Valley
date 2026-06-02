@@ -1096,6 +1096,63 @@
 /mob/proc/can_hear()
 	. = TRUE
 
+//OV Add Start
+/mob
+	var/tmp/atom/movable/hearing_atom_override
+
+///The atom this mob currently hears from.
+/mob/proc/get_hearing_atom()
+	if(hearing_atom_override)
+		if(!QDELETED(hearing_atom_override))
+			return hearing_atom_override
+		set_hearing_atom_override(null)
+	return src
+
+/mob/proc/set_hearing_atom_override(atom/movable/new_hearing_atom)
+	if(new_hearing_atom == src)
+		new_hearing_atom = null
+	if(new_hearing_atom && QDELETED(new_hearing_atom))
+		new_hearing_atom = null
+	if(hearing_atom_override == new_hearing_atom)
+		return
+	hearing_atom_override = new_hearing_atom
+	if(hearing_atom_override)
+		GLOB.remote_hearing_mob_list |= src
+	else
+		GLOB.remote_hearing_mob_list -= src
+
+/mob/proc/refresh_hearing_atom_override()
+	set_hearing_atom_override(null)
+
+/proc/add_remote_hearing_atom_listeners(list/listening, atom/source, hearing_range)
+	if(!listening || !source || !isnum(hearing_range))
+		return
+	var/turf/source_turf = get_turf(source)
+	if(!source_turf)
+		return
+	for(var/mob/listener as anything in GLOB.remote_hearing_mob_list)
+		if(QDELETED(listener))
+			GLOB.remote_hearing_mob_list -= listener
+			continue
+		if(!listener.client)
+			continue
+		var/atom/movable/hearing_atom = listener.hearing_atom_override
+		if(!hearing_atom || hearing_atom == listener)
+			listener.set_hearing_atom_override(null)
+			continue
+		if(QDELETED(hearing_atom))
+			listener.set_hearing_atom_override(null)
+			continue
+		var/turf/hearing_turf = get_turf(hearing_atom)
+		if(!hearing_turf)
+			continue
+		if(get_dist(hearing_turf, source_turf) > hearing_range)
+			continue
+		if(!is_in_zweb(source_turf.z, hearing_turf.z))
+			continue
+		listening |= listener
+//OV Add End
+
 /**
   * Examine text for traits shared by multiple types.
   *

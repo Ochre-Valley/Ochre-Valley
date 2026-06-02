@@ -71,6 +71,10 @@
 			return
 	if(type == "note" && !isnull(note_severity))
 		note_severity = lowertext("[note_severity]")
+		//OV Edit: Ochrebot relay
+		if(CONFIG_GET(flag/amia_enabled))
+			amia_relaynote(target_ckey, admin_ckey, text, note_severity)
+		//OV Edit End
 	var/datum/DBQuery/query_create_message = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("messages")] (type, targetckey, adminckey, text, timestamp, server, server_ip, server_port, round_id, secret, expire_timestamp, severity)
 		VALUES (:type, :target_ckey, :admin_ckey, :text, :timestamp, :server, INET_ATON(:internet_address), :port, :round_id, :secret, :expiry, :note_severity)

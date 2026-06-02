@@ -52,6 +52,7 @@
 	window.send_asset(get_asset_datum(/datum/asset/simple/namespaced/fontawesome))
 	window.send_asset(get_asset_datum(/datum/asset/simple/namespaced/tgfont))
 	window.send_asset(get_asset_datum(/datum/asset/simple/roguefonts))
+	window.send_asset(get_asset_datum(/datum/asset/spritesheet/pref_badges)) //OV ADD
 	// window.send_asset(get_asset_datum(/datum/asset/spritesheet_batched/chat))
 	// Other setup
 	request_telemetry()

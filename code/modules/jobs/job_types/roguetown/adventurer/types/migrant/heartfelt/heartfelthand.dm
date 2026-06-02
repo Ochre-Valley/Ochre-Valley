@@ -5,7 +5,7 @@
 	Travellers often warn of Heartfelt having fallen already, and words of secretive cultists isn't unheard of. \
 	Despite doubts from others, your loyalty remains steadfast as you journey to the Peaks, determined to fulfill your duties."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS //OV Edit
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - Allows All
 	outfit = /datum/outfit/job/roguetown/heartfelt/hand
 	total_positions = 1
 	spawn_positions = 0

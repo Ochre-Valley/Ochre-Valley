@@ -6,7 +6,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	allowed_ages = ALL_AGES_LIST
-	allowed_races = RACES_ALL_KINDS	//Caustic edit from RACES_NO_CONSTRUCT
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)		//Nobility, so no constructs. //OV Edit - Allow All for Good or Ill
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_COUNCILLOR
 	is_quest_giver = TRUE

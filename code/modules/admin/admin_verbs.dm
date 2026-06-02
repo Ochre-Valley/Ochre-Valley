@@ -41,9 +41,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/open_bounty_menu,
 	/client/proc/remove_bounty,
 	/client/proc/agevet_player,
-	// RATWOOD MODULAR START
 	/client/proc/bunker_bypass,
-	// RATWOOD MODULAR END
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -115,6 +113,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_set_ic_date, /* Set custom IC date for events */
 	/client/proc/reenable_pq, //OV ADD
 	/client/proc/log_viewer_new, // OV Add: JSON Logging
+	/client/proc/item_gm_quest, //OV ADD
+	/client/proc/spawn_player, //OV ADD
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(
 	/client/proc/unban_panel,
@@ -956,5 +956,5 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		return
 
 	to_chat(src, "Browser tools are now enabled.")
-	winset(src, null, "browser-options=devtools,find,byondstorage")
+	winset(src, null, "browser-options=devtools,find,refresh") // OV Edit: Correct browser options
 

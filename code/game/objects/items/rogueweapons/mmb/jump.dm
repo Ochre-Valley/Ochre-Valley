@@ -11,6 +11,12 @@
 	user.jump_action(target)
 
 /mob/living/proc/jump_action(atom/A)
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return FALSE
+	// OV Edit End
+
 	if(istype(get_turf(src), /turf/open/water))
 		to_chat(src, span_warning("I can't jump while floating."))
 		return FALSE
@@ -173,6 +179,12 @@
 
 /// Performs a jump. Used by the jump MMB intent. Returns TRUE if a jump was performed.
 /mob/living/proc/can_jump(atom/A)
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't move while petrified."))
+		return FALSE
+	// OV Edit End
+
 	if(stat == DEAD || stat == UNCONSCIOUS || stat == SOFT_CRIT)
 		to_chat(src, span_warning("My muscles refuse to move."))
 		return FALSE

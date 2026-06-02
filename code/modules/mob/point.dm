@@ -28,6 +28,13 @@
 
 	if(stat)
 		return FALSE
+	// OV Edit Start
+	if(isliving(src))
+		var/mob/living/living_user = src
+		if(living_user.IsPetrified())
+			to_chat(src, span_warning("I can't move."))
+			return FALSE
+	// OV Edit End
 
 	if(client)
 		if(!src || !isturf(src.loc) || !(pointed_atom in view(client.view, src)))

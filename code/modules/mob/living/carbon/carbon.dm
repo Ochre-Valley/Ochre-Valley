@@ -661,6 +661,10 @@
 					var/mob/living/carbon/C = src
 					C.add_stress(/datum/stressevent/vomit)
 	else
+		// OV Edit Start
+		if(IsPetrified())
+			return TRUE
+		// OV Edit End
 		if(NOBLOOD in dna?.species?.species_traits || (INVISBLOOD in dna.species.species_traits)) //OV EDIT
 			return TRUE
 		if(message)

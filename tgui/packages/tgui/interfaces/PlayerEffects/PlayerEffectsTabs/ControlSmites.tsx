@@ -49,6 +49,9 @@ export const ControlSmites = (props) => {
       <Button fluid onClick={() => act('item_tf')}>
         Item TF
       </Button>
+      <Button fluid onClick={() => act('sun_strike')}>
+        Astrata Sun Strike
+      </Button>
     </Section>
   );
 };

@@ -173,9 +173,14 @@
 
 	if(!devotion)
 		return FALSE
+	// OV Edit Start
+	if(IsPetrified())
+		to_chat(src, span_warning("I can't do that while petrified."))
+		return FALSE
+	// OV Edit End
 
 	var/prayersesh = 0
-	visible_message("[src] kneels their head in prayer to the Gods.", "I kneel my head in prayer to [devotion.patron.name].")
+	visible_message("[src] kneels their head in prayer to the Gods.", "I kneel my head in prayer to [istype(devotion.patron, /datum/patron/divine/undivided) ? "the Ten" : devotion.patron.name].")
 	for(var/i in 1 to 50)
 		if(devotion.devotion >= devotion.max_devotion)
 			to_chat(src, span_warning("I have reached the limit of my devotion..."))

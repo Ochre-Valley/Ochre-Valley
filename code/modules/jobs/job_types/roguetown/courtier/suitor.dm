@@ -7,7 +7,7 @@
 	spawn_positions = 0
 
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS //Caustic edit from RACES_NO_CONSTRUCT
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED) //OV Edit - allow all
 	advclass_cat_rolls = list(CTAG_CONSORT = 20)
 	tutorial = "You are a noble from a foreign house who has travelled to Azure Peak in order to win favour of the court nobles and secure a political ally for your house. Competition is fierce, and it seems you're not the only one vying for the courts favor..."
 

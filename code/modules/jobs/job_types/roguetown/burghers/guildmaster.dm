@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	min_pq = 0
 
-	allowed_races = RACES_ALL_KINDS //OV Edit - Lets anyone be a Guildmaster
+	//forbidden_races = list(RACES_DESPISED) //OV edit - allows all
 
 	tutorial = "You are the leader of the Azure Peak Guild of Crafts. You represents the interests of all of the craftsmen underneath you - including the Tailor\
 	the Blacksmiths, the Artificers and the Architects. Other townspeople may look to you for guidance, but they are not under your control. You are an experienced smith and artificer, and can do their work easily. Protect the craftsmen's interests."

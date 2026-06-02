@@ -66,6 +66,13 @@
 	return TRUE
 
 /mob/living/proc/can_kick(atom/A, do_message = TRUE)
+	// OV Edit Start
+	if(IsPetrified())
+		if(do_message)
+			to_chat(src, span_warning("I can't move while petrified."))
+		return FALSE
+	// OV Edit End
+
 	if(stat == DEAD || stat == UNCONSCIOUS || stat == SOFT_CRIT)
 		to_chat(src, span_warning("I attempt to kick, but my muscles fail me."))
 		return FALSE

@@ -114,18 +114,19 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/send_speech(message, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language=null, message_mode, original_message)
+/mob/living/carbon/human/send_speech(message, message_range = 6, atom/movable/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language=null, message_mode, original_message) //OV Edit
 	. = ..()
+	var/atom/movable/speech_source = source || src //OV Add
 	if(message_mode != MODE_WHISPER)
-		send_voice(message)
+		send_voice(message, null, speech_source) //OV Edit
 	else	//OV ADD
-		playsound(get_turf(src), 'modular_ochrevalley/sounds/message_effects/whisper.ogg', 25, FALSE, -5,frequency = rand(25000, 50000))	//OV ADD
+		playsound(get_turf(speech_source), 'modular_ochrevalley/sounds/message_effects/whisper.ogg', 25, FALSE, -5,frequency = rand(25000, 50000))	//OV ADD
 
-/mob/living/carbon/human/proc/send_voice(message, skip_thingy)
+/mob/living/carbon/human/proc/send_voice(message, skip_thingy, atom/movable/sound_source = src) //OV Edit
 	if(!message || !length(message))
 		return
 	if(dna.species)
-		dna.species.send_voice(src)
+		dna.species.send_voice(src, sound_source) //OV Edit
 
-/datum/species/proc/send_voice(mob/living/carbon/human/H)
-	playsound(get_turf(H), 'sound/misc/talk.ogg', 100, FALSE, -1)
+/datum/species/proc/send_voice(mob/living/carbon/human/H, atom/movable/sound_source = H) //OV Edit
+	playsound(get_turf(sound_source), 'sound/misc/talk.ogg', 100, FALSE, -1) //OV Edit

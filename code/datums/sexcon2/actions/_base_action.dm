@@ -98,6 +98,14 @@
 	var/self_target = FALSE
 	if(target == user)
 		self_target = TRUE
+	// OV Edit Start
+	var/held_petrified_head_access = FALSE
+	if(check_zone(location) == BODY_ZONE_HEAD && !bodypart)
+		var/obj/item/bodypart/head/held_petrified_head = user.get_held_petrified_head_for(target)
+		if(held_petrified_head)
+			bodypart = held_petrified_head
+			held_petrified_head_access = TRUE
+	// OV Edit End
 
 	if(!bodypart)
 		return FALSE
@@ -108,13 +116,22 @@
 	if(src.check_same_tile && (user != target || self_target))
 		var/same_tile = (get_turf(user) == get_turf(target))
 		var/grab_bypass = (src.aggro_grab_instead_same_tile && user.get_highest_grab_state_on(target) == GRAB_AGGRESSIVE)
-		if(!same_tile && !grab_bypass)
+		// OV Edit Start
+		if(!same_tile && !grab_bypass && !held_petrified_head_access)
 			return FALSE
+		// OV Edit End
 
 	if(src.require_grab && (user != target || self_target))
 		var/grabstate = user.get_highest_grab_state_on(target)
-		if((grabstate == null || grabstate < src.required_grab_state))
+		// OV Edit Start
+		if((grabstate == null || grabstate < src.required_grab_state) && !held_petrified_head_access)
 			return FALSE
+		// OV Edit End
+
+	// OV Edit Start
+	if(held_petrified_head_access)
+		return TRUE
+	// OV Edit End
 
 	var/result = get_location_accessible(target, location = location, grabs = grabs, skipundies = skipundies)
 	return result
@@ -239,4 +256,3 @@
 			new /obj/effect/temp_visual/heart/sex_effects(get_turf(user))
 		else
 			new /obj/effect/temp_visual/heart/sex_effects/red_heart(get_turf(user))
-

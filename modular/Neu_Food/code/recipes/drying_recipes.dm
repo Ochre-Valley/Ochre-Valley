@@ -360,7 +360,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/dmark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -371,7 +371,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/pmark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -382,7 +382,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/zmark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -393,7 +393,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/amark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -404,7 +404,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/smark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -415,7 +415,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/hmark
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -426,7 +426,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/statuek
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -437,7 +437,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/statuer
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -448,7 +448,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/statuey
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -459,7 +459,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/statuel
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -470,7 +470,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/arch
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -481,7 +481,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/archway
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -492,7 +492,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/tower
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -503,7 +503,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/towers
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -514,7 +514,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/castle
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -525,7 +525,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/flag
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -536,7 +536,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/house
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE
@@ -547,7 +547,7 @@
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/sugar = 1)
 	result = /obj/item/reagent_containers/food/snacks/grown/sugarshape/tree
-	craftdiff = 4
+	craftdiff = 2 //OV Edit: These are used in scenes, make them easier to make
 	verbage_simple = "sculpt"
 	verbage = "sculpts"
 	req_table = TRUE

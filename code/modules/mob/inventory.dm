@@ -264,6 +264,12 @@
 /mob/proc/canUnEquip(obj/item/I, force)
 	if(!I)
 		return TRUE
+	// OV Edit Start
+	if(!force && isliving(src))
+		var/mob/living/living_user = src
+		if(living_user.IsPetrified())
+			return FALSE
+	// OV Edit End
 	if(HAS_TRAIT(I, TRAIT_NODROP) && !force)
 		return FALSE
 	return TRUE
@@ -312,6 +318,13 @@
 		update_inv_hands()
 		update_a_intents()
 		return TRUE
+
+	// OV Edit Start
+	if(!force && isliving(src))
+		var/mob/living/living_user = src
+		if(living_user.IsPetrified())
+			return FALSE
+	// OV Edit End
 
 	if(HAS_TRAIT(I, TRAIT_NODROP) && !force)
 		return FALSE

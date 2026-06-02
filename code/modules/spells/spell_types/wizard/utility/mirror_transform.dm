@@ -44,17 +44,24 @@
 		REMOVE_TRAIT(H, TRAIT_MIRROR_MAGIC, TRAIT_GENERIC)
 		to_chat(H, span_warning("Your connection to mirrors fades away."))
 
-/proc/perform_mirror_transform(mob/living/carbon/human/H)
-	if (!H)
-		return
+// OV Edit Start
+/proc/perform_mirror_transform(mob/living/carbon/human/H, mob/user = null, sculpting = FALSE)
+	if(!H)
+		return FALSE
+	if(!user)
+		user = H
 	var/should_update = FALSE
 	var/list/choices = list("Accessory", "Breast Quantity", "Breast Size", "Ears", "Ear Color One", "Ear Color Two", "Eye Color", "Facial Hairstyle", "Facial Hair Color", "Face Detail", "Hairstyle", "Hair Primary Color", "Hair Secondary Gradient", "Hair Secondary Natural Color", "Hair Third Gradient", "Hair Third Dye Color", "Horns", "Horn Color", "Penis", "Penis Size", "Tail", "Tail Color One", "Tail Color Two", "Testicles", "Testicle Size", "Vagina", "Wings", "Wing Color")
+	if(sculpting)
+		choices -= list("Ear Color One", "Ear Color Two", "Eye Color", "Facial Hair Color", "Hair Primary Color", "Hair Secondary Gradient", "Hair Secondary Natural Color", "Hair Third Gradient", "Hair Third Dye Color", "Horn Color", "Tail Color One", "Tail Color Two", "Wing Color")
 	if(HAS_TRAIT(H, TRAIT_EDIT_DESCRIPTORS))
 		choices += "Descriptors"
-	var/chosen = input(H, "Change what?", "Appearance") as null|anything in choices
+	var/target_possessive = sculpting ? "their" : "your"
+	var/descriptor_title = sculpting ? "Describe Them" : "Describe Myself"
+	var/chosen = input(user, "Change what?", "Appearance") as null|anything in choices
 
 	if(!chosen)
-		return
+		return FALSE
 
 	switch(chosen)
 		if("Hairstyle")
@@ -64,7 +71,7 @@
 				var/datum/sprite_accessory/hair/head/hair = new hair_type()
 				valid_hairstyles[hair.name] = hair_type
 
-			var/new_style = input(H, "Choose your hairstyle", "Hair Styling") as null|anything in valid_hairstyles
+			var/new_style = input(user, "Choose [target_possessive] hairstyle", "Hair Styling") as null|anything in valid_hairstyles
 			if(new_style)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -96,7 +103,7 @@
 						should_update = TRUE
 
 		if("Hair Primary Color")
-			var/new_hair_color = color_pick_sanitized(H, "Choose your hair color", "Primary Hair Color", H.hair_color)
+			var/new_hair_color = color_pick_sanitized(user, "Choose [target_possessive] hair color", "Primary Hair Color", H.hair_color)
 			if(new_hair_color)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -130,7 +137,7 @@
 						should_update = TRUE
 
 		if("Facial Hair Color")
-			var/new_facial_hair_color = color_pick_sanitized(H, "Choose your facial hair color", "Facial Hair Color", H.facial_hair_color)
+			var/new_facial_hair_color = color_pick_sanitized(user, "Choose [target_possessive] facial hair color", "Facial Hair Color", H.facial_hair_color)
 			if(new_facial_hair_color)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -158,7 +165,7 @@
 						should_update = TRUE
 
 		if("Eye Color")
-			var/new_eye_color = color_pick_sanitized(H, "Choose your eye color", "Eye Color", H.eye_color)
+			var/new_eye_color = color_pick_sanitized(user, "Choose [target_possessive] eye color", "Eye Color", H.eye_color)
 			if(new_eye_color)
 				new_eye_color = sanitize_hexcolor(new_eye_color, 6, TRUE)
 				var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
@@ -178,7 +185,7 @@
 			for(var/gradient_type in GLOB.hair_gradients)
 				valid_gradients[gradient_type] = gradient_type
 
-			var/new_style = input(H, "Choose your natural gradient", "Secondary Natural Hair Gradient") as null|anything in valid_gradients
+			var/new_style = input(user, "Choose [target_possessive] natural gradient", "Secondary Natural Hair Gradient") as null|anything in valid_gradients
 			if(new_style)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -205,7 +212,7 @@
 						should_update = TRUE
 
 		if("Hair Secondary Natural Color")
-			var/new_gradient_color = color_pick_sanitized(H, "Choose your natural gradient color", "Secondary Natural Hair Gradient Color", H.hair_color)
+			var/new_gradient_color = color_pick_sanitized(user, "Choose [target_possessive] natural gradient color", "Secondary Natural Hair Gradient Color", H.hair_color)
 			if(new_gradient_color)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -240,7 +247,7 @@
 			for(var/gradient_type in GLOB.hair_gradients)
 				valid_gradients[gradient_type] = gradient_type
 
-			var/new_style = input(H, "Choose your dye gradient", "Hair Third Dye Gradient") as null|anything in valid_gradients
+			var/new_style = input(user, "Choose [target_possessive] dye gradient", "Hair Third Dye Gradient") as null|anything in valid_gradients
 			if(new_style)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -267,7 +274,7 @@
 						should_update = TRUE
 
 		if("Hair Third Dye Color")
-			var/new_gradient_color = color_pick_sanitized(H, "Choose your third gradient hair color", "Third Hair Gradient Color", H.hair_color)
+			var/new_gradient_color = color_pick_sanitized(user, "Choose [target_possessive] third gradient hair color", "Third Hair Gradient Color", H.hair_color)
 			if(new_gradient_color)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -303,7 +310,7 @@
 				var/datum/sprite_accessory/hair/facial/facial = new facial_type()
 				valid_facial_hairstyles[facial.name] = facial_type
 
-			var/new_style = input(H, "Choose your facial hairstyle", "Hair Styling") as null|anything in valid_facial_hairstyles
+			var/new_style = input(user, "Choose [target_possessive] facial hairstyle", "Hair Styling") as null|anything in valid_facial_hairstyles
 			if(new_style)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -333,7 +340,7 @@
 				var/datum/sprite_accessory/accessory/acc = new accessory_type()
 				valid_accessories[acc.name] = accessory_type
 
-			var/new_style = input(H, "Choose your accessory", "Accessory Styling") as null|anything in valid_accessories
+			var/new_style = input(user, "Choose [target_possessive] accessory", "Accessory Styling") as null|anything in valid_accessories
 			if(new_style)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -354,7 +361,7 @@
 				var/datum/sprite_accessory/face_detail/detail = new detail_type()
 				valid_details[detail.name] = detail_type
 
-			var/new_detail = input(H, "Choose your face detail", "Face Detail") as null|anything in valid_details
+			var/new_detail = input(user, "Choose [target_possessive] face detail", "Face Detail") as null|anything in valid_details
 			if(new_detail)
 				var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 				if(head && head.bodypart_features)
@@ -374,7 +381,7 @@
 				var/datum/sprite_accessory/penis/penis = new penis_path()
 				valid_penis_types[penis.name] = penis_path
 
-			var/new_style = input(H, "Choose your penis type", "Penis Customization") as null|anything in valid_penis_types
+			var/new_style = input(user, "Choose [target_possessive] penis type", "Penis Customization") as null|anything in valid_penis_types
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/penis/penis = H.getorganslot(ORGAN_SLOT_PENIS)
@@ -400,7 +407,7 @@
 				var/datum/sprite_accessory/testicles/testicles = new testicle_path()
 				valid_testicle_types[testicles.name] = testicle_path
 
-			var/new_style = input(H, "Choose your testicles type", "Testicles Customization") as null|anything in valid_testicle_types
+			var/new_style = input(user, "Choose [target_possessive] testicles type", "Testicles Customization") as null|anything in valid_testicle_types
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/testicles/testicles = H.getorganslot(ORGAN_SLOT_TESTICLES)
@@ -426,7 +433,7 @@
 				var/datum/sprite_accessory/breasts/breasts = new breast_path()
 				valid_breast_types[breasts.name] = breast_path
 
-			var/new_style = input(H, "Choose your breast type", "Breast Customization") as null|anything in valid_breast_types
+			var/new_style = input(user, "Choose [target_possessive] breast type", "Breast Customization") as null|anything in valid_breast_types
 
 			if(new_style)
 				if(new_style == "none")
@@ -450,7 +457,7 @@
 
 		if("Vagina")
 			var/list/valid_vagina_types = list("none", "human", "hairy", "spade", "furred", "gaping", "cloaca")
-			var/new_style = input(H, "Choose your vagina type", "Vagina Customization") as null|anything in valid_vagina_types
+			var/new_style = input(user, "Choose [target_possessive] vagina type", "Vagina Customization") as null|anything in valid_vagina_types
 
 			if(new_style)
 				if(new_style == "none")
@@ -467,19 +474,23 @@
 						vagina.Insert(H, TRUE, FALSE)
 					vagina.accessory_type = valid_vagina_types[new_style]
 
-					var/new_color = color_pick_sanitized(H, "Choose your vagina color", "Vagina Color", vagina.color || H.dna.features["mcolor"])
-					if(new_color)
-						vagina.color = sanitize_hexcolor(new_color, 6, TRUE)
-					else
+					if(sculpting)
 						var/datum/sprite_accessory/vagina/vag_type = SPRITE_ACCESSORY(vagina.accessory_type)
 						vagina.color = vag_type.get_default_colors(color_key_source_list_from_carbon(H))
+					else
+						var/new_color = color_pick_sanitized(user, "Choose [target_possessive] vagina color", "Vagina Color", vagina.color || H.dna.features["mcolor"])
+						if(new_color)
+							vagina.color = sanitize_hexcolor(new_color, 6, TRUE)
+						else
+							var/datum/sprite_accessory/vagina/vag_type = SPRITE_ACCESSORY(vagina.accessory_type)
+							vagina.color = vag_type.get_default_colors(color_key_source_list_from_carbon(H))
 
 					H.update_body()
 					should_update = TRUE
 
 		if("Breast Size")
 			var/list/breast_sizes = list("Flat", "Slight", "Small", "Moderate", "Large", "Generous", "Heavy", "Massive", "Heaping", "Obscene")
-			var/new_size = input(H, "Choose your breast size", "Breast Size") as null|anything in breast_sizes
+			var/new_size = input(user, "Choose [target_possessive] breast size", "Breast Size") as null|anything in breast_sizes
 			if(new_size)
 				var/obj/item/organ/breasts/breasts = H.getorganslot(ORGAN_SLOT_BREASTS)
 				if(breasts)
@@ -512,7 +523,7 @@
 
 		if("Penis Size")
 			var/list/penis_sizes = list("small", "average", "large")
-			var/new_size = input(H, "Choose your penis size", "Penis Size") as null|anything in penis_sizes
+			var/new_size = input(user, "Choose [target_possessive] penis size", "Penis Size") as null|anything in penis_sizes
 			if(new_size)
 				var/obj/item/organ/penis/penis = H.getorganslot(ORGAN_SLOT_PENIS)
 				if(penis)
@@ -531,7 +542,7 @@
 
 		if("Testicle Size")
 			var/list/testicle_sizes = list("small", "average", "large")
-			var/new_size = input(H, "Choose your testicle size", "Testicle Size") as null|anything in testicle_sizes
+			var/new_size = input(user, "Choose [target_possessive] testicle size", "Testicle Size") as null|anything in testicle_sizes
 			if(new_size)
 				var/obj/item/organ/testicles/testicles = H.getorganslot(ORGAN_SLOT_TESTICLES)
 				if(testicles)
@@ -554,7 +565,7 @@
 				var/datum/sprite_accessory/tail/tail = new tail_path()
 				valid_tails[tail.name] = tail_path
 
-			var/new_style = input(H, "Choose your tail", "Tail Customization") as null|anything in valid_tails
+			var/new_style = input(user, "Choose [target_possessive] tail", "Tail Customization") as null|anything in valid_tails
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/tail/tail = H.getorganslot(ORGAN_SLOT_TAIL)
@@ -577,7 +588,7 @@
 		if("Tail Color One")
 			var/obj/item/organ/tail/tail = H.getorganslot(ORGAN_SLOT_TAIL)
 			if(tail)
-				var/new_color = color_pick_sanitized(H, "Choose your primary tail color", "Tail Color One", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] primary tail color", "Tail Color One", "#FFFFFF")
 				if(new_color)
 					tail.Remove(H)
 					var/list/colors = list()
@@ -592,12 +603,12 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have a tail!"))
+				to_chat(user, span_warning("[H] doesn't have a tail!"))
 
 		if("Tail Color Two")
 			var/obj/item/organ/tail/tail = H.getorganslot(ORGAN_SLOT_TAIL)
 			if(tail)
-				var/new_color = color_pick_sanitized(H, "Choose your secondary tail color", "Tail Color Two", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] secondary tail color", "Tail Color Two", "#FFFFFF")
 				if(new_color)
 					tail.Remove(H)
 					var/list/colors = list()
@@ -612,14 +623,14 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have a tail!"))
+				to_chat(user, span_warning("[H] doesn't have a tail!"))
 		if("Ears")
 			var/list/valid_ears = list("none")
 			for(var/ears_path in subtypesof(/datum/sprite_accessory/ears))
 				var/datum/sprite_accessory/ears/ears = new ears_path()
 				valid_ears[ears.name] = ears_path
 
-			var/new_style = input(H, "Choose your ears", "Ears Customization") as null|anything in valid_ears
+			var/new_style = input(user, "Choose [target_possessive] ears", "Ears Customization") as null|anything in valid_ears
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
@@ -642,7 +653,7 @@
 		if("Ear Color One")
 			var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
 			if(ears)
-				var/new_color = color_pick_sanitized(H, "Choose your primary ear color", "Ear Color One", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] primary ear color", "Ear Color One", "#FFFFFF")
 				if(new_color)
 					ears.Remove(H)
 					var/list/colors = list()
@@ -657,12 +668,12 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have ears!"))
+				to_chat(user, span_warning("[H] doesn't have ears!"))
 
 		if("Ear Color Two")
 			var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
 			if(ears)
-				var/new_color = color_pick_sanitized(H, "Choose your secondary ear color", "Ear Color Two", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] secondary ear color", "Ear Color Two", "#FFFFFF")
 				if(new_color)
 					ears.Remove(H)
 					var/list/colors = list()
@@ -677,7 +688,7 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have a ears!"))
+				to_chat(user, span_warning("[H] doesn't have ears!"))
 
 		if("Horns")
 			var/list/valid_horns = list("none")
@@ -685,7 +696,7 @@
 				var/datum/sprite_accessory/horns/horns = new horns_path()
 				valid_horns[horns.name] = horns_path
 
-			var/new_style = input(H, "Choose your horns", "Horns Customization") as null|anything in valid_horns
+			var/new_style = input(user, "Choose [target_possessive] horns", "Horns Customization") as null|anything in valid_horns
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/horns/horns = H.getorganslot(ORGAN_SLOT_HORNS)
@@ -708,7 +719,7 @@
 		if("Horn Color")
 			var/obj/item/organ/horns/horns = H.getorganslot(ORGAN_SLOT_HORNS)
 			if(horns)
-				var/new_color = color_pick_sanitized(H, "Choose your primary ear color", "Ear Color One", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] primary horn color", "Horn Color", "#FFFFFF")
 				if(new_color)
 					horns.Remove(H)
 					var/list/colors = list()
@@ -723,7 +734,7 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have horns!"))
+				to_chat(user, span_warning("[H] doesn't have horns!"))
 
 		if("Wings")
 			var/list/valid_wings = list("none")
@@ -731,7 +742,7 @@
 				var/datum/sprite_accessory/wings/wings = new wings_path()
 				valid_wings[wings.name] = wings_path
 
-			var/new_style = input(H, "Choose your wings", "Wings Customization") as null|anything in valid_wings
+			var/new_style = input(user, "Choose [target_possessive] wings", "Wings Customization") as null|anything in valid_wings
 			if(new_style)
 				if(new_style == "none")
 					var/obj/item/organ/wings/wings = H.getorganslot(ORGAN_SLOT_WINGS)
@@ -754,7 +765,7 @@
 		if("Wing Color")
 			var/obj/item/organ/wings/wings = H.getorganslot(ORGAN_SLOT_WINGS)
 			if(wings)
-				var/new_color = color_pick_sanitized(H, "Choose your primary wing color", "Wing Color One", "#FFFFFF")
+				var/new_color = color_pick_sanitized(user, "Choose [target_possessive] primary wing color", "Wing Color One", "#FFFFFF")
 				if(new_color)
 					wings.Remove(H)
 					var/list/colors = list()
@@ -769,19 +780,19 @@
 					H.update_body()
 					should_update = TRUE
 			else
-				to_chat(H, span_warning("You don't have wings!"))
+				to_chat(user, span_warning("[H] doesn't have wings!"))
 		if("Descriptors")
 			var/list/species_choices = H.dna.species.descriptor_choices
 			if(!length(species_choices))
-				to_chat(H, span_warning("Your species has no standard descriptors to modify."))
-				return
+				to_chat(user, span_warning("[H]'s species has no standard descriptors to modify."))
+				return FALSE
 			var/list/choice_map = list()
 			for(var/path in species_choices)
 				var/datum/descriptor_choice/C = DESCRIPTOR_CHOICE(path)
 				choice_map[C.name] = path
-			var/choice_name = input(H, "Which feature do you want to describe?", "Standard Descriptors") as null|anything in choice_map
+			var/choice_name = input(user, "Which of [target_possessive] features do you want to describe?", "Standard Descriptors") as null|anything in choice_map
 			if(!choice_name)
-				return
+				return FALSE
 			var/choice_type = choice_map[choice_name]
 			var/datum/descriptor_choice/chosen_datum = DESCRIPTOR_CHOICE(choice_type)
 			var/list/picklist = list()
@@ -789,7 +800,7 @@
 				var/datum/mob_descriptor/descriptor = MOB_DESCRIPTOR(desc_type)
 				if(descriptor)
 					picklist[descriptor.name] = desc_type
-			var/picked_name = input(H, "Choose a new description for [choice_name]:", "Describe Myself") as null|anything in picklist
+			var/picked_name = input(user, "Choose a new description for [choice_name]:", descriptor_title) as null|anything in picklist
 			if(picked_name)
 				for(var/old_path in picklist)
 					H.remove_mob_descriptor(picklist[old_path])
@@ -800,6 +811,8 @@
 		H.update_hair()
 		H.update_body()
 		H.update_body_parts()
+	return should_update
+// OV Edit End
 
 //OV edit - Shapeshifting species variant
 /obj/effect/proc_holder/spell/invoked/mirror_transform/instant

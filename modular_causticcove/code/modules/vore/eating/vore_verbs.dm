@@ -28,9 +28,10 @@
 	if(!istype(G))
 		to_chat(src,span_warning("You have to have a very strong grip on someone first!"))
 		return FALSE
-	if(G.grab_state != GRAB_NECK)
-		to_chat(src,span_warning("You must have a tighter grip to severely damage this creature!"))
-		return FALSE
+// Removing this check since it doesn't seem to be working.  Neck grabs don't allow bypassing it.
+//	if(G.grab_state != GRAB_NECK)
+//		to_chat(src,span_warning("You must have a tighter grip to severely damage this creature!"))
+//		return FALSE
 
 	return ..(G.grabbed)
 
@@ -104,24 +105,57 @@
 		//Removing an external organ
 		/*else*/ if(/*!T_int && */T_ext.brute_dam >= 25)
 			//Is it groin/chest? You can't remove those.
+			//Updated damage numbers to work with OV's HP scaling, so that limbs can actually be removed.  Also added sound.
 			if(!T_ext.dismemberable)
-				T.apply_damage(25, BRUTE, T_ext)
+				T.apply_damage(250, BRUTE, T_ext)
+				playsound(T, 'sound/gore/flesh_eat_01.ogg', 100)
 				visible_message(span_danger("[src] severely damages [T]'s [T_ext.name]!"))
 			else if(B)
-				T_ext.drop_limb(1) //Clean cut so it doesn't kill the prey completely.
-				T_ext.forceMove(B)
-				visible_message(span_warning("[src] swallows [T]'s [T_ext.name] into their [lowertext(B.name)]!"))
+				playsound(T, 'sound/gore/flesh_eat_01.ogg', 100)
+				//Add head check and move organs with limb
+				if (T_ext.body_part == HEAD)
+					if (HAS_TRAIT(T, TRAIT_DEATHLESS) && HAS_TRAIT(T, TRAIT_EASYDECAPITATION))
+						T_ext.drop_limb(FALSE)
+						T_ext.forceMove(B)
+						visible_message(span_warning("[src] swallows [T]'s [T_ext.name] into their [lowertext(B.name)]!"))
+					else
+						T_ext.dismember(BRUTE, BCLASS_CUT, T, T_ext.body_part, 200, FALSE, TRUE)
+						T_ext.forceMove(B)
+						visible_message(span_warning("[src] swallows [T]'s [T_ext.name] into their [lowertext(B.name)]!"))
+						//Set as vore death if head
+						var/mob/dead/observer/G = T.ghostize(TRUE)
+						G.vore_death = TRUE
+				else
+					T_ext.drop_limb(1) //Clean cut so it doesn't kill the prey completely.
+					T_ext.forceMove(B)
+					visible_message(span_warning("[src] swallows [T]'s [T_ext.name] into their [lowertext(B.name)]!"))
 			else
-				T_ext.drop_limb(1) //Clean cut so it doesn't kill the prey completely.
-				T_ext.forceMove(T.loc)
-				visible_message(span_warning("[src] tears off [T]'s [T_ext.name]!"),span_warning("You tear off [T]'s [T_ext.name]!"))
+				playsound(T, 'sound/gore/flesh_eat_01.ogg', 100)
+				if (T_ext.body_part == HEAD)
+					if (HAS_TRAIT(T, TRAIT_DEATHLESS) && HAS_TRAIT(T, TRAIT_EASYDECAPITATION))
+						T_ext.drop_limb(FALSE)
+						put_in_active_hand(T_ext)
+						visible_message(span_warning("[src] tears off [T]'s [T_ext.name]!"),span_warning("You tear off [T]'s [T_ext.name]!"))
+					else
+						T_ext.dismember(BRUTE, BCLASS_CUT, T, T_ext.body_part, 200, FALSE, TRUE)
+						visible_message(span_warning("[src] tears off [T]'s [T_ext.name]!"),span_warning("You tear off [T]'s [T_ext.name]!"))
+						put_in_active_hand(T_ext)
+						//Set as vore death if head
+						var/mob/dead/observer/G = T.ghostize(TRUE)
+						G.vore_death = TRUE
+				else
+					T_ext.drop_limb(1) //Clean cut so it doesn't kill the prey completely.
+					put_in_active_hand(T_ext)
+					visible_message(span_warning("[src] tears off [T]'s [T_ext.name]!"),span_warning("You tear off [T]'s [T_ext.name]!"))
 
 		//Not targeting an internal organ w/ > 25 damage , and the limb doesn't have < 25 damage.
 		else
 			//if(T_int)
 			//	T_int.damage = 25 //Internal organs can only take damage, not brute damage.
 			T.apply_damage(25, BRUTE, T_ext)
+			playsound(T, 'sound/gore/flesh_eat_01.ogg', 100)
 			visible_message(span_danger("[src] severely damages [T]'s [T_ext.name]!"))
+
 
 		log_combat(src,T,"Shredded (hardvore)")
 

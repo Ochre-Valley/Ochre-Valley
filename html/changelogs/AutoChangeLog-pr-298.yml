@@ -1,0 +1,4 @@
+author: "Robin"
+delete-after: True
+changes:
+  - bugfix: "Damage Prey Organs command should now work to remove limbs without killing prey in a scene, unless you remove the head.  Organs may be auto-passed to vore organs or removed and dropped.  Head removal counts as a vore death and allows respawns."

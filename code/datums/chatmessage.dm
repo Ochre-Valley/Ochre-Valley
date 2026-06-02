@@ -212,7 +212,7 @@
   * * spans - Additional classes to be added to the message
   * * message_mode - Bitflags relating to the mode of the message
   */
-/mob/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans = list(), message_mode)
+/mob/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans = list(), message_mode, atom/movable/message_loc) //OV Edit
 	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
 	spans = spans ? spans.Copy() : list()
 
@@ -234,7 +234,7 @@
 		text = lang_treat(speaker, message_language, raw_message, spans, null, TRUE)
 
 	// Display visual above source
-	new /datum/chatmessage(text, speaker, src, spans)
+	new /datum/chatmessage(text, message_loc || speaker, src, spans) //OV Edit
 
 
 // Tweak these defines to change the available color ranges

@@ -565,6 +565,20 @@
   * triggers an update the move intent hud as well
   */
 /mob/proc/toggle_move_intent(mob/user)
+	// OV Edit Start
+	if(isliving(src))
+		var/mob/living/living_src = src
+		if(living_src.IsPetrified())
+			if(m_intent != MOVE_INTENT_WALK)
+				m_intent = MOVE_INTENT_WALK
+			var/mob/message_target = user ? user : living_src
+			to_chat(message_target, span_warning("I can't move while petrified."))
+			if(hud_used && hud_used.static_inventory)
+				for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
+					selector.update_icon()
+			return
+	// OV Edit End
+
 	if(m_intent == MOVE_INTENT_RUN)
 		m_intent = MOVE_INTENT_WALK
 	else
@@ -675,6 +689,21 @@
 
 ///Checked whenever a mob tries to change their movement intent
 /mob/proc/toggle_rogmove_intent(intent, silent = FALSE)
+	// OV Edit Start
+	if(isliving(src))
+		var/mob/living/living_src = src
+		if(living_src.IsPetrified())
+			if(m_intent != MOVE_INTENT_WALK)
+				m_intent = MOVE_INTENT_WALK
+				living_src.update_sneak_invis(TRUE)
+			if(!silent)
+				to_chat(living_src, span_warning("I can't move while petrified."))
+			if(hud_used?.static_inventory)
+				for(var/atom/movable/screen/rogmove/selector in hud_used.static_inventory)
+					selector.update_icon()
+			return
+	// OV Edit End
+
 	var/is_mounted = FALSE
 	if(buckled && intent != MOVE_INTENT_SNEAK)
 		if(is_type_in_list(buckled, list(/mob/living/simple_animal/hostile/retaliate/rogue/saiga, /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast)))
@@ -772,29 +801,24 @@
 					return FALSE
 	return TRUE
 
-/mob/living/proc/check_dodge_skill()
+/mob/living/proc/check_dodge_skill(check_trait = TRUE)
 	return TRUE
 
-/mob/living/carbon/human/check_dodge_skill()
-	if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
-		return FALSE
+/mob/living/carbon/human/check_dodge_skill(check_trait = TRUE)
+	if(check_trait)
+		if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
+			return FALSE
 	if(istype(src.wear_armor, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_armor
-		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			return FALSE
-		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+		if(CL.armor_class > ARMOR_CLASS_LIGHT)
 			return FALSE
 	if(istype(src.wear_shirt, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_shirt
-		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			return FALSE
-		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+		if(CL.armor_class > ARMOR_CLASS_LIGHT)
 			return FALSE
 	if(istype(src.wear_pants, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_pants
-		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			return FALSE
-		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+		if(CL.armor_class > ARMOR_CLASS_LIGHT)
 			return FALSE
 	if(istype(src.head, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.head

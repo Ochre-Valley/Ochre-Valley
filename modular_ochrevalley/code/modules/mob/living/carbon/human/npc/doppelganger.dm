@@ -1,6 +1,6 @@
 /mob/living/carbon/human/species/human/northern/doppelganger
 	ai_controller = /datum/ai_controller/human_npc
-	faction = list("viking", "station")
+	faction = list(FACTION_FAE)
 	ambushable = FALSE
 	cmode = 1
 	setparrytime = 30

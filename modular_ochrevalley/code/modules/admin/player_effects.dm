@@ -233,6 +233,18 @@
 
 			spawned_obj.mob_possession = M
 			M.forceMove(spawned_obj)
+		
+		if("sun_strike")
+			var/turf/target_turf = get_turf(target)
+			to_chat(target, span_warning("Let there be light."))
+			var/obj/effect/temp_visual/mark = new /obj/effect/temp_visual/firewave/sun_mark/pre_sunstrike(target_turf)
+
+			animate(mark, alpha = 255, time = 20, flags = ANIMATION_PARALLEL)
+
+			spawn(20 SECONDS)
+				for(var/obj/structure/fluff/psycross/S in oview(5, target_turf))
+					S.AOE_flash(target, range = 8)
+				new /obj/effect/temp_visual/firewave/sunstrike/primary(target_turf)
 
 
 		/*
@@ -530,6 +542,7 @@
 			if(!istype(Tar))
 				return
 			Tar.fully_heal(admin_revive = TRUE)
+			Tar.admin_remove_petrification()
 
 		if("revive")
 			var/mob/living/carbon/Tar = target
@@ -968,6 +981,12 @@
 				return
 			var/atom/movable/X = ui.user.client.holder.marked_datum
 			X.orbit(target)
+		
+		if("make_quest_item")
+			var/mob/living/Tar = target
+			if(!istype(Tar))
+				return
+			Tar.mob_gm_quest(ui.user)
 
 		/*
 		if("quick_nif")

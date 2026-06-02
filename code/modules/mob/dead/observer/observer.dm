@@ -501,6 +501,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 //		to_chat(usr, span_warning("I can return in [mind.current.timeofdeath + RESPAWNTIME - world.time]."))
 //		return
 
+	// OV Edit Start
+	release_kink_death_role(src)
+	// OV Edit End
+
 	if(key)
 		if(modifier)
 			GLOB.respawntimes[key] = world.time + modifier

@@ -240,7 +240,6 @@
 /datum/mob_descriptor/stature/swashbuckler
 	name = "Swashbuckler"
 
-// OV Edits Start
 /datum/mob_descriptor/stature/harlot
 	name = "Harlot"
 
@@ -253,29 +252,14 @@
 /datum/mob_descriptor/stature/slattern
 	name = "Slattern"
 
-/datum/mob_descriptor/stature/nymph
-	name = "Nymph"
-
 /datum/mob_descriptor/stature/gourmand
 	name = "Gourmand"
 
 /datum/mob_descriptor/stature/sovereign
 	name = "Sovereign"
 
-/datum/mob_descriptor/stature/brawler
-	name = "Brawler"
-
-/datum/mob_descriptor/stature/amazon
-	name = "Amazon"
-
-/datum/mob_descriptor/stature/titan
-	name = "Titan"
-
 /datum/mob_descriptor/stature/savage
 	name = "Savage"
-
-/datum/mob_descriptor/stature/beast
-	name = "Beast"
 
 /datum/mob_descriptor/stature/drifter
 	name = "Drifter"
@@ -285,9 +269,6 @@
 
 /datum/mob_descriptor/stature/maniac
 	name = "Maniac"
-
-/datum/mob_descriptor/stature/brat
-	name = "Brat"
 
 /datum/mob_descriptor/stature/provocateur
 	name = "Provocateur"
@@ -328,6 +309,35 @@
 /datum/mob_descriptor/stature/gambler
 	name = "Gambler"
 
+/datum/mob_descriptor/stature/reprobate
+	name = "Reprobate"
+
+/datum/mob_descriptor/stature/spendthrift
+	name = "Spendthrift"
+
+/datum/mob_descriptor/stature/liability
+	name = "Liability"
+
+// OV Edits Start
+
+/datum/mob_descriptor/stature/nymph
+	name = "Nymph"
+
+/datum/mob_descriptor/stature/brawler
+	name = "Brawler"
+
+/datum/mob_descriptor/stature/amazon
+	name = "Amazon"
+
+/datum/mob_descriptor/stature/titan
+	name = "Titan"
+
+/datum/mob_descriptor/stature/beast
+	name = "Beast"
+
+/datum/mob_descriptor/stature/brat
+	name = "Brat"
+
 /datum/mob_descriptor/stature/plaything
 	name = "Plaything"
 
@@ -337,15 +347,7 @@
 /datum/mob_descriptor/stature/bait
 	name = "Bait"
 
-/datum/mob_descriptor/stature/reprobate
-	name = "Reprobate"
-
-/datum/mob_descriptor/stature/spendthrift
-	name = "Spendthrift"
-
 /datum/mob_descriptor/stature/gutter_rat
 	name = "Gutter-Rat"
 
-/datum/mob_descriptor/stature/liability
-	name = "Liability"
 // OV Edits End

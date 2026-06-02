@@ -91,6 +91,10 @@
 	return TRUE //we bloodied the floor
 
 /mob/living/carbon/human/add_blood_DNA(list/blood_dna, from_splatter = FALSE, extreme = FALSE)
+	// OV Edit Start
+	if(IsPetrified())
+		return FALSE
+	// OV Edit End
 	if(extreme)
 		if(head)
 			head.add_blood_DNA(blood_dna)

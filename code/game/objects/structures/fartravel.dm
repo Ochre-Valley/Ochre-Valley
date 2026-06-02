@@ -39,7 +39,9 @@
 		return
 	in_use = FALSE
 	update_icon()
-	var/dat = "[ADMIN_LOOKUPFLW(user)] has despawned [departing_mob == user ? "themselves" : departing_mob], job [departing_mob.job], at [AREACOORD(src)]. Contents despawned along:"
+	// OV Edit Start: Better admin logging
+	var/dat = "[ADMIN_LOOKUPFLW(user)] has despawned [departing_mob == user ? "themselves" : departing_mob], job [departing_mob.job], at [AREACOORD(src)].\n<details><summary>Contents despawned along:</summary>"
+	var/dat_log = "[key_name(user)] has despawned [departing_mob == user ? "themselves" : departing_mob], job [departing_mob.job], at [AREACOORD(src)]. Contents despawned along:"
 	if(departing_mob.mind)
 		mob_job = SSjob.GetJob(departing_mob.mind.assigned_role)
 		if(mob_job)
@@ -49,17 +51,20 @@
 				SSrole_class_handler.adjust_class_amount(target_job, -1)
 	if(!length(departing_mob.contents))
 		dat += " none."
+		dat_log += " none."
 	else
 		var/atom/movable/content = departing_mob.contents[1]
-		dat += " [content.name]"
+		dat += " - [content.name]\n"
+		dat_log += " [content.name]"
 		for(var/i in 2 to length(departing_mob.contents))
 			content = departing_mob.contents[i]
-			dat += ", [content.name]"
+			dat += " - [content.name]\n"
+			dat_log += ", [content.name]"
 			//Caustic Edit - Force-drop all Micros! So they don't get Qdel'd into the abyss!
 			if(istype(content, /obj/item/holder/micro))
 				departing_mob.dropItemToGround(content, TRUE, TRUE)
 			//Caustic Edit End
-		dat += "."
+		dat_log += "."
 	if(departing_mob.mind)
 		departing_mob.mind.unknow_all_people()
 		for(var/datum/mind/MF in get_minds())
@@ -92,10 +97,13 @@
 		if(istype(departing_mob, /mob/living))
 			loose = get_mammons_in_atom(departing_mob) || 0
 		if(recovered > 0 || loose > 0 || is_keep_insider)
-			dat += " | Coin at far-travel (day [GLOB.dayspassed]): [recovered]m forfeit from bank, [loose]m loose on person."
+			dat += " | Coin at far-travel (day [GLOB.dayspassed]): [recovered]m forfeit from bank, [loose]m loose on person.\n"
+			dat_log += " | Coin at far-travel (day [GLOB.dayspassed]): [recovered]m forfeit from bank, [loose]m loose on person."
 		SStreasury.remove_person(departing_mob)
+	dat += "</details>"
 	message_admins(dat)
-	log_admin(dat)
+	log_admin(dat_log)
+	// OV Edit End
 	if(departing_mob.stat == DEAD)
 		departing_mob.visible_message("<span class='notice'>[user] safely sends [departing_mob] away./span>")
 	else
@@ -109,4 +117,3 @@
 		for(var/thing in embeds)
 			QDEL_NULL(thing)
 	QDEL_NULL(departing_mob)
-

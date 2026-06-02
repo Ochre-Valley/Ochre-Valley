@@ -112,3 +112,68 @@
 
 /datum/runeritual/item_tf/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	return TRUE
+
+///////ITEM TF CHALK ITEM
+// Rather than co-opting chalk code, which might get changed upstream, make it a special single use item by itself that prevents spamming.
+
+/obj/item/item_tf_chalk
+	name = "Consolidation Chalk"
+	desc = "A yellow stick of chalk, enchanted to lead to the wielder to draw an accurate consolidation rune for transforming living beings into objects."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "chalk"
+	throw_speed = 2
+	throw_range = 5
+	throwforce = 5
+	color = "#a0d145"
+	damtype = BRUTE
+	force = 1
+	w_class = WEIGHT_CLASS_TINY
+	var/rune_to_scribe = /obj/effect/decal/cleanable/roguerune/arcyne/item_tf
+	var/last_use = 0
+	var/cooldown = 20 MINUTES
+
+/obj/item/item_tf_chalk/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Use this chalk on itself to draw an item TF room where you are standing. This chalk can only be used once every twenty minutes.")
+
+/obj/item/item_tf_chalk/attack_self(mob/living/carbon/human/user)
+	if(last_use)
+		if(world.time < (last_use + cooldown))
+			to_chat(user, span_cult("You can not use this again so soon."))
+			return
+
+	var/turf/Turf = get_turf(user)
+	var/structures_in_way = check_for_structures_and_closed_turfs(loc, rune_to_scribe)
+	if(structures_in_way == TRUE)
+		to_chat(user, span_cult("There is a structure, rune or wall in the way."))
+		return
+	if(locate(/obj/effect/decal/cleanable/roguerune) in Turf)
+		to_chat(user, span_cult("There is already a rune here."))
+		return
+	var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+
+	user.visible_message(span_notice("\The [user] begins to drag [user.p_their()] [name] over \the [Turf], inscribing intricate symbols and sigils inside a circle."), span_notice("I start to drag my [name] over \the [Turf], inscribing intricate symbols and sigils on a circle."))
+	playsound(loc, 'sound/magic/chalkdraw.ogg', 100, TRUE)
+
+	to_chat(user, span_warning("Note: This is a kink tool, you should take care to use it in private, respect bystander consent and not include unwitting players in your kinks."))
+
+	if(do_after(user, crafttime, target = src))
+		user.visible_message(span_warning("[user] draws an arcyne rune with [user.p_their()] [name]!"), \
+		span_notice("I finish tracing ornate symbols and circles with my [name], leaving behind a ritual rune."))
+		new rune_to_scribe(Turf)
+		last_use = world.time
+
+/obj/item/item_tf_chalk/proc/check_for_structures_and_closed_turfs(loc, var/obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+	for(var/turf/T in range(loc, rune_to_scribe.runesize))
+		//check for /sturcture subtypes in the turf's contents
+		for(var/obj/structure/S in T.contents)
+			return TRUE		//Found a structure, no need to continue
+
+		//check if turf itself is a /turf/closed subtype
+		if(istype(T,/turf/closed))
+			return TRUE
+		//check if rune in the turfs contents
+		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+			return TRUE
+		//Return false if nothing in range was found
+	return FALSE

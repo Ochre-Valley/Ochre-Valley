@@ -234,13 +234,13 @@
 
 /obj/item/holder/proc/sync(var/mob/living/M)
 	dir = 2
-	overlays.Cut()
+	//overlays.Cut() OV Remove: These are expensive, and causing the server to stall every time a micro is picked up
 	/*if(M.item_state)
 		item_state = M.item_state*/
 	color = M.color
 	name = M.name
 	desc = M.desc
-	overlays |= M.overlays
+	//overlays |= M.overlays OV Remove: These are expensive, and causing the server to stall every time a micro is picked up
 
 /obj/item/holder/dropped(mob/user)
 	// CHOMPEdit Start

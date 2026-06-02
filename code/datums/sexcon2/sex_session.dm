@@ -27,6 +27,11 @@
 	var/static/sex_id = 0
 	var/our_sex_id = 0 //this is so we can have more then 1 sex id open at once
 
+	// Moved here from proc/get_generic_force_adjective to reduce list initialization/destruction
+	var/static/list/low_force_adjectives 		= list("gently", "carefully", "tenderly", "gingerly", "delicately", "lazily")
+	var/static/list/mid_force_adjectives 		= list("firmly", "vigorously", "eagerly", "steadily", "intently")
+	var/static/list/high_force_adjectives 		= list("roughly", "carelessly", "forcefully", "fervently", "fiercely")
+	var/static/list/extreme_force_adjectives 	= list("brutally", "violently", "relentlessly", "savagely", "mercilessly")
 
 /datum/sex_session/New(mob/living/carbon/human/session_user, mob/living/carbon/human/session_target)
 	user = session_user
@@ -82,13 +87,18 @@
 		return
 	if(!action_type)
 		return
+	//OV Add Start
+	var/datum/sex_action/action = SEX_ACTION(action_type)
+	if(action.masturbation && user.IsPetrified())
+		to_chat(user, span_warning("You cannot do this while petrified."))
+		return
+	//OV Add End
 	if(!can_perform_action(action_type))
 		return
 
 	desire_stop = FALSE
 	current_action = action_type
 	inactivity = 0
-	var/datum/sex_action/action = SEX_ACTION(current_action)
 	log_combat(user, target, "Started sex action: [action.name] with [target.name].")
 	INVOKE_ASYNC(src, PROC_REF(sex_action_loop))
 
@@ -167,12 +177,19 @@
 
 /datum/sex_session/proc/inherent_perform_check(action_type)
 	var/datum/sex_action/action = SEX_ACTION(action_type)
+	// OV Edit Start
+	var/obj/item/bodypart/head/held_petrified_head = user.get_held_petrified_head_for(target)
+	// OV Edit End
 	if(!target)
 		return FALSE
+	//OV Add Start
+	if(action.masturbation && user.IsPetrified())
+		return FALSE
+	//OV Add End
 	if(user.stat != CONSCIOUS)
 		return FALSE
-	// OV Edit Start: Belly Sex
-	if(!user.Adjacent(target) && !action.ranged_action)
+	// OV Edit Start: Belly Sex/Petrified Head
+	if(!user.Adjacent(target) && !action.ranged_action && !held_petrified_head)
 		if(!isbelly(user.loc) || user.loc != target.loc)
 			return FALSE
 	// OV Edit End
@@ -181,12 +198,16 @@
 	if(action.check_same_tile)
 		var/same_tile = (get_turf(user) == get_turf(target))
 		var/grab_bypass = (action.aggro_grab_instead_same_tile && user.get_highest_grab_state_on(target) == GRAB_AGGRESSIVE)
-		if(!same_tile && !grab_bypass)
+		// OV Edit Start
+		if(!same_tile && !grab_bypass && !held_petrified_head)
 			return FALSE
+		// OV Edit End
 	if(action.require_grab)
 		var/grabstate = user.get_highest_grab_state_on(target)
-		if(grabstate == null || grabstate < action.required_grab_state)
+		// OV Edit Start
+		if((grabstate == null || grabstate < action.required_grab_state) && !held_petrified_head)
 			return FALSE
+		// OV Edit End
 	return TRUE
 
 /datum/sex_session/proc/perform_sex_action(mob/living/carbon/human/action_target, arousal_amt, pain_amt, giving)
@@ -290,16 +311,17 @@
 			return "<font color='#f05ee1'>PARTIALLY ERECT</font>"
 		if(SEX_MANUAL_AROUSAL_FULL)
 			return "<font color='#d146f5'>FULLY ERECT</font>"
+
 /datum/sex_session/proc/get_generic_force_adjective()
 	switch(force)
 		if(SEX_FORCE_LOW)
-			return pick(list("gently", "carefully", "tenderly", "gingerly", "delicately", "lazily"))
+			return pick(low_force_adjectives)
 		if(SEX_FORCE_MID)
-			return pick(list("firmly", "vigorously", "eagerly", "steadily", "intently"))
+			return pick(mid_force_adjectives)
 		if(SEX_FORCE_HIGH)
-			return pick(list("roughly", "carelessly", "forcefully", "fervently", "fiercely"))
+			return pick(high_force_adjectives)
 		if(SEX_FORCE_EXTREME)
-			return pick(list("brutally", "violently", "relentlessly", "savagely", "mercilessly"))
+			return pick(extreme_force_adjectives)
 
 /datum/sex_session/proc/spanify_force(string)
 	switch(force)

@@ -136,6 +136,12 @@
 /datum/action/proc/IsAvailable()
 	if(!owner)
 		return FALSE
+	// OV Edit Start
+	if(isliving(owner))
+		var/mob/living/living_owner = owner
+		if(living_owner.IsPetrified())
+			return FALSE
+	// OV Edit End
 	if((check_flags & AB_CHECK_HANDS_BLOCKED) && HAS_TRAIT(owner, TRAIT_HANDS_BLOCKED))
 		return FALSE
 	if((check_flags & AB_CHECK_IMMOBILE) && isliving(owner))
@@ -284,6 +290,12 @@
 
 /// Adds our action button to the screen of the passed viewer.
 /datum/action/proc/ShowTo(mob/viewer)
+	// OV Edit Start
+	if(isliving(viewer))
+		var/mob/living/living_viewer = viewer
+		if(living_viewer.IsPetrified())
+			return
+	// OV Edit End
 	var/datum/hud/our_hud = viewer.hud_used
 	if(!our_hud || viewers[our_hud]) // There's no point in this if you have no hud in the first place
 		return

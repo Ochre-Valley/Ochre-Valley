@@ -23,6 +23,14 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	set name = "Journey to the Underworld"
 	set category = "Spirit"
 
+	// OV Edit Start
+	if(isliving(mob))
+		var/mob/living/living_mob = mob
+		if(living_mob.stat != DEAD && living_mob.IsPetrified())
+			living_mob.petrification_surrender()
+			return
+	// OV Edit End
+
 	switch(alert("Descend to the Underworld?",,"Yes","No"))
 		if("Yes")
 			if(istype(mob, /mob/living/carbon/spirit))
@@ -41,6 +49,14 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /client/proc/dead_observe()
 	set category = "Spirit"
 	set name = "Leave Your Body"
+
+	// OV Edit Start
+	if(isliving(mob))
+		var/mob/living/living_mob = mob
+		if(living_mob.stat != DEAD && living_mob.IsPetrified())
+			living_mob.petrification_surrender()
+			return
+	// OV Edit End
 
 	if(mob.stat == DEAD && isliving(mob))
 		message_admins("[key_name_admin(usr)] is ghosting from their dead body.")

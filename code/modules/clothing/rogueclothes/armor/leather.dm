@@ -289,8 +289,8 @@
 	sewrepair = TRUE
 	sleevetype = null
 	sleeved = null
-	armor_class = ARMOR_CLASS_LIGHT
-	sellprice = 30 //Fashion is important~
+	armor_class = ARMOR_CLASS_NONE
+	sellprice = 30 //Fashion is important~ //CC edit
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 	name = "sea jacket"

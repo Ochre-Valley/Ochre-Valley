@@ -210,9 +210,9 @@
 				var/mob/living/carbon/human/H = L
 
 				//Numbing flag
-				if(mode_flags & DM_FLAG_NUMBING)
+				/*if(mode_flags & DM_FLAG_NUMBING) //OV Edit - Not A Real Reagent Sire
 					if(H.reagents.get_reagent_amount(REAGENT_ID_NUMBENZYME) < 2)
-						H.reagents.add_reagent(REAGENT_ID_NUMBENZYME,4)
+						H.reagents.add_reagent(REAGENT_ID_NUMBENZYME,4)*/
 
 				//Worn items flag
 				if(mode_flags & DM_FLAG_AFFECTWORN && H.contaminate_pref)
@@ -301,6 +301,10 @@
 	return did_an_item
 
 /obj/belly/proc/handle_digestion_death(mob/living/M, instant = FALSE)
+	// OV Edit Start
+	if(M?.IsPetrified())
+		instant = TRUE
+	// OV Edit End
 	if(!instant && slow_digestion) // Gradual corpse digestion
 		if(!M.digestion_in_progress)
 			M.digestion_in_progress = TRUE

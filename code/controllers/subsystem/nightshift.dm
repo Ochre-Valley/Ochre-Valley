@@ -136,7 +136,7 @@ SUBSYSTEM_DEF(nightshift)
 			if(0 to 500)
 				to_chat(src, span_notice("I managed to focus on learning a thing or two lately, but to really solidify the lessons, I think I'll need to meditate and dream on it..."))
 			else
-				to_chat(src, span_notice("My mind has been absorbing knoweledge like a sponge... whatever that is. Curiosity drives me forwards, but reality holds me back... I really should reflect on my lessons now, if I want to realize my potential"))
+				to_chat(src, span_notice("My mind has been absorbing knowledge like a sponge... whatever that is. Curiosity drives me forwards, but reality holds me back... I really should reflect on my lessons now, if I want to realize my potential."))
 
 		if(!stat)
 			to_chat(src, span_warning("Staying alive in these uncertain times is it's own achievement. With the spark of my mind intact, and the embers of my heart and soul burning bright, at least at the moment, I feel slightly better about todae."))

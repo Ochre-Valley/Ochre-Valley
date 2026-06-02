@@ -172,6 +172,17 @@
 	. = ..()
 	update_icon()
 
+//OV edit
+/obj/structure/roguemachine/goldface/public/toys
+	name = "DIRTYFACE"
+	lockid = "bath"
+	profit_id = list("Bathmatron")
+	categories = list(
+		"Toys",
+	)
+	categories_gamer = list()
+//OV edit end
+
 /// Single source of truth for displayed and billed prices. Computes the total cost of
 /// a supply pack accounting for the guild's handling fee (`extra_fee`) and the Crown's
 /// import tariff if applicable. Display-time and buy-time both route through here so

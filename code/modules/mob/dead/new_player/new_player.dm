@@ -282,12 +282,12 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(QDELETED(src))
 		return JOB_UNAVAILABLE_GENERIC
 	if(has_world_trait(/datum/world_trait/skeleton_siege))
-		if(rank != "Greater Skeleton")
+		if(rank != "Siege Skeleton")
 			return JOB_UNAVAILABLE_GENERIC
 		else
 			return JOB_AVAILABLE
 	else
-		if(rank == "Greater Skeleton")
+		if(rank == "Siege Skeleton")
 			return JOB_UNAVAILABLE_GENERIC
 
 	if(has_world_trait(/datum/world_trait/goblin_siege))
@@ -324,7 +324,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			return JOB_UNAVAILABLE_PQ
 	#endif
 	var/datum/species/pref_species = client.prefs.pref_species
-	if(length(job.allowed_races) && !(pref_species.type in job.allowed_races))
+	if(length(job.forbidden_races) && (pref_species.type in job.forbidden_races))
 		return JOB_UNAVAILABLE_RACE
 	var/list/allowed_sexes = list()
 	if(length(job.allowed_sexes))
@@ -404,6 +404,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 
 	SSjob.AssignRole(src, rank, 1)
 
+	// OV Edit Start
+	var/surrendered_petrified_ckey = ckey(key)
+	var/surrendered_petrified_character_name = client?.prefs?.real_name
+	// OV Edit End
+
 	var/mob/living/character = create_character(TRUE)	//creates the human and transfers vars and mind
 
 	character.islatejoin = TRUE
@@ -412,6 +417,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 
 	if(isliving(equip))	//Borgs get borged in the equip, so we need to make sure we handle the new mob.
 		character = equip
+
+	// OV Edit Start
+	cleanup_surrendered_petrified_body(surrendered_petrified_ckey, surrendered_petrified_character_name, character)
+	// OV Edit End
 
 	var/datum/job/job = SSjob.GetJob(rank)
 
@@ -558,7 +567,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			dat += "<legend align='center' style='font-weight: bold; color: [cat_color]'>[cat_name]</legend>"
 
 			if(has_world_trait(/datum/world_trait/skeleton_siege))
-				dat += "<a class='job command' href='byond://?src=[REF(src)];SelectedJob=Greater Skeleton'>BECOME AN EVIL SKELETON</a>"
+				dat += "<a class='job command' href='byond://?src=[REF(src)];SelectedJob=Siege Skeleton'>BECOME AN EVIL SKELETON</a>"
 				dat += "</fieldset><br>"
 				column_counter++
 				if(column_counter > 0 && (column_counter % 3 == 0))

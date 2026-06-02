@@ -1,0 +1,5 @@
+author: "Ryumi"
+delete-after: True
+changes:
+  - rscdel: "Lich, Vampire Lord, Dreamwalker, and Bandit no longer can appear at roundstart."
+  - rscadd: "Psydon storyteller now allows wretches to spawn."

@@ -1,5 +1,5 @@
 /datum/surgery_step/doppel_empower
-	name = "Infuse Lux"
+	name = "Infuse Doppel Heart"
 	implements = list(
 		/obj/item/reagent_containers/doppel_heart = 80,
 	)

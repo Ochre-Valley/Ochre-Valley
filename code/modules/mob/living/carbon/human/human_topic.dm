@@ -3,6 +3,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 
 /mob/living/carbon/human/Topic(href, href_list)
 	var/observer_privilege = isobserver(usr)
+	var/mob/living/petrified_topic_user = isliving(usr) ? usr : null //OV Add
 
 	if(href_list["task"] == "bloodpoolinfo")
 		to_chat(usr, span_notice("Usable blood that yields Vitae and total blood is not the same thing. It takes some time for blood to become nourishing for us."))
@@ -115,6 +116,11 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		return
 
 	if(href_list["undiesthing"]) //canUseTopic check for this is handled by mob/Topic()
+		//OV Add Start
+		if(petrified_topic_user?.IsPetrified())
+			to_chat(usr, span_warning("You cannot do this while petrified."))
+			return
+		//OV Add End
 		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
@@ -131,7 +137,45 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			SEND_SIGNAL(underwear, COMSIG_ITEM_UNDERWEAR_REMOVE, src) //OV ADD
 			underwear = null
 
+	// OV Edit Start
+	if(href_list["petrified_posture"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		if(!IsPetrified())
+			return
+		if(!isliving(usr))
+			return
+		var/mob/living/living_user = usr
+		var/obj/item/grabbing/posture_grab = living_user.get_grabbed_petrified_posture_grab(src)
+		if(!posture_grab || posture_grab.grabbed != src)
+			to_chat(usr, span_warning("I need to keep hold of [src]."))
+			return
+		living_user.set_grabbed_petrified_posture(posture_grab, href_list["petrified_posture"] == "stand")
+		show_inv(living_user)
+		return
+
+	if(href_list["petrified_carry"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		if(!IsPetrified())
+			return
+		if(!ishuman(usr))
+			return
+		var/mob/living/carbon/human/human_user = usr
+		var/obj/item/grabbing/posture_grab = human_user.get_grabbed_petrified_posture_grab(src)
+		if(!posture_grab || posture_grab.grabbed != src)
+			to_chat(usr, span_warning("I need to keep hold of [src]."))
+			return
+		if(!human_user.can_be_firemanned(src))
+			to_chat(usr, span_warning("I need to lay [src] down first."))
+			return
+		human_user.fireman_carry(src)
+		show_inv(human_user)
+		return
+	// OV Edit End
+
 	if(href_list["legwearsthing"]) //canUseTopic check for this is handled by mob/Topic()
+		//OV Add Start
+		if(petrified_topic_user?.IsPetrified())
+			to_chat(usr, span_warning("You cannot do this while petrified."))
+			return
+		//OV Add End
 		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
@@ -150,6 +194,11 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			
 
 	if(href_list["pockets"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)) //TODO: Make it match (or intergrate it into) strippanel so you get 'item cannot fit here' warnings if mob_can_equip fails
+		//OV Add Start
+		if(petrified_topic_user?.IsPetrified())
+			to_chat(usr, span_warning("You cannot do this while petrified."))
+			return
+		//OV Add End
 		var/pocket_side = href_list["pockets"]
 		var/pocket_id = (pocket_side == "right" ? SLOT_R_STORE : SLOT_L_STORE)
 		var/obj/item/pocket_item = (pocket_id == SLOT_R_STORE ? r_store : l_store)

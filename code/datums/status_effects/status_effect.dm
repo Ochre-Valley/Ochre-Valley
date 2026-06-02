@@ -146,6 +146,11 @@
 	if(mob_effect)
 		owner.clear_overhead_indicator(mob_effect, mob_effect_layer)
 
+// OV Edit Start
+/datum/status_effect/proc/can_remove_status_effect()
+	return TRUE
+// OV Edit End
+
 /datum/status_effect/proc/be_replaced() //Called instead of on_remove when a status effect is replaced by itself or when a status effect with on_remove_on_mob_delete = FALSE has its mob deleted
 	for(var/S in effectedstats)
 		owner.change_stat(S, -(effectedstats[S]))
@@ -246,7 +251,9 @@
 	var/effect_id = initial(template.id)
 
 	var/datum/status_effect/S = status_effects_by_id[effect_id]
-	if(S)
+	// OV Edit Start
+	if(S && S.can_remove_status_effect())
+	// OV Edit End
 		qdel(S)
 		. = TRUE
 

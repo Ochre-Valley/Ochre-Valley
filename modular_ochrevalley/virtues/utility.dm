@@ -24,6 +24,10 @@
 #define SPARK_MIRROR "Mirror Transform"
 #define SPARK_NONDETECT "Nondetection"
 #define SPARK_GROW "Reduce/Grow Person"
+#define SPARK_INSTRUMENT "Conjure Instrument"
+#define SPARK_TRANSCRIBE "Transcribe"
+#define SPARK_OMEN "Read Omen"
+#define SPARK_FRIDGE "Fridigitation"
 
 /datum/virtue/utility/spark
 	name = "Spark of Magick"
@@ -41,6 +45,10 @@
 		SPARK_MIRROR,
 		SPARK_NONDETECT,
 		SPARK_GROW,
+		SPARK_INSTRUMENT,
+		SPARK_TRANSCRIBE,
+		SPARK_OMEN,
+		SPARK_FRIDGE,
 	)
 	choice_tooltips = list(
 		SPARK_CHILLFOOD = "Chill a piece of food with a touch of frost without affecting its quality, extending its freshness by a half of a dae (15 MINUTES OOC).",
@@ -53,6 +61,10 @@
 		SPARK_MIRROR = "Gives you a arcyne hand mirror that allows one to change their appearance at will.",
 		SPARK_NONDETECT = "Shroud a target from divination magic for 1 hour.",
 		SPARK_GROW = "A basic trick many apprentices would use to prank their master. Allows one to shift in size to their whims! (( Abuse of this spell for combat purposes will lead to consequences from staff. ))",
+		SPARK_INSTRUMENT = "Conjure a Instrument of your choice in your hand. The instrument will be unsummoned should you conjure a new one or unbind the spell.",
+		SPARK_TRANSCRIBE = "Conjure a parchment and a magical quill to write for you. This magical parchment will listen for up to ten minutes and transcribe what it has heard onto itself. (use in your hand, and then use again to stop the recording).",
+		SPARK_OMEN = "Casting this spell, you draw upon the leylines themselves to reveal secrets of fate itself. (Casting it gives you a vague explanation of who the current storyteller is, if they are your patron the explanation is less vague.)",
+		SPARK_FRIDGE = "An advanced version of Chill Food. Greatly prolongs shelf life by entirely freezing it solid. (OOC Note: it does not work on produce, only foods, removes rot timer entirely.).",
 	)
 
 /datum/virtue/utility/spark/apply_to_human(mob/living/carbon/human/recipient)
@@ -93,6 +105,18 @@
 			if(SPARK_GROW)
 				if(!recipient.mind?.has_spell(/obj/effect/proc_holder/spell/targeted/touch/sizespell))
 					recipient.mind?.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/sizespell)
+			if(SPARK_INSTRUMENT)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/conjure_instrument))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/conjure_instrument)
+			if(SPARK_TRANSCRIBE)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/transcribe))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/transcribe)
+			if(SPARK_OMEN)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/readomen))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/readomen)
+			if(SPARK_FRIDGE)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/fridigitation))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/fridigitation)
 
 #undef SPARK_CHILLFOOD
 #undef SPARK_CAMPFIRE
@@ -104,3 +128,7 @@
 #undef SPARK_MIRROR
 #undef SPARK_NONDETECT
 #undef SPARK_GROW
+#undef SPARK_INSTRUMENT
+#undef SPARK_TRANSCRIBE
+#undef SPARK_OMEN
+#undef SPARK_FRIDGE

@@ -392,7 +392,13 @@
 	if(ismob(usr))
 		var/mob/M = usr
 		M.playsound_local(M, 'sound/misc/click.ogg', 100)
-	if(usr.stat == CONSCIOUS)
+	// OV Edit Start
+	var/petrified_user = FALSE
+	if(isliving(usr))
+		var/mob/living/L = usr
+		petrified_user = L.IsPetrified()
+	if(usr.stat == CONSCIOUS && !petrified_user)
+	// OV Edit End
 		usr.dropItemToGround(usr.get_active_held_item())
 
 /atom/movable/screen/act_intent
@@ -873,6 +879,11 @@
 	hud.mymob.playsound_local(hud.mymob, 'sound/misc/click.ogg', 100)
 	if(isliving(hud?.mymob))
 		var/mob/living/L = hud.mymob
+		// OV Edit Start
+		if(L.IsPetrified())
+			to_chat(L, span_warning("I can't move."))
+			return
+		// OV Edit End
 		if(L.eyesclosed)
 			L.eyesclosed = 0
 			L.cure_blind("eyelids")
@@ -959,6 +970,11 @@
 /atom/movable/screen/rest/Click()
 	if(isliving(usr))
 		var/mob/living/L = usr
+		// OV Edit Start
+		if(L.IsPetrified())
+			to_chat(L, span_warning("I can't move."))
+			return
+		// OV Edit End
 		L.lay_down()
 
 /atom/movable/screen/rest/update_icon_state()
@@ -982,6 +998,11 @@
 
 	if(isliving(usr))
 		var/mob/living/L = usr
+		// OV Edit Start
+		if(L.IsPetrified())
+			to_chat(L, span_warning("I can't move."))
+			return
+		// OV Edit End
 		if(paramslist["right"])
 			L.look_up()
 		else
@@ -998,6 +1019,11 @@
 
 	if(isliving(usr))
 		var/mob/living/L = usr
+		// OV Edit Start
+		if(L.IsPetrified())
+			to_chat(L, span_warning("I can't move."))
+			return
+		// OV Edit End
 		if(paramslist["right"])
 			var/turf/O
 			for(var/turf/T in range(1, L))
@@ -1874,7 +1900,7 @@
 				state2use = "stress"
 			if(5 to 14)
 				state2use = "stress2"
-			if(5 to 24)
+			if(15 to 24)
 				state2use = "stress3"
 			if(25 to 999)
 				state2use = "stress4"
@@ -1898,7 +1924,7 @@
 			state2use = "mood_ult"
 
 		//We go down a janky list of exceptions for total overrides
-		if(HAS_TRAIT(H, TRAIT_NOMOOD))
+		if(HAS_TRAIT(H, TRAIT_DETACHED))
 			state2use = "mood_hopeless"
 		else if(H.stat == DEAD)
 			state2use = "mood_dead"
