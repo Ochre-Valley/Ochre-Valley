@@ -633,6 +633,16 @@ BLIND     // can't see anything
 /obj/proc/generate_tooltip(examine_text)
 	return examine_text
 
+// OV Add Begin - Items have heresy descriptions!
+/obj/item/generate_tooltip(examine_text)
+	var/heresy_desc = get_heresy_description()
+	if(heresy_desc)
+		var/heresy_desc = "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [heresy_desc] &#x16E3;</font>"
+		examine_text = "<font color = '#c43535'>&#x16E3; [examine_text] &#x16E3;</font>"
+		return SPAN_TOOLTIP_DANGEROUS_HTML(heresy_desc, examine_text)
+	return examine_text
+// OV Add End
+
 /obj/item/clothing/generate_tooltip(examine_text)
 	if(!armor)	// No armor
 		return examine_text
@@ -642,6 +652,13 @@ BLIND     // can't see anything
 		return examine_text
 
 	var/str
+	// OV Edit Begin - Heresy item tooltip
+	var/is_heretical = FALSE
+	var/heresy_desc = get_heresy_description()
+	if(heresy_desc)
+		is_heretical = TRUE
+		str += "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [uppertext(heresy_desc)] &#x16E3;</font><br>"
+	// OV Edit End
 	str += "<b>ABSORPTION:</b> [colorgrade_rating("🔨 BLUNT", armor.blunt, elaborate = TRUE, max_tier = 5)]<br>"
 	str += "<b>BLOCK:</b> "
 	str += "[colorgrade_rating("🪓 SLASH", armor.slash, elaborate = TRUE)] | "
@@ -656,8 +673,13 @@ BLIND     // can't see anything
 			resists += colorgrade_rating("🧪 ACID", armor.acid, elaborate = TRUE)
 		str += resists.Join(" | ")
 
-	//This makes it appear darker than the rest of examine text. Draws the cursor to it like to a Wetsquires.rt link.
-	examine_text = "<font color = '#808080'>[examine_text]</font>"
+	// OV Edit - Make it extra obvious if it's HERETICAL!
+	if(is_heretical)
+		examine_text = "<font color = '#c43535'>&#x16E3; [examine_text] &#x16E3;</font>"
+	// OV Edit End
+	else
+		//This makes it appear darker than the rest of examine text. Draws the cursor to it like to a Wetsquires.rt link.
+		examine_text = "<font color = '#808080'>[examine_text]</font>"
 	return SPAN_TOOLTIP_DANGEROUS_HTML(str, examine_text)
 
 /obj/item/clothing/proc/get_armor_integ()

@@ -293,7 +293,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	/// does this item/weapon circumvent two-stage death during dismemberment? (do not add this to anything but ultra rare shit)
 	var/vorpal = FALSE
 
-	var/mob/living/mob_possession = null //OV ADD
+	var/mob/living/mob_possession = null // OV Add
 
 /obj/item/Initialize(mapload)
 	. = ..()
@@ -1785,8 +1785,15 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		str += "<b>[initial(S.name)]</b> and a hammer."
 	if(sewrepair)
 		str += "<b>Sewing</b> and a needle."
-	if(mob_possession) // OV Add
-		str += "<br>There is something unusually <b>ALIVE</b> about this." //OV ADD
+	// OV Add Begin
+	if(mob_possession)
+		str += "<br>There is something unusually <b>ALIVE</b> about this."
+	var/heresy_desc = get_heresy_description()
+	if(heresy_desc)
+		var/heresy_tooltip = "Carrying this item out in the open counts as a form of PVP escalation due to its antagonistic nature. To avoid this, keep it hidden or don't carry it at all."
+		var/heresy_info = "<br><font color = '#c43535'>&#x16E3; IT IS <b>HERETICAL</b>: [uppertext(heresy_desc)] &#x16E3;</font>"
+		str += SPAN_TOOLTIP(heresy_tooltip, heresy_info)
+	// OV Add End
 	str = span_info(str)
 	. += str
 
@@ -1801,3 +1808,11 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 /obj/item/proc/ai_withdraw_item(obj/item/it, mob/living/user)
 	return FALSE
+
+// OV Add - Heresy description
+/// Is this item commonly known as heretical? If it is, this should to return a **SHORT** description of the nature of the item's heresy.
+/// When set, highlights the item's examine name/tooltip with obvious heretical flavor when worn/held with "HERETICAL: [value]."
+/// If this returns null, the item will not be shown as heretical.
+/obj/item/proc/get_heresy_description(mob/living/user)
+	return null
+// OV Add End
