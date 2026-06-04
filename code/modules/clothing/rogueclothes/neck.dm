@@ -1114,6 +1114,9 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 
+/obj/item/clothing/neck/roguetown/bevor/zizo/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ARMOR
+
 /obj/item/clothing/neck/roguetown/bevor/zizo/heavy
 	name = "fused avantyne bevor"
 	desc = "An avantyne neckguard fused into the flesh of the neck, akin to a second skin, yet impossible to remove. The sacred leyline of sinew and spirit protected from severance."

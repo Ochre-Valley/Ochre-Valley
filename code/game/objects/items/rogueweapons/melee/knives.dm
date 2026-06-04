@@ -583,6 +583,9 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "DAGGER")
 
+/obj/item/rogueweapon/huntingknife/idagger/steel/zizo/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_WEAPON
+
 /obj/item/rogueweapon/huntingknife/idagger/avantyne
 	name = "avantyne-threaded dagger"
 	desc = "An darksteel misericorde, defying rhyme-and-reason in favor of unholy lethality. The jagged edge continuously remorphs itself, \
