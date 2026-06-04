@@ -537,8 +537,9 @@
 			var/heresy_desc = I.get_heresy_description()
 			var/item_examine_string = I.get_examine_string(user)
 			if(heresy_desc)
-				item_examine_string = SPAN_TOOLTIP("<font color = '#c43535'>&#x16E3IT IS <b>HERETICAL:</b> [heresy_desc]</font>",
-				"<font color = '#c43535'>&#x16E3&#x16E3 [item_examine_string] &#x16E3</font>")
+				var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3 IT IS <b>HERETICAL:</b> [heresy_desc] &#x16E3</font><br>\
+					Holding this item counts as a form of PVP escalation due to its heretical (antagonisic) nature."
+				item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#c43535'>&#x16E3 [item_examine_string] &#x16E3</font>")
 			var/str = "[m1] holding [item_examine_string] in [m2] [get_held_index_name(get_held_index_of_item(I))]. "
 			// OV Edit End
 			str += I.integrity_check(is_smart, guarded)

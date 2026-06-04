@@ -637,7 +637,7 @@ BLIND     // can't see anything
 /obj/item/generate_tooltip(examine_text)
 	var/heresy_desc = get_heresy_description()
 	if(heresy_desc)
-		var/heresy_desc = "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [heresy_desc] &#x16E3;</font>"
+		heresy_desc = "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [heresy_desc] &#x16E3;</font>"
 		examine_text = "<font color = '#c43535'>&#x16E3; [examine_text] &#x16E3;</font>"
 		return SPAN_TOOLTIP_DANGEROUS_HTML(heresy_desc, examine_text)
 	return examine_text
