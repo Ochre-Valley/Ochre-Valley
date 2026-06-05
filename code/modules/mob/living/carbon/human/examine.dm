@@ -1397,14 +1397,16 @@
 	var/badge_line = "[msg_gng][msg_lean][msg_vore][msg_type][msg_willing][msg_sexuality][msg_erp]"
 	return badge_line
 
-// OV Edit Start - Check for ITEM HERESY
-/// Returns The examine string of the passed item, including a very obvious heresy highlight if the item is heretical (see `/obj/item/proc/get_heresy_description`.)
+// OV Add Start - Check for ITEM HERESY
+/// Returns The examine string of the passed item, including a very obvious heresy highlight if the item is heretical (see `/obj/item/proc/get_heresy_status`.)
 /mob/living/proc/get_item_examine_text(obj/item/I, mob/living/user)
-	var/heresy_desc = I.get_heresy_description()
+	var/heresy_status = I.get_heresy_status()
 	var/item_examine_string = I.get_examine_string(user)
-	if(heresy_desc)
-		var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3<b>HERETICAL:</b> [uppertext(heresy_desc)] &#x16E3</font><br>\
-			Openly wielding this item counts as a form of PVP escalation due to its heretical (antagonisic) nature."
-		item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#c43535'>&#x16E3 [item_examine_string] &#x16E3</font>")
+	if(heresy_status)
+		var/severity = heresy_status[1]
+		var/severity_color = I.get_heresy_severity_color(severity)
+		var/severity_symbol = I.get_heresy_severity_symbol(severity)
+		var/heresy_examine_tooltip = I.get_heresy_description(heresy_status) + "<br>" + I.get_heresy_severity_explanation(severity)
+		item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#[severity_color]'>[severity_symbol] [item_examine_string] [severity_symbol]</font>")
 	return item_examine_string
-//OV Edit End
+//OV Add End

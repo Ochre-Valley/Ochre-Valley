@@ -371,7 +371,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/shoes/roguetown/boots/armor/graggar/get_heresy_description()
+/obj/item/clothing/shoes/roguetown/boots/armor/graggar/get_heresy_status()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -385,7 +385,7 @@
 	unenchantable = TRUE
 
 // OV Edit - Heresy Description
-/obj/item/clothing/shoes/roguetown/boots/armor/matthios/get_heresy_description()
+/obj/item/clothing/shoes/roguetown/boots/armor/matthios/get_heresy_status()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -417,7 +417,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/shoes/roguetown/boots/armor/zizo/get_heresy_description()
+/obj/item/clothing/shoes/roguetown/boots/armor/zizo/get_heresy_status()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -434,7 +434,7 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/clothing/shoes/roguetown/boots/armor/avantyne/get_heresy_description()
+/obj/item/clothing/shoes/roguetown/boots/armor/avantyne/get_heresy_status()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 

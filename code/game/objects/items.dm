@@ -1788,11 +1788,11 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	// OV Add Begin
 	if(mob_possession)
 		str += "<br>There is something unusually <b>ALIVE</b> about this."
-	var/heresy_desc = get_heresy_description()
-	if(heresy_desc)
-		var/heresy_tooltip = "Carrying this item out in the open counts as a form of PVP escalation due to its antagonistic nature. To avoid this, keep it hidden or don't carry it at all."
-		var/heresy_info = "<br><font color = '#c43535'>&#x16E3; IT IS <b>HERETICAL</b>: [uppertext(heresy_desc)] &#x16E3;</font>"
-		str += SPAN_TOOLTIP(heresy_tooltip, heresy_info)
+	var/heresy_status = get_heresy_status()
+	if(heresy_status)
+		var/heresy_desc = get_heresy_description(heresy_status, itis = TRUE)
+		var/heresy_tooltip = get_heresy_severity_explanation()
+		str += SPAN_TOOLTIP(heresy_tooltip, heresy_desc)
 	// OV Add End
 	str = span_info(str)
 	. += str
@@ -1826,6 +1826,52 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 * Examples of what this is intended for include Ascendant amulets.
 * 
 * If this returns null, the item will not be shown as heretical.*/
-/obj/item/proc/get_heresy_description()
+/obj/item/proc/get_heresy_status()
 	return null
+
+/obj/item/proc/get_heresy_description(list/heresy_status, itis = FALSE)
+	if(heresy_status)
+		var/severity = heresy_status[1]
+		var/heresy_desc = heresy_status[2]
+		if(!severity || !heresy_desc)
+			return null
+		var/severity_color = get_heresy_severity_color(severity)
+		var/severity_symbol = get_heresy_severity_symbol(severity)
+		var/severity_itis = "[itis ? "It is " : ""]<b>[get_heresy_severity_adjective(severity)]</b>"
+		
+		return "<br><font color = '#[severity_color]'>[severity_symbol] [severity_itis]: [uppertext(heresy_desc)] [severity_symbol]</font>"
+	return null
+
+/obj/item/proc/get_heresy_severity_adjective(severity_level)
+	switch(severity_level)
+		if(HERESY_SEVERITY_SUSPICIOUS)
+			return "SUSPICIOUS"
+		if(HERESY_SEVERITY_ALARMING)
+			return "ALARMING"
+	return null
+
+/obj/item/proc/get_heresy_severity_explanation(severity_level)
+	switch(severity_level)
+		if(HERESY_SEVERITY_SUSPICIOUS)
+			return DESCRIPTION_HERESY_SEVERITY_SUSPICIOUS
+		if(HERESY_SEVERITY_ALARMING)
+			return DESCRIPTION_HERESY_SEVERITY_ALARMING
+	return null
+
+/obj/item/proc/get_heresy_severity_color(severity_level)
+	switch(severity_level)
+		if(HERESY_SEVERITY_SUSPICIOUS)
+			return COLOR_HERESY_SEVERITY_SUSPICIOUS
+		if(HERESY_SEVERITY_ALARMING)
+			return COLOR_HERESY_SEVERITY_ALARMING
+	return null
+	
+/obj/item/proc/get_heresy_severity_symbol(severity_level)
+	switch(severity_level)
+		if(HERESY_SEVERITY_SUSPICIOUS)
+			return "?"
+		if(HERESY_SEVERITY_ALARMING)
+			return "&#x16E3;" // Zcross unicode
+	return null
+	
 // OV Add End

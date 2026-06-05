@@ -152,8 +152,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "SWORD")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/sword/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_AVANTYNE
+/obj/item/rogueweapon/sword/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_AVANTYNE)
 // OV Edit End
 
 /obj/item/rogueweapon/sword/avantyne
@@ -172,8 +172,8 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/sword/avantyne/get_heresy_description()
-	return HERESYDESC_ZIZO_WEAPON
+/obj/item/rogueweapon/sword/avantyne/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_WEAPON)
 // OV Edit End
 
 /obj/item/rogueweapon/sword/long
@@ -420,8 +420,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "SWORD")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/sword/long/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_AVANTYNE
+/obj/item/rogueweapon/sword/long/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_AVANTYNE)
 // OV Edit End
 
 /obj/item/rogueweapon/sword/long/avantyne
@@ -440,8 +440,8 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/sword/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_WEAPON
+/obj/item/rogueweapon/sword/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_WEAPON)
 // OV Edit End
 
 /obj/item/rogueweapon/sword/long/heirloom
@@ -1663,8 +1663,8 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/sword/rapier/avantyne/get_heresy_description()
-	return HERESYDESC_ZIZO_AVANTYNE
+/obj/item/rogueweapon/sword/rapier/avantyne/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_AVANTYNE)
 // OV Edit End
 
 /obj/item/rogueweapon/sword/rapier/avantyne/relic

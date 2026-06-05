@@ -238,8 +238,8 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/matthios/get_heresy_description()
-	return HERESYDESC_MATTHIOS_ARMOR
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/matthios/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_MATTHIOS_ARMOR)
 // OV Edit End
 
 //
@@ -259,8 +259,8 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_ARMOR
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_ARMOR)
 // OV Edit End
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo/heavy
@@ -291,8 +291,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/graggar/get_heresy_description()
-	return HERESYDESC_GRAGGAR_ARMOR
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/graggar/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_GRAGGAR_ARMOR)
 // OV Edit End
 
 //

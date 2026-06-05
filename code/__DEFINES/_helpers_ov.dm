@@ -29,5 +29,14 @@
 #define HERESYDESC_BAOTHA_ICON "It bears the icon of debauched Baotha"
 #define HERESYDESC_BAOTHA_MISC "A known design of Baotha"
 
+// Heresy item severity levels. The more "Severely" heretical an item is, the more alarmingly the item will be presented on examine.
 #define HERESY_SEVERITY_SUSPICIOUS 1
 #define HERESY_SEVERITY_ALARMING 2
+
+// Heresy severity descriptions
+#define COLOR_HERESY_SEVERITY_SUSPICIOUS "bba737"
+#define COLOR_HERESY_SEVERITY_ALARMING "c43535"
+
+// Heresy severity descriptions
+#define DESCRIPTION_HERESY_SEVERITY_SUSPICIOUS "<b>This is a suspicious item!</b> Carrying this item out in the open is going to see me viewed with suspicion by Tennites and Psydonites - and rightfully so."
+#define DESCRIPTION_HERESY_SEVERITY_ALARMING "<b>This is a blatant, dangerous heretical item!</b> Carrying this out in the open is tantamount to declaring myself an enemy to Tennites and Psydonites, and they are likely to respond in kind."

@@ -584,8 +584,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "DAGGER")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/huntingknife/idagger/steel/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_WEAPON
+/obj/item/rogueweapon/huntingknife/idagger/steel/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_WEAPON)
 // OV Edit End
 
 /obj/item/rogueweapon/huntingknife/idagger/avantyne
@@ -601,8 +601,8 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/huntingknife/idagger/avantyne/get_heresy_description()
-	return HERESYDESC_ZIZO_WEAPON
+/obj/item/rogueweapon/huntingknife/idagger/avantyne/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_WEAPON)
 // OV Edit End
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/holysee

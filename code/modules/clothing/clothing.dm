@@ -635,10 +635,13 @@ BLIND     // can't see anything
 
 // OV Add Begin - Items have heresy descriptions!
 /obj/item/generate_tooltip(examine_text)
-	var/heresy_desc = get_heresy_description()
-	if(heresy_desc)
-		heresy_desc = "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [heresy_desc] &#x16E3;</font>"
-		examine_text = "<font color = '#c43535'>&#x16E3; [examine_text] &#x16E3;</font>"
+	var/heresy_status = get_heresy_status()
+	if(heresy_status)
+		var/heresy_desc = get_heresy_description(heresy_status)
+		var/severity = heresy_status[1]
+		var/severity_color = get_heresy_severity_color(severity)
+		var/severity_symbol = get_heresy_severity_symbol(severity)
+		examine_text = "<font color = '#[severity_color]'>[severity_symbol] [examine_text] [severity_symbol]</font>"
 		return SPAN_TOOLTIP_DANGEROUS_HTML(heresy_desc, examine_text)
 	return examine_text
 // OV Add End
@@ -654,10 +657,12 @@ BLIND     // can't see anything
 	var/str
 	// OV Edit Begin - Heresy item tooltip
 	var/is_heretical = FALSE
-	var/heresy_desc = get_heresy_description()
-	if(heresy_desc)
-		is_heretical = TRUE
-		str += "<font color = '#c43535'>&#x16E3; <b>HERETICAL:</b> [uppertext(heresy_desc)] &#x16E3;</font><br>"
+	var/heresy_status = get_heresy_status()
+	if(heresy_status)
+		var/heresy_desc = get_heresy_description(heresy_status)
+		if(heresy_desc)
+			is_heretical = TRUE
+			str += heresy_desc
 	// OV Edit End
 	str += "<b>ABSORPTION:</b> [colorgrade_rating("🔨 BLUNT", armor.blunt, elaborate = TRUE, max_tier = 5)]<br>"
 	str += "<b>BLOCK:</b> "
@@ -675,9 +680,12 @@ BLIND     // can't see anything
 
 	// OV Edit - Make it extra obvious if it's HERETICAL!
 	if(is_heretical)
-		examine_text = "<font color = '#c43535'>&#x16E3; [examine_text] &#x16E3;</font>"
-	// OV Edit End
+		var/severity = heresy_status[1]
+		var/severity_color = get_heresy_severity_color(severity)
+		var/severity_symbol = get_heresy_severity_symbol(severity)
+		examine_text = "<font color = '#[severity_color]'>[severity_symbol] [examine_text] [severity_symbol]</font>"
 	else
+	// OV Edit End
 		//This makes it appear darker than the rest of examine text. Draws the cursor to it like to a Wetsquires.rt link.
 		examine_text = "<font color = '#808080'>[examine_text]</font>"
 	return SPAN_TOOLTIP_DANGEROUS_HTML(str, examine_text)

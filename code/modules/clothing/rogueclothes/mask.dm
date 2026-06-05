@@ -435,7 +435,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/mask/rogue/facemask/steel/graggar/get_heresy_description()
+/obj/item/clothing/mask/rogue/facemask/steel/graggar/get_heresy_status()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 

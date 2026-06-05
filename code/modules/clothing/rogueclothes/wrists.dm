@@ -419,8 +419,8 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
 
 // OV Edit - Heresy Description
-/obj/item/clothing/wrists/roguetown/bracers/matthios/get_heresy_description()
-	return HERESYDESC_MATTHIOS_ARMOR
+/obj/item/clothing/wrists/roguetown/bracers/matthios/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_MATTHIOS_ARMOR)
 // OV Edit End
 
 //
@@ -442,8 +442,8 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/wrists/roguetown/bracers/zizo/get_heresy_description()
-	return HERESYDESC_ZIZO_ARMOR
+/obj/item/clothing/wrists/roguetown/bracers/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_ZIZO_ARMOR)
 // OV Edit End
 
 /obj/item/clothing/wrists/roguetown/bracers/zizo/heavy
@@ -474,8 +474,8 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#1a146e", "alpha" = 120, "size" = 1)) //Cursed look.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/wrists/roguetown/bracers/graggar/get_heresy_description()
-	return HERESYDESC_MATTHIOS_ARMOR
+/obj/item/clothing/wrists/roguetown/bracers/graggar/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_MATTHIOS_ARMOR)
 // OV Edit End
 
 /obj/item/clothing/wrists/roguetown/bracers/graggar/heavy

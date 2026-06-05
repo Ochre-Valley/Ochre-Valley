@@ -1584,8 +1584,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "CLOAK", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/cloak/graggar/get_heresy_description()
-	return HERESYDESC_GRAGGAR_MISC
+/obj/item/clothing/cloak/graggar/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_GRAGGAR_MISC)
 // OV Edit End
 
 /obj/item/clothing/cloak/graggar/heavy

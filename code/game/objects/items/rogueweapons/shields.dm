@@ -437,8 +437,8 @@
 	smeltresult = /obj/item/ingot/component/zizo
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/shield/tower/metal/zizo/get_heresy_description()
-	return "An alloy of Zizo's anointed metals; Avantyne and Darksteel"
+/obj/item/rogueweapon/shield/tower/metal/zizo/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, "An alloy of Zizo's anointed metals; Avantyne and Darksteel")
 // OV Edit End
 
 /obj/item/rogueweapon/shield/tower/metal/zizo/Initialize()
@@ -701,8 +701,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "SHIELD", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/shield/iron/graggar/get_heresy_description()
-	return HERESYDESC_GRAGGAR_RELIC
+/obj/item/rogueweapon/shield/iron/graggar/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_GRAGGAR_RELIC)
 // OV Edit End
 
 #undef SHIELD_BANG_COOLDOWN

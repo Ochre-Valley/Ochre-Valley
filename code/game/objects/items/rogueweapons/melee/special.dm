@@ -481,8 +481,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "GAUNTLET", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/handclaw/steel/graggaredged/get_heresy_description()
-	return HERESYDESC_GRAGGAR_WEAPON
+/obj/item/rogueweapon/handclaw/steel/graggaredged/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_GRAGGAR_WEAPON)
 // OV Edit End
 
 /obj/item/rogueweapon/handclaw/steel/graggarblunt
@@ -504,8 +504,8 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "GAUNTLET", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/handclaw/steel/graggarblunt/get_heresy_description()
-	return HERESYDESC_GRAGGAR_WEAPON
+/obj/item/rogueweapon/handclaw/steel/graggarblunt/get_heresy_status()
+	return list(HERESY_SEVERITY_ALARMING, HERESYDESC_GRAGGAR_WEAPON)
 // OV Edit End
 
 ///Peasantry / Militia Weapon Pack///
