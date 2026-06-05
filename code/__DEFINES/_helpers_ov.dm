@@ -5,25 +5,26 @@
 #define HERESYDESC_ZIZO_ARMOR "An accursed armor piece of Zizo's champions"
 #define HERESYDESC_ZIZO_RELIC "A relic of Zizo's grim design"
 #define HERESYDESC_ZIZO_ICON "It bears the grim zcross of Zizo"
-#define HERESYDESC_ZIZO_MISC "A known creation of Zizo"
+#define HERESYDESC_ZIZO_MISC "A known design of Zizo"
+#define HERESYDESC_ZIZO_AVANTYNE "It is forged out of Zizo's foul Avantyne"
 
 // Matthios items
 #define HERESYDESC_MATTHIOS_WEAPON "A weapon of Matthios's greedy champions"
 #define HERESYDESC_MATTHIOS_ARMOR "An avaricious armor piece of Matthios's champions"
 #define HERESYDESC_MATTHIOS_RELIC "A relic of Matthios's covetous design"
 #define HERESYDESC_MATTHIOS_ICON "It bears the covetous icon of Matthios"
-#define HERESYDESC_MATTHIOS_MISC "A known creation of Matthios"
+#define HERESYDESC_MATTHIOS_MISC "A known design of Matthios"
 
 // Graggar items
 #define HERESYDESC_GRAGGAR_WEAPON "A weapon of Graggar's bloodthirsty champions"
 #define HERESYDESC_GRAGGAR_ARMOR "A brutal armor piece of Graggar's champions"
 #define HERESYDESC_GRAGGAR_RELIC "A relic of Graggar's cruel design"
 #define HERESYDESC_GRAGGAR_ICON "It bears the icon of cruel Graggar"
-#define HERESYDESC_GRAGGAR_MISC "A known creation of Graggar"
+#define HERESYDESC_GRAGGAR_MISC "A known design of Graggar"
 
 // Baotha items
 #define HERESYDESC_BAOTHA_WEAPON "A weapon of Baotha's depraved champions"
 #define HERESYDESC_BAOTHA_ARMOR "A depraved armor piece of Baotha's champions"
 #define HERESYDESC_BAOTHA_RELIC "A relic of Baotha's debauched design"
 #define HERESYDESC_BAOTHA_ICON "It bears the icon of debauched Baotha"
-#define HERESYDESC_BAOTHA_MISC "A known creation of Baotha"
+#define HERESYDESC_BAOTHA_MISC "A known design of Baotha"

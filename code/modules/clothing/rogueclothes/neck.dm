@@ -558,6 +558,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 15 //Heretical... //CC Edit
 
+/obj/item/clothing/neck/roguetown/psicross/aalloy/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ICON
+
 /obj/item/clothing/neck/roguetown/psicross/inhumen/paalloy
 	name = "ancient zcross"
 	desc = "'Progress. Ascension. Destiny. A mandate, commanded by God, to be fufilled by Man. She called us forth from the edge of reality - and with Her dying breath, rasped out the final truth; the fire is gone, and the world will soon follow.'"
@@ -572,6 +575,9 @@
 	icon_state = "zcross_iron"
 	resistance_flags = FIRE_PROOF
 	sellprice = 66 //Heretical...
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/iron/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ICON
 
 /obj/item/clothing/neck/roguetown/psicross/inhumen/bronze
 	name = "bronze inverted psycross"
@@ -596,6 +602,11 @@
 	smeltresult = null
 	sellprice = 66 //Heretical...
 
+// OV Edit - Heresy Description
+/obj/item/clothing/neck/roguetown/psicross/inhumen/matthios/get_heresy_description(mob/living/user)
+	return HERESYDESC_MATTHIOS_ICON
+// OV Edit End
+
 /obj/item/clothing/neck/roguetown/psicross/inhumen/graggar
 	name = "amulet of Graggar"
 	desc = "Blood leads only to glory, and violence begets divinity. Nothing less. Conquest is simply another name for victory."
@@ -605,6 +616,11 @@
 	smeltresult = null
 	sellprice = 66 //Heretical... //CC Edit
 
+// OV Edit - Heresy Description
+/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_ICON
+// OV Edit End
+
 /obj/item/clothing/neck/roguetown/psicross/inhumen/baotha
 	name = "amulet of Baotha"
 	desc = "A hollow promise rendered in gold. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
@@ -612,6 +628,11 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
 	smeltresult = null
+
+// OV Edit - Heresy Description
+/obj/item/clothing/neck/roguetown/psicross/inhumen/baotha/get_heresy_description(mob/living/user)
+	return HERESYDESC_BAOTHA_ICON
+// OV Edit End
 
 /obj/item/clothing/neck/roguetown/psicross/undivided
 	name = "amulet of Ten"
@@ -1097,6 +1118,11 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
 
+// OV Edit - Heresy Description
+/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/matthios/get_heresy_description(mob/living/user)
+	return HERESYDESC_MATTHIOS_ARMOR
+// OV Edit End
+
 //
 
 /obj/item/clothing/neck/roguetown/bevor/zizo
@@ -1114,8 +1140,10 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 
+// OV Edit - Heresy Description
 /obj/item/clothing/neck/roguetown/bevor/zizo/get_heresy_description(mob/living/user)
 	return HERESYDESC_ZIZO_ARMOR
+// OV Edit End
 
 /obj/item/clothing/neck/roguetown/bevor/zizo/heavy
 	name = "fused avantyne bevor"
@@ -1145,6 +1173,10 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#1a146e", "alpha" = 120, "size" = 1)) //Cursed look.
 
+// OV Edit - Heresy Description
+/obj/item/clothing/neck/roguetown/gorget/steel/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_ARMOR
+// OV Edit End
 
 //
 

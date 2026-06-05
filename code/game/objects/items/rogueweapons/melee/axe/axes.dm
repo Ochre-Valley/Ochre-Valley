@@ -288,6 +288,11 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "AXE", "RENDERED ASUNDER")
 
+// OV Edit - Heresy Description
+/obj/item/rogueweapon/stoneaxe/woodcut/steel/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_WEAPON
+// OV Edit End
+
 /obj/item/rogueweapon/stoneaxe/woodcut/steel/decorated
 	name = "decorated axe"
 	icon_state = "nsapo"
@@ -663,6 +668,11 @@
 	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/chop/heavy, /datum/intent/axe/sweep)
 	smeltresult = /obj/item/ingot/component/graggar
 	special = /datum/special_intent/vicious_swipe
+
+// OV Edit - Heresy Description
+/obj/item/rogueweapon/greataxe/steel/doublehead/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_WEAPON
+// OV Edit End
 
 /obj/item/rogueweapon/greataxe/steel/doublehead/graggar/Initialize()
 	. = ..()

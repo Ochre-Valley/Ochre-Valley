@@ -237,6 +237,11 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
 
+// OV Edit - Heresy Description
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/matthios/get_heresy_description(mob/living/user)
+	return HERESYDESC_MATTHIOS_ARMOR
+// OV Edit End
+
 //
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo
@@ -252,6 +257,11 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
+
+// OV Edit - Heresy Description
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ARMOR
+// OV Edit End
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zizo/heavy
 	name = "fused avantyne hauberk"
@@ -280,5 +290,9 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
+// OV Edit - Heresy Description
+/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_ARMOR
+// OV Edit End
 
 //

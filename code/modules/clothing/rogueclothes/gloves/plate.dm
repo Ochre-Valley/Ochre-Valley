@@ -66,6 +66,11 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
+// OV Edit - Heresy Description
+/obj/item/clothing/gloves/roguetown/plate/graggar/get_heresy_description(mob/living/user)
+	return HERESYDESC_GRAGGAR_ARMOR
+// OV Edit End
+
 /obj/item/clothing/gloves/roguetown/plate/graggar/heavy
 	name = "vicious plated gauntlets"
 	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the lyfe that once was - and now, a stinging reminder of what could've been."
@@ -95,6 +100,11 @@
 	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Remove Maint
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
+// OV Edit - Heresy Description
+/obj/item/clothing/gloves/roguetown/plate/matthios/get_heresy_description(mob/living/user)
+	return HERESYDESC_MATTHIOS_ARMOR
+// OV Edit End
+
 /*/obj/item/clothing/gloves/roguetown/plate/matthios/dropped(mob/living/carbon/human/user) //OV Edit Start - Armor Remove Maint
 	. = ..()
 	if(QDELETED(src))
@@ -117,6 +127,11 @@
 /obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
+
+// OV Edit - Heresy Description
+/obj/item/clothing/gloves/roguetown/plate/zizo/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ARMOR
+// OV Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/zizo/dropped(mob/living/carbon/human/user)
 	return ..()
@@ -145,6 +160,11 @@
 	smeltresult = /obj/item/ingot/avantyne
 	armor = ARMOR_PLATE_BSTEEL
 	body_parts_covered = HANDS|ARMS
+
+// OV Edit - Heresy Description
+/obj/item/clothing/gloves/roguetown/plate/avantyne/get_heresy_description(mob/living/user)
+	return HERESYDESC_ZIZO_ARMOR
+// OV Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/shadowgauntlets
 	name = "darkplate gauntlets"
