@@ -1839,7 +1839,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		var/severity_symbol = get_heresy_severity_symbol(severity)
 		var/severity_itis = "[itis ? "It is " : ""]<b>[get_heresy_severity_adjective(severity)]</b>"
 		
-		return "<br><font color = '#[severity_color]'>[severity_symbol] [severity_itis]: [uppertext(heresy_desc)] [severity_symbol]</font>"
+		return "<font color = '#[severity_color]'>[severity_symbol] [severity_itis]: [uppertext(heresy_desc)] [severity_symbol]</font>"
 	return null
 
 /obj/item/proc/get_heresy_severity_adjective(severity_level)
@@ -1847,7 +1847,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		if(HERESY_SEVERITY_SUSPICIOUS)
 			return "SUSPICIOUS"
 		if(HERESY_SEVERITY_ALARMING)
-			return "ALARMING"
+			return "HERETICAL"
 	return null
 
 /obj/item/proc/get_heresy_severity_explanation(severity_level)
