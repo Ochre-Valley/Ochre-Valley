@@ -1403,7 +1403,7 @@
 	var/heresy_desc = I.get_heresy_description()
 	var/item_examine_string = I.get_examine_string(user)
 	if(heresy_desc)
-		var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3 IT IS <b>HERETICAL:</b> [heresy_desc] &#x16E3</font><br>\
+		var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3<b>HERETICAL:</b> [uppertext(heresy_desc)] &#x16E3</font><br>\
 			Openly wielding this item counts as a form of PVP escalation due to its heretical (antagonisic) nature."
 		item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#c43535'>&#x16E3 [item_examine_string] &#x16E3</font>")
 	return item_examine_string
