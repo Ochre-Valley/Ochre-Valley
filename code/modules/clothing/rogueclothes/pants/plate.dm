@@ -68,7 +68,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/under/roguetown/platelegs/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/under/roguetown/platelegs/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -87,7 +87,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/under/roguetown/platelegs/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/under/roguetown/platelegs/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -110,7 +110,7 @@
 	unenchantable = TRUE
 
 // OV Edit - Heresy Description
-/obj/item/clothing/under/roguetown/platelegs/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/under/roguetown/platelegs/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -149,7 +149,7 @@
 	armor = ARMOR_PLATE_BSTEEL
 
 // OV Edit - Heresy Description
-/obj/item/clothing/under/roguetown/platelegs/avantyne/get_heresy_description(mob/living/user)
+/obj/item/clothing/under/roguetown/platelegs/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 

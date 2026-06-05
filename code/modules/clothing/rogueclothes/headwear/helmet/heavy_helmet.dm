@@ -1236,7 +1236,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/head/roguetown/helmet/heavy/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/head/roguetown/helmet/heavy/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -1255,7 +1255,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "HELM", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/head/roguetown/helmet/heavy/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/head/roguetown/helmet/heavy/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -1300,7 +1300,7 @@
 	unenchantable = TRUE
 
 // OV Edit - Heresy Description
-/obj/item/clothing/head/roguetown/helmet/heavy/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/head/roguetown/helmet/heavy/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -1352,7 +1352,7 @@
 	armor_class = ARMOR_CLASS_LIGHT
 
 // OV Edit - Heresy Description
-/obj/item/clothing/head/roguetown/helmet/heavy/avantyne/get_heresy_description(mob/living/user)
+/obj/item/clothing/head/roguetown/helmet/heavy/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 

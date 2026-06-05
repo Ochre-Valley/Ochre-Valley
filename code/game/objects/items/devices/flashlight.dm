@@ -593,7 +593,7 @@
 	light_color = "#ceff72ff"
 
 // OV Edit - Heresy Description
-/obj/item/flashlight/flare/torch/lantern/pumpkin/zizo/get_heresy_description(mob/living/user)
+/obj/item/flashlight/flare/torch/lantern/pumpkin/zizo/get_heresy_description()
 	return "GREAT GOOGLY MOOGLY, THAT PUMPKIN IS PRAISING SHE OF Z!"
 // OV Edit End
 

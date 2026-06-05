@@ -308,7 +308,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/fluted/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -324,7 +324,7 @@
 	unenchantable = TRUE
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/full/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/full/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -474,7 +474,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/full/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/full/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -500,7 +500,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/fluted/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -524,7 +524,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR") //OV Edit - Armor Marked as heretic
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/fluted/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -544,7 +544,7 @@
 	smeltresult = /obj/item/ingot/avantyne //Made from 'inert avantyne wafers', meaning that anyone can feasibly wear it.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/suit/roguetown/armor/plate/fluted/avantyne/get_heresy_description(mob/living/user)
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 

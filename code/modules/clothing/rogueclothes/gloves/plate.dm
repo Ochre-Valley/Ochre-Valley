@@ -67,7 +67,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/gloves/roguetown/plate/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/gloves/roguetown/plate/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
@@ -101,7 +101,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/gloves/roguetown/plate/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/gloves/roguetown/plate/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -129,7 +129,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 
 // OV Edit - Heresy Description
-/obj/item/clothing/gloves/roguetown/plate/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/gloves/roguetown/plate/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -162,7 +162,7 @@
 	body_parts_covered = HANDS|ARMS
 
 // OV Edit - Heresy Description
-/obj/item/clothing/gloves/roguetown/plate/avantyne/get_heresy_description(mob/living/user)
+/obj/item/clothing/gloves/roguetown/plate/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 

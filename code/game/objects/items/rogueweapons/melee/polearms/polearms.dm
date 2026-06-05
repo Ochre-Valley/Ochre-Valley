@@ -637,7 +637,7 @@
 	smeltresult = /obj/item/ingot/avantyne
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/spear/billhook/avantyne/get_heresy_description(mob/living/user)
+/obj/item/rogueweapon/spear/billhook/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_AVANTYNE
 // OV Edit End
 

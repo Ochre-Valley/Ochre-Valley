@@ -344,7 +344,7 @@
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "FLAIL")
 
 // OV Edit - Heresy Description
-/obj/item/rogueweapon/flail/peasantwarflail/matthios/get_heresy_description(mob/living/user)
+/obj/item/rogueweapon/flail/peasantwarflail/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_WEAPON
 // OV Edit End
 

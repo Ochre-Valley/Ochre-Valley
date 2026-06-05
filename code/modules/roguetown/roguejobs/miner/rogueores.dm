@@ -390,7 +390,7 @@
 	sellprice = 130
 
 // OV Edit - Heresy Description
-/obj/item/ingot/avantyne/get_heresy_description(mob/living/user)
+/obj/item/ingot/avantyne/get_heresy_description()
 	return HERESYDESC_ZIZO_AVANTYNE
 // OV Edit End
 
@@ -463,7 +463,7 @@
 	dropshrink = 0.7
 
 // OV Edit - Heresy Description
-/obj/item/ingot/component/zizo/get_heresy_description(mob/living/user)
+/obj/item/ingot/component/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_AVANTYNE
 // OV Edit End
 
@@ -474,7 +474,7 @@
 	dropshrink = 0.7
 
 // OV Edit - Heresy Description
-/obj/item/ingot/component/graggar/get_heresy_description(mob/living/user)
+/obj/item/ingot/component/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_MISC
 // OV Edit End
 
@@ -485,7 +485,7 @@
 	dropshrink = 0.7
 
 // OV Edit - Heresy Description
-/obj/item/ingot/component/matthios/get_heresy_description(mob/living/user)
+/obj/item/ingot/component/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_MISC
 // OV Edit End
 
@@ -496,6 +496,6 @@
 	dropshrink = 0.7
 
 // OV Edit - Heresy Description
-/obj/item/ingot/component/baotha/get_heresy_description(mob/living/user)
+/obj/item/ingot/component/baotha/get_heresy_description()
 	return HERESYDESC_BAOTHA_MISC
 // OV Edit End

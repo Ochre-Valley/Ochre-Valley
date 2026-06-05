@@ -1810,9 +1810,9 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return FALSE
 
 // OV Add - Heresy description
-/// Is this item commonly known as heretical? If it is, this should to return a **SHORT** description of the nature of the item's heresy.
+/// Is this item commonly known as heretical? If it is, this should to return a list containing first; a **SHORT** description of the nature of the item's heresy, and second; .
 /// When set, highlights the item's examine name/tooltip with obvious heretical flavor when worn/held with "HERETICAL: [value]."
 /// If this returns null, the item will not be shown as heretical.
-/obj/item/proc/get_heresy_description(mob/living/user)
+/obj/item/proc/get_heresy_description()
 	return null
 // OV Add End

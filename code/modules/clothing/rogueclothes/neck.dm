@@ -558,7 +558,7 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 15 //Heretical... //CC Edit
 
-/obj/item/clothing/neck/roguetown/psicross/aalloy/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/psicross/aalloy/get_heresy_description()
 	return HERESYDESC_ZIZO_ICON
 
 /obj/item/clothing/neck/roguetown/psicross/inhumen/paalloy
@@ -576,7 +576,7 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 66 //Heretical...
 
-/obj/item/clothing/neck/roguetown/psicross/inhumen/iron/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/psicross/inhumen/iron/get_heresy_description()
 	return HERESYDESC_ZIZO_ICON
 
 /obj/item/clothing/neck/roguetown/psicross/inhumen/bronze
@@ -603,7 +603,7 @@
 	sellprice = 66 //Heretical...
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/psicross/inhumen/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/psicross/inhumen/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ICON
 // OV Edit End
 
@@ -617,7 +617,7 @@
 	sellprice = 66 //Heretical... //CC Edit
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ICON
 // OV Edit End
 
@@ -630,7 +630,7 @@
 	smeltresult = null
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/psicross/inhumen/baotha/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/psicross/inhumen/baotha/get_heresy_description()
 	return HERESYDESC_BAOTHA_ICON
 // OV Edit End
 
@@ -1119,7 +1119,7 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/matthios/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/matthios/get_heresy_description()
 	return HERESYDESC_MATTHIOS_ARMOR
 // OV Edit End
 
@@ -1141,7 +1141,7 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/bevor/zizo/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/bevor/zizo/get_heresy_description()
 	return HERESYDESC_ZIZO_ARMOR
 // OV Edit End
 
@@ -1174,7 +1174,7 @@
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#1a146e", "alpha" = 120, "size" = 1)) //Cursed look.
 
 // OV Edit - Heresy Description
-/obj/item/clothing/neck/roguetown/gorget/steel/graggar/get_heresy_description(mob/living/user)
+/obj/item/clothing/neck/roguetown/gorget/steel/graggar/get_heresy_description()
 	return HERESYDESC_GRAGGAR_ARMOR
 // OV Edit End
 
