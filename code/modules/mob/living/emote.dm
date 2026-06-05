@@ -425,6 +425,12 @@
 	show_runechat = FALSE
 	needs_emotion = TRUE
 
+//OV edit
+/datum/emote/living/groan/quiet
+	key = "groanq"
+	is_quiet = TRUE
+//OV edit end
+
 // Attack blip played randomly.
 /datum/emote/living/attack
 	key = "attack"
@@ -967,6 +973,12 @@
 	only_forced_audio = TRUE
 	show_runechat = FALSE
 	needs_emotion = TRUE
+
+//OV edit
+/datum/emote/living/painmoan/quiet
+	key = "painmoanq"
+	is_quiet = TRUE
+//OV edit end
 
 /datum/emote/living/groin
 	key = "groin"

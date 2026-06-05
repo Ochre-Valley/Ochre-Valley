@@ -837,10 +837,10 @@
 				def_zone = BODY_ZONE_R_LEG
 	if(istype(skin_armor, /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor)) //Always return early if natural armor is present, it doesn't allow other armors to work
 		var/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/C = skin_armor
-		if(C.obj_integrity > 0)
-			used = C
-			return used
-		return //return null if no armor
+		if(C.obj_integrity <= 0 || C.obj_broken)
+			return //return null if no armor
+		used = C
+		return used
 	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, glasses, ears, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
 	for(var/bp in body_parts)
 		if(!bp)
@@ -877,7 +877,7 @@
 	if(istype(skin_armor, /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor)) //Always return early if natural armor is present, it doesn't allow other armors to work
 		var/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/C = skin_armor
 		var/list/used_armor = list()
-		if(C.obj_integrity > 0)
+		if(C.obj_integrity > 0 || !C.obj_broken)
 			var/val = C.armor.getRating(d_type)
 			if(val > 0)
 				used_armor[C] = C.armor.getRating(d_type)

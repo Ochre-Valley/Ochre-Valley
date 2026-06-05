@@ -773,6 +773,10 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	swimming_filter_client = null
 
 /mob/living/proc/handle_swimming()
+	//OV edit - No need for any of this if in a belly
+	if(isbelly(loc))
+		return
+	//OV edit end
 	var/turf/T = get_turf(src)
 	var/area/A = get_area(src)
 	

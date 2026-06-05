@@ -34,7 +34,7 @@
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/force = sex_session.force
 	var/sound = pick('sound/foley/slap.ogg', 'sound/foley/smackspecial.ogg')
-	playsound(target, sound, 50, TRUE, -2, ignore_walls = FALSE)
+	playsound(target, sound, 50, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 
 	var/msg = "[user] [sex_session.get_generic_force_adjective()] spanks [target]'s butt."
 	user.visible_message(sex_session.spanify_force(msg))

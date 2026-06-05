@@ -26,7 +26,7 @@
 /datum/sex_action/miscellaneous/grind_body/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	user.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective()] grinds against [target]."))
-	playsound(target, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE)
+	playsound(target, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 	do_thrust_animate(user, target)
 
 	sex_session.perform_sex_action(user, 1, 0.5, TRUE)

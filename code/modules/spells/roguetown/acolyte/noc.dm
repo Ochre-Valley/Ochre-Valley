@@ -245,12 +245,12 @@
 	desc = "Make another (or yourself) invisible for some time. Duration scales with intelligence. Casting, attacking or being attacked will cancel the duration."
 	releasedrain = 30
 	chargedrain = 5
-	chargetime = 5
+	chargetime = 5 SECONDS // OV Edit
 	clothes_req = FALSE
 	recharge_time = 30 SECONDS
 	range = 3
 	warnie = "sydwarning"
-	movement_interrupt = FALSE
+	movement_interrupt = TRUE // OV Edit
 	spell_tier = 1
 	invocation_type = "none"
 	glow_color = GLOW_COLOR_ILLUSION

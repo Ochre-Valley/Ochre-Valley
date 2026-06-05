@@ -48,7 +48,7 @@
 /datum/sex_action/masturbate/other/godjob/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/skill_level = user.get_skill_level(/datum/skill/magic/holy)
-	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE)
+	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 
 	switch(user.patron?.type)//There has to be better way to do this but whoever comes after that is a YOU problem not mine.
 		if(/datum/patron/old_god, /datum/patron/divine/undivided)

@@ -94,6 +94,13 @@
 					/obj/item/book/granter/spell/bonechill/mirror_transform
 				)
 
+/datum/supply_pack/rogue/kink_toy/taur_potion
+	name = "Crurahol (Taur) Potion"
+	cost = 20
+	contains = list(
+					/obj/item/taur_potion
+				)
+
 /datum/supply_pack/rogue/kink_toy/capture_crystal
 	name = "Capture Crystal"
 	cost = 100

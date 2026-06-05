@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Natural armour no longer makes you immortal."
+  - balance: "Natural armour now functions similarly to skin armour: No longer consumed nutrition, but can not regen in combat."

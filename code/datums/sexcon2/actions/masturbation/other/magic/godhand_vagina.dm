@@ -48,7 +48,7 @@
 /datum/sex_action/masturbate/other/godjob_vagina/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/skill_level = user.get_skill_level(/datum/skill/magic/holy)
-	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE)
+	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 
 	switch(user.patron?.type)//There has to be better way to do this but whoever comes after that is a YOU problem not mine.
 		if(/datum/patron/old_god, /datum/patron/divine/undivided)
@@ -74,7 +74,7 @@
 			sex_session.perform_sex_action(target, (4*skill_level), 5, TRUE)
 		if(/datum/patron/divine/xylix)
 			user.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective()] fingers [target]'s cunt... where is that jingle coming from?"))
-			playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE)
+			playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 			sex_session.perform_sex_action(target, (4*skill_level), 0, TRUE)
 		else
 			user.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective()] fingers [target]'s cunt..."))

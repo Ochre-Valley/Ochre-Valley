@@ -1,3 +1,6 @@
+// OV Add Start: We've disabled this event.
+#error This file has been deliberately disabled by Ochre Valley and must remain unticked!
+// OV Add End
 /datum/round_event_control/antagonist/solo/dreamwalker
 	name = "Dreamwalker"
 	tags = list(

@@ -372,17 +372,17 @@
 	if(pain_amt >= PAIN_MILD_EFFECT)
 		if(giving)
 			if(prob(30))
-				chosen_emote = "groan"
+				chosen_emote = "groanq" //OV EDIT
 		else
 			if(prob(40))
-				chosen_emote = "painmoan"
+				chosen_emote = "painmoanq" //OV EDIT
 	if(pain_amt >= PAIN_MED_EFFECT)
 		if(giving)
 			if(prob(50))
-				chosen_emote = "groan"
+				chosen_emote = "groanq" //OV EDIT
 		else
 			if(prob(60))
-				chosen_emote = "painmoan"
+				chosen_emote = "painmoanq" //OV EDIT
 
 	last_moan = world.time
 	user.emote(chosen_emote)

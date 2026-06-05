@@ -55,7 +55,7 @@
 	user.make_sucking_noise()
 	// my father. birthed me into the class of yeoman.
 	if(istype(user.head, /obj/item/clothing/head/roguetown/jester))
-		playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE)
+		playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 	do_thrust_animate(user, target)
 
 	sex_session.perform_sex_action(target, 2, 3, TRUE)

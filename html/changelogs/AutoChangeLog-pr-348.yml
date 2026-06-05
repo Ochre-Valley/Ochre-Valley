@@ -1,0 +1,4 @@
+author: "Ryumi"
+delete-after: True
+changes:
+  - balance: "The invisibility spell now has a 5 second cast time and now requires the user to stand still while casting."

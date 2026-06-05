@@ -276,6 +276,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	body += "<b>Apply Components:</b><br>"
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_stats;target=[REF(H)]'>Apply Stats</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_equipment_spells;target=[REF(H)]'>Apply Equipment/Spells</A> | "
+	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=add_remove_spell;target=[REF(H)]'>Add/Remove Spell</A> | " //OV Edit: Add/remove spells from loadout panel
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_skills;target=[REF(H)]'>Apply Skills</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_traits;target=[REF(H)]'>Apply Traits</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];loadout_action=apply_examine_title;target=[REF(H)]'>Apply Examine Title</A><br>"
@@ -587,7 +588,12 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 			if(alert(usr, "This will reset [H.name] to a blank state, removing all equipment, skills, examine title, traits, and resetting stats. Continue?", "Confirm Clean Slate", "Yes", "No") == "Yes")
 				clean_slate_mob(H)
 				show_loadout_panel(H)
-	
+
+		//OV Edit: Add and remove spells
+		if("add_remove_spell")
+			add_remove_spell(H)
+			show_loadout_panel(H)
+		//OV Edit End
 	return TRUE
 
 /client/proc/robust_dress_shop()
@@ -1130,7 +1136,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 	
 	// Clear spells and aspect config if they have a mind
 	if(H.mind)
-		for(var/obj/effect/proc_holder/spell/S in H.mind.spell_list)
+		for(var/S in H.mind.spell_list) //OV Edit: Not all spells are /obj/ Some are datums too
 			H.mind.RemoveSpell(S)
 		H.mind.mage_aspect_config = null
 		H.mind.major_aspects = null
