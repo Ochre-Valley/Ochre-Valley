@@ -533,15 +533,7 @@
 	//Hands
 	for(var/obj/item/I in held_items)
 		if(!(I.item_flags & ABSTRACT))
-			// OV Edit - Check for ITEM HERESY
-			var/heresy_desc = I.get_heresy_description()
-			var/item_examine_string = I.get_examine_string(user)
-			if(heresy_desc)
-				var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3 IT IS <b>HERETICAL:</b> [heresy_desc] &#x16E3</font><br>\
-					Holding this item counts as a form of PVP escalation due to its heretical (antagonisic) nature."
-				item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#c43535'>&#x16E3 [item_examine_string] &#x16E3</font>")
-			var/str = "[m1] holding [item_examine_string] in [m2] [get_held_index_name(get_held_index_of_item(I))]. "
-			// OV Edit End
+			var/str = "[m1] holding [get_item_examine_text(I, user)] in [m2] [get_held_index_name(get_held_index_of_item(I))]. " // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 			str += I.integrity_check(is_smart, guarded)
 			. += str
 
@@ -563,19 +555,19 @@
 
 	//belt
 	if(belt && !(SLOT_BELT in obscured))
-		var/str = "[m3] [belt.get_examine_string(user)] about [m2] waist. "
+		var/str = "[m3] [get_item_examine_text(belt, user)] about [m2] waist. " // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 		str += belt.integrity_check(is_smart, guarded)
 		. += str
 
 	//right belt
 	if(beltr && !(SLOT_BELT_R in obscured))
-		var/str = "[m3] [beltr.get_examine_string(user)] on [m2] belt. "
+		var/str = "[m3] [get_item_examine_text(beltr, user)] on [m2] belt. " // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 		str += beltr.integrity_check(is_smart, guarded)
 		. += str
 
 	//left belt
 	if(beltl && !(SLOT_BELT_L in obscured))
-		var/str = "[m3] [beltl.get_examine_string(user)] on [m2] belt. "
+		var/str = "[m3] [get_item_examine_text(beltl, user)] on [m2] belt. " // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 		str += beltl.integrity_check(is_smart)
 		. += str
 
@@ -602,7 +594,7 @@
 			var/obj/item/clothing/CM = mouth
 			str = "[m3] [CM.generate_tooltip(CM.get_examine_string(user))] in [m2] mouth. "
 		else
-			"[m3] [mouth.get_examine_string(user)] in [m2] mouth. "
+			"[m3] [get_item_examine_text(mouth, user)] in [m2] mouth. " // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 		str += mouth.integrity_check(is_smart, guarded)
 		if(is_stupid)
 			str = "[m3] some kinda thing on [m2] mouth!"
@@ -619,13 +611,13 @@
 	//eyes
 	if(!(SLOT_GLASSES in obscured))
 		if(glasses)
-			. += "[m3] [glasses.get_examine_string(user)] covering [m2] eyes."
+			. += "[m3] [get_item_examine_text(glasses, user)] covering [m2] eyes." // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 		else if(eye_color == BLOODCULT_EYE)
 			. += span_warning("<B>[m2] eyes are glowing an unnatural red!</B>")
 
 	//ears
 	if(ears && !(SLOT_HEAD in obscured))
-		. += "[m3] [ears.get_examine_string(user)] on [m2] ears."
+		. += "[m3] [get_item_examine_text(ears, user)] on [m2] ears." // OV Edit - Use `get_item_examine_text` to check for ITEM HERESY
 
 	//ID
 	if(wear_ring && !(SLOT_RING in obscured))
@@ -1404,4 +1396,15 @@
 				msg_type = "[SPAN_TOOLTIP("Oral Vore, Anal Vore, Cock Vore and Unbirth[pref_warning]","[get_badge_span("type_ov_av_cv_ub")]")]"
 	var/badge_line = "[msg_gng][msg_lean][msg_vore][msg_type][msg_willing][msg_sexuality][msg_erp]"
 	return badge_line
-//OV edit end
+
+// OV Edit Start - Check for ITEM HERESY
+/// Returns The examine string of the passed item, including a very obvious heresy highlight if the item is heretical (see `/obj/item/proc/get_heresy_description`.)
+/mob/living/proc/get_item_examine_text(obj/item/I, mob/living/user)
+	var/heresy_desc = I.get_heresy_description()
+	var/item_examine_string = I.get_examine_string(user)
+	if(heresy_desc)
+		var/heresy_examine_tooltip = "<font color = '#c43535'>&#x16E3 IT IS <b>HERETICAL:</b> [heresy_desc] &#x16E3</font><br>\
+			Openly wielding this item counts as a form of PVP escalation due to its heretical (antagonisic) nature."
+		item_examine_string = SPAN_TOOLTIP_DANGEROUS_HTML(heresy_examine_tooltip, "<font color = '#c43535'>&#x16E3 [item_examine_string] &#x16E3</font>")
+	return item_examine_string
+//OV Edit End
