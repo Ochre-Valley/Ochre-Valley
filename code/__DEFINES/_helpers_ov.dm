@@ -28,3 +28,6 @@
 #define HERESYDESC_BAOTHA_RELIC "A relic of Baotha's debauched design"
 #define HERESYDESC_BAOTHA_ICON "It bears the icon of debauched Baotha"
 #define HERESYDESC_BAOTHA_MISC "A known design of Baotha"
+
+#define HERESY_SEVERITY_SUSPICIOUS 1
+#define HERESY_SEVERITY_ALARMING 2
