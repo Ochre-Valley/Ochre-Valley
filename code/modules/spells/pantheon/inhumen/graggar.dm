@@ -192,6 +192,7 @@
 	invocations = list("TURN AND FACE THE BLOOD GOD!!") //OV EDIT - VERY loud. do NOT add other invocations, this projectile can FUUUCK people up and needs to be telegraphed.
 	sound = 'sound/magic/blood_net.ogg'
 	range = 8
+	human_req = TRUE
 
 /obj/projectile/magic/unholy_grasp
 	name = "visceral organ net"
@@ -232,6 +233,7 @@
 	sound = 'sound/magic/graggar_silence.ogg'
 	invocations = list("BE SILENT!", "QUIET!", "NOT ANOTHER WORD!")
 	zizo_spell = FALSE // Graggar wants his car back.
+	human_req = TRUE
 
 /obj/effect/proc_holder/spell/invoked/silence/graggar/cast(list/targets, mob/user = usr)//This one does actually work on mages, fully.
 	if(iscarbon(targets[1]))
@@ -276,6 +278,7 @@
 	releasedrain = 30
 	miracle = TRUE
 	devotion_cost = 70
+	human_req = TRUE
 
 /obj/effect/proc_holder/spell/invoked/revel_in_slaughter/cast(list/targets, mob/living/user = usr)
 	var/mob/living/carbon/human/human = targets[1]

@@ -8,7 +8,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	f_title = "Princess"
-	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED) //Maybe a system to force-pick lineage based on king and queen should be implemented. (No it shouldn't.) //OV Edit - allow all
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED RACES_OOZE) //OV Edit - Allow all for good or ill
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT)
 	advclass_cat_rolls = list(CTAG_HEIR = 20)
@@ -18,7 +18,7 @@
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
 	noble_income = 20
-	min_pq = 1 //OV EDIT
+	min_pq = 1
 	max_pq = null
 	round_contrib_points = 3
 	cmode_music = 'sound/music/combat_noble.ogg'
@@ -31,9 +31,10 @@
 		/datum/advclass/heir/scamp
 	)
 
+
 /datum/outfit/job/roguetown/heir/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.verbs |= /mob/living/carbon/human/proc/declarechampion
+	add_verb(H, /mob/living/carbon/human/proc/declarechampion)
 	has_loadout = TRUE
 
 /datum/outfit/job/roguetown/heir/choose_loadout(mob/living/carbon/human/H)
@@ -322,7 +323,7 @@
 
 /mob/living/carbon/human/proc/declarechampion()
 	set name = "Declare Champion"
-	set category = "Noble"
+	set category = "RoleUnique.Noble"
 
 
 	if(stat)

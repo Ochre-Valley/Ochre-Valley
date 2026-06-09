@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - admin: "Adds new manifest for admins to view, effectively a more convenient 'whom'"

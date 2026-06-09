@@ -1,4 +1,16 @@
 #define MAX_FARM_ANIMALS 20
+// How long it takes to start butchering as an unskilled person
+#define BUTCHERING_UNSKILLED_PRE_TIME 0.5 SECONDS
+// Time pre calculations
+#define BUTCHERING_BASE_TIME_PER_STEP 2 SECONDS
+// Max time per butchering step
+#define BUTCHERING_MAX_TIME_PER_STEP 1.8 SECONDS
+// Time per step reduction per skill level
+#define BUTCHERING_TIME_REDUCTION_PER_SKILL 0.3 SECONDS
+// EXP per int per step
+#define BUTCHERING_EXP_PER_STEP 0.4
+// EXP for fully finishing a butchering process per int
+#define BUTCHERING_EXP_FINISH 2
 
 GLOBAL_VAR_INIT(farm_animals, FALSE)
 
@@ -538,11 +550,11 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/obj/item/held_item = user.get_active_held_item()
 		if(held_item)
 			if((butcher_results || guaranteed_butcher_results) && ((held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT) || istype(held_item, /obj/item/contraption/shears)))
-				var/used_time = 3 SECONDS
+				var/used_time = BUTCHERING_UNSKILLED_PRE_TIME
 				var/on_meathook = FALSE
 				if((src.buckled && istype(src.buckled, /obj/structure/meathook))|| istype(held_item, /obj/item/contraption/shears))
 					on_meathook = TRUE //will work efficiently if they are using autosheers as well
-					used_time -= 3 SECONDS
+					used_time -= BUTCHERING_UNSKILLED_PRE_TIME
 					visible_message("[user] begins to efficiently butcher [src]...")
 				else
 					visible_message("[user] begins to butcher [src]...")
@@ -585,7 +597,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		ssaddle = null
 
 	var/butchery_skill_level = user.get_skill_level(/datum/skill/labor/butchering)
-	var/time_per_cut = max(5, 30 - butchery_skill_level * 5) // 3 seconds for no skill, 5 ticks for master
+	var/time_per_cut = min(BUTCHERING_MAX_TIME_PER_STEP, BUTCHERING_BASE_TIME_PER_STEP - butchery_skill_level * BUTCHERING_TIME_REDUCTION_PER_SKILL) // 1.8 seconds for no skill, 0.2 seconds for legendary
 	if(on_meathook)
 		time_per_cut *= 0.75
 	var/botch_chance = 0
@@ -656,8 +668,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					var/obj/item/reagent_containers/food/snacks/F = I
 					F.become_rotten()
 
-		if(user.mind)
-			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * 0.5)
+		if(user.mind && !isemptylist(butcher_results))
+			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * BUTCHERING_EXP_PER_STEP)
 		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 	if(isemptylist(butcher_results))
 		if(head_butcher)
@@ -680,7 +692,9 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				head_quality = -1
 			head.scale_butchering_quality(head_quality)
 		to_chat(user, "<span class='notice'>I finish butchering: [butcher_summary(botch_count, normal_count, perfect_count, botch_chance, perfect_chance)].</span>")
-		clean_gib(dna_to_add)
+		if(user.mind)
+			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * BUTCHERING_EXP_FINISH)
+		clean_gib(dna_to_add) //OV NOTE - NORMALLY JUST gib() with nothing below
 
 // This will choose a random adjacent tile to spawn a gib on, and then edit it's offset accordingly so it's closer to the body
 /mob/living/simple_animal/proc/botched_gib(list/dna_to_add)
@@ -772,10 +786,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		remove_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE)
 	add_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE, 100, multiplicative_slowdown = speed, override = TRUE)
 
-/mob/living/simple_animal/Stat()
-	..()
-	return //RTCHANGE
-
 /mob/living/simple_animal/proc/drop_loot()
 	for(var/i in loot) // If someone puts a turf in this list I'm going to kill you.
 		new i(loc)
@@ -789,7 +799,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(dextrous)
 		drop_all_held_items()
 	if(!gibbed)
-		emote("death", forced = TRUE)
+		play_death_emote()
 	layer = layer-0.1
 	if(del_on_death)
 		..()
@@ -1338,7 +1348,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 //Flight related procs foy flying simple_animals
 /mob/living/simple_animal/proc/fly_up()
-	set category = "Winged Form"
+	set category = "RoleUnique.Winged Form"
 	set name = "Fly Up"
 
 	if(src.pulledby != null)
@@ -1353,7 +1363,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			to_chat(src, span_notice("I can't fly away while being grabbed!"))
 
 /mob/living/simple_animal/proc/fly_down()
-	set category = "Winged Form"
+	set category = "RoleUnique.Winged Form"
 	set name = "Fly Down"
 
 	if(src.pulledby != null)
@@ -1369,3 +1379,9 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 //End flight
 
 #undef MAX_FARM_ANIMALS
+#undef BUTCHERING_UNSKILLED_PRE_TIME
+#undef BUTCHERING_BASE_TIME_PER_STEP
+#undef BUTCHERING_MAX_TIME_PER_STEP
+#undef BUTCHERING_TIME_REDUCTION_PER_SKILL
+#undef BUTCHERING_EXP_PER_STEP
+#undef BUTCHERING_EXP_FINISH

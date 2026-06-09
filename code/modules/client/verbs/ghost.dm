@@ -41,7 +41,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 				if(D.buried && D.funeral)
 					D.returntolobby()
 					return
-			verbs -= GLOB.ghost_verbs
+			remove_verb(src, GLOB.ghost_verbs)
+			init_verbs()
 			mob.returntolobby()
 		if("No")
 			usr << "You have second thoughts."
@@ -58,9 +59,17 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 			return
 	// OV Edit End
 
-	if(mob.stat == DEAD && isliving(mob))
-		message_admins("[key_name_admin(usr)] is ghosting from their dead body.")
-		mob.ghostize(TRUE, ignore_zombie = TRUE)
+	if(!(mob.stat == DEAD && isliving(mob)))
+		return
+
+	var/response = alert(src, "Are you sure you want to leave your body?", "Leave Your Body", "Leave Body", "Stay")
+	if(response != "Leave Body")
+		return
+	if(!(mob.stat == DEAD && isliving(mob)))
+		return
+
+	message_admins("[key_name_admin(usr)] is ghosting from their dead body.")
+	mob.ghostize(TRUE, ignore_zombie = TRUE)
 
 /client/proc/reenter_corpse()
 	set category = "Spirit"
@@ -72,7 +81,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 /mob/verb/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	if(key)
@@ -108,7 +117,9 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 		qdel(M)
 		return
 
-	client?.verbs -= GLOB.ghost_verbs
+	if(client)
+		remove_verb(client, GLOB.ghost_verbs)
+	client?.init_verbs()
 	M.key = key
 	if(istype(src, /mob/dead/observer)) //Be rid of clogging ghost shades
 		qdel(src)

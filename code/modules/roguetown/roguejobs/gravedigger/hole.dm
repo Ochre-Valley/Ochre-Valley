@@ -70,13 +70,13 @@
 							//3 - 5 - Bones, small chance of decrepit item, 6 - 8 - Commoner Body, 9 - Noble Body, 10 - Nothing
 
 /obj/structure/closet/dirthole/closed/loot
-	var/looted = FALSE
+	var/hole_looted = FALSE
 	var/lootroll = 0
 
 //Caustic Edit - Making the drops more interesting!
 /obj/structure/closet/dirthole/closed/loot/open()
-	if(!looted)
-		looted = TRUE
+	if(!hole_looted)
+		hole_looted = TRUE
 		switch(lootroll)
 			if(1)
 				new /mob/living/carbon/human/species/skeleton/npc/easy(mastert) //Let's go gambling

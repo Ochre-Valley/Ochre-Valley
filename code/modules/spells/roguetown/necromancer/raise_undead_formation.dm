@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/raise_undead_formation
 	name = "Raise Undead Formation"
 	desc = "Invoke forbidden magicka to summon a cohort of mindless, shambling skeletons.\nMindless skeletons can be given orders to guard, patrol, and attack by their summoner.\nThese skeletons are weaker than their more complex-jointed counterparts, but are harder to incapacitate."
+	background_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon_state = "skeleton_formation"
 	cast_range = 7
@@ -46,7 +47,7 @@
 			else
 				spawn_turf = get_step(T, prob(50) ? NORTH : SOUTH)
 
-		if(!isopenturf(spawn_turf))
+		if(!isopenturf(spawn_turf) || spawn_turf.is_blocked_turf())
 			continue
 
 		new /obj/effect/temp_visual/bluespace_fissure(spawn_turf)

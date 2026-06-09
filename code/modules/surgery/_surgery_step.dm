@@ -230,8 +230,8 @@
 				implement_type = key
 				break
 			if((key == TOOL_HOT) && (tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST))
-				if(isooze(target) && istype(tool, /obj/item/flashlight/flare/torch)) //OV ADD - Oozes get a fancy sort of wound closing with torches
-					break //OV ADD
+				//if(isooze(target) && istype(tool, /obj/item/flashlight/flare/torch)) //OV ADD - Oozes get a fancy sort of wound closing with torches
+					//break //OV ADD
 				implement_type = key
 				break
 

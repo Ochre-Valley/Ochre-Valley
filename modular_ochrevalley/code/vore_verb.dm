@@ -1604,7 +1604,7 @@
 
 	if(!appearance_state)
 		appearance_state = new()
-		appearance_state.construct = human_owner.construct
+		//appearance_state.construct = human_owner.construct //OV EDIT - No longer a thing?
 		appearance_state.hair_color = human_owner.hair_color
 		appearance_state.facial_hair_color = human_owner.facial_hair_color
 		appearance_state.eye_color = human_owner.eye_color
@@ -1696,7 +1696,7 @@
 			if(QDELETED(target))
 				continue
 			petrification_remove_atom_material(target, appearance_state.petrification_atom_colours[target])
-	human_owner.construct = appearance_state.construct
+	//human_owner.construct = appearance_state.construct //No longer a thing?
 	human_owner.hair_color = appearance_state.hair_color
 	human_owner.facial_hair_color = appearance_state.facial_hair_color
 	human_owner.eye_color = appearance_state.eye_color

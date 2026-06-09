@@ -1,6 +1,6 @@
 //Sprites contributed by VelSlime
 
-/mob/living/simple_animal/hostile/retaliate/rogue/ooze_blob
+/*/mob/living/simple_animal/hostile/retaliate/rogue/ooze_blob //OV EDIT - Comented out pending deletion
 	icon = 'modular_ochrevalley/icons/roguetown/mob/ooze_blob.dmi'
 	name = "ooze"
 	desc = "A strange, amorphous animated blob of ooze."
@@ -176,4 +176,4 @@
 		if(BODY_ZONE_L_ARM)
 			return "blob"
 	return ..()
-
+*/ 

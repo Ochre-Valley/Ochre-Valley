@@ -95,6 +95,10 @@
 #define LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE 128
 #define LIGHTING_PLANE_ALPHA_INVISIBLE 0
 
+#define DARKVISION_ACCESSIBILITY_MIN -25
+#define DARKVISION_ACCESSIBILITY_MAX 25
+#define DARKVISION_BASE_POTENCY 0.65
+
 //lighting area defines
 /// dynamic lighting disabled (area stays at full brightness)
 #define DYNAMIC_LIGHTING_DISABLED 0

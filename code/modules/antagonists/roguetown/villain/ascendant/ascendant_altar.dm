@@ -75,6 +75,9 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 	user.STAWIL += 2
 	user.STASPD += 2
 	user.STALUC += 2
+	// OV Edit Start
+	user.update_sight()
+	// OV Edit End
 
 	//check what ascendpoint they are on and add that trait
 	switch(ascendpoints)
@@ -141,6 +144,9 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 	user.STAWIL += 2
 	user.STASPD += 2
 	user.STALUC += 2
+	// OV Edit Start
+	user.update_sight()
+	// OV Edit End
 
 	switch(ascend_stage)
 		if(1)
@@ -168,7 +174,7 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 			if(user.show_redflash())
 				user.flash_fullscreen("redflash3")
 			//Caustic Edit End
-			user.emote("agony", forced = TRUE)
+			user.emote("superagony", forced = TRUE)
 			sleep(20)
 			to_chat(user, span_userdanger("THEW ORLD is not real. my BREATH IS gone. my heart barely baeats. my veins are empty."))
 			sleep(50)
@@ -179,7 +185,7 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 			if(user.show_redflash())
 				user.flash_fullscreen("redflash3")
 			//Caustic Edit End
-			user.emote("agony", forced = TRUE)
+			user.emote("superagony", forced = TRUE)
 			user.Stun(30)
 			user.Knockdown(30)
 			sleep(30)
@@ -188,7 +194,7 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 			if(user.show_redflash())
 				user.flash_fullscreen("redflash3")
 			//Caustic Edit End
-			user.emote("agony", forced = TRUE)
+			user.emote("superagony", forced = TRUE)
 			user.Stun(100)
 			user.Knockdown(100)
 			for(var/i = 1, i <= 10, i++)
@@ -215,6 +221,9 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 			user.STAWIL += 10
 			user.STASPD += 10
 			user.STALUC += 6
+			// OV Edit Start
+			user.update_sight()
+			// OV Edit End
 
 			heavensaysdanger() //Roger, our deal is honored; you will be rewarded in heaven.
 			addomen(ASCEND_ASCENDANT)

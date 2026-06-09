@@ -968,7 +968,7 @@
 /turf/open/water/pond,
 /area/rogue/indoors/ravoxarena)
 "gZ" = (
-/obj/structure/mirror/fancy,
+/obj/structure/mirror/fancy/hag,
 /turf/open/floor/rogue/grassred,
 /area/rogue/indoors/shelter/bog_hag)
 "hb" = (

@@ -497,6 +497,9 @@
 	if(HAS_TRAIT(M, TRAIT_PACIFISM))
 		to_chat(M, span_warning("I don't want to hurt anyone!"))
 		return FALSE
+	if(M.has_status_effect(/datum/status_effect/debuff/deadite_grace) && src.mind)
+		to_chat(M, span_warning("Ah, Lux... I calm down considerably, but my hunger only increases."))
+		M.remove_status_effect(/datum/status_effect/debuff/deadite_grace)
 
 	M.do_attack_animation(src, visual_effect_icon = M.a_intent.animname)
 	playsound(get_turf(M), pick(M.attack_sound), 100, FALSE)
@@ -514,6 +517,9 @@
 		if(M.incapacitated())
 			return FALSE
 
+		if(checkguard(M))
+			return FALSE
+
 		if(checkmiss(M))
 			return FALSE
 
@@ -527,6 +533,13 @@
 
 	return TRUE
 
+/mob/living/proc/checkguard(mob/living/simple_animal/attacker)
+	var/mob/living/carbon/human/target = src
+	if(!(ishuman(target) && target.has_status_effect(/datum/status_effect/buff/clash)))
+		return FALSE
+	var/obj/item/IM = target.get_active_held_item()
+	target.simple_clash(attacker, IM)
+	return TRUE
 
 /mob/living/attack_paw(mob/living/carbon/monkey/M)
 	if(isturf(loc) && istype(loc.loc, /area/start))
@@ -537,6 +550,9 @@
 		if(HAS_TRAIT(M, TRAIT_PACIFISM))
 			to_chat(M, span_info("I don't want to hurt anyone!"))
 			return FALSE
+		if(M.has_status_effect(/datum/status_effect/debuff/deadite_grace) && src.mind)
+			to_chat(M, span_warning("Ah, Lux... I calm down considerably, but my hunger only increases."))
+			M.remove_status_effect(/datum/status_effect/debuff/deadite_grace)
 
 		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
 			to_chat(M, span_warning("I can't bite with my mouth covered!"))
@@ -567,6 +583,9 @@
 		if(HAS_TRAIT(M, TRAIT_PACIFISM))
 			to_chat(M, span_info("I don't want to hurt anyone!"))
 			return FALSE
+		if(M.has_status_effect(/datum/status_effect/debuff/deadite_grace) && src.mind)
+			to_chat(M, span_warning("Ah, Lux... I calm down considerably, but my hunger only increases."))
+			M.remove_status_effect(/datum/status_effect/debuff/deadite_grace)
 
 		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
 			to_chat(M, span_warning("I can't bite with my mouth covered!"))
@@ -601,16 +620,28 @@
 		return FALSE
 	if(shock_damage < 1 && !(flags & SHOCK_VISUAL_ONLY))
 		return FALSE
+
+	if(HAS_TRAIT(src, TRAIT_IRONMAN) && !(flags & SHOCK_VISUAL_ONLY)) // this handles shock weakness, jakk here as you wish
+		adjustFireLoss(50)
+
 	if(!(flags & SHOCK_VISUAL_ONLY))
 		if(!(flags & SHOCK_ILLUSION))
 			adjustFireLoss(shock_damage)
 		else
 			adjustStaminaLoss(shock_damage)
-	visible_message(
-		span_danger("[src] was shocked by \the [source]!"), \
-		span_danger("I feel a powerful shock coursing through my body!"), \
-		span_hear("I hear a heavy electrical crack.") \
-	)
+
+	if(HAS_TRAIT(src, TRAIT_IRONMAN)) // sovl
+		visible_message(
+			span_danger("[src] was violently shocked by \the [source]!"), \
+			span_danger("Electricity tears through my metal body with ease!"), \
+			span_hear("I hear violent electrical cracking and metal popping.")
+		)
+	else
+		visible_message(
+			span_danger("[src] was shocked by \the [source]!"), \
+			span_danger("I feel a powerful shock coursing through my body!"), \
+			span_hear("I hear a heavy electrical crack.")
+		)	
 	playsound(get_turf(src), pick('sound/misc/elec (1).ogg', 'sound/misc/elec (2).ogg', 'sound/misc/elec (3).ogg'), 100, FALSE)
 	return shock_damage
 

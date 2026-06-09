@@ -24,7 +24,6 @@
 	block2add = FOV_BEHIND
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 15 //These can provide some basic protection from your identity. Also fashionable!
 
 /obj/item/clothing/head/roguetown/roguehood/ComponentInitialize()
 	. = ..()
@@ -41,6 +40,9 @@
 	user.update_inv_head()
 
 /obj/item/clothing/head/roguetown/roguehood/AltRightClick(mob/user)
+	. = ..()
+	if(!istype(loc, /mob/living/carbon))
+		return
 	overarmor = !overarmor
 	to_chat(user, span_info("I wear \the [src] [overarmor ? "under" : "over"] my hair."))
 	if(overarmor)
@@ -102,7 +104,6 @@
 	overarmor = FALSE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 10 //Pretty ... neat!
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/black
 	color = CLOTHING_BLACK
@@ -118,6 +119,9 @@
 	hidesnoutADJ = FALSE
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR	//Does not hide face.
 	block2add = null
+
+/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/white
+	color = CLOTHING_WHITE
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/raneshen
 	name = "padded headscarf"
@@ -163,7 +167,6 @@
 	resistance_flags = FIRE_PROOF
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 25 //Praise Astrata...
 
 /obj/item/clothing/head/roguetown/roguehood/astrata/stonekeep
 	name = "sunwrought visage"
@@ -198,7 +201,6 @@
 	max_integrity = 180
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/roguehood/abyssor
 	name = "depths hood"
@@ -216,7 +218,6 @@
 	max_integrity = 180
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/roguehood/eorahood
 	name = "opera hood"
@@ -237,7 +238,6 @@
 	max_integrity = 180
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/roguehood/ravoxgorget
 	name = "ravox's tabard gorget"
@@ -252,7 +252,6 @@
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 	block2add = null
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/roguehood/undivided
 	name = "undivided hood"
@@ -417,10 +416,9 @@
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	max_integrity = 200
+	max_integrity = ARMOR_INT_HELMET_LEATHER
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	sellprice = 40 //Psydon!
 
 /obj/item/clothing/head/roguetown/roguehood/psydon/black
 	name = "blessed hood"
@@ -442,14 +440,14 @@
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	max_integrity = 200
+	max_integrity = ARMOR_INT_HELMET_LEATHER
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 
 /obj/item/clothing/head/roguetown/roguehood/hierophant
 	name = "hierophant's pashmina"
 	desc = "A thick hood that covers one's entire head, should they desire, or merely acts as a scarf otherwise. Made with spell-laced fabric to provide some protection against daemons and mortals alike."
-	max_integrity = 100
+	max_integrity = ARMOR_INT_HELMET_LEATHER
 	armor = ARMOR_LEATHER
 	icon_state = "hijab"
 	item_state = "hijab"
@@ -460,7 +458,7 @@
 /obj/item/clothing/head/roguetown/roguehood/pontifex
 	name = "pontifex's pashmina"
 	desc = "A slim hood with thin, yet dense fabric. Stretchy and malleable, allowing for full flexibility and mobility. Made with spell-laced fabric to provide some protection against daemons and mortals alike."
-	max_integrity = 100
+	max_integrity = ARMOR_INT_HELMET_LEATHER
 	armor = ARMOR_LEATHER
 	icon_state = "monkhood"
 	item_state = "monkhood"

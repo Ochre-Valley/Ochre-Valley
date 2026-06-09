@@ -2,6 +2,7 @@
 /datum/action/cooldown/spell/raise_undead_guard
 	name = "Conjure Undead"
 	desc = "Invoke forbidden magicka to summon a mindless, shambling skeleton.\nMindless skeletons can be given orders to guard, patrol, and attack by their summoner.\nThese skeletons are weaker than their more complex-jointed counterparts, but are harder to incapacitate."
+	background_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon_state = "skeleton"
 	cast_range = 7
@@ -27,7 +28,7 @@
 		return FALSE
 
 	var/turf/T = get_turf(cast_on)
-	if(!isopenturf(T))
+	if(!isopenturf(T) || T.is_blocked_turf())
 		to_chat(owner, span_warning("The targeted location is blocked. My summon fails to come forth."))
 		return FALSE
 

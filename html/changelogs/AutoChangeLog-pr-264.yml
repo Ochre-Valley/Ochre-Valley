@@ -1,0 +1,4 @@
+author: "EeviKat"
+delete-after: True
+changes:
+  - balance: "Darksight now scales with Perception once your PER is above 9, up to a cap of 15 PER. Higher-Perception characters with Darksight can now see substantially better in darkness than lower-Perception characters."

@@ -12,6 +12,7 @@
 	name = "Herozium"
 	cost = 50
 	contains = list(/obj/item/reagent_containers/powder/herozium)
+	contraband = TRUE
 
 // Caustic Edit
 /datum/supply_pack/rogue/drugs/suidust
@@ -34,6 +35,7 @@
 	name = "Spice"
 	cost = 20
 	contains = list(/obj/item/reagent_containers/powder/spice)
+	contraband = TRUE
 
 /*
 /datum/supply_pack/rogue/drugs/trippyzig
@@ -45,6 +47,7 @@
 	name = "Starsugar"
 	cost = 50
 	contains = list(/obj/item/reagent_containers/powder/starsugar)
+	contraband = TRUE
 
 /datum/supply_pack/rogue/drugs/murkwine
 	name = "Murkwine"

@@ -142,6 +142,8 @@
 			to_chat(user, span_nicegreen("[name] is ready to be cooked."))
 			cooked_type = active_recipe.result_type
 			fried_type = active_recipe.result_type
+			active_recipe = null
+			current_step = 1
 
 /obj/item/reagent_containers/food/snacks/rogue/proc/finalize_cooking()
 	var/res_type = active_recipe.result_type
@@ -165,7 +167,7 @@
 	eatverb = pick("bite","chew","nibble","gobble","chomp")
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_QUARTER_MEAL)
 	bitesize = 3
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 
@@ -176,7 +178,7 @@
 
 /obj/item/reagent_containers/food/snacks/rogue/preserved // just convenient way to group food with long rotprocess
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_QUARTER_MEAL)
 	rotprocess = SHELFLIFE_EXTREME
 
 /obj/item/reagent_containers/food/snacks

@@ -1,5 +1,5 @@
 /datum/voicepack/female
-	preview = list("agony", "laugh", "pain", "hmph", "painmoan", "rage", "paincrit", "chuckle", "clearthroat", "embed", "grumble", "groan", "hmm", "huh", "laugh", "rage", "warcry")
+	preview = list("agony", "laugh", "pain", "hmph", "painmoan", "rage", "paincrit", "burp", "chuckle", "clearthroat", "embed", "grumble", "groan", "hiccup", "hmm", "huh", "laugh", "rage", "warcry") // OV Edit - Added burp and hiccup emotes
 
 /datum/voicepack/female/get_sound(soundin, modifiers)
 	var/used
@@ -18,10 +18,12 @@
 				used = pick('sound/vo/female/gen/deathgurgle (1).ogg','sound/vo/female/gen/deathgurgle (2).ogg','sound/vo/female/gen/deathgurgle (3).ogg')
 			if("agony")
 				used = list('sound/vo/female/gen/agony (1).ogg','sound/vo/female/gen/agony (2).ogg','sound/vo/female/gen/agony (3).ogg')
+			if("superagony") // to bypass painless override, use responsibly
+				used = list('sound/vo/female/gen/agony (1).ogg','sound/vo/female/gen/agony (2).ogg','sound/vo/female/gen/agony (3).ogg')
 			if("breathgasp")
 				used = 'sound/vo/female/gen/breathgasp.ogg'
-			if("burp")
-				used = list('sound/vo/vore/burps/belch1.ogg','sound/vo/vore/burps/belch2.ogg','sound/vo/vore/burps/belch3.ogg','sound/vo/vore/burps/belch4.ogg','sound/vo/vore/burps/belch5.ogg','sound/vo/vore/burps/belch6.ogg','sound/vo/vore/burps/belch7.ogg','sound/vo/vore/burps/belch8.ogg','sound/vo/vore/burps/belch9.ogg','sound/vo/vore/burps/belch10.ogg','sound/vo/vore/burps/belch11.ogg','sound/vo/vore/burps/belch12.ogg','sound/vo/vore/burps/belch13.ogg','sound/vo/vore/burps/belch14.ogg','sound/vo/vore/burps/belch15.ogg')
+			if("burp","belch") // OV Edit: A lot of people are used to *belch from other servers. No need to add it to the above list.
+				used = list('modular_ochrevalley/sounds/vo/vore/burps/belch1.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch2.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch3.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch4.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch5.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch6.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch7.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch8.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch9.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch10.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch11.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch12.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch13.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch14.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch15.ogg')
 			if("choke")
 				used = list('sound/vo/female/gen/choke (1).ogg','sound/vo/female/gen/choke (2).ogg','sound/vo/female/gen/choke (3).ogg')
 			if("chuckle")
@@ -52,6 +54,8 @@
 				used = 'sound/vo/female/gen/grumble.ogg'
 			if("haltyell")
 				used = list('sound/vo/female/gen/haltyell (1).ogg','sound/vo/female/gen/haltyell (2).ogg')
+			if("hic","hiccup") // OV Add
+				used = list('modular_ochrevalley/sounds/vo/vore/hiccups/hic.ogg','modular_ochrevalley/sounds/vo/vore/hiccups/hiccup.ogg') // OV Add
 			if("hmm")
 				used = 'sound/vo/female/gen/hmm.ogg'
 			if("huh")
@@ -100,6 +104,10 @@
 				used = 'sound/vo/psst.ogg'
 			if("clap")
 				used = list('sound/vo/clap (1).ogg','sound/vo/clap (2).ogg','sound/vo/clap (3).ogg','sound/vo/clap (4).ogg')
+			if("slowclap")
+				used = list('sound/vo/slowclap.ogg')
+			if("clap1")
+				used = list('sound/vo/claponce.ogg')
 			if("sexmoanlight")
 				used = list('sound/vo/female/gen/se/sexlight (1).ogg','sound/vo/female/gen/se/sexlight (2).ogg','sound/vo/female/gen/se/sexlight (3).ogg','sound/vo/female/gen/se/sexlight (4).ogg','sound/vo/female/gen/se/sexlight (5).ogg','sound/vo/female/gen/se/sexlight (6).ogg','sound/vo/female/gen/se/sexlight (7).ogg')
 			if("sexmoanhvy")

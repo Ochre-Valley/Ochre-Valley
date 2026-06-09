@@ -3,7 +3,6 @@
 	desc = "Alloyed plate gauntlets, meticulously assembled from blacksteel. Each joint, a dozen segments; interconnected, interlinked, intertwined. Metal should not move so freely, like skin on flesh - yet it does."
 	icon_state = "bplategloves"
 	item_state = "bplategloves"
-	sellprice = 85 //CC Edit | Better off smelting them down.
 
 /obj/item/clothing/gloves/roguetown/plate/blacksteel
 	name = "ancient blacksteel plate gauntlets"
@@ -13,4 +12,3 @@
 	armor = ARMOR_PLATE_BSTEEL
 	max_integrity = ARMOR_INT_SIDE_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
-	sellprice = 85

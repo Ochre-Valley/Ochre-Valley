@@ -1,5 +1,6 @@
 /datum/crafting_recipe/roguetown/survival/skullmask
 	name = "skull mask"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/mask/rogue/skullmask
 	reqs = list(
@@ -13,6 +14,7 @@
 
 /datum/crafting_recipe/roguetown/survival/wickercloak
 	name = "wicker cloak"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/cloak/wickercloak
 	reqs = list(
@@ -24,6 +26,7 @@
 
 /datum/crafting_recipe/roguetown/survival/antlerhood
 	name = "antlerhood"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/head/roguetown/antlerhood
 	reqs = list(
@@ -39,6 +42,7 @@
 
 /datum/crafting_recipe/roguetown/survival/tribalrags
 	name = "tribal rags"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/suit/roguetown/shirt/tribalrag
 	reqs = list(
@@ -54,6 +58,7 @@
 
 /datum/crafting_recipe/roguetown/survival/collar
 	name = "collar"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/collar
 	reqs = list(/obj/item/natural/hide/cured = 1)
@@ -61,6 +66,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bell_collar
 	name = "bell collar"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/collar/bell_collar
 	reqs = list(
@@ -83,6 +89,7 @@
 
 /datum/crafting_recipe/roguetown/survival/feldcollar
 	name = "feldcollar"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/collar/feldcollar
 	reqs = list(/obj/item/natural/cloth = 2)
@@ -90,6 +97,7 @@
 
 /datum/crafting_recipe/roguetown/survival/surgcollar
 	name = "surgcollar"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/collar/surgcollar
 	reqs = list(/obj/item/natural/cloth = 2)
@@ -97,6 +105,7 @@
 
 /datum/crafting_recipe/roguetown/survival/goodluckcharm
 	name = "cabbit's foot luck charm"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/luckcharm // +1 fortune when worn
 	reqs = list(
@@ -109,6 +118,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bouquet_rosa
 	name = "rosa bouquet"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/bouquet/rosa
 	reqs = list(
@@ -122,6 +132,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bouquet_salvia
 	name = "salvia bouquet"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/bouquet/salvia
 	reqs = list(
@@ -135,6 +146,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bouquet_matricaria
 	name = "matricaria bouquet"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/bouquet/matricaria
 	reqs = list(
@@ -148,6 +160,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bouquet_calendula
 	name = "calendula bouquet"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/bouquet/calendula
 	reqs = list(
@@ -161,6 +174,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_rosa
 	name = "rosa crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/rosa
 	reqs = list(
@@ -173,6 +187,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_salvia
 	name = "salvia crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/salvia
 	reqs = list(
@@ -185,6 +200,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_matricaria
 	name = "matricaria crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/matricaria
 	reqs = list(
@@ -197,6 +213,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_calendula
 	name = "calendula crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/calendula
 	reqs = list(
@@ -209,6 +226,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_manabloom
 	name = "manabloom crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/manabloom
 	reqs = list(
@@ -221,6 +239,7 @@
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_briar
 	name = "briar thorn crown"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/flowercrown/briar
 	reqs = list(
@@ -233,6 +252,7 @@
 
 /datum/crafting_recipe/roguetown/survival/briarthorns
 	name = "briar thorns"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/head/roguetown/briarthorns
 	reqs = list(
@@ -246,6 +266,7 @@
 // Amulet
 /datum/crafting_recipe/roguetown/survival/pearlcross
 	name = "amulet (pearls)"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/pearl
 	reqs = list(
@@ -256,6 +277,7 @@
 
 /datum/crafting_recipe/roguetown/survival/bpearlcross
 	name = "amulet (blue pearls)"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/bpearl
 	reqs = list(
@@ -266,6 +288,7 @@
 
 /datum/crafting_recipe/roguetown/survival/shellnecklace
 	name = "shell necklace"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/shell
 	reqs = list(
@@ -275,6 +298,7 @@
 
 /datum/crafting_recipe/roguetown/survival/shellbracelet
 	name = "shell bracelet"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/shell/bracelet
 	reqs = list(
@@ -284,6 +308,7 @@
 
 /datum/crafting_recipe/roguetown/survival/abyssoramulet
 	name = "amulet of abyssor"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/abyssor
 	reqs = list(
@@ -293,6 +318,7 @@
 
 /datum/crafting_recipe/roguetown/survival/woodcross
 	name = "wooden psycross"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/wood
 	reqs = list(
@@ -302,6 +328,7 @@
 
 /datum/crafting_recipe/roguetown/survival/autumnwoadarmor
 	name = "autumnwoad elven plate, imbuement"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/suit/roguetown/armor/plate/elven_plate/autumn
 	reqs = list(
@@ -316,6 +343,7 @@
 
 /datum/crafting_recipe/roguetown/survival/autumnwoadhelmet
 	name = "autumnwoad elven helm, imbuement"
+	display_category = ITEM_CAT_GARMENT_COMMON
 	category = "Clothes"
 	result = /obj/item/clothing/head/roguetown/helmet/heavy/elven_helm/autumn
 	reqs = list(

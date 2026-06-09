@@ -21,7 +21,6 @@
 	var/mutantrace_variation = NO_MUTANTRACE_VARIATION //Are there special sprites for specific situations? Don't use this unless you need to.
 	var/freshly_laundered = FALSE
 	bloody_icon_state = "bodyblood"
-	sellprice = 4
 
 	grid_width = 64
 	grid_height = 64

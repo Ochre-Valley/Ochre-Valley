@@ -9,7 +9,6 @@
 	grid_width = 64
 	grid_height = 32
 	throw_on_break = TRUE
-	sellprice = 3 //CC edit 
 
 /obj/item/clothing/neck/worn_overlays(isinhands = FALSE)
 	. = list()

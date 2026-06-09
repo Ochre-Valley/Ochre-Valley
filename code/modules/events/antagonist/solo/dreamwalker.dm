@@ -29,6 +29,7 @@
 	antag_datum = /datum/antagonist/dreamwalker
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	prompted_picking = TRUE
 
 /datum/round_event/antagonist/solo/dreamwalker
 
@@ -39,4 +40,5 @@
 	base_antags = 2
 	maximum_antags = 2
 	max_occurrences = 1
+	prompted_picking = FALSE
 	//allowed_storytellers = list(/datum/storyteller/abyssor) // OV Edit: Stop storytellers from injecting this antagonist

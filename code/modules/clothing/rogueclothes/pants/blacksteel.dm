@@ -3,7 +3,6 @@
 	desc = "Tasseted leggings of blacksteel, adorned with hooks to suspend both sabatons-and-faulds alike. Besilken trousers shepherd the maille, leaving the royal flesh unmarred by even the slightest of chafes-or-bruises. May its wearer never kneel again; be it in surrender or death."
 	icon_state = "bplatelegs"
 	item_state = "bplatelegs"
-	sellprice = 145 //CC Edit
 
 /obj/item/clothing/under/roguetown/platelegs/blacksteel
 	name = "ancient blacksteel plate chausses"
@@ -15,4 +14,3 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	smelt_bar_num = 2
-	sellprice = 145

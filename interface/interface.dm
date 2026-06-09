@@ -59,7 +59,7 @@
 /client/verb/mentorhelp()
 	set name = "Mentorhelp"
 	set desc = ""
-	set category = "-Admin-"
+	set category = "Admin.Admin"
 	if(mob)
 		var/msg = tgui_input_text(src, "Submit your question to the Voices:", "Mentorhelp Input", multiline = TRUE, prevent_enter = TRUE, max_length = MAX_MESSAGE_LEN, encode = FALSE) // OV Edit: Use TGUI input
 		if(msg)
@@ -149,7 +149,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 
 /client/verb/set_fixed()
 	set name = "IconSize"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	if(winget(src, "mapwindow.map", "icon-size") == "64")
 		to_chat(src, "Stretch-to-fit... OK")
@@ -160,7 +160,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 
 /client/verb/set_stretch()
 	set name = "IconScaling"
-	set category = "Options"
+	set category = "Preferences.Options"
 	if(prefs)
 		if(prefs.crt == TRUE)
 			to_chat(src, "CRT mode is on.")
@@ -174,7 +174,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 		winset(src, "mapwindow.map", "zoom-mode=normal")
 
 /client/verb/crtmode()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ToggleCRT"
 	if(!prefs)
 		return
@@ -194,7 +194,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 			S.alpha = 70
 
 /client/verb/grainfilter()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ToggleGrain"
 	if(!prefs)
 		return
@@ -244,7 +244,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 		// OV Edit End
 
 /client/verb/changefps()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ChangeFPS"
 	if(!prefs)
 		return
@@ -256,7 +256,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 
 /client/verb/set_picinchat()
 	set name = "Headshot in Chat"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	if(prefs)
 		prefs.chatheadshot = !prefs.chatheadshot
@@ -269,12 +269,12 @@ Hotkey-Mode: (hotkey-mode must be on)
 /*
 /client/verb/set_blur()
 	set name = "AAOn"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	winset(src, "mapwindow.map", "zoom-mode=blur")
 
 /client/verb/set_normal()
 	set name = "AAOff"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	winset(src, "mapwindow.map", "zoom-mode=normal")*/

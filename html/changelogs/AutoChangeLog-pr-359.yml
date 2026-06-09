@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added the ability to spawn custom kill quests with special titles, up to 20 specially chosen mobs, any amount of reward money and any amount of region threat removed. These are proper quests, and can be spawned as scrolls or placed into the ledger."

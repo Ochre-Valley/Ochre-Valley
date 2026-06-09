@@ -20,10 +20,10 @@ GLOBAL_LIST_INIT(synthetic_bones, list(
 	var/bones_amount = rand(2, 4)
 
 	for(var/i = 1, i <= bones_amount, i++)	//throw in the rest
-		var/new_bone = prey.construct ? pick(GLOB.synthetic_bones) : pick(GLOB.organic_bones)
+		var/new_bone = pick(GLOB.organic_bones) //prey.constructm ? pick(GLOB.synthetic_bones) : //OV Edit AP Merge 5.31.26 - COMMENTED PENDING FIX
 		new new_bone(src, owner, prey)
 
-	if(!ishuman(prey) || prey.construct) // synths n' animals don't have skulls and ribcages that survive digestion
+	if(!ishuman(prey)) //|| prey.constructm) // synths n' animals don't have skulls and ribcages that survive digestion //OV Edit AP Merge 5.31.26 - COMMENTED PENDING FIX
 		return
 
 	if(prob(20)) //ribcage surviving whole is some luck

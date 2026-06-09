@@ -3,7 +3,7 @@
 /client/proc/player_effects(var/mob/target in GLOB.mob_list)
 	set name = "Player Effects"
 	set desc = "Modify a player character with various 'special treatments' from a list."
-	set category = "-Admin-"
+	set category = "Admin.Admin"
 	if(!holder)
 		return
 

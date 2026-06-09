@@ -52,6 +52,8 @@ GLOBAL_VAR(restart_counter)
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
+	init_pricing_engine()
+
 	TgsNew(minimum_required_security_level = TGS_SECURITY_TRUSTED)
 
 	GLOB.revdata = new
@@ -98,6 +100,8 @@ GLOBAL_VAR(restart_counter)
 	load_bypassage()
 
 	load_patreons()
+
+	load_calendar_events()
 
 //	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 
@@ -488,7 +492,7 @@ GLOBAL_VAR(restart_counter)
 /*
 #ifdef TESTING
 /client/verb/maxzcdec()
-	set category = "DEBUGTEST"
+	set category = "Debug.Test"
 	set name = "decr"
 	set desc = ""
 	world.decrementMaxZ()

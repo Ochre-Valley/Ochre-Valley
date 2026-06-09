@@ -1,7 +1,7 @@
 //OV FILE
 //////////// Hand games that can be played by people next to each other, or over a small table.
 
-/mob/living/carbon/human/verb/hand_games()
+/*/mob/living/carbon/human/verb/hand_games() //OV EDIT - Commented out Pending Refinement
 	set name = "Hand Games"
 	set desc = "Choose from a variety of hand games to play with someone next to you or across a small table."
 	set category = "Emotes"
@@ -191,3 +191,4 @@
 			player1.visible_message(span_notice("After a gruelling battle, [player1] eventually manages to subdue the thumb of [player2]!"))
 		else
 			player2.visible_message(span_notice("After a gruelling battle, [player2] eventually manages to subdue the thumb of [player1]!"))
+	*/

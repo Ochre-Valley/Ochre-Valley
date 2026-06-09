@@ -106,8 +106,9 @@
 		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
 
 	if(noble_income)
+		var/already_has_income = !isnull(SStreasury.noble_incomes[H])
 		SStreasury.noble_incomes[H] = noble_income
-		SStreasury.grant_estate_income(H, noble_income, TRUE)
+		SStreasury.grant_estate_income(H, noble_income, !already_has_income)
 
 	if(adaptive_name)
 		H.adaptive_name = TRUE
@@ -149,6 +150,10 @@
 
 	if(applies_post_equipment)
 		apply_character_post_equipment(H)
+
+	// OV Edit Start
+	H.update_sight()
+	// OV Edit End
 
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit), TRUE), 20)
@@ -225,4 +230,3 @@
 
 //Final proc in the set for really silly shit
 ///datum/advclass/proc/extra_slop_proc_ending(mob/living/carbon/human/H)
-

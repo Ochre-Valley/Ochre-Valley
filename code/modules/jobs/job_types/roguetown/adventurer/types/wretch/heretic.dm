@@ -57,7 +57,8 @@
 			if("Mace")
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					beltr = /obj/item/rogueweapon/mace/goden/psymace
+					r_hand = /obj/item/rogueweapon/mace/goden/psymace
+					l_hand = /obj/item/rogueweapon/scabbard/gwstrap
 				else
 					beltr = /obj/item/rogueweapon/mace/steel
 			if("Flail")
@@ -89,7 +90,7 @@
 	if (istype (H.patron, /datum/patron/inhumen/zizo))
 		if(H.mind)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/minion_order)
-			H.verbs |= /mob/living/carbon/human/proc/revelations
+			add_verb(H, /mob/living/carbon/human/proc/revelations)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/gravemark)
 			H.mind?.current.faction += "[H.name]_faction"
 		ADD_TRAIT(H, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
@@ -240,6 +241,7 @@
 			H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
+			H.adjust_skillrank(/datum/skill/labor/lumberjacking, 2, TRUE)
 			ADD_TRAIT(H, TRAIT_SMITHING_EXPERT, TRAIT_GENERIC)
 		if(/datum/patron/divine/undivided)
 			H.change_stat(STATKEY_INT, 2)
@@ -335,10 +337,21 @@
 		)
 	H.cmode_music = 'sound/music/cmode/antag/combat_cutpurse.ogg'
 	if(H.mind)
-		var/weapons = list("Rapier", "Sabre", "Bow", "Crossbow", "Slurbow")
+		var/weapons = list("Daggers", "Rapier", "Sabre", "Bow", "Crossbow", "Slurbow")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
 		switch(weapon_choice)
+			if("Daggers")
+				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
+				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger
+				else if(istype(H.patron, /datum/patron/inhumen/zizo))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/zizo
+				else
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/rondel
+				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
+				beltl = /obj/item/rogueweapon/scabbard/sheath
+				beltr = /obj/item/rogueweapon/scabbard/sheath
 			if("Rapier")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
@@ -461,6 +474,7 @@
 			H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
+			H.adjust_skillrank(/datum/skill/labor/lumberjacking, 2, TRUE)
 		if(/datum/patron/divine/undivided)
 			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/undivided, SLOT_RING, TRUE)
 			H.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
@@ -481,7 +495,7 @@
 
 /mob/living/carbon/human/proc/revelations()
 	set name = "Revelations"
-	set category = "Cleric"
+	set category = "RoleUnique.Cleric"
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
 	var/obj/item/S = get_inactive_held_item()

@@ -16,41 +16,61 @@
 	if(!reward)
 		return
 	
-	var/bands_of_threat = tgui_input_number(user, "How many bands of threat does it remove?", "Threat", 1)
+	var/bands_of_threat = tgui_input_number(user, "How many bands of threat does it remove?", "Threat", 1, 20)
 	if(!bands_of_threat)
 		return
 	
-	var/datum/threat_region/where_to_spawn = tgui_input_list(user, "Pick a region for the quest.", "Region", SSregionthreat.threat_regions)
+	var/list/regions = list()
+	for(var/datum/threat_region/TR as anything in SSregionthreat.threat_regions)
+		regions[TR.region_name] = TR
+	var/selected = tgui_input_list(user, "Pick a region for the quest.", "Region", regions)
+	var/datum/threat_region/where_to_spawn = regions[selected]
+	/*var/datum/threat_region/where_to_spawn = tgui_input_list(user, "Pick a region for the quest.", "Region", SSregionthreat.threat_regions)
 	if(!where_to_spawn)
 		return
-	to_chat(user, "The region selected is: [where_to_spawn?.region_name]")
+	to_chat(user, "The region selected is: [where_to_spawn?.region_name]")*/
 
 	while(current_mob_count < 21)
-		current_mob_count++
 		var/mob_to_add = tgui_input_list(user, "Choose a mob that needs killing, cancel to finish adding mobs.", "Mob", list_of_mobs)
 		if(!mob_to_add)
 			break
 		else
-			quest_mobs += mob_to_add
+			var/remaining_count = 20 - current_mob_count
+			var/number_to_add = tgui_input_number(user, "How many of this mob to include?", "Mob", 1, remaining_count)
+			while(number_to_add > 0)
+				quest_mobs += mob_to_add
+				number_to_add--
+				current_mob_count++
 	
 	if(!quest_mobs.len)
 		return
+
+	var/crimes = tgui_input_text(user, "Whereof they stand accused of:", "Message Text")
 	
 	var/ledger_or_floor = tgui_input_list(user, "Spawn in a ledger or on the floor?", "Scroll", list("Ledger", "Floor", "Cancel"))
 	if(!ledger_or_floor || (ledger_or_floor == "Cancel"))
 		return
 	
+	var/fellowship_size = 0
+	if(ledger_or_floor == "Ledger")
+		fellowship_size = tgui_input_number(user, "Minimum fellowship size?", "Threat", 1, 6)
+		if(fellowship_size == 1)
+			fellowship_size = 0
+	
 	var/spawn_loc = get_turf(user)
 
-	SSquestpool.gm_kill_quest(quest_title, reward, bands_of_threat, where_to_spawn, quest_mobs, ledger_or_floor, spawn_loc)
+	SSquestpool.gm_kill_quest(quest_title, reward, bands_of_threat, fellowship_size, where_to_spawn, quest_mobs, ledger_or_floor, spawn_loc, crimes)
 
-/datum/controller/subsystem/questpool/proc/gm_kill_quest(quest_title, reward, bands_of_threat, datum/threat_region/where_to_spawn, list/quest_mobs, ledger_or_floor, spawn_loc)
+/datum/controller/subsystem/questpool/proc/gm_kill_quest(quest_title, reward, bands_of_threat, fellowship_size, datum/threat_region/where_to_spawn, list/quest_mobs, ledger_or_floor, spawn_loc, crimes)
 	var/datum/quest/kill/generated/Q = new /datum/quest/kill/generated()
 	if(!Q)
 		return null
 	Q.quest_mobs = quest_mobs
 	Q.threat_bands_cleared = bands_of_threat
 	Q.title = quest_title
+	if(crimes)
+		Q.rolled_crimes = list(crimes)
+	Q.required_fellowship_size = fellowship_size
 	Q.quest_difficulty = "Special"
 	Q.created_at = world.time
 	Q.issued_day = GLOB.dayspassed
@@ -103,6 +123,7 @@
 	if(!landmark)
 		return FALSE
 	spawn_kill_mobs(landmark)
+	message_admins("A custom quest ([title]) has spawned its landmark at [landmark.x], [landmark.y], [landmark.z].")
 	return TRUE
 
 /datum/quest/kill/generated/compose_warband()

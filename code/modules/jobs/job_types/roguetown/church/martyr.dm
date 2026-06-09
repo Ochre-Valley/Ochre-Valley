@@ -321,6 +321,9 @@
 				current_holder.STAPER += stat_bonus_martyr
 				current_holder.STALUC += stat_bonus_martyr
 				H.energy_add(9999)
+				// OV Edit Start
+				H.update_sight()
+				// OV Edit End
 
 //This is called regardless of the activated state (safe or not)
 /datum/component/martyrweapon/proc/deactivate()
@@ -370,15 +373,15 @@
 	var/obj/item/I = parent
 	if(!tonormal)
 		if(current_state == STATE_MARTYR || current_state == STATE_MARTYRULT)
-			I.toggle_state = "[initial(I.icon_state)]_ulton"
+			I.override_state = "[initial(I.icon_state)]_ulton"
 		else
-			I.toggle_state = "[initial(I.icon_state)]_on"
-		I.item_state = "[I.toggle_state][I.wielded ? "1" : ""]"
-		I.icon_state = "[I.toggle_state][I.wielded ? "1" : ""]"
+			I.override_state = "[initial(I.icon_state)]_on"
+		I.item_state = "[I.override_state][I.wielded ? "1" : ""]"
+		I.icon_state = "[I.override_state][I.wielded ? "1" : ""]"
 	else
 		I.icon_state = initial(I.icon_state)
 		I.item_state = initial(I.item_state)
-		I.toggle_state = null
+		I.override_state = null
 
 	current_holder.regenerate_icons()
 
@@ -443,6 +446,9 @@
 				current_holder.STAINT = 20
 				current_holder.STAPER = 20
 				current_holder.STALUC = 20
+				// OV Edit Start
+				current_holder.update_sight()
+				// OV Edit End
 
 				current_holder.energy = current_holder.max_energy
 				current_holder.stamina = 0
@@ -493,7 +499,7 @@
 	faction = "Station"
 	tutorial = "Martyrs are hand-picked among the most devout of the Holy See. They are given one of the See's cherished relics to protect the Church, and to inspire hope and lead by example of grace, kindness and vicious intolerance to any who do not share the belief of the Ten. They have sworn an Oath in the sight of the gods, and will fulfill it to the bitter end."
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)
+	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED RACES_OOZE)
 	allowed_patrons = list(/datum/patron/divine/undivided)
 	outfit = /datum/outfit/job/roguetown/martyr
 	min_pq = null //10 //Cus it's a Martyr of the Ten. Get it.
@@ -591,7 +597,7 @@
 			if("Holy Silver Armet")
 				head = /obj/item/clothing/head/roguetown/helmet/heavy/holysee/alt
 	if(H.mind)
-		SStreasury.give_money_account(ECONOMIC_UPPER_CLASS, H, "Church Funding.")
+		SStreasury.grant_savings(ECONOMIC_UPPER_CLASS, H)
 
 
 /obj/item/rogueweapon/sword/long/martyr
@@ -622,7 +628,7 @@
 	dropshrink = 1
 	smeltresult = null
 	is_silver = TRUE
-	toggle_state = null
+	override_state = null
 	is_important = TRUE
 	special = /datum/special_intent/martyr_blazing_sweep_sword
 
@@ -720,7 +726,7 @@
 	associated_skill = /datum/skill/combat/axes
 	smeltresult = null
 	is_silver = TRUE
-	toggle_state = null
+	override_state = null
 	is_important = TRUE
 	special = /datum/special_intent/martyr_blazing_sweep
 
@@ -813,7 +819,7 @@
 	associated_skill = /datum/skill/combat/maces
 	smeltresult = null
 	is_silver = TRUE
-	toggle_state = null
+	override_state = null
 	is_important = TRUE
 	special = /datum/special_intent/martyr_volcano_slam
 
@@ -903,7 +909,7 @@
 	associated_skill = /datum/skill/combat/polearms
 	smeltresult = null
 	is_silver = TRUE
-	toggle_state = null
+	override_state = null
 	is_important = TRUE
 	throwforce = 40
 	special = /datum/special_intent/martyr_blazing_trident

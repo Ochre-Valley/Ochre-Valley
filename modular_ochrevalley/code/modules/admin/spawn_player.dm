@@ -1,7 +1,7 @@
 /client/proc/spawn_player(var/client/C in GLOB.clients)
 	set name = "Spawn Player"
 	set desc = "Spawn a character as a specified job, with their currently loaded char slot"
-	set category = "-Admin-"
+	set category = "Admin.Admin"
 	if(!holder)
 		return
 	//Setup and option selections

@@ -17,7 +17,6 @@
 	sleeved_detail = FALSE
 	boobed_detail = FALSE
 	chunkcolor = "#7d9097"
-	sellprice = 27 //CC Edit | Fairly common armor, steel and cloth!
 	material_category = ARMOR_MAT_PLATE
 
 /obj/item/clothing/suit/roguetown/armor/brigandine/Initialize()
@@ -80,7 +79,6 @@
 	equip_delay_self = 40
 	armor_class = ARMOR_CLASS_LIGHT//steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
-	sellprice = 22
 
 /obj/item/clothing/suit/roguetown/armor/brigandine/light/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)

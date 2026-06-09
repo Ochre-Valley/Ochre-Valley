@@ -8,7 +8,6 @@
 	strip_delay = 20
 	equip_delay_other = 25
 	resistance_flags = NONE
-	sellprice = 1
 	var/vision_flags = 0
 	var/darkness_view = 2//Base human is 2
 	var/invis_view = SEE_INVISIBLE_LIVING	//admin only for now

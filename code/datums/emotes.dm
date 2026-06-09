@@ -179,6 +179,7 @@
 			pre_color_msg = trim(replacetext(pre_color_msg, "$n", "[emote_display_name]")) //OV Edit
 		else
 			msg = "[styled_name] [msg]"
+		msg = "<span class='game-emote'>[msg]</span>"
 		for(var/mob/M in GLOB.dead_mob_list)
 			if(!M.client || isnewplayer(M))
 				continue

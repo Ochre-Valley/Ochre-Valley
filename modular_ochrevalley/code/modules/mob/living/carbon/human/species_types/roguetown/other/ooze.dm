@@ -1,4 +1,4 @@
-/datum/species/ooze
+/*/datum/species/ooze //OV Edit - Commented out pending REFINEMENT
 	name = "Ooze"
 	id = "ooze"
 	desc = "<b>Ooze</b><br>\
@@ -194,7 +194,7 @@
 
 /datum/species/ooze/check_roundstart_eligible()
 	return TRUE
-
+*/
 //SLIME FORM WOOO
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/ooze
