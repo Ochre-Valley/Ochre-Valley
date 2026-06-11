@@ -64,16 +64,14 @@
 			playsound(src, 'sound/foley/bodyfall (3).ogg', 90, TRUE)
 			user.visible_message(span_warning("[user] emerges from [src]!"),span_alert("I emerge from [src]!"))
 
-/obj/structure/closet/dirthole/closed/loot/Initialize()
-	. = ..()
-	lootroll = rand(1,10)	//Caustic Edit - Make the loot a bit more interesting. 1 - Skeleton, 2 - Buried Loot
-							//3 - 5 - Bones, small chance of decrepit item, 6 - 8 - Commoner Body, 9 - Noble Body, 10 - Nothing
-
 /obj/structure/closet/dirthole/closed/loot
 	var/hole_looted = FALSE
 	var/lootroll = 0
 
-//Caustic Edit - Making the drops more interesting!
+/obj/structure/closet/dirthole/closed/loot/Initialize()
+	. = ..()
+	lootroll = rand(1,6)
+
 /obj/structure/closet/dirthole/closed/loot/open()
 	if(!hole_looted)
 		hole_looted = TRUE
@@ -81,257 +79,18 @@
 			if(1)
 				new /mob/living/carbon/human/species/skeleton/npc/easy(mastert) //Let's go gambling
 			if(2)
-				new /obj/structure/closet/crate/chest/gravechest(mastert)
+				new /obj/structure/closet/crate/chest/coffinlootbox(mastert) //How it be
 			if(3)
-				corpse_bones()
-				decrepit_chance()
+				new /mob/living/carbon/human/species/skeleton/npc/medium(mastert) //How it be
 			if(4)
-				corpse_bones()
-				decrepit_chance()
+				new /mob/living/carbon/human/species/skeleton/npc/medium(mastert)
+				new /obj/structure/closet/crate/chest/coffinlootbox_middle(mastert) //Starts locked
 			if(5)
-				corpse_bones()
-				decrepit_chance()
+				new /mob/living/carbon/human/species/skeleton/npc/hard(mastert)
 			if(6)
-				corpse_bones()
-				towner_chance()
-			if(7)
-				corpse_bones()
-				towner_chance()
-			if(8)
-				corpse_bones()
-				towner_chance()
-			if(9)
-				corpse_bones()
-				noble_chance()
+				new /mob/living/carbon/human/species/skeleton/npc/hard(mastert) //Starts locked & has a skeleton guard
+				new /obj/structure/closet/crate/chest/coffinlootbox_high(mastert)
 	..()
-
-/obj/structure/closet/dirthole/closed/loot/proc/corpse_bones()
-	new /obj/item/skull(mastert)
-	var/num_bones = rand(2,5)
-
-	var/i
-	for(i=0, i<num_bones, i++)
-		new /obj/item/natural/bone(mastert)
-
-/obj/structure/closet/dirthole/closed/loot/proc/decrepit_chance()
-	var/num_item = rand(0,2)
-	if(num_item == 0)
-		return
-	
-	var/list/loot = list(/obj/item/rogueweapon/huntingknife/idagger/adagger=6,
-		/obj/item/rogueweapon/mace/alloy=5,
-		/obj/item/rogueweapon/spear/aalloy=9,
-		/obj/item/rogueweapon/pitchfork/aalloy=4,
-		/obj/item/rogueweapon/sickle/aalloy=5,
-		/obj/item/rogueweapon/shovel/aalloy=8,
-		/obj/item/rogueweapon/hammer/aalloy=7,
-		/obj/item/clothing/suit/roguetown/armor/chainmail/aalloy=1,
-		/obj/item/clothing/under/roguetown/chainlegs/kilt/aalloy=1,
-		/obj/item/reagent_containers/glass/cup/aalloygob=2,
-		/obj/item/reagent_containers/glass/bowl/aalloy=2,
-		/obj/item/clothing/ring/aalloy=3)
-	
-	var/i
-	for(i=0, i<num_item, i++)
-		var/J = pickweight(loot)
-		new J(mastert)
-
-/obj/structure/closet/dirthole/closed/loot/proc/towner_chance()
-	var/num_weapon = rand(1,2)
-	
-	var/list/weapon_loot = list(/obj/item/rogueweapon/huntingknife/idagger=5,
-		/obj/item/rogueweapon/huntingknife/idagger/steel=2,
-		/obj/item/rogueweapon/mace=4,
-		/obj/item/rogueweapon/mace/steel=1,
-		/obj/item/rogueweapon/shield/buckler=2,
-		/obj/item/rogueweapon/shield/heater=1,
-		/obj/item/rogueweapon/stoneaxe/battle=5,
-		/obj/item/rogueweapon/stoneaxe/woodcut/wardenpick=2,
-		/obj/item/rogueweapon/flail/militia=3,
-		/obj/item/rogueweapon/spear=6,
-		/obj/item/rogueweapon/pitchfork/aalloy=4,
-		/obj/item/rogueweapon/pick/militia=3,
-		/obj/item/rogueweapon/sword/falchion/militia=4,
-		/obj/item/rogueweapon/sword/iron=3,
-		/obj/item/rogueweapon/sword/falx=1,
-		/obj/item/rogueweapon/sword/long/shotel/iron=1,
-		/obj/item/rogueweapon/sword/short/iron=4,
-		/obj/item/rogueweapon/sword/short/falchion=2,
-		/obj/item/rogueweapon/sword/short/messer=3,
-		/obj/item/rogueweapon/pitchfork=7,
-		/obj/item/rogueweapon/sickle=6,
-		/obj/item/rogueweapon/shovel=9,
-		/obj/item/rogueweapon/hammer/iron=6,
-		/obj/item/rogueweapon/tongs=4,
-		/obj/item/rogueweapon/pick=6)
-	
-	var/i
-	for(i=0, i<num_weapon, i++)
-		var/W = pickweight(weapon_loot)
-		new W(mastert)
-	
-	if(prob(80))
-		var/list/armor_loot = list(/obj/item/clothing/suit/roguetown/armor/gambeson=5,
-			/obj/item/clothing/suit/roguetown/armor/gambeson/heavy=2,
-			/obj/item/clothing/suit/roguetown/armor/chainmail/iron=3,
-			/obj/item/clothing/wrists/roguetown/bracers=3,
-			/obj/item/clothing/wrists/roguetown/bracers/leather/heavy=1,
-			/obj/item/clothing/gloves/roguetown/leather=2,
-			/obj/item/clothing/gloves/roguetown/chain/iron=2,
-			/obj/item/clothing/head/roguetown/helmet/leather/advanced=2,
-			/obj/item/clothing/head/roguetown/helmet=3,
-			/obj/item/clothing/neck/roguetown/chaincoif=2,
-			/obj/item/clothing/under/roguetown/heavy_leather_pants=2,
-			/obj/item/clothing/under/roguetown/splintlegs=3,
-			/obj/item/clothing/under/roguetown/chainlegs/iron=3,
-			/obj/item/clothing/shoes/roguetown/boots/leather/reinforced=2,
-			/obj/item/clothing/shoes/roguetown/boots/armor/iron=3)
-		
-		var/A = pickweight(armor_loot)
-		new A(mastert)
-
-		if(prob(50))
-			var/A_bonus = pickweight(armor_loot)
-			new A_bonus(mastert)
-	
-	var/num_other = rand(0,3)
-	if(num_other == 0)
-		return
-	
-	var/list/other_loot = list(/obj/item/clothing/neck/roguetown/psicross=3,
-		/obj/item/clothing/neck/roguetown/psicross/undivided=1,
-		/obj/item/clothing/neck/roguetown/psicross/noc=1,
-		/obj/item/clothing/neck/roguetown/psicross/abyssor=1,
-		/obj/item/clothing/neck/roguetown/psicross/dendor=1,
-		/obj/item/clothing/neck/roguetown/psicross/necra=1,
-		/obj/item/clothing/neck/roguetown/psicross/pestra=1,
-		/obj/item/clothing/neck/roguetown/psicross/ravox=1,
-		/obj/item/clothing/neck/roguetown/psicross/malum=1,
-		/obj/item/clothing/neck/roguetown/psicross/eora=1,
-		/obj/item/clothing/neck/roguetown/psicross/xylix=1,
-		/obj/item/clothing/ring/band=8,
-		/obj/item/clothing/ring/aalloy=6,
-		/obj/item/clothing/ring/silver=3,
-		/obj/item/clothing/ring/gold=5,
-		/obj/item/storage/keyring=4,
-		/obj/item/clothing/neck/roguetown/ornateamulet=2,
-		/obj/item/roguecoin/copper/pile=5,
-		/obj/item/roguecoin/silver/pile=3,
-		/obj/item/roguecoin/aalloy/pile=7,
-		/obj/item/roguecoin/inqcoin/pile=2,
-		/obj/item/reagent_containers/glass/bottle/rogue/beer/murkwine=2,
-		/obj/item/reagent_containers/glass/bottle/rogue/beer/rtoper=2,
-		/obj/item/reagent_containers/glass/bottle/rogue/beer/hagwoodbitter=2,
-		/obj/item/reagent_containers/glass/cup=4,
-		/obj/item/reagent_containers/glass/cup/silver/pewter=3,
-		/obj/item/reagent_containers/glass/bowl/iron=4)
-	
-	for(i=0, i<num_other, i++)
-		var/O = pickweight(other_loot)
-		new O(mastert)
-
-/obj/structure/closet/dirthole/closed/loot/proc/noble_chance()
-	var/num_weapon = rand(1,2)
-	
-	var/list/weapon_loot = list(/obj/item/rogueweapon/sword/blacksteel=1,
-		/obj/item/rogueweapon/sword/decorated=3,
-		/obj/item/rogueweapon/sword/long/dec=2,
-		/obj/item/rogueweapon/sword/sabre/dec=3,
-		/obj/item/rogueweapon/sword/rapier/dec=3,
-		/obj/item/rogueweapon/huntingknife/idagger/silver/stake=1,
-		/obj/item/rogueweapon/huntingknife/idagger/silver/elvish/poopknife=1,
-		/obj/item/rogueweapon/huntingknife/idagger/silver/elvish=3,
-		/obj/item/rogueweapon/huntingknife/idagger/steel/parrying/vaquero=2,
-		/obj/item/rogueweapon/huntingknife/combat/iron=2,
-		/obj/item/rogueweapon/mace/cudgel/justice=1,
-		/obj/item/rogueweapon/mace/parasol/noble=1,
-		/obj/item/rogueweapon/mace/steel=4,
-		/obj/item/rogueweapon/mace/maul/grand=2,
-		/obj/item/rogueweapon/stoneaxe/woodcut/steel/slayer=1,
-		/obj/item/rogueweapon/stoneaxe/woodcut/steel/atgervi=3,
-		/obj/item/rogueweapon/stoneaxe/battle/steppesman=3,
-		/obj/item/rogueweapon/greataxe/steel/gilded=2,
-		/obj/item/rogueweapon/spear/lance=4,
-		/obj/item/rogueweapon/hammer/blacksteel=2)
-	
-	var/i
-	for(i=0, i<num_weapon, i++)
-		var/W = pickweight(weapon_loot)
-		new W(mastert)
-	
-	var/list/armor_loot = list(/obj/item/clothing/mask/rogue/lordmask=3,
-		/obj/item/clothing/mask/rogue/facemask/goldmask=2,
-		/obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_m=1,
-		/obj/item/clothing/suit/roguetown/shirt/dress/emerald=2,
-		/obj/item/clothing/suit/roguetown/shirt/dress/royal/princess=1,
-		/obj/item/clothing/suit/roguetown/shirt/dress/royal/prince=1,
-		/obj/item/clothing/suit/roguetown/shirt/dress/silkydress/random=3,
-		/obj/item/clothing/suit/roguetown/shirt/fancyjacket=2,
-		/obj/item/clothing/suit/roguetown/armor/plate/cuirass=2,
-		/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fencer=3,
-		/obj/item/clothing/suit/roguetown/armor/plate/otavan=1,
-		/obj/item/clothing/suit/roguetown/armor/armordress/winterdress/monarch=2,
-		/obj/item/clothing/suit/roguetown/armor/leather/vest/winterjacket=3,
-		/obj/item/clothing/head/roguetown/helmet/heavy/knight/gilded=2,
-		/obj/item/clothing/head/roguetown/helmet/sallet/visored/gilded=2,
-		/obj/item/clothing/head/roguetown/helmet/otavan=2,
-		/obj/item/clothing/head/roguetown/nyle/consortcrown=3,
-		/obj/item/clothing/head/roguetown/circlet=3,
-		/obj/item/clothing/gloves/roguetown/nomagic=1,
-		/obj/item/clothing/gloves/roguetown/otavan/psygloves=3,
-		/obj/item/clothing/gloves/roguetown/otavan=3,
-		/obj/item/clothing/under/roguetown/heavy_leather_pants/otavan=3,
-		/obj/item/clothing/under/roguetown/heavy_leather_pants/grenzelpants=3,
-		/obj/item/clothing/shoes/roguetown/boots/psydonboots=3,
-		/obj/item/clothing/shoes/roguetown/boots/leather/atgervi=2,
-		/obj/item/clothing/shoes/roguetown/boots/otavan=2,
-		/obj/item/clothing/shoes/roguetown/boots/nobleboot=3,
-		/obj/item/clothing/climbing_gear=1)
-	
-	var/A = pickweight(armor_loot)
-	new A(mastert)
-
-	if(prob(55))
-		var/A_bonus = pickweight(armor_loot)
-		new A_bonus(mastert)
-	
-	var/num_other = rand(1,3)
-	
-	var/list/other_loot = list(/obj/item/clothing/neck/roguetown/psicross=2,
-		/obj/item/clothing/neck/roguetown/psicross/astrata=3,
-		/obj/item/clothing/ring/band=3,
-		/obj/item/clothing/ring/emerald=2,
-		/obj/item/clothing/ring/ruby=1,
-		/obj/item/clothing/ring/topaz=3,
-		/obj/item/clothing/ring/quartz=3,
-		/obj/item/clothing/ring/sapphire=2,
-		/obj/item/clothing/ring/diamond=1,
-		/obj/item/clothing/ring/emeralds=2,
-		/obj/item/clothing/ring/rubys=1,
-		/obj/item/clothing/ring/topazs=3,
-		/obj/item/clothing/ring/quartzs=3,
-		/obj/item/clothing/ring/sapphires=2,
-		/obj/item/clothing/ring/diamonds=1,
-		/obj/item/clothing/neck/roguetown/ornateamulet/noble=2,
-		/obj/item/clothing/neck/roguetown/skullamulet=2,
-		/obj/item/clothing/neck/roguetown/skullamulet/gemerald=1,
-		/obj/item/roguecoin/gold/pile=3,
-		/obj/item/roguecoin/silver/pile=5,
-		/obj/item/roguecoin/aalloy/pile=2,
-		/obj/item/roguecoin/inqcoin/pile=3,
-		/obj/item/reagent_containers/glass/bottle/rogue/elfblue=3,
-		/obj/item/reagent_containers/glass/bottle/rogue/elfred=3,
-		/obj/item/reagent_containers/glass/cup/silver=3,
-		/obj/item/reagent_containers/glass/cup/golden=4,
-		/obj/item/reagent_containers/glass/bowl/silver=2,
-		/obj/item/reagent_containers/glass/bowl/gold=3,
-		/obj/item/clothing/neck/roguetown/talkstone=1,
-		/obj/item/scomstone=1)
-	
-	for(i=0, i<num_other, i++)
-		var/O = pickweight(other_loot)
-		new O(mastert)
-//Caustic Edit End
 
 /obj/structure/closet/dirthole/closed/loot/examine(mob/user)
 	. = ..()

@@ -70,39 +70,6 @@
 		var/I = pickweight(loot)
 		new I(src)
 
-//Caustic Edit
-/obj/structure/closet/crate/chest/gravechest
-
-/obj/structure/closet/crate/chest/gravechest/PopulateContents()
-	var/list/loot = list(/obj/item/rogueweapon/huntingknife/idagger/steel=10,
-		/obj/item/rogueweapon/mace/steel=10,
-		/obj/item/rogueweapon/pick=20,
-		/obj/item/rogueweapon/shovel=20,
-		/obj/item/clothing/suit/roguetown/armor/gambeson=15,
-		/obj/item/clothing/suit/roguetown/armor/leather=15,
-		/obj/item/ingot/iron=20,
-		/obj/item/ingot/gold=5,
-		/obj/item/ingot/silver=3,
-		/obj/item/riddleofsteel=1,
-		/obj/item/roguegem/ruby=2,
-		/obj/item/roguegem/blue=3,
-		/obj/item/roguegem/violet=4,
-		/obj/item/roguegem/green=6,
-		/obj/item/roguegem/yellow=10,
-		/obj/item/roguecoin/silver/pile=2,
-		/obj/item/roguecoin/gold/pile=6,
-		/obj/item/storage/belt/rogue/pouch/coins/mid=8,
-		/obj/item/storage/belt/rogue/pouch/coins/rich=8,
-		/obj/item/storage/backpack/rogue/satchel/otavan=30,
-		/obj/item/roguestatue/gold/loot=1,
-		/obj/item/clothing/neck/roguetown/talkstone=2)
-	
-	var/i
-	for(i=0, i<3, i++)
-		var/I = pickweight(loot)
-		new I(src)
-//Caustic Edit End
-
 /obj/structure/closet/crate/roguecloset
 	name = "closet"
 	desc = "A simple wooden closet, used to store whatever it is you would like out of sight."

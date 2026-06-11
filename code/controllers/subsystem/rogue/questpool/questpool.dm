@@ -189,6 +189,8 @@ SUBSYSTEM_DEF(questpool)
 		var/cutoff = (Q.source == QUEST_SOURCE_POOL) ? pool_cutoff : player_cutoff
 		if(Q.created_at >= cutoff)
 			continue
+		if(Q.quest_difficulty == "Special") //OV ADD - GM quests are not removed
+			continue //OV ADD
 		stale += Q
 		if(is_kill_type(Q.quest_type))
 			kill_replacements_needed++

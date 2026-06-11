@@ -1,0 +1,4 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - balance: "Reset grave loot to AP's in order to undo a PR made to significantly buff grave loot."

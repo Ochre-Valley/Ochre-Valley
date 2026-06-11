@@ -121,3 +121,80 @@
 	contains = list(
 					/obj/item/item_tf_chalk
 				)
+
+
+//for armored collars, prices are 110% the gorget they are based on, because dirtyfaces randomize pricing a bit
+ //bronze gorgets are assigned a value of 40 because vibes (more than its mechanically worth), since the normal bronze gorget is not sold.
+
+/datum/supply_pack/rogue/kink_toy/collar/leather
+	name = "Armored Collar (Leather)"
+	cost = 33 
+	contains = list(
+					/obj/item/clothing/neck/roguetown/leather/collar
+				)
+/datum/supply_pack/rogue/kink_toy/collar/leather_bell
+	name = "Armored Collar (Leather, Bell)"
+	cost = 33
+	contains = list(
+					/obj/item/clothing/neck/roguetown/leather/collar/bell
+				)
+/datum/supply_pack/rogue/kink_toy/collar/leather_cowbell
+	name = "Armored Collar (Leather, Cowbell)"
+	cost = 33
+	contains = list(
+					/obj/item/clothing/neck/roguetown/leather/collar/bell/cow
+				)
+/datum/supply_pack/rogue/kink_toy/collar/iron
+	name = "Armored Collar (Iron)"
+	cost = 27
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/collar
+				)
+/datum/supply_pack/rogue/kink_toy/collar/iron_bell
+	name = "Armored Collar (Iron, Bell)"
+	cost = 27
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/collar/bell
+				)
+/datum/supply_pack/rogue/kink_toy/collar/iron_cowbell
+	name = "Armored Collar (Iron, Cowbell)"
+	cost = 27
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/collar/bell/cow
+				)
+/datum/supply_pack/rogue/kink_toy/collar/bronze
+	name = "Armored Collar (Bronze)"
+	cost = 44
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/bronze/collar
+				)
+/datum/supply_pack/rogue/kink_toy/collar/bronze_bell
+	name = "Armored Collar (Bronze, Bell)"
+	cost = 44
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/bronze/collar/bell
+				)
+/datum/supply_pack/rogue/kink_toy/collar/bronze_cowbell
+	name = "Armored Collar (Bronze, Cowbell)"
+	cost = 44
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/bronze/collar/bell/cow
+				)
+/datum/supply_pack/rogue/kink_toy/collar/steel
+	name = "Armored Collar (Steel)"
+	cost = 55
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/steel/collar
+				)
+/datum/supply_pack/rogue/kink_toy/collar/steel_bell
+	name = "Armored Collar (Steel, Bell)"
+	cost = 55
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/steel/collar/bell
+				)
+/datum/supply_pack/rogue/kink_toy/collar/steel_cowbell
+	name = "Armored Collar (Steel, Cowbell)"
+	cost = 55
+	contains = list(
+					/obj/item/clothing/neck/roguetown/gorget/steel/collar/bell/cow
+				)
