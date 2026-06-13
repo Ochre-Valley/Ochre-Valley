@@ -1374,7 +1374,7 @@
 			if("Dubcon and Unwilling")
 				msg_willing = "[SPAN_TOOLTIP("Dubcon and Unwilling[pref_warning]","[get_badge_span("pref_unwilling_dub")]")]"
 			if("All")
-				msg_willing = "[SPAN_TOOLTIP("Willing, Dubcon and Unwilling[pref_warning]","[get_badge_span("pref_unwilling_dub_unwilling")]")]"
+				msg_willing = "[SPAN_TOOLTIP("Willing, Dubcon and Unwilling[pref_warning]","[get_badge_span("pref_unwilling_dub_willing")]")]"
 	if(client.prefs.badge_sexuality)
 		switch(client.prefs.badge_sexuality)
 			if("Straight")
