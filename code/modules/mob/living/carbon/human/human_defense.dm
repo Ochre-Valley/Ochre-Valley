@@ -840,12 +840,14 @@
 				def_zone = BODY_ZONE_L_LEG
 			if(BODY_ZONE_PRECISE_R_FOOT)
 				def_zone = BODY_ZONE_R_LEG
+	//OV edit
 	if(istype(skin_armor, /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor)) //Always return early if natural armor is present, it doesn't allow other armors to work
 		var/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/C = skin_armor
 		if(C.obj_integrity <= 0 || C.obj_broken)
 			return //return null if no armor
 		used = C
 		return used
+	//OV edit end
 	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, glasses, ears, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
 	for(var/bp in body_parts)
 		if(!bp)
@@ -879,14 +881,16 @@
 				def_zone = BODY_ZONE_L_LEG
 			if(BODY_ZONE_PRECISE_R_FOOT)
 				def_zone = BODY_ZONE_R_LEG
+	//OV edit
 	if(istype(skin_armor, /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor)) //Always return early if natural armor is present, it doesn't allow other armors to work
 		var/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/C = skin_armor
 		var/list/used_armor = list()
-		if(C.obj_integrity > 0 || !C.obj_broken)
+		if(C.obj_integrity > 0 && !C.obj_broken)
 			var/val = C.armor.getRating(d_type)
 			if(val > 0)
 				used_armor[C] = C.armor.getRating(d_type)
 		return used_armor
+	//OV edit end
 	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, glasses, ears, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
 	var/list/used_armor = list()
 	for(var/bp in body_parts)
