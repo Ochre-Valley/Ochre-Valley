@@ -1,4 +1,4 @@
-/datum/round_event_control/antagonist/migrant_wave/assassins
+/*/datum/round_event_control/antagonist/migrant_wave/assassins //OV Edit - Disables
 	name = "Assassin Migration"
 	typepath = /datum/round_event/migrant_wave/assassins
 	wave_type = /datum/migrant_wave/assassin
@@ -28,4 +28,4 @@
 			if(!player.client)
 				continue
 
-			to_chat(player, span_danger("Graggar demands blood, assassins flock to Azuria. An assassin slot has been opened."))
+			to_chat(player, span_danger("Graggar demands blood, assassins flock to Azuria. An assassin slot has been opened."))*/

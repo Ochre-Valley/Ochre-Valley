@@ -51,3 +51,9 @@
 	category = LOG_CATEGORY_GAME_WHISPER
 	config_flag = /datum/config_entry/flag/log_whisper
 	master_category = /datum/log_category/game
+
+/datum/log_category/game_craft
+	category = LOG_CATEGORY_GAME_CRAFT
+	config_flag = /datum/config_entry/flag/log_game
+	master_category = /datum/log_category/game
+

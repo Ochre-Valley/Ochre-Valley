@@ -1,4 +1,4 @@
-/client/proc/add_remove_spell(mob/living/carbon/human/H)	
+/*/client/proc/add_remove_spell(mob/living/carbon/human/H)	
 	switch(alert(usr, "Add or remove a spell from [H.name]?", "Add/Remove Spell", "Add", "Remove", "Cancel"))
 		if("Add")
 			var/list/spells = list()
@@ -29,4 +29,4 @@
 					spell_name = S.name
 				H.mind.RemoveSpell(spell)
 				message_admins("[key_name_admin(usr)] has removed [spell_name] from [ADMIN_LOOKUPFLW(H)].")
-				log_admin("[key_name(usr)] has removed [spell_name] from [key_name(H)].")
+				log_admin("[key_name(usr)] has removed [spell_name] from [key_name(H)].")*/

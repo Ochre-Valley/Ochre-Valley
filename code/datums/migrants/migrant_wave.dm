@@ -90,7 +90,7 @@
 	)
 	greet_text = "Together with a party of trusted friends we decided to venture out, seeking thrills, glory and treasure, ending up in the misty and damp bog underneath Azure Peak, perhaps getting ourselves into more than what we bargained for."
 
-/datum/migrant_wave/bandit
+/*/datum/migrant_wave/bandit //OV Edit - Disables Unwanted
 	name = "Bandit Raid"
 	track = MIGRANT_TRACK_SPECIAL
 	weight = 16
@@ -128,4 +128,4 @@
 	)
 	optional_roles = list(
 		/datum/migrant_role/gnoll = 3,
-	)
+	)*/

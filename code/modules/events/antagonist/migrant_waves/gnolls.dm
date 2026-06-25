@@ -1,4 +1,4 @@
-/datum/round_event_control/antagonist/migrant_wave/gnolls
+/*/datum/round_event_control/antagonist/migrant_wave/gnolls //OV Edit - Disables
 	name = "Gnolls Migration"
 	typepath = /datum/round_event/migrant_wave/gnolls
 	wave_type = /datum/migrant_wave/gnolls
@@ -29,4 +29,4 @@
 			if(!player.client)
 				continue
 
-			to_chat(player, span_danger("Graggar demands blood, gnolls flock to Azuria."))
+			to_chat(player, span_danger("Graggar demands blood, gnolls flock to Azuria."))*/

@@ -80,9 +80,9 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
 	if(player.prefs.voice_pack != "Default")
-		var/datum/voicepack/VP = GLOB.voice_packs_list[player.prefs.voice_pack]
-		character.dna.species.soundpack_m = new VP()
-		character.dna.species.soundpack_f = new VP()
+		var/datum/voicepack/VP = GLOB.voice_packs[GLOB.voice_packs_list[player.prefs.voice_pack]]
+		character.dna.species.soundpack_m = VP
+		character.dna.species.soundpack_f = VP
 
 
 /proc/apply_prefs_virtue(mob/living/carbon/human/character, client/player)
@@ -205,9 +205,13 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	return FALSE
 
 /proc/apply_charflaw_equipment(mob/living/carbon/human/character, client/player)
+	var/has_extra_vice = FALSE
+	for(var/datum/charflaw/cf in character.charflaws) // if we didn't do this, someone could take hunted and targeted together and no other vice
+		if(!cf.needs_extra_vice)
+			has_extra_vice = TRUE
 	for(var/datum/charflaw/cf in character.charflaws)
 		cf.apply_post_equipment(character)
-		if(cf.needs_extra_vice && character.charflaws.len < 2)
+		if(cf.needs_extra_vice && !has_extra_vice)
 			var/datum/charflaw/randflaw/rf = new()
 			character.charflaws.Add(rf)
 			rf.apply_post_equipment(character)

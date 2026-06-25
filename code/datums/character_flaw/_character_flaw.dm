@@ -32,9 +32,11 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	/datum/charflaw/mute::name = /datum/charflaw/mute,
 	/datum/charflaw/critweakness::name = /datum/charflaw/critweakness,
 	/datum/charflaw/hunted::name = /datum/charflaw/hunted,
+	/datum/charflaw/targeted::name = /datum/charflaw/targeted,
 	/datum/charflaw/mind_broken::name = /datum/charflaw/mind_broken,
 	/datum/charflaw/noflaw::name = /datum/charflaw/noflaw,
 	/datum/charflaw/leprosy::name = /datum/charflaw/leprosy,
+	/datum/charflaw/wanted::name = /datum/charflaw/wanted,
 	/datum/charflaw/randflaw::name = /datum/charflaw/randflaw,
 
 	//Caustic edit
@@ -210,6 +212,22 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/badsight/proc/apply_reading_skill(mob/living/carbon/human/H)
 	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 
+/datum/charflaw/proc/get_nearby_humans(mob/user, range)
+	. = list()
+	for(var/mob/M in get_hearers_in_view(range, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
+		if(M == user)
+			continue
+		if(M.stat)
+			continue
+		var/mob/living/carbon/human/H = M
+		if(istype(H) && H.dna.species)
+			. += H
+		var/obj/shapeshift_holder/S = locate(/obj/shapeshift_holder) in M
+		if(S && ishuman(S.stored))
+			H = S.stored
+			if(H != user && H.dna.species)
+				. += H
+
 /datum/charflaw/paranoid
 	name = "Paranoid"
 	desc = "I'm even more anxious than most people. I'm extra paranoid of other races and the sight of blood."
@@ -222,11 +240,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		return
 	last_check = world.time
 	var/cnt = 0
-	for(var/mob/living/carbon/human/L in hearers(7, user))
-		if(L == src)
-			continue
-		if(L.stat)
-			continue
+	for(var/mob/living/carbon/human/L in get_nearby_humans(user, 7))
 		if(L.dna?.species)
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
@@ -257,24 +271,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(is_active)
 		if(world.time > next_check)
 			next_check = world.time + interval
-			var/cnt = 0
-			//OV edit - If you have prey or are in prey, always count as having 1 person nearby (no matter how many you've eaten)
-			for(var/obj/belly/our_belly in user.vore_organs)
-				for(var/mob/living/our_prey in our_belly.contents)
-					if(our_prey.client)
-						cnt = 1
-			if(istype(user.loc,/obj/belly))
-				cnt = 1
-			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(6, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
-				if(L == user)
-					continue
-				if(L.stat)
-					continue
-				if(L.dna.species)
-					cnt++
-				if(cnt > 3)
-					break
+			var/cnt = length(get_nearby_humans(user, 6))
 			var/mob/living/carbon/P = user
 			if(cnt > 3)
 				P.add_stress(/datum/stressevent/crowd)
@@ -303,30 +300,8 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(is_active && user.stat == CONSCIOUS)
 		if(world.time > next_check)
 			next_check = world.time + interval
-			var/cnt = 0
-			//OV edit - Always pass if there's vore
-			for(var/obj/belly/our_belly in user.vore_organs)
-				if(cnt > 3)
-					break
-				for(var/mob/living/our_prey in our_belly.contents)
-					if(our_prey.client)
-						cnt++
-						if(cnt > 3)
-							break
-			if(istype(user.loc,/obj/belly))
-				cnt++
-			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(7, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
-				if(L == user)
-					continue
-				if(L.stat)
-					continue
-				if(L.dna.species)
-					cnt++
-				if(cnt > 3)
-					break
 			var/mob/living/carbon/P = user
-			if(cnt <= 0)
+			if(length(get_nearby_humans(user, 7)) <= 0)
 				handle_stacks(P)
 			else
 				reset_stacks(P)
@@ -385,18 +360,22 @@ GLOBAL_LIST_INIT(averse_factions, list(
 				user.remove_stress(/datum/stressevent/nopeople)
 				cnt++
 			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(2, user))
-				if(L == user)
-					continue
-				if(L.stat == DEAD)
-					continue
-				var/dist = get_dist(L, user)
-				if(dist <= 1)
-					distfound = TRUE
-					user.remove_stress(/datum/stressevent/nopeople)
-					break
-				if(L.dna.species)
+			for(var/mob/living/carbon/human/L in get_nearby_humans(user, 7)) // the distance check won't work if you're shapeshifted without some extra logic
+				var/obj/shapeshift_holder/S = locate(/obj/shapeshift_holder) in L
+				if(S && S.shape && S.stored)
+					if(get_dist(S.shape, user) <= 1)
+						distfound = TRUE
+						user.remove_stress(/datum/stressevent/nopeople)
+						break
 					cnt++
+				else
+					var/dist = get_dist(L, user)
+					if(dist <= 1)
+						distfound = TRUE
+						user.remove_stress(/datum/stressevent/nopeople)
+						break
+					if(L.dna.species)
+						cnt++
 				if(cnt >= 2)
 					user.remove_stress(/datum/stressevent/nopeople)
 					break
@@ -472,38 +451,13 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		ADD_TRAIT(H, TRAIT_ARMOR_BREAK, TRAIT_GENERIC)
-
-GLOBAL_LIST_INIT(hunted_protected_roles, list(
-	"Head Physician",
-	"Martyr",
-	"Bishop",
-	"Councillor",
-	"Hand",
-	"Jester",
-	"Court Magician",
-	"Seneschal",
-	"Suitor",
-	"Sergeant",
-	"Inquisitor",
-	"Consort",
-	"Grand Duke",
-	"Prince",
-	"Servant",
-	"Knight",
-	"Marshal"
-))
-
 /datum/charflaw/hunted
-	name = "Hunted" //OV Edit - Triumph Gain removed, was "Hunted (+2 TRI)"
+	name = "Hunted"
 	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
-	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY ASSASSINS AND HAVE ASSASINATION ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
+	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY GNOLLS. \
 	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
 	needs_extra_vice = TRUE
 	var/logged = FALSE
-
-/*/datum/charflaw/hunted/on_mob_creation(mob/user) //OV Edit - Commented out to remove triumph gain
-	. = ..()
-	user.adjust_triumphs(2)*/
 
 /datum/charflaw/hunted/flaw_on_life(mob/user)
 	if(!ishuman(user))
@@ -515,6 +469,28 @@ GLOBAL_LIST_INIT(hunted_protected_roles, list(
 			logged = TRUE
 
 /datum/charflaw/hunted/apply_post_equipment(mob/user)
+	..()
+	if(!ishuman(user))
+		return
+
+/datum/charflaw/targeted
+	name = "Targeted"
+	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
+	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY ASSASSINS AND HAVE ASSASINATION ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
+	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
+	needs_extra_vice = TRUE
+	var/logged = FALSE
+
+/datum/charflaw/targeted/flaw_on_life(mob/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	if(logged == FALSE)
+		if(H.name) // If you don't check this, the log entry wont have a name as flaw_on_life is checked at least once before the name is set.
+			log_hunted("[H.ckey] playing as [H.name] had the targeted flaw by vice.") // we log this in the same place as hunted because making a seperate log for it would be silly
+			logged = TRUE
+
+/datum/charflaw/targeted/apply_post_equipment(mob/user)
 	..()
 	if(!ishuman(user))
 		return
@@ -937,6 +913,29 @@ GLOBAL_LIST_INIT(hunted_protected_roles, list(
 			active_since = world.time
 	if(is_active && user && !QDELETED(user))
 		addtimer(CALLBACK(src, PROC_REF(check_for_candidates), user), 5 SECONDS)
+
+/datum/charflaw/wanted
+	name = "Wanted" //OV Edit, TRI Removal - (+2 TRI)"
+	desc = "You're a known criminal; your name can be found on the EXCIDIUM. Your crime may have been a misdeed worthy of a fine, or a great offense against the powers at play. Only Adventurers, Pilgrims (Migrants), Traders, Vagabonds and Lunatics may pick this vice and it requires another."
+	needs_extra_vice = TRUE
+
+/datum/charflaw/wanted/on_mob_creation(mob/user)
+	. = ..()
+	//user.adjust_triumphs(2) //OV Edit - TRI removal
+	ADD_TRAIT(user, TRAIT_OUTLAW, "[type]")
+
+/datum/charflaw/wanted/apply_post_equipment(mob/user)
+	..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	addtimer(CALLBACK(src, PROC_REF(apply_bounty_when_ready), H), 5 SECONDS)
+
+/datum/charflaw/wanted/proc/apply_bounty_when_ready(mob/living/carbon/human/H)
+	if(H.advsetup)
+		addtimer(CALLBACK(src, PROC_REF(apply_bounty_when_ready), H), 5 SECONDS)
+		return
+	wretch_select_bounty(H)
 
 
 

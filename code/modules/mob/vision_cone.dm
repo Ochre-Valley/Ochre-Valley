@@ -6,6 +6,7 @@
 
 /mob
 	var/fovangle
+	var/cone_showing = FALSE
 
 //Procs
 /atom/proc/InCone(atom/center = usr, dir = NORTH)
@@ -357,6 +358,9 @@
 /mob/proc/show_cone()
 	if(!client)
 		return
+	if(cone_showing)
+		return
+	cone_showing = TRUE
 	if(hud_used?.fov)
 		hud_used.fov.alpha = 255
 		hud_used.fov_blocker.alpha = 255
@@ -366,6 +370,9 @@
 /mob/proc/hide_cone()
 	if(!client)
 		return
+	if(!cone_showing)
+		return
+	cone_showing = FALSE
 	if(hud_used?.fov)
 		hud_used.fov.alpha = 0
 		hud_used.fov_blocker.alpha = 0
