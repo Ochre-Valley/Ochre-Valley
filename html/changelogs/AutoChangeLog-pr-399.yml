@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - code_imp: "Sets the BODY_SIZE_MAX and BODY_SIZE_MIN values to be the correct way round."

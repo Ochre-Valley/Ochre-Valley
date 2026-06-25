@@ -374,7 +374,7 @@
 	to_chat(H, span_warning("You are a former veteran arbalest, outfitted with the latest technologies known to man. Your weapons remain as deadly to the enemy as to you, but your training should overcome it. Run them down, with fire and sword."))
 	beltr = /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	beltl = /obj/item/quiver/bulletpouch/iron
-	r_hand = /obj/item/gun/ballistic/arquebus
+	r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus // OV Edit: Arquebus Refactor
 	if(H.mind)
 		var/armor_options = list("Light Brigandine", "Studded Leather Vest")
 		var/armor_choice = input(H, "Choose your armor.", "DRESS UP") as anything in armor_options

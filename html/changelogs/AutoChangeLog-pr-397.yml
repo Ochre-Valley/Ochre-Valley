@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Being hit with a shrink or grow spell now trigger size stripping if you have the appropriate prefs selected."

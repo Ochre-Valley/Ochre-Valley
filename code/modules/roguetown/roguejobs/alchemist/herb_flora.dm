@@ -97,7 +97,13 @@
 	/obj/structure/flora/roguegrass/herb/valeriana,
 	/obj/structure/flora/roguegrass/herb/artemisia,
 	/obj/structure/flora/roguegrass/herb/rosa,
-	/obj/structure/flora/roguegrass/swampweed))
+	/obj/structure/flora/roguegrass/swampweed,
+	//OV Edit Start: New herbs for size potions
+	/obj/structure/flora/roguegrass/herb/faestool,
+	/obj/structure/flora/roguegrass/herb/wyldweed,
+	/obj/structure/flora/roguegrass/herb/boastersnare
+	//OV Edit End
+	))
 
 	var/obj/structure/flora/roguegrass/herb/boi = new type
 	boi.forceMove(get_turf(src))
