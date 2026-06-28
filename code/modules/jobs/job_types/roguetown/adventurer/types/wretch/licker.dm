@@ -13,6 +13,10 @@
 	maximum_possible_slots = 2
 	applies_post_equipment = FALSE
 
+//OV Add Start
+	vice_limits = list(/datum/charflaw/hemovore)
+//OV Add End
+
 /datum/outfit/job/roguetown/wretch/licker/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)

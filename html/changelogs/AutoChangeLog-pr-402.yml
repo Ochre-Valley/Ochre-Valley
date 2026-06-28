@@ -1,0 +1,4 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - bugfix: "When a hemovore bites a target who is not in combat mode, in a zone with no greater than medium stab protection, they may always drink, even if the target is not bleeding, and vampire drugs are applied properly. If these qualifications are not met, hemovore behavior remains as it was before this fix"

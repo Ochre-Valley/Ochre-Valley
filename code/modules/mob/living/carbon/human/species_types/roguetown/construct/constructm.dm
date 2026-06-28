@@ -42,6 +42,7 @@
 		/obj/item/bodypart/taur/bunny,
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
+		/obj/item/bodypart/taur/satyr, //OV ADD
 	)
 	///Caustic edit end
 	default_features = MANDATORY_FEATURE_LIST

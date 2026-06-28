@@ -89,7 +89,7 @@
 /atom/movable/proc/send_speech_emote(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode, original_message)
 	var/rendered = compose_message(src, message_language, message, , spans, message_mode)
 	var/list/hearers = get_hearers_in_view(range, source)
-	//OV Edit - Commented out per testing add_remote_hearing_atom_listeners(hearers, source, range) //OV Add
+	add_remote_hearing_atom_listeners(hearers, source, range) //OV Add
 	for(var/_AM in hearers)
 		var/atom/movable/AM = _AM
 		AM.Hear(rendered, src, message_language, message, , spans, message_mode)

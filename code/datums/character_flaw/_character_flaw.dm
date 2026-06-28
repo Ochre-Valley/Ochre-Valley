@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/badsight/proc/apply_reading_skill(mob/living/carbon/human/H)
 	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 
-/datum/charflaw/proc/get_nearby_humans(mob/user, range)
+/datum/charflaw/proc/get_nearby_humans(mob/user, range, var/include_prey = FALSE) //OV EDIT - Add include_prey argument to check for prey in the user's vore organs
 	. = list()
 	for(var/mob/M in get_hearers_in_view(range, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
 		if(M == user)
@@ -227,6 +227,13 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			H = S.stored
 			if(H != user && H.dna.species)
 				. += H
+	//OV edit - Count any prey that are in the user's vore organs as well, if include_prey is true
+	if(include_prey)
+		for(var/obj/belly/our_belly in user.vore_organs)
+			for(var/mob/living/our_prey in our_belly.contents)
+				if(our_prey.client)
+					. += our_prey
+	//OV edit end
 
 /datum/charflaw/paranoid
 	name = "Paranoid"
@@ -271,11 +278,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(is_active)
 		if(world.time > next_check)
 			next_check = world.time + interval
-			var/cnt = length(get_nearby_humans(user, 6))
+			var/cnt = length(get_nearby_humans(user, 6, TRUE)) //OV edit - Include prey in the count
 			var/mob/living/carbon/P = user
-			if(cnt > 3)
+			if((cnt > 3) && !isbelly(user.loc)) //OV EDIT - ignore if you're prey
 				P.add_stress(/datum/stressevent/crowd)
-			else if(cnt == 0)
+			else if((cnt == 0) && !isbelly(user.loc)) //OV EDIT - ignore if you're prey
 				P.add_stress(/datum/stressevent/nocrowd)
 			else
 				next_check = world.time + (interval * 6)	//we procced it successfully, so the delay is longer
@@ -301,7 +308,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		if(world.time > next_check)
 			next_check = world.time + interval
 			var/mob/living/carbon/P = user
-			if(length(get_nearby_humans(user, 7)) <= 0)
+			if((length(get_nearby_humans(user, 7, TRUE)) <= 0) && !isbelly(user.loc)) //OV EDIT - Check if the user is in a belly, if so, don't add stress
 				handle_stacks(P)
 			else
 				reset_stacks(P)
@@ -327,7 +334,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/lonely/proc/reset_stacks(mob/living/L)
 	if(stacks >= 2)
 		to_chat(L, span_info("Oh thank [L.patron?.name]! A person!"))
-	if(stacks > 1)
+	if(stacks > 0) //OV EDIT - Remove stress even at 1 stack, otherwise you get stuck with lonely_one
 		L.remove_stress_list(list(/datum/stressevent/lonely_one, /datum/stressevent/lonely_two, /datum/stressevent/lonely_three, /datum/stressevent/lonely_max))
 	stacks = 0
 
@@ -346,7 +353,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			next_check = world.time + interval
 			var/cnt = 0
 			var/distfound = FALSE
-			//OV edit - Always remove stress if there's vore, can't get clingier than that
+			//OV edit - Always remove stress if there's vore, can't get clingier than that - Needs to remain separate in this proc, as distance is a factor.
 			for(var/obj/belly/our_belly in user.vore_organs)
 				for(var/mob/living/our_prey in our_belly.contents)
 					if(our_prey.client)

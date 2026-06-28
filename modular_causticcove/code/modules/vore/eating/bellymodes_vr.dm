@@ -336,6 +336,19 @@
 
 	if((mode_flags & DM_FLAG_LEAVEREMAINS) && M.digest_leave_remains)
 		handle_remains_leaving(M)
+	
+	//OV edit
+	if((mode_flags & DM_FLAG_SPARELIMB) && M.digest_leave_remains && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/bodypart/l_arm/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/r_arm/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/l_leg/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/r_leg/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+	//OV edit end
 
 	digestion_death(M)
 	if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && reagents.total_volume < reagents.maximum_volume) // digestion producing reagents

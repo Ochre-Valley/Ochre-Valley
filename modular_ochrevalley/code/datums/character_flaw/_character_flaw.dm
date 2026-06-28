@@ -29,6 +29,32 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 		REMOVE_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 		to_chat(H, span_danger("My hunger brays at the back of my mind."))
 
+/obj/item/grabbing/bite/proc/check_hemovore(mob/living/user)
+	if(!HAS_TRAIT(user, TRAIT_LYFE_DRINK))
+		return FALSE //only hemovores get the snowflake check~
+	if(iscarbon(grabbed))
+		var/mob/living/carbon/target = grabbed
+		if(target.cmode)
+			to_chat(user, span_warning("My meal is fighting back! I can't get a clean bite."))
+			return FALSE //target is actively fighting
+		if(ishuman(target)) //check if the target is human, so their armor can be checked. If the target is human, we get the best stab resist on this zone. 
+			var/mob/living/carbon/human/humantarget = target
+			var/def_zone = limb_grabbed.body_zone
+			var/obj/item/clothing/prot = humantarget.get_best_worn_armor(def_zone, "stab")
+			if(prot)
+				var/armoramount = prot.armor.getRating("stab")
+				if(armoramount >= DBLOCK_HEAVY) //Hemovores can bite thru leather and below, intended to bypass natural armor. This means they can bite through bronze right now, unfortunately, but it's for scenes!!
+					to_chat(user, span_warning("My meal is protected! I can't get a clean bite."))
+					return FALSE
+				else if(armoramount) //tell that you're biting through the armor. I don't actually want to damage it, this is mostly for scenes anyways
+					to_chat(user, span_warning("I bite through the target's [prot]"))
+		var/ramount = 15
+		var/rid = /datum/reagent/vampsolution
+		target.reagents.add_reagent(rid, ramount)
+		user.drinksomeblood(grabbed, sublimb_grabbed)
+		return TRUE
+	return FALSE //you should never get this far. you've somehow tried to drink from something other than a carbon mob.
+
 /datum/charflaw/dendor_touched
 	name = "Dendor Touched"
 	desc = "Cursed by Dendor, you transform into an animal every time you enter total darkness."

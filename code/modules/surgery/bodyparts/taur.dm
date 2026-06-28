@@ -290,3 +290,14 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	clip_mask_state = "clip_mask_goat"
 
 	has_taur_color = TRUE
+
+//OV edit
+/obj/item/bodypart/taur/satyr
+	name = "Satyr Legs"
+
+	icon = 'modular_ochrevalley/icons/mob/taurs/taurs.dmi'
+	offset_x = -16
+	taur_icon_state = "satyr_s"
+
+	has_taur_color = TRUE
+//OV edit end

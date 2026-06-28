@@ -20,7 +20,7 @@
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/spider,
 		/obj/item/bodypart/taur/horse,
-		/obj/item/bodypart/taur/goat,
+		// /obj/item/bodypart/taur/goat, //OV remove - No sprite
 		//OV Edit Start
 		/obj/item/bodypart/taur/cow,
 		/obj/item/bodypart/taur/lizard,
@@ -45,6 +45,7 @@
 		/obj/item/bodypart/taur/bunny,
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
+		/obj/item/bodypart/taur/satyr, //OV ADD
 		//OV Edit End
 	)
 	base_name = "Godtouched"
