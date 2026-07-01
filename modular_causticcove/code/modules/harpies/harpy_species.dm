@@ -5,6 +5,7 @@
 	name = "Harpy"
 	id = SPEC_ID_HARPY
 	base_name = "Harpy"
+	desc_title = "Harpy"
 	desc = "Harpies, or less ceremoniously known as 'magpies,' resemble the despised hollow-kin in appearance at first glance. \
 	One would rightfully assume they are similar in nature- with accuracy even, much to the harpies' chagrin. \
 	Harpies have been uplifted and reconnected to divinity by Eora, having developed culture of music and song which caught the attention of such a goddess. \
@@ -13,8 +14,7 @@
 	Harpies tend to live and gather in colonies at the tops of great sequoia forests and in nearby cliffs. Due to their laden flight, they must employ use of updrafts and proximity to large objects or structures to bolster their limited range and air-dancing performances. \
 	Their serene songs and blissful music can be heard echoing far below, guiding travelers and thieves both to respite... or treasure. For as lifted into grace as they might be, these 'magpies' earn such a nickname from instinctual Matthiosan greed and love for anything that shines. \
 	Yet if one can work past that distrust and compensate them well, harpies make for unparalleled couriers. \
-	Harpies and Feculents often find themselves in conflict, mirroring the quarrels of their patrons, whether of conscious faith or not.<br> \
-	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 PER | +1 INT </b></span><br>"
+	Harpies and Feculents often find themselves in conflict, mirroring the quarrels of their patrons, whether of conscious faith or not."
 
 	skin_tone_wording = "Heritage"
 	default_color = "FFFFFF"
@@ -146,6 +146,11 @@
 		/datum/descriptor_choice/prominent_two_wild,
 		/datum/descriptor_choice/prominent_three_wild,
 		/datum/descriptor_choice/prominent_four_wild,
+	)
+	
+	mechanics_explanations = list(
+		"Are able to fly using a unique ability, (after a slow initial takeoff,) carrying them up a floor above them. Using the ability again will send them back down.",
+		"Can sing using a unique ability. Requires a free hand to use."
 	)
 	//OV Edit End
 

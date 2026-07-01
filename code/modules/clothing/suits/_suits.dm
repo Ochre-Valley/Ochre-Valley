@@ -9,7 +9,6 @@
 	var/blood_overlay_type = "suit"
 	var/togglename = null
 	bloody_icon_state = "bodyblood"
-	sellprice = 3
 
 
 /obj/item/clothing/suit/worn_overlays(isinhands = FALSE)

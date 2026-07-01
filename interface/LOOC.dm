@@ -86,7 +86,6 @@
 
 
 	var/list/mobs = list()
-	var/muted = prefs.muted
 	for(var/mob/M in GLOB.player_list)
 		var/added_text
 		var/is_admin = FALSE
@@ -94,17 +93,17 @@
 		if(!M.client)
 			continue
 		if((C in GLOB.admins) && (C.prefs.admin_chat_toggles & CHAT_ADMINLOOC))
-			added_text += " ([mob.ckey]) [ADMIN_FLW(mob)] <A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>\[MUTE\]</font></a>"
+			added_text += " ([mob.ckey]) [ADMIN_FLW(mob)]"
 			is_admin = 1
 		mobs += C
 		if(C.prefs.chat_toggles & CHAT_OOC)
 			var/turf/speakturf = get_turf(M)
 			var/turf/sourceturf = get_turf(usr)
 			if(wp == 1 && (M in range (7, src)))
-				to_chat(C, "<font color='["#6699CC"]'><b><span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>")
+				to_chat(C, "<font color='["#6699CC"]'><b><span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>", type = MESSAGE_TYPE_OOC)
 				M.playsound_local(speakturf, 'modular_ochrevalley/sounds/message_effects/looc_smol.ogg', 30,TRUE)	//OV ADD
 			else if(speakturf in get_hear(7, sourceturf))
-				to_chat(C, "<font color='["#6699CC"]'><b><span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>")
+				to_chat(C, "<font color='["#6699CC"]'><b><span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>", type = MESSAGE_TYPE_OOC)
 				M.playsound_local(speakturf, 'modular_ochrevalley/sounds/message_effects/looc_smol.ogg', 30,TRUE)	//OV ADD
 			else if(is_admin == 1)
-				to_chat(C, "<font color='["#6699CC"]'><b>(R) <span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>")
+				to_chat(C, "<font color='["#6699CC"]'><b>(R) <span class='prefix'>[prefix]:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>", type = MESSAGE_TYPE_OOC)

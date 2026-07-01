@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added new drider drow to the game, which are larger, angrier and more dangerous drow with spider bodies. These drow can rarely spawn as part of underdark ambushes or underdark drow quests.add: Added more things"
+  - rscadd: "A bunch of GM spawn only legendary enemies."

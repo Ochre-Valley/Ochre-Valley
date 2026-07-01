@@ -1,7 +1,7 @@
 /client/proc/spawn_player(var/client/C in GLOB.clients)
 	set name = "Spawn Player"
 	set desc = "Spawn a character as a specified job, with their currently loaded char slot"
-	set category = "-Admin-"
+	set category = "Admin.Admin"
 	if(!holder)
 		return
 	//Setup and option selections
@@ -65,8 +65,8 @@
 		if(!location)
 			to_chat(usr, span_danger("Invalid coordinates for spawn!"))
 	while(!location)
-	var/announce = tgui_alert(usr, "Add [C.prefs.real_name] to the actor list? (This will announce their arrival if their role normally would)", "Hide from actor list?", "Yes", "No") == "Yes"
-	if(tgui_alert(usr, "You are spawning [C.prefs.real_name]/([C.ckey]) as [selected_title] at ([location.x],[location.y],[location.z]), is this correct?", "Confirmation", "Yes", "Cancel") != "Yes")
+	var/announce = tgui_alert(usr, "Add [C.prefs.real_name] to the actor list? (This will announce their arrival if their role normally would)", "Hide from actor list?", list("Yes", "No")) == "Yes"
+	if(tgui_alert(usr, "You are spawning [C.prefs.real_name]/([C.ckey]) as [selected_title] at ([location.x],[location.y],[location.z]), is this correct?", "Confirmation", list("Yes", "Cancel")) != "Yes")
 		return
 	//Actual Spawning stuff
 	var/mob/living/carbon/human/new_character = new

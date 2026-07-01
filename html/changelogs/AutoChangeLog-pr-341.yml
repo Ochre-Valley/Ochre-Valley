@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new adventurer class under the rogue heading. This class has completely random stats, completely random equipment, completely random skills, completely random traits. This is not supposed to be a good class, just pure comedy."

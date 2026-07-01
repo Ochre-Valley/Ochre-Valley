@@ -1003,15 +1003,15 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		emote_number = pick(1,5)
 		switch(emote_number) 
 			if(1)
-				carbon.emote("whimper")
+				carbon.emote("whimper", forced = TRUE)
 			if(2)
-				carbon.emote("whine")
+				carbon.emote("whine", forced = TRUE)
 			if(3)
-				carbon.emote("b_stare")
+				carbon.emote("b_stare", forced = TRUE)
 			if(4)
-				carbon.emote("lip_c")
+				carbon.emote("lip_c", forced = TRUE)
 			if(5)
-				carbon.emote("tremble") //This one really got to you.
+				carbon.emote("tremble", forced = TRUE) //This one really got to you.
 
 	qdel(src)
 

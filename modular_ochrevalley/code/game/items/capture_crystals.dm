@@ -599,7 +599,7 @@
 	result = /obj/item/capture_crystal/basic
 	reqs = list(/obj/item/ingot/iron = 1,
 				/obj/item/roguegem/amethyst = 1,
-				/obj/item/magic/melded/t1 = 1)
+				/obj/item/magic/fae/fairydust = 1)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/arcana/capture_crystal_great
@@ -607,7 +607,7 @@
 	result = /obj/item/capture_crystal/great
 	reqs = list(/obj/item/ingot/iron = 1,
 				/obj/item/roguegem/yellow = 1,
-				/obj/item/magic/melded/t2 = 1)
+				/obj/item/magic/fae/iridescentscale = 1)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/arcana/capture_crystal_ultra
@@ -615,5 +615,5 @@
 	result = /obj/item/capture_crystal/ultra
 	reqs = list(/obj/item/ingot/iron = 1,
 				/obj/item/roguegem/green = 1,
-				/obj/item/magic/melded/t3 = 1)
+				/obj/item/magic/fae/heartwoodcore = 1)
 	craftdiff = 4

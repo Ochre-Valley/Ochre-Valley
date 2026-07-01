@@ -25,7 +25,6 @@
 	grid_width = 32
 	grid_height = 96
 	special = /datum/special_intent/flail_sweep
-	sellprice = 15 //Akin to blunt; Also rather even.
 
 /obj/item/rogueweapon/flail/alt
 	desc = "A studded macehead and wooden handle, linked together with a length of chain. It can be spun around to smash armored opponents with tremendous force, cracking plate and bone alike with unflinching impunity."
@@ -173,14 +172,12 @@
 	color = "#bb9696"
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
-	sellprice = 10
 
 /obj/item/rogueweapon/flail/sflail/paflail
 	name = "ancient flail"
 	desc = "A spiked ball of polished gilbranze, chained to a reinforced handle. They say that His children worshipped the flail above all else, for its twirls replicated the Comet Syon's blazing flights."
 	icon_state = "aflail"
 	smeltresult = /obj/item/ingot/aaslag
-	sellprice = 10
 
 /obj/item/rogueweapon/flail/bronze
 	force = 27
@@ -198,7 +195,6 @@
 	desc = "A flanged macehead and a carved handle, linked together with a length of steel chain. It can be spun around to smash armored opponents with tremendous force, cracking plate and bone alike with unflinching impunity."
 	smeltresult = /obj/item/ingot/steel
 	minstr = 5
-	sellprice = 30
 
 /obj/item/rogueweapon/flail/sflail/silver
 	force = 35
@@ -210,7 +206,6 @@
 	max_integrity = 200 //Same value as before, for reference.
 	minstr = 12
 	is_silver = TRUE
-	sellprice = 80
 
 /obj/item/rogueweapon/flail/sflail/silver/ComponentInitialize()
 	AddComponent(\
@@ -229,7 +224,6 @@
 	icon_state = "necraflail"
 	force = 35
 	is_silver = TRUE
-	sellprice = 40
 
 /obj/item/rogueweapon/flail/sflail/necraflail/ComponentInitialize()
 	AddComponent(\
@@ -251,12 +245,22 @@
 	wdefense = 0
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
-	sellprice = 120
 
 /obj/item/rogueweapon/flail/sflail/psyflail/ComponentInitialize()
 	AddComponent(\
 		/datum/component/silverbless,\
 		pre_blessed = BLESSING_NONE,\
+		silver_type = SILVER_PSYDONIAN,\
+		added_force = 0,\
+		added_blade_int = 0,\
+		added_int = 50,\
+		added_def = 0,\
+	)
+
+/obj/item/rogueweapon/flail/sflail/psyflail/preblessed/ComponentInitialize()
+	AddComponent(\
+		/datum/component/silverbless,\
+		pre_blessed = BLESSING_PSYDONIAN,\
 		silver_type = SILVER_PSYDONIAN,\
 		added_force = 0,\
 		added_blade_int = 0,\
@@ -302,12 +306,11 @@
 	minstr = 9
 	wbalance = WBALANCE_HEAVY
 	smeltresult = /obj/item/ingot/iron
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/skill/combat/whipsflails
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
 	wdefense = 4
 	resistance_flags = FLAMMABLE
-	sellprice = 15
 
 /obj/item/rogueweapon/flail/peasantwarflail/getonmobprop(tag)
 	. = ..()
@@ -333,6 +336,7 @@
 	sellprice = 250
 	smeltresult = /obj/item/ingot/steel
 	possible_item_intents = list(/datum/intent/flail/strike/matthiosflail)
+	no_loot_taint = TRUE
 	gripped_intents = list(/datum/intent/flail/strike/matthiosflail, /datum/intent/flail/smash/matthiosflail, /datum/intent/flail/sweep)
 	associated_skill = /datum/skill/combat/whipsflails
 	slot_flags = ITEM_SLOT_BACK
@@ -343,6 +347,9 @@
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "FLAIL")
 
+/obj/item/rogueweapon/flail/peasantwarflail/matthios/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_MATTHIOS_WEAPON)
+
 /obj/item/rogueweapon/flail/militia
 	name = "militia flail"
 	desc = "In another lyfe, this humble thresher was used to pound stalks into grain. Under a militiaman's grasp, however, it has found a new purpose: to humble overconfident bandits with crippling blows."
@@ -351,4 +358,12 @@
 	force = 27
 	wdefense = 3
 	wbalance = WBALANCE_HEAVY
-	sellprice = 15
+
+/obj/item/rogueweapon/flail/sflail/holysee
+	name = "holy see flail"
+	desc = "A blessed flail, oft conflicts arise betwixt the Otavian Orthodoxy and Holy See on the origins \
+			being betwixt Psydon and Noc being the origin of such weapon, regardless against the forces of evil, \
+			it serves one absolute truth - smashing through plate and skull of Heathen and Heretic alike. Often favored \
+			by Xylix's following for theatrics but also curiously Noc's following as a ceremonial tool of war."
+	icon_state = "churchflail"
+	wlength = WLENGTH_LONG

@@ -160,6 +160,12 @@
 	duration = 2.5 MINUTES
 	effectedstats = list(STATKEY_STR = 1, STATKEY_WIL = 2, STATKEY_CON = 1)
 
+/datum/status_effect/buff/call_to_slaughter/on_remove()
+	. = ..()
+	if(owner.cmode && !owner.has_status_effect(/datum/status_effect/buff/bloodrage))	//No cmode, no point - More Gigajank for combat music if we lack bloodrage but got the tune from it
+		owner.toggle_cmode()
+		owner.toggle_cmode()
+
 /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	name = "Call to Slaughter"
 	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core.."
@@ -192,6 +198,7 @@
 	invocations = list("TURN AND FACE THE BLOOD GOD!!") //OV EDIT - VERY loud. do NOT add other invocations, this projectile can FUUUCK people up and needs to be telegraphed.
 	sound = 'sound/magic/blood_net.ogg'
 	range = 8
+	human_req = TRUE
 
 /obj/projectile/magic/unholy_grasp
 	name = "visceral organ net"
@@ -204,6 +211,8 @@
 /obj/projectile/magic/unholy_grasp/on_hit(target)
 	. = ..()
 	if(!iscarbon(target))
+		return
+	if(out_of_effective_range())
 		return
 	if(target)
 		ensnare(target)
@@ -232,6 +241,7 @@
 	sound = 'sound/magic/graggar_silence.ogg'
 	invocations = list("BE SILENT!", "QUIET!", "NOT ANOTHER WORD!")
 	zizo_spell = FALSE // Graggar wants his car back.
+	human_req = TRUE
 
 /obj/effect/proc_holder/spell/invoked/silence/graggar/cast(list/targets, mob/user = usr)//This one does actually work on mages, fully.
 	if(iscarbon(targets[1]))
@@ -276,6 +286,7 @@
 	releasedrain = 30
 	miracle = TRUE
 	devotion_cost = 70
+	human_req = TRUE
 
 /obj/effect/proc_holder/spell/invoked/revel_in_slaughter/cast(list/targets, mob/living/user = usr)
 	var/mob/living/carbon/human/human = targets[1]

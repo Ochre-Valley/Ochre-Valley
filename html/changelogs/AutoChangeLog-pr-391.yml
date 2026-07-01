@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - server: "Topic call to allow ochrebot to kick players who attempt to evade the discord presence requirement."

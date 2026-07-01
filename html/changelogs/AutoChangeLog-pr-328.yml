@@ -1,0 +1,5 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - bugfix: "Clean slate now actually removes all spells"
+  - qol: "Spells can now be quickly added/removed from the loadout panel."

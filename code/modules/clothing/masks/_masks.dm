@@ -8,7 +8,6 @@
 	var/modifies_speech = FALSE
 	var/mask_adjusted = 0
 	var/adjusted_flags = null
-	sellprice = 3
 
 	grid_width = 64
 	grid_height = 32

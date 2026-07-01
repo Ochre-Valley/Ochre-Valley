@@ -1,0 +1,5 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added new AP Merge Content"
+  - bugfix: "fixed several bugs"

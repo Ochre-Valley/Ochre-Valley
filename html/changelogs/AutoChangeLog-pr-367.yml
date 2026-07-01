@@ -1,0 +1,5 @@
+author: "FeniaFox"
+delete-after: True
+changes:
+  - rscadd: "Added armored collars, and added them to the dirtyface"
+  - code_imp: "new file in the modular directory"

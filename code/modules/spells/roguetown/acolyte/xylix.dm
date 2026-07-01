@@ -39,6 +39,7 @@
 	antimagic_allowed = TRUE
 	recharge_time = 30 SECONDS
 	var/icon/clone_icon
+	ignore_combat_tag = TRUE
 
 /obj/effect/proc_holder/spell/invoked/mastersillusion/cast(list/targets, mob/living/carbon/human/user = usr)
 //CC Edit: Unfucks this entire spell by moving from get_flat_human_icon to get_flat_icon for human

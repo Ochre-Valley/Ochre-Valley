@@ -169,7 +169,7 @@
 			if(C.show_redflash())
 				C.flash_fullscreen("redflash3")
 			//Caustic Edit End
-			C.emote("agony", forced = TRUE)
+			C.emote("superagony", forced = TRUE)
 			C.adjust_fire_stacks(500) //you deserve this.
 			C.ignite_mob()
 			C.adjustFireLoss(1000) //you, literally, deserve this.
@@ -259,5 +259,5 @@
 			if(C.show_redflash())
 				C.flash_fullscreen("redflash3")
 			//Caustic Edit End
-			C.emote("agony", forced = TRUE)
+			C.emote("superagony", forced = TRUE)
 			C.gib() //YOU. LITERALLY. DESERVE THIS.

@@ -6,13 +6,11 @@
 	sewrepair = TRUE
 	salvage_result = /obj/item/natural/fibers
 	salvage_amount = 2 // Minor materials loss
-	sellprice = 5 //Hey it's something!
 
 /obj/item/clothing/head/roguetown/puritan
 	name = "buckled hat"
 	icon_state = "puritan_hat"
 	sewrepair = TRUE
-	sellprice = 5
 
 /obj/item/clothing/head/roguetown/puritan/armored
 	name = "puritan's hat" //Puritan hat subtype, meant for the Exorcist's heaviest classes. Steel skullcap-tier protection.
@@ -25,7 +23,6 @@
 	max_integrity = ARMOR_INT_HELMET_STEEL
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/nightman
 	name = "teller's hat"
@@ -57,7 +54,6 @@
 	item_state = "curator"
 	sewrepair = TRUE
 	salvage_result = /obj/item/natural/hide/cured
-	sellprice = 7
 
 /obj/item/clothing/head/roguetown/hatfur
 	name = "fur hat"
@@ -76,7 +72,6 @@
 	salvage_result = /obj/item/natural/fur
 	salvage_amount = 1
 	cold_protection = 10
-	sellprice = 10
 
 /obj/item/clothing/head/roguetown/hatblu
 	name = "fur hat"
@@ -150,7 +145,6 @@
 	detail_tag = "_detail"
 	color = CLOTHING_WHITE
 	detail_color = COLOR_ASSEMBLY_GOLD
-	sellprice = 20 //Noble hat...
 
 /obj/item/clothing/head/roguetown/chaperon/noble/update_icon()
 	cut_overlays()
@@ -178,6 +172,11 @@
 	desc = "A noble's chaperon made for the guildmaster."
 	color = "#1b1717ff"
 	detail_color = "#b68e37ff"
+
+/obj/item/clothing/head/roguetown/chaperon/noble/aristocratotava
+	desc = "A noble's chaperon made for a traveling noble from Otava. \"Purity afloat!\""
+	color = "#1f1818ff"
+	detail_color = "#dbe6e5ff"
 
 /obj/item/clothing/head/roguetown/chaperon/noble/hand
 	name = "hand's chaperon"
@@ -297,7 +296,7 @@
 	dynamic_hair_suffix = null
 
 /obj/item/clothing/head/roguetown/headband/monk
-	name = "monk's headband"
+	name = "padded headband"
 	desc = "A winding length of cloth, meticulously lined with heavy leather strips. Errant impacts are thwarted, yet not a degree of vision is impaired; valuable traits, for the Monk who must enlighten their villains with a white-knuckled sermon. </br>'..I kick ass for the Lord!'"
 	icon_state = "headband"
 	color = "#bfb8a9"
@@ -311,7 +310,7 @@
 	dynamic_hair_suffix = null
 
 /obj/item/clothing/head/roguetown/headband/monk/barbarian
-	name = "hunter's headband"
+	name = "roughspun headband"
 	desc = "A winding length of cloth, meticulously lined with heavy leather strips. Errant impacts are thwarted, yet not a degree of vision is impaired; valuable traits, for those who have taken the mantle of confronting monsters with overwhelming strength. </br>'..All it takes for evil to triumph is for good men to do nothing.'"
 	max_integrity = ARMOR_INT_HELMET_LEATHER //Far less durable than the Monk's variant. Remember that the Barbarian retrieves solid weapon skills and armor, even as a pugilist.
 
@@ -370,7 +369,6 @@
 	name = "nun's veil"
 	desc = "A humble hat for the faithful."
 	icon_state = "nun"
-	sellprice = 5
 	sewrepair = TRUE
 
 /obj/item/clothing/head/roguetown/hennin
@@ -395,6 +393,15 @@
 	color = COLOR_ALMOST_BLACK	
 	detail_tag = "_detail"
 	detail_color = COLOR_SILVER
+
+/obj/item/clothing/head/roguetown/duelhat/aristocrat
+	name = "noble's feathered hat"
+	desc = "A feathered leather hat, with silken inseams and a silver trim, to show them all your superiority."
+	icon_state = "duelhat"
+	sewrepair = TRUE
+	color = COLOR_ORANGE
+	detail_tag = "_detail"
+	detail_color = COLOR_RED
 
 /obj/item/clothing/head/roguetown/wizhat
 	name = "wizard hat"
@@ -468,6 +475,7 @@
 /obj/item/clothing/head/roguetown/witchhat
 	name = "witch hat"
 	desc = "Fair is foul, and foul is fair; Hover through the fog and filthy air."
+	adjustable = CAN_CADJUST
 	icon_state = "witch"
 	item_state = "witch"
 	detail_tag = "_detail"
@@ -476,6 +484,10 @@
 	sewrepair = TRUE
 	color = CLOTHING_BLACK
 	detail_color = CLOTHING_BROWN
+
+/obj/item/clothing/head/roguetown/witchhat/ComponentInitialize()
+	..()
+	AddComponent(/datum/component/adjustable_clothing, null, null, null, 'sound/foley/cloth_wipe (1).ogg', null, UPD_HEAD)
 
 /obj/item/clothing/head/roguetown/witchhat/mageblue
 	color = CLOTHING_MAGE_BLUE
@@ -499,6 +511,7 @@
 	desc = "My cure is most effective."
 	icon_state = "physhat"
 
+
 /obj/item/clothing/head/roguetown/helmet/tricorn
 	slot_flags = ITEM_SLOT_HEAD
 	name = "tricorn"
@@ -514,6 +527,11 @@
 	blocksound = SOFTHIT
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+
+//OV Add Start
+/obj/item/clothing/head/roguetown/helmet/tricorn/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
+//OV Add End
 
 
 /obj/item/clothing/head/roguetown/helmet/tricorn/skull

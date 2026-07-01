@@ -49,13 +49,16 @@
 	user.visible_message(span_love("[user] finishes into [target]'s mouth!"))
 	return "into"
 
-/datum/sex_action/oral/cunnilingus/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/oral/cunnilingus/on_perform_message(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	user.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective()] sucks [target]'s clit..."))
+
+/datum/sex_action/oral/cunnilingus/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
+	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	user.make_sucking_noise()
 	// my father. birthed me into the class of yeoman.
 	if(istype(user.head, /obj/item/clothing/head/roguetown/jester))
-		playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE)
+		playsound(user, SFX_JINGLE_BELLS, 30, TRUE, -2, ignore_walls = FALSE, quiet = TRUE) //OV EDIT
 	do_thrust_animate(user, target)
 
 	sex_session.perform_sex_action(target, 2, 3, TRUE)

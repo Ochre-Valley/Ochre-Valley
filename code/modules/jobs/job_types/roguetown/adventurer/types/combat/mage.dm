@@ -42,7 +42,7 @@
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltl = /obj/item/rogueweapon/huntingknife
 	backl = /obj/item/storage/backpack/rogue/satchel
-	H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
+	H.dna.species.soundpack_m = GLOB.voice_packs[/datum/voicepack/male/wizard]
 	if(H.mind)
 		backr = choose_implement(H, "lesser")
 		backpack_contents = list(
@@ -272,25 +272,9 @@
 	if(H.mind)
 		H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/vicious_mockery)
 		H.mind.AddSpell(new /datum/action/cooldown/spell/arcyne_forge)
-		var/list/poke_options = list("Spitfire", "Frost Bolt", "Arc Bolt", "Greater Arcyne Bolt", "Stygian Efflorescence", "Arcyne Lance", "Lesser Gravel Blast", "Lesser Soulshot")
-		var/poke_choice = input(H, "Choose your offensive cantrip.", "Arcyne Training") as anything in poke_options
-		switch(poke_choice)
-			if("Spitfire")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/spitfire)
-			if("Frost Bolt")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/frost_bolt)
-			if("Arc Bolt")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/arc_bolt)
-			if("Greater Arcyne Bolt")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/greater_arcyne_bolt)
-			if("Stygian Efflorescence")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/stygian_efflorescence)
-			if("Arcyne Lance")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/arcyne_lance)
-			if("Lesser Gravel Blast")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/gravel_blast/lesser)
-			if("Lesser Soulshot")
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/soulshot/lesser)
+		H.mind.AddSpell(new /datum/action/cooldown/spell/conjure_instrument)
+		grant_poke_spell(H)
+
 	H.cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/zizo)

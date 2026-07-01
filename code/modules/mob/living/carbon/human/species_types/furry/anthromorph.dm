@@ -5,13 +5,13 @@
 	name = "Wild-Kin"
 	id = "anthromorph"
 	base_name = "Beastvolk"
+	desc_title = "Wild-Kin"
 	desc = "A product of Dendor's enigmatic meddling in mortals races. The average wild-kin suffers from animalistic urges that vary in severity, \
 	from simply avoiding certain foods to smoldering desires to howl at the moon or chase prey. Usually these urges are tied to the animal that the wild-kin is melded with, \
 	making them rather predictable. Despite this, the way each wild-kin approaches their bizarre physiology and psychology varies, \
 	creating a diverse race of people who may not even empathise with one another. And whilst Dendor is considered the main culprit for Wild-kin, there are those created through other means, \
 	akin to Noc's stolen knowledge that created lupians and other abstract experimentation or circumstance. \
-	(Wild-kin is an animal-like species touched by Dendor intended to serve broadly as a more freeform anthropomorphic species.  While you're largely given the tools to be whatever creature you wish, you're still meant to be a wild-kin, and should have something in mind to explain why your character looks the way they do.)<br>\
-	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 CON | +1 PER </b></span><br>" // OV Edit: Removed warning
+	(Wild-kin is an animal-like species touched by Dendor intended to serve broadly as a more freeform anthropomorphic species.  While you're largely given the tools to be whatever creature you wish, you're still meant to be a wild-kin, and should have something in mind to explain why your character looks the way they do.)" //OV Edit
 	default_color = "444"
 	species_traits = list(
 		MUTCOLORS,
@@ -50,6 +50,7 @@
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
 		///Caustic edit end
+		/obj/item/bodypart/taur/satyr, //OV ADD
 	)
 
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID

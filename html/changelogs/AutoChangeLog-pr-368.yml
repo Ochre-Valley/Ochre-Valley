@@ -1,0 +1,5 @@
+author: "Rando001"
+delete-after: True
+changes:
+  - rscadd: "Ravenous vice, a more tame version of Bottomless"
+  - qol: "Re-described Bottomless to mention that it scales exponentially and has no cap"

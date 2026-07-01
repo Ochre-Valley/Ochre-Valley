@@ -13,7 +13,6 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 	unarmed_bonus = 2
-	sellprice = 15 //CC edit
 
 /obj/item/clothing/gloves/roguetown/chain/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
@@ -29,14 +28,12 @@
 	material_category = ARMOR_MAT_CHAINMAIL
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
-	sellprice = 10 //Ew... AAslag... //CC edit
 
 /obj/item/clothing/gloves/roguetown/chain/paalloy
 	name = "ancient chain gauntlets"
 	desc = "Polished gilbranze rings, delicately daisy-chained together into mittens. The filament is ruptured, and it will never heal; Zizo's ascension made sure of that. By the hands of Her disciples, the final obstacle preventing this world's salvation shall be dismantled - lyfe."
 	icon_state = "acgloves"
 	smeltresult = /obj/item/ingot/aaslag
-	sellprice = 10 //Ew... AAslag...
 
 /obj/item/clothing/gloves/roguetown/chain/psydon
 	name = "psydonic chain-wrapped gloves"
@@ -45,7 +42,6 @@
 	item_state = "psydongloveschains"
 	smeltresult = null	//So you can't melt down your start gear for blacksteel brigadines etc.
 	var/wrapped = FALSE
-	sellprice = 150 //Pretty good..!
 
 /obj/item/clothing/gloves/roguetown/chain/psydon/attack_right(mob/user)
 	. = ..()
@@ -70,9 +66,19 @@
 
 
 /obj/item/clothing/gloves/roguetown/chain/iron
+	name = "iron chain gauntlets"
 	icon_state = "icgloves"
 	desc = "Armored mittens, woven together from a series of interlinked iron rings. Crude gestures are impossible with such gloves; then again, who needs an offending finger when one can articulate their hatred through a swing to the skull?"
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
-	sellprice = 10
+
+/obj/item/clothing/gloves/roguetown/chain/bronze
+	icon_state = "bcgloves"
+	name = "bronze maille gauntlets"
+	desc = "Armored mittens, woven together from a series of interlinked bronze rings. It can comfortably accomadate the needs of a warrior in \
+	almost any action, be it stringing a longbow or wielding a sword."
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/bronze
+	max_integrity = ARMOR_INT_SIDE_BRONZE
+	armor = ARMOR_BRONZE

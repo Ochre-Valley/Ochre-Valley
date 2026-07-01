@@ -68,9 +68,11 @@ GLOBAL_VAR(last_connection)
 				log_access("Failed Login: [key] - Blacklisted")
 				return list("reason"="blacklist", "desc" = "\nSomething went wrong. Contact the Game Master.")
 */
-
+	//OV Edit: Whitelist checking
 	if(!amia_whitelistcheck(ckey))
+		log_access("Failed Login: [key] - Not whitelisted and on the discord.")
 		return list("reason"="Unverified","desc"="Your ckey is not associated with an active member account on our discord. Please verify by opening a ticket. If you are already verified, follow the instructions in #ckey-linking !")
+	//OV Edit End
 
 	if(!real_bans_only && !C)
 		if (!admin)

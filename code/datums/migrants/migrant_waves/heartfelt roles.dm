@@ -1,13 +1,13 @@
 /datum/migrant_role/heartfelt/lord
 	name = "Lord of Heartfelt"
 	advclass_cat_rolls = list(CTAG_HFT_LORD = 20)
-	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED) //OV Edit - ALL ALLOWED PLEASE
 	show_wanderer_examine = FALSE
 
 /datum/migrant_role/heartfelt/hand
 	name = "Hand of Heartfelt"
 	advclass_cat_rolls = list(CTAG_HFT_HAND = 20)
-	forbidden_races = list(RACES_DESPISED)
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - ALL ALLOWED PLEASE
 	grant_lit_torch = TRUE
 	show_wanderer_examine = FALSE
 	advjob_examine = FALSE
@@ -15,7 +15,7 @@
 /datum/migrant_role/heartfelt/knight
 	name = "Knight of Heartfelt"
 	advclass_cat_rolls = list(CTAG_HFT_KNIGHT = 20)
-	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED) //OV Edit - ALL ALLOWED PLEASE
 	grant_lit_torch = FALSE
 	show_wanderer_examine = FALSE
 	outfit = /datum/outfit/job/roguetown/heartfelt/cloak
@@ -52,6 +52,6 @@
 /datum/migrant_role/heartfelt/retinue
 	name = "Heartfelt Retinue"
 	advclass_cat_rolls = list(CTAG_HFT_RETINUE = 20)
-	forbidden_races = list(RACES_DESPISED)
+	//forbidden_races = list(RACES_DESPISED) //OV Edit - ALL ALLOWED PLEASE
 	grant_lit_torch = FALSE
 	show_wanderer_examine = FALSE

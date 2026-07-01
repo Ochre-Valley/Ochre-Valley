@@ -8,13 +8,12 @@
 	origin_default = /datum/virtue/origin/hammerhold
 	origin = "Hammerhold"
 	base_name = "Dwarf"
-	desc = "<b>Gnome</b><br>\
-	Gnomes are short delicate creatures known for their quick thinking and wit.<br>\
+	desc_title = "Gnome"
+	desc = "Gnomes are short delicate creatures known for their quick thinking and wit.<br>\
 The naturally inquisitive mind of a Gnome inclines them towards arcane pursuits, artificing and teaching others.\
 Gnomish folk have an earned reputation for being brilliant tradespeople and crafters, although their rapid thoughts often lead to them seeming scatterbrained to the other beings of Azuria.<br>\
 Gnomes are typically a mixed race of Dwarves and a magical race, typically Elves when the two aren't arguing, but some are born with fae blood as well. <br>\
-Even though they are of mixed blood and smaller than typical dwarves, most gnomes and dwarves still regard each other as kin.<br>\
-	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 INT | +1 PER </b></span><br>"
+Even though they are of mixed blood and smaller than typical dwarves, most gnomes and dwarves still regard each other as kin."
 
 	skin_tone_wording = "Skintone"
 	use_skin_tone_wording_for_examine = FALSE
@@ -49,6 +48,9 @@ Even though they are of mixed blood and smaller than typical dwarves, most gnome
 		OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-5), OFFSET_BACK_F = list(0,-5), \
 		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,-4), OFFSET_UNDIES_F = list(0,-4), \
+		//OV Add Start - Monitor Offsets
+		OFFSET_BUTT = list(0,-4),\
+		//OV Add End
 		)
 	race_bonus = list( STAT_INTELLIGENCE = 1, STAT_PERCEPTION = 1,)// STAT_CONSTITUTION = -1, ) //leaving off the negative con for now, if inteligence and perception is too strong together, I can put it back in
 	enflamed_icon = "widefire"
@@ -76,6 +78,10 @@ Even though they are of mixed blood and smaller than typical dwarves, most gnome
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human,
+		//OV Add Start
+		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
+		//OV Add End
 		)
 	body_markings = list(
 	)

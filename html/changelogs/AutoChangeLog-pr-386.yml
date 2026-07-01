@@ -1,0 +1,9 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - bugfix: "Stairs can now be built properly again (from above looking down)."
+  - bugfix: "Leaning on walls while on RUN intent no longer builds Athletics XP."
+  - bugfix: "Donator / triumph modkits can now be applied to the fencer's cuirass without compromising fencer's dexterity."
+  - bugfix: "Removeallspells not removing all spells"
+  - bugfix: "Loadout Items location"
+  - bugfix: "Veteran File Sync"

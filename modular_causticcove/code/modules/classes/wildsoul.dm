@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 5 // Wildman McCryptid should be slightly rare, given they get so much more than adventurer with 90% of the same freedoms.
 	spawn_positions = 5
-	forbidden_races = list(RACES_CONSTRUCT)
+	//forbidden_races = list(RACES_CONSTRUCT) //OV Edit - Construct Changes + Natural Armor make this no longer evil. Also now matches Warden
 	tutorial = "You've never been one for the comforts of society. Whether born and raised in the wild, or having eschewed the comforts of the city after some incident, you've learned to survive on your own within Dendor's realm. You still need to live carefully, though; you're part of an ecosystem you're not above, and for every creature you hunt, another will make you its hunted."
 	outfit = null 
 	outfit_female = null 

@@ -5,6 +5,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 /datum/job/roguetown/adventurer
 	title = "Adventurer"
+	vice_restrictions = list()
 	flag = ADVENTURER
 	department_flag = WANDERERS
 	faction = "Station"
@@ -51,6 +52,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/rogue/thief,
 		/datum/advclass/rogue/bard,
 		/datum/advclass/rogue/swashbuckler,
+		/datum/advclass/rogue/antiquarian,
 		/datum/advclass/mystic,
 		/datum/advclass/mystic/resilientsoul,
 		/datum/advclass/mystic/holyblade,
@@ -75,6 +77,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		// /datum/advclass/mage/spellthief, //OV Edit AP Merge 4.2.26 - Commented out Pending Rework
 		/datum/advclass/rogue/buccaneer,
 		///Caustic edit end
+		/datum/advclass/true_random, //OV ADD
 		/datum/advclass/foreigner/shepherd,
 		/datum/advclass/foreigner/fencerguy,
 		/datum/advclass/foreigner/bronzeclad,

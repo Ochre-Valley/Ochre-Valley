@@ -43,7 +43,7 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "wipe"
 	speed = MAGE_PROJ_VERY_SLOW
-	damage = 55
+	damage = 50
 	damage_type = BURN
 	woundclass = BCLASS_BURN
 	npc_simple_damage_mult = 2.5
@@ -58,7 +58,7 @@
 
 /obj/projectile/magic/ice_burst/arc
 	name = "arced ice burst"
-	damage = 41
+	damage = 37
 	arcshot = TRUE
 
 /obj/projectile/magic/ice_burst/on_hit(target)
@@ -70,6 +70,9 @@
 		playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 		qdel(src)
 		return BULLET_ACT_BLOCK
+
+	if(out_of_effective_range())
+		return
 
 	var/aoe_damage = round(damage * aoe_damage_ratio)
 	var/turf/epicenter = get_turf(target)

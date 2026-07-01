@@ -1,4 +1,4 @@
-
+/* OV Edit: Refactor Arquebus
 /obj/item/gun/ballistic/arquebus
 	name = "arquebus rifle"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
@@ -81,7 +81,7 @@
 				myrod = null
 		else
 			to_chat(user, "<span class='warning'>There is no rod stowed in [src]!</span>")
-
+*/ // OV Edit End
 
 /datum/intent/shoot/arquebus
 	chargedrain = 0
@@ -137,6 +137,7 @@
 			return 1
 	return chargetime
 
+/* OV Edit: Refactor Arquebus
 /obj/item/gun/ballistic/arquebus/shoot_with_empty_chamber()
 	playsound(src.loc, 'modular_causticcove/sound/arquebus/musketcock.ogg', 100, FALSE)
 	update_icon()
@@ -259,6 +260,7 @@
 	if (!reloaded)
 		return FALSE
 	return ..()
+*/ // OV Edit End
 
 /obj/item/ammo_box/magazine/internal/arquebus
 	name = "arquebus internal magazine"
@@ -270,6 +272,7 @@
 
 
 /// PISTOLS
+/* OV Edit: Refactor arquebus pistol to inherit from arquebus.
 /obj/item/gun/ballistic/arquebus_pistol // I'm gonna fucking kill someone for this copypasted bullshit, but I refuse to fix it right now. -Ace
 	name = "arquebus pistol"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
@@ -504,6 +507,7 @@
 	if (!reloaded)
 		return FALSE
 	return ..()
+*/ // OV Edit End
 
 /obj/item/ammo_box/magazine/internal/arquebus
 	name = "arquebus internal magazine"
@@ -559,6 +563,7 @@
 			if(!eatarrow(bullet))
 				break
 
+/* OV Edit: Arquebus Refactor
 /obj/item/quiver/bulletpouch/attackby(obj/A, loc, params)
 	if(A.type in subtypesof(/obj/item/ammo_casing/caseless/rogue/bullet))
 		if(arrows.len < max_storage)
@@ -582,6 +587,7 @@
 					break
 		return
 	..()
+*/ // OV Edit End
 
 /obj/item/quiver/bulletpouch/attack_right(mob/user)
 	if(arrows.len)

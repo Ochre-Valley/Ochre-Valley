@@ -11,7 +11,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_NOBLE
-	forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED RACES_OOZE) //OV Edit - Allow all for good or ill
 	allowed_sexes = list(MALE, FEMALE)
 	advclass_cat_rolls = list(CTAG_LORD = 20)
 
@@ -43,6 +43,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/advclass/lord/mage,
 		/datum/advclass/lord/inbred
 	)
+	
 
 /datum/outfit/job/roguetown/lord
 	job_bitflag = BITFLAG_ROYALTY
@@ -476,6 +477,9 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	var/refuse_message = "I refuse."
 	ignore_los = 1 // this needs to ignore normal "range", it looks like
 	range = 3
+	/// traits to apply on recruitment - currently only used to let new maids use the vomitorium to cook
+	/// since that's an administrative thing not an innate trait
+	var/applied_traits = list()
 
 /obj/effect/proc_holder/spell/self/convertrole/cast(list/targets,mob/user = usr)
 	. = ..()
@@ -508,7 +512,13 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	//only migrants and peasants
 	if(!(recruit.job in GLOB.peasant_positions) && \
 		!(recruit.job in GLOB.burgher_positions) && \
-		!(recruit.job in GLOB.wanderer_positions))
+		!(recruit.job in GLOB.wanderer_positions) && \
+		//unique case to re-allow deserters to recruit wretches but technically applies to all-antags + convert verbs.
+		//Its actually kinda lowkey cool and lets antagonists actually pull some genuine espionage.
+		//Think vlord maid getting hired into the keep, bandit somehow convincing nobles to make them a watchman, etc.
+		!(recruit.job in GLOB.antagonist_positions))
+		return FALSE
+	if(recruit.cmode) //We probably don't want to accidentally flashbang this mid-fight.
 		return FALSE
 	//need to see their damn face
 	if(!recruit.get_face_name(null))
@@ -522,15 +532,20 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	var/prompt = alert(recruit, "Do you wish to become a [new_role]?", "[recruitment_faction] Recruitment", "Yes", "No")
 	if(QDELETED(recruit) || QDELETED(recruiter) || !(recruiter in get_hearers_in_view(recruitment_range, recruit)))
 		return FALSE
-	if(prompt != "Yes")
+	if(prompt != "Yes") //If they deny, we forcesay here.
 		if(refuse_message)
 			recruit.say(refuse_message, forced = "[name]")
 		return FALSE
-	if(accept_message)
+	if(accept_message) //If they accept, we forcesay here.
 		recruit.say(accept_message, forced = "[name]")
-	if(new_role)
+	if(new_role) //We assign our role here. + log it.
 		recruit.job = new_role
+		recruit.override_advclass_examine = TRUE // makes your servants display as 'servant' instead of like. 'witch' or w/e
+		for(var/trait in applied_traits)
+			ADD_TRAIT(recruit, trait, JOB_TRAIT)
 		SEND_SIGNAL(SSdcs, COMSIG_GLOB_ROLE_CONVERTED, recruiter, recruit, new_role)
+		message_admins("ROLE RECRUITMENT: [recruiter.real_name] ([recruiter.ckey]) has converted [recruit.real_name] ([recruit.ckey]) to [new_role]")
+		log_game("ROLE RECRUITMENT: [recruiter.real_name] ([recruiter.ckey]) has converted [recruit.real_name] ([recruit.ckey]) to [new_role]")
 	return TRUE
 
 /obj/effect/proc_holder/spell/self/convertrole/guard
@@ -546,7 +561,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	. = ..()
 	if(!.)
 		return
-	recruit.verbs |= /mob/proc/haltyell
+	add_verb(recruit, /mob/proc/haltyell)
 
 /obj/effect/proc_holder/spell/self/convertrole/servant
 	name = "Recruit Servant"
@@ -557,6 +572,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	accept_message = "FOR THE CROWN!"
 	refuse_message = "I refuse."
 	recharge_time = 100
+	applied_traits = list(TRAIT_FOOD_STIPEND)
 
 /obj/effect/proc_holder/spell/self/convertrole/bog
 	name = "Recruit Warden"

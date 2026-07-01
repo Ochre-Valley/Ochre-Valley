@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/raise_undead_formation
 	name = "Raise Undead Formation"
 	desc = "Invoke forbidden magicka to summon a cohort of mindless, shambling skeletons.\nMindless skeletons can be given orders to guard, patrol, and attack by their summoner.\nThese skeletons are weaker than their more complex-jointed counterparts, but are harder to incapacitate."
+	background_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon_state = "skeleton_formation"
 	cast_range = 7
@@ -8,10 +9,10 @@
 	primary_resource_cost = 40
 	primary_resource_type = SPELL_COST_STAMINA
 	charge_required = TRUE
-	charge_time = 6 SECONDS
+	charge_time = 3 SECONDS //Quick for combat, useless outside of it mostly.
 	charge_slowdown = 1
 	associated_skill = /datum/skill/magic/arcane
-	cooldown_time = 20 SECONDS
+	cooldown_time = 25 SECONDS
 	zizo_spell = TRUE
 	invocation_type = INVOCATION_SHOUT
 	invocations = list("Evoca skeletos!")
@@ -46,7 +47,7 @@
 			else
 				spawn_turf = get_step(T, prob(50) ? NORTH : SOUTH)
 
-		if(!isopenturf(spawn_turf))
+		if(!isopenturf(spawn_turf) || spawn_turf.is_blocked_turf())
 			continue
 
 		new /obj/effect/temp_visual/bluespace_fissure(spawn_turf)
@@ -89,6 +90,8 @@
 				continue
 			if(M.mind)
 				continue
+			if(!M.ai_controller)
+				continue
 			if(M.faction_check_mob(S))
 				continue
 			if(M.faction_check_mob(owner))
@@ -98,9 +101,11 @@
 			M.ai_controller.set_blackboard_key(BB_HIGHEST_THREAT_MOB, S)
 
 			var/datum/component/ai_aggro_system/aggro = M.GetComponent(/datum/component/ai_aggro_system)
-			
+
 			if(aggro)
-				aggro.add_threat_to_mob(S, 100)
+				aggro.add_threat_to_mob(S, 1000)
+				aggro.add_threat_to_mob(owner, -1000)
+
 
 		apply_mob_lifespan(S, owner, spawn_lifespan)
 
@@ -109,5 +114,5 @@
 /datum/action/cooldown/spell/raise_undead_formation/necromancer
 	cabal_affine = TRUE
 	is_summoned = TRUE
-	cooldown_time = 35 SECONDS
+	cooldown_time = 40 SECONDS
 	to_spawn = 3

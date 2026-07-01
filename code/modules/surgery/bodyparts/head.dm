@@ -52,12 +52,18 @@
 	/// Brainkill means that this head is considered dead and revival is impossible
 	var/brainkill = FALSE
 
+	/// Set on the heads of contract-spawned mobs. 
+	var/no_head_bounty = FALSE
+
 	two_stage_death = TRUE // players won't be decapitated instantly (they'll still die immediately, though)
+
+/obj/item/bodypart/head/get_real_price()
+	return 0
 
 /obj/item/bodypart/head/examine()
 	. = ..()
-	if(sellprice)
-		. += span_notice("This head seems to be wanted by the Judiciary of Azuria. It can be sold at the merchant or a HEADEATER.")
+	if(sellprice && !no_head_bounty)
+		. += span_notice("This head seems to be wanted by the Judiciary of Azuria. It can be turned in at a HEADEATER.")
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
 	var/used_limb = precise

@@ -110,12 +110,17 @@ Balloon Alert / Floating Text defines
 	/datum/species/kobold,\
 	/datum/species/harpy,\
 	/datum/species/goblinp,\
+	/datum/species/ooze,\
 
 #define RACES_DESPISED \
 	/datum/species/dullahan,\
 
 #define RACES_CONSTRUCT \
 	/datum/species/construct/metal,\
+
+#define RACES_OOZE \
+	/datum/species/ooze,\
+
 
 #define RACES_AASIMAR \
 	/datum/species/aasimar, \
@@ -151,8 +156,9 @@ Balloon Alert / Floating Text defines
 	/datum/species/goblinp,\
 	/datum/species/dullahan,\
 	/datum/species/dwarf/gnome,\
-	/datum/species/harpy,\
+	/datum/species/construct/metal,\
 	/datum/species/ooze,\
+	/datum/species/harpy,\
 
 
 // All but elves & half-elves.
@@ -177,8 +183,9 @@ Balloon Alert / Floating Text defines
 	/datum/species/goblinp,\
 	/datum/species/dullahan,\
 	/datum/species/dwarf/gnome,\
-	/datum/species/harpy,\
+	/datum/species/construct/metal,\
 	/datum/species/ooze,\
+	/datum/species/harpy,\
 
 // All but dwarves.
 #define RACES_GRUDGE \
@@ -204,10 +211,12 @@ Balloon Alert / Floating Text defines
 	/datum/species/kobold,\
 	/datum/species/goblinp,\
 	/datum/species/dullahan,\
-	/datum/species/harpy,\
+	/datum/species/dwarf/gnome,\
+	/datum/species/construct/metal,\
 	/datum/species/ooze,\
+	/datum/species/harpy,\
 
-// Dwarves, Gnomes, Kobolds, D. Elves, Moths & Anthrosmall
+// All but Dwarves, Gnomes, Kobolds, D. Elves, Oozes, Moths & Anthrosmall
 #define RACES_UNDERDARK \
 	/datum/species/human/northern,\
 	/datum/species/human/halfelf,\
@@ -253,8 +262,9 @@ Balloon Alert / Floating Text defines
 	/datum/species/goblinp,\
 	/datum/species/dullahan,\
 	/datum/species/dwarf/gnome,\
-	/datum/species/harpy,\
+	/datum/species/construct/metal,\
 	/datum/species/ooze,\
+	/datum/species/harpy,\
 
 
 #define NOBLE_RACES_TYPES list(\
@@ -419,9 +429,8 @@ GLOBAL_LIST_EMPTY(confessors)
 #define FAMILY_FULL 3
 
 GLOBAL_LIST_EMPTY(head_bounties)
-GLOBAL_LIST_EMPTY(board_viewers)
-GLOBAL_LIST_EMPTY(noticeboard_posts)
-GLOBAL_LIST_EMPTY(premium_noticeboardposts)
+GLOBAL_LIST_EMPTY(noticeboard_notices)
+GLOBAL_LIST_EMPTY(noticeboard_listings)
 GLOBAL_LIST_EMPTY(job_respawn_delays)
 GLOBAL_LIST_EMPTY(round_join_times)
 
@@ -484,10 +493,10 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_SQUIRE			"CAT_SQUIRE"		// Squire class - Handles Squire class selector
 #define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
 #define CTAG_MARSHAL		"CAT_MARSHAL"		// Marshal class
-#define CTAG_SENESCHAL		"CAT_SENESCHAL"		// Seneschal's aesthetic choices. 
+#define CTAG_SENESCHAL		"CAT_SENESCHAL"		// Seneschal's aesthetic choices.
 #define CTAG_SERVANT		"CAT_SERVANT"		// Servant's aesthetic choices.
 #define CTAG_WAPPRENTICE	"CTAG_WAPPRENTICE"	// Mage Apprentice Classes - Handles Mage Apprentices class selector
-#define CTAG_GUILDSMASTER 	"CAT_GUILDSMASTER"	// Guildsmaster class - Handles Guildsmaster class selector 
+#define CTAG_GUILDSMASTER 	"CAT_GUILDSMASTER"	// Guildsmaster class - Handles Guildsmaster class selector
 #define CTAG_GUILDSMEN 		"CAT_GUILDSMEN"		// Guildsmen class - Handles Guildsmen class selector
 #define CTAG_BATHWORKER		"CAT_BATHWORKER"	// Bathhouse Attendant's aesthetic choices.
 

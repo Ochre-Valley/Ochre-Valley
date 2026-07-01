@@ -175,7 +175,7 @@
 					if(ishuman(src))
 						var/mob/living/carbon/human/H = src
 						H.deathgasp_noise() // wanton noise pollution, blame RYON >:(
-						if(H.mind) // NPC filter //OV Edit - Removed || H.mind.key for runtimes?
+						if(H.mind && H.mind.key) // NPC filter
 							H.deathgasp_visual()
 							if(prob(50)) // mostly to halve the potential chatlog spam, we don't care if it never appears or always appear, on the former, tough luck, on the latter, drama queen
 								emote(pick("struggles to breathe, deathly pale!"))
@@ -236,20 +236,21 @@
 	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 
+	if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))	// We apply the major multipliers first.
+		amt *= CRIT_RESISTANCE_EFFECTIVE_BLEEDRATE
+	else if(HAS_TRAIT(src, TRAIT_BLOOD_RESISTANCE))
+		amt *= BLOOD_RESISTANCE_EFFECTIVE_BLEEDRATE
+
 	//For each CON above 10, we bleed slower.
 	//Consequently, for each CON under 10 we bleed faster.
 	var/conbonus = 1
 	if(STACON >= CONSTITUTION_BLEEDRATE_CAP)
 		conbonus = CONSTITUTION_BLEEDRATE_CAP - 10
 	else if(STACON != 10)
-		conbonus = STACON - 10
-		amt -= amt * (conbonus * CONSTITUTION_BLEEDRATE_MOD)
-		if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-			amt = amt * CRIT_RESISTANCE_EFFECTIVE_BLEEDRATE
-		if(HAS_TRAIT(src, TRAIT_BLOOD_RESISTANCE))
-			amt *= BLOOD_RESISTANCE_EFFECTIVE_BLEEDRATE
 		if(HAS_TRAIT(src, TRAIT_CRITICAL_WEAKNESS))
 			amt = amt * 2
+		conbonus = STACON - 10
+		amt -= amt * (conbonus * CONSTITUTION_BLEEDRATE_MOD) // We reduce it by a flat value.
 	if(surrendering)
 		amt = amt / 4 // Helps yield condition not be a bloodloss failure state. Approx to grabbing all of your bodyparts at once
 	blood_volume = max(blood_volume - amt, 0)
@@ -495,22 +496,20 @@
 			D = new(T)
 			D.set_blood_color(get_blood_color())
 
-//OV edit
 /mob/living/carbon/human/add_drip_floor(turf/T, amt)
 	// OV Edit Start
 	if(IsPetrified())
 		return
 	// OV Edit End
-	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits))
+	if(!(NOBLOOD in dna.species.species_traits))
 		..()
-//OV edit end
 
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
 	// OV Edit Start
 	if(IsPetrified())
 		return
 	// OV Edit End
-	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits)) //OV EDIT
+	if(!(NOBLOOD in dna.species.species_traits))
 		..()
 
 /mob/living/carbon/human/proc/deathgasp_visual()

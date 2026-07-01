@@ -20,3 +20,22 @@
 	set category = "Emotes"
 
 	emote("quest", intentional =  TRUE)
+
+/datum/emote/living/hiccup
+	key = "hiccup"
+	key_third_person = "hiccup"
+	message = "hiccups."
+	message_muffled = "makes a muffled noise."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+
+/mob/living/carbon/human/verb/emote_hiccup()
+	set name = "Hiccup"
+	set category = "Emotes.Noises"
+	emote("hiccup", intentional = TRUE)
+
+/datum/emote/living/hiccup/hic
+	key = "hic"
+
+/datum/emote/living/burp/belch
+	key = "belch"

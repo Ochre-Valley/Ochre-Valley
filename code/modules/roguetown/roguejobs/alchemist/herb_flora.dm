@@ -44,10 +44,21 @@
 			if(B)
 				B = new B(user.loc)
 				user.put_in_hands(B)
-				if(HAS_TRAIT(user, TRAIT_WOODWALKER))
+				var/bonus_chance = 0
+				if(user.mind)
+					var/alch_level = user.get_skill_level(/datum/skill/craft/alchemy)
+					var/farm_level = user.get_skill_level(/datum/skill/labor/farming)
+					var/alch_chance = (alch_level / 6) * 100
+					var/farm_chance = (farm_level / 6) * 66
+					if(HAS_TRAIT(user, TRAIT_ALCHEMY_EXPERT) && alch_level >= SKILL_LEVEL_JOURNEYMAN)
+						alch_chance *= 2
+					bonus_chance = max(bonus_chance, alch_chance, farm_chance)
+				var/got_bonus = FALSE
+				if(prob(bonus_chance))
 					var/obj/item/C = new B.type(user.loc)
 					user.put_in_hands(C)
-				user.visible_message(span_notice("[user] harvests [HAS_TRAIT(user, TRAIT_WOODWALKER) ? "two " : ""][B.name] from [src] bush."))
+					got_bonus = TRUE
+				user.visible_message(span_notice("[user] harvests [got_bonus ? "two " : ""][B.name] from [src] bush."))
 				harvested = TRUE
 				timerid = addtimer(CALLBACK(src, PROC_REF(loot_replenish)), 5 MINUTES, flags = TIMER_STOPPABLE)
 				//add_filter("picked", 1, alpha_mask_filter(icon = icon('icons/effects/picked_overlay.dmi', "picked_overlay_[rand(1,3)]"), flags = MASK_INVERSE))
@@ -86,7 +97,13 @@
 	/obj/structure/flora/roguegrass/herb/valeriana,
 	/obj/structure/flora/roguegrass/herb/artemisia,
 	/obj/structure/flora/roguegrass/herb/rosa,
-	/obj/structure/flora/roguegrass/swampweed))
+	/obj/structure/flora/roguegrass/swampweed,
+	//OV Edit Start: New herbs for size potions
+	/obj/structure/flora/roguegrass/herb/faestool,
+	/obj/structure/flora/roguegrass/herb/wyldweed,
+	/obj/structure/flora/roguegrass/herb/boastersnare
+	//OV Edit End
+	))
 
 	var/obj/structure/flora/roguegrass/herb/boi = new type
 	boi.forceMove(get_turf(src))

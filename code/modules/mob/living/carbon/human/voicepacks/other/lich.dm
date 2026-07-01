@@ -25,10 +25,20 @@
 			used = list('sound/vo/fsnap3.ogg')
 		if("clap")
 			used = list('sound/vo/clap (1).ogg','sound/vo/clap (2).ogg','sound/vo/clap (3).ogg','sound/vo/clap (4).ogg')
+		if("slowclap")
+			used = list('sound/vo/slowclap.ogg')
+		if("clap1")
+			used = list('sound/vo/claponce.ogg')
 		if("blink")
 			used = list('sound/vo/blink.ogg')
 		if("stomp")
 			used = list('sound/foley/brickdrop.ogg')
+		if("salute")
+			used = 'sound/vo/salute.ogg'
+		if("crack")
+			used = 'sound/vo/knuckles.ogg'
+		if("facepalm")
+			used = list('sound/vo/facepalm1.ogg', 'sound/vo/facepalm2.ogg')
 	if(!used)
 		used = ..(soundin, modifiers)
 	return used

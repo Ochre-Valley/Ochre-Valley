@@ -25,15 +25,18 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	/datum/charflaw/noeyer::name = /datum/charflaw/noeyer,
 	/datum/charflaw/noeyel::name = /datum/charflaw/noeyel,
 	/datum/charflaw/noeyeall::name = /datum/charflaw/noeyeall,
+	/datum/charflaw/armor_break::name=/datum/charflaw/armor_break,
 	/datum/charflaw/limbloss/arm_r::name = /datum/charflaw/limbloss/arm_r,
 	/datum/charflaw/limbloss/arm_l::name = /datum/charflaw/limbloss/arm_l,
 	/datum/charflaw/sleepless::name = /datum/charflaw/sleepless,
 	/datum/charflaw/mute::name = /datum/charflaw/mute,
 	/datum/charflaw/critweakness::name = /datum/charflaw/critweakness,
 	/datum/charflaw/hunted::name = /datum/charflaw/hunted,
+	/datum/charflaw/targeted::name = /datum/charflaw/targeted,
 	/datum/charflaw/mind_broken::name = /datum/charflaw/mind_broken,
 	/datum/charflaw/noflaw::name = /datum/charflaw/noflaw,
 	/datum/charflaw/leprosy::name = /datum/charflaw/leprosy,
+	/datum/charflaw/wanted::name = /datum/charflaw/wanted,
 	/datum/charflaw/randflaw::name = /datum/charflaw/randflaw,
 
 	//Caustic edit
@@ -45,6 +48,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	//OV Add Start
 	/datum/charflaw/hemovore::name=/datum/charflaw/hemovore,
 	/datum/charflaw/dendor_touched::name=/datum/charflaw/dendor_touched,
+	/datum/charflaw/ravenous::name=/datum/charflaw/ravenous,
 	//OV Add End
 	))
 
@@ -52,12 +56,13 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	"Courtiers & Nobility" = (COURTIERS | NOBLEMEN | COUNCILLOR),
 	"Inquisition" = INQUISITION,
 	"Burghers" = BURGHERS,
+	"Azurian Trading Company" = ATC,
 	"Retinue" = RETINUE,
 	"Garrison" = GARRISON,
 	"Churchmen" = CHURCHMEN,
 	"Peasants" = PEASANTS,
 	"Wanderers" = WANDERERS,
-	"Everyone" = (COURTIERS | NOBLEMEN | INQUISITION | BURGHERS | RETINUE | GARRISON | CHURCHMEN | PEASANTS | WANDERERS | SIDEFOLK | ANTAGONIST | COUNCILLOR)
+	"Everyone" = (COURTIERS | NOBLEMEN | INQUISITION | BURGHERS | ATC | RETINUE | GARRISON | CHURCHMEN | PEASANTS | WANDERERS | SIDEFOLK | ANTAGONIST | COUNCILLOR)
 ))
 
 /datum/charflaw
@@ -207,6 +212,29 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/badsight/proc/apply_reading_skill(mob/living/carbon/human/H)
 	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 
+/datum/charflaw/proc/get_nearby_humans(mob/user, range, var/include_prey = FALSE) //OV EDIT - Add include_prey argument to check for prey in the user's vore organs
+	. = list()
+	for(var/mob/M in get_hearers_in_view(range, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
+		if(M == user)
+			continue
+		if(M.stat)
+			continue
+		var/mob/living/carbon/human/H = M
+		if(istype(H) && H.dna.species)
+			. += H
+		var/obj/shapeshift_holder/S = locate(/obj/shapeshift_holder) in M
+		if(S && ishuman(S.stored))
+			H = S.stored
+			if(H != user && H.dna.species)
+				. += H
+	//OV edit - Count any prey that are in the user's vore organs as well, if include_prey is true
+	if(include_prey)
+		for(var/obj/belly/our_belly in user.vore_organs)
+			for(var/mob/living/our_prey in our_belly.contents)
+				if(our_prey.client)
+					. += our_prey
+	//OV edit end
+
 /datum/charflaw/paranoid
 	name = "Paranoid"
 	desc = "I'm even more anxious than most people. I'm extra paranoid of other races and the sight of blood."
@@ -219,11 +247,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		return
 	last_check = world.time
 	var/cnt = 0
-	for(var/mob/living/carbon/human/L in hearers(7, user))
-		if(L == src)
-			continue
-		if(L.stat)
-			continue
+	for(var/mob/living/carbon/human/L in get_nearby_humans(user, 7))
 		if(L.dna?.species)
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
@@ -254,28 +278,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(is_active)
 		if(world.time > next_check)
 			next_check = world.time + interval
-			var/cnt = 0
-			//OV edit - If you have prey or are in prey, always count as having 1 person nearby (no matter how many you've eaten)
-			for(var/obj/belly/our_belly in user.vore_organs)
-				for(var/mob/living/our_prey in our_belly.contents)
-					if(our_prey.client)
-						cnt = 1
-			if(istype(user.loc,/obj/belly))
-				cnt = 1
-			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(6, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
-				if(L == user)
-					continue
-				if(L.stat)
-					continue
-				if(L.dna.species)
-					cnt++
-				if(cnt > 3)
-					break
+			var/cnt = length(get_nearby_humans(user, 6, TRUE)) //OV edit - Include prey in the count
 			var/mob/living/carbon/P = user
-			if(cnt > 3)
+			if((cnt > 3) && !isbelly(user.loc)) //OV EDIT - ignore if you're prey
 				P.add_stress(/datum/stressevent/crowd)
-			else if(cnt == 0)
+			else if((cnt == 0) && !isbelly(user.loc)) //OV EDIT - ignore if you're prey
 				P.add_stress(/datum/stressevent/nocrowd)
 			else
 				next_check = world.time + (interval * 6)	//we procced it successfully, so the delay is longer
@@ -300,30 +307,8 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(is_active && user.stat == CONSCIOUS)
 		if(world.time > next_check)
 			next_check = world.time + interval
-			var/cnt = 0
-			//OV edit - Always pass if there's vore
-			for(var/obj/belly/our_belly in user.vore_organs)
-				if(cnt > 3)
-					break
-				for(var/mob/living/our_prey in our_belly.contents)
-					if(our_prey.client)
-						cnt++
-						if(cnt > 3)
-							break
-			if(istype(user.loc,/obj/belly))
-				cnt++
-			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(7, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
-				if(L == user)
-					continue
-				if(L.stat)
-					continue
-				if(L.dna.species)
-					cnt++
-				if(cnt > 3)
-					break
 			var/mob/living/carbon/P = user
-			if(cnt <= 0)
+			if((length(get_nearby_humans(user, 7, TRUE)) <= 0) && !isbelly(user.loc)) //OV EDIT - Check if the user is in a belly, if so, don't add stress
 				handle_stacks(P)
 			else
 				reset_stacks(P)
@@ -349,7 +334,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/lonely/proc/reset_stacks(mob/living/L)
 	if(stacks >= 2)
 		to_chat(L, span_info("Oh thank [L.patron?.name]! A person!"))
-	if(stacks > 1)
+	if(stacks > 0) //OV EDIT - Remove stress even at 1 stack, otherwise you get stuck with lonely_one
 		L.remove_stress_list(list(/datum/stressevent/lonely_one, /datum/stressevent/lonely_two, /datum/stressevent/lonely_three, /datum/stressevent/lonely_max))
 	stacks = 0
 
@@ -368,7 +353,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			next_check = world.time + interval
 			var/cnt = 0
 			var/distfound = FALSE
-			//OV edit - Always remove stress if there's vore, can't get clingier than that
+			//OV edit - Always remove stress if there's vore, can't get clingier than that - Needs to remain separate in this proc, as distance is a factor.
 			for(var/obj/belly/our_belly in user.vore_organs)
 				for(var/mob/living/our_prey in our_belly.contents)
 					if(our_prey.client)
@@ -382,18 +367,22 @@ GLOBAL_LIST_INIT(averse_factions, list(
 				user.remove_stress(/datum/stressevent/nopeople)
 				cnt++
 			//OV edit end
-			for(var/mob/living/carbon/human/L in get_hearers_in_view(2, user))
-				if(L == user)
-					continue
-				if(L.stat == DEAD)
-					continue
-				var/dist = get_dist(L, user)
-				if(dist <= 1)
-					distfound = TRUE
-					user.remove_stress(/datum/stressevent/nopeople)
-					break
-				if(L.dna.species)
+			for(var/mob/living/carbon/human/L in get_nearby_humans(user, 7)) // the distance check won't work if you're shapeshifted without some extra logic
+				var/obj/shapeshift_holder/S = locate(/obj/shapeshift_holder) in L
+				if(S && S.shape && S.stored)
+					if(get_dist(S.shape, user) <= 1)
+						distfound = TRUE
+						user.remove_stress(/datum/stressevent/nopeople)
+						break
 					cnt++
+				else
+					var/dist = get_dist(L, user)
+					if(dist <= 1)
+						distfound = TRUE
+						user.remove_stress(/datum/stressevent/nopeople)
+						break
+					if(L.dna.species)
+						cnt++
 				if(cnt >= 2)
 					user.remove_stress(/datum/stressevent/nopeople)
 					break
@@ -459,17 +448,23 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	..()
 	user.add_client_colour(/datum/client_colour/monochrome)
 
+/datum/charflaw/armor_break
+	name = "Loose Straps"
+	desc = "My armor never seems to fit quite right. It has a nasty habit of exploding off my body when under inordinate stress."
+	needs_extra_vice = TRUE
+
+/datum/charflaw/armor_break/on_mob_creation(mob/user)
+	..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		ADD_TRAIT(H, TRAIT_ARMOR_BREAK, TRAIT_GENERIC)
 /datum/charflaw/hunted
-	name = "Hunted" //OV Edit - Triumph Gain removed, was "Hunted (+2 TRI)"
+	name = "Hunted"
 	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
-	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY ASSASSINS AND HAVE ASSASINATION ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
+	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY GNOLLS. \
 	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
 	needs_extra_vice = TRUE
 	var/logged = FALSE
-
-/*/datum/charflaw/hunted/on_mob_creation(mob/user) //OV Edit - Commented out to remove triumph gain
-	. = ..()
-	user.adjust_triumphs(2)*/
 
 /datum/charflaw/hunted/flaw_on_life(mob/user)
 	if(!ishuman(user))
@@ -481,6 +476,28 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			logged = TRUE
 
 /datum/charflaw/hunted/apply_post_equipment(mob/user)
+	..()
+	if(!ishuman(user))
+		return
+
+/datum/charflaw/targeted
+	name = "Targeted"
+	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
+	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY ASSASSINS AND HAVE ASSASINATION ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
+	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
+	needs_extra_vice = TRUE
+	var/logged = FALSE
+
+/datum/charflaw/targeted/flaw_on_life(mob/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	if(logged == FALSE)
+		if(H.name) // If you don't check this, the log entry wont have a name as flaw_on_life is checked at least once before the name is set.
+			log_hunted("[H.ckey] playing as [H.name] had the targeted flaw by vice.") // we log this in the same place as hunted because making a seperate log for it would be silly
+			logged = TRUE
+
+/datum/charflaw/targeted/apply_post_equipment(mob/user)
 	..()
 	if(!ishuman(user))
 		return
@@ -719,7 +736,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	ADD_TRAIT(insane_fool, TRAIT_PSYCHOSIS, TRAIT_GENERIC)
 	insane_fool.adjust_triumphs(3)
 	if(insane_fool.patron?.type == /datum/patron/divine/abyssor) 
-	 insane_fool.grant_language(/datum/language/abyssal)
+		insane_fool.grant_language(/datum/language/abyssal)
 
 /datum/charflaw/indebted
 	name = "Indebted"
@@ -735,11 +752,12 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	addtimer(CALLBACK(src, PROC_REF(setup_self), alimony), 5 SECONDS)
 
 /datum/charflaw/indebted/proc/setup_self(mob/living/carbon/human/user)
-	if(user.mind)
-		if(!SStreasury.has_account(user))
-			SStreasury.create_bank_account(user, minimum)
-			is_active = TRUE
-			next_alimony = world.time + interval
+	if(!user?.mind)
+		return
+	if(!SStreasury.has_account(user))
+		SStreasury.create_bank_account(user, minimum)
+	is_active = TRUE
+	next_alimony = world.time + interval
 
 /datum/charflaw/indebted/flaw_on_life(mob/user)
 	. = ..()
@@ -902,6 +920,29 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			active_since = world.time
 	if(is_active && user && !QDELETED(user))
 		addtimer(CALLBACK(src, PROC_REF(check_for_candidates), user), 5 SECONDS)
+
+/datum/charflaw/wanted
+	name = "Wanted" //OV Edit, TRI Removal - (+2 TRI)"
+	desc = "You're a known criminal; your name can be found on the EXCIDIUM. Your crime may have been a misdeed worthy of a fine, or a great offense against the powers at play. Only Adventurers, Pilgrims (Migrants), Traders, Vagabonds and Lunatics may pick this vice and it requires another."
+	needs_extra_vice = TRUE
+
+/datum/charflaw/wanted/on_mob_creation(mob/user)
+	. = ..()
+	//user.adjust_triumphs(2) //OV Edit - TRI removal
+	ADD_TRAIT(user, TRAIT_OUTLAW, "[type]")
+
+/datum/charflaw/wanted/apply_post_equipment(mob/user)
+	..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	addtimer(CALLBACK(src, PROC_REF(apply_bounty_when_ready), H), 5 SECONDS)
+
+/datum/charflaw/wanted/proc/apply_bounty_when_ready(mob/living/carbon/human/H)
+	if(H.advsetup)
+		addtimer(CALLBACK(src, PROC_REF(apply_bounty_when_ready), H), 5 SECONDS)
+		return
+	wretch_select_bounty(H)
 
 
 

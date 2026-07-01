@@ -68,7 +68,7 @@
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword/kazengun/noparry, SLOT_BELT_L, TRUE)
 		if("Great Mace")
 			H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
-			H.put_in_hands(new /obj/item/rogueweapon/mace/goden/kanabo)
+			H.put_in_hands(new /obj/item/rogueweapon/mace/goden/steel/kanabo)
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE)
 		if("Spear")
 			H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_EXPERT, TRUE)
@@ -209,7 +209,7 @@
 			H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			// H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE) // OV Edit
-			H.equip_to_slot_or_del(new /obj/item/gun/ballistic/arquebus, SLOT_BACK_R, TRUE) // OV Edit // H.put_in_hands(new /obj/item/gun/ballistic/arquebus)
+			H.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus, SLOT_BACK_R, TRUE) // OV Edit // H.put_in_hands(new /obj/item/gun/ballistic/arquebus), Arquebus Refactor
 			H.put_in_hands(new /obj/item/powderflask)
 			H.put_in_hands(new /obj/item/rogueweapon/huntingknife/idagger/steel/kazengun)
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sheath/kazengun, SLOT_BELT_R, TRUE)

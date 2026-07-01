@@ -1,0 +1,6 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - rscadd: "Shrinking, Growth, and 'Normalisation' potion."
+  - rscadd: "Three new herbs relating to the new potions"
+  - rscadd: "Two new types of muffins that use the new herbs and reagents"

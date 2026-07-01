@@ -92,7 +92,10 @@
 	src.status_flags |= GODMODE // so they won't die by any means
 	invisibility = oldinv
 
+	// OV Edit Start
 	W.gain_inherent_skills()
+	W.update_sight()
+	// OV Edit End
 
 /mob/living/carbon/human/proc/animagus_untransform(dead,gibbed)
 	if(!stored_mob)
@@ -170,7 +173,10 @@
 			if(wildspell != originspell)
 				W.RemoveSpell(wildspell)
 
+	// OV Edit Start
 	W.regenerate_icons()
+	W.update_sight()
+	// OV Edit End
 	to_chat(W, span_userdanger("I return to my old form."))
 
 	qdel(src)

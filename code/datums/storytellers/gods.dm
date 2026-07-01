@@ -28,14 +28,14 @@
 
 /datum/storyteller/psydon
 	name = "Psydon"
-	vote_desc = "Peace reigns. No villains will be present. His children can rest easy, for they have earned their respite"
+	vote_desc = "Peace reigns. No villains will be present except for wretches. His children can rest easy, for they have earned their respite" // OV Edit: Specify that wretches are okay
 	desc = "Mundane and moderate events fire 1.2x more often. No antagonists, no divine intervention. Gnolls absent."
 	welcome_text = "A temperate breeze rolls through the quiet streets.."
 	weight = 6
 	always_votable = TRUE
 	color_theme = "#80ced8"
 	preferred_gnoll_mode = GNOLL_SCALING_NONE
-	wretch_slot_cap = 0
+	// wretch_slot_cap = 0 // OV Remove
 	guarantees_roundstart_roleset = FALSE
 	roundstart_prob = 0
 
@@ -371,7 +371,7 @@
 	welcome_text = "\"Love is in the air? Nay; tis the smell of freshly-baked pies upon the windowsills!\""
 	color_theme = "#9966CC"
 	preferred_gnoll_mode = GNOLL_SCALING_NONE
-	wretch_slot_cap = 5
+	// wretch_slot_cap = 5 // OV Remove
 	guarantees_roundstart_roleset = FALSE
 	roundstart_prob = 0
 
@@ -471,7 +471,7 @@
 	always_votable = TRUE
 	color_theme = "#CC4444"
 	preferred_gnoll_mode = GNOLL_SCALING_FLAT
-	wretch_slot_cap = 15
+	// wretch_slot_cap = 15 // OV Remove
 
 	tag_multipliers = list(
 		TAG_MAGICAL = 1.2,
@@ -523,7 +523,7 @@
 	always_votable = TRUE
 	color_theme = "#9933FF"
 	preferred_gnoll_mode = GNOLL_SCALING_RANDOM
-	wretch_slot_cap = 15
+	// wretch_slot_cap = 15 // OV Remove
 
 	tag_multipliers = list(
 		TAG_INSANITY = 1.4,
@@ -573,7 +573,7 @@
 	always_votable = TRUE
 	color_theme = "#8B3A3A"
 	preferred_gnoll_mode = GNOLL_SCALING_DYNAMIC
-	wretch_slot_cap = 15
+	// wretch_slot_cap = 15 // OV Remove
 
 	tag_multipliers = list(
 		TAG_BATTLE = 1.6,
@@ -620,7 +620,7 @@
 	always_votable = TRUE
 	color_theme = "#8B4513"
 	preferred_gnoll_mode = GNOLL_SCALING_RANDOM
-	wretch_slot_cap = 15
+	// wretch_slot_cap = 15 // OV Remove
 
 	tag_multipliers = list(
 		TAG_TRADE = 1.4,

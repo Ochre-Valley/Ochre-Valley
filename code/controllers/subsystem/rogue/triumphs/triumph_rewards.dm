@@ -57,6 +57,52 @@
 	icon_state = "astrata_g"
 	sellprice = 77
 
+/obj/item/clothing/neck/roguetown/psicross/reform/g/triumph
+	name = "ornate reformist psycross"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/noc/g/triumph
+	name = "ornate amulet of Noc"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/abyssor/g/triumph
+	name = "ornate amulet of Abyssor"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/dendor/g/triumph
+	name = "ornate amulet of Dendor"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/necra/g/triumph
+	name = "ornate amulet of Necra"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/pestra/g/triumph
+	name = "ornate amulet of Pestra"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/ravox/g/triumph
+	name = "ornate amulet of Ravox"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/malum/g/triumph
+	name = "ornate amulet of Malum"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/eora/g/triumph
+	name = "ornate amulet of Eora"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/xylix/g/triumph
+	name = "ornate amulet of Xylix"
+	sellprice = 77
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar/g/triumph
+	name = "ornate amulet of Graggar"
+	sellprice = 77
+
+//
+
 /obj/item/clothing/ring/diamond/triumph
 	name = "ornate dorpel ring"
 	icon_state = "g_newring_diamond"
@@ -83,6 +129,16 @@
 	name = "ornate golden halfmask"
 	desc = "An ornate halfmask of pure, glistening gold. What lies underneath to cradle the face: a besilked cushion, or cold alloys?"
 	sellprice = 33
+
+// OV Edit Start
+/obj/item/clothing/mask/rogue/lordmask/naledi/triumph
+	name = "tarnished war scholar's mask"
+	item_state = "naledimask"
+	icon_state = "naledimask"
+	desc = "Runes and wards, meant for daemons; the gold has somehow rusted in unnatural, impossible agony. The most prominent of these etchings is in the shape of the Naledian psycross. This one is old and negligibly maintained, it will not provide armor to the wearer's face."
+	armor = null
+	sellprice = 25
+// OV Edit End
 
 /obj/item/clothing/mask/rogue/facemask/goldmask/triumph
 	name = "ornate golden mask"

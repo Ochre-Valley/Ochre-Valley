@@ -24,7 +24,7 @@
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE
-	weapon_cast_penalized = FALSE
+	weapon_cast_penalized = TRUE
 	charge_time = CHARGETIME_POKE
 	charge_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_NONE
@@ -35,6 +35,8 @@
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_impact_intensity = SPELL_IMPACT_LOW
+
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 
 /datum/action/cooldown/spell/projectile/gravel_blast/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
@@ -78,6 +80,17 @@
 	damage = 20
 	arcshot = TRUE
 
+/obj/projectile/magic/gravel_blast/prehit(atom/target)
+	if(ismob(target))
+		var/mob/living/M = target
+		if(M == firer)
+			damage = round(damage / 2)
+		else if(M.mob_timers[MT_ROCKSHOT] && world.time < M.mob_timers[MT_ROCKSHOT] + ROCKSHOT_DR_DURATION)
+			damage = reduced_damage
+		else
+			M.mob_timers[MT_ROCKSHOT] = world.time
+	return ..()
+
 /obj/projectile/magic/gravel_blast/on_hit(target)
 	if(ismob(target))
 		var/mob/living/M = target
@@ -86,12 +99,6 @@
 			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 			qdel(src)
 			return BULLET_ACT_BLOCK
-		if(M == firer)
-			damage = round(damage / 2)
-		else if(M.mob_timers[MT_ROCKSHOT] && world.time < M.mob_timers[MT_ROCKSHOT] + ROCKSHOT_DR_DURATION)
-			damage = reduced_damage
-		else
-			M.mob_timers[MT_ROCKSHOT] = world.time
 	. = ..()
 
 // --- Lesser Gravel Blast: 3-projectile variant for poke option picks ---

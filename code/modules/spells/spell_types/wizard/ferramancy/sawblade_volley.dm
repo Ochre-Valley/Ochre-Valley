@@ -26,15 +26,17 @@
 
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
-	charge_time = CHARGETIME_POKE
+	charge_time = CHARGETIME_MAJOR
 	charge_drain = 1
-	charge_slowdown = CHARGING_SLOWDOWN_SMALL
+	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 15 SECONDS
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
+
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 
 	displayed_damage = 60
 
@@ -66,6 +68,14 @@
 	var/hits = 0
 	var/max_hits = 3
 
+/obj/projectile/magic/sawblade/prehit(atom/target)
+	if(ismob(target))
+		var/mob/living/M = target
+		if(M.mob_timers[MT_SAWBLADE] && world.time < M.mob_timers[MT_SAWBLADE] + SAWBLADE_HIT_IMMUNITY)
+			return FALSE
+		M.mob_timers[MT_SAWBLADE] = world.time
+	return ..()
+
 /obj/projectile/magic/sawblade/on_hit(target)
 	if(ismob(target))
 		var/mob/living/M = target
@@ -74,11 +84,6 @@
 			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 			qdel(src)
 			return BULLET_ACT_BLOCK
-		// Same-volley duplicate hit immunity
-		if(M.mob_timers[MT_SAWBLADE] && world.time < M.mob_timers[MT_SAWBLADE] + SAWBLADE_HIT_IMMUNITY)
-			qdel(src)
-			return BULLET_ACT_BLOCK
-		M.mob_timers[MT_SAWBLADE] = world.time
 		playsound(get_turf(target), hitsound, 80, TRUE)
 	. = ..()
 	if(!ismob(target))

@@ -24,13 +24,14 @@
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
 	charge_time = CHARGETIME_MAJOR
-	charge_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging_fire.ogg'
 	cooldown_time = 16 SECONDS
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 3
+
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 
 /obj/projectile/magic/aoe/fireball/rogue
 	name = "fireball"
@@ -71,6 +72,9 @@
 		playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 		qdel(src)
 		return BULLET_ACT_BLOCK
+
+	if(out_of_effective_range())
+		return
 
 	if(M)
 		M.adjust_fire_stacks(1)

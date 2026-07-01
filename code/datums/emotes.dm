@@ -179,6 +179,7 @@
 			pre_color_msg = trim(replacetext(pre_color_msg, "$n", "[emote_display_name]")) //OV Edit
 		else
 			msg = "[styled_name] [msg]"
+		msg = "<span class='game-emote'>[msg]</span>"
 		for(var/mob/M in GLOB.dead_mob_list)
 			if(!M.client || isnewplayer(M))
 				continue
@@ -270,6 +271,8 @@
 			// familiars get to do emotes with their weird planar being anatomy, so that they can caw and such
 			if(istype(user, /mob/living/simple_animal/pet/familiar))
 				var/mob/living/simple_animal/pet/familiar/fam = user
+				if(!fam.voice_pack)
+					return
 				var/possible_sounds = fam.voice_pack.get_sound(key)
 				var/used_sound
 				if(islist(possible_sounds))
@@ -290,6 +293,8 @@
 		msg = replacetext(msg, "them", user.p_them())
 	if(findtext(msg, "%s"))
 		msg = replacetext(msg, "%s", user.p_s())
+	if(findtext(msg, "themselves"))
+		msg = replacetext(msg, "themselves", user.p_themselves())
 	return msg
 
 /datum/emote/proc/select_message_type(mob/user, intentional)

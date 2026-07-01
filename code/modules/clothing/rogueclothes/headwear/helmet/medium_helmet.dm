@@ -23,7 +23,6 @@
 	experimental_onhip = TRUE
 	experimental_inhand = TRUE
 	chunkcolor = "#8c9599"
-	sellprice = 20 // CC Edit
 	material_category = ARMOR_MAT_LEATHER
 
 /obj/item/clothing/head/roguetown/helmet/MiddleClick(mob/user)
@@ -61,17 +60,17 @@
 	body_parts_covered = HEAD|HAIR
 	max_integrity = ARMOR_INT_HELMET_IRON
 	smeltresult = /obj/item/ingot/iron
-	sellprice = 15
 
 // Copper lamellar cap
 /obj/item/clothing/head/roguetown/helmet/coppercap
-	name = "lamellar cap"
-	desc = "A heavy lamellar cap made out of copper. Despite the primitive material, it's an effective design that keeps the head safe."
+	name = "copper lamellar helmet"
+	desc = "A cap of leather, graciously covered with a layer of small copper plates. Rarely seen since the dawn of civilization, copper \
+	garbs like these were the undersung heroes of humenity's earliest daes; a story of vintage proportions, still fresh in the minds of \
+	only a few blessed Aasimarites."
 	icon_state = "lamellar"
 	smeltresult = /obj/item/ingot/copper
 	armor = ARMOR_LEATHER
 	max_integrity = ARMOR_INT_HELMET_LEATHER
-	sellprice = 10
 
 /obj/item/clothing/head/roguetown/helmet/horned
 	name = "horned cap"
@@ -80,7 +79,6 @@
 	body_parts_covered = HEAD|HAIR
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_HELMET_IRON
-	sellprice = 15
 
 /obj/item/clothing/head/roguetown/helmet/winged
 	name = "winged cap"
@@ -91,7 +89,6 @@
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	body_parts_covered = HEAD|HAIR
-	sellprice = 15
 
 /obj/item/clothing/head/roguetown/helmet/kettle
 	name = "kettle helmet"
@@ -99,7 +96,6 @@
 	icon_state = "kettle"
 	body_parts_covered = HEAD|HAIR|EARS
 	armor = ARMOR_PLATE
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/helmet/kettle/aalloy
 	name = "decrepit kettle helmet"
@@ -111,6 +107,7 @@
 	material_category = ARMOR_MAT_PLATE
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
+	max_integrity = ARMOR_INT_HELMET_HEAVY_DECREPIT
 
 /obj/item/clothing/head/roguetown/helmet/kettle/paalloy
 	name = "ancient kettle helmet"
@@ -124,7 +121,6 @@
 	icon_state = "ikettle"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_HELMET_IRON
-	sellprice = 15
 
 /obj/item/clothing/head/roguetown/helmet/kettle/wide
 	name = "wide kettle helmet"
@@ -161,9 +157,9 @@
 	desc = "A steel helmet which covers most of the head, offering superior coverage to the kettle helmet. Preferred by those who intend to clash steel, rather than those who arch-and-bombard from afar."
 	smeltresult = /obj/item/ingot/steel
 	body_parts_covered = HEAD|HAIR|EARS
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/helmet/sallet/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/sallet/attackby(obj/item/W, mob/living/user, params)
@@ -206,7 +202,6 @@
 	desc = "A iron helmet covers most of the head, offeirng superior coverage to the kettle helmet. It comfortably fits atop most padded coifs-and-caps."
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_HELMET_IRON
-	sellprice = 15
 
 /obj/item/clothing/head/roguetown/helmet/sallet/beastskull
 	name = "beast skull"
@@ -232,7 +227,6 @@
 	smelt_bar_num = 2
 	armor = ARMOR_PLATE
 	stack_fovs = TRUE
-	sellprice = 45
 
 /obj/item/clothing/head/roguetown/helmet/sallet/shishak
 	name = "steel shishak"
@@ -240,11 +234,12 @@
 	body_parts_covered = HEAD|EARS|HAIR|NECK
 	max_integrity = ARMOR_INT_HELMET_STEEL + 50
 	icon_state = "shishak"
-	sellprice = 50
 
 /obj/item/clothing/head/roguetown/helmet/sallet/visored/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), HIDEEARS|HIDEHAIR, null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Sallet. Hides ears at the very least since it's a helmet.
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/sallet/visored/iron
 	name = "iron visored sallet"
@@ -252,7 +247,6 @@
 	desc = "An iron 'sallet'-styled helmet with an adjustable visor. Out for a stroll, now, are we?"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_HELMET_IRON
-	sellprice = 20
 
 /obj/item/clothing/head/roguetown/helmet/sallet/raneshen
 	name = "kulah khud"
@@ -263,7 +257,6 @@
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64.dmi'
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/helmet/sallet/beastskull
 	name = "beast skull"
@@ -315,6 +308,8 @@
 /obj/item/clothing/head/roguetown/helmet/otavan/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), HIDEEARS, null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Otavan. Only hides ears when open.
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/elvenbarbute
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
@@ -328,7 +323,6 @@
 	armor = ARMOR_PLATE
 	clothing_flags = 0
 	block2add = FOV_BEHIND
-	sellprice = 200 //Elven! //CC edit
 	detail_tag = "_detail"
 	detail_color = "#FFFFFF"
 
@@ -385,6 +379,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/ComponentInitialize()
 	..()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/attackby(obj/item/W, mob/living/user, params)
@@ -423,11 +418,12 @@
 	smeltresult = /obj/item/ingot/steel
 	smelt_bar_num = 2
 	stack_fovs = TRUE
-	sellprice = 45
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/attackby(obj/item/W, mob/living/user, params)
 	..()
@@ -471,13 +467,31 @@
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull
 	name = "hounskull bascinet"
-	desc = "A bascinet with a conical visor, favored by those with snouts and whiskers. Nestle a feather onto the rim to display your allegiance."
+	desc = "A bascinet with a conical visor, favored by those with snouts and whiskers. Nestle a feather or length of cloth onto the rim to display your allegiance."
 	icon_state = "hounskull"
 	item_state = "hounskull"
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+
+/obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface
+	name = "roundface bascinet"
+	desc = "A bascinet with a conical visor, favored by those without snouts and whiskers. Nestle a feather or length of cloth onto the rim to display your allegiance."
+	icon_state = "roundface"
+	item_state = "roundface"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64.dmi'
+
+/obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface/ComponentInitialize()
+	..()
+	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan
 	name = "klappvisier bascinet"
@@ -492,7 +506,6 @@
 	block2add = FOV_BEHIND
 	smeltresult = /obj/item/ingot/steel
 	smelt_bar_num = 2
-	sellprice = 50
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan/attackby(obj/item/W, mob/living/user, params)
 	..()
@@ -521,6 +534,8 @@
 /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 /obj/item/clothing/head/roguetown/helmet/kettle/jingasa
 	name = "jingasa"
@@ -529,7 +544,6 @@
 	item_state = "kazengunmedhelm"
 	detail_tag = "_detail"
 	detail_color = "#FFFFFF"
-	sellprice = 45 //CC Edit
 	flags_inv = HIDEEARS|HIDEHAIR
 
 /obj/item/clothing/head/roguetown/helmet/kettle/jingasa/update_icon()
@@ -558,11 +572,12 @@
 	block2add = FOV_BEHIND
 	smeltresult = /obj/item/ingot/steel
 	smelt_bar_num = 2
-	sellprice = 45 //CC Edit
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler/ComponentInitialize()
 	..()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 
 //............... Eora Helmet ............... //
 /obj/item/clothing/head/roguetown/helmet/sallet/eoran
@@ -570,7 +585,6 @@
 	desc = "A simple yet protective helmet forged in the style typical of Eoran worshippers. Upon it lays several laurels of flowers and other colorful ornaments followed by symbols noting the accomplishments and punishments of the owner's chapter."
 	icon_state = "eorahelmsallet"
 	item_state = "eorahelmsallet"
-	sellprice = 50 //Eora!
 
 /obj/item/clothing/head/roguetown/helmet/sallet/warden
 	flags_inv = HIDEFACE|HIDESNOUT
@@ -621,7 +635,6 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	max_integrity = 200
-	sellprice = 25
 
 /obj/item/clothing/head/roguetown/roguehood/warden/antler
 	name = "warden's antlered hood"

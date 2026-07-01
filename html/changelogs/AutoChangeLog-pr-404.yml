@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added the ability to make it so that prosthetic limbs from digested prey are dropped into your belly. This uses the \"Spare Prosthetics\" belly mode add-on, and requires the prey to have \"Leave Remains\" enabled."

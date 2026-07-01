@@ -372,7 +372,7 @@
 			//Caustic Edit End
 			A.Stun(10)
 			A.apply_damage(10, BRUTE, def_zone)
-			A.emote("whimper")
+			A.emote("whimper", forced = TRUE)
 			return
 	if(!ismob(M))
 		say("Unable to comply without a subject. Aborting...")

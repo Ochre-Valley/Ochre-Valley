@@ -8,9 +8,8 @@
 	origin_default = /datum/virtue/origin/lirvas
 	origin = "Lirvas"
 	base_name = "Zard"
-	desc = "<b>Kobold</b><br>\
-	Short in stature and typically scrawny, these little lizards make up for it in their natural agility. People typically stereotype them as thieves, though...<br>\
-	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 FOR | +1 STAT of choice.</b></span><br>"
+	desc_title = "Kobold"
+	desc = "Short in stature and typically scrawny, these little lizards make up for it in their natural agility. People typically stereotype them as thieves, though..."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	///Caustic edit
 	allowed_taur_types = list(
@@ -22,6 +21,7 @@
 		/obj/item/bodypart/taur/fatnaga,
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
+		/obj/item/bodypart/taur/satyr, //OV ADD
 	)
 	///Caustic edit end
 	possible_ages = ALL_AGES_LIST

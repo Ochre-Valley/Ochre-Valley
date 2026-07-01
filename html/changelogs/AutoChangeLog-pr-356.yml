@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - code_imp: "Change fetchmanifest to account for merchant and shophand's new category"

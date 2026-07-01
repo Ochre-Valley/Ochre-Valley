@@ -26,12 +26,24 @@
 	regen_delay = 60 SECONDS
 	regen_cost = 2
 
+//OV edit
 /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/Initialize(mapload)
 	. = ..()
 	skin_haver = loc
 	trait_add(skin_haver)
 	START_PROCESSING(SSobj, src)
+	addtimer(CALLBACK(src, PROC_REF(check_owner)), 5 SECONDS)
 	return
+
+/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/proc/check_owner()
+	if(!ishuman(loc))
+		return
+	var/mob/living/L = loc
+	RegisterSignal(L, COMSIG_MOB_ITEM_BEING_ATTACKED, PROC_REF(process_attack))
+
+/obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/proc/process_attack(mob/living/parent, mob/living/target, mob/user, obj/item/I)
+	next_regen = world.time + 60 SECONDS
+//OV edit end
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/Destroy()
 	trait_remove(skin_haver)
@@ -57,9 +69,13 @@
 /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/proc/regenerate(mob/living/user)
 	//mob wearing the natural armor
 	skin_haver = user
+	//OV edit
+	/*
 	if(HAS_TRAIT_FROM(skin_haver, TRAIT_NOHUNGER, TRAIT_VIRTUE)) // Hard coding the incompatibility of deathless' hunger removal, since domesticated wildsoul can still have deathless. Can still be nobreath through other sources.
 		REMOVE_TRAIT(skin_haver, TRAIT_NOHUNGER, TRAIT_VIRTUE)
 		to_chat(skin_haver, span_danger("My natural armor awakens a hunger in me."))
+	*/
+	//OV edit end
 
 	//making sure that the thing wearing the armor is human
 	if(!istype(skin_haver))
@@ -69,9 +85,13 @@
 	if(obj_integrity >= max_integrity)
 		return
 	
+	//OV edit
+	/*
 	//we can't regenerate if we have no nutrition to do it with
 	if(skin_haver.nutrition <= (regen_cap * regen_cost))
 		return
+	*/
+	//OV edit end
 
 	//we can only regenerate 100 points of integrity at a time
 	var/regen_amt = min(regen_cap, max_integrity - obj_integrity)
@@ -81,7 +101,7 @@
 		obj_broken = FALSE //doesn't effect anything but the examine
 
 	//Every 1 point of integrity is 2 points of hunger
-	skin_haver.adjust_nutrition(-regen_amt * regen_cost)
+	//skin_haver.adjust_nutrition(-regen_amt * regen_cost) //OV EDIT - no longer dependant on nutrition
 
 	//some user feed back for regeneration
 	if(obj_integrity < max_integrity)

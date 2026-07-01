@@ -1,4 +1,4 @@
-/datum/round_event_control/antagonist/migrant_wave/banditsorgnolls
+/*/datum/round_event_control/antagonist/migrant_wave/banditsorgnolls //OV Edit - Disables
 	name = "Bandits or Gnolls Migration"
 	typepath = /datum/round_event/migrant_wave/banditsorgnolls
 	wave_type = /datum/migrant_wave/bandit
@@ -50,4 +50,4 @@
 			for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 				if(!player.client)
 					continue
-				to_chat(player, span_danger("Graggar demands blood, gnolls flock to Azuria."))
+				to_chat(player, span_danger("Graggar demands blood, gnolls flock to Azuria."))*/

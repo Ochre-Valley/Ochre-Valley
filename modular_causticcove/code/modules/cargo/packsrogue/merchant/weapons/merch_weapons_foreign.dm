@@ -1,3 +1,4 @@
+/* OV Edit: Refactor Arquebus
 /datum/supply_pack/rogue/merc_weapons/arquebus
 	name = "Grenzelhoft Arquebus Rifle"
 	cost = 250
@@ -7,6 +8,7 @@
 	name = "Grenzelhoft Arquebus Pistol"
 	cost = 225 // Revisit this as the pistol gets better balanced.
 	contains = list(/obj/item/gun/ballistic/arquebus_pistol)
+*/ // OV Edit End
 
 /datum/supply_pack/rogue/merc_weapons/arquebus_powderflask
 	name = "Arquebus Powderflask"

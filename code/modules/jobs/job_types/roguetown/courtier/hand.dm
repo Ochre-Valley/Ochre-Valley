@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED)	//No noble constructs. //OV Edit - Allow all for good or ill
+	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED RACES_OOZE)	//No noble constructs. //OV Edit - Allow all for good or ill
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
@@ -21,7 +21,7 @@
 	round_contrib_points = 3
 	cmode_music = 'sound/music/cmode/nobility/combat_spymaster.ogg'
 	job_traits = list(TRAIT_NOBLE, TRAIT_EXPERT_HUNTER)
-	vice_restrictions = list(/datum/charflaw/mute, /datum/charflaw/unintelligible) //Needs to use the throat - sometimes
+	vice_restrictions = list(/datum/charflaw/mute, /datum/charflaw/unintelligible, /datum/charflaw/wanted) //Needs to use the throat - sometimes
 	job_subclasses = list(
 		/datum/advclass/hand/blademaster,
 		/datum/advclass/hand/spymaster,
@@ -40,7 +40,7 @@
 
 /datum/outfit/job/roguetown/hand/pre_equip(mob/living/carbon/human/H)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/agent)
-	H.verbs |= /datum/job/roguetown/hand/proc/remember_agents
+	add_verb(H, /datum/job/roguetown/hand/proc/remember_agents)
 
 /datum/job/roguetown/hand/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
@@ -234,7 +234,7 @@
 
 /datum/job/roguetown/hand/proc/remember_agents()
 	set name = "Remember Agents"
-	set category = "Voice of Command"
+	set category = "RoleUnique.Voice of Command"
 
 	to_chat(usr, span_boldnotice("I have these agents present:"))
 	for(var/name in GLOB.court_agents)
@@ -256,4 +256,4 @@
 	if(!.)
 		return
 	GLOB.court_agents += recruit.real_name
-	recruit.verbs |= /datum/job/roguetown/adventurer/courtagent/proc/remember_employer
+	add_verb(recruit, /datum/job/roguetown/adventurer/courtagent/proc/remember_employer)

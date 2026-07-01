@@ -1070,8 +1070,13 @@
 		/obj/item/rogueweapon/greatsword/psygsword,
 		/obj/item/clothing/head/roguetown/circlet,
 		/obj/item/carvedgem,  //Some of these aren't particularly worth much, but it'd be REALLY unintuitive for "valuables" to not actually be offerings
-		/obj/item/rogueweapon/huntingknife/stoneknife/kukri,
-		/obj/item/rogueweapon/huntingknife/stoneknife/opalknife,
+		/obj/item/rogueweapon/huntingknife/combat/jadekukri,
+		/obj/item/rogueweapon/huntingknife/combat/opalknife,
+		/obj/item/ammo_casing/caseless/rogue/javelin,
+		/obj/item/rogueweapon/stoneaxe/battle/coral,
+		/obj/item/rogueweapon/sword/amber,
+		/obj/item/rogueweapon/sword/short/messer/onyxa,
+		/obj/item/rogueweapon/huntingknife/idagger/steel/rondel/rose,
 		/obj/item/rogueweapon/mace/cudgel/shellrungu,
 		/obj/item/clothing/mask/rogue/facemask/carved,
 		/obj/item/clothing/neck/roguetown/carved,
@@ -1149,7 +1154,7 @@
 	if(user.mind.assigned_role == "Bishop")
 		. += span_info("As the Bishop, you can marry two people by having them both bite an apple, then offering it to the cross.")
 		. += span_info("The second person to bite the apple will take the last name of whoever bit it first.")
-	else if(istype(living_user) && HAS_TRAIT(living_user, TRAIT_MARRIAGE_CAPABLE) && (living_user.patron.type == /datum/patron/divine/eora))
+	else if(istype(living_user) && HAS_TRAIT(living_user, TRAIT_MARRIAGE_CAPABLE))
 		. += span_info("As an Eoran, you can marry two people by having them both bite an apple, then offering it to the cross.")
 		. += span_info("The second person to bite the apple will take the last name of whoever bit it first.")
 
@@ -1190,6 +1195,7 @@
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
+//OV Add Start - CC Grandfathered Self Revive Cross
 /obj/structure/fluff/psycross/attack_hand(mob/user)
 	. = ..()
 	var/mob/living/carbon/H = user
@@ -1231,8 +1237,16 @@
 		H.remove_status_effect(/datum/status_effect/debuff/rotted_zombie) //Removes the rotted-zombie debuff if they have it - Failsafe for it.
 		H.apply_status_effect(/datum/status_effect/debuff/self_revived)	//Longer debuff for self revival. Hurts like a fuckin' TRUCK.
 		H.update_body()
+		//addtimer(CALLBACK(src, PROC_REF(deathmark), H), 5 MINUTES) //Performs a check after the listed time has elapsed, post-resurrection. If the target is still alive by then, it'll apply the 'DNR' trait. //OV Edit - Commented Out
 	else
 		H.visible_message(span_notice("[H] hopelessly clutches the cross, sorrow filling their cold, dead eyes..."), span_red("The Ten cannot help me here... I must find a church..."))
+
+/*/obj/structure/fluff/psycross/proc/deathmark(mob/living/victim) OV Edit - Commented Out
+	if(victim.stat != DEAD)
+		victim.apply_status_effect(/datum/status_effect/debuff/permadeath) //The deathmark. This temporarily adds unrevivability to the target; die again while it's active, and your story'll be over.. for now.
+		victim.play_permadeath_indicator()
+		to_chat(victim, span_danger("You suddenly feel a deathly chill from within, as the lux begins to creep across your heart once more. The thread betwixt your soul and body remains thin; to succumb again so soon would ensure its total severance.")) */
+//OV Add End - CC Grandfathered Self Revive Cross
 
 /obj/structure/fluff/psycross/copper
 	name = "pantheon cross"
@@ -1299,14 +1313,14 @@
 
 /obj/structure/fluff/psycross/zizocross/stone
 	name = "stone inverted cross"
-	desc = "An unholy symbol, the knowledge that something so sturdy was able to be put up in reverence of the dark star, completely unattended... is a difficult anchovy to swallow for many."
+	desc = "An unholy symbol. The knowledge that something so sturdy was able to be put up in reverence of the archlych, completely unattended, is a difficult anchovy to swallow for many."
 	icon_state = "cross_zizo_r"
 	divine = FALSE
 	max_integrity = 200
 
 /obj/structure/fluff/psycross/zizocross/golden
 	name = "golden inverted cross"
-	desc = "An unholy symbol meticilously plated with leaf gold. It stands in defiance to order. The dead will rise."
+	desc = "An unholy symbol meticulously plated with leaf gold. It stands in defiance to order. The dead will rise."
 	icon_state = "cross_zizo_u"
 	divine = FALSE
 	max_integrity = 350
@@ -1357,7 +1371,7 @@
 	if(user.mind)
 		var/mob/living/living_user = user
 		// if there's no bishop inround, you can still get married... as long as there's an eoran. heretics can do it too!
-		if((user.mind.assigned_role == "Bishop") || (istype(living_user) && HAS_TRAIT(living_user, TRAIT_MARRIAGE_CAPABLE) && (living_user.patron.type == /datum/patron/divine/eora)))
+		if(HAS_TRAIT(living_user, TRAIT_MARRIAGE_CAPABLE))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/grown/apple))
 				var/obj/item/reagent_containers/food/snacks/grown/apple/A = W
 				//The MARRIAGE TEST BEGINS

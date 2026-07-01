@@ -52,7 +52,7 @@
 	if(istype(size_status))
 		size_status.original_scale = target_live.size_multiplier
 	
-	target_live.resize(target_scale)
+	target_live.resize(target_scale, allow_stripping = TRUE) //OV EDIT
 	qdel(src)
 
 /obj/item/melee/touch_attack/sizespell/proc/shrink_target(mob/living/target, mob/living/carbon/human/user)
@@ -87,7 +87,7 @@
 
 /datum/status_effect/buff/sizechanged/on_remove()
 	var/mob/living/target = owner
-	target.resize(original_scale)
+	target.resize(original_scale, allow_stripping = TRUE) //OV EDIT
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/sizechanged
