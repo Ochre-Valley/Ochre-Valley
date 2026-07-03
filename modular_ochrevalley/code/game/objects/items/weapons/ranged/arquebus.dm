@@ -138,7 +138,7 @@
 	pickup_sound = 'modular_causticcove/sound/sheath_sounds/draw_from_holster.ogg'
 	var/spread_num = 10
 	damfactor = 2
-	var/range = 30 // This is defined here instead of on the bullet because different barrel lengths = different ranges.
+	var/range = 30
 	var/onehanded = FALSE
 	var/reloaded = FALSE
 	var/load_time = 50
