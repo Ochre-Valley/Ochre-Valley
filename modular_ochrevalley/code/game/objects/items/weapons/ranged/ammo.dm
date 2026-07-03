@@ -11,7 +11,7 @@
 	damage_type = BRUTE
 	icon_state = "slingbullet_proj" // Good enough.
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
-	// range = 30 // Range is uniquely handled in arquebus.dm, but it is 30 by default.
+	range = 30 // Range is actually determined by the gun, not the bullet. This is a backup value.
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	embedchance = 100
 	woundclass = BCLASS_PIERCE
