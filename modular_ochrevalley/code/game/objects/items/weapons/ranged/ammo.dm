@@ -11,7 +11,7 @@
 	damage_type = BRUTE
 	icon_state = "slingbullet_proj" // Good enough.
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
-	range = 30
+	// range = 30 // Range is uniquely handled in arquebus.dm, but it is 30 by default.
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	embedchance = 100
 	woundclass = BCLASS_PIERCE
@@ -63,7 +63,7 @@
 // Not implimented yet; no crafting recipe.
 /obj/item/ammo_casing/caseless/rogue/bullet/silver
 	name = "silver shot"
-	desc = "A small metal sphere that is shot from a firearm. Grenzelhoftian vampire hunters love these things."
+	desc = "A small metal sphere that is shot from a firearm. </br>Purported to've originally been crafted by one of Grenzelhoft's finest monster hunters."
 	projectile_type = /obj/projectile/bullet/reusable/bullet/silver
 	icon_state = "shotslugsilv"
 	is_silver = TRUE
