@@ -519,7 +519,7 @@
 /// ITEMS
 
 /obj/item/ramrod
-	name = "ramrod"
+	name = "arquebus ramrod" // OV edit - Looks like Azure might add a mortar with its own ramrod, and I don't want players confused. -Ace
 	icon = 'modular_causticcove/icons/items/arquebus_items.dmi'
 	desc = "A ramrod used for reloading a firearm."
 	icon_state = "ramrod"
@@ -538,7 +538,7 @@
 	slot_flags = SLOT_BELT_L | SLOT_BELT_R | ITEM_SLOT_NECK | ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_SMALL
 	grid_height = 64
-	grid_width = 32
+	grid_width = 64 // OV Edit
 
 /obj/item/quiver/bulletpouch
 	name = "arquebus bullet pouch"
@@ -550,7 +550,7 @@
 	max_storage = 20
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
-	grid_width = 32
+	grid_width = 64 // OV Edit
 	allowed_ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet //OV Add: Lets bullet pouches bullet
 
 /obj/item/quiver/bulletpouch/attack_turf(turf/T, mob/living/user)
