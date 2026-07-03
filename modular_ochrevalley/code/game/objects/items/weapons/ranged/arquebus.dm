@@ -131,7 +131,7 @@
 	anvilrepair = /datum/skill/craft/engineering
 	smeltresult = /obj/item/ingot/bronze
 	obj_flags = CAN_BE_HIT | UNIQUE_RENAME | CLAMP_BREAK // You need to be able to hit it to repair it. Adding other rogueweapon tags too.
-	max_integrity = 100 // As a melee weapon, this is just a quarterstaff but worse.
+	max_integrity = 100 // As a melee weapon, this is weaker than a quarterstaff.
 	integrity_failure = 0.2
 	bolt_type = BOLT_TYPE_NO_BOLT
 	casing_ejector = FALSE
@@ -145,6 +145,8 @@
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
+	wdefense = 0 // Can't parry if it's not held in two hands.
+	wdefense_wbonus = 10 // Parrying with two hands is very effective. This sounds awesome until your gun fucking shatters. :)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_mechanics_examine(mob/user)
 	. = ..()
