@@ -58,6 +58,7 @@
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
+		/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/moth,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -130,6 +131,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
 		/datum/descriptor_choice/stature,

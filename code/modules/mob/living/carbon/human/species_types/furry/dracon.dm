@@ -11,7 +11,7 @@
 	desc_title = "Drakian"
 	desc = "Mighty scaled individuals who claim to be descendants of the dragons of yore."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
-	///Caustic edit
+	/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/lizard,
@@ -26,6 +26,7 @@
 		/obj/item/bodypart/taur/sloog, //OV ADD
 		/obj/item/bodypart/taur/noodle, // OV ADD
 	)
+	*/
 	///Caustic edit end
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
@@ -76,6 +77,7 @@
 		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
 		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
+	/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -143,6 +145,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	languages = list(
 		/datum/language/common,
 		/datum/language/draconic

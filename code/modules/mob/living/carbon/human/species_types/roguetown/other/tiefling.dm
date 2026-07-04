@@ -93,6 +93,7 @@
 		/datum/customizer/organ/wings/anthro,
 		// OV Edit End
 		)
+	/*  OV edit- these are defined on the base type in a modular file
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 		/datum/body_marking_set/belly,
@@ -124,6 +125,11 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
+	//ov edit start
+	allowed_taur_types = list(
+	)
+	//ov edit end
 	languages = list(
 		/datum/language/common,
 		/datum/language/hellspeak,

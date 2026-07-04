@@ -7,6 +7,20 @@
 	color_keys = 2
 	color_key_names = list("Tail","Tips")
 
+/datum/sprite_accessory/tail/large_snake_stripe
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake, Striped"
+	icon_state = "large_snake_stripe"
+	color_keys = 2
+	color_key_names = list("Tail", "Stripes")
+
+/datum/sprite_accessory/tail/large_snake_stripe_alt
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake, Alt Stripes"
+	icon_state = "large_snake_stripe_alt"
+	color_keys = 2
+	color_key_names = list("Tail", "Stripes")
+
 /datum/sprite_accessory/tail/large_tails/ochre/
 	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
 

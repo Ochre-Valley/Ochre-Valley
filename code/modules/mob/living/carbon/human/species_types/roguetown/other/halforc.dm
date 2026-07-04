@@ -63,6 +63,7 @@
 		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
 		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
 		)
+	/*  OV edit- these are defined on the base type in a modular file
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 		/datum/body_marking_set/belly,
@@ -79,6 +80,11 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
+	//ov edit start
+	allowed_taur_types = list(
+	)
+	//ov edit end
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,

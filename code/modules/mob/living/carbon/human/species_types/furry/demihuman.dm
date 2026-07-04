@@ -16,6 +16,7 @@
 	skin_tone_wording = "Ancestry"
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY,MUTCOLORS_PARTSONLY)
+	/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/spider,
@@ -51,6 +52,7 @@
 		/obj/item/bodypart/taur/sloog, //OV ADD
 		/obj/item/bodypart/taur/noodle, // OV ADD
 	)
+	*/
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
 	possible_ages = ALL_AGES_LIST
@@ -93,6 +95,7 @@
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
+	/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -139,6 +142,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
 		/datum/descriptor_choice/stature,
