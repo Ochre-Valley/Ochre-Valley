@@ -19,5 +19,5 @@
 
 /datum/sprite_accessory/horns/ochre/tripleswept
 	name = "Swept, Tricorn"
-	icon_state = "swept_horns_tricorns"
+	icon_state = "swept_horns_tricorn"
 	
