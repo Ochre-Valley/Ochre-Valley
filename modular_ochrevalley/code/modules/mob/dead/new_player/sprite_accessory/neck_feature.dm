@@ -7,3 +7,4 @@
 	name = "Chest Ruff"
 	color_key_name = "fluffruff"
 	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/neck_features/mammal_fluff.dmi'
+	relevant_layers = list(BODY_FRONT_LAYER)

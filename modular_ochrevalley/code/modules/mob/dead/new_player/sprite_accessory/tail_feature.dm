@@ -5,4 +5,5 @@
 /datum/sprite_accessory/tail_feature/large_snake/brush
 	name = "Large snake Tail, Brush"
 	icon_state = "bigsnaketailbrush"
+	pixel_x = -16
 	icon = 'modular_ochrevalley/icons/mob/tails/large_snake_markings_64x32.dmi'
