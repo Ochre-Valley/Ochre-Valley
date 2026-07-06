@@ -173,7 +173,7 @@
 /obj/structure/chair/wood/rogue/chair3
 	icon_state = "chair3"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue/chair3 //Caustic Edit - Use the proper chair item for each
+	item_chair = /obj/item/chair/rogue/chair3
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -181,7 +181,7 @@
 /obj/structure/chair/wood/rogue/chair4
 	icon_state = "chair4"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue/chair4 //Caustic Edit - Use the proper chair item for each
+	item_chair = /obj/item/chair/rogue/chair4
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -189,7 +189,7 @@
 /obj/structure/chair/wood/rogue/chair5
 	icon_state = "chair5"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue/chair5 //Caustic Edit - Use the proper chair item for each
+	item_chair = /obj/item/chair/rogue/chair5
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -231,9 +231,8 @@
 	. += span_info("Restrained people are unable to 'unbuckle' themeselves, or otherwise get up from whatever they're tied to. Pressing the 'RESIST' hotkey will allow them to start struggling out of their restraints. The time needed to accomplish this scales with the character's Strength.")
 	. += span_info("Some chairs and stools can be used as improvised weapons, by click-dragging them onto yourself. Activating a chair or stool in your hand will set it down in whatever direction you're facing.")
 
-//Caustic Edit - Adding the missing fallen-over chairs!
 /obj/item/chair/rogue/chair2
-	icon_state = "chair_red"
+	icon_state = "chair2"
 	origin_type = /obj/structure/chair/wood/rogue
 
 /obj/item/chair/rogue/chair3
@@ -241,13 +240,12 @@
 	origin_type = /obj/structure/chair/wood/rogue/chair3
 
 /obj/item/chair/rogue/chair4
-	icon_state = "chair2"
+	icon_state = "chair4"
 	origin_type = /obj/structure/chair/wood/rogue/chair4
 
 /obj/item/chair/rogue/chair5
-	icon_state = "chair_purple"
+	icon_state = "chair5"
 	origin_type = /obj/structure/chair/wood/rogue/chair5
-//Caustic Edit End
 
 /obj/item/chair/rogue/getonmobprop(tag)
 	. = ..()
@@ -319,8 +317,20 @@
 	item_chair = /obj/item/chair/rogue/fancy
 
 /obj/item/chair/rogue/fancy
-	icon_state = "chair_green" //Caustic Edit - Adding the missing fallen-over chairs!
+	icon_state = "chair1"
 	origin_type = /obj/structure/chair/wood/rogue/fancy
+
+/obj/item/chair/rogue/chair3
+	icon_state = "chair3"
+	origin_type = /obj/structure/chair/wood/rogue/chair3
+
+/obj/item/chair/rogue/chair4
+	icon_state = "chair4"
+	origin_type = /obj/structure/chair/wood/rogue/chair4
+
+/obj/item/chair/rogue/chair5
+	icon_state = "chair5"
+	origin_type = /obj/structure/chair/wood/rogue/chair5
 
 /obj/structure/chair/wood/rogue/attack_right(mob/user)
 	var/datum/component/simple_rotation/rotcomp = GetComponent(/datum/component/simple_rotation)

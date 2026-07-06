@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new belly mode addon that causes bellies to slowly convert prey's mana into nutrition for the pred."

@@ -132,3 +132,9 @@
 #undef SPARK_TRANSCRIBE
 #undef SPARK_OMEN
 #undef SPARK_FRIDGE
+
+/datum/virtue/utility/mountable
+	name = "Mountable"
+	desc = "You have trained and become fit enough to function as a suitable mount. People may ride you as they would a saiga."
+	added_traits = list(TRAIT_MOUNTABLE)
+

@@ -1,7 +1,7 @@
 GLOBAL_DATUM(admin_manifest, /datum/admin_manifest)
 
 /client/proc/admin_manifest()
-	set name = "Show Manifest"
+	set name = "Show Manifest.Admin"
 	set category = "Admin"
 	if(!holder)
 		return

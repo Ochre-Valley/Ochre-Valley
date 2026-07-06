@@ -442,7 +442,7 @@
 //
 /mob/living/verb/lick_taste(mob/living/tasted in living_mobs_in_view(1, TRUE))
 	set name = "Lick someone"
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Misc" //OV EDIT
 	set desc = "Lick someone nearby!"
 	set popup_menu = FALSE // Stop licking by accident!
 
@@ -495,7 +495,7 @@
 //This is just the above proc but switched about.
 /mob/living/verb/smell(mob/living/smelled in living_mobs(1, TRUE))
 	set name = "Smell someone"
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Misc" //OV EDIT
 	set desc = "Smell someone nearby!"
 	set popup_menu = FALSE
 
@@ -806,8 +806,8 @@
 
 /mob/living/verb/eat_trash()
 	set name = "Eat object"
-	set category = "Vore" //OV EDIT
-	set desc = "Consume held object into currently selected belly."
+	set category = "Vore.Actions" //OV EDIT
+	set desc = "Consume held object into currently selected vorgan." // OV Edit - vorgan instead of belly
 
 	//on chomp it worked off a whitelist of items you could devour, hope is that here it can be replaced by a long windup before eating something
 
@@ -1315,9 +1315,9 @@
 	return message
 
 /mob/living/verb/vore_check_reagents()
-	set name = "Check Belly Liquid (Vore)"
-	set category = "Vore" //OV EDIT
-	set desc = "Check the amount of liquid in your belly."
+	set name = "Check Vorgan Liquid" // OV Edit - Vorgan instead of belly
+	set category = "Vore.Vorgan Liquids" //OV EDIT
+	set desc = "Check the amount of liquid in your vorgan." // OV Edit - Vorgan instead of belly
 
 	var/obj/belly/RTB = tgui_input_list(src, "Choose which vore belly to check", "Select Belly", vore_organs)
 	if(!RTB)
@@ -1331,8 +1331,8 @@
 	to_chat(src, total_report)
 
 /mob/living/verb/vore_transfer_reagents()
-	set name = "Transfer Liquid (Vore)"
-	set category = "Vore" //OV EDIT
+	set name = "Transfer Liquid" // OV Edit
+	set category = "Vore.Vorgan Liquids" //OV EDIT
 	set desc = "Transfer liquid from an organ to another or stomach, or into another person or container."
 	set popup_menu = FALSE
 
@@ -1538,7 +1538,7 @@
 
 /mob/living/proc/restrict_trasheater()
 	set name = "Restrict Trash Eater"
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Preferences" //OV EDIT
 	set desc = "Toggle Trash Eater restriction level."
 	adminbus_trash = !adminbus_trash
 	to_chat(src, span_warning("Trash Eater restriction level set to [adminbus_trash ? "everything not blacklisted" : "only whitelisted items"]."))
@@ -1567,7 +1567,7 @@
 
 /mob/living/verb/vore_check_nutrition()
 	set name = "Check Nutrition"
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Misc" //OV EDIT
 	set desc = "Check your current nutrition level."
 	to_chat(src, span_notice("Current nutrition level: [nutrition]."))
 

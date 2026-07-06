@@ -25,5 +25,5 @@
 
 /mob/living/carbon/verb/toggle_vore_mode_verb()
 	set name = "Toggle Vore Mode"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 	toggle_vore_mode()

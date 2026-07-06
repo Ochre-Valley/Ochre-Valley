@@ -32,6 +32,7 @@
 	display_order = JDO_WILDSOUL 
 	cmode_music = 'modular_causticcove/sound/music/combat_wildsoul.ogg'
 	virtue_restrictions = list(/datum/virtue/utility/noble, /datum/virtue/utility/hollow, /datum/virtue/utility/notable) // Wildman McCryptidson shouldnt be anything that contradicts such. Also no deathless, cause natural armor on direbear.
+	vice_restrictions = list()
 	job_subclasses = list(
 		/datum/advclass/wildsoul/direbear,
 		/datum/advclass/wildsoul/mantid,

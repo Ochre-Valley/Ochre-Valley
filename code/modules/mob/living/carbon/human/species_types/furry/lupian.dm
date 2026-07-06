@@ -28,6 +28,7 @@
 		/obj/item/bodypart/taur/fatwolf,
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
+		/obj/item/bodypart/taur/goat, //OV Add
 		/obj/item/bodypart/taur/satyr, //OV ADD
 	)
 	///Caustic edit end
@@ -126,6 +127,9 @@
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
 		/datum/body_marking/gradient,
+		/datum/body_marking/waist,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,

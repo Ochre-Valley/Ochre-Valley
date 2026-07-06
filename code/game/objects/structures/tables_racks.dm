@@ -60,9 +60,6 @@
 	qdel(src)
 	new /obj/structure/table/wood(A)
 
-/obj/structure/table/attack_paw(mob/user)
-	return attack_hand(user)
-
 /obj/structure/table/attack_hand(mob/living/user)
 	if(user.m_intent == MOVE_INTENT_SNEAK)
 		var/turf/T = get_turf(src)
@@ -120,8 +117,10 @@
 	return ..()
 
 /obj/structure/table/proc/hideinside(mob/living/user)
+	if(user.in_combat_until > world.time)
+		return
 	var/sneak_level = user.get_skill_level(/datum/skill/misc/sneaking) || 0
-	var/sneaktime = max(10, 50 - (sneak_level * 10)) // Hard caps at 1 second at Expert and above.
+	var/sneaktime = max(10, 45 - (sneak_level * 5))	// 1.5 seconds at Legendary. 
 	if(user.loc == src)
 		unhide(user)
 		return
@@ -176,6 +175,9 @@
 /obj/structure/table/proc/tablepush(mob/living/user, mob/living/pushed_mob)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_danger("Throwing [pushed_mob] onto the table might hurt them!"))
+		return
+	if(HAS_TRAIT(user, TRAIT_DEADITE)) //Deadites are too stupid to do this.
+		to_chat(user, span_warning("...what?"))
 		return
 	var/added_passtable = FALSE
 	if(!(pushed_mob.pass_flags & PASSTABLE))
@@ -641,9 +643,6 @@
 				W.pixel_x = initial(W.pixel_x) + CLAMP(pixel_x + text2num(click_params["icon-x"]) - 16, pixel_x + -(world.icon_size/2), pixel_x + world.icon_size/2)
 				W.pixel_y = initial(W.pixel_y) + CLAMP(pixel_y + text2num(click_params["icon-y"]) - 16, pixel_y + -(world.icon_size/2), pixel_y + world.icon_size/2)
 				return 1
-
-/obj/structure/rack/attack_paw(mob/living/user)
-	attack_hand(user)
 
 
 

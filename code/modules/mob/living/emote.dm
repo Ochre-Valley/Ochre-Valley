@@ -248,7 +248,6 @@
 	key = ""
 	key_third_person = ""
 	message = "gasps out their last breath."
-	message_monkey = "lets out a faint chimper as it collapses and stops moving..."
 	message_simple =  "falls limp."
 	stat_allowed = UNCONSCIOUS
 
@@ -523,6 +522,12 @@
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
 	playsound(target.loc, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
+		/// Blackblood hidden interactions
+		var/mob/living/carbon/carbs = target
+		if(HAS_TRAIT(carbs, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(carbs, TRAIT_PSYDONIAN_GRIT))
+			user.add_stress(/datum/stressevent/inq_trauma)
+			carbs.emote("whimper")
+
 		record_round_statistic(STATS_KISSES_MADE)
 
 /datum/emote/living/lick
@@ -625,6 +630,11 @@
 	if(ishuman(target))
 		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 		if(user.mind)
+			/// Blackblood hidden interactions
+			var/mob/living/carbon/carbs = target
+			if(HAS_TRAIT(carbs, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(carbs, TRAIT_PSYDONIAN_GRIT))
+				carbs.add_stress(/datum/stressevent/inq_trauma)
+				carbs.stress_freakout()
 			record_round_statistic(STATS_HUGS_MADE)
 			SEND_SIGNAL(user, COMSIG_MOB_HUGGED, target)
 
@@ -706,6 +716,12 @@
 		//Caustic Edit End
 		H.AdjustSleeping(-50)
 		playsound(target.loc, 'sound/foley/slap.ogg', 100, TRUE, -1)
+		/// Blackblood hidden interactions
+		var/mob/living/carbon/carbs = target
+		if(HAS_TRAIT(target, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(target, TRAIT_PSYDONIAN_GRIT))
+			user.add_stress(/datum/stressevent/inq_trauma)
+			carbs.emote("whimper")
+
 
 /datum/emote/living/pinch
 	key = "pinch"

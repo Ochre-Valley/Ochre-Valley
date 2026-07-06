@@ -503,12 +503,11 @@
 		if(cost != 0)
 			to_chat(user, "<font color='purple'>I lose [cost] devotion!</font>")
 		if(I.max_integrity <= I.obj_integrity)
-			if(I.obj_broken)//OV add: Without this check, Order: Repair breaks armor
+			if(I.obj_broken) // obj_fix() strips armor ratings/class when called on intact armor; only call it on items that were actually broken.
 				I.obj_fix()
-			else
-				I.repair_coverage()
-				I.visible_message(span_info("[I] mend together, completely."))
-				continue
+			I.repair_coverage()
+			I.visible_message(span_info("[I] mend together, completely."))
+			continue
 		if((user.devotion?.devotion - cost) < 0)
 			to_chat(user, span_warning("I do not have enough devotion!"))
 			return FALSE
@@ -560,7 +559,7 @@
 			playsound(user, 'sound/misc/wood_saw.ogg', 100, TRUE)
 			door.icon_state = "[door.base_state]"
 			door.density = TRUE
-			door.opacity = TRUE
+			door.set_opacity(TRUE)
 			door.brokenstate = FALSE
 			door.obj_broken = FALSE
 			door.repair_state = 0								

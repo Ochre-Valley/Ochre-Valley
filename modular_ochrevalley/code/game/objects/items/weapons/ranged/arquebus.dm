@@ -99,7 +99,8 @@
 	. = ..()
 	. += span_info("Black powder weapons increase in accuracy with a higher <b>PERCEPTION</b>, but deal a static amount of damage \
 	regardless of character stats.")
-	. += span_info("Black powder weapons must be loaded with powder, then a bullet which must be forced down the barrel with a ramrod.")
+	. += span_info("Black powder weapons must be loaded with powder, then a bullet, which must then be forced down the barrel with a ramrod.")
+	. += span_info("Most black powder weapons come with a ramroad stored on them, which can be pulled out with a right click from an empty hand. They can be stored back on the weapon by left clicking them when there isn't a bullet that needs ramming down.")
 	if(onehanded)
 		. += span_info("This weapon can be used in one hand, at the penalty of aim time.")
 

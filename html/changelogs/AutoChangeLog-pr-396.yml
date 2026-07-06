@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new button for GMs to create recovery quests. They work the same as the kill quests but you can put a selection of items into a pack to be delivered."

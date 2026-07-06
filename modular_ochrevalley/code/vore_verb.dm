@@ -324,7 +324,7 @@
 /mob/living/verb/vore_player()
 	set name = "Vore Player"
 	set desc = "Attempt to eat an adjacent player."
-	set category = "Vore"
+	set category = "Vore.Actions"
 
 	if(stat)
 		to_chat(src,span_warning("You can't do that right now."))
@@ -393,7 +393,7 @@
 /mob/living/verb/petrification()
 	set name = "Petrification"
 	set desc = "Petrify yourself or a nearby player."
-	set category = "Vore"
+	set category = "Vore.Misc"
 
 	if(stat)
 		to_chat(src, span_warning("You can't do that right now."))

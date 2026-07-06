@@ -63,7 +63,7 @@
 //OV edit
 /mob/living/carbon/verb/changebellysize()
 	set name = "Change Asset Size"
-	set category = "Vore"
+	set category = "Vore.Misc"
 	set desc = "Change the size of your belly or other assets"
 	var/list/all_assets = list("Belly", "Breasts", "Butt", "Penis", "Testicles")
 	var/option = tgui_input_list(src, "Which asset do you wish to resize?", "Asset Selection", all_assets)

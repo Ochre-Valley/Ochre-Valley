@@ -1,3 +1,14 @@
+/mob/living/carbon/proc/get_armor_class(def_zone, d_type)
+	if(!ishuman(src))
+		return ARMOR_CLASS_NONE
+
+	var/mob/living/carbon/human/H = src
+	var/obj/item/clothing/C = H.get_best_worn_armor(def_zone, d_type)
+
+	if(!C)
+		return ARMOR_CLASS_NONE
+
+	return C.armor_class
 
 /mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration = PEN_NONE, penetrated_text, damage, blade_dulling, intdamfactor, used_weapon = null, pen_info)
 	var/armor_tier = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling, intdamfactor, used_weapon, pen_info)
@@ -206,12 +217,12 @@
 		if(!apply_damage(actual_damage, P.damage_type, def_zone, armor))
 			nodmg = TRUE
 			next_attack_msg += VISMSG_ARMOR_BLOCKED
-		apply_status_effect(/datum/status_effect/combat_tag)
+		changeNext_inCombat(IN_COMBAT_DELAY)
 		if(!P.out_of_effective_range())
 			apply_effects(stun = P.stun, knockdown = P.knockdown, unconscious = P.unconscious, slur = P.slur, stutter = P.stutter, eyeblur = P.eyeblur, drowsy = P.drowsy, blocked = armor, stamina = P.stamina, jitter = P.jitter, paralyze = P.paralyze, immobilize = P.immobilize)
 		if(!nodmg)
 			if(!P.out_of_effective_range())
-				if(P.dismemberment)
+				if(P.dismemberment || P.dismember_by_default)
 					check_projectile_dismemberment(P, def_zone,armor)
 				if(P.woundclass)
 					check_projectile_wounding(P, def_zone, armor)
@@ -251,7 +262,7 @@
 	return 0
 
 /mob/living/proc/check_projectile_wounding(obj/projectile/P, def_zone)
-	return simple_woundcritroll(P.woundclass, P.damage, null, def_zone, crit_message = TRUE)
+	return simple_woundcritroll(P.woundclass, P.damage, null, def_zone, crit_message = TRUE, no_crit = P.no_crit)
 
 /mob/living/proc/check_projectile_embed(obj/projectile/P, def_zone)
 	// Disable embeds on simples, allowing it to override on complex.
@@ -289,7 +300,7 @@
 				nodmg = TRUE
 				next_attack_msg += VISMSG_ARMOR_BLOCKED
 			if(!nodmg)
-				apply_status_effect(/datum/status_effect/combat_tag)
+				changeNext_inCombat(IN_COMBAT_DELAY)
 				if(iscarbon(src))
 					var/obj/item/bodypart/affecting = get_bodypart(zone)
 					if(affecting)
@@ -323,6 +334,8 @@
 			return 1
 
 /mob/living/fire_act(added, maxstacks)
+	if(has_status_effect(/datum/status_effect/buff/emberward))
+		return
 	if(added > 20)
 		added = 20
 	if(maxstacks > 20)
@@ -553,68 +566,8 @@
 	target.simple_clash(attacker, IM)
 	return TRUE
 
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
-	if(isturf(loc) && istype(loc.loc, /area/start))
-//		to_chat(M, "No attacking people at spawn, you jackass.")
-		return FALSE
-
-	if (M.used_intent.type == INTENT_HARM)
-		if(HAS_TRAIT(M, TRAIT_PACIFISM))
-			to_chat(M, span_info("I don't want to hurt anyone!"))
-			return FALSE
-		if(M.has_status_effect(/datum/status_effect/debuff/deadite_grace) && src.mind)
-			to_chat(M, span_warning("Ah, Lux... I calm down considerably, but my hunger only increases."))
-			M.remove_status_effect(/datum/status_effect/debuff/deadite_grace)
-
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
-			to_chat(M, span_warning("I can't bite with my mouth covered!"))
-			return FALSE
-		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
-		if (prob(75))
-			log_combat(M, src, "attacked")
-			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
-			visible_message(span_danger("[M.name] bites [src]!"), \
-							span_danger("[M.name] bites you!"), span_hear("I hear a chomp!"), COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, span_danger("I bite [src]!"))
-			return TRUE
-		else
-			visible_message(span_danger("[M.name]'s bite misses [src]!"), \
-							span_danger("I avoid [M.name]'s bite!"), span_hear("I hear the sound of jaws snapping shut!"), COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, span_warning("My bite misses [src]!"))
-	return FALSE
-
 /mob/living/ex_act(severity, target)
 	..()
-
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
-	if(isturf(loc) && istype(loc.loc, /area/start))
-//		to_chat(M, "No attacking people at spawn, you jackass.")
-		return FALSE
-
-	if (M.used_intent.type == INTENT_HARM)
-		if(HAS_TRAIT(M, TRAIT_PACIFISM))
-			to_chat(M, span_info("I don't want to hurt anyone!"))
-			return FALSE
-		if(M.has_status_effect(/datum/status_effect/debuff/deadite_grace) && src.mind)
-			to_chat(M, span_warning("Ah, Lux... I calm down considerably, but my hunger only increases."))
-			M.remove_status_effect(/datum/status_effect/debuff/deadite_grace)
-
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
-			to_chat(M, span_warning("I can't bite with my mouth covered!"))
-			return FALSE
-		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
-		if (prob(75))
-			log_combat(M, src, "attacked")
-			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
-			visible_message(span_danger("[M.name] bites [src]!"), \
-							span_danger("[M.name] bites you!"), span_hear("I hear a chomp!"), COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, span_danger("I bite [src]!"))
-			return TRUE
-		else
-			visible_message(span_danger("[M.name]'s bite misses [src]!"), \
-							span_danger("I avoid [M.name]'s bite!"), span_hear("I hear the sound of jaws snapping shut!"), COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, span_warning("My bite misses [src]!"))
-	return FALSE
 
 //Looking for irradiate()? It's been moved to radiation.dm under the rad_act() for mobs.
 

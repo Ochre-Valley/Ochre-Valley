@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added three new bad statpacks. Weakling, Imbecile and Laggard."
+  - qol: "Better mechanical info for guns."
