@@ -1,8 +1,8 @@
 // Overrides files in code/game/objects/items/rogueweapons/ranged so we can balance these how we want to.
 
-// -------------------
-// PROJECTILES OBJECTS
-// -------------------
+// ------------------
+// PROJECTILE OBJECTS
+// ------------------
 
 // Firearms
 /obj/projectile/bullet/reusable/bullet
