@@ -48,6 +48,11 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return 0
 	// RATWOOD EDIT END
 
+	if(logging_topic)
+		LAZYADD(last_topics, html_encode(href))
+		if(LAZYLEN(last_topics) > 10)
+			popleft(last_topics)
+
 	if(href_list["statbrowser_calendar"])
 		open_calendar_ui()
 		return
@@ -73,9 +78,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
 				topiclimiter[ADMINSWARNED_AT] = minute
 				msg += " Administrators have been informed."
-				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-				message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-//			to_chat(src, span_danger("[msg]"))
+				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute. Recent topics: [last_topics.Join(",")]")
+				message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute.[span_details("Recent topics", last_topics.Join("\n"))]")
+			logging_topic = TRUE
 			return
 
 	var/stl = CONFIG_GET(number/second_topic_limit)

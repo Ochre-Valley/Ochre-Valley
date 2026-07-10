@@ -107,6 +107,11 @@
 	///Used for limiting the rate of clicks sends by the client to avoid abuse
 	var/list/clicklimiter
 
+	///whether or not logging is turned on
+	var/logging_topic = FALSE
+	///last 10 topics
+	var/list/last_topics = list()
+
 	///goonchat chatoutput of the client
 	var/datum/chatOutput/chatOutput
 
