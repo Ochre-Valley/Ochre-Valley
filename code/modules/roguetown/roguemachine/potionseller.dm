@@ -35,7 +35,7 @@
 
 // For university mage
 /obj/structure/roguemachine/potionseller/university
-	keycontrol = "apothecary" //OV EDIT - Now that the apothecary and uni are combined, only the apothecary gets to sell the potions.
+	keycontrol = "university" //OV EDIT - Now that the apothecary and uni are combined, only the apothecary gets to sell the potions.
 
 /obj/structure/roguemachine/potionseller/Initialize()
 	. = ..()
