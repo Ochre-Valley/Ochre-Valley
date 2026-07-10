@@ -152,7 +152,7 @@
 	//OV edit end
 	
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
-		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TR_DEFAULTMSG))
+		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
 			return TRUE
 		if(stat == DEAD && client)
 			record_round_statistic(STATS_PEOPLE_DROWNED)
