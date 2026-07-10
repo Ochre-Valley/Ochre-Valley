@@ -49,7 +49,7 @@
 // Firearms
 /obj/item/ammo_casing/caseless/rogue/bullet
 	name = "ball shot"
-	desc = "A small metal sphere that is shot from a firearm."
+	desc = "A small metal sphere that is to be shot out of a firearm. It probably would not survive a direct hit to a wall."
 	projectile_type = /obj/projectile/bullet/reusable/bullet
 	caliber = "musketball"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
@@ -61,7 +61,7 @@
 // Not implimented yet; no crafting recipe.
 /obj/item/ammo_casing/caseless/rogue/bullet/silver
 	name = "silver shot"
-	desc = "A small metal sphere that is shot from a firearm. </br>Purported to've originally been crafted by one of Grenzelhoft's finest monster hunters."
+	desc = "A small metal sphere that is to be shot out of a firearm. It probably would not survive a direct hit to a wall.</br>Purported to've originally been crafted by one of Grenzelhoft's finest monster hunters."
 	projectile_type = /obj/projectile/bullet/reusable/bullet/silver
 	icon_state = "shotslugsilv"
 	is_silver = TRUE
