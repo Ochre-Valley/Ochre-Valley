@@ -24,7 +24,7 @@
 	masterstring = "As a master of this stance, my jab hits 10% harder, my uppercut comes out a bit faster, and my haymakers become less clumsy."
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
-	special = /datum/special_intent/upper_cut/silence
+	//special = /datum/special_intent/upper_cut/silence
 
 /datum/alt_grip/boxing
 	name = "heavy stance"
@@ -88,7 +88,7 @@
 /datum/special_intent/upper_cut/master
 	delay = 8
 
-/datum/special_intent/upper_cut/silence
+/*/datum/special_intent/upper_cut/silence
 	name = "Strong Hook"
 	desc = "Swiftly charge a left hook which dazes the target. If it connects with a target who is exposed or unprepared, they will be Silenced. Always aims for the head."
 	tile_coordinates = list(list(0,0))
@@ -100,6 +100,21 @@
 	stamcost = 40 //it comes out pretty quick, so pay more for it!
 	KD_dur = 15 SECONDS
 	dam = 20
+
+/datum/special_intent/upper_cut/silence/on_create()
+	. = ..()
+	
+	howner.OffBalance(self_immob_dur)
+	howner.Immobilize(self_immob_dur)
+	dam = initial(dam)
+	prev_pixel_z = howner.pixel_z
+	prev_transform = howner.transform
+	//OV Add end
+	playsound(howner, 'sound/combat/ground_smash_start.ogg', 100, TRUE)
+	if(HAS_TRAIT(howner, TRAIT_BIGGUY))
+		return // windup
+	else
+		animate(howner, pixel_z = howner.pixel_z - 4, time = 3) //OV edit
 
 /datum/special_intent/upper_cut/silence/apply_hit(turf/T) //SHameless copypaste of uppercut, with a few changes~
 	for(var/mob/living/L in get_hearers_in_view(0, T))
@@ -123,8 +138,9 @@
 	if(HAS_TRAIT(howner, TRAIT_BIGGUY))
 		return
 	else
-		animate(howner, pixel_z = pixel_z + 12, time = 2) //shoryuken
+		animate(howner, pixel_z = pixel_z + 12, time = 2)
 		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
 		animate(transform = prev_transform, time = 0)
-
-	SHOULD_CALL_PARENT(TRUE)
+	return ..()
+	
+*/

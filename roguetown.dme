@@ -3753,7 +3753,7 @@
 #include "modular_ochrevalley\code\modules\admin\spawn_player.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\martial\boxing.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\martial\karate.dm"
-#include "modular_ochrevalley\code\modules\spells\spell_types\martial\claws.dm"
+#include "modular_ochrevalley\code\modules\spells\spell_types\martial\claw.dm"
 #include "modular_ochrevalley\code\modules\spells\abstract_weapon.dm"
 #include "modular_ochrevalley\code\game\rotational_objects\rotation_shaft.dm"
 #include "modular_ochrevalley\code\modules\admin\admin_manifest.dm"

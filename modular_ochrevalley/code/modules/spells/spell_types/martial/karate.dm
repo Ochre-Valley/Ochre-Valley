@@ -5,6 +5,7 @@
 	<b>AXE HAND</b>: A telegraphed hit which does heavy damage to objects. \n \
 	<b>KANABO STRIKE</b>: A telegraphed strike with the palm, knocking the target back.\n \
 	<b>WRING</b>: A telegraphed strike which deals TWIST damage to the target.\n \
+	<b>FLYING LIGHTNING KICK</b>: Your special is a leap into a distant tile, after which you execute a series of wild kicks!\n \
 	<i>A Kazengun martial art tradition, refined from an ancient lingyuan style.</i>"
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/karate
 	draw_message = "Enters the Hollow Hand stance." 
@@ -19,7 +20,7 @@
 	possible_item_intents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop, /datum/intent/martial/smash, /datum/intent/martial/dislocate)
 	masterstring = "As a master of this stance, my chop becomes sharp, my kanabo deals more knockback, and my wring comes out quicker."
 	masterintents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop/master, /datum/intent/martial/smash/master, /datum/intent/martial/dislocate/master)
-	//special = 
+	special = /datum/special_intent/flyingkick //this is a meme. if it turns out to be powerful, i am ver  dum
 
 
 /datum/intent/martial/jab/karate
@@ -97,3 +98,55 @@
 
 /datum/intent/martial/dislocate/master
 	chargetime = 7
+
+/datum/special_intent/flyingkick
+	name = "Flying Thunder Kick"
+	desc = "Leap at the target tile, before releasing a flurry of kicks in random directions"
+	cooldown = 30 SECONDS
+	stamcost = 40 //cheaper than a jump, but you'll pay stamina for every kick you make
+	tile_coordinates = list(list(0,0))
+	respect_adjacency = FALSE
+	range = 5
+
+/datum/special_intent/flyingkick/apply_hit(turf/T)
+	. = ..()
+	var/mob/living/kicker = howner
+	var/efficacy = kicker.get_skill_level(/datum/skill/combat/unarmed) //first calc uses this, if it's someone's unarmed special
+	if(istype(iparent, /obj/item/rogueweapon))
+		var/obj/item/rogueweapon/weapon = iparent
+		efficacy = kicker.get_skill_level(weapon.associated_skill)
+	
+	var/jumprange = min(3, efficacy) //default range limit is equal to that of a running jump
+	if(HAS_TRAIT(kicker, TRAIT_LEAPER)) //but acrobats can go a bit further
+		jumprange += 1
+	if(!kicker.check_armor_skill() || kicker.get_item_by_slot(SLOT_LEGCUFFED))
+		jumprange = 1
+	
+	kicker.OffBalance(40)
+	var/kickamt = rand(efficacy * 2, efficacy * 4) //there's not much point in kicking this much, given kicks knock people back. pointlessly flashy 
+	kicker.jump_action_resolve(T, 0, jumprange, TRUE, kickamt + 2)
+	while(kicker.throwing)
+		sleep(1)
+	if(kicker.stat != CONSCIOUS || kicker.IsParalyzed() || kicker.IsStun() || QDELETED(kicker) || !isturf(kicker.loc) || !(kicker.mobility_flags & MOBILITY_STAND))
+		return //you fucked up, or got sent to a belly like a dumbass
+
+	
+	//first, we're gonna try and stomp anyone we landed on, and directly in front of us
+	kicker.try_kick(get_turf(kicker))
+	kicker.try_kick(get_step(get_turf(kicker), kicker.dir))
+	var/soundchoice = pick(PUNCHWOOSH)
+	playsound(kicker, soundchoice, 100, TRUE)
+	spawn(1)
+	//next, we're going to execute the actual "tornado kick. For every point of Kickamt, kick a random adjacent tile"
+	kicker.visible_message(span_warning("[kicker] leaps forwards, executing a flurry of wild kicks!"))
+	for(var/I in 1 to kickamt)
+		if(kicker.stat != CONSCIOUS || kicker.IsParalyzed() || kicker.IsStun() || QDELETED(kicker) || !isturf(kicker.loc) || !(kicker.mobility_flags & MOBILITY_STAND))
+			break
+		var/dir = pick(GLOB.alldirs)
+		kicker.try_kick(get_step(get_turf(kicker), dir))
+		var/sound = pick(PUNCHWOOSH)
+		playsound(kicker, sound, 50, TRUE)
+		var/obj/effect/temp_visual/special_intent/fx = new (T, 3)
+		fx.icon = _icon
+		fx.icon_state = "kick_fx"
+		spawn(1)

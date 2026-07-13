@@ -5,6 +5,7 @@
 	<b>LUNGE</b>: A telegraphed attempt to plunge your claws into a target, penetrating light armor! \n \
 	<b>REND</b>: A telegraphed strike  for high damage, perfect for disemboweling unarmored targets!\n \
 	<b>FRENZY</b>: A skilled user of this stance can execute a wild, cleaving slash that can hit multiple targets.\n \
+	<b>POUNCE</b>: Your special is a POUNCE, leaping to a nearby tile before attacking and exposing all targets in a frontal arc. Both yourself, and the targets, are rooted in place.\n \
 	<i>A 'martial art' of no certain origin, practiced and taught first by those blessed by dendor's gift of claws.</i> "
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/bigclaws
 	draw_message = "Curls their hands into terrible claws!" 
@@ -22,12 +23,13 @@
 	masterintents = list(/datum/intent/claw/cut/martial/master, /datum/intent/claw/lunge/martial/master, /datum/intent/claw/rend, /datum/intent/claw/cleave)
 
 /datum/action/cooldown/spell/abstractweapon/martialart/claws
-	name = "Badger Stance"
+	name = "Lynx Stance"
 	desc = "Bare both hands, curling fingers as if into claws to slice into your foes.\n \
 	<b>CUT</b>: A fast slice of the claws. Pays for sharpness in that its raw damage is significantly lesser than a simple punch. \n \
 	<b>SLASH</b>: A swift slash which can hit multiple targets. \n \
 	<b>REND</b>: A telegraphed strike  for high damage, perfect for disemboweling unarmored targets!\n \
 	<b>JAB</b>: A skilled user of this stance can execute a swift jab, able to penetrate light armor.\n \
+	<b>DASH</b>: Your special is a DASH, giving you a bonus to SPEED, and allowing you to move through occupied spaces for a brief moment.\n \
 	<i>A 'martial art' of no certain origin, practiced and taught first by those blessed by dendor's gift of claws.</i>"
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/claws
 	draw_message = "Curls their hands into claws!" 
@@ -86,3 +88,53 @@
 	desc = "Slash wildly, cleaving up to one adjacent target."
 	cleave = /datum/cleave_pattern/adjacent
 	clickcd = CLICK_CD_MELEE
+
+/datum/special_intent/pounce//high risk, high reward. If you whiff, immobilize yourself. if you hit 
+	name = "Pounce"
+	desc = "Leap at the target tile, rooting both yourself and adjacent targets in a frontal arc. Other targets hit are Exposed"
+	cooldown = 30 SECONDS
+	stamcost = 50 
+	post_icon_state = "heavy_attack"
+	pre_icon_state = "trap"
+	tile_coordinates = list(list(0,-1), list(-1, 0, 3), list(0, 0, 3), list(1, 0, 3), list(-1, -1, 3), list(1, -1, 3))
+	respect_adjacency = FALSE
+	delay = 0.2 SECONDS
+	range = 3
+	var/pounced = FALSE
+	var/dmg = 45
+	var/exposedur = 3 SECONDS
+	var/immobdur = 3 SECONDS
+
+/datum/special_intent/pounce/apply_hit(turf/T)
+	. = ..()
+	var/mob/living/pouncer = howner
+	if(!pounced)
+		pouncer.OffBalance(30)
+		pouncer.jump_action_resolve(T, 0, 3, TRUE, 3 SECONDS)
+		while(pouncer.throwing)
+			sleep(1)
+		var/sfx = pick(list('sound/combat/ground_smash1.ogg','sound/combat/ground_smash2.ogg','sound/combat/ground_smash3.ogg'))
+		playsound(T, sfx, 100, TRUE)
+		pounced = TRUE
+		return
+	
+	if(pouncer.stat != CONSCIOUS || pouncer.IsParalyzed() || pouncer.IsStun() || QDELETED(pouncer) || !isturf(pouncer.loc) || !(pouncer.mobility_flags & MOBILITY_STAND))
+		return
+	if(istype(iparent, /obj/item/rogueweapon/abstractweapon/martialart))
+		var/obj/item/rogueweapon/abstractweapon/martialart/weapon = iparent
+		dmg = (weapon.force * 3)
+		exposedur = weapon.tier SECONDS 
+		immobdur = weapon.tier SECONDS
+	for(var/mob/living/L in get_hearers_in_view(0, T))
+		if(isbelly(L.loc))
+			continue
+		if(L != howner)
+			apply_generic_weapon_damage(L, dmg, "slash", BODY_ZONE_CHEST, bclass = BCLASS_CUT)
+			L.apply_status_effect(/datum/status_effect/debuff/exposed, exposedur)
+			L.Immobilize(immobdur)
+
+
+/datum/special_intent/pounce/_reset()
+	pounced = FALSE
+	. = ..()
+
