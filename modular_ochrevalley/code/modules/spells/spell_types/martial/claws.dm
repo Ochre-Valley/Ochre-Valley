@@ -43,6 +43,7 @@
 	possible_item_intents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend)
 	masterstring = "As a master of this stance, my rend deals greater damage, and I gain access to a thrust attack with light armor penetration."
 	masterintents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend/steel, /datum/intent/dagger/thrust/martial)
+	special = /datum/special_intent/dagger_dash
 
 /datum/intent/claw/cut/martial
 	icon_state = "inclaw"

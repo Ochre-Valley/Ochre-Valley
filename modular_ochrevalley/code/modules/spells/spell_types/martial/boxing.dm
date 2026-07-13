@@ -3,9 +3,11 @@
 	desc = "Raise both hands up, entering a versatile stance which combines light and heavy attacks\n \
 	<b>JAB</b>: A swift punch which does low damage. \n \
 	<b>SUCKER PUNCH</b>: A very weak punch which can't be dodged or parried. \n \
+	<b>LEFT HOOK</b>: In swift stance, your special attack is a swift LEFT HOOK to the mouth, which dazes the target. If the target is exposed, vulnerable, or unprepared for combat, they're SILENCED \n \
 	You can switch your grip to enable HEAVY stance, switching to the following intents: \n \
 	<b>CROSS</b>: A strong, straight punch with your main hand.\n \
 	<b>HAYMAKER</b>: A slow, predictable punch, which hits hard and can daze the target if it damages their head, as well as knock them back if you're strong enough.\n \
+	<b>UPPER CUT</b>: In heavy stance, your special attack is an UPPER CUT, a slow, charged hit. Does massive damage to vulnerable targets, and knocks them down!\n \
 	<i>A homegrown azurian martial art emphasizing a strong form and center of balance, favored for its usefulness to people of most builds in pit-fights</i>"
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/boxing
 	draw_message = "Puts up their dukes!" 
@@ -19,19 +21,20 @@
 	wbalance = WBALANCE_HEAVY
 	alt_grips = list(/datum/alt_grip/boxing)
 	possible_item_intents = list(/datum/intent/martial/jab, /datum/intent/martial/sucker_punch)
-	masterstring = "As a master of this stance, my jab hits 10% harder, and my haymakers become less clumsy."
+	masterstring = "As a master of this stance, my jab hits 10% harder, my uppercut comes out a bit faster, and my haymakers become less clumsy."
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
-	special = /datum/special_intent/upper_cut //fucking duh.
+	special = /datum/special_intent/upper_cut/silence
 
 /datum/alt_grip/boxing
 	name = "heavy stance"
 	two_handed = TRUE
 	grip_intents = list(/datum/intent/martial/cross, /datum/intent/mace/smash/martial)
-	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY)
+	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY, "special" = /datum/special_intent/upper_cut)
 
 /datum/alt_grip/boxing/master
 	grip_intents = list(/datum/intent/martial/cross, /datum/intent/mace/smash/martial/master)
+	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY, "special" = /datum/special_intent/upper_cut/master)
 
 /datum/intent/martial/jab //this is nearly equivalent to a normal punch, but deals slightly less damage, and is capped based on tier
 	name = "jab"
@@ -82,5 +85,46 @@
 	chargetime = 8
 	maxrange = 4
 
+/datum/special_intent/upper_cut/master
+	delay = 8
 
-	
+/datum/special_intent/upper_cut/silence
+	name = "Strong Hook"
+	desc = "Swiftly charge a left hook which dazes the target. If it connects with a target who is exposed or unprepared, they will be Silenced. Always aims for the head."
+	tile_coordinates = list(list(0,0))
+	post_icon_state = "kick_fx"
+	pre_icon_state = "trap"
+	respect_adjacency = TRUE
+	delay = 5
+	cooldown = 60 SECONDS//swift attack, costs more
+	stamcost = 40 //it comes out pretty quick, so pay more for it!
+	KD_dur = 15 SECONDS
+	dam = 20
+
+/datum/special_intent/upper_cut/silence/apply_hit(turf/T) //SHameless copypaste of uppercut, with a few changes~
+	for(var/mob/living/L in get_hearers_in_view(0, T))
+		//OV edit
+		if(isbelly(L.loc))
+			continue
+		//OV edit end
+		if(L != howner)
+
+			if(L.has_status_effect(/datum/status_effect/debuff/exposed) || L.has_status_effect(/datum/status_effect/debuff/vulnerable) || !L.cmode) // sucker punch! Also procs if the target isn't ready for combat.
+				L.set_silence(KD_dur)
+				dam = 50 // big damage
+				playsound(howner, 'sound/misc/bonk.ogg', 100, TRUE)
+				L.remove_status_effect(/datum/status_effect/debuff/exposed)
+				L.remove_status_effect(/datum/status_effect/debuff/vulnerable)
+				to_chat(L, span_userdanger("I've been hit across the jaw! I can't speak!"))
+
+			apply_generic_weapon_damage(L, dam, "blunt", BODY_ZONE_HEAD, bclass = BCLASS_BLUNT, no_pen = TRUE)
+			L.apply_status_effect(/datum/status_effect/debuff/dazed)
+			playsound(howner, 'sound/combat/hits/punch/punch_hard (2).ogg', 100, TRUE)
+	if(HAS_TRAIT(howner, TRAIT_BIGGUY))
+		return
+	else
+		animate(howner, pixel_z = pixel_z + 12, time = 2) //shoryuken
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
+		animate(transform = prev_transform, time = 0)
+
+	SHOULD_CALL_PARENT(TRUE)

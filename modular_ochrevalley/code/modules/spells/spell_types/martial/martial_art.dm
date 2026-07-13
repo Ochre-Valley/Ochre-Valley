@@ -37,6 +37,7 @@
 	var/mastertier = 4 //the breakpoint at which this martial art can get truly impactful abilities, if any. Tier 4 requires at least expert skill, with minimal magic
 	var/demolition = TRUE //if it can destroy structures and shields at demotier
 	var/specialability = TRUE //if it can use special abilities at mastertier. can be ignored if no such abilities are coded into the intents
+	var/specialtier = 0 //if this is set to a value, it's necessary for the weapon to be at that tier to use its special
 
 /obj/item/rogueweapon/abstractweapon/martialart/updateequip()
 	. = ..()
