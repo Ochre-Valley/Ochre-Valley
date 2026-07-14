@@ -399,6 +399,10 @@
 	beltl = /obj/item/rogueweapon/flail
 	beltr = /obj/item/rogueweapon/whip/antique
 	backl = /obj/item/rogueweapon/shield/iron
+	backl = /obj/item/rogueweapon/sword/long/exe/cloth
+	//ov edit
+	H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+	//ov edit end
 
 	H.adjust_blindness(-3)
 	if(H.mind)

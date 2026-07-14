@@ -76,6 +76,27 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, TRUE)
 				ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
 				gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted // apperantly normal barb gets em so for consistency sake
+						//ovedit- martial arts added to wrasslin' techniques
+				var/techniques = list("Dropkick - Pushback + Extra Damage", "Chokeslam - Stamina Damage", "Stunner - Dazed Debuff", "Headbutt - Vulnerable Debuff", "Boxing - Martial Art", "Hollow Hands - Martial Art", "Lynx Claws - Martial Art", "Direbear Claws - Martial art") // cool wrestling moves
+				var/technique_choice = input(H,"Choose your TECHNIQUE.", "TOSS THEM.") as anything in techniques
+				switch(technique_choice)
+					if("Dropkick - Pushback + Extra Damage")
+						H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/dropkick)
+					if("Chokeslam - Stamina Damage")
+						H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/chokeslam)
+					if("Stunner - Dazed Debuff")
+						H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/stunner)
+					if("Headbutt - Vulnerable Debuff")
+						H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/headbutt)
+					if("Boxing - Martial Art")
+						H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+					if("Hollow Hands - Martial Art")
+						H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/karate)
+					if("Lynx Claws - Martial Art")
+						H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/claws)
+					if("Direbear Claws - Martial art")
+						H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/bigclaws)
+					//ovedit end
 				var/list/unarmed_options = list("Katar", "Knuckledusters", "Punch Dagger")
 				var/weapon_choice = input(H, "Choose how you PUNCH!", "BREAK THEIR BONES.") as anything in unarmed_options
 				switch(weapon_choice)

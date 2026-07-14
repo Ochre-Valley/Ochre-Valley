@@ -42,6 +42,7 @@
 	force = 12 
 	tiermult = 2 //lower scaling than normal punches. a tier 4 user will be roughly on par with a steel dagger in damage
 	wbalance = WBALANCE_SWIFT
+	twohands_required = FALSE //hope this isn't a bad idea
 	possible_item_intents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend)
 	masterstring = "As a master of this stance, my rend deals greater damage, and I gain access to a thrust attack with light armor penetration."
 	masterintents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend/steel, /datum/intent/dagger/thrust/martial)
