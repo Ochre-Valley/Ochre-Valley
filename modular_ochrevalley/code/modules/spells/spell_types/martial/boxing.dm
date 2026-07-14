@@ -24,7 +24,7 @@
 	masterstring = "As a master of this stance, my jab hits 10% harder, my uppercut comes out a bit faster, and my haymakers become less clumsy."
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
-	//special = /datum/special_intent/upper_cut/silence
+	special = /datum/special_intent/silencepunch 
 
 /datum/alt_grip/boxing
 	name = "heavy stance"
@@ -88,7 +88,7 @@
 /datum/special_intent/upper_cut/master
 	delay = 8
 
-/*/datum/special_intent/upper_cut/silence
+/datum/special_intent/silencepunch //shameless uppercut copypasta tbh
 	name = "Strong Hook"
 	desc = "Swiftly charge a left hook which dazes the target. If it connects with a target who is exposed or unprepared, they will be Silenced. Always aims for the head."
 	tile_coordinates = list(list(0,0))
@@ -98,10 +98,16 @@
 	delay = 5
 	cooldown = 60 SECONDS//swift attack, costs more
 	stamcost = 40 //it comes out pretty quick, so pay more for it!
-	KD_dur = 15 SECONDS
-	dam = 20
+	var/silence_dur = 15 SECONDS
+	var/dam = 20
+	var/KD_dur = 1 SECONDS
+	var/self_immob_dur = 1 SECONDS
+	var/pixel_z
+	var/prev_pixel_z
+	var/prev_transform
+	var/transform
 
-/datum/special_intent/upper_cut/silence/on_create()
+/datum/special_intent/silencepunch/on_create()
 	. = ..()
 	
 	howner.OffBalance(self_immob_dur)
@@ -116,7 +122,7 @@
 	else
 		animate(howner, pixel_z = howner.pixel_z - 4, time = 3) //OV edit
 
-/datum/special_intent/upper_cut/silence/apply_hit(turf/T) //SHameless copypaste of uppercut, with a few changes~
+/datum/special_intent/silencepunch/apply_hit(turf/T) //SHameless copypaste of uppercut, with a few changes~
 	for(var/mob/living/L in get_hearers_in_view(0, T))
 		//OV edit
 		if(isbelly(L.loc))
@@ -125,8 +131,8 @@
 		if(L != howner)
 
 			if(L.has_status_effect(/datum/status_effect/debuff/exposed) || L.has_status_effect(/datum/status_effect/debuff/vulnerable) || !L.cmode) // sucker punch! Also procs if the target isn't ready for combat.
-				L.set_silence(KD_dur)
-				dam = 50 // big damage
+				L.set_silence(silence_dur)
+				dam = 50
 				playsound(howner, 'sound/misc/bonk.ogg', 100, TRUE)
 				L.remove_status_effect(/datum/status_effect/debuff/exposed)
 				L.remove_status_effect(/datum/status_effect/debuff/vulnerable)
@@ -143,4 +149,4 @@
 		animate(transform = prev_transform, time = 0)
 	return ..()
 	
-*/
+

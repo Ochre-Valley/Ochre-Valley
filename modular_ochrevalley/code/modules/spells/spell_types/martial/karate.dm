@@ -136,7 +136,7 @@
 	kicker.try_kick(get_step(get_turf(kicker), kicker.dir))
 	var/soundchoice = pick(PUNCHWOOSH)
 	playsound(kicker, soundchoice, 100, TRUE)
-	spawn(1)
+	sleep(1)
 	//next, we're going to execute the actual "tornado kick. For every point of Kickamt, kick a random adjacent tile"
 	kicker.visible_message(span_warning("[kicker] leaps forwards, executing a flurry of wild kicks!"))
 	for(var/I in 1 to kickamt)
@@ -149,4 +149,5 @@
 		var/obj/effect/temp_visual/special_intent/fx = new (T, 3)
 		fx.icon = _icon
 		fx.icon_state = "kick_fx"
-		spawn(1)
+		sleep(1)
+
