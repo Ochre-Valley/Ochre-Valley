@@ -253,7 +253,7 @@ export const VoreUserPreferences = (props: { prefs: PrefData }) => {
       test: stumble_vore,
       tooltip: {
         main:
-          'Allows for stumble related spontaneous vore to occur. ' +
+          'Allows for stumble related spontaneous vore to occur. If enabled with throw vore, allows for vore to occur if you dodge into someone. ' +
           ' Note, you still need spontaneous vore pred and/or prey enabled.',
         enable: 'Click here to allow for stumble vore.',
         disable: 'Click here to disable stumble vore.',

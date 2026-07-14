@@ -85,7 +85,11 @@
 
 	var/list/datum/bioware = list()
 
-	var/static/list/can_ride_typecache = typecacheof(list(/mob/living/carbon/human))
+	var/static/list/can_ride_typecache = typecacheof(list( // OV Edit - This is expanded for harpies to be able to combat grab and drop hostile NPCs via flight. A disabled mechanic, until its re-coded due to a z-drop bug.
+		/mob/living/carbon/human,
+		/mob/living/simple_animal/hostile,
+		/mob/living/carbon/human/species/goblin,
+	))
 	var/lastpuke = 0
 	var/last_fire_update
 

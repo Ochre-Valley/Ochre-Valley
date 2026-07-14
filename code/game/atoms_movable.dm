@@ -69,6 +69,8 @@
 		target = get_step_multiz(source, direction)
 		if(!target)
 			return FALSE
+	if(HAS_TRAIT(src, TRAIT_PREVENT_Z_FALL)) // OV Add
+		return FALSE
 	return !(movement_type & FLYING) && !throwing
 
 /atom/movable/proc/onZImpact(turf/T, levels)
@@ -688,7 +690,9 @@
 		return
 	return throw_at(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
-/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, extra = FALSE) //If this returns FALSE then callback will not be called.
+//ov edit start- adding a "throwvore" var, to allow more fine control of whether or not throwvore can occur from a specific proc
+/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, extra = FALSE, throwvore = TRUE) //If this returns FALSE then callback will not be called.
+//ov edit end
 	. = FALSE
 	if (!target || speed <= 0 || move_resist == INFINITY)
 		return
@@ -737,6 +741,9 @@
 	TT.force = force
 	TT.callback = callback
 	TT.extra = extra
+	//ov edit- throwvore var
+	TT.throwvore = throwvore
+	//ov edit end
 	if(!QDELETED(thrower))
 		TT.target_zone = thrower.zone_selected
 

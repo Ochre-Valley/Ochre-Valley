@@ -17,6 +17,10 @@ var/list/used_colors
 	var/activecolor = "#FFFFFF"
 	var/activecolor_detail = "#FFFFFF"
 	var/activecolor_altdetail = "#FFFFFF"
+	//OV ADD START
+	var/tauractivecolor_detail = "#FFFFFF"
+	var/tauractivecolor_altdetail = "#FFFFFF"
+	//OV ADD END
 	var/list/allowed_types = list(
 			/obj/item/clothing,
 			/obj/item/storage,
@@ -209,6 +213,41 @@ var/list/used_colors
 		dat += "<A href='?src=\ref[src];paint_altdetail=1'>Apply new color</A> | "
 		dat += "<A href='?src=\ref[src];clear_altdetail=1'>Remove paintjob</A><BR>"
 
+	//OV ADD START
+	// Taur tasset dyyyyyyeeeing - only for heavy armor when user is a taur
+	if(istype(inserted_item, /obj/item/clothing))
+		var/obj/item/clothing/clothing_check = inserted_item
+		if(clothing_check.armor_class == ARMOR_CLASS_HEAVY && ishuman(user))
+			var/mob/living/carbon/human/H = user
+			var/obj/item/bodypart/taur/taur = H.get_taur_tail()
+			if(taur?.taur_clothing_category)
+				dat += "<b>Taur Barding Tassets</b><BR>"
+
+				var/icon/tasset1_preview = new /icon()
+				tasset1_preview.Insert(new /icon('modular_ochrevalley/icons/roguetown/clothing/onmob/taur_clothing.dmi', "plate-tasset1_[taur.taur_clothing_category]"), "", SOUTH, 0)
+				if(taur.tasset1_color)
+					tasset1_preview.Blend(taur.tasset1_color, ICON_MULTIPLY)
+				dat += "<div style='text-align:center;'>"
+				dat += "<img src='data:image/png;base64,[icon2base64(tasset1_preview)]' style='vertical-align:middle; width:64px; height:64px; image-rendering: pixelated; image-rendering: crisp-edges;'>"
+				dat += "</div>"
+				dat += "Tasset 1 Color: <font color='[taur.tasset1_color || "#FFFFFF"]'>&#10070;</font> "
+				dat += "<A href='?src=\ref[src];select_tasset1=1'>Select color.</A><BR>"
+				dat += "<A href='?src=\ref[src];paint_tasset1=1'>Apply color</A> | "
+				dat += "<A href='?src=\ref[src];clear_tasset1=1'>Remove color</A><BR><BR>"
+
+				var/icon/tasset2_preview = new /icon()
+				tasset2_preview.Insert(new /icon('modular_ochrevalley/icons/roguetown/clothing/onmob/taur_clothing.dmi', "plate-tasset2_[taur.taur_clothing_category]"), "", SOUTH, 0)
+				if(taur.tasset2_color)
+					tasset2_preview.Blend(taur.tasset2_color, ICON_MULTIPLY)
+				dat += "<div style='text-align:center;'>"
+				dat += "<img src='data:image/png;base64,[icon2base64(tasset2_preview)]' style='vertical-align:middle; width:64px; height:64px; image-rendering: pixelated; image-rendering: crisp-edges;'>"
+				dat += "</div>"
+				dat += "Tasset 2 Color: <font color='[taur.tasset2_color || "#FFFFFF"]'>&#10070;</font> "
+				dat += "<A href='?src=\ref[src];select_tasset2=1'>Select color.</A><BR>"
+				dat += "<A href='?src=\ref[src];paint_tasset2=1'>Apply color</A> | "
+				dat += "<A href='?src=\ref[src];clear_tasset2=1'>Remove color</A><BR><BR>"
+	//OV ADD END
+
 	dat += "<BR><A href='?src=\ref[src];eject=1'>Eject item.</A><BR>"
 	menu.set_content("<html>[dat.Join("")]</html>")
 	menu.open()
@@ -311,6 +350,94 @@ var/list/used_colors
 		inserted.forceMove(drop_location())
 		inserted = null
 		interact(usr)
+
+	//OV ADD START - TAUR BARDING
+	if(href_list["select_tasset1"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/c = pick_dye(usr, tauractivecolor_detail, "Taur Tasset Primary")
+		if(!c) return
+		tauractivecolor_detail = c
+		interact(usr)
+
+	if(href_list["select_tasset2"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/c = pick_dye(usr, tauractivecolor_altdetail, "Taur Tasset Secondary")
+		if(!c) return
+		tauractivecolor_altdetail = c
+		interact(usr)
+
+	if(href_list["paint_tasset1"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/mob/living/carbon/human/H = usr
+		var/obj/item/bodypart/taur/taur = H.get_taur_tail()
+		if(!taur?.taur_clothing_category)
+			return
+		taur.tasset1_color = tauractivecolor_detail
+		playsound(src, "bubbles", 50, 1)
+		H.update_inv_armor()
+		H.update_inv_shirt()
+		interact(usr)
+
+	if(href_list["paint_tasset2"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/mob/living/carbon/human/H = usr
+		var/obj/item/bodypart/taur/taur = H.get_taur_tail()
+		if(!taur?.taur_clothing_category)
+			return
+		taur.tasset2_color = tauractivecolor_altdetail
+		playsound(src, "bubbles", 50, 1)
+		H.update_inv_armor()
+		H.update_inv_shirt()
+		interact(usr)
+
+	if(href_list["clear_tasset1"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/mob/living/carbon/human/H = usr
+		var/obj/item/bodypart/taur/taur = H.get_taur_tail()
+		if(!taur?.taur_clothing_category)
+			return
+		taur.tasset1_color = "#FFFFFF"
+		playsound(src, "bubbles", 50, 1)
+		H.update_inv_armor()
+		H.update_inv_shirt()
+		interact(usr)
+
+	if(href_list["clear_tasset2"])
+		if(!inserted || !ishuman(usr))
+			return
+		var/obj/item/clothing/armor_item = inserted
+		if(!istype(armor_item) || armor_item.armor_class != ARMOR_CLASS_HEAVY)
+			return
+		var/mob/living/carbon/human/H = usr
+		var/obj/item/bodypart/taur/taur = H.get_taur_tail()
+		if(!taur?.taur_clothing_category)
+			return
+		taur.tasset2_color = "#FFFFFF"
+		playsound(src, "bubbles", 50, 1)
+		H.update_inv_armor()
+		H.update_inv_shirt()
+		interact(usr)
+	//OV ADD END
 
 
 // PAINTBRUSH

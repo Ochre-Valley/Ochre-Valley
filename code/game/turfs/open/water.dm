@@ -181,24 +181,25 @@
 		if (istype(src,/turf/open/water/bloody))
 			L.add_mob_blood(L)
 
-		if(!(L.mobility_flags & MOBILITY_STAND) || water_level == 3)
-			L.SoakMob(FULL_BODY)
-		else
-			if(water_level == 2)
-				L.SoakMob(BELOW_CHEST)
-		if(water_overlay)
-			if(water_level > 1 && !istype(oldLoc, type))
-				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
+		if(!(L.movement_type & FLYING)) // OV Edit Start
+			if(!(L.mobility_flags & MOBILITY_STAND) || water_level == 3)
+				L.SoakMob(FULL_BODY)
 			else
-				playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
-			if(istype(oldLoc, type) && (get_dir(src, oldLoc) != SOUTH))
-				water_overlay.layer = ABOVE_MOB_LAYER
-				water_overlay.plane = GAME_PLANE_HIGHEST
-			else
-				spawn(6)
-					if(AM.loc == src)
-						water_overlay.layer = ABOVE_MOB_LAYER
-						water_overlay.plane = GAME_PLANE_HIGHEST
+				if(water_level == 2)
+					L.SoakMob(BELOW_CHEST)
+			if(water_overlay)
+				if(water_level > 1 && !istype(oldLoc, type))
+					playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
+				else
+					playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
+				if(istype(oldLoc, type) && (get_dir(src, oldLoc) != SOUTH))
+					water_overlay.layer = ABOVE_MOB_LAYER
+					water_overlay.plane = GAME_PLANE_HIGHEST
+				else
+					spawn(6)
+						if(AM.loc == src)
+							water_overlay.layer = ABOVE_MOB_LAYER
+							water_overlay.plane = GAME_PLANE_HIGHEST // OV Edit End
 		if(!istype(L, /mob/living/carbon/human/species/skeleton))
 			return
 		if(!istype(src, /turf/open/water/sewer))

@@ -294,6 +294,11 @@
 		/mob/living/carbon/human/proc/emote_growl,
 		/mob/living/carbon/human/proc/emote_prbt,
 		/mob/living/carbon/human/proc/emote_bleat,
+		/mob/living/carbon/human/proc/emote_warble, // OV Add Start
+		/mob/living/carbon/human/proc/emote_raptor,
+		/mob/living/carbon/human/proc/emote_dove,
+		/mob/living/carbon/human/proc/emote_loudcaw,
+		/mob/living/carbon/human/proc/wurble // OV Add End
 	)
 
 /obj/item/organ/tongue/moth
@@ -303,3 +308,40 @@
 		/mob/living/carbon/human/proc/emote_chitter,
 		/mob/living/carbon/human/proc/emote_flutter,
 	)
+
+/obj/item/organ/tongue/harpy // OV Add Start
+	name = "bird tongue"
+	desc = "Chirp chirp chirp chirp chirp!!"
+	icon_state = "tongue-con"
+	say_mod = "chirps"
+	taste_sensitivity = 5
+	modifies_speech = FALSE
+	emote_verbs = list(
+		/mob/living/carbon/human/proc/emote_meow,
+		/mob/living/carbon/human/proc/emote_mrrp,
+		/mob/living/carbon/human/proc/emote_caw,
+		/mob/living/carbon/human/proc/emote_peep,
+		/mob/living/carbon/human/proc/emote_hoot,
+		/mob/living/carbon/human/proc/emote_squeak,
+		/mob/living/carbon/human/proc/emote_hiss,
+		/mob/living/carbon/human/proc/emote_phiss,
+		/mob/living/carbon/human/proc/emote_roar,
+		/mob/living/carbon/human/proc/emote_howl,
+		/mob/living/carbon/human/proc/emote_cackle,
+		/mob/living/carbon/human/proc/emote_whine,
+		/mob/living/carbon/human/proc/emote_fwhine,
+		/mob/living/carbon/human/proc/emote_snort,
+		/mob/living/carbon/human/proc/emote_oink,
+		/mob/living/carbon/human/proc/emote_trill,
+		/mob/living/carbon/human/proc/emote_purr,
+		/mob/living/carbon/human/proc/emote_moo,
+		/mob/living/carbon/human/proc/emote_bark,
+		/mob/living/carbon/human/proc/emote_growl,
+		/mob/living/carbon/human/proc/emote_prbt,
+		/mob/living/carbon/human/proc/emote_bleat,
+		/mob/living/carbon/human/proc/emote_warble,
+		/mob/living/carbon/human/proc/emote_dove,
+		/mob/living/carbon/human/proc/emote_loudcaw,
+		/mob/living/carbon/human/proc/emote_raptor,
+		/mob/living/carbon/human/proc/wurble
+	) // OV Add End

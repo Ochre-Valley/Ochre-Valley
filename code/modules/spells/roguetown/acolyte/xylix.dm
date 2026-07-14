@@ -23,7 +23,7 @@
 
 
 /obj/effect/proc_holder/spell/invoked/mastersillusion
-	name = "Master's Illusion"
+	name = "Set Decoy"
 	desc = "Creates a body double of yourself and makes you invisible, after a delay your clone explodes into smoke."
 	overlay_icon = 'icons/mob/actions/xylixmiracles.dmi'
 	action_icon = 'icons/mob/actions/xylixmiracles.dmi'
@@ -38,16 +38,21 @@
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	recharge_time = 30 SECONDS
+	var/firstcast = TRUE
 	var/icon/clone_icon
 	ignore_combat_tag = TRUE
 
 /obj/effect/proc_holder/spell/invoked/mastersillusion/cast(list/targets, mob/living/carbon/human/user = usr)
-//CC Edit: Unfucks this entire spell by moving from get_flat_human_icon to get_flat_icon for human
-	clone_icon = user.get_flat_icon() // We can only set our decoy icon once. This proc is sort of expensive on generation. <-- CC Edit: Not anymore, this thing is actually useful now.
+	if(firstcast)
+		to_chat(user, span_italics("...Oh, oh, thy visage is so grand! Let us prepare it for tricks!"))
+		clone_icon = get_flat_human_icon("[user.real_name] decoy", null, null, DUMMY_HUMAN_SLOT_MANIFEST, GLOB.cardinals, TRUE, user, TRUE) // We can only set our decoy icon once. This proc is sort of expensive on generation.
+		firstcast = FALSE
+		name = "Master's Illusion"
+		to_chat(user, "There we are... Perfect.")
+		revert_cast()
+		return
 	var/turf/T = get_turf(user)
-	var/mob/living/simple_animal/hostile/rogue/xylixdouble/double = new /mob/living/simple_animal/hostile/rogue/xylixdouble(T, user, clone_icon)
-	double.transform = user.transform
-//CC Edit end
+	new /mob/living/simple_animal/hostile/rogue/xylixdouble(T, user, clone_icon)
 	animate(user, alpha = 0, time = 0 SECONDS, easing = EASE_IN)
 	user.mob_timers[MT_INVISIBILITY] = world.time + 7 SECONDS
 	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living/carbon/human, update_sneak_invis), TRUE), 7 SECONDS)

@@ -115,7 +115,43 @@
 
 
 
+/obj/item/enchantingkit/triumph_transmutekit_armorcollar
+	name = "Armored Collar transmutation elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to turn a gorget of leather, iron, bronze, or steel into its collar equivalent"
+	target_items = list(
+		/obj/item/clothing/neck/roguetown/leather						= /obj/item/clothing/neck/roguetown/leather/collar,
+		/obj/item/clothing/neck/roguetown/gorget/steel					= /obj/item/clothing/neck/roguetown/gorget/steel/collar,
+		/obj/item/clothing/neck/roguetown/gorget/bronze					= /obj/item/clothing/neck/roguetown/gorget/bronze/collar,
+		/obj/item/clothing/neck/roguetown/gorget						= /obj/item/clothing/neck/roguetown/gorget/collar,
+		)
+	result_item = null
 
+/obj/item/enchantingkit/triumph_transmutekit_armorcollarbell
+	name = "Armored Bell Collar transmutation elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to turn a gorget of leather, iron, bronze, or steel into its bell collar equivalent"
+	target_items = list(
+		/obj/item/clothing/neck/roguetown/leather						= /obj/item/clothing/neck/roguetown/leather/collar/bell,
+		/obj/item/clothing/neck/roguetown/gorget/steel					= /obj/item/clothing/neck/roguetown/gorget/steel/collar/bell,
+		/obj/item/clothing/neck/roguetown/gorget/bronze					= /obj/item/clothing/neck/roguetown/gorget/bronze/collar/bell,
+		/obj/item/clothing/neck/roguetown/gorget						= /obj/item/clothing/neck/roguetown/gorget/collar/bell,
+		)
+	result_item = null
 
+/obj/item/enchantingkit/triumph_transmutekit_armorcollarcowbell
+	name = "Armored Cow Bell Collar transmutation elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to turn a gorget of leather, iron, bronze, or steel into its bell collar equivalent"
+	target_items = list(
+		/obj/item/clothing/neck/roguetown/leather							= /obj/item/clothing/neck/roguetown/leather/collar/bell/cow,
+		/obj/item/clothing/neck/roguetown/gorget/steel						= /obj/item/clothing/neck/roguetown/gorget/steel/collar/bell/cow,
+		/obj/item/clothing/neck/roguetown/gorget/bronze						= /obj/item/clothing/neck/roguetown/gorget/bronze/collar/bell/cow,
+		/obj/item/clothing/neck/roguetown/gorget							= /obj/item/clothing/neck/roguetown/gorget/collar/bell/cow,
+		)
+	result_item = null
 
-
+/datum/crafting_recipe/roguetown/leather/armor/lgorget
+	name = "hardened leather gorget"
+	display_category = ITEM_CAT_ARMOR_NECK
+	result = /obj/item/clothing/neck/roguetown/leather
+	reqs = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3

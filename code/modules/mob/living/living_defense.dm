@@ -280,9 +280,11 @@
 	//Caustic Edit - Add Spontaneous Vore from throwing things!
 	var/speed = throwingdatum?.speed
 	var/mob/living/thrower = throwingdatum?.thrower
-
-	if(SEND_SIGNAL(src, COMSIG_LIVING_HIT_BY_THROWN_ENTITY, AM, thrower, speed) & COMSIG_CANCEL_HITBY)
-		return FALSE
+	//ov edit- allow for finer control of throwvore
+	if(throwingdatum?.throwvore)
+		if(SEND_SIGNAL(src, COMSIG_LIVING_HIT_BY_THROWN_ENTITY, AM, thrower, speed) & COMSIG_CANCEL_HITBY)
+			return FALSE
+	//ov edit end
 	//Caustic Edit End
 	
 	if(istype(AM, /obj/item))

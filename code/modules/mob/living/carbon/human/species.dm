@@ -92,6 +92,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	// generic traits tied to having the species
 	var/list/inherent_traits = list()
 	var/inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	///Associative list of skills to adjustments // OV Add Start
+	var/list/inherent_skills = list() // OV Add End
 	///List of factions the mob gain upon gaining this species.
 	var/list/inherent_factions
 
@@ -413,6 +415,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
 			C.dna.organ_dna[slot] = new_dna
 
+/datum/species/proc/apply_organ_stuff_species(mob/living/carbon/C) // OV Add 
+	var/obj/item/organ/organ
+
+	for(organ in C.internal_organs)
+		if(organ.should_regenerate)
+			organ.Insert(C, TRUE, FALSE)
+
 /datum/species/proc/random_character(mob/living/carbon/human/H)
 	H.real_name = random_name(H.gender,1)
 //	H.age = pick(possible_ages)
@@ -481,7 +490,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	for(var/X in inherent_traits)
 		ADD_TRAIT(C, X, SPECIES_TRAIT)
-
+// OV Edit Start
+	for(var/skill as anything in inherent_skills)
+		C.adjust_skillrank_up_to(skill, inherent_skills[skill], TRUE)
+// OV Edit End
 	if(TRAIT_TOXIMMUNE in inherent_traits)
 		C.setToxLoss(0, TRUE, TRUE)
 
@@ -527,6 +539,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		C.Digitigrade_Leg_Swap(TRUE)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
+
+	for(var/skill as anything in inherent_skills)
+		C.adjust_skillrank(skill, -inherent_skills[skill], TRUE)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -722,7 +737,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_SHOES)
 			if(H.shoes)
 				return FALSE
-			if(is_nudist || is_inhumen)
+			if(is_nudist || is_inhumen) // is_harpy removed so they can wear shoes again
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHOES) )
 				return FALSE

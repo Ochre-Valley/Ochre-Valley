@@ -361,5 +361,10 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 	return
 
 /datum/datacore/proc/get_id_photo(mob/living/carbon/human/H, client/C, show_directions = list(SOUTH))
-	//CC Edit, unfucks an another get_flat_human_icon by changing it to get_flat_icon for human
-	return H.get_flat_icon()
+	var/datum/job/J = SSjob.GetJob(H.mind.assigned_role)
+	var/datum/preferences/P
+	if(!C)
+		C = H.client
+	if(C)
+		P = C.prefs
+	return get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, show_directions)

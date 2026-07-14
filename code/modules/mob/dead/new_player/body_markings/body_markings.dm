@@ -403,3 +403,18 @@
 	icon_state = "waist"
 	default_color = "FF0000"
 	affected_bodyparts = CHEST
+// OV Add Start
+/datum/body_marking/harpy_feet_claws
+	icon = 'icons/mob/body_markings/harpy_markings.dmi'
+	name = "Feet Claws"
+	icon_state = "hclaw"
+	affected_bodyparts = LEG_LEFT | LEG_RIGHT
+	default_color = DEFAULT_SECONDARY
+
+/datum/body_marking/harpy_leg
+	icon = 'icons/mob/body_markings/harpy_markings.dmi'
+	name = "Avian Leg Color Override"
+	icon_state = "hleg"
+	affected_bodyparts = LEG_LEFT | LEG_RIGHT
+	default_color = DEFAULT_SECONDARY
+// OV Add End

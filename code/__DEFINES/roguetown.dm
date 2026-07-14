@@ -65,7 +65,8 @@ Balloon Alert / Floating Text defines
 	/datum/species/goblinp,\
 	/datum/species/dullahan,\
 	/datum/species/ooze,\
-  /datum/species/dwarf/gnome\
+	/datum/species/dwarf/gnome,\
+	/datum/species/harpy\
 )
 
 #define RACES_RESPECTED \

@@ -43,7 +43,7 @@
 /datum/advclass/wildsoul/direbear
 	name = "Soul of the Direbear"
 	tutorial = "Strong, heavy, durable- but not swift. Not particularly wise, either, but does it matter how smart someone else is if you can crush their skull in one hand?"
-	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_CIVILIZEDBARBARIAN, TRAIT_STRONGBITE, TRAIT_NATURAL_ARMOR)
+	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_CIVILIZEDBARBARIAN, TRAIT_STRONGBITE, TRAIT_ARMOR_AVERSE) // OV EDIT
 	category_tags = list(CTAG_WILDSOUL)
 	subclass_stats = list(
 		STATKEY_STR = 3, // 9 points weighted, with favoring keeping durability and awareness over strength.
@@ -82,7 +82,7 @@
 	gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltl = /obj/item/rogueweapon/huntingknife/stoneknife
-	H.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor/dense(H)
+	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/dense //OV EDIT
 	give_feral_eyes(H)
 
 	var/techniques = list("Dropkick - Pushback + Extra Damage", "Chokeslam - Stamina Damage", "Stunner - Dazed Debuff", "Headbutt - Vulnerable Debuff") // cool wrestling moves
@@ -100,7 +100,7 @@
 /datum/advclass/wildsoul/mantid
 	name = "Soul of the Mantid"
 	tutorial = "To fight head on never was your style. You prefer the subtle options; to be hidden, quiet, and strike at the opportune moment. But be wary, as that lack of brute strength and thick armor means you can't cut yourself out of an aspiring hunter's net so easily."
-	traits_applied = list(TRAIT_WOODWALKER, TRAIT_DODGEEXPERT, TRAIT_PERFECT_TRACKER, TRAIT_LIGHT_STEP, TRAIT_NATURAL_ARMOR) // Lets try keeping the tanky traits on direbear instead. Sneaky hunter-like archetype- Should shine best in that lane.
+	traits_applied = list(TRAIT_WOODWALKER, TRAIT_DODGEEXPERT, TRAIT_PERFECT_TRACKER, TRAIT_LIGHT_STEP, TRAIT_ARMOR_AVERSE) // OV EDIT - Lets try keeping the tanky traits on direbear instead. Sneaky hunter-like archetype- Should shine best in that lane.
 	category_tags = list(CTAG_WILDSOUL)
 	subclass_stats = list(
 		STATKEY_STR = -2, // 9 stats weighted, with a focus on speed and perception for knives and bows.
@@ -142,7 +142,7 @@
 	beltl = /obj/item/rogueweapon/huntingknife
 	beltr = /obj/item/quiver/arrows
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
-	H.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/natural_armor(H)
+	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul	//OV EDIT
 	give_feral_eyes(H)
 
 /datum/advclass/wildsoul/lampternfly //OV Edit AP Merge 4.5.26 - RE-ENABLED 
@@ -295,3 +295,9 @@
 	if(!(our_area.town_area))
 		owner.remove_status_effect(/datum/status_effect/buff/feraldebuff)
 
+//OV edit
+/datum/stressevent/feralintown
+	desc = "So many walls, no trees, no grass... I have to get out of here!!!"
+	stressadd = 15
+	timer = 5 MINUTES
+//OV edit end

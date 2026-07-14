@@ -95,7 +95,7 @@
 	var/list/peopleknowme = list()
 
 	var/plevel_req = 0
-	var/min_pq = null //0
+	var/min_pq = 0
 	var/max_pq = 0
 	var/round_contrib_points = 0 //Each 10 contributor points counts as 1 PQ, up to 10 PQ.
 
@@ -345,20 +345,29 @@
 	set hidden = FALSE
 	if(mob && ishuman(mob) && mob.mind)
 		var/mob/living/carbon/human/H = mob
-		//CC Edit: Mugshots are optimized now, take them to your heart's
-		to_chat(src, "Updating mugshot...")
-		H.add_credit(TRUE)
-		to_chat(src, "Mugshot updated.")
+		if(!H.mind.mugshot_set)
+			to_chat(src, "Updating mugshot...")
+			H.mind.mugshot_set = TRUE
+			H.add_credit(TRUE)
+			to_chat(src, "Mugshot updated.")
+		else
+			to_chat(src, "Mugshots are resource intensive. You are limited to one per character.")
 
 /mob/living/carbon/human/proc/add_credit(generate_for_adv_class = FALSE) //Evil code to get the proper image for adv classes after they spawn in.
-//CC Edit: unfucks this entire proc as well by moving from get_flat_human_icon to get_flat_icon for human
 	if(!mind || !client)
 		return
 	var/thename = "[real_name]"
-	//var/datum/job/J = SSjob.GetJob(mind.assigned_role)
+	var/datum/job/J = SSjob.GetJob(mind.assigned_role)
 	var/used_title = get_role_title()
+
 	GLOB.credits_icons[thename] = list()
-	var/icon/I = get_flat_icon(list(SOUTH))
+	var/client/C = client
+	var/datum/preferences/P = C.prefs
+	var/icon/I
+	if(generate_for_adv_class)
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH), human_gear_override = src)
+	else if (P)
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH))
 	if(I)
 		var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="credits")
 		I.Blend(female_s, ICON_MULTIPLY)
@@ -366,7 +375,6 @@
 		GLOB.credits_icons[thename]["title"] = used_title
 		GLOB.credits_icons[thename]["icon"] = I
 		GLOB.credits_icons[thename]["vc"] = voice_color
-//CC Edit end
 
 /datum/job/proc/announce(mob/living/carbon/human/H)
 
@@ -396,6 +404,7 @@
 			H.apply_pref_name("human", preference_source)
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
+	H.apply_organ_stuff() // OV Add - apply super special sauce organ stuff when we spawn in, and therefore have MIND
 	if(!outfit_override && visualsOnly && visuals_only_outfit)
 		outfit_override = visuals_only_outfit
 	if(should_wear_femme_clothes(H))

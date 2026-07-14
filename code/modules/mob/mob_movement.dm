@@ -770,6 +770,34 @@
 	return TRUE
 
 /mob/living/carbon/human/check_armor_skill()
+	//OV edit
+	if(HAS_TRAIT(src, TRAIT_ARMOR_AVERSE)) //With this, they can still get away with boots, gloves and bracers which should be relatively minor.
+		if(istype(src.wear_armor, /obj/item/clothing)) //May as well include an armour check here
+			var/obj/item/clothing/CL = src.wear_armor
+			if(CL.armor_class >= ARMOR_CLASS_LIGHT)
+				return FALSE
+		if(istype(src.wear_shirt, /obj/item/clothing))
+			var/obj/item/clothing/CL = src.wear_shirt
+			if(CL.armor_class >= ARMOR_CLASS_LIGHT)
+				return FALSE
+		if(istype(src.wear_pants, /obj/item/clothing))
+			var/obj/item/clothing/CL = src.wear_pants
+			if(CL.armor_class >= ARMOR_CLASS_LIGHT)
+				return FALSE
+		if(istype(src.head, /obj/item/clothing)) //This will allow them to continue to wear volfskin helmets etc
+			var/obj/item/clothing/CL = src.head
+			if(CL.armor_class >= ARMOR_CLASS_LIGHT)
+				return FALSE
+		if(istype(src.wear_neck, /obj/item/clothing)) //No gorgets etc
+			var/obj/item/clothing/CL = src.wear_neck
+			if(CL.armor)
+				return FALSE
+		if(istype(src.wear_mask, /obj/item/clothing)) //No coifs etc
+			var/obj/item/clothing/CL = src.wear_mask
+			if(CL.armor)
+				return FALSE
+		return TRUE //No need to run the rest of the checks, we've already ensured there's nothing better than light armour on them
+	//OV edit end
 	if(istype(src.wear_armor, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_armor
 		if(CL.armor_class == ARMOR_CLASS_HEAVY)

@@ -136,6 +136,13 @@
 			carbon_owner.handle_dreams()
 			if(prob(10) && owner.health > owner.crit_threshold)
 				owner.emote("snore")
+	if(isharpy(owner)) // OV Add Start
+		var/obj/item/clothing/suit/roguetown/armor/skin_armor/harpy_skin = human_owner.skin_armor
+		if(harpy_skin.obj_integrity < harpy_skin.max_integrity)
+			harpy_skin.obj_integrity += 10
+			to_chat(human_owner, "I can feel the skin on my feet mend...")
+		else if((harpy_skin.obj_integrity >= harpy_skin.max_integrity) && harpy_skin.obj_broken)
+			harpy_skin.obj_broken = FALSE // OV Add End
 
 /atom/movable/screen/alert/status_effect/asleep
 	name = "Asleep"

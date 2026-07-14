@@ -246,7 +246,7 @@
 		return FALSE
 	if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		return TRUE
-	var/new_pose = tgui_input_text(user, "Set [src]'s pose (MARKDOWN AVAILABLE):", "SET POSE", pose_text, multiline = FALSE, encode = FALSE, bigmodal = TRUE, max_length = 256)
+	var/new_pose = tgui_input_text(user, "Set [src]'s pose (MARKDOWN AVAILABLE):", "SET POSE", pose_text, multiline = FALSE, encode = TRUE, bigmodal = TRUE, max_length = 256)
 	if(isnull(new_pose))
 		return TRUE
 	if(QDELETED(src) || QDELETED(user) || !IsPetrified())

@@ -27,7 +27,10 @@
 	var/playing = FALSE
 	grid_height = 64
 	grid_width = 32
-
+// OV Add Start
+	/// Instrument is in some other holder such as an organ or item.
+	var/not_held = FALSE
+// OV Add End
 /obj/item/rogue/instrument/equipped(mob/living/user, slot)
 	. = ..()
 	if(playing && user.get_active_held_item() != src)
@@ -82,8 +85,10 @@
 	if(playing)
 		playing = FALSE
 		groupplaying = FALSE
-		soundloop.stop()
+		soundloop.stop(user) // OV Edit
 		user.remove_status_effect(/datum/status_effect/buff/playing_music)
+		if(not_held) // OV Edit
+			user.remove_status_effect(/datum/status_effect/buff/harpy_sing)
 		return
 	else
 		var/playdecision = alert(user, "Would you like to start a band?", "Band Play", "Yes", "No")
@@ -101,7 +106,7 @@
 			if(!choice || !user)
 				return
 
-			if(playing || !(src in user.held_items) || user.get_inactive_held_item())
+			if(playing || !(src in user.held_items) && !(not_held) || user.get_inactive_held_item()) // OV Edit
 				return
 
 			if(choice == "Upload New Song")
@@ -113,7 +118,7 @@
 
 				if(!infile)
 					return
-				if(playing || !(src in user.held_items) || user.get_inactive_held_item())
+				if(playing || !(src in user.held_items) && !(not_held) || user.get_inactive_held_item()) // OV Edit
 					return
 
 				var/filename = "[infile]"
@@ -132,7 +137,7 @@
 				return
 
 			curfile = song_list[choice]
-			if(!user || playing || !(src in user.held_items))
+			if(!user || playing || !(src in user.held_items) && !(not_held) ) // OV Edit
 				return
 			if(user.mind)
 				switch(user.get_skill_level(/datum/skill/misc/music))
@@ -161,23 +166,25 @@
 						soundloop.stress2give = stressevent
 					else
 						soundloop.stress2give = stressevent
-			if(!(src in user.held_items))
+			if(!(src in user.held_items) && !(not_held)) // OV Edit
 				return
 			if(user.get_inactive_held_item())
 				playing = FALSE
-				soundloop.stop()
+				soundloop.stop(user) // OV Edit
 				user.remove_status_effect(/datum/status_effect/buff/playing_music)
 				return
 			if(curfile)
 				playing = TRUE
 				soundloop.set_mid_sounds(list(curfile))
-				soundloop.start()
+				soundloop.start(user) // OV Edit - (user) Is needed so harpies singing applies to their body instead of the organ, for playing the sound.
 				user.apply_status_effect(/datum/status_effect/buff/playing_music, stressevent, note_color)
+				if(not_held) // OV Edit
+					user.apply_status_effect(/datum/status_effect/buff/harpy_sing)
 				record_round_statistic(STATS_SONGS_PLAYED)
 			else
 				playing = FALSE
 				groupplaying = FALSE
-				soundloop.stop()
+				soundloop.stop(user) // OV Edit
 				user.remove_status_effect(/datum/status_effect/buff/playing_music)
 		if(groupplaying)
 			var/pplnearby =view(7,loc)
@@ -207,7 +214,7 @@
 					bandinstrumentsband.playing = TRUE
 					bandinstrumentsband.groupplaying = TRUE
 					bandinstrumentsband.soundloop.set_mid_sounds(list(bandinstrumentsband.curfile))
-					bandinstrumentsband.soundloop.start()
+					bandinstrumentsband.soundloop.start(user) // OV Edit - (user) Is needed so harpies singing applies to their body instead of the organ, for playing the sound.
 					for(var/mob/living/carbon/human/A in bandmates)
 						A.apply_status_effect(/datum/status_effect/buff/playing_music, stressevent, note_color)
 
@@ -366,7 +373,14 @@
 	"Season" = 'sound/music/instruments/shamisen (6).ogg',
 	"Parade" = 'sound/music/instruments/shamisen (7).ogg',
 	"Koshiro" = 'sound/music/instruments/shamisen (8).ogg')
-
+// OV Edit Start
+/obj/item/rogue/instrument/vocals/harpy_vocals
+	name = "harpy's song"
+	desc = "The blessed essence of harpysong. How did you get this... you monster!"
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "harpysong"		//Pulsating heart energy thing.
+	not_held = TRUE
+// OV Edit End
 /obj/item/rogue/instrument/psyaltery
 	name = "psyaltery"
 	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, aasimars and liturgies."

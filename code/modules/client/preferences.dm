@@ -321,7 +321,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	if(!directory_sexualitytag)
 		directory_sexualitytag = "Unset"
 	if(!directory_pvp)
-		directory_pvp = "No PvP"
+		directory_pvp = "Unset"
 
 	if(!badge_gng)
 		badge_gng = "No"
@@ -846,13 +846,13 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br><b>Loadout:</b> <a href='?_src_=prefs;preference=open_loadout;task=input'>Open Menu</a>"
 			//OV edit
 			//Character directory
+			dat += "<br><br><b>PvP Opt-In:</b> <a href='?_src_=prefs;preference=directory_pvp;task=input'>[directory_pvp || "Unset"]</a>"
 
 			dat += "<br><br><b>Show In Directory:</b> <a href='?_src_=prefs;preference=show_in_directory;task=input'>[show_in_directory ? "Yes" : "No"]</a>"
 			dat += "<br><b>Vore Pref Tag:</b> <a href='?_src_=prefs;preference=directory_tag;task=input'>[directory_tag || "Unset"]</a>"
 			dat += "<br><b>ERP Pref Tag:</b> <a href='?_src_=prefs;preference=directory_erptag;task=input'>[directory_erptag || "Unset"]</a>"
 			dat += "<br><b>Gender Tag:</b> <a href='?_src_=prefs;preference=directory_gendertag;task=input'>[directory_gendertag || "Unset"]</a>"
 			dat += "<br><b>Sexuality Tag:</b> <a href='?_src_=prefs;preference=directory_sexualitytag;task=input'>[directory_sexualitytag || "Unset"]</a>"
-			dat += "<br><b>PvP Opt-In:</b> <a href='?_src_=prefs;preference=directory_pvp;task=input'>[directory_pvp || "No PvP"]</a>"
 			dat += "<br><b>Directory Ad:</b> <a href='?_src_=prefs;preference=directory_ad;task=input'>Set</a>"
 			dat += "<br><br><b>Preference Badges:</b> <a href='?_src_=prefs;preference=pref_badges;task=menu'>Open Menu</a>"
 			dat += "</td>"
@@ -3059,7 +3059,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(!directory_sexualitytag)
 						directory_sexualitytag = "Unset"
 					if(!directory_pvp)
-						directory_pvp = "No PvP"
+						directory_pvp = "Unset"
 				if("directory_tag")
 					var/new_choice = tgui_input_list(user, "Choose a vore preference:", "Directory Tag", GLOB.char_directory_tags)
 					if(new_choice)

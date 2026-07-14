@@ -250,8 +250,12 @@ SUBSYSTEM_DEF(treasury)
 		return
 	if(has_account(owner))
 		return
+	//OV Remove: This has no signifigance and has caused multiple pains in our asses.
+	/*
 	if(is_name_taken(owner.real_name))
 		return
+	*/
+	//OV Remove End
 	var/datum/fund/account = new(owner.real_name, owner, 0, CURRENCY_MAMMON)
 	bank_accounts[owner] = account
 	poll_projection_dirty = TRUE
