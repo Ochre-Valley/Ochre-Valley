@@ -7,3 +7,8 @@
     name = "Tarnished Gold Half-Mask"
     path = /obj/item/clothing/mask/rogue/lordmask/tarnished
     sort_category = "Accessories"
+
+/datum/loadout_item/xylixhalfmask
+	name = "Half-Tragedian Mask"
+	path = /obj/item/clothing/mask/rogue/xylixmask/xylixhalfmask
+	sort_category = "Accessories"

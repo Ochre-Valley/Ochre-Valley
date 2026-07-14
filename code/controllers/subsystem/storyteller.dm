@@ -2056,7 +2056,8 @@ SUBSYSTEM_DEF(gamemode)
         STATS_ALIVE_TABAXI,
         STATS_ALIVE_VULPS,
         STATS_ALIVE_LUPIANS,
-        STATS_ALIVE_MOTHS
+        STATS_ALIVE_MOTHS,
+		STATS_ALIVE_HARPIES, // OV Add
 	)
 
 	for(var/stat_name in statistics_to_clear)
@@ -2191,7 +2192,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_LUPIANS)
 			if(ismoth(human_mob))
 				record_round_statistic(STATS_ALIVE_MOTHS)
-
+			if(isharpy(human_mob)) // OV Add
+				record_round_statistic(STATS_ALIVE_HARPIES)
 			// Chronicle statistics
 			if(human_mob.STASTR > highest_strength)
 				highest_strength = human_mob.STASTR

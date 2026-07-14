@@ -1,0 +1,4 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - refactor: "Reverted previous optimizations to AP standard"

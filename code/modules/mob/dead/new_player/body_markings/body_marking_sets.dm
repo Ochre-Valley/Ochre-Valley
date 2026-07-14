@@ -119,4 +119,20 @@
 /datum/body_marking_set/moth/lovers
 	name = "Lovers"
 	body_marking_list = list(/datum/body_marking/moth/lovers)
+// OV Add Start
+//////////////
+/// HARPY ///
+////////////
 
+/datum/body_marking_set/harpy_feet_claws
+	name = "Feet Claws"
+	body_marking_list = list(
+		/datum/body_marking/harpy_feet_claws
+	)
+
+/datum/body_marking_set/harpy_leg
+	name = "Harpy Leg Color Override"
+	body_marking_list = list(
+		/datum/body_marking/harpy_leg
+	)
+// OV Add End

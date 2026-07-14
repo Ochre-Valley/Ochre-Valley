@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - server: "Watchlist entries are now relayed to ochrebot"

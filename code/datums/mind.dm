@@ -121,7 +121,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/datum/sleep_adv/sleep_adv = null
 
-	// var/mugshot_set = FALSE CC Edit: Mugshots are optimized, take them to your heart's content!
+	var/mugshot_set = FALSE
 
 	/// Nickname used for heretic commune.
 	var/heretic_nickname
@@ -1194,7 +1194,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	if(!mind.name)
 		mind.name = real_name
 	mind.current = src
-	
 	AddComponent(/datum/component/area_ambience)
 
 /mob/living/carbon/mind_initialize()

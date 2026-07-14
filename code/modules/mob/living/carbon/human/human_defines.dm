@@ -85,7 +85,11 @@
 
 	var/list/datum/bioware = list()
 
-	var/static/list/can_ride_typecache = typecacheof(list(/mob/living/carbon/human))
+	var/static/list/can_ride_typecache = typecacheof(list( // OV Edit - This is expanded for harpies to be able to combat grab and drop hostile NPCs via flight. A disabled mechanic, until its re-coded due to a z-drop bug.
+		/mob/living/carbon/human,
+		/mob/living/simple_animal/hostile,
+		/mob/living/carbon/human/species/goblin,
+	))
 	var/lastpuke = 0
 	var/last_fire_update
 
@@ -176,6 +180,10 @@
 
 	/// Whether our job title is adaptive to our skills.
 	var/adaptive_name
+	/// Fixed title to show instead of composing every expert skill into the adaptive name. Resulting into a MESS.
+	var/adaptive_name_title
+	/// Next world.time where Homesteaders can change their chosen title.
+	var/next_homesteader_title_change = 0
 
 	/// Ref to orison-like sunder object
 	var/sunder_light_obj = null

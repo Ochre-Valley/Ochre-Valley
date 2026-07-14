@@ -100,6 +100,7 @@
 	name = "Feline Body"
 
 	offset_x = -16
+	taur_clothing_category = "m" //OV ADD
 	taur_icon_state = "feline_s"
 
 	has_taur_color = TRUE
@@ -113,9 +114,10 @@
 	has_taur_color = TRUE
 
 /obj/item/bodypart/taur/tempest
-	name = "Tempst Body"
+	name = "Tempest Body"
 
 	offset_x = -16
+	taur_clothing_category = "m" //OV ADD
 	taur_icon_state = "tempest_s"
 
 	has_taur_color = TRUE
@@ -126,6 +128,7 @@
 	name = "Drake Body"
 
 	offset_x = -16
+	taur_clothing_category = "r" //OV ADD
 	taur_icon_state = "drake_s"
 
 	has_taur_color = TRUE
@@ -142,6 +145,7 @@
 	name = "Wolf Body"
 
 	offset_x = -16
+	taur_clothing_category = "m" //OV ADD
 	taur_icon_state = "wolf_s"
 
 	has_taur_color = TRUE
@@ -166,6 +170,7 @@
 	name = "Deer Body"
 
 	offset_x = -16
+	taur_clothing_category = "d" //OV ADD
 	taur_icon_state = "deer_s"
 
 	has_taur_color = TRUE
@@ -182,6 +187,7 @@
 	name = "Fat wolf Body"
 
 	offset_x = -16
+	taur_clothing_category = "m" //OV ADD
 	taur_icon_state = "fatwolf_s"
 
 	has_taur_color = TRUE
@@ -190,6 +196,7 @@
 	name = "Fat feline Body"
 
 	offset_x = -16
+	taur_clothing_category = "m" //OV ADD
 	taur_icon_state = "fatfeline_s"
 
 	has_taur_color = TRUE
@@ -255,5 +262,13 @@
 
 	offset_x = -16
 	taur_icon_state = "biglegsstanced_s"
+
+	has_taur_color = TRUE
+
+/obj/item/bodypart/taur/sloog
+	name = "Slugcat Body"
+	offset_x = -16
+	taur_clothing_category = "r"
+	taur_icon_state = "sloog_s"
 
 	has_taur_color = TRUE

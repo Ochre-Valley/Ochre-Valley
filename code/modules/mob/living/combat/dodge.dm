@@ -310,7 +310,7 @@
 	dodgecd = TRUE
 	playsound(src, 'sound/combat/dodge.ogg', 100, FALSE)
 	if(!HAS_TRAIT(src, TRAIT_DODGE_NO_MOVE))
-		throw_at(turfy, 1, 2, src, FALSE)
+		throw_at(turfy, 1, 2, src, FALSE, throwvore = stumble_vore) //ov edit- throwvore var. Dodgevore now needs the target to have stumblevore enabled
 	if(drained > 0)
 		src.visible_message(span_warning("<b>[src]</b> dodges [user]'s attack!"))
 	else

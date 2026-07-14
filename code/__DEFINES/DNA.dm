@@ -132,6 +132,7 @@
 #define OLDGREY			21
 #define NO_ORGAN_FEATURES			22
 #define NO_BODYPART_FEATURES			23
+#define HARPY			26 // OV ADD
 #define INVISBLOOD		50 //OV ADD - Ooze Feature to stop blood drips, used only for oozes
 
 //organ defines

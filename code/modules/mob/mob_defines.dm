@@ -326,6 +326,8 @@
 	// The last tick where we manually moved, or clicked on something in-world. Useful for preventing abuse of mobs with AFK players.
 	var/last_client_interact = 0
 
+	var/flying = FALSE // OV Add
+
 	var/datum/weakref/offered_item_ref
 
 

@@ -132,3 +132,8 @@
 	name = "Big Legs, Stanced Marking"
 	icon = 'modular_causticcove/icons/mob/taurs/biglegsstanced_markings.dmi'
 	icon_state = "biglegs_stanced"
+
+/datum/sprite_accessory/tail_feature/taur/sloogmarkings
+	name = "Slugcat Body Glow Line Marking"
+	icon = 'modular_causticcove/icons/mob/taurs/sloog_markings.dmi'
+	icon_state = "sloog_glowstripe"

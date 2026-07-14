@@ -133,6 +133,10 @@
 			to_update = TRUE
 		if(istype(returns) && returns["soundToPlay"] && !play_sound)
 			play_sound = returns["soundToPlay"]
+		//OV edit
+		if(mode_flags & DM_FLAG_MANA_DRAIN)
+			steal_mana(L)
+		//OV edit end
 
 	if(play_sound)
 		for(var/mob/M in hearers(VORE_SOUND_RANGE, get_turf(owner))) //so we don't fill the whole room with the sound effect
@@ -389,3 +393,12 @@
 		owner.updateVRPanel()
 	if(isanimal(owner))
 		owner.update_icon()
+
+//OV edit
+/obj/belly/proc/steal_mana(mob/living/L)
+	if((L.energy > 5) && (L.client))
+		L.energy_add(-5)
+		owner.adjust_nutrition(5)
+		if(prob(3))
+			to_chat(L, span_warning("Your energy is slowly being siphoned away..."))
+//OV edit end

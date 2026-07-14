@@ -63,6 +63,9 @@ SUBSYSTEM_DEF(throwing)
 	var/delayed_time = 0
 	var/last_move = 0
 	var/extra = FALSE
+	//ov edit
+	var/throwvore = FALSE
+	//ov edit
 
 /datum/thrownthing/New(thrownthing, target, target_turf, init_dir, maxrange, speed, thrower, diagonals_first, force, callback, target_zone, extra)
 	. = ..()

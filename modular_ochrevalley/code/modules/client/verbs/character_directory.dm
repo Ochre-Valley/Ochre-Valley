@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(char_directory_tags, list("Pred", "Pred-Pref", "Prey", "Prey-Pr
 GLOBAL_LIST_INIT(char_directory_erptags, list("Dominant", "Dom-Pref", "Submissive", "Sub-Pref", "Switch", "No ERP", "Unset"))
 GLOBAL_LIST_INIT(char_directory_sexualitytags, list("Straight", "Bisexual", "Pansexual", "Gay", "Lesbian", "Asexual", "Demisexual", "Flexible", "Other", "Unset"))
 GLOBAL_LIST_INIT(char_directory_gendertags, list("Male", "Female", "Feminine", "Masculine", "Nonbinary", "Trans Man", "Trans Woman", "Other", "Flexible", "Ungendered", "Unset"))
-GLOBAL_LIST_INIT(char_directory_pvp, list("No PvP", "Ask First", "Open to PvP"))
+GLOBAL_LIST_INIT(char_directory_pvp, list("No PvP", "Ask First", "Open to PvP", "Unset"))
 
 /proc/get_character_ad_value(mob/living/carbon/human/character, datum/preferences/prefs, datum/mind/mind)
 	var/current_ad = prefs?.directory_ad
@@ -74,14 +74,14 @@ GLOBAL_LIST_INIT(char_directory_pvp, list("No PvP", "Ask First", "Open to PvP"))
 		data["personalErpTag"] = user.mind.directory_erptag || "Unset"
 		data["personalGenderTag"] = user.mind.directory_gendertag || "Unset"
 		data["personalSexualityTag"] = user.mind.directory_sexualitytag || "Unset"
-		data["personalPvPTag"] = user.mind.directory_pvp || "No PvP"
+		data["personalPvPTag"] = user.mind.directory_pvp || "Unset"
 	else if (user?.client?.prefs)
 		data["personalVisibility"] = user.client.prefs.show_in_directory
 		data["personalTag"] = user.client.prefs.directory_tag || "Unset"
 		data["personalErpTag"] = user.client.prefs.directory_erptag || "Unset"
 		data["personalGenderTag"] = user.client.prefs.directory_gendertag || "Unset"
 		data["personalSexualityTag"] = user.client.prefs.directory_sexualitytag || "Unset"
-		data["personalPvPTag"] = user.client.prefs.directory_pvp || "No PvP"
+		data["personalPvPTag"] = user.client.prefs.directory_pvp || "Unset"
 
 	return data
 
@@ -134,14 +134,14 @@ GLOBAL_LIST_EMPTY(chardirectory_photos)
 			character_ad = get_character_ad_value(C.mob, C.prefs, C.mob.mind)
 			gendertag = C.mob.mind.directory_gendertag || "Unset"
 			sexualitytag = C.mob.mind.directory_sexualitytag || "Unset"
-			pvp = C.mob.mind.directory_pvp || "No PvP"
+			pvp = C.mob.mind.directory_pvp || "Unset"
 		else
 			tag = C.prefs.directory_tag || "Unset"
 			erptag = C.prefs.directory_erptag || "Unset"
 			character_ad = get_character_ad_value(null, C.prefs, null)
 			gendertag = C.prefs.directory_gendertag || "Unset"
 			sexualitytag = C.prefs.directory_sexualitytag || "Unset"
-			pvp = C.prefs.directory_pvp || "No PvP"
+			pvp = C.prefs.directory_pvp || "Unset"
 
 		if(ishuman(C.mob))
 			var/mob/living/carbon/human/H = C.mob

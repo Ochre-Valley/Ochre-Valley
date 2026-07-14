@@ -92,6 +92,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	// generic traits tied to having the species
 	var/list/inherent_traits = list()
 	var/inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	///Associative list of skills to adjustments // OV Add Start
+	var/list/inherent_skills = list() // OV Add End
 	///List of factions the mob gain upon gaining this species.
 	var/list/inherent_factions
 
@@ -413,6 +415,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
 			C.dna.organ_dna[slot] = new_dna
 
+/datum/species/proc/apply_organ_stuff_species(mob/living/carbon/C) // OV Add 
+	var/obj/item/organ/organ
+
+	for(organ in C.internal_organs)
+		if(organ.should_regenerate)
+			organ.Insert(C, TRUE, FALSE)
+
 /datum/species/proc/random_character(mob/living/carbon/human/H)
 	H.real_name = random_name(H.gender,1)
 //	H.age = pick(possible_ages)
@@ -481,7 +490,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	for(var/X in inherent_traits)
 		ADD_TRAIT(C, X, SPECIES_TRAIT)
-
+// OV Edit Start
+	for(var/skill as anything in inherent_skills)
+		C.adjust_skillrank_up_to(skill, inherent_skills[skill], TRUE)
+// OV Edit End
 	if(TRAIT_TOXIMMUNE in inherent_traits)
 		C.setToxLoss(0, TRUE, TRUE)
 
@@ -527,6 +539,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		C.Digitigrade_Leg_Swap(TRUE)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
+
+	for(var/skill as anything in inherent_skills)
+		C.adjust_skillrank(skill, -inherent_skills[skill], TRUE)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -722,7 +737,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_SHOES)
 			if(H.shoes)
 				return FALSE
-			if(is_nudist || is_inhumen)
+			if(is_nudist || is_inhumen) // is_harpy removed so they can wear shoes again
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHOES) )
 				return FALSE
@@ -1246,9 +1261,17 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return
 
 		var/damage = user.get_punch_dmg()
+
+		if(istype(user.rmb_intent, /datum/rmb_intent/strong))
+			damage += (damage * STRONG_STANCE_DMG_BONUS)
+
 		if(target.has_status_effect(/datum/status_effect/buff/clash) && ishuman(user))
 			var/obj/item/IM = target.get_active_held_item()
 			target.process_clash(user, IM)
+			return
+
+		if(user.has_status_effect(/datum/status_effect/buff/clash) && !target.has_status_effect(/datum/status_effect/buff/clash))
+			user.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
 			return
 
 		if(target.has_status_effect(/datum/status_effect/buff/skulduggery) && ishuman(user))
@@ -1364,6 +1387,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			target.forcesay(GLOB.hit_appends)
 		if(!nodmg)
 			playsound(target.loc, user.used_intent.hitsound, 100, FALSE)
+			if(user.mind)
+				user.dodgetime = (clamp(user.dodgetime - 2, 0, CLICK_CD_DODGE))
+				user.changeMaxDodge(3)
+			if(target.mind)
+				target.dodgetime = (clamp(target.dodgetime - 8, 0, CLICK_CD_DODGE))	//We reset the dodgetime after getting struck directly in the body.
+				target.changeMaxDodge(5)
 
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -1576,7 +1605,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			target.lastattacker_weakref = WEAKREF(user)
 			if(target.mind)
 				target.mind.attackedme[user.real_name] = world.time
-			var/selzone = melee_accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+			var/selzone = user.zone_selected
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 			var/damage = user.get_punch_dmg() * 1.4
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT, damage = damage)

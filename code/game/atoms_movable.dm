@@ -69,6 +69,8 @@
 		target = get_step_multiz(source, direction)
 		if(!target)
 			return FALSE
+	if(HAS_TRAIT(src, TRAIT_PREVENT_Z_FALL)) // OV Add
+		return FALSE
 	return !(movement_type & FLYING) && !throwing
 
 /atom/movable/proc/onZImpact(turf/T, levels)
@@ -688,7 +690,9 @@
 		return
 	return throw_at(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
-/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, extra = FALSE) //If this returns FALSE then callback will not be called.
+//ov edit start- adding a "throwvore" var, to allow more fine control of whether or not throwvore can occur from a specific proc
+/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, extra = FALSE, throwvore = TRUE) //If this returns FALSE then callback will not be called.
+//ov edit end
 	. = FALSE
 	if (!target || speed <= 0 || move_resist == INFINITY)
 		return
@@ -737,6 +741,9 @@
 	TT.force = force
 	TT.callback = callback
 	TT.extra = extra
+	//ov edit- throwvore var
+	TT.throwvore = throwvore
+	//ov edit end
 	if(!QDELETED(thrower))
 		TT.target_zone = thrower.zone_selected
 
@@ -1045,6 +1052,7 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	var/obj/effect/temp_visual/dir_setting/attack_effect/firstatk = new(first_step, newdir)
 	firstatk.icon_state = visual_effect_icon
 	firstatk.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	firstatk.layer = ABOVE_MOB_LAYER
 	var/dist = get_dist(src, A)
 	if(dist > 1)	//2+ tiles, we trace a path to the target.
 		for(var/i = 1, i<dist, i++)
@@ -1119,17 +1127,24 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	acted_explosions += ex_id
 	return TRUE
 
-//TODO: Better floating
 /atom/movable/proc/float(on)
 	if(throwing)
 		return
 	if(on && !(movement_type & FLOATING))
-		animate(src, pixel_y = pixel_y + 2, time = 1 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
-		animate(pixel_y = pixel_y - 2, time = 1 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
 		setMovetype(movement_type | FLOATING)
-	else if (!on && (movement_type & FLOATING))
-		animate(src, pixel_y = initial(pixel_y), time = 1 SECONDS)
+		INVOKE_ASYNC(src, PROC_REF(float_bob))
+	else if(!on && (movement_type & FLOATING))
 		setMovetype(movement_type & ~FLOATING)
+		animate(src, pixel_y = base_pixel_y, time = 5)
+
+// Oscillates pixel_y between base+2 and base-2 using absolute targets while FLOATING is set.
+// Absolute values prevent drift; the loop survives icon-state changes that cancel animate chains.
+/atom/movable/proc/float_bob()
+	var/bob_up = TRUE
+	while(!QDELETED(src) && (movement_type & FLOATING))
+		animate(src, pixel_y = base_pixel_y + (bob_up ? 2 : -2), time = 10, easing = SINE_EASING)
+		bob_up = !bob_up
+		sleep(10)
 
 /* Language procs */
 /atom/movable/proc/get_language_holder(shadow=TRUE)

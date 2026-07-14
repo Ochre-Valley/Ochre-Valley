@@ -42,6 +42,7 @@
 		/datum/sprite_accessory/tail_feature/taur/biglegs,
 		/datum/sprite_accessory/tail_feature/taur/biglegsstanced,
 		/// CAUSTIC EDIT END
+		/datum/sprite_accessory/tail_feature/taur/sloogmarkings, //OV ADD
 		)
 
 /datum/customizer/organ/tail_feature/vox_markings

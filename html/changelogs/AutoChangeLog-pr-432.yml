@@ -1,0 +1,5 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - qol: "Arquebuses can now be examined to learn if they are loaded, and unloaded by being right clicked with a ramrod"
+  - balance: " Arquebuses stored in an item become unloaded when their storage is moved, as well as becoming unloaded when stored in an item"

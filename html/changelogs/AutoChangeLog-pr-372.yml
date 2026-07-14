@@ -1,0 +1,6 @@
+author: "EtheoBoxxman"
+delete-after: True
+changes:
+  - code_imp: "Harpy update! Improves the flight mechanics and harpy singing."
+  - qol: "Slightly buffs the mountable virtue to remove the need for 10 strength minimum to even use it"
+  - sound: "added several new bird related sounds, plus wurble"

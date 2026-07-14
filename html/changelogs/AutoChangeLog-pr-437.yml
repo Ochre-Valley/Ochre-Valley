@@ -1,0 +1,4 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - qol: "Dodging no longer triggers spontaneous vore, unless both Stumble vore and Throw vore are enabled"
