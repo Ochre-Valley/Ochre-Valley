@@ -69,6 +69,7 @@
 		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/firearms = SKILL_LEVEL_JOURNEYMAN //caustic edit
 	)
+	tempo_capable = FALSE
 
 /datum/outfit/job/roguetown/guildmaster
 	has_loadout = TRUE

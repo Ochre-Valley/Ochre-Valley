@@ -13,11 +13,11 @@
 	
 	var/list/spell_buffs = list(
 		"Stone Skin" = /datum/status_effect/buff/stoneskin,
-		"Hawk Eyes" = /datum/status_effect/buff/hawks_eyes,
+		"Hawk Eyes" = /datum/status_effect/buff/attune_hawk,
 		"Dragon Eyes" = /datum/status_effect/buff/dragonhide,
-		"Haste" = /datum/status_effect/buff/haste,
+		"Haste" = /datum/status_effect/buff/attune_haste,
 		"Guidance" = /datum/status_effect/buff/guidance,
-		"Giants Strength" = /datum/status_effect/buff/giants_strength,
+		"Giants Strength" = /datum/status_effect/buff/attune_giant,
 		"Fortitude" = /datum/status_effect/buff/fortitude,
 		"Arcyne Momentum" = /datum/status_effect/buff/arcyne_momentum,
 	)

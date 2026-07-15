@@ -20,6 +20,7 @@
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/spider,
 		/obj/item/bodypart/taur/horse,
+		/obj/item/bodypart/taur/goat,
 		///Caustic edit
 		/obj/item/bodypart/taur/cow,
 		/obj/item/bodypart/taur/lizard,
@@ -47,6 +48,8 @@
 		/obj/item/bodypart/taur/biglegsstanced,
 		///Caustic edit end
 		/obj/item/bodypart/taur/satyr, //OV ADD
+		/obj/item/bodypart/taur/sloog, //OV ADD
+		/obj/item/bodypart/taur/noodle, // OV ADD
 	)
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
@@ -132,6 +135,9 @@
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
 		/datum/body_marking/gradient,
+		/datum/body_marking/waist,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,

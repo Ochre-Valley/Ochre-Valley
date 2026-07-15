@@ -1,0 +1,5 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added code to make PvP Opt-In needed before spawn"
+  - rscadd: "Moved PvP Opt-In above the character directory and below the loadout, for better visibility"

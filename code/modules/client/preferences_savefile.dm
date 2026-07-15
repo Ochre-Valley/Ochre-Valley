@@ -220,6 +220,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["eating_noises"]		>> eating_noises
 	S["belch_noises"]		>> belch_noises
 	///Caustic edit end
+	//OV Edit
+	S["block_mindlink"]		>> block_mindlink
+	//OV Edit End
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
@@ -285,6 +288,25 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(!length(binds))
 			key_bindings -= key
 	// End
+
+/client/verb/export_savefile()
+	set name = "Export Preferences"
+	set desc = "Export your preferences to a file."
+	set category = "OOC"
+	if(!prefs.path)
+		return
+
+	if(alert("Are you sure you want to export your preferences? This will create a file on your computer that contains your preferences.", "Export Preferences", "Yes", "No") == "No")
+		return
+
+	if(!fexists(prefs.path))
+		to_chat(src, span_warning("No savefile, what?!"))
+		return
+
+	var/file_name = "[ckey].sav"
+	var/exportable_file = file(prefs.path)
+
+	DIRECT_OUTPUT(src, ftp(exportable_file, file_name))
 
 /datum/preferences/proc/save_preferences()
 	if(!path)
@@ -377,7 +399,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["eating_noises"], eating_noises)
 	WRITE_FILE(S["belch_noises"], belch_noises)
 	///Caustic edit end
-	
+	//OV Edit: Any persistent OV Prefs
+	WRITE_FILE(S["block_mindlink"], block_mindlink)
+	//OV Edit Start
 	return TRUE
 
 

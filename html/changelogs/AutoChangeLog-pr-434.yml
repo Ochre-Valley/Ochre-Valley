@@ -1,0 +1,4 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - rscadd: "added a crafting recipe and loadout transmutation kit for armored collars"

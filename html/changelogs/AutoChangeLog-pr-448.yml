@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - bugfix: "Meister no longer checks for repeat account names, since it does not appear to matter."

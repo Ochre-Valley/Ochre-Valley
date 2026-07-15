@@ -17,7 +17,7 @@
 
 	charge_required = TRUE
 	charge_time = 1 SECONDS
-	charge_drain = 1
+	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 60 SECONDS
@@ -56,7 +56,11 @@
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
 		if(HL.real_name != input)
 			continue
-
+		//OV Edit: Allow mindlink and message to be blocked
+		if(HL.client?.prefs.block_mindlink)
+			to_chat(user, span_warning("I seek a mental connection, but can't find [input]."))
+			return FALSE
+		//OV Edit End
 		user.emote("me", 1, "mutters an incantation, their mouth briefly flashing white!", TRUE, custom_me = TRUE)
 
 		var/message_color = "7246ff"

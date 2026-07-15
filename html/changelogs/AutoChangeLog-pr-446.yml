@@ -1,0 +1,6 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - balance: "Wearing anything with an armour class as a wildsoul will nerf you, excluding feet, wrists and hands."
+  - balance: "Wildsouls now get a big mood debuff in town."
+  - refactor: "Changed natural armour to be a normal skin armour."

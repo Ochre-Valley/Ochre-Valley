@@ -1,0 +1,4 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - rscadd: "Itinerant Tinkerer rogue subclass, a support rogue focused on crafting, enchantment, and repair, which starts with a special gadget of your choice"

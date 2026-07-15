@@ -9,6 +9,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_pq,
 	/client/proc/hearallasghost,
 	/client/proc/hearglobalLOOC,
+	/client/proc/hearsubtleLOOC,
 	/client/proc/togglespawnmessages,
 	/client/proc/toggle_aghost_invis,
 	/client/proc/admin_ghost,
@@ -160,6 +161,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/smite,
 	/client/proc/player_effects, //OV ADD
 	/client/proc/generate_quest_kill, //OV ADD
+	/client/proc/generate_quest_recover, //OV ADD
 	))
 GLOBAL_PROTECT(admin_verbs_fun)
 GLOBAL_LIST_INIT(admin_verbs_spawn, list(/datum/admins/proc/spawn_atom, /datum/admins/proc/podspawn_atom, /client/proc/respawn_character, /datum/admins/proc/beaker_panel))
@@ -177,6 +179,7 @@ GLOBAL_PROTECT(admin_verbs_server)
 //	/datum/admins/proc/toggleAI,
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_debug_del_all,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/toggle_random_events,
 	/client/proc/forcerandomrotate,
 	/client/proc/adminchangemap,
@@ -193,6 +196,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	return list(
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
 	/client/proc/restart_controller,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
 	/client/proc/cmd_debug_mob_lists,
@@ -283,6 +287,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 //	/client/proc/everyone_random,
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,

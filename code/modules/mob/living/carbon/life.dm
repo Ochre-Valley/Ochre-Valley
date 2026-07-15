@@ -152,7 +152,7 @@
 	//OV edit end
 	
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
-		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TR_DEFAULTMSG))
+		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
 			return TRUE
 		if(stat == DEAD && client)
 			record_round_statistic(STATS_PEOPLE_DROWNED)
@@ -660,10 +660,14 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 					var/obj/structure/flora/newbranch/branch = locate() in loc
 					if(branch)
 						sleepy_mod = 2 //Worse than a bedroll, better than nothing.
-		//Caustic edit
+		//OV edit
 		else if(istype(loc,/obj/belly))
-			sleepy_mod = 3
-		//Caustic edit end
+			var/obj/belly/our_belly = loc
+			if(our_belly.mode_flags & DM_FLAG_MANA_DRAIN)
+				sleepy_mod = 0
+			else
+				sleepy_mod = 2
+		//OV edit end
 		if(sleepy_mod > 0)
 			if(eyesclosed)
 				if(HAS_TRAIT(src, TRAIT_NOSLEEP) && !sleepless_flaw)

@@ -861,7 +861,248 @@
 	name = "Mesmerised"
 	desc = span_warning("Their beauty is otherwordly..")
 	icon_state = "acid"
+// OV Add Start
+///////////////////////// 
+///HARPY FLIGHT STUFF///
+///////////////////////
 
+/datum/status_effect/debuff/harpy_flight
+	id = "harpy_flight"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/harpy_flight
+	tick_interval = 10
+	var/obj/effect/flyer_shadow/shadow
+	var/mob/living/carbon/human/harpy
+	var/mob/living/carbon/human/passenger
+	var/stamcost = 9
+	var/obj/item/organ/wings/harpy/harpy_wings
+	/// Buckled mob if someone decides to mount the flying harpy
+	var/datum/weakref/buckled_mob
+
+/datum/status_effect/debuff/harpy_flight/on_creation(mob/living/new_owner, new_stamcost)
+	stamcost = new_stamcost
+	harpy_wings = new_owner.getorganslot(ORGAN_SLOT_WINGS)
+	return ..()
+
+/datum/status_effect/debuff/harpy_flight/on_apply()
+	. = ..()
+	harpy = owner
+	owner.float(TRUE)
+	harpy.drop_all_held_items()
+	for(var/obj/item/rogueweapon/huntingknife/idagger/harpy_talons/talons in harpy_wings.nullspace_items)
+		var/talons_final = talons
+		harpy.put_in_hands(talons_final, TRUE, FALSE, TRUE)
+		break
+	harpy.movement_type |= FLYING
+	harpy.dna.species.speedmod += 0.3
+	harpy.remove_movespeed_modifier(MOVESPEED_ID_LIVING_TURF_SPEEDMOD) // If they are slowed down (like being in water) remove it
+	harpy.add_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE, 100, override=TRUE, multiplicative_slowdown = harpy.dna.species.speedmod)
+	harpy.apply_status_effect(/datum/status_effect/debuff/flight_sound_loop)
+	ADD_TRAIT(harpy, TRAIT_SPELLCOCKBLOCK, ORGAN_TRAIT)
+	harpy.flying = TRUE
+	init_signals()
+	var/mob/buckled_rider = harpy.buckled_mobs[1]
+	if(!isnull(buckled_rider))
+		buckled_mob = WEAKREF(buckled_rider)
+		buckled_rider.movement_type |= FLYING
+
+/datum/status_effect/debuff/harpy_flight/tick()
+	. = ..()
+	harpy = owner
+	var/stamcost_final = stamcost
+	if(harpy.pulling)
+		stamcost_final = stamcost * 2
+	harpy.stamina_add(stamcost_final)
+//	to_chat(harpy, span_warningbig("[stamcost_final] REMOVED!")) // debug msg
+	if(harpy.pulledby)
+		passenger = harpy.pulling
+		if(harpy.pulledby != passenger)
+			to_chat(harpy, span_bloody("I can't fly while someone's grabbing me like this, AGHH!!"))
+			harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
+	if(harpy.buckled)
+		to_chat(harpy, span_bloody("Ha-ha, time to rest my wings!"))
+		harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
+	if(harpy.mind)
+		harpy.mind.add_sleep_experience(/datum/skill/misc/athletics, (harpy.STAINT*0.03), FALSE)
+	if(!(harpy.mobility_flags & MOBILITY_STAND))
+		to_chat(harpy, span_bloody("I can't flap my wings while imbalanced like this! AGHH!!"))
+		harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
+	if(harpy.stamina >= harpy.max_stamina)
+		to_chat(harpy, span_bloody("I can't flap my wings for much more! AGHH!!"))
+		harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
+
+/datum/status_effect/debuff/harpy_flight/on_remove()
+	. = ..()
+	harpy = owner
+	if(harpy.pulling)
+		harpy.stop_pulling()
+	harpy.remove_status_effect(/datum/status_effect/debuff/flight_sound_loop)
+	harpy.dna.species.speedmod -= 0.3
+	harpy.remove_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE)
+	var/turf/tile_under_harpy = harpy.loc
+	harpy.movement_type &= ~FLYING
+	tile_under_harpy.zFall(harpy)
+	remove_signals()
+	owner.float(FALSE)
+	REMOVE_TRAIT(harpy, TRAIT_SPELLCOCKBLOCK, ORGAN_TRAIT)
+	harpy.flying = FALSE
+	if(harpy.is_holding_item_of_type(/obj/item/rogueweapon/huntingknife/idagger/harpy_talons))
+		for(var/obj/item/rogueweapon/huntingknife/idagger/harpy_talons/talons in harpy.held_items)
+			harpy.dropItemToGround(talons, TRUE)
+			return
+	var/mob/buckled_rider = buckled_mob.resolve()
+	if(!isnull(buckled_rider))
+		buckled_rider.movement_type &= ~FLYING
+	buckled_mob = null
+
+/atom/movable/screen/alert/status_effect/debuff/harpy_flight
+	name = "Flying..."
+	desc = "Tehee!!"
+	icon_state = "muscles"
+
+/obj/effect/flyer_shadow
+	name = "humanoid shadow"
+	desc = "A shadow cast from something flying above."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "shadow"
+	anchored = TRUE
+	layer = BELOW_MOB_LAYER
+	alpha = 130
+	pixel_y = -5
+	var/datum/weakref/flying_ref
+
+/obj/effect/flyer_shadow/Initialize(mapload, flying_mob)
+	. = ..()
+	if(flying_mob)
+		flying_ref = WEAKREF(flying_mob)
+	transform = matrix() * 0.8 // Make the shadow slightly smaller
+
+/obj/effect/flyer_shadow/Destroy()
+	flying_ref = null
+	return ..()
+
+/datum/status_effect/debuff/harpy_flight/proc/init_signals()
+	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_movement))
+	RegisterSignal(owner, COMSIG_LIVING_UPDATE_TURF_MOVESPEED, PROC_REF(on_turf_movespeed_update))
+	RegisterSignal(owner, COMSIG_MOVABLE_BUCKLE, PROC_REF(harpy_mob_buckled))
+	RegisterSignal(owner, COMSIG_MOVABLE_UNBUCKLE, PROC_REF(harpy_mob_unbuckle))
+
+/datum/status_effect/debuff/harpy_flight/proc/check_movement(datum/source) // rewritten by @tmyqlfpir
+	SIGNAL_HANDLER
+
+	var/turf/cur_turf = get_turf(owner)
+	if(!cur_turf)
+		return
+	if(!shadow)
+		shadow = new /obj/effect/flyer_shadow(cur_turf, owner)
+	while(isopenspace(cur_turf))
+		var/turf/temp_turf = GET_TURF_BELOW(cur_turf)
+		if(!temp_turf || isclosedturf(temp_turf))
+			break
+		cur_turf = temp_turf
+	shadow.forceMove(cur_turf)
+
+/datum/status_effect/debuff/harpy_flight/proc/on_turf_movespeed_update()
+	SIGNAL_HANDLER
+	return TURF_MOVESPEED_BLOCKED // Flying harpies do not get slowed down from turfs
+
+/// Updates flight when a mob is buckled as a harpy is already in flight
+/datum/status_effect/debuff/harpy_flight/proc/harpy_mob_buckled(datum/source, mob/living/M, force = FALSE)
+	SIGNAL_HANDLER
+	if(isnull(M))
+		return
+	buckled_mob = WEAKREF(M)
+	M.movement_type |= FLYING
+
+/// Updates flight when a mob is unbuckled as a harpy is already in flight
+/datum/status_effect/debuff/harpy_flight/proc/harpy_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
+	SIGNAL_HANDLER
+	var/mob/living/unbuckling_mob = buckled_mob.resolve()
+	if(!unbuckling_mob && isnull(M))
+		buckled_mob = null
+		return
+	unbuckling_mob.movement_type &= ~FLYING
+	var/turf/tile_under_rider = get_turf(unbuckling_mob)
+	tile_under_rider.zFall(unbuckling_mob)
+	buckled_mob = null
+
+/datum/status_effect/debuff/harpy_flight/proc/remove_signals()
+	UnregisterSignal(owner, list(
+		COMSIG_MOVABLE_MOVED,
+		COMSIG_LIVING_UPDATE_TURF_MOVESPEED,
+		COMSIG_MOVABLE_BUCKLE,
+		COMSIG_MOVABLE_UNBUCKLE,
+	))
+	QDEL_NULL(shadow)
+
+/datum/status_effect/debuff/harpy_passenger
+	id = "harpy_passenger"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/harpy_passenger
+	tick_interval = 5
+	var/mob/living/carbon/human/passenger
+	var/mob/living/carbon/human/harpy
+
+/datum/status_effect/debuff/harpy_passenger/on_apply()
+	. = ..()
+	passenger = owner
+	animate(passenger, pixel_y = passenger.pixel_y + 3, time = 6, loop = -1) // thank you shadowdeath6
+	animate(pixel_y = passenger.pixel_y - 3, time = 6) // thank you oog
+	passenger.movement_type |= FLYING
+	passenger.drop_all_held_items() // think fast chucklenuts
+	passenger.put_in_hands(new /obj/item/harpy_leg, TRUE, FALSE, TRUE) // will have to make it so ppl can't dismount themselves
+
+/datum/status_effect/debuff/harpy_passenger/tick()
+	. = ..()
+	passenger = owner
+	if(!passenger.pulledby)
+		passenger.remove_status_effect(/datum/status_effect/debuff/harpy_passenger)
+
+/datum/status_effect/debuff/harpy_passenger/on_remove()
+	. = ..()
+	passenger = owner
+	animate(passenger)
+	if(passenger.is_holding_item_of_type(/obj/item/harpy_leg))
+		for(var/obj/item/harpy_leg/I in passenger.held_items)
+			if(istype(I, /obj/item/harpy_leg))
+				qdel(I)
+	if(passenger.pulledby)
+		harpy = passenger.pulledby
+		harpy.stop_pulling()
+	var/turf/tile_under_passenger = passenger.loc
+	passenger.movement_type &= ~FLYING
+	tile_under_passenger.zFall(passenger)
+
+/atom/movable/screen/alert/status_effect/debuff/harpy_passenger
+	name = "Being carried..."
+	desc = "ARGHHHH GET ME DOWN!!"
+	icon_state = "muscles"
+
+//////////////////////////////////////
+///FLIGHT SOUND LOOP STATUS EFFECT///
+////////////////////////////////////
+
+///I MEAN it's the easiest fucking way to do so in my mind LOL
+/datum/status_effect/debuff/flight_sound_loop
+	id = "flight_sound_loop"
+	tick_interval = 16
+	alert_type = null
+	var/list/wing_flap_sound = list(
+		'sound/foley/footsteps/flight_sounds/wingflap1.ogg',
+		'sound/foley/footsteps/flight_sounds/wingflap2.ogg',
+		'sound/foley/footsteps/flight_sounds/wingflap3.ogg',
+		'sound/foley/footsteps/flight_sounds/wingflap4.ogg',
+		'sound/foley/footsteps/flight_sounds/wingflap5.ogg',
+		'sound/foley/footsteps/flight_sounds/wingflap6.ogg',
+	)
+
+/datum/status_effect/debuff/flight_sound_loop/tick()
+	. = ..()
+	var/mob/living/carbon/human/harpy = owner
+	playsound(harpy, pick(wing_flap_sound), 100)
+
+/////////////////////////////
+///HARPY FLIGHT STUFF END///
+///////////////////////////
+// OV Add End
 /datum/status_effect/debuff/liver_failure
 	id = "liver_failure"
 	alert_type = null

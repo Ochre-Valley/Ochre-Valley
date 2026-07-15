@@ -269,7 +269,7 @@
 			/obj/item/storage/belt/rogue/leather/sash,
 			/obj/item/storage/belt/rogue/leather/plaquesilver,
 			/obj/item/storage/belt/rogue/leather/black,
-			/obj/item/storage/belt/rogue/leather/cloth/lady,
+			/obj/item/storage/belt/rogue/leather/cloth/upgraded/lady,
 	)
 	beltl = pick(/obj/item/storage/belt/rogue/pouch/coins/poor,
 			/obj/item/storage/belt/rogue/pouch/coins/rich,
@@ -336,7 +336,7 @@
 		)
 	backl = /obj/item/storage/backpack/rogue/satchel
 	var/backpack_items = list(
-		/obj/item/book/spellbook,
+		/obj/item/rogueweapon/spellbook,
 		/obj/item/flashlight/flare/torch/metal,
 		/obj/item/storage/belt/rogue/pouch/coins/poor,
 		/obj/item/rogueweapon/scabbard/sheath,

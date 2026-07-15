@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - rscadd: "Preference and verb to toggle blocking mindlinks/messages"

@@ -46,8 +46,13 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	if((src.holy_area == TRUE) && HAS_TRAIT(guy, TRAIT_UNDIVIDED)) // get a long-lingering mood buff so long as we visit the church daily as Undivided.
 		guy.add_stress(/datum/stressevent/seeblessed)
 	//Caustic edit
+	//OV edit
 	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_FERAL) && !guy.has_status_effect(/datum/status_effect/buff/feraldebuff)) //feral creatures don't do well in town
 		guy.apply_status_effect(/datum/status_effect/buff/feraldebuff)
+		guy.add_stress(/datum/stressevent/feralintown)
+	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_FERAL_MINOR)) //for domesticated wildsouls to discourage them being in town
+		guy.add_stress(/datum/stressevent/feralintown)
+	//OV edit end
 	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_NECRAS_ABATEMENT) && !guy.has_status_effect(/datum/status_effect/buff/deadite_pacified)) //zombie pacification
 		guy.apply_status_effect(/datum/status_effect/buff/deadite_pacified)
 	//Caustic edit end

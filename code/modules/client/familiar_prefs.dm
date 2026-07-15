@@ -195,7 +195,7 @@
 			return
 
 		if("familiar_ooc_extra")
-			to_chat(user, "<span class='notice'>Add a link to an mp3, mp4, or jpg/png (catbox, discord, etc).</span>")
+			to_chat(user, "<span class='notice'>Add a link to an mp3, mp4, or jpg/png (catbox, imgbox, etc).</span>")
 			to_chat(user, "<span class='notice'>Videos are resized to ~300x300. Abuse = ban.</span>")
 			to_chat(user, "<font color='#d6d6d6'>Leave a single space to delete it.</font>")
 			var/link = input(user, "Input the accessory link (https)", "Familiar OOC Extra", familiar_ooc_extra_link[planar_origin]) as text|null

@@ -21,8 +21,6 @@
 				new /datum/ambush_config/heavy_skeleton_party = 5,
 				new /datum/ambush_config/doppelganger = 2, //OV ADD
 				new /datum/ambush_config/doppelgangers = 1, //OV ADD
-				new /datum/ambush_config/hobgoblin_band = 10, //CC Add
-				new /datum/ambush_config/hobgoblin_band/circus = 5, //CC Add
 				)
 	droning_sound = 'sound/music/area/decap.ogg'
 	droning_sound_dusk = null
@@ -67,7 +65,6 @@
 				new /datum/ambush_config/medium_skeleton_party = 20,
 				new /datum/ambush_config/heavy_skeleton_party = 10,
 				new /datum/ambush_config/doppelganger = 1, //OV ADD
-				new /datum/ambush_config/hobgoblin_band = 10, //CC Add
 				)
 	droning_sound = 'sound/music/area/decap_deeper.ogg'
 	droning_sound_dusk = null
