@@ -36,7 +36,7 @@
 	neck = /obj/item/clothing/neck/roguetown/coif/padded
 	cloak = /obj/item/clothing/cloak/wardencloak
 	backr = /obj/item/storage/backpack/rogue/satchel
-	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded/warden
+	//armor = /obj/item/clothing/suit/roguetown/armor/leather/studded/warden //OV Edit
 	//gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather //OV Edit
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/rogueweapon/stoneaxe/woodcut/wardenpick
@@ -87,6 +87,7 @@
 
 /datum/outfit/job/roguetown/warden/warden/pre_equip(mob/living/carbon/human/H)
 	..()
+	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded/warden //OV Add
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather //OV Add
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced //OV Add
 	backpack_contents = list(
