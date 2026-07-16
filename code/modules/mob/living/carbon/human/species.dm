@@ -2209,15 +2209,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		//Body temperature is too hot.
 
 		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
-		//FIRE_STACKS Human damage taken from fire is determined here.
-		var/burn_damage
-		var/datum/status_effect/fire_handler/fire_stacks/pure_stacks = H.has_status_effect(/datum/status_effect/fire_handler/fire_stacks)
-		var/firemodifier = pure_stacks?.stacks / 50
-		if(pure_stacks?.on_fire)
-			burn_damage = 5 + round(sqrt(pure_stacks?.stacks) * 10) // sqrt curve - diminishing returns at high stacks
-		else
-			firemodifier = min(firemodifier, 0)
-			burn_damage = round(max(log(2-firemodifier,(H.bodytemperature-BODYTEMP_NORMAL))-5,0)) // this can go below 5 at log 2.5
+		var/burn_damage = round(max(log(2, (H.bodytemperature - BODYTEMP_NORMAL)) - 5, 0))
 		if(HAS_TRAIT(H, TRAIT_FIRE_RESIST))
 			burn_damage *= 0.5
 		if (burn_damage)
@@ -2260,6 +2252,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 // FIRE //
 //////////
 
+#define FIRE_WOUND_BURN_BASE 4
+#define FIRE_WOUND_BURN_STACK_SCALE 6
+#define FIRE_WOUND_BURN_SUITED 2
+
 /datum/species/proc/handle_fire(mob/living/carbon/human/H, no_protection = FALSE)
 	if(!Canignite_mob(H))
 		return TRUE
@@ -2271,10 +2267,27 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	var/fire_resist_mult = HAS_TRAIT(H, TRAIT_FIRE_RESIST) ? 0.5 : 1
 
+	var/burn_damage
 	if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT && !no_protection)
-		H.adjust_bodytemperature(11 * fire_resist_mult)
+		burn_damage = FIRE_WOUND_BURN_SUITED
 	else
-		H.adjust_bodytemperature((BODYTEMP_HEATING_MAX + (H.fire_stacks * 12)) * fire_resist_mult)
+		burn_damage = FIRE_WOUND_BURN_BASE + round(sqrt(H.fire_stacks) * FIRE_WOUND_BURN_STACK_SCALE)
+	burn_damage = round(burn_damage * fire_resist_mult * heatmod * H.physiology.heat_mod)
+	if(burn_damage <= 0)
+		return
+
+	if(H.stat < UNCONSCIOUS && prob(min(burn_damage * 4, 100)))
+		H.emote("pain")
+
+	var/obj/item/bodypart/BP = pick(H.bodyparts)
+	if(!BP)
+		return
+	BP.receive_damage(0, burn_damage)
+	BP.bodypart_attacked_by(BCLASS_BURN, burn_damage, null, BP.body_zone)
+
+#undef FIRE_WOUND_BURN_BASE
+#undef FIRE_WOUND_BURN_STACK_SCALE
+#undef FIRE_WOUND_BURN_SUITED
 
 /datum/species/proc/Canignite_mob(mob/living/carbon/human/H)
 	if(HAS_TRAIT(H, TRAIT_NOFIRE))
@@ -2557,5 +2570,26 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		bonuses.Add(SPAN_TOOLTIP_DANGEROUS_HTML(GLOB.roguetraits[trait], "\[<u>[trait]</u>\]"))
 	if(length(bonuses))
 		return jointext(bonuses, " | ")
+	else
+		return null
+
+/datum/species/proc/get_string_languages()
+	var/list/ret_languages = list()
+	for (var/language_type in languages)
+		var/datum/language/lang = GLOB.language_datum_instances[language_type]
+		if(!lang)
+			continue
+		var/lang_name = initial(lang.name)
+		// Everyone knows Imperial, therefore it's redundant to list. So we'll skip over it
+		if(lang_name == "Imperial")
+			continue
+		var/lang_desc = initial(lang.desc)
+		// If it has a description, give it a tooltip and underline to indicate said tooltip being there
+		if(length(lang_desc))
+			ret_languages.Add(SPAN_TOOLTIP(lang_desc, "\[<u>[lang_name]</u>\]"))
+		else
+			ret_languages.Add("\[[lang_name]\]")
+	if(length(ret_languages))
+		return jointext(ret_languages, " | ")
 	else
 		return null

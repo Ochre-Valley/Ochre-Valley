@@ -1,39 +1,29 @@
-/datum/action/cooldown/spell/grasp
-	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
+/datum/action/cooldown/spell/augment_buff/grasp
 	name = "Grasp"
 	desc = "Reach out to a target within 7 tiles and wrench them to your side after a 2-second channel. An arcyne tether links you to them while you reel them in, warning them to ready themselves. They must share a fellowship with you and still be within your sight when the channel completes."
 	button_icon_state = "grasp"
 	sound = 'sound/magic/whiteflame.ogg'
 	spell_color = GLOW_COLOR_ARCANE
 	glow_intensity = GLOW_INTENSITY_MEDIUM
-	attunement_school = ASPECT_NAME_AUGMENTATION
 
-	click_to_activate = TRUE
 	cast_range = 7
 	self_cast_possible = FALSE
 
-	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_TELEPORT
 
-	invocations = list("Ad me!")
+	invocations = list("Ad Me!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = FALSE
-	hold_drain = 0
 	cooldown_time = 45 SECONDS
-
-	associated_skill = /datum/skill/magic/arcane
-	spell_tier = 2
 
 	point_cost = 1
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
 
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
-
-	var/channel_time = 3 SECONDS
+	var/channel_time = 1.5 SECONDS
 	var/channeling = FALSE
 
-/datum/action/cooldown/spell/grasp/cast(atom/cast_on)
+/datum/action/cooldown/spell/augment_buff/grasp/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
@@ -48,8 +38,8 @@
 	if(target == H)
 		to_chat(H, span_warning("I cannot grasp myself!"))
 		return FALSE
-	if(!shares_fellowship(H, target))
-		to_chat(H, span_warning("[target] is not of my fellowship!"))
+	if(!shares_fellowship(H, target) && !H.faction_check_mob(target))
+		to_chat(H, span_warning("[target] shares no bond with me!"))
 		return FALSE
 
 	var/datum/beam/tether = H.Beam(target, "purple_lightning", time = channel_time)
@@ -69,8 +59,8 @@
 
 	if(QDELETED(target) || !isliving(target))
 		return FALSE
-	if(!shares_fellowship(H, target))
-		to_chat(H, span_warning("[target] is no longer of my fellowship - the grasp unravels."))
+	if(!shares_fellowship(H, target) && !H.faction_check_mob(target))
+		to_chat(H, span_warning("[target] is no longer bound to me - the grasp unravels."))
 		return FALSE
 	if(!can_see(H, target, cast_range))
 		to_chat(H, span_warning("[target] has slipped from my sight - the grasp fails!"))

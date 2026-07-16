@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - bugfix: "Note removal will now use canonical, stripped ckey."

@@ -14,6 +14,7 @@
 	name = "Extract Lux"
 	implements = list(
 		TOOL_SCALPEL = 80,
+		TOOL_SHARP = 60, //OV change
 	)
 	target_mobtypes = list(/mob/living/carbon/human)
 	time = 8 SECONDS

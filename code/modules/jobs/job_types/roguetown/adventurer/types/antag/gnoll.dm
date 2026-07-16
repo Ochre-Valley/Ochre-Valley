@@ -118,9 +118,9 @@
 		if(GNOLL_SCALING_DYNAMIC)
 			max_slots = 3
 		if(GNOLL_SCALING_FLAT)
-			max_slots = 3 //OV Edit - 2
+			max_slots = 2
 		if(GNOLL_SCALING_SINGLE)
-			max_slots = 3 //OV Edit - 1
+			max_slots = 1
 	if(max_slots <= 0)
 		return 0
 	return SSgamemode.storyteller_scale_slots(max_slots)
