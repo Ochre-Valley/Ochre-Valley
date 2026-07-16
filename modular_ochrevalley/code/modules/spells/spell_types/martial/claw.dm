@@ -10,7 +10,7 @@
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/bigclaws
 	draw_message = "Curls their hands into terrible claws!" 
 	drop_message = "loses their clawed stance!"
-	
+	button_icon_state = "bigclaws"
 
 /obj/item/rogueweapon/abstractweapon/martialart/bigclaws //Similar to handclaws, with lower damage and armor penetration.
 	name = "Heavy Claws"
@@ -18,7 +18,11 @@
 	force = 15 
 	tiermult = 2.5 //Damage scales about as hard as normal fists- a t4 user is about 10 damage behind someone with gronnic claws
 	wbalance = WBALANCE_HEAVY
+	sharpness = IS_SHARP
+	icon_state = "bigclaws"
 	possible_item_intents = list(/datum/intent/claw/cut/martial, /datum/intent/claw/lunge/martial, /datum/intent/claw/rend)
+	gripped_intents = list(/datum/intent/claw/cut/martial, /datum/intent/claw/lunge/martial, /datum/intent/claw/rend)
+	baseintents = list(/datum/intent/claw/cut/martial, /datum/intent/claw/lunge/martial, /datum/intent/claw/rend)
 	masterstring = "As a master of this stance, my lunge and slash can penetrate greater protection, and I gain access to a wild, cleaving slash."
 	masterintents = list(/datum/intent/claw/cut/martial/master, /datum/intent/claw/lunge/martial/master, /datum/intent/claw/rend, /datum/intent/claw/cleave)
 
@@ -34,6 +38,8 @@
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/claws
 	draw_message = "Curls their hands into claws!" 
 	drop_message = "loses their clawed stance!"
+	charge_time = 0.5 SECONDS
+	button_icon_state = "claw"
 	
 
 /obj/item/rogueweapon/abstractweapon/martialart/claws //Similar in damage to a dagger, but most users won't be able to deal with armor
@@ -43,7 +49,10 @@
 	tiermult = 2 //lower scaling than normal punches. a tier 4 user will be roughly on par with a steel dagger in damage
 	wbalance = WBALANCE_SWIFT
 	twohands_required = FALSE //hope this isn't a bad idea
+	sharpness = IS_SHARP
+	icon_state = "claw"
 	possible_item_intents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend)
+	baseintents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend)
 	masterstring = "As a master of this stance, my rend deals greater damage, and I gain access to a thrust attack with light armor penetration."
 	masterintents = list(/datum/intent/claw/cut/martial/quick, /datum/intent/claw/cleave/fast, /datum/intent/claw/rend/steel, /datum/intent/dagger/thrust/martial)
 	special = /datum/special_intent/dagger_dash

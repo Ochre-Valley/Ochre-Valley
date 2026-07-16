@@ -16,11 +16,15 @@
 /obj/item/rogueweapon/abstractweapon/martialart/boxing
 	name = "Fists"
 	desc = "Your hands, raised into iron fists"
+	icon_state = "boxing"
 	force = 15 
 	tiermult = 2.5 //Damage scales about as hard as normal fists. Our power scales with our intent
 	wbalance = WBALANCE_HEAVY
 	alt_grips = list(/datum/alt_grip/boxing)
+	basegrips = list(/datum/alt_grip/boxing)
 	possible_item_intents = list(/datum/intent/martial/jab, /datum/intent/martial/sucker_punch)
+	gripped_intents = list(/datum/intent/martial/jab, /datum/intent/martial/sucker_punch)
+	baseintents = list(/datum/intent/martial/jab, /datum/intent/martial/sucker_punch)
 	masterstring = "As a master of this stance, my jab hits 10% harder, my uppercut comes out a bit faster, and my haymakers become less clumsy."
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
@@ -30,11 +34,10 @@
 	name = "heavy stance"
 	two_handed = TRUE
 	grip_intents = list(/datum/intent/martial/cross, /datum/intent/mace/smash/martial)
-	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY, "special" = /datum/special_intent/upper_cut)
+	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY)
 
 /datum/alt_grip/boxing/master
 	grip_intents = list(/datum/intent/martial/cross, /datum/intent/mace/smash/martial/master)
-	var_overrides = list("wlength" = WLENGTH_NORMAL, "wbalance" = WBALANCE_HEAVY, "special" = /datum/special_intent/upper_cut/master)
 
 /datum/intent/martial/jab //this is nearly equivalent to a normal punch, but deals slightly less damage, and is capped based on tier
 	name = "jab"

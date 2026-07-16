@@ -20,8 +20,9 @@
 /datum/virtue/combat/unarmed_master
 	name = "Martial Disciple"
 	desc = "Through knowledge or body, I possess unique talent in wielding my bare hands as weaponry. I'll still need pugilist training, or a weighted glove, to deal significant damage with them. Martial arts are weaker for those with significant magical knowledge."
-	max_choices = 2
-	choice_costs = list(0, 6)
+	max_choices = 4 // DEBUG ONLY
+	choice_costs = list(0, 0, 0, 0)// DEBUG ONLY
+	//choice_costs = list(0, 6)
 	extra_choices = list(
 		UM_BOXING,
 		UM_KARATE,

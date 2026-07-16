@@ -10,14 +10,18 @@
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/karate
 	draw_message = "Enters the Hollow Hand stance." 
 	drop_message = "drops their stance!"
-	
+	button_icon_state = "karate"
+
 /obj/item/rogueweapon/abstractweapon/martialart/karate
 	name = "Hollow Palms"
 	desc = "Your hands- bereft of weapons, yet still deadly"
+	icon_state = "karate"
 	force = 15 
 	tiermult = 2.5 //Damage scales about as hard as normal fists. Our power scales with our intent
 	wbalance = WBALANCE_NORMAL
 	possible_item_intents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop, /datum/intent/martial/smash, /datum/intent/martial/dislocate)
+	gripped_intents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop, /datum/intent/martial/smash, /datum/intent/martial/dislocate)
+	baseintents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop, /datum/intent/martial/smash, /datum/intent/martial/dislocate)
 	masterstring = "As a master of this stance, my chop becomes sharp, my kanabo deals more knockback, and my wring comes out quicker."
 	masterintents = list(/datum/intent/martial/jab/karate, /datum/intent/martial/chop/master, /datum/intent/martial/smash/master, /datum/intent/martial/dislocate/master)
 	special = /datum/special_intent/flyingkick //this is a meme. if it turns out to be powerful, i am ver  dum
@@ -63,7 +67,7 @@
 		mastermob.visible_message(span_warning("[mastermob] reels their hand back with an open palm!"))
 
 /datum/intent/martial/smash/smash/spec_on_apply_effect(mob/living/H, mob/living/user, params) //copypasted from mace smashes! the difference here is that we don't scale off of strength for this martial art 
-	if(user?.client?.chargedprog < 100) //not fully charged? you get NOTHING
+	if(90 >= user?.client?.chargedprog) //not fully charged? you get NOTHING
 		return
 	if(H.has_status_effect(/datum/status_effect/debuff/yeetcd))
 		return // Recently knocked back, cannot be knocked back again yet
