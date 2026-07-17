@@ -29,6 +29,24 @@
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
 	special = /datum/special_intent/silencepunch 
+	var/datum/special_intent/basespecial = /datum/special_intent/silencepunch //gee bill, mom lets you have TWO specials?!
+	var/datum/special_intent/altspecial = /datum/special_intent/upper_cut 
+	var/datum/special_intent/altmasterspecial = /datum/special_intent/upper_cut/master
+
+/obj/item/rogueweapon/abstractweapon/martialart/boxing/cycle_altgrip(mob/living/carbon/user, direction)
+	if(..())//god i hope this doesnt break anything 
+		if(altgripped)
+			var/datum/special_intent/newspecial
+			if(specialability)
+				newspecial = new altmasterspecial()
+			else 
+				newspecial = new altspecial()
+			qdel(special)
+			special = newspecial
+		else
+			qdel(special)
+			special = new basespecial()
+	
 
 /datum/alt_grip/boxing
 	name = "heavy stance"

@@ -106,23 +106,24 @@
 	if(is_silver)
 		to_chat(H, span_notice("My strikes are silvered."))
 	//demolition = FALSE
-	master = FALSE
+	specialability = FALSE
 	/*if(tier >= demotier)
 		demolition = initial(demolition)
 		if(demolition)
 			to_chat(H, span_notice("I strike with sufficient strength to damage structures."))*/
 	if(tier >= mastertier)
 		specialability = initial(specialability)
-		if(master)
+		if(specialability)
 			to_chat(H, span_notice("[masterstring]"))
 	possible_item_intents = baseintents
 	gripped_intents = baseintents
 	alt_grips = basegrips
-	if(master && LAZYLEN(masterintents)) //at tier 4 or above, your class is almost certainly an unarmed specialist without spells, so you can get special intents
+	if(specialability && LAZYLEN(masterintents)) //at tier 4 or above, your class is almost certainly an unarmed specialist without spells, so you can get special intents
 		possible_item_intents = masterintents
 		gripped_intents = masterintents
-	if(master && LAZYLEN(mastergrips))
+	if(specialability && LAZYLEN(mastergrips))
 		alt_grips = mastergrips
+	H.update_a_intents()
 	/*for(var/datum/intent/I in possible_item_intents)
 		to_chat(H, span_userdanger("[I]"))
 		if(demolition) 

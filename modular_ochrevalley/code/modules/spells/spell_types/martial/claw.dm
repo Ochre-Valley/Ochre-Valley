@@ -25,6 +25,7 @@
 	baseintents = list(/datum/intent/claw/cut/martial, /datum/intent/claw/lunge/martial, /datum/intent/claw/rend)
 	masterstring = "As a master of this stance, my lunge and slash can penetrate greater protection, and I gain access to a wild, cleaving slash."
 	masterintents = list(/datum/intent/claw/cut/martial/master, /datum/intent/claw/lunge/martial/master, /datum/intent/claw/rend, /datum/intent/claw/cleave)
+	special = /datum/special_intent/pounce 
 
 /datum/action/cooldown/spell/abstractweapon/martialart/claws
 	name = "Lynx Stance"
@@ -90,8 +91,8 @@
 	penfactor = PEN_NONE
 	clickcd = CLICK_CD_GLACIAL
 	item_d_type = "slash"
-	cleave = /datum/cleave_pattern/wide_sweep
-	desc = "Slash wildly, cleaving up to two nearby targets."
+	cleave = /datum/cleave_pattern/frontal_arc
+	desc = "Slash wildly, cleaving up to four nearby targets."
 
 /datum/intent/claw/cleave/fast
 	name = "slash"
@@ -106,11 +107,11 @@
 	stamcost = 50 
 	post_icon_state = "heavy_attack"
 	pre_icon_state = "trap"
-	tile_coordinates = list(list(0,-1), list(-1, 0, 3), list(0, 0, 3), list(1, 0, 3), list(-1, -1, 3), list(1, -1, 3))
+	tile_coordinates = list(list(0,-1), list(-1, 0, 6), list(0, 0, 6), list(1, 0, 6), list(-1, -1, 6), list(1, -1, 6))
 	respect_adjacency = FALSE
 	delay = 0.2 SECONDS
 	range = 3
-	var/pounced = FALSE
+	use_clickloc = TRUE
 	var/dmg = 45
 	var/exposedur = 3 SECONDS
 	var/immobdur = 3 SECONDS
@@ -118,19 +119,17 @@
 /datum/special_intent/pounce/apply_hit(turf/T)
 	. = ..()
 	var/mob/living/pouncer = howner
-	if(!pounced)
+	if(!pouncer.IsOffBalanced())
 		pouncer.OffBalance(30)
 		pouncer.jump_action_resolve(T, 0, 3, TRUE, 3 SECONDS)
 		while(pouncer.throwing)
 			sleep(1)
 		var/sfx = pick(list('sound/combat/ground_smash1.ogg','sound/combat/ground_smash2.ogg','sound/combat/ground_smash3.ogg'))
-		playsound(T, sfx, 100, TRUE)
-		pounced = TRUE
+		playsound(pouncer, sfx, 100, TRUE)
 		return
-	
 	if(pouncer.stat != CONSCIOUS || pouncer.IsParalyzed() || pouncer.IsStun() || QDELETED(pouncer) || !isturf(pouncer.loc) || !(pouncer.mobility_flags & MOBILITY_STAND))
 		return
-	if(istype(iparent, /obj/item/rogueweapon/abstractweapon/martialart))
+	if(istype(iparent, /obj/item/rogueweapon/abstractweapon/martialart))	
 		var/obj/item/rogueweapon/abstractweapon/martialart/weapon = iparent
 		dmg = (weapon.force * 3)
 		exposedur = weapon.tier SECONDS 
@@ -142,9 +141,4 @@
 			apply_generic_weapon_damage(L, dmg, "slash", BODY_ZONE_CHEST, bclass = BCLASS_CUT)
 			L.apply_status_effect(/datum/status_effect/debuff/exposed, exposedur)
 			L.Immobilize(immobdur)
-
-
-/datum/special_intent/pounce/_reset()
-	pounced = FALSE
-	. = ..()
 

@@ -39,7 +39,7 @@
 	penfactor = PEN_NONE
 	damfactor = 1.5
 	swingdelay = 10
-	demolition_mod = 3
+	demolition_mod = 2.5
 	clickcd = CLICK_CD_GLACIAL
 
 /datum/intent/martial/chop/master 
@@ -56,18 +56,18 @@
 	damfactor = 1.2
 	chargetime = 5
 	chargedrain = 2
-	var/knockback = 3
+	var/knockback = 2
 
 /datum/intent/martial/smash/master
 	chargedrain = 1
-	knockback = 4
+	knockback = 3
 
 /datum/intent/martial/smash/prewarning()
 	if(mastermob)
 		mastermob.visible_message(span_warning("[mastermob] reels their hand back with an open palm!"))
 
-/datum/intent/martial/smash/smash/spec_on_apply_effect(mob/living/H, mob/living/user, params) //copypasted from mace smashes! the difference here is that we don't scale off of strength for this martial art 
-	if(90 >= user?.client?.chargedprog) //not fully charged? you get NOTHING
+/datum/intent/martial/smash/spec_on_apply_effect(mob/living/H, mob/living/user, params) //copypasted from mace smashes! the difference here is that we don't scale off of strength for this martial art 
+	if(user?.client?.chargedprog < 100) //not fully charged? you get NOTHING
 		return
 	if(H.has_status_effect(/datum/status_effect/debuff/yeetcd))
 		return // Recently knocked back, cannot be knocked back again yet
@@ -106,14 +106,17 @@
 /datum/special_intent/flyingkick
 	name = "Flying Thunder Kick"
 	desc = "Leap at the target tile, before releasing a flurry of kicks in random directions"
+	post_icon_state = "strike"
+	pre_icon_state = "trap"
+	delay = 0.3 SECONDS //the one perk is actually coming out pretty quick, but most of the kicks are delayed
+	use_clickloc = TRUE
 	cooldown = 30 SECONDS
-	stamcost = 40 //cheaper than a jump, but you'll pay stamina for every kick you make
+	stamcost = 40
 	tile_coordinates = list(list(0,0))
 	respect_adjacency = FALSE
-	range = 5
+	range = 4
 
 /datum/special_intent/flyingkick/apply_hit(turf/T)
-	. = ..()
 	var/mob/living/kicker = howner
 	var/efficacy = kicker.get_skill_level(/datum/skill/combat/unarmed) //first calc uses this, if it's someone's unarmed special
 	if(istype(iparent, /obj/item/rogueweapon))
@@ -125,21 +128,17 @@
 		jumprange += 1
 	if(!kicker.check_armor_skill() || kicker.get_item_by_slot(SLOT_LEGCUFFED))
 		jumprange = 1
-	
-	kicker.OffBalance(40)
 	var/kickamt = rand(efficacy * 2, efficacy * 4) //there's not much point in kicking this much, given kicks knock people back. pointlessly flashy 
-	kicker.jump_action_resolve(T, 0, jumprange, TRUE, kickamt + 2)
+	kicker.jump_action_resolve(T, 0, jumprange, TRUE, (kickamt + 2) * 2)
+	sleep(1)
 	while(kicker.throwing)
 		sleep(1)
 	if(kicker.stat != CONSCIOUS || kicker.IsParalyzed() || kicker.IsStun() || QDELETED(kicker) || !isturf(kicker.loc) || !(kicker.mobility_flags & MOBILITY_STAND))
 		return //you fucked up, or got sent to a belly like a dumbass
-
-	
 	//first, we're gonna try and stomp anyone we landed on, and directly in front of us
-	kicker.try_kick(get_turf(kicker))
-	kicker.try_kick(get_step(get_turf(kicker), kicker.dir))
-	var/soundchoice = pick(PUNCHWOOSH)
-	playsound(kicker, soundchoice, 100, TRUE)
+	kick(kicker, get_turf(kicker))
+	sleep(1)
+	kick(kicker, get_step(get_turf(kicker), kicker.dir))
 	sleep(1)
 	//next, we're going to execute the actual "tornado kick. For every point of Kickamt, kick a random adjacent tile"
 	kicker.visible_message(span_warning("[kicker] leaps forwards, executing a flurry of wild kicks!"))
@@ -147,11 +146,37 @@
 		if(kicker.stat != CONSCIOUS || kicker.IsParalyzed() || kicker.IsStun() || QDELETED(kicker) || !isturf(kicker.loc) || !(kicker.mobility_flags & MOBILITY_STAND))
 			break
 		var/dir = pick(GLOB.alldirs)
-		kicker.try_kick(get_step(get_turf(kicker), dir))
-		var/sound = pick(PUNCHWOOSH)
-		playsound(kicker, sound, 50, TRUE)
-		var/obj/effect/temp_visual/special_intent/fx = new (T, 3)
-		fx.icon = _icon
-		fx.icon_state = "kick_fx"
-		sleep(1)
+		var/kickturf = get_step(get_turf(kicker), dir)
+		kick(kicker, kickturf)
+		sleep(2)
+	..()
 
+/datum/special_intent/flyingkick/proc/kick(mob/living/user, turf/T)
+	var/soundchoice = pick(PUNCHWOOSH)
+	var/obj/effect/temp_visual/special_intent/fx = new(T, 3)
+	fx.icon = _icon
+	fx.icon_state = "kick_fx"
+	playsound(user, soundchoice, 75)
+	user.face_atom(T)
+	var/mob/living/target
+	for(var/mob/living/mob in T)
+		target = mob
+		break 
+	if(target) //copypasted from kick code
+		if(QDELETED(user) || QDELETED(target))
+			return FALSE
+		if(!target.Adjacent(user))
+			return FALSE
+		if(target.checkmiss(user))
+			return FALSE
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED) //we dont run check_defense, as that only works for normal intents
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED_SUCCESSFUL, user)
+		if(ishuman(target))
+			var/mob/living/carbon/human/H = target
+			H.dna.species.kicked(user, H)
+		else
+			target.onkick(user)
+	else //no mobs in the tile? we're gonna pick something from that turf and KICK it
+		for(var/obj/O in T)
+			O.onkick(user)
+			break
