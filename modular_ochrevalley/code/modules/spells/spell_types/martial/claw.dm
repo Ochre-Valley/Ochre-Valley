@@ -107,11 +107,14 @@
 	stamcost = 50 
 	post_icon_state = "heavy_attack"
 	pre_icon_state = "trap"
-	tile_coordinates = list(list(0,-1), list(-1, 0, 6), list(0, 0, 6), list(1, 0, 6), list(-1, -1, 6), list(1, -1, 6))
 	respect_adjacency = FALSE
-	delay = 0.2 SECONDS
+	delay = 0 //you get to jump into place instantly
 	range = 3
 	use_clickloc = TRUE
+	tile_coordinates = list(list(0, 0))
+	var/list/secondary_coordinates = list(list(-1, 0), list(0, 1), list(1, 0), list(-1, 1), list(1, 1))
+	var/list/secondary_delay = 0.4 SECONDS
+	var/turf/pouncedto
 	var/dmg = 45
 	var/exposedur = 3 SECONDS
 	var/immobdur = 3 SECONDS
@@ -119,15 +122,42 @@
 /datum/special_intent/pounce/apply_hit(turf/T)
 	. = ..()
 	var/mob/living/pouncer = howner
-	if(!pouncer.IsOffBalanced())
+	if(!pouncedto)
 		pouncer.OffBalance(30)
-		pouncer.jump_action_resolve(T, 0, 3, TRUE, 3 SECONDS)
+		pouncer.jump_action_resolve(T, 0, 3, FALSE, 3 SECONDS)
+		sleep(1)
 		while(pouncer.throwing)
 			sleep(1)
+		pouncedto = get_turf(pouncer)
 		var/sfx = pick(list('sound/combat/ground_smash1.ogg','sound/combat/ground_smash2.ogg','sound/combat/ground_smash3.ogg'))
-		playsound(pouncer, sfx, 100, TRUE)
+		playsound(pouncer, sfx, 200, TRUE)
+		//okay, so this next step is copypasted from create_grid. We're essentially creating a new grid at the location the pouncer, and manually calling process_grid
+		var/list/turflist = list()
+		for(var/list/l in secondary_coordinates)
+			var/dx = l[1]
+			var/dy = l[2]
+			switch(howner.dir)
+				//if(NORTH) Do nothing because the coords are meant to be written from north-facing perspective. All is well.
+				if(SOUTH)
+					dx = -dx
+					dy = -dy
+				if(WEST)
+					var/holder = dx
+					dx = -dy
+					dy = holder
+				if(EAST)
+					var/holder = dx
+					dx = dy
+					dy = -holder
+			var/turf/step = locate((pouncedto.x + dx), (pouncedto.y + dy), pouncedto.z)
+			if(step && isturf(step) && !step.density)	//We try to avoid doing Specials in walls.
+				turflist.Add(step)
+		if(turflist.len)
+			_process_grid(turflist, secondary_delay)
 		return
 	if(pouncer.stat != CONSCIOUS || pouncer.IsParalyzed() || pouncer.IsStun() || QDELETED(pouncer) || !isturf(pouncer.loc) || !(pouncer.mobility_flags & MOBILITY_STAND))
+		return
+	if(get_turf(pouncer) != pouncedto)
 		return
 	if(istype(iparent, /obj/item/rogueweapon/abstractweapon/martialart))	
 		var/obj/item/rogueweapon/abstractweapon/martialart/weapon = iparent
@@ -141,4 +171,8 @@
 			apply_generic_weapon_damage(L, dmg, "slash", BODY_ZONE_CHEST, bclass = BCLASS_CUT)
 			L.apply_status_effect(/datum/status_effect/debuff/exposed, exposedur)
 			L.Immobilize(immobdur)
+			playsound(L, 'sound/combat/brutal_impalement.ogg', 100, TRUE)
 
+/datum/special_intent/pounce/_reset()
+	pouncedto = null
+	. = ..()

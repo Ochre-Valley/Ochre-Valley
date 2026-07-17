@@ -129,7 +129,7 @@
 	if(!kicker.check_armor_skill() || kicker.get_item_by_slot(SLOT_LEGCUFFED))
 		jumprange = 1
 	var/kickamt = rand(efficacy * 2, efficacy * 4) //there's not much point in kicking this much, given kicks knock people back. pointlessly flashy 
-	kicker.jump_action_resolve(T, 0, jumprange, TRUE, (kickamt + 2) * 2)
+	kicker.jump_action_resolve(T, 0, jumprange, FALSE, (kickamt + 2) * 2)
 	sleep(1)
 	while(kicker.throwing)
 		sleep(1)
