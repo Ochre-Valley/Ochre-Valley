@@ -113,7 +113,7 @@
 	use_clickloc = TRUE
 	tile_coordinates = list(list(0, 0))
 	var/list/secondary_coordinates = list(list(-1, 0), list(0, 1), list(1, 0), list(-1, 1), list(1, 1))
-	var/list/secondary_delay = 0.4 SECONDS
+	var/list/secondary_delay = 0.6 SECONDS
 	var/turf/pouncedto
 	var/dmg = 45
 	var/exposedur = 3 SECONDS
