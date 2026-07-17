@@ -29,7 +29,7 @@
 
 /datum/action/cooldown/spell/abstractweapon/martialart/claws
 	name = "Lynx Stance"
-	desc = "Bare both hands, curling fingers as if into claws to slice into your foes.\n \
+	desc = "Bare both hands, curling fingers as if into claws to slice into your foes. This is a remarkably swift stance to enter, and requires only one free hand.\n \
 	<b>CUT</b>: A fast slice of the claws. Pays for sharpness in that its raw damage is significantly lesser than a simple punch. \n \
 	<b>SLASH</b>: A swift slash which can hit multiple targets. \n \
 	<b>REND</b>: A telegraphed strike  for high damage, perfect for disemboweling unarmored targets!\n \

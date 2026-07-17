@@ -5,7 +5,7 @@
 	<b>AXE HAND</b>: A telegraphed hit which does heavy damage to objects. \n \
 	<b>KANABO STRIKE</b>: A telegraphed strike with the palm, knocking the target back.\n \
 	<b>WRING</b>: A telegraphed strike which deals TWIST damage to the target.\n \
-	<b>FLYING LIGHTNING KICK</b>: Your special is a leap into a distant tile, after which you execute a series of wild kicks!\n \
+	<b>FLYING THUNDER KICK</b>: Your special is a leap into a distant tile, after which you execute a series of wild kicks!\n \
 	<i>A Kazengun martial art tradition, refined from an ancient lingyuan style.</i>"
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/karate
 	draw_message = "Enters the Hollow Hand stance." 
