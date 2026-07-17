@@ -54,8 +54,36 @@
 			if (H != owner && HAS_TRAIT(H, TRAIT_XYLIX) && !H.has_status_effect(/datum/status_effect/buff/xylix_joy))
 				H.apply_status_effect(/datum/status_effect/buff/xylix_joy)
 				to_chat(H, span_info("The music brings a smile to my face, and fortune to my steps!"))
+// OV Add Start
+////////////////////
+///HARPY SINGING///
+//////////////////
+// i dont wanna refactor how instruments function, so this is how we go about an instrument that can't be dropped bc it's inside of us
+// since stopping playing relies on dropping item to stop unconscious people playing music
+/datum/status_effect/buff/harpy_sing 
+	id = "harpy_sing"
+	alert_type = null
+	tick_interval = 10
+	duration = -1
+	var/mob/living/carbon/human/harpy
 
+/datum/status_effect/buff/harpy_sing/tick()
+	. = ..()
+	harpy = owner
+	if(harpy.has_status_effect(STATUS_EFFECT_UNCONSCIOUS))
+		harpy.remove_status_effect(/datum/status_effect/buff/harpy_sing)
+	if(harpy.has_status_effect(STATUS_EFFECT_SLEEPING))
+		harpy.remove_status_effect(/datum/status_effect/buff/harpy_sing)
+	if(!harpy.can_speak_vocal())
+		harpy.remove_status_effect(/datum/status_effect/buff/harpy_sing)
 
+/datum/status_effect/buff/harpy_sing/on_remove()
+	. = ..()
+	harpy = owner
+	if(harpy.has_status_effect(/datum/status_effect/buff/playing_music))
+		var/obj/item/organ/vocal_cords/harpy/vocal_cords = harpy.getorganslot(ORGAN_SLOT_VOICE)
+		vocal_cords.vocals.attack_self(harpy)
+// OV Add End
 /obj/effect/temp_visual/songs
 	name = "songs"
 	icon = 'icons/mob/actions/bardsong_anims.dmi'
@@ -73,15 +101,6 @@
 	m.Scale(0.75, 0.75)
 	transform = m
 
-
-/obj/effect/temp_visual/songs/inspiration_dirget1
-	icon_state = "dirge_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget2
-	icon_state = "dirge_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget3
-	icon_state = "dirge_t3_base"
 
 /obj/effect/temp_visual/songs/inspiration_melodyt1
 	icon_state = "melody_t1_base"
@@ -121,7 +140,3 @@
 // Blue-green notes for buffed allies
 /obj/effect/temp_visual/song_telltale/buff
 	note_color = "#5CB8E6"
-
-// Red notes for debuffed enemies
-/obj/effect/temp_visual/song_telltale/debuff
-	note_color = "#CC3333"

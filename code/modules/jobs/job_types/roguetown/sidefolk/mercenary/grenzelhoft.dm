@@ -285,7 +285,7 @@
 	cmode_music = 'sound/music/combat_grenzelhoft.ogg'
 	subclass_languages = list(/datum/language/grenzelhoftian)
 	traits_applied = list(TRAIT_INTELLECTUAL, TRAIT_STEELHEARTED, TRAIT_ALCHEMY_EXPERT)
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "variants" = list(/datum/magic_aspect/pyromancy = "grenzelhoftian"), "post_aspect_spells" = list(/datum/action/cooldown/spell/message, /datum/action/cooldown/spell/magicians_brick), "ward" = TRUE)
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "allowed_majors" = list(/datum/magic_aspect/pyromancy, /datum/magic_aspect/geomancy, /datum/magic_aspect/ferramancy), "variants" = list(/datum/magic_aspect/pyromancy = "gefechtsgelehrter", /datum/magic_aspect/geomancy = "gefechtsgelehrter", /datum/magic_aspect/ferramancy = "gefechtsgelehrter"), "post_aspect_spells" = list(/datum/action/cooldown/spell/message, /datum/action/cooldown/spell/magicians_brick), "ward" = TRUE)
 	subclass_stats = list(
 		STATKEY_INT = 3,
 		STATKEY_WIL = 3,
@@ -296,7 +296,8 @@
 	age_mod = /datum/class_age_mod/grenzel_mage
 	subclass_skills = list(
 		/datum/skill/magic/arcane = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/staves = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/arcyne = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -332,7 +333,7 @@
 		/obj/item/flashlight/flare/torch = 1,
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
-		/obj/item/book/spellbook = 1,
+		/obj/item/rogueweapon/spellbook/greater = 1,
 		/obj/item/chalk = 1
 		)
 	ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
@@ -374,7 +375,7 @@
 	to_chat(H, span_warning("You are a former veteran arbalest, outfitted with the latest technologies known to man. Your weapons remain as deadly to the enemy as to you, but your training should overcome it. Run them down, with fire and sword."))
 	beltr = /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	beltl = /obj/item/quiver/bulletpouch/iron
-	r_hand = /obj/item/gun/ballistic/arquebus
+	r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus // OV Edit: Arquebus Refactor
 	if(H.mind)
 		var/armor_options = list("Light Brigandine", "Studded Leather Vest")
 		var/armor_choice = input(H, "Choose your armor.", "DRESS UP") as anything in armor_options

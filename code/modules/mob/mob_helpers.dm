@@ -38,10 +38,6 @@
 			zone = BODY_ZONE_CHEST
 		if(BODY_ZONE_PRECISE_STOMACH)
 			zone = BODY_ZONE_CHEST
-		if(BODY_ZONE_PRECISE_R_INHAND)
-			zone = BODY_ZONE_R_ARM
-		if(BODY_ZONE_PRECISE_L_INHAND)
-			zone = BODY_ZONE_L_ARM
 
 	return zone
 
@@ -959,6 +955,8 @@
 	if(ignore_mapload && SSatoms.initialized != INITIALIZATION_INNEW_REGULAR)	//don't notify for objects created during a map load
 		return
 	for(var/mob/dead/observer/O in GLOB.player_list)
+		if(isscryeye(O))
+			continue
 		if(!notify_suiciders && (O in GLOB.suicided_mob_list))
 			continue
 		if (ignore_key && (O.ckey in GLOB.poll_ignore[ignore_key]))

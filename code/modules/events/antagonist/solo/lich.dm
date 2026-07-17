@@ -16,8 +16,8 @@
 	base_antags = 0 //OV Edit - 1
 	maximum_antags = 0 //OV Edit - 1
 
-	weight = 0	//i hate you CC edit: Disabled. Was originally 2.
-	max_occurrences = 0 // mashallah //OV Edit: Disabled. Was 1.
+	weight = 0	//i hate you //OV Edit - Disabled, was 11
+	max_occurrences = 0 // mashallah //OV Edit - Disabled, was 1
 
 	earliest_start = 0 SECONDS
 

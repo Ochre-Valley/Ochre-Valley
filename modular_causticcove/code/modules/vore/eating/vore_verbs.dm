@@ -51,9 +51,9 @@
 	return ..(target)
 
 /mob/living/verb/shred_limb()
-	set name = "Damage Prey's Organ" //OV EDIT
+	set name = "Damage Prey's Organ"
 	set desc = "Severely damages prey's organ. If the limb is already severely damaged, it will be torn off."
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Actions" //OV EDIT
 
 	//can_shred() will return a mob we can shred, if we can shred any.
 	var/mob/living/carbon/human/T = can_shred()
@@ -162,12 +162,12 @@
 /mob/living/proc/shred_limb_temp()
 	set name = "Damage Prey's Organ (beartrap)" //OV EDIT
 	set desc = "Severely damages prey's organ. If the limb is already severely damaged, it will be torn off."
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Actions" //OV EDIT
 	shred_limb()
 
 /mob/verb/toggle_vore_health_bars()
 	set name = "Toggle Auto Healthbars"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	if(client?.prefs)
 		client.prefs.vore_health_bars = !client.prefs.vore_health_bars
@@ -175,7 +175,7 @@
 
 /mob/verb/toggle_digest_noises()
 	set name = "Toggle Digest Noises"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	if(client?.prefs)
 		client.prefs.digestion_noises = !client.prefs.digestion_noises
@@ -183,7 +183,7 @@
 
 /mob/verb/toggle_eating_noises()
 	set name = "Toggle Eating Noises"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	if(client?.prefs)
 		client.prefs.eating_noises = !client.prefs.eating_noises
@@ -191,7 +191,7 @@
 
 /mob/verb/toggle_belch_noises()
 	set name = "Toggle Belch Noises"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	if(client?.prefs)
 		client.prefs.belch_noises = !client.prefs.belch_noises
@@ -200,7 +200,7 @@
 //OV edit
 /mob/verb/toggle_vore_fx()
 	set name = "Toggle Vore FX"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	show_vore_fx = !show_vore_fx
 	if(client.prefs_vr)
@@ -217,7 +217,7 @@
 
 /mob/verb/toggle_spont_pred()
 	set name = "Toggle Spont Pred"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	can_be_drop_pred = !can_be_drop_pred
 	if(client.prefs_vr)
@@ -226,7 +226,7 @@
 
 /mob/verb/toggle_spont_prey()
 	set name = "Toggle Spont Prey"
-	set category = "Vore"
+	set category = "Vore.Preferences" // OV Edit
 
 	can_be_drop_prey = !can_be_drop_prey
 	if(client.prefs_vr)

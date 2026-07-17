@@ -122,7 +122,26 @@
 					/obj/item/item_tf_chalk
 				)
 
+/datum/supply_pack/rogue/kink_toy/shrinkpot
+	name = "Vial of Reduction Draught"
+	cost = 20
+	contains = list(
+					/obj/item/reagent_containers/glass/bottle/alchemical/shrink
+				)
 
+/datum/supply_pack/rogue/kink_toy/growpot
+	name = "Vial of Enlargement Draught"
+	cost = 20
+	contains = list(
+					/obj/item/reagent_containers/glass/bottle/alchemical/grow
+				)
+
+/datum/supply_pack/rogue/kink_toy/normpot
+	name = "Vial of Normalization Draught"
+	cost = 20
+	contains = list(
+					/obj/item/reagent_containers/glass/bottle/alchemical/normal
+				)
 //for armored collars, prices are 110% the gorget they are based on, because dirtyfaces randomize pricing a bit
  //bronze gorgets are assigned a value of 40 because vibes (more than its mechanically worth), since the normal bronze gorget is not sold.
 

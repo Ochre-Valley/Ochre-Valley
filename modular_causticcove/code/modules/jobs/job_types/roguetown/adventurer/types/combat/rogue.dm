@@ -24,6 +24,7 @@
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
 	)
 
+/* OV Edit: Refactor arquebus pistol to inherit from arquebus.
 /datum/outfit/job/roguetown/adventurer/buccaneer/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_warning("You are a daring rogue of the seas! Buccaneers wield deadly firearms and ruthless cunning - fighting dirty to outgun foes with swagger."))
@@ -48,3 +49,4 @@
 		/obj/item/flashlight/flare/torch/lantern = 1,
 		/obj/item/recipe_book/survival = 1
 		)
+*/ // OV Edit End

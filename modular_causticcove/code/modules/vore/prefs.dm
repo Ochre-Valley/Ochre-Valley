@@ -5,7 +5,7 @@
 	var/directory_gendertag = "Unset" // Gender stuff!
 	var/directory_sexualitytag = "Unset" // Sexuality!
 	var/directory_ad = ""		//Advertisement stuff to show in character directory.
-	var/directory_pvp = "No PvP" //OV ADD
+	var/directory_pvp = "Unset" //OV ADD
 
 	var/vore_health_bars = TRUE //It seems like these were swapped for the toggles below some time ago
 	var/digestion_noises = TRUE

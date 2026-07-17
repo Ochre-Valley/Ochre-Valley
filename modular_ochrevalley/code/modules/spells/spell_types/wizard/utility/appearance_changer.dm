@@ -171,12 +171,15 @@
 	var/obj/item/organ/penis/penis = target.getorganslot(ORGAN_SLOT_PENIS)
 	if(penis)
 		data["penis_size"] = penis.penis_size
+		data["penis_color"] = color_string_to_list(penis.accessory_colors)
 	var/obj/item/organ/testicles/testicles = target.getorganslot(ORGAN_SLOT_TESTICLES)
 	if(testicles)
 		data["testicle_size"] = testicles.ball_size
+		data["testicle_color"] = color_string_to_list(testicles.accessory_colors)
 	var/obj/item/organ/breasts/breasts = target.getorganslot(ORGAN_SLOT_BREASTS)
 	if(breasts)
 		data["breast_size"] = breasts.breast_size
+		data["breast_color"] = color_string_to_list(breasts.accessory_colors)
 	var/obj/item/organ/vagina/vagina = target.getorganslot(ORGAN_SLOT_VAGINA)
 	if(vagina)
 		data["vagina_color"] = color_string_to_list(vagina.accessory_colors)
@@ -430,6 +433,22 @@
 			if(penis)
 				penis.penis_size = 1 + (penis.penis_size % 5)
 				should_update = TRUE
+		if("penis_color")
+			var/obj/item/organ/penis/penis = target.getorganslot(ORGAN_SLOT_PENIS)
+			if(penis)
+				var/new_color = color_pick_sanitized(target, "Choose your penis color", "Penis color", "#FFFFFF")
+				if(new_color)
+					penis.Remove(target)
+					var/list/colors = list()
+					if(penis.accessory_colors)
+						colors = color_string_to_list(penis.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
+					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
+					penis.accessory_colors = color_list_to_string(colors)
+					penis.Insert(target, TRUE, FALSE)
+					target.dna.features["penis_color"] = colors[1]  // Update DNA features
+					should_update = TRUE
 		if("testicle")
 			if(params["testicle"])
 				if(params["testicle"] == "none")
@@ -445,13 +464,29 @@
 						testicles.Insert(target, TRUE, FALSE)
 					testicles.accessory_type = valid_testicles[params["testicle"]]
 					var/datum/sprite_accessory/testicles/testicles_type = SPRITE_ACCESSORY(testicles.accessory_type)
-					testicles_type.get_default_colors(color_key_source_list_from_carbon(target))
+					testicles.accessory_colors = testicles_type.get_default_colors(color_key_source_list_from_carbon(target))
 					should_update = TRUE
 		if("testicle_size")
 			var/obj/item/organ/testicles/testicles = target.getorganslot(ORGAN_SLOT_TESTICLES)
 			if(testicles)
 				testicles.ball_size = 1 + (testicles.ball_size % 5)
 				should_update = TRUE
+		if("testicle_color")
+			var/obj/item/organ/testicles/testicles = target.getorganslot(ORGAN_SLOT_TESTICLES)
+			if(testicles)
+				var/new_color = color_pick_sanitized(target, "Choose your testicle color", "Testicle color", "#FFFFFF")
+				if(new_color)
+					testicles.Remove(target)
+					var/list/colors = list()
+					if(testicles.accessory_colors)
+						colors = color_string_to_list(testicles.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
+					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
+					testicles.accessory_colors = color_list_to_string(colors)
+					testicles.Insert(target, TRUE, FALSE)
+					target.dna.features["testicle_color"] = colors[1]  // Update DNA features
+					should_update = TRUE
 		if("vagina")
 			if(params["vagina"])
 				if(params["vagina"] == "none")
@@ -578,6 +613,22 @@
 			if(breasts)
 				breasts.breast_size = (breasts.breast_size + 1) % 17
 				should_update = TRUE
+		if("breast_color")
+			var/obj/item/organ/breasts/breasts = target.getorganslot(ORGAN_SLOT_BREASTS)
+			if(breasts)
+				var/new_color = color_pick_sanitized(target, "Choose your breast color", "Breast color", "#FFFFFF")
+				if(new_color)
+					breasts.Remove(target)
+					var/list/colors = list()
+					if(breasts.accessory_colors)
+						colors = color_string_to_list(breasts.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
+					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
+					breasts.accessory_colors = color_list_to_string(colors)
+					breasts.Insert(target, TRUE, FALSE)
+					target.dna.features["breast_color"] = colors[1]  // Update DNA features
+					should_update = TRUE
 		if("accessory")
 			if(params["acc"])
 				var/obj/item/bodypart/head/head = target.get_bodypart(BODY_ZONE_HEAD)

@@ -74,7 +74,10 @@
 		//OV Edit: Ochrebot relay
 		if(CONFIG_GET(flag/amia_enabled))
 			amia_relaynote(target_ckey, admin_ckey, text, note_severity)
-		//OV Edit End
+	else if(type == "watchlist entry")
+		if(CONFIG_GET(flag/amia_enabled))
+			amia_relaynote(target_ckey, admin_ckey, text, "watchlisted")
+	//OV Edit End
 	var/datum/DBQuery/query_create_message = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("messages")] (type, targetckey, adminckey, text, timestamp, server, server_ip, server_port, round_id, secret, expire_timestamp, severity)
 		VALUES (:type, :target_ckey, :admin_ckey, :text, :timestamp, :server, INET_ATON(:internet_address), :port, :round_id, :secret, :expiry, :note_severity)
@@ -141,6 +144,10 @@
 		qdel(query_del_message)
 		return
 	qdel(query_del_message)
+	//OV Edit: Relay note/whitelist/message removals
+	if(CONFIG_GET(flag/amia_enabled))
+		amia_relaynote(target_key, deleted_by_ckey, text, "removed")
+	//OV Edit End
 	if(logged)
 		var/m1 = "[user_key_name] has deleted a [type][(type == "note" || type == "message" || type == "watchlist entry") ? " for" : " made by"] [target_key]: [text]"
 		var/m2 = "[user_name_admin] has deleted a [type][(type == "note" || type == "message" || type == "watchlist entry") ? " for" : " made by"] [target_key]:<br>[text]"

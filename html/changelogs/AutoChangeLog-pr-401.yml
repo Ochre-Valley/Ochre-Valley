@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Fixed lonely and finicky to check for if the user is in a belly or has prey themselves."
+  - bugfix: "Fixed lonely to clear all levels of stress when with other people."

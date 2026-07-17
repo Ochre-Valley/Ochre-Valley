@@ -113,9 +113,17 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 				if(length(client.prefs.ooc_notes) < MINIMUM_OOC_NOTES)
 					to_chat(src, span_boldwarning("You need at least a few words in your OOC notes in order to play."))
 					return
+				//OV ADD START
+				if(client.prefs.directory_pvp == "Unset")
+					to_chat(src, span_boldwarning("You need to set your PvP Opt-In Preference in order to play."))
+					return
+				//OV ADD END
 
 			if(ready != tready)
 				ready = tready
+				if(tready != PLAYER_READY_TO_PLAY && SSvote.mode)
+					SSvote.remove_vote_for_ckey(ckey)
+					SSvote.show_vote(client)
 		//if it's post initialisation and they're trying to observe we do the needful
 		if(!SSticker.current_state < GAME_STATE_PREGAME && tready == PLAYER_READY_TO_OBSERVE)
 			ready = tready
@@ -203,6 +211,12 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		if(length(client.prefs.ooc_notes) < MINIMUM_OOC_NOTES)
 			to_chat(src, span_boldwarning("You need at least a few words in your OOC notes in order to play."))
 			return
+
+		//OV ADD START
+		if(client.prefs.directory_pvp == "Unset")
+			to_chat(src, span_boldwarning("You need to set your PvP Opt-In Preference in order to play."))
+			return
+		//OV ADD END
 
 		AttemptLateSpawn(href_list["SelectedJob"])
 		return

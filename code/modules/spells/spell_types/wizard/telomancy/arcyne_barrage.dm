@@ -25,7 +25,7 @@
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
 	charge_time = CHARGETIME_HEAVY
-	charge_drain = 1
+	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 90 SECONDS
@@ -41,6 +41,11 @@
 	var/bolts_per_pulse = 5
 	var/pulse_spread = 120
 	var/channel_slowdown = 3
+
+/datum/action/cooldown/spell/projectile/arcyne_barrage/get_spell_statistics(mob/living/user)
+	var/list/stats = ..()
+	stats += span_info("Damage: 45 per bolt ([bolts_per_pulse] per pulse, pierces up to 5)")
+	return stats
 
 /datum/action/cooldown/spell/projectile/arcyne_barrage/before_cast(atom/cast_on)
 	. = ..()

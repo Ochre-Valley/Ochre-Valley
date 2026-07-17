@@ -152,7 +152,7 @@
 	//OV edit end
 	
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
-		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TR_DEFAULTMSG))
+		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
 			return TRUE
 		if(stat == DEAD && client)
 			record_round_statistic(STATS_PEOPLE_DROWNED)
@@ -168,8 +168,7 @@
 
 	return TRUE
 
-
-
+#define BURN_PAIN_WEIGHT 0.6
 
 /mob/living/carbon/proc/get_complex_pain()
 	. = 0
@@ -186,13 +185,15 @@
 	for(var/obj/item/bodypart/limb as anything in bodyparts)
 		if(limb.status == BODYPART_ROBOTIC || limb.skeletonized && !has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder) && !has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed))
 			continue //If we're not sundered, skeletonised limbs do not hurt.
-		var/bodypart_pain = ((limb.brute_dam + limb.burn_dam) / limb.max_damage) * limb.max_pain_damage
+		var/bodypart_pain = ((limb.brute_dam + (limb.burn_dam * BURN_PAIN_WEIGHT)) / limb.max_damage) * limb.max_pain_damage
 		for(var/datum/wound/wound as anything in limb.wounds)
 			bodypart_pain += wound?.woundpain
 		bodypart_pain = min(bodypart_pain, limb.max_pain_damage)
 		if(has_adrenaline)
 			bodypart_pain *= 0.5
 		. += bodypart_pain
+
+#undef BURN_PAIN_WEIGHT
 
 /mob/living/carbon/human/get_complex_pain()
 	. = ..()
@@ -608,6 +609,8 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		var/doesnt_hunger = HAS_TRAIT(src, TRAIT_NOHUNGER)
 		if(HAS_TRAIT(src, TRAIT_BETTER_SLEEP))
 			energy_add(sleepy_mod * 4)
+		if(HAS_TRAIT(src, TRAIT_MALUMCHOSEN))
+			energy_add(sleepy_mod * 2)
 		if(buckled?.sleepy)
 			sleepy_mod = buckled.sleepy
 		if(HAS_TRAIT(src, TRAIT_REGROW_LIMBS))
@@ -660,10 +663,14 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 					var/obj/structure/flora/newbranch/branch = locate() in loc
 					if(branch)
 						sleepy_mod = 2 //Worse than a bedroll, better than nothing.
-		//Caustic edit
+		//OV edit
 		else if(istype(loc,/obj/belly))
-			sleepy_mod = 3
-		//Caustic edit end
+			var/obj/belly/our_belly = loc
+			if(our_belly.mode_flags & DM_FLAG_MANA_DRAIN)
+				sleepy_mod = 0
+			else
+				sleepy_mod = 2
+		//OV edit end
 		if(sleepy_mod > 0)
 			if(eyesclosed)
 				if(HAS_TRAIT(src, TRAIT_NOSLEEP) && !sleepless_flaw)

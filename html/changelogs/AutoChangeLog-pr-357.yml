@@ -1,0 +1,12 @@
+author: "CockatriceXL"
+delete-after: True
+changes:
+  - balance: "Rebalanced arquebus aim speed and reload time. Aim speed takes more skill and stats to cap, but reloading is faster with higher skill."
+  - balance: "Firearms skill gains exp by shooting living targets instead of shooting at anything. It caps at expert this way, like bows and crossbows."
+  - bugfix: "Fixed pistol arc intent."
+  - bugfix: "Repairing firearms is possible."
+  - bugfix: "Reloading on the ground, hip, or a table isn't possible."
+  - bugfix: "Clicking the bullet pouch with an arquebus doesn't delete bullets."
+  - bugfix: "Stowing a ramrod makes a sound."
+  - bugfix: "Reloading a firearm for the first time doesn't stop all other sounds."
+  - refactor: "Cleaned up a lot of the arquebus logic and made them inherit properly."

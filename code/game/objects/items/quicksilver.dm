@@ -101,14 +101,33 @@
 		icon_state = "[initial(icon_state)]_half"
 		to_chat(user, span_notice("My inquisitorial training leaves just enough of the poultice left for one more anointment."))
 		
-
+// OV Edit start - any werewolf can be cured
 	//Werewolf deconversion
-	if(Were && !Wereless) //The roundstart elder/alpha werewolf, it cannot be saved
-		to_chat(M, span_userdanger("This wretched silver weighs heavy on my brow. Dendor's blessing shall not be quit of me so easily."))
-		user.visible_message(span_danger("The quicksilver poultice boils away from [M]'s brow, viscerally rejecting the divine anointment."))
+	if(Were && !Wereless) //The roundstart elder/alpha werewolf
+		if(Were.transformed == TRUE)
+			var/mob/living/carbon/human/I = M.stored_mob
+			to_chat(M, span_userdanger("THE FOUL SILVER! MY BODY RENDS ITSELF ASUNDER!"))
+			M.werewolf_untransform()
+			Were.on_removal()
+			ADD_TRAIT(I, TRAIT_SILVER_BLESSED, POULTICE_TRAIT)
+			ADD_TRAIT(I, TRAIT_PACIFISM, POULTICE_TRAIT)
+			I.emote("agony", forced = TRUE)
+			I.Stun(30)
+			I.Knockdown(30)
+			I.Jitter(30)
+			return
+
+		if(M.show_redflash())
+			M.flash_fullscreen("redflash3")
+		M.emote("agony", forced = TRUE)
+		to_chat(M, span_userdanger("THE FOUL SILVER! IT BURNS ME TO MY CORE!"))
+		Were.on_removal()
+		ADD_TRAIT(M, TRAIT_SILVER_BLESSED, POULTICE_TRAIT)
+		M.poultice_pacify()
 		M.Stun(30)
 		M.Knockdown(30)
-		return
+		M.Jitter(30)
+// OV Edit end
 
 	else if(Wereless) //A lesser werewolf can be deconverted
 		if(Wereless.transformed == TRUE)

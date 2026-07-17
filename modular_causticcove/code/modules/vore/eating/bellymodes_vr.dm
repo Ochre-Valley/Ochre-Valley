@@ -133,6 +133,10 @@
 			to_update = TRUE
 		if(istype(returns) && returns["soundToPlay"] && !play_sound)
 			play_sound = returns["soundToPlay"]
+		//OV edit
+		if(mode_flags & DM_FLAG_MANA_DRAIN)
+			steal_mana(L)
+		//OV edit end
 
 	if(play_sound)
 		for(var/mob/M in hearers(VORE_SOUND_RANGE, get_turf(owner))) //so we don't fill the whole room with the sound effect
@@ -336,6 +340,19 @@
 
 	if((mode_flags & DM_FLAG_LEAVEREMAINS) && M.digest_leave_remains)
 		handle_remains_leaving(M)
+	
+	//OV edit
+	if((mode_flags & DM_FLAG_SPARELIMB) && M.digest_leave_remains && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/bodypart/l_arm/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/r_arm/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/l_leg/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+		for(var/obj/item/bodypart/r_leg/prosthetic/limb in H.bodyparts)
+			limb.drop_limb()
+	//OV edit end
 
 	digestion_death(M)
 	if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && reagents.total_volume < reagents.maximum_volume) // digestion producing reagents
@@ -376,3 +393,12 @@
 		owner.updateVRPanel()
 	if(isanimal(owner))
 		owner.update_icon()
+
+//OV edit
+/obj/belly/proc/steal_mana(mob/living/L)
+	if((L.energy > 5) && (L.client))
+		L.energy_add(-5)
+		owner.adjust_nutrition(5)
+		if(prob(3))
+			to_chat(L, span_warning("Your energy is slowly being siphoned away..."))
+//OV edit end

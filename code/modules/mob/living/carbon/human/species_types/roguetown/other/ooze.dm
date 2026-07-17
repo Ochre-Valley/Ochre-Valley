@@ -77,6 +77,9 @@
 		/obj/item/bodypart/taur/mammoth,
 		/obj/item/bodypart/taur/biglegs,
 		/obj/item/bodypart/taur/biglegsstanced,
+		/obj/item/bodypart/taur/goat, //OV Add
+		/obj/item/bodypart/taur/satyr, //OV ADD
+		/obj/item/bodypart/taur/sloog, //OV ADD
 	)
 	//OV Add End
 	enflamed_icon = "widefire"
@@ -159,6 +162,9 @@
 		/datum/body_marking/bun,
 		/datum/body_marking/gradient,
 	//OV Edit End
+		/datum/body_marking/waist,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly
 	)
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/ooze,

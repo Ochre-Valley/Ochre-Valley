@@ -6,8 +6,7 @@ GLOBAL_LIST_INIT(t3summoningrunerituallist, generate_t3summoning_rituallist())
 GLOBAL_LIST_INIT(t4summoningrunerituallist, generate_t4summoning_rituallist())
 GLOBAL_LIST_INIT(t2wallrunerituallist, generate_t2wall_rituallist())
 GLOBAL_LIST_INIT(t4wallrunerituallist, generate_t4wall_rituallist())
-// GLOBAL_LIST_INIT(buffrunerituallist, generate_buff_rituallist()) //OV Add - Empowerment //OV Edit AP Merge 4.2.26 - Commented Out Pending Rework
-// GLOBAL_LIST_INIT(t2buffrunerituallist, generate_t2buff_rituallist()) //OV Add - Empowerment //OV Edit AP Merge 4.2.26 - Commented Out Pending Rework
+GLOBAL_LIST_INIT(verglasrunerituallist, generate_verglas_rituallist())
 GLOBAL_LIST_INIT(t2enchantmentrunerituallist,generate_t2enchantment_rituallist())
 GLOBAL_LIST_INIT(t3enchantmentrunerituallist,generate_t3enchantment_rituallist())
 GLOBAL_LIST_INIT(t4enchantmentrunerituallist,generate_t4enchantment_rituallist())
@@ -92,25 +91,14 @@ GLOBAL_LIST_INIT(familiarbindingrituallist, generate_familiarbinding_rituallist(
 		runerituals[initial(runeritual.name)] = runeritual
 	return runerituals
 
-/*/proc/generate_buff_rituallist()	//list of all rituals for player use //OV Add - Empowerment //OV Edit AP Merge 4.2.26 - Commented Out Pending Rework
+/proc/generate_verglas_rituallist()
 	RETURN_TYPE(/list)
 	var/list/runerituals = list()
-	for(var/datum/runeritual/runeritual as anything in subtypesof(/datum/runeritual/buff))
-		if(runeritual.tier > 1)
-			continue
+	for(var/datum/runeritual/runeritual as anything in typesof(/datum/runeritual/other/verglas))
 		if(runeritual.blacklisted)
 			continue
 		runerituals[initial(runeritual.name)] = runeritual
 	return runerituals
-
-/proc/generate_t2buff_rituallist()	//list of all rituals for player use
-	RETURN_TYPE(/list)
-	var/list/runerituals = list()
-	for(var/datum/runeritual/runeritual as anything in subtypesof(/datum/runeritual/buff))
-		if(runeritual.blacklisted)
-			continue
-		runerituals[initial(runeritual.name)] = runeritual
-	return runerituals */
 
 /proc/generate_t2enchantment_rituallist()	//list of all rituals for player use
 	RETURN_TYPE(/list)

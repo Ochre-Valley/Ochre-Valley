@@ -406,6 +406,14 @@
 	desc = "The refuge of the TEN upon my back. A Undivided House, standing eternal against the encroaching darkness."
 	icon_state = "seetabard"
 
+/obj/item/clothing/cloak/templar/undividedcleric
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	alternate_worn_layer = TABARD_LAYER
+	boobed = TRUE
+	name = "undivided devotee tabard"
+	desc = "The refuge of the TEN upon my back. A Undivided Pantheon, to carry the light amongst the ever-present darkness that looms ahead."
+	icon_state = "tenclerictabard"
+
 /obj/item/clothing/cloak/templar/undivided_alt
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	alternate_worn_layer = TABARD_LAYER
@@ -976,7 +984,6 @@
 
 /obj/item/clothing/cloak/raincloak/brown
 	color = CLOTHING_BROWN
-	sellprice = 25
 
 /obj/item/clothing/cloak/raincloak/green
 	color = CLOTHING_GREEN
@@ -1193,6 +1200,14 @@
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 
+/obj/item/clothing/cloak/undividedcleric
+	desc = "The refuge of the TEN upon my back. A Undivided Pantheon, to carry the light amongst the ever-present darkness that looms ahead."
+	name = "undivided devotee cloak"
+	icon_state = "tenclericcloak"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+
 /obj/item/clothing/cloak/half
 	name = "halfcloak"
 	desc = ""
@@ -1271,6 +1286,11 @@
 	desc = "A heavy leather cloak held together by a gilded pin, depicting the Grand Duke's house. The sign of a faithful servant."
 	icon_state = "shadowcloak"
 	color = null
+
+/obj/item/clothing/cloak/half/shadowcloak/spymaster
+	name = "hand's cloak"
+	desc = "Crafted not for warmth, but to complete an imposing silhouette. It is tailored to shroud both the hilt of a hidden blade and the true intentions of its wearer from prying eyes."
+	icon_state = "handcloak"
 
 /obj/item/clothing/cloak/thief_cloak
 	name = "rapscallion's shawl"
@@ -1368,6 +1388,17 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 
+/obj/item/clothing/cloak/suspenders
+	name = "pouched suspenders"
+	desc = "A pair of suspenders which go over the shoulders. Usually used for keeping one's pants in place in an admittably fashionable style, but this one has a couple of belts for extra storage."
+	icon_state = "suspenders"
+	item_state = "suspenders"
+	icon = 'icons/roguetown/clothing/belts.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/belts.dmi'
+	body_parts_covered = CHEST|GROIN
+	alternate_worn_layer = TABARD_LAYER
+	slot_flags = ITEM_SLOT_CLOAK | ITEM_SLOT_ARMOR | ITEM_SLOT_SHIRT | ITEM_SLOT_BELT
+
 /obj/item/clothing/cloak/battlenun
 	name = "nun vestments"
 	desc = "Chaste, righteous, merciless to the wicked."
@@ -1411,6 +1442,9 @@
 	smeltresult = /obj/item/riddleofsteel
 	anvilrepair = /datum/skill/craft/armorsmithing
 	var/active_item = FALSE
+
+/obj/item/clothing/neck/roguetown/blkknight/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_MATTHIOS_ICON)
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user, slot)
 	. = ..()

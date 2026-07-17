@@ -570,6 +570,32 @@
 /obj/item/clothing/suit/roguetown/armor/plate/fluted/avantyne/get_examine_highlight_status()
 	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_ZIZO_ARMOR)
 
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/baotha
+	name = "saccharine plate armor"
+	desc = "Is it not obvious what Ravox would've chosen? Yet upon the dae of His choice, She refused to gift any chance to Her sister.."
+	icon_state = "baothaplate"
+	item_state = "baothaplate"
+	max_integrity = ARMOR_INT_CHEST_PLATE_ANTAG - 350 //Halved durability, compared to traditional Ascendant-tier armor.
+	armor_class = ARMOR_CLASS_LIGHT //The big, big thing.
+	color = null
+	chunkcolor = "#dd2166"
+	body_parts_covered = COVERAGE_ALL_BUT_HANDFEET
+	smeltresult = /obj/item/ingot/component/baotha
+
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/baotha/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_DEPRAVED, "ARMOR")
+	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/baotha/dropped(mob/living/carbon/human/user)
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)
+
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/baotha/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_BAOTHA_ARMOR)
+
 /obj/item/clothing/suit/roguetown/armor/plate/full/bikini
 	name = "full-plate corset"
 	desc = "Breastplate, pauldrons, couters, cuisses.. did you forget something?"
@@ -1014,3 +1040,31 @@
 /obj/item/clothing/suit/roguetown/armor/plate/scale/inqcoat/armored/ComponentInitialize()
 	AddComponent(/datum/component/item_equipped_movement_rustle, SFX_PLATE_STEP, 12)
 	return
+
+/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fencer/decorated
+	name = "decorated chestplate"
+	icon_state = "gildedchestplate"
+	smeltresult = /obj/item/ingot/gold
+	desc = "An ornate steel chestplate, decorated with golden fluting. For when you need to bring a little bit of regal style to that upcoming duel with your lyfe's greatest adversary."
+	smelt_bar_num = 1
+	
+/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/decorated
+	name = "decorated cuirass"
+	icon_state = "gildedcuirass"
+	smeltresult = /obj/item/ingot/gold
+	desc = "An ornate steel cuirass, decorated with golden fluting. For when you need to ensure that you look dapper, during your mustering for the latest crusade into some gods-forsaken land."
+	smelt_bar_num = 1
+
+/obj/item/clothing/suit/roguetown/armor/plate/fluted/decorated
+	name = "decorated half-plate"
+	icon_state = "gildedhalfplate"
+	smeltresult = /obj/item/ingot/gold
+	desc = "An ornate set of steel armor, decorated with golden fluting. For when you need to remind those of lesser stations about whose authority reigns supreme, in lieu of a King's command."
+	smelt_bar_num = 1
+
+/obj/item/clothing/suit/roguetown/armor/plate/full/fluted/decorated
+	name = "decorated plate armor"
+	icon_state = "gildedplate"
+	smeltresult = /obj/item/ingot/gold
+	desc = "An ornate set of steel plate armor, decorated with golden fluting. For when you need to do something with all of that precious, precious wealth gathering dust in a fief's ducal treasury."
+	smelt_bar_num = 1

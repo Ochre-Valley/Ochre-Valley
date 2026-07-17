@@ -1,0 +1,4 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - rscadd: "round start Werewolves can now be cured by quicksilver"

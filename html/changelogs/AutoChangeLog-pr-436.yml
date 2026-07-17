@@ -1,0 +1,5 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "Added taur armor for certain taur bodytypes"
+  - rscadd: "Added slugcat body thing for taurs from our dmi"

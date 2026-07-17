@@ -1,6 +1,6 @@
 /mob/verb/standardsprite()
 	set name = "Standardize sprite"
-	set category = "Vore"
+	set category = "Vore.Misc" // OV Edit
 	set desc = "Standardizes your sprite to 100%. ONLY FOR YOURSELF!"
 	if(isliving(src))
 		var/mob/living/curruser = src

@@ -15,7 +15,7 @@
 		STATKEY_INT = 3,
 		STATKEY_PER = 2
 	)
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "ward" = TRUE)
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "post_aspect_spells" = list(/datum/action/cooldown/spell/bind_armament), "ward" = TRUE)
 	extra_context = "This subclass chooses between twin shamshirs or a more traditional staff."
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
@@ -53,7 +53,7 @@
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
 		/obj/item/rogueweapon/scabbard/sheath,
 		/obj/item/clothing/neck/roguetown/shalal,
-		/obj/item/book/spellbook,
+		/obj/item/rogueweapon/spellbook/greater,
 		/obj/item/flashlight/flare/torch,
 		/obj/item/storage/belt/rogue/pouch/coins/poor
 		)
@@ -71,6 +71,7 @@
 				l_hand = /obj/item/rogueweapon/sword/sabre/shamshir
 			if("Greater Staff")
 				H.adjust_skillrank_up_to(/datum/skill/combat/staves, SKILL_LEVEL_EXPERT, TRUE)
+				H.adjust_skillrank_up_to(/datum/skill/combat/arcyne, SKILL_LEVEL_EXPERT, TRUE)
 				r_hand = /obj/item/rogueweapon/woodstaff/implement/greater
 
 	H.merctype = 4

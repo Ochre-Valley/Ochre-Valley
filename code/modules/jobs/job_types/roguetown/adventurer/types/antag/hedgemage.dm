@@ -8,7 +8,7 @@
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/combat_thewall.ogg'
 	maximum_possible_slots = 1 //Shadow wizard money gang
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 2, "minor" = 3, "utilities" = 9, "ward" = TRUE)
+	subclass_mage_aspects = list("mastery" = TRUE, "major" = 1, "minor" = 3, "utilities" = 9, "ward" = TRUE)
 	traits_applied = list(TRAIT_ARCYNE, TRAIT_ALCHEMY_EXPERT)
 	subclass_stats = list(
 		//Caustic edit
@@ -22,6 +22,7 @@
 	age_mod = /datum/class_age_mod/court_magician
 	subclass_skills = list(
 		/datum/skill/combat/staves = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/arcyne = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
@@ -49,7 +50,7 @@
 					/obj/item/needle/thorn = 1,
 					/obj/item/natural/cloth = 1,
 					/obj/item/flashlight/flare/torch = 1,
-					/obj/item/book/spellbook = 1, // Spell resetting is a key identity of good mage
+					/obj/item/rogueweapon/spellbook/grand = 1, // Spell resetting is a key identity of good mage
 					/obj/item/chalk = 1,
 					)
 	mask = /obj/item/clothing/mask/rogue/facemask/steel //idk if this makes it so they cant cast but i want all of the bandits to have the same mask

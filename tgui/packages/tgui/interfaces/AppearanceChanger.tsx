@@ -34,15 +34,18 @@ type Data = {
   penis_style: string;
   penis_styles: Accessory[];
   penis_size: number;
+  penis_color: string[];
   testicle_style: string;
   testicle_styles: Accessory[];
   testicle_size: number;
+  testicle_color: string[];
   vagina_style: string;
   vagina_styles: Accessory[];
   vagina_color: string[];
   breast_style: string;
   breast_styles: Accessory[];
   breast_size: number;
+  breast_color: string[];
   has_vagina: number;
   has_wings: number;
   has_horns: number;
@@ -431,6 +434,7 @@ const AppearanceChangerBitsPenis = () => {
   const { 
     penis_styles,
     penis_style,
+    penis_color,
     penis_size } = data;
   const sizes = ["None", "Small", "Normal", "Large", "Massive", "Enormous"];
     return (
@@ -442,6 +446,12 @@ const AppearanceChangerBitsPenis = () => {
             Size:{sizes[penis_size]}
           </Button>
         ) : "Size: None"}
+          {penis_size > 0 ? (
+          <Box>
+            <ColorBox color={penis_color[0]} mr={1} />
+            <Button content="Change Penis Color" onClick={() => act('penis_color')} />
+          </Box>
+        ) : " and Nothing to color!"}
         <Section title="Penis Type" scrollable>
           <Button
             onClick={() => act('penis', { penis: "none" })}
@@ -466,6 +476,7 @@ const AppearanceChangerBitsBalls = () => {
   const { 
     testicle_styles,
     testicle_style,
+    testicle_color,
     testicle_size } = data; 
   const sizes = ["None", "Small", "Normal", "Large", "Massive", "Enormous"];
   return(
@@ -477,6 +488,12 @@ const AppearanceChangerBitsBalls = () => {
             Size:{sizes[testicle_size]}
           </Button>
         ) : "Size: None"}
+          {testicle_size > 0 ? (
+          <Box>
+            <ColorBox color={testicle_color[0]} mr={1} />
+            <Button content="Change Testicle Color" onClick={() => act('testicle_color')} />
+          </Box>
+        ) : " and Nothing to color!"}
         <Section title="Testicle Type" scrollable>
           <Button
             onClick={() => act('testicle', { testicle: "none" })}
@@ -535,6 +552,7 @@ const AppearanceChangerBitsBreast = () => {
   const { 
     breast_styles,
     breast_style,
+    breast_color,
     has_breasts,
     breast_size } = data;
   const sizes = ["Flat", "Very Small", "Small", "Normal",
@@ -551,6 +569,12 @@ const AppearanceChangerBitsBreast = () => {
             Size: {sizes[breast_size]}
           </Button>
         ) : "Size: None"}
+        {has_breasts ? (
+          <Box>
+            <ColorBox color={breast_color[0]} mr={1} />
+            <Button content="Change Breast Color" onClick={() => act('breast_color')} />
+          </Box>
+        ) : " and Nothing to color!"}
         <Section title="Breast Type" scrollable>
           <Button
             onClick={() => act('breast', { breast: "none" })}

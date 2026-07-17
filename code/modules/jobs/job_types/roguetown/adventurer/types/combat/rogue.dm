@@ -97,9 +97,6 @@
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/traps = SKILL_LEVEL_EXPERT,
 	)
-	///CC edit
-	maximum_possible_slots = 2
-	///CC edit end
 
 /datum/outfit/job/roguetown/adventurer/thief/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -269,6 +266,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/antiquarian
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
 	traits_applied = list(TRAIT_SEEPRICES, TRAIT_GRAVEROBBER, TRAIT_INTELLECTUAL, TRAIT_ALCHEMY_EXPERT)
+	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT)
 	subclass_stats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 2,

@@ -132,6 +132,7 @@
 #define OLDGREY			21
 #define NO_ORGAN_FEATURES			22
 #define NO_BODYPART_FEATURES			23
+#define HARPY			26 // OV ADD
 #define INVISBLOOD		50 //OV ADD - Ooze Feature to stop blood drips, used only for oozes
 
 //organ defines
@@ -152,8 +153,8 @@
 #define MANDATORY_FEATURE_LIST list("mcolor" = "FFF", "mcolor2" = "FFF", "mcolor3" = "FFF", "ethcolor" = "9c3030", "legs" = "Normal Legs", "body_size" = BODY_SIZE_NORMAL)
 
 #define BODY_SIZE_NORMAL 1.00
-#define BODY_SIZE_MAX 0.25	//OV ADD
-#define BODY_SIZE_MIN 2.00	//OV EDIT
+#define BODY_SIZE_MIN 0.25	//OV ADD
+#define BODY_SIZE_MAX 2.00	//OV EDIT
 
 
 #define HAIR_COLOR_LIST list("#8f5a00", "#593800", "#362200", "#4e422e", "#8c8271", "#bfb7ab", "#31302e", "#f0dc48")

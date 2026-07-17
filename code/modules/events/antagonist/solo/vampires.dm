@@ -12,7 +12,7 @@
 	storyteller_pill_label = "Vampire Lord"
 	storyteller_rumour_name = "lycker lords"
 
-	weight = 0 // CC edit: Disabled. Was 4
+	weight = 0 // CC edit: Disabled. Was 9
 	max_occurrences = 0 //OV Edit: Disabled. Was 1
 
 	denominator = 80
