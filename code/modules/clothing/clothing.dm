@@ -72,6 +72,7 @@
 	var/boobed_detail = TRUE
 	var/sleeved_detail = TRUE
 	var/malumblessed_c = FALSE
+	var/list/worn_offsets = null  // in case it needs an extra offset to fit in a 32x32 .dmi file. Originally made by Sigma.
 	var/list/original_armor //For restoring broken armor
 
 /obj/item/clothing/New()
@@ -160,6 +161,9 @@
 			if(r_sleeve_status == SLEEVE_TORN)
 				to_chat(user, span_info("It's torn away."))
 				return
+			if(!salvage_result)
+				to_chat(user, span_warning("[src] cannot be torn."))
+				return
 			if(!do_after(user, 20, target = user))
 				return
 			if(prob(L.STASTR * 8))
@@ -182,6 +186,9 @@
 				return
 			if(l_sleeve_status == SLEEVE_TORN)
 				to_chat(user, span_info("It's torn away."))
+				return
+			if(!salvage_result)
+				to_chat(user, span_warning("[src] cannot be torn."))
 				return
 			if(!do_after(user, 20, target = user))
 				return

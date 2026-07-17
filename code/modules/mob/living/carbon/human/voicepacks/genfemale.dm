@@ -24,6 +24,16 @@
 				used = 'sound/vo/female/gen/breathgasp.ogg'
 			if("burp","belch") // OV Edit: A lot of people are used to *belch from other servers. No need to add it to the above list.
 				used = list('modular_ochrevalley/sounds/vo/vore/burps/belch1.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch2.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch3.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch4.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch5.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch6.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch7.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch8.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch9.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch10.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch11.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch12.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch13.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch14.ogg','modular_ochrevalley/sounds/vo/vore/burps/belch15.ogg')
+			if("gulp")
+				used = list('sound/vo/gulp.ogg', 'sound/vo/gulp2.ogg')
+			if("sniff")
+				used = list('sound/vo/sniff.ogg')
+			if("salute")
+				used = 'sound/vo/salute.ogg'
+			if("crack")
+				used = 'sound/vo/knuckles.ogg'
+			if("facepalm")
+				used = list('sound/vo/facepalm1.ogg', 'sound/vo/facepalm2.ogg')
 			if("choke")
 				used = list('sound/vo/female/gen/choke (1).ogg','sound/vo/female/gen/choke (2).ogg','sound/vo/female/gen/choke (3).ogg')
 			if("chuckle")

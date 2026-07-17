@@ -8,16 +8,17 @@
 	roundstart = TRUE
 	antag_flag = ROLE_NBEAST
 	shared_occurence_type = SHARED_HIGH_THREAT
-	storyteller_antag_flags = STORYTELLER_ANTAG_NONE // OV Edit: Stop storytellers from injecting this antagonist
-	storyteller_guarantee_flags = STORYTELLER_FAVOR_NONE // OV Edit: Stop storytellers from injecting this antagonist
+	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_pill_label = "Vampire Lord"
+	storyteller_rumour_name = "lycker lords"
 
 	weight = 0 // CC edit: Disabled. Was 4
 	max_occurrences = 0 //OV Edit: Disabled. Was 1
 
 	denominator = 80
 
-	base_antags = 1
-	maximum_antags = 2
+	base_antags = 0 //OV Edit - 1
+	maximum_antags = 0 //OV Edit - 1
 
 	earliest_start = 0 SECONDS
 

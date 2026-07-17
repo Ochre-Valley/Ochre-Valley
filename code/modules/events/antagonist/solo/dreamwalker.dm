@@ -13,7 +13,6 @@
 	antag_flag = ROLE_DREAMWALKER
 	shared_occurence_type = SHARED_MINOR_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_SOFT
-	storyteller_guarantee_flags = STORYTELLER_FAVOR_DREAMWALKER
 
 	denominator = 80
 
@@ -31,14 +30,19 @@
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
 	prompted_picking = TRUE
 
+/datum/round_event_control/antagonist/solo/dreamwalker/canSpawnEvent(players_amt, gamemode, fake_check)
+	var/datum/storyteller/preset = active_preset()
+	if(!preset?.allow_dreamwalker)
+		return FALSE
+	return ..()
+
 /datum/round_event/antagonist/solo/dreamwalker
 
 /datum/round_event_control/antagonist/solo/dreamwalker/roundstart
 	name = "Dreamwalker"
-	roundstart = TRUE
+	roundstart = FALSE //OV Edit - True
 	min_players = CHARACTER_INJECTION_MIN_POP
-	base_antags = 2
-	maximum_antags = 2
-	max_occurrences = 1
+	base_antags = 0 //OV Edit - 2
+	maximum_antags = 0 // OV Edit -2
+	max_occurrences = 0 //OV Edit - 1
 	prompted_picking = FALSE
-	//allowed_storytellers = list(/datum/storyteller/abyssor) // OV Edit: Stop storytellers from injecting this antagonist

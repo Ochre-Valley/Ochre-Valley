@@ -212,6 +212,8 @@
 	. = ..()
 	if(!iscarbon(target))
 		return
+	if(out_of_effective_range())
+		return
 	if(target)
 		ensnare(target)
 

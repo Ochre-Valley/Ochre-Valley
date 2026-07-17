@@ -8,13 +8,13 @@
 	roundstart = TRUE
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
-	storyteller_antag_flags = STORYTELLER_ANTAG_NONE // OV Edit: Stop storytellers from injecting this antagonist
-	storyteller_guarantee_flags = STORYTELLER_FAVOR_LICH
+	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_rumour_name = "liches"
 
 	denominator = 80
 
-	base_antags = 1
-	maximum_antags = 2
+	base_antags = 0 //OV Edit - 1
+	maximum_antags = 0 //OV Edit - 1
 
 	weight = 0	//i hate you CC edit: Disabled. Was originally 2.
 	max_occurrences = 0 // mashallah //OV Edit: Disabled. Was 1.

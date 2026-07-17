@@ -709,7 +709,7 @@
 	force = 15
 	force_wielded = 35
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/chop/heavy, /datum/intent/axe/sweep)
+	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/sweep)
 	name = "double-headed steel greataxe"
 	desc = "A large axe with a twinned axhead of steel, requiring both hands to properly swing. It carves, chops, and cleaves from \
 	afar. </br>'Crush your enemies, see them driven before you, and hear the lamentations of the women..'"
@@ -727,7 +727,7 @@
 	force = 20
 	force_wielded = 40
 	max_blade_int = 270
-	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/chop/heavy, /datum/intent/axe/sweep)
+	gripped_intents = list(/datum/intent/axe/cut/long, /datum/intent/axe/chop/long, /datum/intent/axe/sweep)
 	smeltresult = /obj/item/ingot/component/graggar
 	special = /datum/special_intent/vicious_swipe
 
@@ -785,3 +785,14 @@
 	var/active_gripped_intents = list(/datum/intent/axe/cut/frost, /datum/intent/axe/chop/frost, /datum/intent/axe/bash)
 	var/inactive_intents = list()
 	var/inactive_gripped_intents = list()
+
+/obj/item/rogueweapon/stoneaxe/battle/holyseeaxe
+	name = "holy see axe"
+	desc = "A blessed axe, wielded by the Holy See's crusaders to keep the forces of evil at bay, \
+			it is oft rumored these axes are commonplace amongst the greater crusades of the See against \
+			Heathenry and Heretic alyke, often used to tear down walls and fortifications that heretics hide within, \
+			a ceremonial manifestation of Malum's destruction and Astrata's all-reaching grasp of authority."
+	icon_state = "churchaxe"
+	wdefense = 5
+	max_blade_int = 260
+	max_integrity = 150

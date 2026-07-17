@@ -390,3 +390,45 @@
 	name = "raw boar ham"
 	desc = "A bramblesnout that is no longer trying to end you. Raw and ready to be steamed."
 	icon_state = "ham_boar"
+
+// Raw mushroom from weird underdarky places
+/obj/item/reagent_containers/food/snacks/rogue/mushroom
+	eat_effect = null
+	//Not really filling uncooked.
+	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
+	bitesize = 3
+	name = "mushroom flesh"
+	desc = "A common piece of mushroom flesh. Often called Vesse-de-Vouivre by the drow of the underdark. It has a strong, earthy odor to it. Definitely better to cook this..."
+	icon = 'modular/Neu_Food/icons/raw/raw_meat.dmi'
+	icon_state = "mushroom"
+	slice_batch = TRUE
+	rotprocess = SHELFLIFE_DECENT
+	chopping_sound = TRUE
+	//can't believe it's not a vegetable.
+	foodtype = MEAT
+	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	cooked_smell = /datum/pollutant/food/fried_mushroom
+	tastes = list("wyvern" = 1, "natural gas" = 1)
+	fried_type = /obj/item/reagent_containers/food/snacks/rogue/mushroom/cooked/fried
+	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/mushroom/cooked
+
+/* ............. Humanoid Meat ................*/
+/obj/item/reagent_containers/food/snacks/rogue/meat/steak/humanoid
+	name = "raw long pig"
+	desc = "Meat taken from some unfortunate individual. Why does it smell so right?"
+	icon_state = "longpig"
+	slice_path = /obj/item/reagent_containers/food/snacks/rogue/meat/mince/humanoid
+	fried_type = /obj/item/reagent_containers/food/snacks/rogue/meat/steak/humanoid/fried
+	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/meat/steak/humanoid/fried
+	cooked_smell = /datum/pollutant/food/humanoid
+
+/obj/item/reagent_containers/food/snacks/rogue/meat/mince/humanoid
+	name = "minced long pig"
+	desc = "Tasty mince! Wait a second..."
+	icon_state = "longpigmince"
+
+/obj/item/reagent_containers/food/snacks/rogue/meat/mince/humanoid_salted
+	name = "salted minced long pig"
+	desc = "Tasty mince! Wait a second..."
+	icon_state = "pigsalt"
+	rotprocess = SHELFLIFE_LONG

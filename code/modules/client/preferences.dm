@@ -158,6 +158,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/no_language_icon = FALSE
 	var/no_redflash = FALSE
 	var/no_storyteller_events = FALSE
+	var/top_examine = FALSE
 	var/darkvision_accessibility = 0
 
 	var/lastclass
@@ -255,8 +256,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/cursed_animal = "mouse" //OV ADD
 	var/cursed_animal_colour = "#FFFFFF" //OV ADD
 
-	var/datum/voicepack/temp_vp
-
 	var/mood_messages_in_chat
 
 	var/attack_blip_frequency = ATTACK_BLIP_PREF_DEFAULT
@@ -266,6 +265,14 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	/// Whether we can see the feint HUD bar.
 	var/feint_hud = FALSE
+
+	// Vocal bark prefs
+	var/bark_id = "None" //OV Edit
+	var/bark_speed = 4
+	var/bark_pitch = 1
+	var/bark_variance = 0.2
+	COOLDOWN_DECLARE(bark_previewing)
+	var/mute_barks = FALSE
 
 	//OV edit
 	var/badge_gng = "No"
@@ -679,12 +686,19 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br>"
 			dat += "<b>Vices:</b>"
 			if(charflaws.len)
+				var/has_extra_vice = FALSE
+				for(var/i = 1 to charflaws.len)
+					var/datum/charflaw/cf = charflaws[i]
+					if(!cf)
+						continue
+					if(!cf.needs_extra_vice)
+						has_extra_vice = TRUE
 				for(var/i = 1 to charflaws.len)
 					var/datum/charflaw/cf = charflaws[i]
 					if(!cf)
 						continue
 					var/warning = ""
-					if(cf.needs_extra_vice && charflaws.len < 2)
+					if(cf.needs_extra_vice && !has_extra_vice)
 						warning = "<font color = '#910505'>"
 					dat += "[warning] <a href='?_src_=prefs;preference=charflaw;task=remove;index=[i]'>[cf]</a>[warning ? " (Requires Extra Vice!)</font>" : ""]"
 					if(i < charflaws.len)
@@ -755,6 +769,15 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<a href='?_src_=prefs;preference=ai_core_icon;task=input'><b>Preferred AI Core Display:</b> [preferred_ai_core_display]</a><br>"
 			dat += "<a href='?_src_=prefs;preference=sec_dept;task=input'><b>Preferred Security Department:</b> [prefered_security_department]</a><BR></td>"
 */
+			var/datum/bark/B = GLOB.bark_list[bark_id]
+			dat += "<br>"
+			dat += "<b>Vocal Bark Sound:</b><br>"
+			dat += "<a href='?_src_=prefs;preference=barksound;task=input'>[B ? initial(B.name) : "INVALID"]</a><br>"
+			dat += "<b>Vocal Bark Speed:</b> <a href='?_src_=prefs;preference=barkspeed;task=input'>[bark_speed]</a><br>"
+			dat += "<b>Vocal Bark Pitch:</b> <a href='?_src_=prefs;preference=barkpitch;task=input'>[bark_pitch]</a><br>"
+			dat += "<b>Vocal Bark Variance:</b> <a href='?_src_=prefs;preference=barkvary;task=input'>[bark_variance]</a><br>"
+			dat += "<b><a href='?_src_=prefs;preference=barkpreview;task=input'>Preview Bark</a></b><br>"
+			dat += "</td>"
 			dat += "</tr></table>"
 // 			-----------END OF IDENT TABLE-----------
 
@@ -2038,12 +2061,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							to_chat(user, "<font color='red'>Your character will now audibly emote in accordance to their Voice Identity and any Racial / Class-specific voice packs.</font>")
 				if("voicepack_preview")
 					if(voice_pack != "Default")
-						var/datum/voicepack/VP = GLOB.voice_packs_list[voice_pack]
-						if(!istype(temp_vp, VP))
-							temp_vp = new VP()
-						var/voiceline = temp_vp.get_sound(pick(temp_vp.preview))
+						var/datum/voicepack/VP = GLOB.voice_packs[GLOB.voice_packs_list[voice_pack]]
+						var/voiceline = VP.get_sound(pick(VP.preview))
 						user.playsound_local(user, voiceline, 100)
-
 				if("taur_type")
 					var/list/species_taur_list = pref_species.get_taur_list()
 					if(!LAZYLEN(species_taur_list))
@@ -2164,6 +2184,60 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							to_chat(user, "<font color='red'>Value must be between [MIN_VOICE_PITCH] and [MAX_VOICE_PITCH].</font>")
 							return
 						voice_pitch = new_voice_pitch
+
+				if("barksound")
+					var/list/woof_woof = list()
+					for(var/path in GLOB.bark_list)
+						var/datum/bark/B = GLOB.bark_list[path]
+						if(initial(B.ignore))
+							continue
+						if(initial(B.ckeys_allowed))
+							var/list/allowed = initial(B.ckeys_allowed)
+							if(!allowed.Find(user.client.ckey))
+								continue
+						woof_woof[initial(B.name)] = initial(B.id)
+					var/new_bork = input(user, "Choose your desired vocal bark", "Character Preference") as null|anything in woof_woof
+					if(new_bork)
+						bark_id = woof_woof[new_bork]
+						var/datum/bark/B = GLOB.bark_list[bark_id] //Now we need sanitization to take into account bark-specific min/max values
+						bark_speed = round(clamp(bark_speed, initial(B.minspeed), initial(B.maxspeed)), 1)
+						bark_pitch = clamp(bark_pitch, initial(B.minpitch), initial(B.maxpitch))
+						bark_variance = clamp(bark_variance, initial(B.minvariance), initial(B.maxvariance))
+
+				if("barkspeed")
+					var/datum/bark/B = GLOB.bark_list[bark_id]
+					var/borkset = input(user, "Choose your desired bark speed (Higher is slower, lower is faster). Min: [initial(B.minspeed)]. Max: [initial(B.maxspeed)]", "Character Preference") as null|num
+					if(!isnull(borkset))
+						bark_speed = round(clamp(borkset, initial(B.minspeed), initial(B.maxspeed)), 1)
+
+				if("barkpitch")
+					var/datum/bark/B = GLOB.bark_list[bark_id]
+					var/borkset = input(user, "Choose your desired baseline bark pitch. Min: [initial(B.minpitch)]. Max: [initial(B.maxpitch)]", "Character Preference") as null|num
+					if(!isnull(borkset))
+						bark_pitch = clamp(borkset, initial(B.minpitch), initial(B.maxpitch))
+
+				if("barkvary")
+					var/datum/bark/B = GLOB.bark_list[bark_id]
+					var/borkset = input(user, "Choose your desired baseline bark pitch. Min: [initial(B.minvariance)]. Max: [initial(B.maxvariance)]", "Character Preference") as null|num
+					if(!isnull(borkset))
+						bark_variance = clamp(borkset, initial(B.minvariance), initial(B.maxvariance))
+
+				if("barkpreview")
+					if(SSticker.current_state == GAME_STATE_STARTUP) //Timers don't tick at all during game startup, so let's just give an error message
+						to_chat(user, "<span class='warning'>Bark previews can't play during initialization!</span>")
+						return
+					if(!COOLDOWN_FINISHED(src, bark_previewing))
+						return
+					if(!parent || !parent.mob)
+						return
+					COOLDOWN_START(src, bark_previewing, (5 SECONDS))
+					var/atom/movable/barkbox = new(get_turf(parent.mob))
+					barkbox.set_bark(bark_id)
+					var/total_delay = 0
+					for(var/i in 1 to (round((32 / bark_speed)) + 1))
+						addtimer(CALLBACK(barkbox, TYPE_PROC_REF(/atom/movable, bark), list(parent.mob), 7, 70, BARK_DO_VARY(bark_pitch, bark_variance)), total_delay)
+						total_delay += rand(DS2TICKS(bark_speed/4), DS2TICKS(bark_speed/4) + DS2TICKS(bark_speed/4)) TICKS
+					QDEL_IN(barkbox, total_delay)
 
 				if("highlight_color")
 					var/new_color = color_pick_sanitized(user, "Choose your character's nickname highlight color:", "Character Preference","#"+highlight_color)
@@ -3464,6 +3538,12 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	// Rumours / Noble gossip
 	character.rumour = rumour
 	character.noble_gossip = noble_gossip
+
+	// Barks
+	character.set_bark(bark_id)
+	character.vocal_speed = bark_speed
+	character.vocal_pitch = bark_pitch
+	character.vocal_pitch_range = bark_variance
 
 	if(parent)
 		var/list/L = get_player_curses(parent.ckey)
