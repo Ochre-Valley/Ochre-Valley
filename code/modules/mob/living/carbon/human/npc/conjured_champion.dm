@@ -18,13 +18,24 @@
 	if(!outfit)
 		return
 	equipOutfit(outfit)
-	for(var/obj/item/gear in (get_equipped_items() + held_items))
-		ADD_TRAIT(gear, TRAIT_NODROP, TRAIT_GENERIC)
+	//OV Edit Let servants drop/swap around their gear
+	if(!istype(outfit, /datum/outfit/job/roguetown/conjured_servant))
+		for(var/obj/item/gear in (get_equipped_items() + held_items))
+			ADD_TRAIT(gear, TRAIT_NODROP, TRAIT_GENERIC)
+	else //Make the initial fit qdel when dropped.
+		for(var/obj/item/gear in (get_equipped_items() + held_items))
+			gear.item_flags |= DROPDEL
+	//OV Edit End
 
 /mob/living/carbon/human/species/human/northern/conjured_champion/Destroy()
 	release_conjured_gear()
 	return ..()
-
+//OV Edit Give servant champions the ability to copy slot appearance
+/mob/living/carbon/human/species/human/northern/conjured_champion/get_pilot_ability()
+	if(loadout == "servant")
+		return /datum/action/cooldown/spell/apply_prefs
+	return null
+//OV Edit End
 /mob/living/carbon/human/species/human/northern/conjured_champion/after_creation()
 	..()
 	AddComponent(/datum/component/ai_aggro_system)
@@ -33,13 +44,16 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NPC_EXAMINE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_BADTRAINER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NODISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DUSTABLE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_DUST_DELETE_GEAR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	//OV Edit Yeah, no, you're not putting medium and heavy armor on a servant.
+	if(loadout != "servant")
+		ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+		ADD_TRAIT(src, TRAIT_DUST_DELETE_GEAR, TRAIT_GENERIC)
+		ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	//OV Edit End
 	var/mob/living/master = summoner_ref?.resolve()
 	if(master)
 		if(master.mind && master.mind.current)
@@ -68,6 +82,11 @@
 		if("spearman")
 			outfit_champion(new /datum/outfit/job/roguetown/conjured_champion/spearman)
 			def_intent_change(INTENT_PARRY)
+		//OV Edit Servant option for champion
+		if("servant")
+			outfit_champion(new /datum/outfit/job/roguetown/conjured_servant)
+			def_intent_change(INTENT_DODGE)
+		//OV Edit End
 		else
 			outfit_champion(new /datum/outfit/job/roguetown/conjured_champion/greatswordman)
 			def_intent_change(INTENT_PARRY)
@@ -211,3 +230,31 @@
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/quiver/bolt/conjured
 	beltr = /obj/item/rogueweapon/sword/short/iron
+//OV Edit: Servant option for champion
+/datum/outfit/job/roguetown/conjured_servant/pre_equip(mob/living/carbon/human/H, visualsOnly)
+	. = ..()
+	//Low stats save speed, they are either a packmule or for scenes.
+	H.STASTR = 8
+	H.STASPD = 11 // To prevent NPC following problem
+	H.STACON = 8
+	H.STAWIL = 8
+	H.STAPER = 10
+	H.STAINT = 10
+	H.STALUC = 10
+	pants = /obj/item/clothing/under/roguetown/tights
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
+	shoes = /obj/item/clothing/shoes/roguetown/shortboots
+
+/datum/action/cooldown/spell/apply_prefs
+	name = "Apply Appearance"
+	desc = "Give this summon the appearance of your currently loaded slot."
+	cooldown_time = 2 MINUTES //So people can't spam icon refreshes, should ideally only need this once anyways
+	click_to_activate = FALSE
+
+/datum/action/cooldown/spell/apply_prefs/cast()
+	. = ..()
+	if(owner.client)
+		owner.client.prefs.copy_to(owner, TRUE, FALSE)
+		return TRUE
+	return FALSE
+//OV Edit end

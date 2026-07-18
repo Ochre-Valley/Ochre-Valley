@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - admin: "Adds a simple button to Player Effects to print someone's traits to your chat."

@@ -234,3 +234,4 @@
 	//Caustic Edit
 	var/time_of_last_move = 0
 	//Caustic Edit End
+

@@ -987,6 +987,40 @@
 			if(!istype(Tar))
 				return
 			Tar.mob_gm_quest(ui.user)
+		
+		if("check_traits")
+			var/ht
+			var/mob/living/L = target
+			to_chat(ui.user, "*----*")
+			if(ishuman(target))
+				var/mob/living/carbon/human/M = target
+				if(M.charflaws.len)
+					for(var/datum/charflaw/cf in M.charflaws)
+						var/datum/charflaw/addiction/ad_cf = null
+						if(istype(cf, /datum/charflaw/addiction))
+							ad_cf = cf
+						to_chat(ui.user, span_danger("[cf.name] [ad_cf ? ad_cf.sated ? span_purple("SATED") : "" : ""]"))
+						to_chat(ui.user, span_info("[cf.desc]"))
+					to_chat(M, "*----*")
+				if(M.mind)
+					if(M.mind.language_holder)
+						var/finn
+						for(var/X in M.mind.language_holder.languages)
+							if(!X || !ispath(X, /datum/language))
+								continue
+							var/datum/language/LA = new X()
+							finn = TRUE
+							to_chat(ui.user, "<span class='info'>[LA.name] - ,[LA.key]</span>")
+						if(!finn)
+							to_chat(ui.user, "<span class='warning'>They don't know any languages.</span>")
+						to_chat(M, "*----*")
+			for(var/X in GLOB.roguetraits)
+				if(HAS_TRAIT(L, X))
+					to_chat(ui.user, "[X] - <span class='info'>[GLOB.roguetraits[X]]</span>")
+					ht = TRUE
+			if(!ht)
+				to_chat(ui.user, "<span class='warning'>They have no special traits.</span>")
+			to_chat(ui.user, "*----*")
 
 		/*
 		if("quick_nif")

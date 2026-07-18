@@ -1,0 +1,6 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - rscadd: "Servant summon with no gear/skills, for scenes or I guess carrying things?"
+  - bugfix: "Dying inside a summon you're control should no longer send you, still alive to the pit when you switch back"
+  - admin: "Logging of people having their summons eat them in case anyone abuses it."

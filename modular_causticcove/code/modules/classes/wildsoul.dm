@@ -300,4 +300,9 @@
 	desc = "So many walls, no trees, no grass... I have to get out of here!!!"
 	stressadd = 15
 	timer = 5 MINUTES
+
+/datum/stressevent/feralintown_minor
+	desc = "So many walls, no trees, no grass... I'm still not used to this..."
+	stressadd = 3
+	timer = 2 MINUTES
 //OV edit end

@@ -3,7 +3,7 @@
 	tutorial = "You were once upon a time part of the wild. Now you have taken up the duty to protecting it, whenever because of the safety and curiosity of the settlement that you now serve, longing for a purpose, or merely being part of something greater and a concentrated effort, the safety of the roads for these fragile towners and traders rest in your hands and claws. Keep your cradle safe and free of riff raffs, together with your more civilized allies."
 	outfit = /datum/outfit/job/roguetown/warden/wildsoul
 	category_tags = list(CTAG_WARDEN)
-	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_CIVILIZEDBARBARIAN, TRAIT_STRONGBITE, TRAIT_ARMOR_AVERSE, TRAIT_FERAL_MINOR) // OV EDIT - Woodsman removed so it doesnt get applied twice. Feral removed, since theyre warden.
+	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_CIVILIZEDBARBARIAN, TRAIT_STRONGBITE, TRAIT_FERAL_MINOR) // OV EDIT - Woodsman removed so it doesnt get applied twice. Feral removed, since theyre warden.
 	subclass_stats = list(
 		STATKEY_STR = 3,//7 points weighted, same as MAA. Direbear stats are kicked in the shins cause they get stat buffs in the woods instead of a debuff in the town.
 		STATKEY_CON = 2,
@@ -36,7 +36,7 @@
 	H.adjust_blindness(-3)
 	shoes = /obj/item/clothing/shoes/roguetown/boots/furlinedanklets
 	beltr = /obj/item/rogueweapon/huntingknife/stoneknife //OV Edit - Warden Sync
-	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/dense //OV EDIT
+	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/warden //OV EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/knuckles //OV Edit added steel knuckles
 	//OV Add Start
 	backpack_contents = list(

@@ -35,7 +35,7 @@
 			message += "<span class='deadsay'>[p_they(TRUE)] commited suicide... Nothing can be done..."
 		if(HAS_TRAIT(src, TRAIT_DNR))
 			message += "<span class='deadsay'>[p_their(TRUE)] heart will never beat again...</span>"
-		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE) || HAS_TRAIT(user, TRAIT_ZIZOSIGHT) || (user.get_skill_level(/datum/skill/misc/medicine) >= SKILL_LEVEL_MASTER))
+		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE) || HAS_TRAIT(user, TRAIT_ZIZOSIGHT) || (user.get_skill_level(/datum/skill/misc/medicine) >= SKILL_LEVEL_EXPERT)) //OV change; dropped to expert from master
 			if(!key && !get_ghost(FALSE, TRUE))
 				message += span_deadsay("[p_their(TRUE)] soul has departed...")
 			else

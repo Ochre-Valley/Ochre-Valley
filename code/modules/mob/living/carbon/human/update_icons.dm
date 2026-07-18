@@ -1111,7 +1111,7 @@ There are several things that need to be remembered:
 
 	//OV ADD START
 	var/obj/item/bodypart/taur/taur_back = get_taur_tail()
-	if(taur_back?.taur_clothing_category && (istype(backr, /obj/item/storage) || istype(backl, /obj/item/storage)))
+	if(taur_back?.taur_clothing_category && allow_taur_clothing && (istype(backr, /obj/item/storage) || istype(backl, /obj/item/storage)))
 		var/mutable_appearance/saddlebag_ov = mutable_appearance('modular_ochrevalley/icons/roguetown/clothing/onmob/taur_clothing.dmi', "saddlebag_[taur_back.taur_clothing_category]", -BACK_LAYER)
 		saddlebag_ov.pixel_x = taur_back.offset_x
 		overcloaks += saddlebag_ov
@@ -1167,13 +1167,13 @@ There are several things that need to be remembered:
 					cloak_overlay.pixel_y += dna.species.offset_features[OFFSET_CLOAK_F][2]
 			if(cloak.alternate_worn_layer == TABARD_LAYER)
 				//OV EDIT START overlays_standing[TABARD_LAYER] = cloak_overlay
-				if(taur?.taur_clothing_category && istype(cloak, /obj/item/clothing/cloak/tabard/stabard))
+				if(taur?.taur_clothing_category && allow_taur_clothing && istype(cloak, /obj/item/clothing/cloak/tabard/stabard))
 					var/mutable_appearance/taur_cap_ov = mutable_appearance('modular_ochrevalley/icons/roguetown/clothing/onmob/taur_clothing.dmi', "caparison_[taur.taur_clothing_category]", -TABARD_LAYER)
 					taur_cap_ov.pixel_x = taur.offset_x
 					if(cloak.color)
 						taur_cap_ov.color = cloak.color
 					overlays_standing[TABARD_LAYER] = list(cloak_overlay, taur_cap_ov)
-				else if(taur?.taur_clothing_category && istype(cloak, /obj/item/clothing/cloak/tabard))
+				else if(taur?.taur_clothing_category && allow_taur_clothing && istype(cloak, /obj/item/clothing/cloak/tabard))
 					var/mutable_appearance/taur_tabard_ov = mutable_appearance('modular_ochrevalley/icons/roguetown/clothing/onmob/taur_clothing.dmi', "caparison-tabard_[taur.taur_clothing_category]", -TABARD_LAYER)
 					taur_tabard_ov.pixel_x = taur.offset_x
 					if(cloak.color)
@@ -1299,7 +1299,7 @@ There are several things that need to be remembered:
 					shirt_overlay.pixel_y += dna.species.offset_features[OFFSET_SHIRT_F][2]
 			// OV EDIT START overlays_standing[SHIRT_LAYER] = shirt_overlay
 			// Taur barding overlay for shirt slot
-			if(taur?.taur_clothing_category)
+			if(taur?.taur_clothing_category && allow_taur_clothing)
 				var/list/taur_shirt_states = list()
 				switch(wear_shirt.armor_class)
 					if(ARMOR_CLASS_LIGHT)
@@ -1408,7 +1408,7 @@ There are several things that need to be remembered:
 					armor_overlay.pixel_y += dna.species.offset_features[OFFSET_ARMOR_F][2]
 			// OV EDIT START overlays_standing[ARMOR_LAYER] = armor_overlay
 			// Taur barding overlay for armor slot
-			if(taur?.taur_clothing_category)
+			if(taur?.taur_clothing_category && allow_taur_clothing)
 				var/list/taur_armor_states = list()
 				switch(wear_armor.armor_class)
 					if(ARMOR_CLASS_LIGHT)
@@ -2185,3 +2185,5 @@ generate/load female uniform sprites matching all previously decided variables
 	if(boobs.breast_size == 0)
 		return FALSE
 	return TRUE
+
+
