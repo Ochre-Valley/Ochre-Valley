@@ -60,6 +60,12 @@
 			new /obj/item/reagent_containers/lux_moss(target.loc)
 		else
 			new /obj/item/reagent_containers/lux_impure(target.loc)
+		
+		//OV edit
+		if(target == user)
+			target.Stun(200)
+			to_chat(target, span_warningbig("THE AGONY! I should not have tried to harvest my own lux!"))
+		//OV edit end
 
 		SEND_SIGNAL(user, COMSIG_LUX_EXTRACTED, target)
 		//record_featured_stat(FEATURED_STATS_CRIMINALS, user)	- This.. isn't normally criminal.
