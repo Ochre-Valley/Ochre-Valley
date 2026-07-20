@@ -37,6 +37,10 @@
 	display_results(user, target, span_notice("I begin to scrape lux from [target]'s heart..."),
 		span_notice("[user] begins to scrape lux from [target]'s heart."),
 		span_notice("[user] begins to scrape lux from [target]'s heart."))
+	//OV edit
+	if(target == user)
+		to_chat(target, span_warningbig("Doing this to myself will likely kill me..."))
+	//OV edit end
 	return TRUE
 
 /datum/surgery_step/extract_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
