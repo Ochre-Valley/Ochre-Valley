@@ -7,7 +7,7 @@
 //	where you would want the updater procs below to run
 
 //	This also works with decimals.
-#define SAVEFILE_VERSION_MAX	35
+#define SAVEFILE_VERSION_MAX	36
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -716,6 +716,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/needs_update = savefile_needs_update(S)
 	if(needs_update == -2)		//fatal, can't load any data
 		return FALSE
+
+	if(needs_update == 35)
+		S["virtue"] << null
+		S["virtuetwo"] << null
+		//OV ADD START
+		S["extravirtue"] << null
+		//OV ADD END
 
 	loaded_slot = slot
 
