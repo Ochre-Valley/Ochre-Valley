@@ -717,12 +717,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(needs_update == -2)		//fatal, can't load any data
 		return FALSE
 
+	//OV ADD START
 	if(needs_update == 35)
 		S["virtue"] << null
 		S["virtuetwo"] << null
-		//OV ADD START
 		S["extravirtue"] << null
-		//OV ADD END
+	//OV ADD END
 
 	loaded_slot = slot
 
