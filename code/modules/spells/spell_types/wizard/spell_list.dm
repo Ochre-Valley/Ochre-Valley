@@ -20,6 +20,7 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/datum/action/cooldown/spell/mindlink,
 		// /datum/action/cooldown/spell/mirror_transform, //OV Edit - Commented Out for Below Spell
 		/obj/effect/proc_holder/spell/invoked/mirror_transform_ov, //OV Add - OV Specific Mirror Transform, pending adjustments to DATUM system
+		/obj/effect/proc_holder/spell/invoked/mirror_transform/instant, //OV Add - A variant that does not require the magic mirror
 		/datum/action/cooldown/spell/nondetection,
 		/datum/action/cooldown/spell/projectile/lesser_fetch,
 		/datum/action/cooldown/spell/projectile/lesser_repel,

@@ -273,6 +273,18 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
     icon_state ="scrolldarkred"
     oneuse = TRUE
 
+//OV edit
+/obj/item/book/granter/spell/bonechill/instant_transform // Instant Transform Spell
+    name = "Scroll of Instant Transform"
+    spell = /obj/effect/proc_holder/spell/invoked/mirror_transform/instant //OV Edit: Use the new mirror transform
+    spellname = "Instant Transform"
+    icon_state ="scrolldarkred"
+    oneuse = TRUE
+
+/obj/item/book/granter/spell/bonechill/instant_transform/loadout // Mirror Transform Spell
+    needLit = FALSE
+//OV edit end
+
 /obj/item/book/granter/spell/bonechill/sizespell/loadout // Loadout specific ones!
 	needLit = FALSE
 

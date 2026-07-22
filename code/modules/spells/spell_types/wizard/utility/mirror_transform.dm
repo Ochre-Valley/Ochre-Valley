@@ -850,7 +850,10 @@
 		to_chat(user, span_warning("You can only use this on yourself."))
 		return
 
-	perform_mirror_transform(H)
+	var/datum/appearance_changer/mirror_transform/M
+	M = new(H)
+	if(do_after(H, 3 SECONDS))
+		M.ui_interact(H)
 	return TRUE  // Return TRUE for successful cast
 
 //OV edit end
