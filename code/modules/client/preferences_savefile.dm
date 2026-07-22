@@ -718,7 +718,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 
 	//OV ADD START
-	if(needs_update == 35)
+	if(needs_update <= 35)
 		S["virtue"] << null
 		S["virtuetwo"] << null
 		S["extravirtue"] << null
