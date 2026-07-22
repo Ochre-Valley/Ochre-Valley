@@ -15,6 +15,7 @@
 		list("name" = "Greataxe", "tag" = "GAX", "loadout" = "greataxeman", "color" = GLOW_COLOR_ARCANE, "invocation" = "Exsurge, miles!"),
 		list("name" = "Axe & Shield", "tag" = "AXE", "loadout" = "axeman", "color" = GLOW_COLOR_ARCANE, "invocation" = "Exsurge, miles!"),
 		list("name" = "Spear", "tag" = "SPR", "loadout" = "spearman", "color" = GLOW_COLOR_ARCANE, "invocation" = "Exsurge, hastati!"),
+		list("name" = "Servant", "tag" = "SRV", "loadout" = "servant", "color" = GLOW_COLOR_ARCANE, "invocation" = "Exsurge, serve"), //OV Edit: Add servant summon 
 	)
 
 /datum/action/cooldown/spell/conjure_summon/champion/spawn_summon(turf/T, mob/living/user)

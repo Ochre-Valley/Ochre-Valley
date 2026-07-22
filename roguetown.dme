@@ -3667,6 +3667,8 @@
 #include "modular_causticcove\code\modules\classes\shrine_priest\shrine_priest.dm"
 #include "modular_causticcove\code\modules\client\customizers\organ\genitals.dm"
 #include "modular_causticcove\code\modules\dcbot\config.dm"
+#include "modular_ochrevalley\code\modules\mob\living\carbon\human\human_defines.dm"
+#include "modular_ochrevalley\code\modules\mob\living\carbon\human\update_icons.dm"
 #include "modular_causticcove\code\modules\dcbot\internaltools\ahelprelay.dm"
 #include "modular_causticcove\code\modules\dcbot\internaltools\whitelost.dm"
 #include "modular_causticcove\code\modules\dcbot\proactivebits\newround.dm"

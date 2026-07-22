@@ -1,0 +1,6 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - balance: "Domesticated wildsouls now have a lower protection skin armour that allows them to layer armour."
+  - balance: "Domesticated wildsoul town mood debuff reduced from 15 to 3."
+  - balance: "Domesticated wildsouls are no longer debuffed by wearing light armour."

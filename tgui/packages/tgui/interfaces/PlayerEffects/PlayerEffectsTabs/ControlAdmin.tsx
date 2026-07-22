@@ -31,6 +31,9 @@ export const ControlAdmin = (props) => {
       <Button fluid onClick={() => act('make_quest_item')}>
         Turn Into Quest Target
       </Button>
+      <Button fluid onClick={() => act('check_traits')}>
+        Check Traits
+      </Button>
     </Section>
   );
 };
