@@ -56,7 +56,7 @@
 		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/smelting = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/engineering = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/engineering = SKILL_LEVEL_EXPERT,
 		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE
 	)
 	extra_context = "Chooses between a Pistol, a Rifle, a Grappler, a Clockwork Drill, Voltic Gauntlets, or Bronze Limbs."
@@ -117,6 +117,13 @@
 				if(H.charflaws.len)
 					var/obj/item/bodypart/l_leg/prosthetic/bronzeleft/leftbleg = new()
 					leftbleg.attach_limb(H)
+		var/wrenches = list("Compact Wrench", "Massive Wrench")
+		var/wrench_choice = input(H, "Choose your tool.", "TINKERER'S PRIDE") as anything in wrenches
+		switch(wrench_choice)
+			if("Compact Wrench")
+				backr = /obj/item/rogueweapon/contraption/linker/mace/preloaded
+			if("Massive Wrench")
+				backr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	backl = /obj/item/storage/backpack/rogue/backpack
