@@ -49,6 +49,7 @@
 		///Caustic edit end
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
+		/obj/item/bodypart/taur/noodle, // OV ADD
 	)
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE

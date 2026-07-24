@@ -116,3 +116,7 @@
 
 	change_origin(H, /datum/virtue/origin/naledi, "Holy order")//These are Naledi we make them actually Naledi
 	H.grant_language(/datum/language/celestial)
+	//OV Edit: Let more classes test faith
+	add_verb(H, /mob/living/carbon/human/proc/faith_test)
+	add_verb(H, /mob/living/carbon/human/proc/torture_victim)
+	//OV Edit End

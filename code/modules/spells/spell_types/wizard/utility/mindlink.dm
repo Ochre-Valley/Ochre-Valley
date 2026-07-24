@@ -61,6 +61,11 @@
 
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
 		if(HL.real_name == first_target_name)
+			//OV Edit: Block mindlink and message
+			if(HL.client?.prefs.block_mindlink)
+				to_chat(user, span_warning("I seek a mental connection, but can't find [first_target_name]."))
+				return FALSE
+			//OV Edit End
 			first_target = HL
 
 	possible_targets -= first_target_name
@@ -74,6 +79,11 @@
 
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
 		if(HL.real_name == second_target_name)
+			//OV Edit: Block mindlink and message
+			if(HL.client?.prefs.block_mindlink)
+				to_chat(user, span_warning("I seek a mental connection, but can't find [second_target_name]."))
+				return FALSE
+			//OV Edit End
 			second_target = HL
 
 	for(var/datum/mindlink/ML in GLOB.mindlinks)

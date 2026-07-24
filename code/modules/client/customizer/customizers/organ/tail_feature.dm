@@ -42,6 +42,8 @@
 		/datum/sprite_accessory/tail_feature/taur/biglegs,
 		/datum/sprite_accessory/tail_feature/taur/biglegsstanced,
 		/// CAUSTIC EDIT END
+		/datum/sprite_accessory/tail_feature/taur/noodle_marking_belly, // OV ADD
+		/datum/sprite_accessory/tail_feature/taur/noodle_marking_tail, // OV ADD
 		/datum/sprite_accessory/tail_feature/taur/sloogmarkings, //OV ADD
 		)
 

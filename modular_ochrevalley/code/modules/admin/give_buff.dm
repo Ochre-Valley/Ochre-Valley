@@ -12,7 +12,6 @@
 	var/chosen_buff
 	
 	var/list/spell_buffs = list(
-		"Stone Skin" = /datum/status_effect/buff/stoneskin,
 		"Hawk Eyes" = /datum/status_effect/buff/attune_hawk,
 		"Dragon Eyes" = /datum/status_effect/buff/dragonhide,
 		"Haste" = /datum/status_effect/buff/attune_haste,

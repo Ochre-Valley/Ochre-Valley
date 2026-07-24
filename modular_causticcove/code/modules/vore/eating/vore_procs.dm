@@ -10,6 +10,12 @@
  * Params: user, prey, pred, belly, delay_time
  */
 /mob/living/proc/perform_the_nom(mob/living/user, mob/living/prey, mob/living/pred, obj/belly/belly, delay_time)
+	//OV Edit: Check if a summon is eating its summoner
+	var/datum/component/conjured_minion/isMinion = pred.GetComponent(/datum/component/conjured_minion)	
+	if(isMinion && isMinion.summoner_ref == prey.weak_reference)
+		log_admin("[key_name(pred)] has eaten themselves using a summon. If they do this repeatedly, they may be abusing mechanics")
+		message_admins("[ADMIN_LOOKUPFLW(pred)] has eaten themselves using a summon. If they do this repeatedly, they may be abusing mechanics")
+	//OV Edit End
 	if(!delay_time || delay_time > 0)
 		return begin_delayed_nom(user, prey, pred, belly, delay_time)
 	else //This is here to catch when delay_time is set to a negative number, aka, 'we want this to be instant.' Any uses of this should be replaced by begin_instant_nom

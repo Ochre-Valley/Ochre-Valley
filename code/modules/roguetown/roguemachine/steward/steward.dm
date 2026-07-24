@@ -247,9 +247,17 @@
 		if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 			return
 		var/list/in_arrears = list()
+		//OV Edit: Let arrears handle duplicates
+		var/list/count = list()
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
 			if(SStreasury.poll_tax_owed[H] || SStreasury.poll_tax_debt_days[H] || HAS_TRAIT(H, TRAIT_ARREARS))
-				in_arrears["[H.real_name]"] = H
+				if(count["[H.real_name]"])
+					in_arrears["[H.real_name]([count["[H.real_name]"]])"] = H
+					count["[H.real_name]"]++
+				else
+					in_arrears["[H.real_name]"] = H
+					count["[H.real_name]"] = 1
+		//OV Edit End
 		if(!length(in_arrears))
 			say("No poll tax arrears on the ledger.")
 			return

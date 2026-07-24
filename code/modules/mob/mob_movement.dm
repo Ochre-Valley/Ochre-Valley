@@ -116,6 +116,12 @@
 	if(mob.force_moving)
 		return FALSE
 
+	var/mob/living/sliding_mob = mob
+	var/datum/status_effect/ice_slide/ice_sliding = sliding_mob.has_status_effect(/datum/status_effect/ice_slide)
+	if(ice_sliding)
+		ice_sliding.steer(direct)
+		return FALSE
+
 	if(mob.shifting)
 		mob.pixel_shift(direct)
 		return FALSE
@@ -788,6 +794,7 @@
 			var/obj/item/clothing/CL = src.head
 			if(CL.armor_class >= ARMOR_CLASS_LIGHT)
 				return FALSE
+		/* Removed till it's reworked
 		if(istype(src.wear_neck, /obj/item/clothing)) //No gorgets etc
 			var/obj/item/clothing/CL = src.wear_neck
 			if(CL.armor)
@@ -796,6 +803,7 @@
 			var/obj/item/clothing/CL = src.wear_mask
 			if(CL.armor)
 				return FALSE
+		*/
 		return TRUE //No need to run the rest of the checks, we've already ensured there's nothing better than light armour on them
 	//OV edit end
 	if(istype(src.wear_armor, /obj/item/clothing))

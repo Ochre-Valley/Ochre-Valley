@@ -968,6 +968,7 @@
 		M.forceMove(hasMMI)
 	else*/
 	//OV edit
+	SEND_SIGNAL(M, COMSIG_LIVING_DEATH, FALSE) //Should smooth some things out, especially with summons and other things that take you out of your body.
 	M.reset_view(null)
 	var/sfx
 	if(!fancy_vore)

@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Fixed dendor touched chickens being invisible, just needed a corrected icon name."
