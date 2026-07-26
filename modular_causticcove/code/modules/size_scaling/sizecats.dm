@@ -62,5 +62,5 @@ GLOBAL_LIST_EMPTY(sizecats)
 	if(ishuman(character))
 		var/mob/living/carbon/human/us = character
 		var/new_body_size = us.dna.features["body_size"]
-		character.resize(new_body_size, forced = TRUE)
+		character.resize(new_body_size, forced = TRUE, ignore_prefs = TRUE)
 	//OV edit end

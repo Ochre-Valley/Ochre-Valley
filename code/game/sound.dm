@@ -97,7 +97,7 @@
 					continue
 
 			var/is_muffled = (M in muffled_listeners)
-			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled))
+			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled, pref_toggle)) //OV EDIT
 				. += M
 
 

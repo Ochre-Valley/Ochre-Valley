@@ -111,4 +111,10 @@
 	//OV Edit: Let more classes test faith
 	add_verb(H, /mob/living/carbon/human/proc/faith_test)
 	add_verb(H, /mob/living/carbon/human/proc/torture_victim)
+	
+	var/origins = list("Otava", "Naledi")
+	var/origin_choice = input(H,"Choose your HERALDRY.", "TAKE UP PSYDON'S ARMS.") as anything in origins
+	if(origin_choice == "Naledi")
+		neck = /obj/item/clothing/neck/roguetown/psicross/silver/naledi
+		id = /obj/item/clothing/ring/signet/psy/g
 	//OV Edit End

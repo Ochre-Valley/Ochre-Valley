@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - qol: "Makes dendor touched more efficient and less buggy by first simply checking to see if the user has any active lights on their person before checking lighting."

@@ -80,6 +80,11 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 	if(user.stat || !isturf(user.loc))
 		return
 	if(world.time > next_check)
+		for(var/obj/item/flashlight/our_light in user.contents) //If they're wearing or holding an active light, just bypass this whole check
+			if(our_light.on)
+				countdown = 0
+				next_check = world.time + check_interval
+				return
 		if(countdown > 4)
 			animal_tf(user)
 		else
