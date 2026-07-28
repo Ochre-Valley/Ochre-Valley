@@ -10,6 +10,9 @@
 	accessory_type = /datum/sprite_accessory/butt/pair
 	var/organ_size = DEFAULT_BUTT_SIZE
 
+/obj/item/organ/butt/get_cache_key()
+	return "[..()]-[organ_size]"
+
 /datum/organ_dna/butt
 	var/organ_size = DEFAULT_BUTT_SIZE
 

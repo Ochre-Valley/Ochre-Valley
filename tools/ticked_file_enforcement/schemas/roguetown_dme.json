@@ -4,8 +4,6 @@
 	"subdirectories": true,
 	"excluded_files": [],
 	"forbidden_includes": [
-		"code/__HELPERS/_logging.dm",
-		"code/modules/photography/_pictures.dm",
         "code/modules/events/raids/goblin.dm",
         "code/modules/events/raids/skeleton.dm",
 		"code/modules/events/antagonist/solo/dreamwalker.dm",

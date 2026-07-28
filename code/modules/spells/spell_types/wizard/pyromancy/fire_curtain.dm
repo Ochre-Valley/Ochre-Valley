@@ -7,7 +7,8 @@
 	desc = "Conjure a 5x2 curtain of flame at a target location, perpendicular to your facing. \
 	After a 2-second telegraph, the fire erupts. Burning for 10 seconds. \
 	The fire does not block movement but will burn anything that passes through or stands in it. \
-	You are not immune to your own curtain."
+	You are not immune to your own curtain.\n\
+	Fire spells apply scorched effects - at 4 scorched, an armor piercing wound is applied to the head or chest: whichever you are aiming at, and randomly if aiming elsewhere."
 	button_icon_state = "fire_curtain"
 	sound = 'sound/magic/fireball.ogg'
 	spell_color = GLOW_COLOR_FIRE
@@ -27,7 +28,7 @@
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
 	charge_time = 1 SECONDS
-	charge_swingdelay_type = SWINGDELAY_CANCEL
+	charge_swingdelay_type = SWINGDELAY_PENALTY
 	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging_fire.ogg'

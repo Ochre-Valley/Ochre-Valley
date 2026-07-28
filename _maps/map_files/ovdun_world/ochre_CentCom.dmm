@@ -1382,9 +1382,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/shelter/bog_hag)
 "oh" = (
-/obj/effect/wisp/prestidigitation{
-	desc = "A small, fiery ball of light made up of mystical energy.";
-	name = "Will-o'-the-wisp";
+/obj/effect/wisp/prestidigitation/willowwisp{
 	pixel_x = 12;
 	pixel_y = 9
 	},
@@ -3301,9 +3299,7 @@
 	pixel_x = -17;
 	pixel_y = -8
 	},
-/obj/effect/wisp/prestidigitation{
-	desc = "A small, fiery ball of light made up of mystical energy.";
-	name = "Will-o'-the-wisp";
+/obj/effect/wisp/prestidigitation/willowwisp{
 	pixel_x = -3;
 	pixel_y = 20
 	},

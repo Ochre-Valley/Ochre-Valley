@@ -301,8 +301,8 @@
 			SStreasury.noble_incomes[H] = noble_income
 			SStreasury.grant_estate_income(H, noble_income, TRUE)
 
-	if(show_in_credits)
-		SScrediticons.processing += H
+	if(show_in_credits && H.ckey && isnull(SScrediticons.processing[H.ckey]))
+		SScrediticons.processing[H.ckey] = FALSE
 
 	if(cmode_music)
 		H.cmode_music = cmode_music
@@ -360,18 +360,18 @@
 	var/datum/job/J = SSjob.GetJob(mind.assigned_role)
 	var/used_title = get_role_title()
 
-	GLOB.credits_icons[thename] = list()
 	var/client/C = client
 	var/datum/preferences/P = C.prefs
 	var/icon/I
 	if(generate_for_adv_class)
-		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH), human_gear_override = src)
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_CREDITS, list(SOUTH), human_gear_override = src)
 	else if (P)
-		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH))
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_CREDITS, list(SOUTH))
 	if(I)
 		var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="credits")
 		I.Blend(female_s, ICON_MULTIPLY)
 		I.Scale(96,96)
+		GLOB.credits_icons[thename] = list()
 		GLOB.credits_icons[thename]["title"] = used_title
 		GLOB.credits_icons[thename]["icon"] = I
 		GLOB.credits_icons[thename]["vc"] = voice_color
@@ -542,7 +542,7 @@
 /proc/should_wear_masc_clothes(mob/living/carbon/human/H)
 	if(!H.mind)
 		return (H.pronouns == HE_HIM || H.pronouns == THEY_THEM || H.pronouns == IT_ITS)
-	else 
+	else
 		return (H.clothes_pref == CLOTHES_M)
 
 /proc/should_wear_femme_clothes(mob/living/carbon/human/H)
@@ -741,29 +741,12 @@
 			var/advdat = ""
 			var/datum/advclass/subclasspath = adv
 			var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
-			var/found_issue = FALSE
-			if(length(subclass.virtue_limits))
-				for(var/virtuetype in subclass.virtue_limits)
-					if(istype(player.prefs.virtue, virtuetype))
-						advdat += "[player.prefs.virtue.name]<br>"
-						found_issue = TRUE
-					if(istype(player.prefs.virtuetwo, virtuetype))
-						advdat += "[player.prefs.virtuetwo.name]<br>"
-						found_issue = TRUE
-					//OV Add - Extra Virtue
-					if(istype(player.prefs.extravirtue, virtuetype))
-						advdat += "[player.prefs.extravirtue.name]<br>"
-						found_issue = TRUE
-					//OV Add Start - Extra Virtue
-
-			if(length(subclass.vice_limits))
-				for(var/vicetype in subclass.vice_limits)
-					for(var/vice in player.prefs.charflaws)
-						var/datum/charflaw/cf = vice
-						if(istype(vice, vicetype))
-							advdat += "[cf.name]<br>"
-							found_issue = TRUE
-			if(found_issue)
+			if(!subclass)
+				continue
+			var/list/restriction_names = subclass.get_prefs_restriction_names(player)
+			if(length(restriction_names))
+				for(var/restriction_name in restriction_names)
+					advdat += "[restriction_name]<br>"
 				dat += "<font color = '#e4e1e1'><b>[subclass::name]</b></font><br>"
 				dat += advdat
 		var/datum/browser/popup = new(usr, "subclassslots", "<div style='text-align: center'>Subclass Incompatibilities</div>", nwidth = 200, nheight = 300)
@@ -792,13 +775,23 @@
 	for(var/adv in job_subclasses)
 		var/datum/advclass/subclasspath = adv
 		var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
-		if(length(subclass.virtue_limits))
-			for(var/virtuetype in subclass.virtue_limits)
-				if(istype(player.prefs.virtue, virtuetype) || istype(player.prefs.virtuetwo, virtuetype) || istype(player.prefs.extravirtue, virtuetype)) //OV Edit - Extra Virtue
-					return TRUE
+		if(!subclass)
+			continue
+		if(length(subclass.get_prefs_restriction_names(player)))
+			return TRUE
 
-		if(length(subclass.vice_limits))
-			for(var/vicetype in subclass.vice_limits)
-				for(var/vice in player.prefs.charflaws)
-					if(istype(vice, vicetype))
-						return TRUE
+/datum/job/proc/prefs_all_subclasses_restricted(client/player)
+	if(!player?.prefs)
+		return FALSE
+	if(!length(job_subclasses))
+		return FALSE
+	var/checked_subclass = FALSE
+	for(var/adv in job_subclasses)
+		var/datum/advclass/subclasspath = adv
+		var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
+		if(!subclass)
+			continue
+		checked_subclass = TRUE
+		if(!length(subclass.get_prefs_restriction_names(player)))
+			return FALSE
+	return checked_subclass

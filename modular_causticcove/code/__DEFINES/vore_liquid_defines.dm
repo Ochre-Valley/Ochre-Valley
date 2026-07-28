@@ -21,7 +21,7 @@
 #define REAGENT_TEA "Tea"
 #define REAGENT_ID_TEA /datum/reagent/consumable/caffeine/tea
 #define REAGENT_TEA_ROSE "Rose Tea"
-#define REAGENT_ID_TEA_ROSE /datum/reagent/water/rosewater
+#define REAGENT_ID_TEA_ROSE /datum/reagent/consumable/rosewater
 #define REAGENT_TEA_CALENDULA "Golden Calendula Tea"
 #define REAGENT_ID_TEA_CALENDULA /datum/reagent/consumable/golden_calendula_tea
 #define REAGENT_TEA_VALERIAN "Soothing Valerian Tea"

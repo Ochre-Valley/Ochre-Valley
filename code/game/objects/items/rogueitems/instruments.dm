@@ -176,6 +176,7 @@
 			if(curfile)
 				playing = TRUE
 				soundloop.set_mid_sounds(list(curfile))
+				soundloop.mid_length = rustg_sound_length("[curfile]")
 				soundloop.start(user) // OV Edit - (user) Is needed so harpies singing applies to their body instead of the organ, for playing the sound.
 				user.apply_status_effect(/datum/status_effect/buff/playing_music, stressevent, note_color)
 				if(not_held) // OV Edit
@@ -209,10 +210,11 @@
 								bandinstrumentspersonal.curfile = bandinstrumentspersonal.song_list[bandinstrumentspersonal.curfile]
 			if(do_after(user, 1))
 				for(var/obj/item/rogue/instrument/bandinstrumentsband in instrumentsintheband)
-					if(!curfile)
+					if(!bandinstrumentsband.curfile)
 						return
 					bandinstrumentsband.playing = TRUE
 					bandinstrumentsband.groupplaying = TRUE
+					bandinstrumentsband.soundloop.mid_length = rustg_sound_length("[bandinstrumentsband.curfile]")
 					bandinstrumentsband.soundloop.set_mid_sounds(list(bandinstrumentsband.curfile))
 					bandinstrumentsband.soundloop.start(user) // OV Edit - (user) Is needed so harpies singing applies to their body instead of the organ, for playing the sound.
 					for(var/mob/living/carbon/human/A in bandmates)

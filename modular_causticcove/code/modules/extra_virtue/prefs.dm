@@ -4,63 +4,30 @@
 /datum/preferences/proc/load_extra_virtue(S)
 	var/extravirtue_type
 	S["extravirtue"] >> extravirtue_type
-	var/error_check = FALSE
-	var/error_found = FALSE
+	var/list/extravirtue_choices = list()
+	var/virtextra
+	S["extravirtuechoices"] >> virtextra
+	extravirtue_choices = virtextra
+
 	if(istype(extravirtue_type, /datum/virtue))
-		extravirtue = extravirtue_type
-		error_check = TRUE
+		var/datum/virtue/V = extravirtue_type
+		extravirtue = new V.type
+		if(length(V.picked_choices))
+			extravirtue.picked_choices = V.picked_choices
+		qdel(V)
 	else if(ispath(extravirtue_type, /datum/virtue))
 		extravirtue = new extravirtue_type
 	else
 		extravirtue = new /datum/virtue/none
 
-	if(error_check)
-		//Future-proofing sanity checks in case virtues get adjusted later. We do a full reset if we find any discrepancies.
-		var/datum/virtue/sane_extravirtue = new extravirtue.type
-		error_found = FALSE
+	if(length(extravirtue_choices))
+		extravirtue.picked_choices = extravirtue_choices.Copy()
 
-		if(extravirtue.name != sane_extravirtue.name)	//We should keep the names & descs updated across saves, too
-			virtue.name = sane_extravirtue.name
-
-		if(extravirtue.desc != sane_extravirtue.desc)	//Not errors warranting a full reset, in theory, anyway.
-			extravirtue.desc = sane_extravirtue.desc
-
-
-		if(length(extravirtue.picked_choices) > sane_extravirtue.max_choices)
-			error_found = TRUE
-		
-		if(sane_extravirtue.max_choices != extravirtue.max_choices)
-			error_found = TRUE
-		
-		if(length(extravirtue.extra_choices) != length(sane_extravirtue.extra_choices))
-			error_found = TRUE
-		
-		if(!error_found)
-			for(var/choice in extravirtue.extra_choices)
-				if(!(choice in sane_extravirtue.extra_choices))
-					error_found = TRUE
-					break
-
-			var/total_ours = 0
-			var/total_sane = 0
-
-			for(var/cost in extravirtue.choice_costs)
-				total_ours += cost
-			for(var/cost in sane_extravirtue.choice_costs)
-				total_sane += cost
-				
-			if(total_ours != total_sane)
-				error_found = TRUE
-
-		if(error_found)
-			extravirtue = sane_extravirtue
-			qdel(virtue)
-		else
-			qdel(sane_extravirtue)
-			extravirtue.on_load()
+	extravirtue.on_load()
 
 /datum/preferences/proc/save_extra_virtue(S)
-	WRITE_FILE(S["extravirtue"], extravirtue)
+	WRITE_FILE(S["extravirtue"], extravirtue.type)
+	WRITE_FILE(S["extravirtuechoices"] , extravirtue.picked_choices)
 
 /datum/preferences/proc/get_extra_virtue_htmlpick()
 	return "<b>Extra Virtue:</b> <a href='?_src_=prefs;preference=extravirtue;task=input'>[extravirtue]</a><BR>"

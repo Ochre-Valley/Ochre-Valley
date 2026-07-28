@@ -47,11 +47,12 @@ export const Hermes = (props: any, context: any) => {
   const [letterContent, setLetterContent] = useState('');
 
   const isFree = !!free_send_ready;
-  const canSendLetter = recipient.length > 0 && (isFree || balance >= letter_cost);
+  const canSendLetter =
+    recipient.length > 0 && (isFree || balance >= letter_cost);
   const canBuyPaper = balance >= paper_cost;
   const canBuyQuill = balance >= quill_cost;
   const canSendTube = letterContent.length > 0;
-// OV Edit Start: Add Missive send button
+  // OV Edit Start: Add Missive send button
   return (
     <Window title="HERMES" width={400} height={480}>
       <Window.Content>
@@ -99,11 +100,7 @@ export const Hermes = (props: any, context: any) => {
                 </Button>
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  compact
-                  icon="scroll"
-                  onClick={() => act('missive')}
-                >
+                <Button compact icon="scroll" onClick={() => act('missive')}>
                   Send Missive
                 </Button>
               </Stack.Item>

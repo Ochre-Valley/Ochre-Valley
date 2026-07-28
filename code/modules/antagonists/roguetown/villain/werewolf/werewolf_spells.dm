@@ -14,7 +14,7 @@
 
 /obj/effect/proc_holder/spell/self/howl/cast(mob/user = usr)
 	..()
-	var/message = input("Howl at the hidden moon...", "MOONCURSED") as text|null
+	var/message = sanitize(input("Howl at the hidden moon...", "MOONCURSED") as text|null)
 	if(!message) return
 
 	var/datum/antagonist/antag_data = user.mind.has_antag_datum(wolf_antag_type)
@@ -99,7 +99,7 @@
 				log_runtime(msg)
 			user.temporarilyRemoveItemFromInventory(I = current_item, force = TRUE)
 			qdel(current_item)
-		extended_claw_record[hand_index] = FALSE		
+		extended_claw_record[hand_index] = FALSE
 	return TRUE
 
 /obj/effect/proc_holder/spell/self/claws/proc/clear_claw_entry(datum/source)
@@ -120,3 +120,4 @@
 	invocation_type = INVOCATION_NONE
 	sound = 'sound/vo/mobs/wwolf/roar.ogg'
 	spell_requirements = NONE
+	spell_flags = SPELL_IGNORE_SPELLBLOCK

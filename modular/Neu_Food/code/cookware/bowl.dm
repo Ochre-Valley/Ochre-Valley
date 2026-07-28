@@ -29,7 +29,6 @@
 /obj/item/reagent_containers/glass/bowl/iron
 	name = "iron bowl"
 	icon_state = "bowl_iron"
-	sellprice = 25
 
 /obj/item/reagent_containers/glass/bowl/bronze
 	name = "bronze bowl"

@@ -36,7 +36,7 @@
 			transformed = TRUE // Mark as transformed
 
 		else if (world.time >= transforming + 25 SECONDS) // Stage 2
-			
+
 			if(H.show_redflash())
 				H.flash_fullscreen("redflash3")
 			H.emote("agony", forced = TRUE)
@@ -118,7 +118,7 @@
 	W.regenerate_icons()
 	W.stored_mob = src
 	W.werewolf_headshot_link = src.werewolf_headshot_link // OC Added Line
-	
+
 	// Set the werewolf's name from the antagonist datum
 	var/datum/antagonist/werewolf/Were = mind.has_antag_datum(/datum/antagonist/werewolf/)
 	if(Were)
@@ -164,7 +164,7 @@
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_SOURCE_WEREWOLF)
 	ADD_TRAIT(src, TRAIT_DEATHLESS, TRAIT_SOURCE_WEREWOLF)
 	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_SOURCE_WEREWOLF)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WEREWOLF)	
+	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WEREWOLF)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_SOURCE_WEREWOLF)
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_SOURCE_WEREWOLF)
 	ADD_TRAIT(src, TRAIT_PACIFISM, TRAIT_SOURCE_WEREWOLF)
@@ -180,10 +180,10 @@
 	W.STACON = 20
 	W.STAWIL = 20
 
-	W.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
-	W.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
-	W.AddSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)
-	W.AddSpell(new /datum/action/cooldown/spell/repulse/werewolf)
+	W.mind.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
+	W.mind.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
+	W.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)
+	W.mind.AddSpell(new /datum/action/cooldown/spell/repulse/werewolf)
 	invisibility = oldinv
 
 /mob/living/carbon/human/proc/werewolf_untransform(dead,gibbed)
@@ -233,10 +233,10 @@
 	// if(WW)
 		// WW.apply_verbs(W)
 	// OV Edit End
-	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
-	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/claws)
-	W.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)
-	W.RemoveSpell(new /datum/action/cooldown/spell/repulse/werewolf)
+	W.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
+	W.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/claws)
+	W.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)
+	W.mind.RemoveSpell(new /datum/action/cooldown/spell/repulse/werewolf)
 	W.regenerate_icons()
 
 	to_chat(W, span_userdanger("I return to my facade."))

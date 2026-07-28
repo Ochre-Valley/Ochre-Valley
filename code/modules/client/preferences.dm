@@ -171,8 +171,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/datum/migrant_pref/migrant
 	var/next_special_trait = null
 
-	var/action_buttons_screen_locs = list()
-
 	var/domhand = 2
 	var/nickname = "Please Change Me"
 	var/highlight_color = "#FF0000"
@@ -233,8 +231,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/taur_type = null
 	var/taur_color = "ffffff"
 
-	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
-	var/list/culinary_preferences = list()
+	var/favorite_cuisine = NONE
+	var/favorite_dish = NONE
+	var/favorite_drink = NONE
 
 
 	var/tgui_pref = TRUE
@@ -1180,6 +1179,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					var/restrict_text = english_list(restricted_list)
 					HTML += "<font color='#a56161'>[used_name] (Disallowed by Vice: [restrict_text])</font></td> <td> </td></tr>"
 					continue
+			if(job.prefs_all_subclasses_restricted(user.client))
+				HTML += "<font color='#a561a5'>[used_name] (Disallowed by Subclass Virtues / Vice)</font></td> <td> </td></tr>"
+				continue
 			var/job_unavailable = JOB_AVAILABLE
 			if(isnewplayer(parent?.mob))
 				var/mob/dead/new_player/new_player = parent.mob
@@ -1510,7 +1512,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 		dat += "<br><b>Crime:</b> "
 		dat += "<a href='?_src_=prefs;preference=preset_bounty_crime;task=input'>\
-			[preset_bounty_crime || "None"]\
+			[html_encode(preset_bounty_crime) || "None"]\
 		</a>"
 	if(preset_bounty_severity_key && !GLOB.wretch_severities[preset_bounty_severity_key])
 		preset_bounty_severity_key = null
@@ -1890,7 +1892,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 		//OV edit end
 		if("change_culinary_preferences")
 			handle_culinary_topic(user, href_list)
-			show_culinary_ui(user)
 			return
 		if("random")
 			switch(href_list["preference"])
@@ -2099,9 +2100,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/faith_input = tgui_input_list(user, "The world rots. Which truth you bear?", "FAITH", faiths_named)
 					if(faith_input)
 						var/datum/faith/faith = faiths_named[faith_input]
-						to_chat(user, "<font color='yellow'>Faith: [faith.name]</font>")
-						to_chat(user, "Background: [faith.desc]")
-						to_chat(user, "<font color='red'>Likely Worshippers: [faith.worshippers]</font>")
+						var/pantheon_info = "[faith.desc]<br><br>"
+						pantheon_info += span_redtext("Likely worshippers: " + faith.worshippers)
+						var/pantheon_fieldsetblock = fieldset_block(span_big("<b>[span_bignotice(faith.name)]</b>"), pantheon_info, "faithdesc_block")
+						to_chat(user, pantheon_fieldsetblock)
 						selected_patron = GLOB.patronlist[faith.godhead] || GLOB.patronlist[pick(GLOB.patrons_by_faith[faith_input])]
 
 				if("patron")
@@ -2114,10 +2116,12 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/god_input = tgui_input_list(user, "The first amongst many.", "PATRON", patrons_named)
 					if(god_input)
 						selected_patron = patrons_named[god_input]
-						to_chat(user, "<font color='yellow'>Patron: [selected_patron]</font>")
-						to_chat(user, "<font color='#FFA500'>Domain: [selected_patron.domain]</font>")
-						to_chat(user, "Background: [selected_patron.desc]")
-						to_chat(user, "<font color='red'>Likely Worshippers: [selected_patron.worshippers]</font>")
+						var/patron_info = ""
+						patron_info += span_honeyyellow("Domain: [selected_patron.domain]<br><br>")
+						patron_info += "[selected_patron.desc]<br><br>"
+						patron_info += span_redtext("Likely Worshippers: [selected_patron.worshippers]")
+						var/patron_fieldsetblock = fieldset_block(span_big("<b>[span_bignotice(selected_patron.name)]</b>"), patron_info, "patrondesc_block")
+						to_chat(user, patron_fieldsetblock)
 
 				if("combat_music") // if u change shit here look at /client/verb/combat_music() too
 					if(!combat_music_helptext_shown)
@@ -3569,8 +3573,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	// Customizers are already applied inside set_species() (both the species-change path via
 	// on_species_gain, and the same-species short-circuit). Re-applying here doubled the work.
 
-	if(culinary_preferences)
-		apply_culinary_preferences(character)
+	apply_culinary_preferences(character)
 
 /datum/preferences/proc/get_default_name(name_id)
 	switch(name_id)
@@ -3716,7 +3719,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 		dat += "[V.custom_text]"
 		dat += "</font>"
 	if(V.stackable)
-		dat += "<font color = '#ffeea3'>This virtue can be picked twice using Virtuous.</font><br>"
+		dat += "<font color = '#ffeea3'><br>This virtue can be picked twice using Virtuous.</font><br>"
 	return dat
 
 /datum/preferences/proc/LorePopup(mob/user)

@@ -10,12 +10,12 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 
 
 /mob/living/carbon/human/species/human/northern/highwayman/ambush
-	threat_point = THREAT_MODERATE
+	threat_point = THREAT_HIGH
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/mount_reaver
 	name = "mount reaver"
-	threat_point = THREAT_HIGH
+	threat_point = THREAT_TOUGH
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/mount_reaver/after_creation()
@@ -25,7 +25,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 
 /mob/living/carbon/human/species/human/northern/highwayman/archer
 	ai_controller = /datum/ai_controller/human_npc/archer
-	threat_point = THREAT_MODERATE
+	threat_point = THREAT_HIGH
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/archer/after_creation()
@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 
 /mob/living/carbon/human/species/human/northern/highwayman/crossbowman
 	ai_controller = /datum/ai_controller/human_npc/archer
-	threat_point = THREAT_MODERATE
+	threat_point = THREAT_HIGH
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/crossbowman/after_creation()
@@ -234,6 +234,8 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
 	backl = /obj/item/quiver/randomfill/highwayman
 	H.STAPER += 3
+	H.STACON -= 1
+	H.STAWIL -= 1
 	H.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
 
 /datum/outfit/job/roguetown/human/species/human/northern/highwayman/crossbowman/pre_equip(mob/living/carbon/human/H)
@@ -241,10 +243,12 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/quiver/bolt/standard
 	H.STAPER += 3
+	H.STACON -= 1
+	H.STAWIL -= 1
 	H.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
 
 /mob/living/carbon/human/species/human/northern/highwayman/road_knight
-	threat_point = THREAT_DANGEROUS
+	threat_point = THREAT_DEADLY
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/road_knight/after_creation()
@@ -290,7 +294,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 
 /mob/living/carbon/human/species/human/northern/highwayman/sharpshooter
 	ai_controller = /datum/ai_controller/human_npc/archer
-	threat_point = THREAT_DANGEROUS
+	threat_point = THREAT_DEADLY
 	ambush_faction = "bandits"
 
 /mob/living/carbon/human/species/human/northern/highwayman/sharpshooter/after_creation()
@@ -329,8 +333,8 @@ GLOBAL_LIST_INIT(highwayman_aggro, world.file2list("strings/rt/highwaymanaggroli
 	backl = /obj/item/quiver/randomfill/reaver
 	H.STASTR = 12
 	H.STASPD = 10
-	H.STACON = 8
-	H.STAWIL = 9
+	H.STACON = 7
+	H.STAWIL = 8
 	H.STAPER = 15
 	H.STAINT = 8
 	H.adjust_skillrank(/datum/skill/combat/bows, 5, TRUE)

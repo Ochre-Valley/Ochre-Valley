@@ -156,6 +156,13 @@
 	cost = 50
 	contains = list(/obj/item/reagent_containers/food/snacks/tallow/black)
 
+/datum/supply_pack/rogue/luxury/heelificators
+	name = "Heel Elixirs"
+	cost = 300
+	contains = list(/obj/item/heelkit,
+					/obj/item/heelkit,
+					/obj/item/heelkit)
+
 //Caustic edit start
 /datum/supply_pack/rogue/luxury/sizescroll
 	name = "Scroll of Reduce/Enlarge"

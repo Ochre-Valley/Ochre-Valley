@@ -43,10 +43,10 @@
 	list_reagents = list(/datum/reagent/medicine/strongmana = 60)
 
 /obj/item/reagent_containers/glass/bottle/rogue/stampot
-	list_reagents = list(/datum/reagent/medicine/stampot = 60)
+	list_reagents = list(/datum/reagent/medicine/stampot = 30)
 
 /obj/item/reagent_containers/glass/bottle/rogue/strongstampot
-	list_reagents = list(/datum/reagent/medicine/strongstam = 60)
+	list_reagents = list(/datum/reagent/medicine/strongstam = 30)
 
 /obj/item/reagent_containers/glass/bottle/rogue/antidote
 	list_reagents = list(/datum/reagent/medicine/antidote = 60)

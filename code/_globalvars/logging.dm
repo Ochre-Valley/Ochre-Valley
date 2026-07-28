@@ -1,4 +1,3 @@
-// OV Edit Start: JSON Logging
 GLOBAL_VAR_INIT(log_directory, "data/logs/") // See world.dm for the full calculated path
 GLOBAL_PROTECT(log_directory)
 
@@ -32,53 +31,8 @@ DECLARE_LOG(perf_log, DONT_START_LOG) // Declared here but name is set in time_t
 DECLARE_LOG_NAMED(test_log, "tests", START_LOG)
 #endif
 
-// GLOBAL_VAR(world_game_log)
-// GLOBAL_PROTECT(world_game_log)
-// GLOBAL_VAR(world_runtime_log)
-// GLOBAL_PROTECT(world_runtime_log)
-// GLOBAL_VAR(world_qdel_log)
-// GLOBAL_PROTECT(world_qdel_log)
-// GLOBAL_VAR(world_attack_log)
-// GLOBAL_PROTECT(world_attack_log)
-// GLOBAL_VAR(world_href_log)
-// GLOBAL_PROTECT(world_href_log)
-// GLOBAL_VAR(world_seen_log)
-// GLOBAL_PROTECT(world_seen_log)
 GLOBAL_VAR(round_id)
 GLOBAL_PROTECT(round_id)
-// GLOBAL_VAR(config_error_log)
-// GLOBAL_PROTECT(config_error_log)
-// GLOBAL_VAR(sql_error_log)
-// GLOBAL_PROTECT(sql_error_log)
-// GLOBAL_VAR(world_pda_log)
-// GLOBAL_PROTECT(world_pda_log)
-// GLOBAL_VAR(world_telecomms_log)
-// GLOBAL_PROTECT(world_telecomms_log)
-// GLOBAL_VAR(world_manifest_log)
-// GLOBAL_PROTECT(world_manifest_log)
-// GLOBAL_VAR(query_debug_log)
-// GLOBAL_PROTECT(query_debug_log)
-// GLOBAL_VAR(world_job_debug_log)
-// GLOBAL_PROTECT(world_job_debug_log)
-// GLOBAL_VAR(world_mecha_log)
-// GLOBAL_PROTECT(world_mecha_log)
-// GLOBAL_VAR(world_virus_log)
-// GLOBAL_PROTECT(world_virus_log)
-// GLOBAL_VAR(world_asset_log)
-// GLOBAL_PROTECT(world_asset_log)
-// GLOBAL_VAR(world_cloning_log)
-// GLOBAL_PROTECT(world_cloning_log)
-// GLOBAL_VAR(world_map_error_log)
-// GLOBAL_PROTECT(world_map_error_log)
-// GLOBAL_VAR(world_paper_log)
-// GLOBAL_PROTECT(world_paper_log)
-// GLOBAL_VAR(tgui_log)
-// GLOBAL_PROTECT(tgui_log)
-// GLOBAL_VAR(character_list_log)
-// GLOBAL_PROTECT(character_list_log)
-// GLOBAL_VAR(hunted_log)
-// GLOBAL_PROTECT(hunted_log)
-// OV Edit End
 
 GLOBAL_LIST_EMPTY(character_list)
 GLOBAL_LIST_EMPTY(character_ckey_list)
@@ -116,9 +70,7 @@ GLOBAL_VAR(picture_logging_prefix)
 GLOBAL_PROTECT(picture_logging_prefix)
 /////
 
-// OV Add Start: Undef logging macros
 #undef DECLARE_LOG
 #undef DECLARE_LOG_NAMED
 #undef START_LOG
 #undef DONT_START_LOG
-// OV Add End

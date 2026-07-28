@@ -1,5 +1,0 @@
-author: "KatTheFox"
-delete-after: True
-changes:
-  - bugfix: "Elemental and void familiars can now resist to break out of tool transformations"
-  - balance: "Tier 1 earthen forge no longer halves the durability of conjured items"
