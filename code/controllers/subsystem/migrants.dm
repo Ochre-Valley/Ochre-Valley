@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(migrants)
 		wave_number++
 		return
 	log_game("Migrants: FAILED to spawn wave: [wave_type]")
-	message_admins("MIGRANTS: Wave '[wave.name]' failed to assemble on the [track] track.")
+	//message_admins("MIGRANTS: Wave '[wave.name]' failed to assemble on the [track] track.") // OV REMOVE - we do not need to know this
 	wave_cooldown[wave_type] = world.time + get_fail_cooldown(wave)
 	for(var/client/client as anything in get_wave_candidates(wave_type))
 		to_chat(client, span_boldwarning("The wave you queued for, [wave.name], failed to gather enough people and scattered into the mist. You have left the queue."))

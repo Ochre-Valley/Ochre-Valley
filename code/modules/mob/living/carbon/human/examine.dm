@@ -336,7 +336,7 @@
 		str += skin_armor.integrity_check() //not tied to 'smart' because wild souls aren't
 		. += str
 	//caustic edit end
-	
+
 	//arcyne ward
 	if(istype(skin_armor, /obj/item/clothing/suit/roguetown/armor/manual/arcyne_ward))
 		var/obj/item/clothing/suit/roguetown/armor/manual/arcyne_ward/ward = skin_armor
@@ -697,7 +697,7 @@
 		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 		if(heart?.inscryption && (heart.inscryption_key in maniac.key_nums))
 			. += span_danger("[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!")
-	
+
 	//Caustic Edit - Attempt to add a quick AFK tag to examine text!
 	if(client && away_from_keyboard && manual_afk)
 		. += span_warning("\[Away From Keyboard for [round((client.inactivity/10)/60)] minutes.\]")
@@ -799,7 +799,7 @@
 	var/pvp_pref = get_pvp_icon()
 	var/pvp_icon
 	if(pvp_pref && client.prefs.directory_pvp)
-		pvp_icon = "[SPAN_TOOLTIP("[client.prefs.directory_pvp]","[get_badge_span("[pvp_pref]")]")]"	
+		pvp_icon = "[SPAN_TOOLTIP("[client.prefs.directory_pvp]","[get_badge_span("[pvp_pref]")]")]"
 	//OV edit end
 
 	if(name in unknown_names)
@@ -1120,7 +1120,7 @@
 			. += span_redtext("[m3] strange glowing eyes and fangs!")
 
 		//Blackblood Inquisition trauma
-		if(HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_BLACKBLOOD))
+		if(HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_BLACKBLOOD) && src != user) // OV Edit - we can examine OURSELVES
 			var/mob/living/carbon/carbs = user
 			if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT) || HAS_TRAIT(user, TRAIT_NOMOOD))
 				return
@@ -1179,7 +1179,7 @@
 
 	. += medical_text
 
-	//OV edit 
+	//OV edit
 	// VORE BELLY EXAMINES
 	var/list/vorestrings = list()
 	vorestrings += formatted_vore_examine()
