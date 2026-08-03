@@ -77,4 +77,7 @@
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		/datum/sprite_accessory/ears/big/ochre/feather_horns,
 		/datum/sprite_accessory/ears/big/ochre/party_plume,
+		/datum/sprite_accessory/ears/cobrahood,
+		/datum/sprite_accessory/ears/cobrahoodears,
+		/datum/sprite_accessory/ears/naja_hood,
 		)

@@ -5,7 +5,7 @@
 #define CLAW_STYLE_CHITINOUS "Chitinous claws"
 
 // These RT species either explicitly have claws in their physiology. This allows them to use cosmetic claws without having to add a new different mechanical attack to the game. In other words, these species can use cosmetic claws because they have claws in their body.
-/datum/species/anthromorph
+/datum/species//anthromorph OV edit- all species get all claws
 	cosmetic_claw_types = list(
 		CLAW_STYLE_RETRACTABLE = /datum/intent/unarmed/punch/cosmetic_claw/retractable,
 		CLAW_STYLE_HOOKED = /datum/intent/unarmed/punch/cosmetic_claw/hooked,
@@ -13,7 +13,7 @@
 		CLAW_STYLE_TALONS = /datum/intent/unarmed/punch/cosmetic_claw/talons,
 		CLAW_STYLE_CHITINOUS = /datum/intent/unarmed/punch/cosmetic_claw/chitinous,
 	)
-
+/* OV edit start
 /datum/species/anthromorphsmall
 	cosmetic_claw_types = list(
 		CLAW_STYLE_RETRACTABLE = /datum/intent/unarmed/punch/cosmetic_claw/retractable,
@@ -73,7 +73,7 @@
 		CLAW_STYLE_CHITINOUS = /datum/intent/unarmed/punch/cosmetic_claw/chitinous,
 		CLAW_STYLE_HOOKED = /datum/intent/unarmed/punch/cosmetic_claw/hooked,
 	)
-
+*///OV edit end
 /mob/living/carbon/human/apply_intent_customizations(datum/intent/intent)
 	. = ..()
 	if(intent.type != INTENT_HARM || !cosmetic_claw_intent)
