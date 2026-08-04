@@ -325,7 +325,7 @@
 			user.visible_message(span_notice("[src] is already filled with gunpowder!</span>"))
 			return
 		playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
-		if(do_after(user, load_time_skill, src))
+		if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
 			user.visible_message(span_notice("[user] fills [src] with gunpowder.</span>"))
 			gunpowder = TRUE
 		return
@@ -401,6 +401,7 @@
 	range = 10
 	onehanded = TRUE
 	damfactor = 1
+	quick_reload = FALSE
 	var/can_spin = TRUE
 	var/last_spunned
 	var/spin_cooldown = 3 SECONDS
