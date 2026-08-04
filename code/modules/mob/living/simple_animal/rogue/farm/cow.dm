@@ -295,6 +295,6 @@
 		total_loss = check_health
 	
 /mob/living/simple_animal/hostile/retaliate/rogue/cow/target_practice/death(gibbed)
-	. = ..()
 	say(pick("I can't believe you've done this...", "Will I be a good burger?", "I'm dead?"))
+	. = ..()	
 //OV edit end

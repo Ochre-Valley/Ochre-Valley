@@ -9,7 +9,6 @@
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
 #include "_maps\ovdun_world.dm"
-#include "_maps\roguetest.dm"
 #include "_maps\map_files\ovdun_world\ochre_CentCom.dmm"
 #include "_maps\templates\arcyne_fortress.dm"
 #include "code\__byond_version_compat.dm"
