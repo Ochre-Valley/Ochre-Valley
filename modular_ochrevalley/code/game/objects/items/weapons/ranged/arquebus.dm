@@ -137,7 +137,7 @@
 	casing_ejector = FALSE
 	pickup_sound = 'modular_causticcove/sound/sheath_sounds/draw_from_holster.ogg'
 	var/spread_num = 10
-	damfactor = 2
+	damfactor = 1.2
 	var/range = 30
 	var/onehanded = FALSE
 	var/reloaded = FALSE
@@ -145,6 +145,7 @@
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
+	var/ranged_skill = /datum/skill/combat/firearms
 	wdefense = 0 // Can't parry if it's not held in two hands.
 	wdefense_wbonus = 10 // Parrying with two hands is very effective. This sounds awesome until your gun fucking shatters. :)
 
@@ -220,6 +221,11 @@
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB
+		if(!BB)
+			continue
+		BB.accuracy += accfactor * (user.STAPER - 8) * 3 // 8+ PER gives +3 per level. Exponential.
+		BB.bonus_accuracy += (user.STAPER - 8) // 8+ PER gives +1 per level. Does not decrease over range.
+		BB.bonus_accuracy += (user.get_skill_level(ranged_skill) * 5) // +5 per skill level.
 		BB.damage = BB.damage * damfactor
 		BB.range = range
 	gunpowder = FALSE
@@ -398,6 +404,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	range = 10
 	onehanded = TRUE
+	damfactor = 1
 	var/can_spin = TRUE
 	var/last_spunned
 	var/spin_cooldown = 3 SECONDS

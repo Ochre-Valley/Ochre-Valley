@@ -281,3 +281,20 @@
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_type))
 
 
+//OV edit
+/mob/living/simple_animal/hostile/retaliate/rogue/cow/target_practice
+	health = 1000
+	maxHealth = 1000
+	var/total_loss = 0
+
+/mob/living/simple_animal/hostile/retaliate/rogue/cow/target_practice/Life()
+	. = ..()
+	var/check_health = maxHealth - health
+	if(check_health != total_loss)
+		say("Ouch, that dealt [check_health - total_loss] damage!")
+		total_loss = check_health
+	
+/mob/living/simple_animal/hostile/retaliate/rogue/cow/target_practice/death(gibbed)
+	. = ..()
+	say(pick("I can't believe you've done this...", "Will I be a good burger?", "I'm dead?"))
+//OV edit end

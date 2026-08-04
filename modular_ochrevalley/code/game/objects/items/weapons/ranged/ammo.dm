@@ -18,7 +18,7 @@
 	flag = "piercing"
 	armor_penetration = PEN_BSTEEL // Same as heavy crossbow.
 	speed = 0.1 // Nearly hitscan.
-	npc_simple_damage_mult = 5 // Same as heavy crossbow. (Honestly I think this might be a little high even for heavy crossbows, but whatever. Change it if this causes issues. -Ace)
+	npc_simple_damage_mult = 4 // Allows it to keep it's old busted damage vs simple mobs
 	wall_impact_break_probability = 100 // Same as heavy crossbow. Bullets will shatter if they hit a wall. With a range of 30, this will almost ALWAYS happen if you miss, so don't miss!
 	damages_turf_walls = FALSE // Bullets lack the mass to meaningfully damage walls.
 
