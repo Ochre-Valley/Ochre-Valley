@@ -7,7 +7,7 @@
 // Firearms
 /obj/projectile/bullet/reusable/bullet
 	name = "bullet"
-	damage = 90 // Same as heavy crossbow.
+	damage = 70
 	damage_type = BRUTE
 	icon_state = "slingbullet_proj" // Good enough.
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
