@@ -2332,3 +2332,66 @@ As Excaliber."
 	<font color='1B1B2A'>'Even though He may be gone, we have not lost the ability to Endure hardship.'</font>"
 	icon_state = "athena_psyrapier"
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+//RHYNNRHYNN
+/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn
+	base_implement_name = "celestial staff"
+	name = "celestial staff"
+	desc = "Celestial Staves, or Himmelsstäbe, are often awarded to Gefechtsgelehrter who have completed at least two \
+	military campaigns. The possession of one marks the wielder as an individual who has not only seen the horrors of \
+	war, but delivered them firsthand. This one happens to be crested with a spherical ornament."
+	icon_state = "celestialstaff"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn
+	base_implement_name = "refined celestial staff"
+	name = "refined celestial staff"
+	desc = "Celestial Staves, or Himmelsstäbe, are often awarded to Gefechtsgelehrter who have completed at least two \
+	military campaigns. The possession of one marks the wielder as an individual who has not only seen the horrors of \
+	war, but delivered them firsthand. This one happens to be crested with a spherical ornament."
+	icon_state = "celestialstaff"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+//
+
+/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn
+	base_implement_name = "celestial staff"
+	name = "celestial staff"
+	desc = "Celestial Staves, or Himmelsstäbe, are often awarded to Gefechtsgelehrter who have completed at least two \
+	military campaigns. The possession of one marks the wielder as an individual who has not only seen the horrors of \
+	war, but delivered them firsthand. This one happens to be crested with a special ornament."
+	icon_state = "celestialstaff"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/crested
+	icon_state = "celestialstaffcrest"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/winged
+	icon_state = "celestialstaffeagle"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/solar
+	icon_state = "celestialstaffsun"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn
+	base_implement_name = "refined celestial staff"
+	name = "refined celestial staff"
+	desc = "Celestial Staves, or Himmelsstäbe, are often awarded to Gefechtsgelehrter who have completed at least two \
+	military campaigns. The possession of one marks the wielder as an individual who has not only seen the horrors of \
+	war, but delivered them firsthand. This one happens to be crested with a special ornament."
+	icon_state = "celestialstaff"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/crested
+	icon_state = "celestialstaffcrest"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/winged
+	icon_state = "celestialstaffeagle"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
+
+/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/solar
+	icon_state = "celestialstaffsun"
+	icon = 'icons/obj/items/donor_weapons_64.dmi'
