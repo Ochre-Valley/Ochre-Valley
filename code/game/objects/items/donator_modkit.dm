@@ -941,7 +941,7 @@
 	result_item = /obj/item/rogueweapon/sword/rapier/athena
 
 //RhynnRhynn - Celestial Staff + Variants
-/obj/item/enchantingkit/weapon/rhynnrhynn_staff
+/obj/item/enchantingkit/rhynnrhynn_staff
 	name = "'Celestial Staff' morphing elixir"
 	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
@@ -950,7 +950,7 @@
 	)
 	result_item = null
 
-/obj/item/enchantingkit/weapon/rhynnrhynn_staff_crested
+/obj/item/enchantingkit/rhynnrhynn_staff_crested
 	name = "'Celestial Staff, Crested' morphing elixir"
 	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
@@ -959,7 +959,7 @@
 	)
 	result_item = null
 
-/obj/item/enchantingkit/weapon/rhynnrhynn_staff_winged
+/obj/item/enchantingkit/rhynnrhynn_staff_winged
 	name = "'Celestial Staff, Winged' morphing elixir"
 	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
@@ -968,7 +968,7 @@
 	)
 	result_item = null
 
-/obj/item/enchantingkit/weapon/rhynnrhynn_staff_solar
+/obj/item/enchantingkit/rhynnrhynn_staff_solar
 	name = "'Celestial Staff, Solar' morphing elixir"
 	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(

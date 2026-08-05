@@ -802,20 +802,20 @@
 
 /datum/loadout_item/donator/rhynnrhynn_staff
 	name = "Donator Kit - Celestial Staff"
-	path = /obj/item/enchantingkit/weapon/rhynnrhynn_staff
+	path = /obj/item/enchantingkit/rhynnrhynn_staff
 	ckeywhitelist = list("rhynnrhynn")
 
 /datum/loadout_item/donator/rhynnrhynn_staff_crested
 	name = "Donator Kit - Celestial Staff, Crested"
-	path = /obj/item/enchantingkit/weapon/rhynnrhynn_staff_crested
+	path = /obj/item/enchantingkit/rhynnrhynn_staff_crested
 	ckeywhitelist = list("rhynnrhynn")
 
 /datum/loadout_item/donator/rhynnrhynn_staff_winged
 	name = "Donator Kit - Celestial Staff, Winged"
-	path = /obj/item/enchantingkit/weapon/rhynnrhynn_staff_winged
+	path = /obj/item/enchantingkit/rhynnrhynn_staff_winged
 	ckeywhitelist = list("rhynnrhynn")
 
 /datum/loadout_item/donator/rhynnrhynn_staff_solar
 	name = "Donator Kit - Celestial Staff, Solar"
-	path = /obj/item/enchantingkit/weapon/rhynnrhynn_staff_solar
+	path = /obj/item/enchantingkit/rhynnrhynn_staff_solar
 	ckeywhitelist = list("rhynnrhynn")
