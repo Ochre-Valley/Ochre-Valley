@@ -943,6 +943,7 @@
 //RhynnRhynn - Celestial Staff + Variants
 /obj/item/enchantingkit/weapon/rhynnrhynn_staff
 	name = "'Celestial Staff' morphing elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
 		/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel		= /obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn,
 		/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel			= /obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn
@@ -951,6 +952,7 @@
 
 /obj/item/enchantingkit/weapon/rhynnrhynn_staff_crested
 	name = "'Celestial Staff, Crested' morphing elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
 		/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel		= /obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/crested,
 		/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel			= /obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/crested
@@ -959,6 +961,7 @@
 
 /obj/item/enchantingkit/weapon/rhynnrhynn_staff_winged
 	name = "'Celestial Staff, Winged' morphing elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
 		/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel		= /obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/winged,
 		/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel			= /obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/winged
@@ -967,6 +970,7 @@
 
 /obj/item/enchantingkit/weapon/rhynnrhynn_staff_solar
 	name = "'Celestial Staff, Solar' morphing elixir"
+	desc = "A small container of special morphing dust, perfect to make a specific item. It can be used to alter the appearance either a regular or refined Blacksteel Staff."
 	target_items = list(
 		/obj/item/rogueweapon/woodstaff/implement/greater/blacksteel		= /obj/item/rogueweapon/woodstaff/implement/greater/blacksteel/rhynn/solar,
 		/obj/item/rogueweapon/woodstaff/implement/grand/blacksteel			= /obj/item/rogueweapon/woodstaff/implement/grand/blacksteel/rhynn/solar
