@@ -30,7 +30,7 @@
 	tutorial = "In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."
 	outfit = /datum/outfit/job/roguetown/adventurer/tinkerer
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
-	traits_applied = list(TRAIT_SEEPRICES, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT)
+	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 3,
 		STATKEY_PER = 2,
@@ -125,6 +125,7 @@
 			if("Massive Wrench")
 				backr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
+	head = /obj/item/clothing/mask/rogue/spectacles/golden //DRIP
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	backl = /obj/item/storage/backpack/rogue/backpack
 	pants = /obj/item/clothing/under/roguetown/trou/leather
@@ -135,10 +136,8 @@
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
-		/obj/item/recipe_book/survival = 1,
 		/obj/item/chalk = 1,
 		/obj/item/rogueweapon/hammer/iron,
-		/obj/item/clothing/mask/rogue/spectacles/golden = 1// a good tinkerer needs a pair of sickass looking goggles. In backpack so vices won't replace 'em
 		)
 
 /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
