@@ -445,6 +445,12 @@
 	grind_results = list(/datum/reagent/berrypoison = 5)
 	color_index = "bad"
 
+//OV edit
+/obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison/On_Consume(mob/living/eater)
+	..()
+	log_admin("[eater] ate a poison jackberry.") //For the sake of solving stupid "whodunit" arguments
+//OV edit end
+
 /obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison/Initialize()
 	. = ..()
 	var/static/list/slapcraft_recipe_list = list(
@@ -676,6 +682,16 @@
 	grind_results = list(/datum/reagent/drug/nicotine = 5)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_SHORT
+
+//OV edit
+/obj/item/reagent_containers/food/snacks/grown/rogue/swampweed/On_Consume(mob/living/eater)
+	. = ..()
+	log_admin("[eater] ate a swamp weed.") //For the sake of solving stupid "whodunit" arguments
+
+/obj/item/reagent_containers/food/snacks/grown/rogue/pipeweed/On_Consume(mob/living/eater)
+	. = ..()
+	log_admin("[eater] ate a westleach leaf.") //For the sake of solving stupid "whodunit" arguments
+//OV edit end
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/pipeweeddry
 	seed = null

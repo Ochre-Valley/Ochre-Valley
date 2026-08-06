@@ -345,6 +345,7 @@ All foods are distributed among various categories. Use common sense.
 
 	if(!reagents.total_volume)
 		if(eat_effect == /datum/status_effect/debuff/rotfood)
+			log_admin("[eater] has eaten a rotten [src]") //For the sake of solving stupid "whodunit" arguments
 			SEND_SIGNAL(eater, COMSIG_ROTTEN_FOOD_EATEN, src)
 		var/mob/living/location = loc
 		var/obj/item/trash_item = generate_trash(location)
@@ -878,3 +879,9 @@ All foods are distributed among various categories. Use common sense.
 	foodtype = GROSS
 	burntime = 0
 	cooktime = 0
+
+//OV edit
+/obj/item/reagent_containers/food/snacks/badrecipe/On_Consume(mob/living/eater)
+	. = ..()
+	log_admin("[eater] ate a burned mess.") //For the sake of solving stupid "whodunit" arguments
+//OV edit end
