@@ -65,7 +65,7 @@
 	..()
 	to_chat(H, span_warning("In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."))
 	if(H.mind)
-		var/gadgets = list("Pistol", "Rifle", "Grappling Hook", "Clockwork Drill", "Voltic Gauntlets", "Bronze Limbs")
+		var/gadgets = list("Pistol", "Rifle", "Crossbow", "Grappling Hook", "Clockwork Drill", "Voltic Gauntlets", "Bronze Limbs")
 		var/gadget_choice = input(H, "Choose a gadget.", "YOUR LATEST MASTERPIECE") as anything in gadgets
 		H.set_blindness(0)
 		switch(gadget_choice)
@@ -79,6 +79,10 @@
 				beltl = /obj/item/quiver/bulletpouch/iron
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
 				l_hand = /obj/item/powderflask
+			if("Crossbow")
+				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_APPRENTICE, TRUE)
+				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+				beltl = /obj/item/quiver/bolt/standard
 			if("Grappling Hook")
 				H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_EXPERT, TRUE)
 				r_hand = /obj/item/grapplinghook
