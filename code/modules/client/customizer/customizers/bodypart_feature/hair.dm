@@ -1032,8 +1032,7 @@
 		/datum/sprite_accessory/hair/head/strand,
 		/datum/sprite_accessory/hair/head/sodden,
 		/datum/sprite_accessory/hair/head/lizbeth,
-		/datum/sprite_accessory/hair/head/skunky
-		/datum/sprite_accessory/hair/head/lizbeth,
+		/datum/sprite_accessory/hair/head/skunky,
 		//ov edit start
 		/datum/sprite_accessory/hair/head/dragonmane,
 		/datum/sprite_accessory/hair/head/dragonmaneshort
