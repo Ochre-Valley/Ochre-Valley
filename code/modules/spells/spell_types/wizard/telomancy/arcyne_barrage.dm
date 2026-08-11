@@ -24,6 +24,7 @@
 
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
+	charge_swingdelay_type = SWINGDELAY_PENALTY
 	charge_time = CHARGETIME_HEAVY
 	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
@@ -117,8 +118,8 @@
 	bolt.fired_from = get_turf(H)
 	bolt.def_zone = BODY_ZONE_CHEST
 	bolt.spell_impact_intensity = SPELL_IMPACT_MEDIUM
-	bolt.accuracy += (H.STAINT - 9) * 4
-	bolt.bonus_accuracy += (H.STAINT - 8) * 3
+	bolt.accuracy += (H.STAPER - 9) * 4
+	bolt.bonus_accuracy += (H.STAPER - 8) * 3
 	if(H.mind)
 		bolt.bonus_accuracy += (H.get_skill_level(associated_skill) * 5)
 	bolt.setAngle(angle)
@@ -137,8 +138,9 @@
 	speed = 3
 	accuracy = 60
 	guard_deflectable = TRUE
+	expose_caster_on_deflect = TRUE
 	npc_simple_damage_mult = 1.5
-	intdamfactor = BLUNT_DEFAULT_INT_DAMAGEFACTOR
+	intdamfactor = 1
 	movement_type = UNSTOPPABLE
 	ricochets_max = 5
 	ricochet_chance = 100

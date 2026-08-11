@@ -189,6 +189,9 @@
 		M.mind.remove_antag_datum(/datum/antagonist/zombie)
 		M.remove_status_effect(/datum/status_effect/debuff/rotted_zombie)
 		M.apply_status_effect(/datum/status_effect/debuff/revived)
+		if(HAS_TRAIT(M, TRAIT_IRONMAN))
+			M.apply_status_effect(/datum/status_effect/debuff/integrity_rig, 11 MINUTES)
+			M.visible_message(span_danger("[M] is looking on the verge of exploding again! Their core may need an extra whack from a hammer."))
 		//addtimer(CALLBACK(src, PROC_REF(deathmark), M), 5 MINUTES) //Performs a check after the listed time has elapsed, post-resurrection. If the target is still alive by then, it'll apply the 'DNR' trait. //OV Edit - Commented Out
 		M.remove_status_effect(src)
 
@@ -361,7 +364,7 @@
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.remove_filter(WILTING_FILTER)
-	
+
 	dismember_owner()
 
 /datum/status_effect/debuff/eoran_wilting/tick()
@@ -372,7 +375,7 @@
 		if(L.show_redflash())
 			L.flash_fullscreen("redflash3", 1)
 		//Caustic Edit End
-		
+
 		// Small damage to limbs as warning
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
@@ -425,17 +428,17 @@
 /datum/status_effect/pearlescent_aril/tick()
 	if(!owner.reagents || !iscarbon(owner))
 		return
-	
+
 	var/mob/living/carbon/C = owner
 	var/datum/reagents/R = C.reagents
 	var/conversion_occurred = FALSE
-	
+
 	for(var/datum/reagent/RG in R.reagent_list)
 		if(RG.harmful || istype(RG, /datum/reagent/medicine/stronghealth) && RG.volume > 0.1)
 			R.remove_reagent(RG.type, 1)
 			R.add_reagent(/datum/reagent/medicine/healthpot, 1)
 			conversion_occurred = TRUE
-	
+
 	// Visual feedback if conversion occurred
 	if(conversion_occurred)
 		new /obj/effect/temp_visual/heal(get_turf(C), "#d8d8d8")

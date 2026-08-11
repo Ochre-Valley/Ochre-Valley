@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "The option to spawn with gold instead of silver for the orator inquisitor subclass."

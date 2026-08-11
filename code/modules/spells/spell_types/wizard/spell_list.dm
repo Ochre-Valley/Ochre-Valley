@@ -10,19 +10,20 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/datum/action/cooldown/spell/fridigitation,
 		/datum/action/cooldown/spell/greater_cleaning,
 		/datum/action/cooldown/spell/lesser_knock,
+		/datum/action/cooldown/spell/levitation,
 		/datum/action/cooldown/spell/light,
 		/datum/action/cooldown/spell/magicians_brick,
 		/datum/action/cooldown/spell/magicians_stone,
 		/datum/action/cooldown/spell/magicians_rock,
-		/datum/action/cooldown/spell/aetherknife, //OV Add
+		/datum/action/cooldown/spell/aetherknife,
 		/datum/action/cooldown/spell/mending,
 		/datum/action/cooldown/spell/message,
 		/datum/action/cooldown/spell/mindlink,
 		// /datum/action/cooldown/spell/mirror_transform, //OV Edit - Commented Out for Below Spell
 		/obj/effect/proc_holder/spell/invoked/mirror_transform_ov, //OV Add - OV Specific Mirror Transform, pending adjustments to DATUM system
 		/datum/action/cooldown/spell/nondetection,
-		/datum/action/cooldown/spell/projectile/lesser_fetch,
-		/datum/action/cooldown/spell/projectile/lesser_repel,
+		/datum/action/cooldown/spell/projectile/fetch,
+		/datum/action/cooldown/spell/projectile/repel,
 		/datum/action/cooldown/spell/projectile/waterbolt,
 		/datum/action/cooldown/spell/readomen,
 		/datum/action/cooldown/spell/touch/rune_ward,

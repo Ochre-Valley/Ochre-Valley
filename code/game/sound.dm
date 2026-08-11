@@ -97,7 +97,7 @@
 					continue
 
 			var/is_muffled = (M in muffled_listeners)
-			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled))
+			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled, pref_toggle)) //OV EDIT
 				. += M
 
 
@@ -108,7 +108,7 @@
 	I.pixel_y = 6
 	I.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	I.appearance_flags = RESET_COLOR
-	flick_overlay(I, GLOB.clients, 6)
+	flick_overlay_view(I, A, 6)
 
 /proc/ping_sound_through_walls(turf/T)
 	new /obj/effect/temp_visual/soundping(T)
@@ -474,6 +474,13 @@
 							'sound/foley/footsteps/armor/woodarmor (1).ogg',
 							'sound/foley/footsteps/armor/woodarmor (2).ogg',
 							'sound/foley/footsteps/armor/woodarmor (3).ogg',
+							)
+			if(SFX_HEELS)
+				soundin = pick(
+							'sound/foley/footsteps/highheel1.ogg',
+							'sound/foley/footsteps/highheel2.ogg',
+							'sound/foley/footsteps/highheel3.ogg',
+							'sound/foley/footsteps/highheel4.ogg',
 							)
 	//START OF CIT CHANGES - adds random vore sounds
 			if ("hunger_sounds") soundin = pick('modular_causticcove/sound/cvore/vore/growl1.ogg','modular_causticcove/sound/cvore/vore/growl2.ogg','modular_causticcove/sound/cvore/vore/growl3.ogg','modular_causticcove/sound/cvore/vore/growl4.ogg','modular_causticcove/sound/cvore/vore/growl5.ogg')

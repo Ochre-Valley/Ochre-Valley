@@ -127,7 +127,6 @@ SUBSYSTEM_DEF(garbage)
 		if(LAZYLEN(I.extra_details))
 			del_log += "\tExtra Info:\n\t\t- [I.extra_details.Join("\n\t\t- ")]"
 	log_qdel("", del_log)
-// OV Edit End
 
 /datum/controller/subsystem/garbage/fire()
 	//the fact that this resets its processing each fire (rather then resume where it left off) is intentional.
@@ -293,7 +292,7 @@ SUBSYSTEM_DEF(garbage)
 	if (tick > highest_del_tickusage)
 		highest_del_tickusage = tick
 		highest_del_type_string = "[type]"
-	
+
 	time = world.timeofday - time
 	if (!time && TICK_DELTA_TO_MS(tick) > 1)
 		time = TICK_DELTA_TO_MS(tick)/100

@@ -26,6 +26,7 @@
 	foodtype = GROSS
 
 /obj/item/reagent_containers/food/snacks/mix_sbiten
+	cuisine = CUISINE_NORTHERN
 	name = "Sbiten honey mix"
 	desc = "a brick of crystallized honey, infused with spices for extra comfort"
 	icon = 'modular/Neu_teas_and_brews/icons/obj/tea_mixes.dmi'
@@ -53,11 +54,11 @@
 	rotprocess = null
 	slice_sound = TRUE
 	dry = TRUE
-	pipe_reagents = list(/datum/reagent/drug/nicotine = 120) //500 cigarettes
+	pipe_reagents = list(/datum/reagent/drug/westleach = 120) //500 cigarettes
 	eat_effect = /datum/status_effect/debuff/badmeal
 	extra_eat_effect = /datum/status_effect/debuff/rotfood
-	list_reagents = list(/datum/reagent/drug/nicotine = 5, /datum/reagent/consumable/nutriment = 1, /datum/reagent/toxin/bad_food = 5)
-	grind_results = list(/datum/reagent/drug/nicotine = 20)
+	list_reagents = list(/datum/reagent/drug/westleach = 5, /datum/reagent/consumable/nutriment = 1, /datum/reagent/toxin/bad_food = 5)
+	grind_results = list(/datum/reagent/drug/westleach = 20)
 
 /obj/item/reagent_containers/food/snacks/grown/tar_brick/update_icon()
 	if(slices_num)
@@ -85,6 +86,6 @@
 	dry = TRUE
 	eat_effect = /datum/status_effect/debuff/badmeal
 	extra_eat_effect = /datum/status_effect/debuff/rotfood
-	pipe_reagents = list(/datum/reagent/drug/nicotine = 30) 
-	list_reagents = list(/datum/reagent/drug/nicotine = 5, /datum/reagent/consumable/nutriment = 1, /datum/reagent/toxin/bad_food = 1)
-	grind_results = list(/datum/reagent/drug/nicotine = 10)
+	pipe_reagents = list(/datum/reagent/drug/westleach = 30)
+	list_reagents = list(/datum/reagent/drug/westleach = 5, /datum/reagent/consumable/nutriment = 1, /datum/reagent/toxin/bad_food = 1)
+	grind_results = list(/datum/reagent/drug/westleach = 10)

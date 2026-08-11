@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - bugfix: "Far travel and safe_round_remove are now recursive on contents, so any player inside another is also removed."

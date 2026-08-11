@@ -124,7 +124,6 @@
 	minstr = 6
 	walking_stick = TRUE
 	experimental_onback = TRUE
-	flags_ai_inventory = AI_ITEM_GUN
 	cartridge_wording = "musketball"
 	load_sound = 'modular_causticcove/sound/arquebus/musketload.ogg'
 	fire_sound = "modular_causticcove/sound/arquebus/arquefire.ogg"
@@ -188,7 +187,7 @@
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_INSERT, PROC_REF(checkstoragevalidity))
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE, PROC_REF(checkstoragevalidity))
 	myrod = new /obj/item/ramrod(src)
-	
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/Destroy()
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_INSERT)
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE)

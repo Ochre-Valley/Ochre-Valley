@@ -85,8 +85,13 @@
 
 /datum/supply_pack/rogue/tools/surgeonsbag
 	name = "Surgeon's bag, Full"
-	cost = 80
+	cost = 45
 	contains = list(/obj/item/storage/belt/rogue/surgery_bag)
+
+/datum/supply_pack/rogue/tools/surgeonsbagempty
+	name = "Surgeon's bag, Empty"
+	cost = 15
+	contains = list(/obj/item/storage/belt/rogue/surgery_bag/empty)
 
 /datum/supply_pack/rogue/tools/soapps
 	name = "Soap"
@@ -263,3 +268,10 @@
 	name = "Iron Pot"
 	cost = 12
 	contains = list(/obj/item/reagent_containers/glass/bucket/pot)
+
+/datum/supply_pack/rogue/tools/steel_pick
+	name = "Steel Pick"
+	cost = 40
+	contains = list(/obj/item/rogueweapon/pick/steel)
+	// i forgot why we decided no steel pick in the public face but we did. i think this was when it was way easier to game gems...? idfk im keeping it.
+	not_in_public = TRUE

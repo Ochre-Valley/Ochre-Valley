@@ -33,6 +33,7 @@
 	popup.set_content(dat)
 	popup.open(FALSE)
 
+//OV ADD START - Roleplay Ad Maint
 /client/proc/view_roleplay_ads()
 	var/dat
 	for(var/X in GLOB.roleplay_ads)
@@ -41,3 +42,4 @@
 	var/datum/browser/popup = new(src, "actors", "<center>Roleplay Ads</center>", 500, 600)
 	popup.set_content(dat)
 	popup.open(FALSE)
+//OV ADD END

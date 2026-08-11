@@ -58,8 +58,6 @@
 
 #define LOGSRC_CLIENT "Client"
 #define LOGSRC_MOB "Mob"
-
-// OV Add Start: JSON Logging
 /// The number of entries to store per category, don't make this too large or you'll start to see performance issues
 #define CONFIG_MAX_CACHED_LOG_ENTRIES 1000
 
@@ -138,5 +136,3 @@
 
 // Default log schema version
 #define LOG_CATEGORY_SCHEMA_VERSION_NOT_SET "0.0.1"
-
-// OV Add End

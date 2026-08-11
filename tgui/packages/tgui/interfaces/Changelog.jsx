@@ -1,5 +1,5 @@
 import dateformat from 'dateformat';
-import yaml from 'js-yaml';
+import { CORE_SCHEMA, load } from 'js-yaml';
 import { Component, Fragment } from 'react';
 import {
   Box,
@@ -90,7 +90,7 @@ export class Changelog extends Component {
           self.getData(date, attemptNumber + 1);
         }, timeout);
       } else {
-        self.setData(yaml.load(result, { schema: yaml.CORE_SCHEMA }));
+        self.setData(load(result, { schema: CORE_SCHEMA }));
       }
     });
   };
@@ -101,9 +101,9 @@ export class Changelog extends Component {
     } = useBackend();
 
     if (dates) {
-      dates.forEach((date) =>
-        this.dateChoices.push(dateformat(date, 'mmmm yyyy', true)),
-      );
+      dates.forEach((date) => {
+        this.dateChoices.push(dateformat(date, 'mmmm yyyy', true));
+      });
       this.setSelectedDate(this.dateChoices[0]);
       this.getData(dates[0]);
     }
@@ -184,22 +184,29 @@ export class Changelog extends Component {
 
     const header = (
       <Section>
-        <h1 style={{ color: 'red' }}><b>Welcome To Ochre Valley!!!!</b></h1>
+        <h1 style={{ color: 'red' }}>
+          <b>Welcome To Ochre Valley!!!!</b>
+        </h1>
         <p style={{ color: 'red' }}>
-          This is a server is 18+ and made by people who are into vore, for people who are into vore. If you do not know what that is, or it bothers you, this is not the server for you. Harassment or kinkshaming in any regard will not be tolerated, review our rules before playing, and approach the game with a casual attitude; many are here to have fun and ERP. PvP is entirely OPT-IN.
+          This is a server is 18+ and made by people who are into vore, for
+          people who are into vore. If you do not know what that is, or it
+          bothers you, this is not the server for you. Harassment or kinkshaming
+          in any regard will not be tolerated, review our rules before playing,
+          and approach the game with a casual attitude; many are here to have
+          fun and ERP. PvP is entirely OPT-IN.
         </p>
         <p>
           {'Our GitHub can be found '}
           <a href="https://github.com/Ochre-Valley/Ochre-Valley">here</a>
           {', recent GitHub contributors can be found '}
-          <a href="https://github.com/Ochre-Valley/Ochre-Valley/pulse">
-            here
-          </a>
-          .
+          <a href="https://github.com/Ochre-Valley/Ochre-Valley/pulse">here</a>.
         </p>
         <p>
           {'Check for any new announcements on the discord '}
-          <a href="https://discord.com/channels/1473048818802229523/1473049362719440896">here</a>.
+          <a href="https://discord.com/channels/1473048818802229523/1473049362719440896">
+            here
+          </a>
+          .
         </p>
         {/* {dateDropdown} */}
       </Section>
@@ -285,7 +292,8 @@ export class Changelog extends Component {
         <p>
           {'Roguetown / Azure Peak was originally forked from '}
           <a href="https://github.com/tgstation/tgstation/commit/c28b351807bad950d2b323ada048190844bbda32">
-            TG station commit c28b351807bad950d2b323ada048190844bbda32 on 2019/17/11
+            TG station commit c28b351807bad950d2b323ada048190844bbda32 on
+            2019/17/11
           </a>
         </p>
         <p>

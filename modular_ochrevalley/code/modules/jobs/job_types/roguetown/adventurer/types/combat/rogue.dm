@@ -47,7 +47,7 @@
 		/datum/skill/misc/swimming = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE, 
+		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_NOVICE,//besides engineering, they have the bare minimum to maintain most equipment. Meant to run a repair-support role in most parties
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_NOVICE,
@@ -138,10 +138,10 @@
 		/obj/item/rogueweapon/hammer/iron,
 		/obj/item/clothing/mask/rogue/spectacles/golden = 1// a good tinkerer needs a pair of sickass looking goggles. In backpack so vices won't replace 'em
 		)
-	H.AddSpell(new /obj/effect/proc_holder/spell/invoked/secularbarter) //They have the Connections like an antiquarian does, but none of the alchemical tricks
-	H.mind.AddSpell(new /datum/action/cooldown/spell/touch/prestidigitation)//A tinkerer is a bit magical, but one of their spells has to be mending 
+	H.mind.AddSpell(new /datum/action/cooldown/spell/matthios/barter_secular) //They have the Connections like an antiquarian does, but none of the alchemical tricks
+	H.mind.AddSpell(new /datum/action/cooldown/spell/touch/prestidigitation)//A tinkerer is a bit magical, but one of their spells has to be mending
 	H.mind.AddSpell(new /datum/action/cooldown/spell/mending)
-	if(!LAZYLEN(H.mind.mage_aspect_config)) 
+	if(!LAZYLEN(H.mind.mage_aspect_config))
 		H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 0, "utilities" = 2))
 		H.mind.check_learnspell()
 

@@ -216,6 +216,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 	set name = "Commend Someone"
 	commendsomeone()
 
+//OV ADD START - Roleplay Ad Maint
 /client/verb/roleplay_ad_view()
 	set category = "OOC"
 	set name = "Roleplay Ad (View)"
@@ -241,7 +242,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 			log_game("[C] has set their Roleplay Ad to '[msg]'.")
 		else
 			to_chat(C, span_info("Roleplay ad removed."))
-		// OV Edit End
+// OV ADD END
 
 /client/verb/changefps()
 	set category = "Preferences.Options"

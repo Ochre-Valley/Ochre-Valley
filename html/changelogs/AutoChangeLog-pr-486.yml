@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - code_imp: "Appearance changer loading static data should be a bit more performant."

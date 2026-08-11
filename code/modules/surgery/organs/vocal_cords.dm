@@ -25,6 +25,7 @@
 
 /obj/item/organ/vocal_cords/harpy // OV Add Start
 	name = "harpy's song"
+	icon = 'modular_ochrevalley/icons/obj/surgery.dmi'
 	icon_state = "harpysong"		//Pulsating heart energy thing.
 	desc = "The blessed essence of harpysong. How did you get this... you monster!"
 	should_regenerate = TRUE

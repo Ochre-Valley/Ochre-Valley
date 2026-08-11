@@ -401,19 +401,22 @@
 	adjust_fire_stacks(-2, /datum/status_effect/fire_handler/fire_stacks)
 	adjust_fire_stacks(-2, /datum/status_effect/fire_handler/fire_stacks/sunder)
 	adjust_fire_stacks(-2, /datum/status_effect/fire_handler/fire_stacks/divine)
+	adjust_fire_stacks(-1, /datum/status_effect/fire_handler/fire_stacks/vheslyn) //Harder to remove
 
 	var/datum/status_effect/fire_handler/fire_stacks/fire_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder)
 	var/datum/status_effect/fire_handler/fire_stacks/divine_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/divine)
+	var/datum/status_effect/fire_handler/fire_stacks/vheslyn_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/vheslyn)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/blessed/blessed_sunder = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
 
-	if(fire_status?.stacks + sunder_status?.stacks + divine_status?.stacks + blessed_sunder?.stacks > 10 || !(mobility_flags & MOBILITY_STAND))
+	if(fire_status?.stacks + sunder_status?.stacks + vheslyn_status?.stacks + divine_status?.stacks + blessed_sunder?.stacks > 10 || !(mobility_flags & MOBILITY_STAND))
 		Paralyze(50, TRUE, TRUE)
 		spin(32,2)
 		adjust_fire_stacks(-5, /datum/status_effect/fire_handler/fire_stacks)
 		adjust_fire_stacks(-5, /datum/status_effect/fire_handler/fire_stacks/sunder)
 		adjust_fire_stacks(-5, /datum/status_effect/fire_handler/fire_stacks/divine)
 		adjust_fire_stacks(-5, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+		adjust_fire_stacks(-3, /datum/status_effect/fire_handler/fire_stacks/vheslyn) //Harder to remove
 		visible_message(span_warning("[src] rolls on the ground, trying to put [p_them()]self out!"))
 	else
 		visible_message(span_notice("[src] pats the flames to extinguish them."))
@@ -617,7 +620,7 @@
 /mob/living/carbon/proc/vomit(lost_nutrition = 50, blood = FALSE, stun = TRUE, distance = 1, message = TRUE, toxic = FALSE, harm = FALSE, force = FALSE)
 	if(HAS_TRAIT(src, TRAIT_IRONMAN))
 		return TRUE
-	
+
 	if(HAS_TRAIT(src, TRAIT_TOXINLOVER) && !force)
 		return TRUE
 
@@ -1015,38 +1018,36 @@
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")*/
-
+	var/hurtdamage = 0
 	if(show_redflash())
-		var/hurtdamage = ((get_complex_pain() / (STAWIL * 10)) * 100) //what percent out of 100 to max pain
-		if(hurtdamage > 5) //float
-			var/severity = 0
-			switch(hurtdamage)
-				if(5 to 20)
-					severity = 1
-				if(20 to 40)
-					severity = 2
-				if(40 to 60)
-					severity = 3
-					if(!check_epilepsy())
-						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
-				if(60 to 80)
-					severity = 4
-					if(!check_epilepsy())
-						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
-				if(80 to 99)
-					severity = 5
-					if(!check_epilepsy())
-						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
-				if(99 to INFINITY)
-					severity = 6
-					if(!check_epilepsy())
-						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
-			
-			if(!check_epilepsy())
-				overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
+		// Divide by 0 prevention, for sanity sake.
+		hurtdamage = ((get_complex_pain() / (max(STAWIL, 1) * 10)) * 100) //what percent out of 100 to max pain
+	if(hurtdamage > 5) //float
+		var/severity = 0
+		switch(hurtdamage)
+			if(5 to 20)
+				severity = 1
+			if(20 to 40)
+				severity = 2
+			if(40 to 60)
+				severity = 3
+			if(60 to 80)
+				severity = 4
+			if(80 to 99)
+				severity = 5
+			if(99 to INFINITY)
+				severity = 6
+		if(!check_epilepsy()) //OV EDIT
+			overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
+		//drops to 30 stops rapid health changes at this threshold from spamming the overlay.
+		if(hurtdamage >= 40 || (screens["painflash"] && hurtdamage > 30))
+			if(!check_epilepsy()) //OV EDIT
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 		else
-			clear_fullscreen("brute")
 			clear_fullscreen("painflash")
+	else
+		clear_fullscreen("brute")
+		clear_fullscreen("painflash")
 
 /mob/living/carbon/update_health_hud(shown_health_amount)
 	if(!client || !hud_used)

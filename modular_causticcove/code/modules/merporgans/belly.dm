@@ -8,6 +8,9 @@
 	accessory_type = /datum/sprite_accessory/belly
 	var/belly_size = DEFAULT_BELLY_SIZE
 
+/obj/item/organ/belly/get_cache_key()
+	return "[..()]-[belly_size]"
+
 /datum/organ_dna/belly
 	var/belly_size = DEFAULT_BELLY_SIZE
 

@@ -58,7 +58,7 @@
 /obj/item/clothing/under/roguetown/skirt/baotha/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_DEPRAVED, "SKIRT")
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV EDIT - Removeable
 
 /obj/item/clothing/under/roguetown/skirt/baotha/dropped(mob/living/carbon/human/user)
 	. = ..()

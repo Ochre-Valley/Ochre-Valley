@@ -17,6 +17,9 @@
 		return //No ghosts or incapacitated folk allowed to do this.
 	if(!ishuman(dropping))
 		return //Only humans have job slots to be freed.
+	if(HAS_TRAIT(dropping, TRAIT_CONJURED_SUMMON))
+		to_chat(user, "<span class='warning'>This is not your true body, why are you leaving?</span>")
+		return
 	if(in_use) // Someone's already going in.
 		return
 	var/mob/living/carbon/human/departing_mob = dropping
@@ -64,6 +67,12 @@
 			if(istype(content, /obj/item/holder/micro))
 				departing_mob.dropItemToGround(content, TRUE, TRUE)
 			//Caustic Edit End
+			//OV Edit: Recursively remove contents.
+			if(istype(content, /obj/belly))
+				for(var/mob/living/L in content.contents)
+					if(L.client) //Let's not make every mob proc this.
+						safe_round_remove(L)
+			//OV Edit End
 		dat_log += "."
 	if(departing_mob.mind)
 		departing_mob.mind.unknow_all_people()
@@ -72,13 +81,14 @@
 		for(var/datum/bounty/removing_bounty in GLOB.head_bounties)
 			if(removing_bounty.target == departing_mob.real_name)
 				GLOB.head_bounties -= removing_bounty
+	GLOB.dominant_faith_tracker.handle_removal(departing_mob)
 	if(SSticker.rulermob == departing_mob)
 		SSticker.rulermob = null
 	if(SSticker.regentmob == departing_mob)
 		SSticker.regentmob = null
 	GLOB.chosen_names -= departing_mob.real_name
 	LAZYREMOVE(GLOB.actors_list, departing_mob.mobid)
-	LAZYREMOVE(GLOB.roleplay_ads, departing_mob.mobid)
+	LAZYREMOVE(GLOB.roleplay_ads, departing_mob.mobid) //OV ADD - Roleplay Ad Maint
 	// Keep insiders' bank balance forfeits to the Crown's Purse on far-travel (silent OOC).
 	// Day 0 is a grace window so roundstart bailouts don't accidentally hand the Crown a
 	// windfall from a player who never had time to act in role. Loose mammon is tallied

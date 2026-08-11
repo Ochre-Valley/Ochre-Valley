@@ -32,6 +32,26 @@
 	var/matthios = FALSE
 	priest_excluded = TRUE
 
+/obj/effect/proc_holder/spell/invoked/resurrect/get_spell_statistics(mob/living/user)
+	. = ..()
+	var/list/needed_items = get_current_required_items()
+
+	if(!length(needed_items))
+		. += span_notice("<b>Required Components:</b> None.")
+		return
+
+	var/has_alt_reduction = SSchimeric_tech.has_revival_cost_reduction() && length(alt_required_items)
+	var/cost_header = "Required Components" + (has_alt_reduction ? " (Reduced Cost Active):" : ":")
+
+	. += "<br><span class='notice'><b>[cost_header]</b></span>"
+
+	for(var/item_path in needed_items)
+		var/amount = needed_items[item_path]
+		var/obj/item/item_datum = item_path
+		var/item_name = initial(item_datum.name)
+
+		. += span_info("- [amount]x [item_name][amount > 1 ? "s" : ""]")
+
 /obj/effect/proc_holder/spell/invoked/resurrect/start_recharge()
 	var/old_recharge = recharge_time
 	recharge_time = initial(recharge_time) * SSchimeric_tech.get_resurrection_multiplier()
@@ -177,7 +197,7 @@
 	for(var/item_type in current_required_items)
 		var/needed = current_required_items[item_type]
 		var/have = available_items[item_type] || 0
-		
+
 		if(have < needed) {
 			var/obj/item/I = item_type
 			var/amount_needed = needed - have
@@ -291,7 +311,7 @@
 	var/timed_cooldown
 
 /obj/effect/proc_holder/spell/invoked/summon_dreamfiend_curse/cast(list/targets, mob/living/user)
-	if (world.time < timed_cooldown) 
+	if (world.time < timed_cooldown)
 		to_chat(user, span_warning("You must gather your strength before you are ready to confront your terror!"))
 		to_chat(user, span_warning("Time remaining: [max(0, timed_cooldown - world.time)/10] seconds."))
 		revert_cast()
@@ -339,6 +359,8 @@
 	)
 	debuff_type = /datum/status_effect/debuff/metabolic_acceleration
 	sound = 'sound/magic/heartbeat.ogg'
+	overlay_icon = 'icons/mob/actions/eoramiracles.dmi'
+	action_icon = 'icons/mob/actions/eoramiracles.dmi'
 	overlay_state = "eora_revive"
 
 /atom/movable/screen/alert/status_effect/nutrition_drain
@@ -379,6 +401,9 @@
 	desc = "Resurrects the chosen target, bringing them back from the dead. Side effects may include crippling weaknesses from other godly rites, ending up \
 	butt-naked in the middle of the kingdom's throne room, and much, much, more. </br>Unlike a regular Healing miracle, \
 	this can affect - and resurrect - devout Psydonians as well."
+	action_icon = 'icons/mob/actions/xylixmiracles.dmi'
+	overlay_icon = 'icons/mob/actions/xylixmiracles.dmi'
+	overlay_state = "revive"
 	debuff_type = /datum/status_effect/debuff/random_revival
 	alt_required_items = list(
 		/obj/item/clothing/neck/roguetown/psicross/wood = 1
@@ -661,3 +686,40 @@
 	action_icon = 'icons/mob/actions/undividedmiracles.dmi'
 	overlay_icon = 'icons/mob/actions/undividedmiracles.dmi'
 	overlay_state = "revive"
+
+/obj/effect/proc_holder/spell/invoked/resurrect/dream
+	name = "Oneiric Rite of Anastasis"
+	desc = "Resurrects the chosen target, bringing them back from the dead. \
+	Converts material used into random higher tier materials. \
+	The resurrected target will be tethered to a dream entity. They must invoke the daemon and kill it to be freed from their curse. \
+	Requires ocean water near."
+	sound = 'sound/magic/chime.ogg'
+
+	required_items = list(
+		/obj/item/dream_material/dream_spike = 1,
+		/obj/item/dream_material/parchment_raw = 1,
+		/obj/item/dream_material/dream_ring = 1
+	)
+	alt_required_items = list(
+		/obj/item/dream_material/dream_seed = 1
+	)
+
+	debuff_type = /datum/status_effect/debuff/dreamfiend_curse
+	required_structure = /turf/open/water/ocean
+	action_icon = 'icons/mob/actions/abyssormiracles.dmi'
+	overlay_icon = 'icons/mob/actions/abyssormiracles.dmi'
+	overlay_state = "paint_revive"
+
+/obj/effect/proc_holder/spell/invoked/resurrect/dream/cast(list/targets, mob/living/user)
+	. = ..()
+	if(.)
+		var/turf/T = get_turf(user)
+		if(T)
+			var/static/list/t2_items = list(
+				/obj/item/dream_material/dream_effigy,
+				/obj/item/dream_material/dream_fishes,
+				/obj/item/dream_material/dream_blade
+			)
+			for(var/i in 1 to 3)
+				var/chosen_type = pick(t2_items)
+				new chosen_type(T)

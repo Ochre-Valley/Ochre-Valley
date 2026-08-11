@@ -31,6 +31,7 @@
 					/datum/advclass/warden/wildsoul,
 					//OV Add End
 					)
+//	has_subprefs = FALSE // only one subclass //OV EDIT - Comented out because yes subclass
 
 /datum/outfit/job/roguetown/warden
 	neck = /obj/item/clothing/neck/roguetown/coif/padded

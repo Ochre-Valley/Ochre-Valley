@@ -3,12 +3,11 @@
 	var/newtime = max(20, reloadtime - user.STASTR - (user.get_skill_level(ranged_skill) * 2))
 	if(chambered)
 		newtime *= chambered.charge_time_mult
-	return max(ARCHER_NPC_MIN_CROSSBOW_CHARGETIME, newtime) * ARCHER_NPC_ROF_PENALTY
+	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	has_item_quality = TRUE
 	name = "crossbow"
-	flags_ai_inventory = AI_ITEM_GUN
 	desc = "A deadly weapon that shoots a bolt with terrific power. Unlike the common bow, \
 	it uses a sophisticated mechanism to renock - and retain - its half-length bolts; a \
 	matter that relies more on raw strength than dexterity to master. </br>A favorite \
@@ -317,7 +316,6 @@
 	movingreload = TRUE
 	onehanded = TRUE
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_HIP
-	penfactor = -1	//Reduces bolt penetration by one tier. A PEN_MEDIUM bolt becomes PEN_LIGHT.
 	w_class = WEIGHT_CLASS_SMALL
 	wdefense = 2
 	max_integrity = 80
@@ -397,7 +395,7 @@
 	item_state = "ancientheavybow"
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/heavy/relic
-	name = "Providence"
+	name = "\"Providence\""
 	desc = "In the hands of Saint Augustere, this specially-hewn siegebow felled the traitorous Archbishop of Rockhill; \
 	mere moments before the completion of a terrible ritual. Decades later, it has been called into action once more \
 	to destroy those who'd seek to sacrifice His greatest works. May thy aim be true, childe o' God - and thy judgement, unfettered."
@@ -409,7 +407,7 @@
 	item_state = "relicpsyheavybow"
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/heavy/relic/marque
-	name = "Epistle"
+	name = "\"Epistle\""
 	desc = "'I cannot explain what happened in those halls, your eminence..' </br>'..I can only have faith that I did the right thing.'"
 
 //

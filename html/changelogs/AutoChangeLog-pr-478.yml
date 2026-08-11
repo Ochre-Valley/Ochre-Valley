@@ -1,0 +1,4 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - bugfix: "made bloom tea use manabloompowder instead of manablooms due to an upstream merge conflict"

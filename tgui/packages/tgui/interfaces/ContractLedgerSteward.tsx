@@ -279,7 +279,11 @@ const ComposeView = () => {
   const bonusPayEligible = funding !== 'directive';
   const effectiveLevel = bonusPayEligible ? bonusPayLevel : 0;
   const bonusMult =
-    effectiveLevel === 2 ? bonusFullMult : effectiveLevel === 1 ? bonusLightMult : 1;
+    effectiveLevel === 2
+      ? bonusFullMult
+      : effectiveLevel === 1
+        ? bonusLightMult
+        : 1;
   const scaledCost = effectiveLevel !== 0 ? Math.round(cost * bonusMult) : cost;
   const effectiveCost = funding === 'directive' ? 0 : scaledCost;
 
@@ -490,16 +494,17 @@ const ComposeView = () => {
               disabled={aldermanActing || directivesRemaining <= 0}
               onChange={() => setFunding('directive')}
             />
-            &nbsp;Request ({directivesRemaining}/{data.directives_per_day ?? 0} left)
+            &nbsp;Request ({directivesRemaining}/{data.directives_per_day ?? 0}{' '}
+            left)
           </label>
         </div>
       </FormRow>
 
       {funding === 'directive' && (
         <div className="ContractLedger__InnkeeperFlavor">
-          A Request calls upon someone to
-          answer out of duty. No coin changes hands; the scroll is drawn to
-          your hand and must be given directly to whoever will honour it.
+          A Request calls upon someone to answer out of duty. No coin changes
+          hands; the scroll is drawn to your hand and must be given directly to
+          whoever will honour it.
         </div>
       )}
 
@@ -558,7 +563,9 @@ const ComposeView = () => {
         <div className="ContractLedger__InnkeeperFlavor">
           Blockade writs are always drawn to your hand. Pin to the Grand
           Contract Ledger to require a Fellowship of three; keep in hand to
-          dispatch a trusted party directly.
+          dispatch a trusted party directly. Each defender past the third who
+          stands at the blockade, up to six, raises both the waves and the
+          payout by 20%.
         </div>
       )}
 
@@ -595,7 +602,9 @@ const ComposeView = () => {
             onClick={() => act('recall_blockade_writ', { region })}
           >
             Recall Writ
-            {recallEntry.refund > 0 ? ` (refund ${coin(recallEntry.refund)})` : ''}
+            {recallEntry.refund > 0
+              ? ` (refund ${coin(recallEntry.refund)})`
+              : ''}
           </button>
         )}
       </div>

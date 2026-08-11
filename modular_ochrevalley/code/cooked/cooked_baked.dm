@@ -46,7 +46,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/meatpestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4)
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "crispy sausages" = 1)
@@ -63,7 +63,7 @@
 	icon_state = "meat_pizza_pesto_slice"
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "crispy sausages" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
@@ -83,7 +83,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/fishpestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4)
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "oily fish" = 1)
@@ -100,7 +100,7 @@
 	icon_state = "fish_pizza_pesto_slice"
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "oily fish" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
@@ -120,7 +120,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/onionpestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4)
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "snappy, crunchy onions" = 1)
@@ -137,7 +137,7 @@
 	icon_state = "onion_pizza_pesto_slice"
 	faretype = FARE_NEUTRAL
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "snappy, crunchy onions" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
@@ -157,7 +157,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/trufflepestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4)
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "savory and decadant truffles" = 1)
@@ -174,7 +174,7 @@
 	icon_state = "onion_pizza_pesto_slice"
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "savory and decadant truffles" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
@@ -194,7 +194,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/poisontrufflepestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4, /datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4, /datum/reagent/berrypoison = 5)
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "rubbery and bitter truffles" = 1)
@@ -211,7 +211,7 @@
 	icon_state = "onion_pizza_pesto_slice"
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1, /datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1, /datum/reagent/berrypoison = 5)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "rubbery and bitter truffles" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
@@ -231,7 +231,7 @@
 	slices_num = 6
 	bitesize = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/pearpestoplate_slice
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/nicotine = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_TWO_MEALS + NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 4)
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "sweet and tangy pears" = 1)
@@ -248,7 +248,7 @@
 	icon_state = "pear_pizza_pesto_slice"
 	faretype = FARE_FINE
 	w_class = WEIGHT_CLASS_NORMAL
-	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/nicotine = 1)
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL, /datum/reagent/consumable/acorn_powder = 1, /datum/reagent/drug/westleach = 1)
 	tastes = list("nutty, herby, and garlicky sauce" = 1, "hot and gooey cheese" = 1, "savory and tangy pears" = 1)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME

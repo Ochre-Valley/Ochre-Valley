@@ -1,6 +1,6 @@
 import {
-  PropsWithChildren,
-  ReactNode,
+  type PropsWithChildren,
+  type ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -108,9 +108,9 @@ export const ColorizedImage = (props: ColorizedImageProps) => {
     height,
   } = props;
 
-  let realWidth = width || 64;
-  let realHeight = height || 64;
-  let realColorBlendingMode = colorBlendingMode || 'multiply';
+  const realWidth = width || 64;
+  const realHeight = height || 64;
+  const realColorBlendingMode = colorBlendingMode || 'multiply';
 
   const render = useCallback(
     async (canvas: OffscreenCanvas, ctx: OffscreenCanvasRenderingContext2D) => {

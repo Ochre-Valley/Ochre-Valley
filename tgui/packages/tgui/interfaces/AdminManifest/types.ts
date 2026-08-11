@@ -1,6 +1,6 @@
 export type Data = {
   directory: playerEntry[];
-}
+};
 
 export type playerEntry = {
   ckey: string;
@@ -11,4 +11,4 @@ export type playerEntry = {
   afk: string;
   state: number;
   antag: string;
-}
+};

@@ -28,6 +28,7 @@
 	job_subclasses = list(
 		/datum/advclass/soilson
 	)
+	has_subprefs = FALSE // only one subclass
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/soilson
@@ -72,7 +73,6 @@
 	beltr = /obj/item/storage/keyring/soilson
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(
-		/obj/item/recipe_book/survival = 1,
 		/obj/item/flashlight/flare/torch = 1,
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/flint = 1,

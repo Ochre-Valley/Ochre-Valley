@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - admin: "Added admin logs for when people eat burned mess, poison berries, westleach leaves, swampweed or rotten food."

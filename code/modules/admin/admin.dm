@@ -249,7 +249,7 @@
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=fortune'>-</a></li>"
 		body += "</ul>"
 		body += "</div>"
-		
+
 		// Patron Section
 		body += "<div id='patron-section'>"
 		body += "<h3>Patron</h3>"
@@ -266,7 +266,7 @@
 			body += "<li>[initial(P.name)] "
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];set_patron=[REF(M)];patron=[patron_type]'>Set</a></li>"
 		body += "</ul></div>"
-		
+
 
 		body += "</div>"
 		body += "</div>"
@@ -383,7 +383,7 @@
 
 	if(!check_rights())
 		return
-	
+
 	if(!M.ckey)
 		to_chat(src, span_warning("There is no ckey attached to this mob."))
 		return
@@ -550,6 +550,11 @@
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(SSticker.current_state == GAME_STATE_PREGAME || SSticker.current_state == GAME_STATE_STARTUP)
+		var/player_count = length(GLOB.clients)
+		// Idiot proof for accidental click due to focus hijack / testing server
+		if(player_count > 1)
+			if(alert(usr, "There are [player_count] players connected. Are you sure you want to start the round RIGHT NOW?", "Start Now", "Yes", "No") != "Yes")
+				return 0
 		SSticker.start_immediately = TRUE
 		log_admin("[usr.key] has started the game.")
 		var/msg = ""
@@ -895,7 +900,7 @@
 		alert(usr, "Target has no mind!") // Optional Error check that may or may not be neccessary
 	GLOB.chosen_names -= H.real_name
 	LAZYREMOVE(GLOB.actors_list, H.mobid)
-	LAZYREMOVE(GLOB.roleplay_ads, H.mobid)
+	LAZYREMOVE(GLOB.roleplay_ads, H.mobid) //OV ADD - Roleplay Ad Maint
 	H.returntolobby()
 
 

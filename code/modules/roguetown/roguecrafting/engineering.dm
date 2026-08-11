@@ -218,9 +218,10 @@
 		/obj/item/natural/fibers = 1,
 		/obj/item/natural/wood/plank = 1,
 	)
+	subtype_reqs = TRUE
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 4
+	craftdiff = 2 //It's a brush. The consumable cream still needs expert, so this can drop to apprentice.
 
 /datum/crafting_recipe/roguetown/engineering/polishcream
 	name = "Polish Cream"
@@ -234,7 +235,7 @@
 	)
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 4
+	craftdiff = 4 //high, but we dont want polishing to be come commonplace or an expectation.
 
 //crossbows, crossbow bolts, and specialized arrows and bolts
 
@@ -1172,7 +1173,7 @@
 	craftdiff = 4
 
 // ------------ Craftable Traps ----------
-//setting these up as a more "arcane" alternative to trap making done with engineering. 
+//setting these up as a more "arcane" alternative to trap making done with engineering.
 
 /datum/crafting_recipe/roguetown/engineering/rocktrap
 	name = "rock trap (engineered)"

@@ -57,7 +57,7 @@
 	if(.)
 		return FALSE
 	var/list/modifiers = params2list(params)
-	if(!modifiers["middle"])
+	if(modifiers[BUTTON_CHANGED] != MIDDLE_CLICK)
 		return TRUE
 	if(!can_cast(caller) || !cast_check(FALSE, ranged_ability_user))
 		return FALSE
@@ -113,8 +113,8 @@
 			M.spell_impact_intensity = spell_impact_intensity
 		P.def_zone = user.zone_selected
 		// Accuracy modification code, same as bow rebalance PR
-		P.accuracy += (user.STAINT - 9) * 4
-		P.bonus_accuracy += (user.STAINT - 8) * 3
+		P.accuracy += (user.STAPER - 9) * 4
+		P.bonus_accuracy += (user.STAPER - 8) * 3
 		if(user.mind)
 			P.bonus_accuracy += (user.get_skill_level(associated_skill) * 5) // +5% per level
 		P.firer = user
@@ -151,8 +151,11 @@
 /// Dedicated maptext holder for the ARC indicator, separate from the cooldown maptext.
 /atom/movable/screen/arc_maptext_holder
 	layer = ABOVE_HUD_LAYER
-	maptext_x = 6
-	maptext_y = 22
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	maptext_x = 2
+	maptext_y = 0
+	maptext_width = 64
+	maptext_height = 11
 
 /// Updates the ARC maptext indicator on the spell's action button using a dedicated holder.
 /obj/effect/proc_holder/spell/invoked/projectile/proc/update_arc_maptext()

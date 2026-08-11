@@ -96,7 +96,12 @@
 		switch(path_choice)
 			if("Busker")
 				ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+
+				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_VIRTUE)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_descriptors)
+				add_verb(H, /mob/living/carbon/human/proc/emote_ffsalute)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_guarded)
+
 				ADD_TRAIT(H, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 				H.adjust_skillrank_up_to(/datum/skill/misc/sneaking,    SKILL_LEVEL_EXPERT, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/misc/stealing,    SKILL_LEVEL_EXPERT, TRUE)
@@ -128,22 +133,6 @@
 				H.adjust_skillrank_up_to(/datum/skill/magic/arcane, SKILL_LEVEL_JOURNEYMAN, TRUE)
 				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 5))
 				r_hand = /obj/item/rogueweapon/spellbook
-				var/list/poke_options = list("Spitfire", "Frost Bolt", "Arc Bolt", "Greater Arcyne Bolt", "Arcyne Lance", "Lesser Gravel Blast", "Lesser Soulshot")
-				var/poke_choice = input(H, "Choose your cantrip.", "Choose your cantrip") as anything in poke_options
-				switch(poke_choice)
-					if("Spitfire")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/spitfire)
-					if("Frost Bolt")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/frost_bolt)
-					if("Arc Bolt")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/arc_bolt)
-					if("Greater Arcyne Bolt")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/greater_arcyne_bolt)
-					if("Arcyne Lance")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/arcyne_lance)
-					if("Lesser Gravel Blast")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/gravel_blast/lesser)
-					if("Lesser Soulshot")
-						H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/soulshot/lesser)
+				grant_poke_spell(H)
 
 		wretch_select_bounty(H)

@@ -32,7 +32,6 @@
 	item_state = "leather"
 	equip_sound = 'sound/blank.ogg'
 	sewrepair = TRUE
-	sellprice = 10
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/belt/rogue/leather/plaquegold
@@ -51,7 +50,6 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	item_state = "blackbelt"
-	sellprice = 10
 
 /obj/item/storage/belt/rogue/leather/double
 	name = "pair of belts"
@@ -251,7 +249,6 @@
 	name = "black satchel"
 	icon_state = "bsatchel"
 	item_state = "bsatchel"
-	sellprice = 10
 
 /obj/item/storage/backpack/rogue/attack_right(mob/user)
 	var/datum/component/storage/CP = GetComponent(/datum/component/storage)
@@ -588,7 +585,7 @@
 	name = "talons"
 	desc = "Harpy talons. Birds of prey and all..."
 	experimental_inhand = FALSE
-	icon = 'icons/roguetown/weapons/misc32.dmi'
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/misc32.dmi'
 	icon_state = "harpy_talon" // coder kitbash 5 minute sprite ugh
 	drop_sound = 'sound/blank.ogg'
 	gripped_intents = list(/datum/intent/wing/cut, /datum/intent/wing/shred, /datum/intent/wing/pick) // /datum/intent/wing/grab - temporarily removed until a fix for the INFINITE FLOAT bug is figured out.
@@ -617,7 +614,7 @@
 		return
 
 /obj/item/rogueweapon/huntingknife/idagger/harpy_talons/process()
-	if(obj_integrity >= max_integrity) 
+	if(obj_integrity >= max_integrity)
 		STOP_PROCESSING(SSobj, src)
 		src.visible_message(span_notice("[src] are in a much better shape now, enough resting!"), vision_distance = 1)
 		return
@@ -765,7 +762,7 @@
 	//mob_overlay_icon = 'icons/roguetown/clothing/onmob/belts.dmi'
 	icon_state = "rucksack"
 	item_state = "rucksack"
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK 
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_NORMAL
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'

@@ -215,9 +215,7 @@
 /obj/effect/particle_effect/smoke/fire_gas/smoke_mob(mob/living/carbon/M)
 	breathin = FALSE
 	if(..())
-		M.adjustFireLoss(6, 0)
-		M.adjust_fire_stacks(3)
-		M.ignite_mob()
+		apply_scorch_stack(M, 2, BODY_ZONE_CHEST)
 		M.emote("scream")
 		return TRUE
 
@@ -237,8 +235,9 @@
 	if(..())
 		if(HAS_TRAIT(M, TRAIT_HOLDBREATH))
 			return FALSE
-		M.adjust_blurriness(3)
-		M.adjust_blindness(3)
+		if(M.has_status_effect(STATUS_EFFECT_BLINDED))
+			return FALSE
+		M.apply_status_effect(STATUS_EFFECT_BLINDED)
 		M.emote("cry")
 		return TRUE
 

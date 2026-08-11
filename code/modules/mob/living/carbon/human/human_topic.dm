@@ -107,20 +107,23 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		return
 
 	if(href_list["origin_lore"])
-		if(!client || !client.prefs.virtue_origin.origin_desc || !client.prefs.virtue_origin.origin_name)
-			to_chat(usr, span_ooc("Characters must have a functional client for origin descriptions to be accessed."))
-			return
-		var/datum/browser/popup = new(usr, "origin_info", "<center>[client.prefs.virtue_origin.origin_name]</center>", 460, 550)
-		popup.set_content(client.prefs.virtue_origin.origin_desc)
+		var/oname = (dna.species.origin || "Elsewhere")
+		var/origin_desc = GLOB.origins[oname]
+		var/datum/browser/popup = new(usr, "origin_info", "<center>[oname]</center>", 460, 550)
+		popup.set_content(origin_desc)
 		popup.open()
 		return
 
 	if(href_list["undiesthing"]) //canUseTopic check for this is handled by mob/Topic()
+		if(NO_UNDERWEAR in dna.species.species_traits)
+			return
+
 		//OV Add Start
 		if(petrified_topic_user?.IsPetrified())
 			to_chat(usr, span_warning("You cannot do this while petrified."))
 			return
 		//OV Add End
+
 		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
@@ -171,11 +174,15 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 	// OV Edit End
 
 	if(href_list["legwearsthing"]) //canUseTopic check for this is handled by mob/Topic()
+		if(NO_UNDERWEAR in dna.species.species_traits)
+			return
+
 		//OV Add Start
 		if(petrified_topic_user?.IsPetrified())
 			to_chat(usr, span_warning("You cannot do this while petrified."))
 			return
 		//OV Add End
+
 		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
@@ -191,7 +198,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 				C.put_in_hands(legwear_socks) //OV EDIT
 			SEND_SIGNAL(legwear_socks, COMSIG_ITEM_UNDERWEAR_REMOVE, src) //OV ADD
 			legwear_socks = null //OV EDIT
-			
+
 
 	if(href_list["pockets"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)) //TODO: Make it match (or intergrate it into) strippanel so you get 'item cannot fit here' warnings if mob_can_equip fails
 		//OV Add Start
@@ -493,6 +500,15 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			to_chat(usr, "<span class='info'>[msg]</span>")
 		else	//Edge-case of there being ONLY noble gossip, but we aren't a noble.
 			to_chat(usr, "<span class='info'>Any tales of intrigue of this one are reserved to the nobility...</span>")
+		return
+
+	if(href_list["task"] == "view_fam_headshot")
+		if(!ismob(usr))
+			return
+		var/datum/examine_panel/familiar/mob_examine_panel = new(src)
+		mob_examine_panel.holder = src
+		mob_examine_panel.viewing = usr
+		mob_examine_panel.ui_interact(usr)
 		return
 
 	return ..() //end of this massive fucking chain. TODO: make the hud chain not spooky. - Yeah, great job doing that. - I made it worse sorry guys.

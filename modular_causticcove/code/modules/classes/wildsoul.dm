@@ -8,8 +8,8 @@
 	spawn_positions = 5
 	//forbidden_races = list(RACES_CONSTRUCT) //OV Edit - Construct Changes + Natural Armor make this no longer evil. Also now matches Warden
 	tutorial = "You've never been one for the comforts of society. Whether born and raised in the wild, or having eschewed the comforts of the city after some incident, you've learned to survive on your own within Dendor's realm. You still need to live carefully, though; you're part of an ecosystem you're not above, and for every creature you hunt, another will make you its hunted."
-	outfit = null 
-	outfit_female = null 
+	outfit = null
+	outfit_female = null
 
 	obsfuscated_job = TRUE
 
@@ -18,7 +18,7 @@
 	max_pq = null
 	announce_latejoin = FALSE
 	wanderer_examine = TRUE
-	advjob_examine = FALSE //not sure if leaving them unmarked as wild souls is a good idea? it might be worth adding an examine text message for a wild soul with the "in town" debuff later, but we'll see 
+	advjob_examine = FALSE //not sure if leaving them unmarked as wild souls is a good idea? it might be worth adding an examine text message for a wild soul with the "in town" debuff later, but we'll see
 	always_show_on_latechoices = TRUE
 	same_job_respawn_delay = 2 MINUTES
 	//job_reopens_slots_on_death = TRUE
@@ -29,7 +29,7 @@
 
 	round_contrib_points = 1 //just in case we start using PQ at some point, equal to mercenary
 	advclass_cat_rolls = list(CTAG_WILDSOUL = 20)//I don't understand how this works and it scares me
-	display_order = JDO_WILDSOUL 
+	display_order = JDO_WILDSOUL
 	cmode_music = 'modular_causticcove/sound/music/combat_wildsoul.ogg'
 	virtue_restrictions = list(/datum/virtue/utility/noble, /datum/virtue/utility/hollow, /datum/virtue/utility/notable) // Wildman McCryptidson shouldnt be anything that contradicts such. Also no deathless, cause natural armor on direbear.
 	vice_restrictions = list()
@@ -85,18 +85,6 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/dense //OV EDIT
 	give_feral_eyes(H)
 
-	var/techniques = list("Dropkick - Pushback + Extra Damage", "Chokeslam - Stamina Damage", "Stunner - Dazed Debuff", "Headbutt - Vulnerable Debuff") // cool wrestling moves
-	var/technique_choice = input(H,"Choose your TECHNIQUE.", "TOSS THEM.") as anything in techniques
-	switch(technique_choice)
-		if("Dropkick - Pushback + Extra Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/dropkick)
-		if("Chokeslam - Stamina Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/chokeslam)
-		if("Stunner - Dazed Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/stunner)
-		if("Headbutt - Vulnerable Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/headbutt)
-
 /datum/advclass/wildsoul/mantid
 	name = "Soul of the Mantid"
 	tutorial = "To fight head on never was your style. You prefer the subtle options; to be hidden, quiet, and strike at the opportune moment. But be wary, as that lack of brute strength and thick armor means you can't cut yourself out of an aspiring hunter's net so easily."
@@ -145,7 +133,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul	//OV EDIT
 	give_feral_eyes(H)
 
-/datum/advclass/wildsoul/lampternfly //OV Edit AP Merge 4.5.26 - RE-ENABLED 
+/datum/advclass/wildsoul/lampternfly //OV Edit AP Merge 4.5.26 - RE-ENABLED
 	name = "Soul of the Lampternfly"
 	tutorial = "Some things in this world have a magical spark to them; you're one of them. Having an immensely potent arcyne nature, even without training, you're capable of commanding many magycks; but be careful, for an opposing hunter's command of a bow can prove just as deadly."
 	traits_applied = list(TRAIT_ARCYNE, TRAIT_WOODWALKER, TRAIT_ALCHEMY_EXPERT)
@@ -187,7 +175,7 @@
 /datum/outfit/job/roguetown/wildsoul/lampternfly/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_blindness(-3)
-	mouth = /obj/item/roguegem/amethyst	
+	mouth = /obj/item/roguegem/amethyst
 	head = /obj/item/clothing/head/roguetown/roguehood
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	pants = /obj/item/clothing/under/roguetown/loincloth/brown
@@ -204,7 +192,7 @@
 	category_tags = list(CTAG_WILDSOUL)
 	subclass_stats = list(
 		STATKEY_STR = -1, // 9 stats weighted, with a focus on their intelligence and stamina for crafting.
-		STATKEY_INT = 4, 
+		STATKEY_INT = 4,
 		STATKEY_WIL = 2,
 		STATKEY_SPD = 2,
 		STATKEY_LCK = 1
