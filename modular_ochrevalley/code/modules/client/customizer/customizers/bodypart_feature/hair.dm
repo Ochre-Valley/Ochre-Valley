@@ -434,5 +434,5 @@
 		/datum/sprite_accessory/hair/head/vulpkian/keid,
 		/datum/sprite_accessory/hair/head/vulpkian/mizar,
 		/datum/sprite_accessory/hair/head/vulpkian/raine,
-		/datum/sprite_accessory/hair/head/skunky,
+		/datum/sprite_accessory/hair/head/skunky
 		)
