@@ -312,7 +312,7 @@
 			ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 			gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
-			armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/disciple/barbarian
+			armor = /obj/item/clothing/suit/roguetown/armor/manual/resting/padded/barbarian
 			//ovedit- martial arts added to wrasslin' techniques
 			var/techniques = list("Boxing - Martial Art", "Hollow Hands - Martial Art", "Lynx Claws - Martial Art", "Direbear Claws - Martial art") // cool wrestling moves
 			var/technique_choice = input(H,"Choose your martial art.", "PUNCH THEM.") as anything in techniques

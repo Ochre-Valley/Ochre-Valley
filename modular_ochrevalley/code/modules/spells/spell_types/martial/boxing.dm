@@ -10,14 +10,14 @@
 	<b>UPPER CUT</b>: In heavy stance, your special attack is an UPPER CUT, a slow, charged hit. Does massive damage to vulnerable targets, and knocks them down!\n \
 	<i>A homegrown azurian martial art emphasizing a strong form and center of balance, favored for its usefulness to people of most builds in pit-fights</i>"
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart/boxing
-	draw_message = "Puts up their dukes!" 
+	draw_message = "Puts up their dukes!"
 	drop_message = "drops their hands!"
-	
+
 /obj/item/rogueweapon/abstractweapon/martialart/boxing
 	name = "Fists"
 	desc = "Your hands, raised into iron fists"
 	icon_state = "boxing"
-	force = 15 
+	force = 15
 	tiermult = 2.5 //Damage scales about as hard as normal fists. Our power scales with our intent
 	wbalance = WBALANCE_HEAVY
 	alt_grips = list(/datum/alt_grip/boxing)
@@ -28,25 +28,25 @@
 	masterstring = "As a master of this stance, my jab hits 10% harder, my uppercut comes out a bit faster, and my haymakers become less clumsy."
 	masterintents = list(/datum/intent/martial/jab/master, /datum/intent/martial/sucker_punch)
 	mastergrips = list(/datum/alt_grip/boxing/master)
-	special = /datum/special_intent/silencepunch 
+	special = /datum/special_intent/silencepunch
 	var/datum/special_intent/basespecial = /datum/special_intent/silencepunch //gee bill, mom lets you have TWO specials?!
-	var/datum/special_intent/altspecial = /datum/special_intent/upper_cut 
+	var/datum/special_intent/altspecial = /datum/special_intent/upper_cut
 	var/datum/special_intent/altmasterspecial = /datum/special_intent/upper_cut/master
 
 /obj/item/rogueweapon/abstractweapon/martialart/boxing/cycle_altgrip(mob/living/carbon/user, direction)
-	if(..())//god i hope this doesnt break anything 
+	if(..())//god i hope this doesnt break anything
 		if(altgripped)
 			var/datum/special_intent/newspecial
 			if(specialability)
 				newspecial = new altmasterspecial()
-			else 
+			else
 				newspecial = new altspecial()
 			qdel(special)
 			special = newspecial
 		else
 			qdel(special)
 			special = new basespecial()
-	
+
 
 /datum/alt_grip/boxing
 	name = "heavy stance"
@@ -89,11 +89,11 @@
 	icon_state = "indaze"
 	attack_verb = list("slugs", "pummels")
 	hitsound = list('sound/combat/hits/blunt/genblunt (1).ogg','sound/combat/hits/blunt/genblunt (2).ogg','sound/combat/hits/blunt/genblunt (3).ogg', 'sound/misc/bonk.ogg')
-	chargedrain = 2 // 
+	chargedrain = 2 //
 	chargetime = 10
 	damfactor = 2
 	target_parts = list(BODY_ZONE_HEAD)
-	intent_effect = /datum/status_effect/debuff/dazed/stunner
+	intent_effect = /datum/status_effect/debuff/dazed
 	maxrange = 3
 
 /datum/intent/mace/smash/martial/prewarning()
@@ -130,7 +130,7 @@
 
 /datum/special_intent/silencepunch/on_create()
 	. = ..()
-	
+
 	howner.OffBalance(self_immob_dur)
 	howner.Immobilize(self_immob_dur)
 	dam = initial(dam)
@@ -169,5 +169,5 @@
 		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
 		animate(transform = prev_transform, time = 0)
 	return ..()
-	
+
 
