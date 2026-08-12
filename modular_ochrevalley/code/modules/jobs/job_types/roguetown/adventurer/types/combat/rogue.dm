@@ -73,7 +73,7 @@
 		switch(gadget_choice)
 			if("Pistol")
 				beltl = /obj/item/quiver/bulletpouch/iron
-				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 				l_hand = /obj/item/powderflask
 			if("Rifle")
 				beltl = /obj/item/quiver/bulletpouch/iron
@@ -124,9 +124,9 @@
 		var/wrench_choice = input(H, "Choose your tool.", "TINKERER'S PRIDE") as anything in wrenches
 		switch(wrench_choice)
 			if("Compact Wrench")
-				backr = /obj/item/rogueweapon/contraption/linker/mace/preloaded
+				beltr = /obj/item/rogueweapon/contraption/linker/mace/preloaded
 			if("Massive Wrench")
-				backr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
+				beltr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
 	head = /obj/item/clothing/mask/rogue/spectacles/golden //DRIP
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
@@ -134,7 +134,6 @@
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	beltr = /obj/item/flashlight/flare/torch/lantern
 	belt = /obj/item/storage/belt/rogue/leather
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife = 1,
@@ -142,6 +141,7 @@
 		/obj/item/chalk = 1,
 		/obj/item/rogueweapon/hammer/iron = 1,
 		/obj/item/rogueweapon/tongs = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
 		)
 
 /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
