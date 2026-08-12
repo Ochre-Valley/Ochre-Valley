@@ -3719,6 +3719,7 @@
 #include "modular_causticcove\code\modules\cargo\packsrogue\merchant\weapons\merch_weapons_foreign.dm"
 #include "modular_causticcove\code\modules\cargo\packsrogue\merchant\weapons\merch_weapons_ranged.dm"
 #include "modular_causticcove\code\modules\classes\domesticated_wildsoul.dm"
+#include "modular_causticcove\code\modules\classes\shophand.dm"
 #include "modular_ochrevalley\code\cooked\cooked_pastry.dm"
 #include "modular_causticcove\code\modules\classes\wildsoul.dm"
 #include "modular_causticcove\code\modules\classes\shrine_priest\shrine_guardian.dm"

@@ -36,12 +36,14 @@
 		STATKEY_PER = 2,
 		STATKEY_SPD = 1,
 	)
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 3, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE)
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 4, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE)
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/knives = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/firearms = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_APPRENTICE,
@@ -70,17 +72,14 @@
 		H.set_blindness(0)
 		switch(gadget_choice)
 			if("Pistol")
-				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_APPRENTICE, TRUE)
 				beltl = /obj/item/quiver/bulletpouch/iron
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 				l_hand = /obj/item/powderflask
 			if("Rifle")
-				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_APPRENTICE, TRUE)
 				beltl = /obj/item/quiver/bulletpouch/iron
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
 				l_hand = /obj/item/powderflask
 			if("Crossbow")
-				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_APPRENTICE, TRUE)
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 				beltl = /obj/item/quiver/bolt/standard
 			if("Grappling Hook")
