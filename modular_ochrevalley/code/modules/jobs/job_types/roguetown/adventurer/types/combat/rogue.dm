@@ -68,7 +68,7 @@
 	to_chat(H, span_warning("In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."))
 	if(H.mind)
 		var/gadgets = list("Pistol", "Rifle", "Crossbow", "Grappling Hook", "Clockwork Drill", "Voltic Gauntlets", "Bronze Limbs")
-		var/gadget_choice = input(H, "Choose a gadget.", "YOUR LATEST MASTERPIECE") as anything in gadgets
+		var/gadget_choice = input(H, "Choose a gadget.", "YOUR LATEST CREATION") as anything in gadgets
 		H.set_blindness(0)
 		switch(gadget_choice)
 			if("Pistol")
