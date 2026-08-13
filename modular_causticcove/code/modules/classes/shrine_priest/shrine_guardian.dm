@@ -7,7 +7,6 @@
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)
-	class_select_category = CLASS_CAT_KAZENGUN
 	category_tags = list(CTAG_ADVENTURER)
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE) // NO dodge expert. Hit fast, hit hard, but survive attacks by sheer grit and avoidance. You have spacing tools to avoid getting whacked - use 'em!
 	cmode_music = 'sound/music/combat_kazengite.ogg'
