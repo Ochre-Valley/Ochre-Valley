@@ -1,25 +1,27 @@
-/datum/advclass/mercenary/shrine_guardian
+# define SHRINEGUARDIAN_TUTORIAL "You were once a guardian of a shrine in the far eastern lands of Kazengun. For one reason or another you have departed from your homeland and sailed far across the seas to these western lands. Perhaps you were forced out by marauding ronin or beasts. Or maybe you have an unusual desire to spread the word of Aisata and Saidon's Twelve Children to the west. These foreign lands are lethal indeed, but you will be more so."
+
+/datum/advclass/foreigner/shrine_guardian
 	name = "Shrine Guardian"
-	tutorial = "You were once a guardian of your shrine in Kazengun. Something has forced you out, if it be maurauding ronin, or too many beasts for you to handle. You are skilled in polearms and bows, using an awkward battle style for hit and run tactics."
+	tutorial = SHRINEGUARDIAN_TUTORIAL
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_SMALL) //no dwarf sprites
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)
 	class_select_category = CLASS_CAT_KAZENGUN
-	category_tags = list(CTAG_MERCENARY)
-	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE)
+	category_tags = list(CTAG_ADVENTURER)
+	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE) // NO dodge expert. Hit fast, hit hard, but survive attacks by sheer grit and avoidance. You have spacing tools to avoid getting whacked - use 'em!
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	//OV edit
 	subclass_stats = list(
-		STATKEY_WIL = 2,
+		STATKEY_WIL = 1,
 		STATKEY_STR = 1,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_PER = 1
+		// 6 stat weight. Unlike the advent Paladin (5 stat weight), these guys don't even have medium armor. A more lightweight, mobility-focused, Kazengunese paladin of sorts.
 	)
 	//OV edit end
 	subclass_skills = list(
-		/datum/skill/magic/holy = SKILL_LEVEL_NOVICE,
+		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/bows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
@@ -33,9 +35,9 @@
 
 /datum/outfit/job/roguetown/mercenary/shrine_guardian/pre_equip(mob/living/carbon/human/H)
 	..()
-	to_chat(H, span_warning("You were once a guardian of your shrine in Kazengun. Something has forced you out, if it be maurauding ronin, or too many beasts for you to handle. You are skilled in polearms and bows, using an awkward battle style for hit and run tactics."))
+	to_chat(H, span_warning(SHRINEGUARDIAN_TUTORIAL))
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
-	C.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)
+	C.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1) //Capped to T1 miracles.
 	head = /obj/item/clothing/head/roguetown/mentorhat
 	cloak = /obj/item/clothing/cloak/kazengun //OV Add: Added Kazengun Drip to Kazengun Class
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
@@ -77,3 +79,5 @@
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve //OV Edit: Adjusted for spawn
 				l_hand = /obj/item/rogueweapon/spear/naginata //OV Edit: Adjusted for spawn
 				beltr = /obj/item/quiver/arrows
+
+#undef SHRINEGUARDIAN_TUTORIAL
