@@ -2,7 +2,7 @@
 #define SHRINEPRIEST_CHOICE_MIRACLES "Holy Arts (T3 Miracles + Medicine skill)" // OV Add
 #define SHRINEPRIEST_CHOICE_BLADE "Swordsmanship (T2 Miracles + Hwando)" // OV Add
 
-/datum/advclass/mercenary/shrine_priest
+/datum/advclass/foreigner/shrine_priest
 	name = "Shrine Priest"
 	tutorial = SHRINEPRIEST_TUTORIAL // OV Edit
 	allowed_sexes = list(MALE, FEMALE)
@@ -10,8 +10,7 @@
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_priest
 	subclass_languages = list(/datum/language/kazengunese)
-	class_select_category = CLASS_CAT_KAZENGUN
-	category_tags = list(CTAG_MERCENARY)
+	category_tags = list(CTAG_ADVENTURER)
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_RITUALIST)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_stats = list(
@@ -22,7 +21,6 @@
 	)
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
