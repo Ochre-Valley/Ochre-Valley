@@ -11,7 +11,7 @@
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_priest
 	subclass_languages = list(/datum/language/kazengunese)
 	category_tags = list(CTAG_ADVENTURER)
-	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_RITUALIST)
+	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_stats = list(
 		STATKEY_WIL = 1,
