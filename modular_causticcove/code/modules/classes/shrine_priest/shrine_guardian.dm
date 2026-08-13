@@ -1,4 +1,4 @@
-# define SHRINEGUARDIAN_TUTORIAL "You were once a guardian of a shrine in the far eastern lands of Kazengun. For one reason or another you have departed from your homeland and sailed far across the seas to these western lands. Perhaps you were forced out by marauding ronin or beasts. Or maybe you have an unusual desire to spread the word of Aisata and Saidon's Twelve Children to the west. These foreign lands are lethal indeed, but you will be more so."
+# define SHRINEGUARDIAN_TUTORIAL "You were once a guardian of a shrine in the far eastern lands of Kazengun. For one reason or another you have departed from your homeland and sailed far across the seas to these western lands. Perhaps you were forced out by marauding ronin or beasts. Regardless of the cause, these foreign lands are lethal indeed... but you will be even more so."
 
 /datum/advclass/foreigner/shrine_guardian
 	name = "Shrine Guardian"
@@ -51,7 +51,6 @@
 		/obj/item/flashlight/flare/torch/lantern,
 		/obj/item/needle,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
-		/obj/item/roguekey/mercenary
 		)
 	var/weapons = list("Eagle's Beak + Shortbow","Naginata + Shortbow","Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
 	if(H.mind)
@@ -78,5 +77,43 @@
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve //OV Edit: Adjusted for spawn
 				l_hand = /obj/item/rogueweapon/spear/naginata //OV Edit: Adjusted for spawn
 				beltr = /obj/item/quiver/arrows
+
+	switch(H.patron?.type)
+		if(/datum/patron/old_god)
+			neck = /obj/item/clothing/neck/roguetown/psicross
+		if(/datum/patron/divine/astrata)
+			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+			H.cmode_music = 'sound/music/cmode/church/combat_astrata.ogg'
+		if(/datum/patron/divine/noc)
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+		if(/datum/patron/divine/abyssor)
+			neck = /obj/item/clothing/neck/roguetown/psicross/abyssor
+		if(/datum/patron/divine/dendor)
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			H.cmode_music = 'sound/music/cmode/garrison/combat_warden.ogg' // see: druid.dm
+		if(/datum/patron/divine/necra)
+			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+			H.cmode_music = 'sound/music/cmode/church/combat_necra.ogg'
+		if(/datum/patron/divine/pestra)
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+		if(/datum/patron/divine/ravox)
+			neck = /obj/item/clothing/neck/roguetown/psicross/ravox
+		if(/datum/patron/divine/malum)
+			neck = /obj/item/clothing/neck/roguetown/psicross/malum
+		if(/datum/patron/divine/eora)
+			neck = /obj/item/clothing/neck/roguetown/psicross/eora
+			H.cmode_music = 'sound/music/cmode/church/combat_eora.ogg'
+		// Kazengun considers Matoko and Baosumi to be benevolent and a part of the holy pantheon with the rest of the Ten. We therefore do not give them TRAIT_HERESIARCH. However the character no doubt knows how heretical they are in these lands, so we put their cross in their stash.
+		if(/datum/patron/inhumen/matthios)
+			neck = /obj/item/clothing/neck/roguetown/psicross
+			H.cmode_music = 'sound/music/combat_matthios.ogg'
+			H.mind?.special_items["Amulet of Matoko"] = /obj/item/clothing/neck/roguetown/psicross/inhumen/matthios
+		if(/datum/patron/inhumen/baotha)
+			neck = /obj/item/clothing/neck/roguetown/psicross
+			H.cmode_music = 'sound/music/combat_baotha.ogg'
+			H.mind?.special_items["Amulet of Baosumi"] = /obj/item/clothing/neck/roguetown/psicross/inhumen/baotha
+		if(/datum/patron/divine/xylix)
+			neck = /obj/item/clothing/neck/roguetown/luckcharm
+			H.cmode_music = 'sound/music/combat_jester.ogg'
 
 #undef SHRINEGUARDIAN_TUTORIAL
