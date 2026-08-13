@@ -18,7 +18,7 @@
 		STATKEY_LCK = 1, //OV Edit: Fixing stat issue while fixing sandals
 		STATKEY_INT = 2,
 		STATKEY_SPD = 1,
-		// 7 stat weight. Compared to Missionary (stat weight 8,) we start with slightly nicer gear.
+		// 7 stat weight. Compared to Missionary (stat weight 8,) we start with slightly nicer gear, so we dock a comparative stat weight.
 	)
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
@@ -64,11 +64,11 @@
 			beltr = /obj/item/rogueweapon/scabbard/sword/kazengun
 			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_2)
 			H.change_stat(STATKEY_STR, -1) // Cuts down our stat weight to 5. You will pay the stat price if you want the cool sword AND T2 miracles!
-			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Although dedicated to the holy arts, you are not defenseless - your blade will see to that."))
+			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Although you are dedicated to the holy arts, you are not defenseless - your blade will see to that."))
 		// Sacrifice your neat sword for better holy magic and medicine! Kazengunese missionary, essentially.
 		if(SHRINEPRIEST_CHOICE_MIRACLES)
 			H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_JOURNEYMAN)
-			C.grant_miracles(H, cleric_tier = CLERIC_T3, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_3)
+			C.grant_miracles(H, cleric_tier = CLERIC_T3, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_3)//Minor regen, capped to T3, parity with other Holy and/or Arcyne caster - no others spend 15 minutes idling only to unlock their entire potencial.
 			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Your single-minded devotion to the holy arts will prove useful in these violent lands."))
 
 	switch(H.patron?.type)

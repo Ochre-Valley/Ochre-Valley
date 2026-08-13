@@ -34,7 +34,7 @@
 
 /datum/outfit/job/roguetown/mercenary/shrine_guardian/pre_equip(mob/living/carbon/human/H)
 	..()
-	to_chat(H, span_warning(SHRINEGUARDIAN_TUTORIAL))
+	to_chat(H, span_notice(SHRINEGUARDIAN_TUTORIAL))
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	C.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1) //Capped to T1 miracles.
 	head = /obj/item/clothing/head/roguetown/mentorhat
