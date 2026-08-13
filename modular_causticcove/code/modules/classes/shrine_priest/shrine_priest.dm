@@ -14,11 +14,10 @@
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_RITUALIST)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_stats = list(
-		STATKEY_WIL = 2,
-		STATKEY_LCK = 1, //OV Edit: Fixing stat issue while fixing sandals
+		STATKEY_WIL = 1,
 		STATKEY_INT = 2,
 		STATKEY_SPD = 1,
-		// 7 stat weight. Compared to Missionary (stat weight 8,) we start with slightly nicer gear, so we dock a comparative stat weight.
+		// 5 stat weight. Compared to Missionary (stat weight 7,) we start with slightly nicer gear, and we do have crit resistance, so we dock 2 comparative stat weight.
 	)
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
@@ -63,7 +62,7 @@
 			r_hand = /obj/item/rogueweapon/sword/sabre/mulyeog
 			beltr = /obj/item/rogueweapon/scabbard/sword/kazengun
 			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_2)
-			H.change_stat(STATKEY_STR, -1) // Cuts down our stat weight to 5. You will pay the stat price if you want the cool sword AND T2 miracles!
+			H.change_stat(STATKEY_STR, -1) // Cuts down our stat weight to 3. You will pay the stat price if you want the cool sword AND T2 miracles AND crit resist on an adventurer!
 			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Although you are dedicated to the holy arts, you are not defenseless - your blade will see to that."))
 		// Sacrifice your neat sword for better holy magic and medicine! Kazengunese missionary, essentially.
 		if(SHRINEPRIEST_CHOICE_MIRACLES)

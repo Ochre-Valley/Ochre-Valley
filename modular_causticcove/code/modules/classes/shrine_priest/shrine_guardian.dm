@@ -15,8 +15,7 @@
 		STATKEY_WIL = 1,
 		STATKEY_STR = 1,
 		STATKEY_SPD = 1,
-		STATKEY_PER = 1
-		// 6 stat weight. Unlike the advent Paladin (5 stat weight), these guys don't even have medium armor. A more lightweight, mobility-focused, Kazengunese paladin of sorts.
+		// 5 stat weight. Unlike the advent Paladin (7 stat weight), these guys don't even have medium armor, but they do have crit resistance. A more lightweight, mobility-focused, Kazengunese paladin of sorts.
 	)
 	//OV edit end
 	subclass_skills = list(
