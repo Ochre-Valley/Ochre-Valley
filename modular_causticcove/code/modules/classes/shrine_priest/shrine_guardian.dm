@@ -15,7 +15,7 @@
 		STATKEY_WIL = 1,
 		STATKEY_STR = 1,
 		STATKEY_SPD = 1,
-		// 5 stat weight. Unlike the advent Paladin (7 stat weight), these guys don't even have medium armor, but they do have dodge expert. Aoh more lightweight, mobility-focused, Kazengunese paladin of sorts.
+		// 5 stat weight. Unlike the advent Paladin (7 stat weight), these guys don't even have medium armor, but they do have dodge expert. A more lightweight, mobility-focused, Kazengunese paladin of sorts.
 	)
 	//OV edit end
 	subclass_skills = list(
