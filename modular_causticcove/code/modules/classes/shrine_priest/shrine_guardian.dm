@@ -27,6 +27,7 @@
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN
 	)
+	extra_context = "This subclass has access to tier 1 miracles, and has a choice of naginata, eagle's beak, recurve bow, and short bows."
 
 /*/datum/outfit/job/roguetown/mercenary/shrine_guardian //OV Edit - All Kazengun Patrons Unlocked
 	allowed_patrons = list(/datum/patron/divine/astrata)*/
@@ -50,6 +51,7 @@
 		/obj/item/flashlight/flare/torch/lantern,
 		/obj/item/needle,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
+		/obj/item/storage/belt/rogue/pouch/coins/poor,
 		)
 	var/weapons = list("Eagle's Beak + Shortbow","Naginata + Shortbow","Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
 	if(H.mind)

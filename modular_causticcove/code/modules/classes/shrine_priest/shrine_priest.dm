@@ -4,7 +4,6 @@
 	name = "Shrine Priest"
 	tutorial = SHRINEPRIEST_TUTORIAL // OV Edit
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_SMALL) //no dwarf sprites
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_priest
 	subclass_languages = list(/datum/language/kazengunese)
@@ -14,7 +13,7 @@
 		STATKEY_WIL = 1,
 		STATKEY_INT = 2,
 		STATKEY_SPD = 1,
-		// 5 stat weight. Compared to Missionary (stat weight 7,) we start with slightly nicer gear, and we do have crit resistance, so we dock 2 comparative stat weight.
+		// 5 stat weight. Compared to Missionary (stat weight 7,) we start with fairly nicer gear, so we dock 2 comparative stat weight.
 	)
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
@@ -29,7 +28,7 @@
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 	)
-	extra_context = "This subclass regenerates Devotion far quicker, and has access to Tier 3 miracles. It also starts with slightly better gear than Missionary, such as "
+	extra_context = "This subclass regenerates Devotion far quicker, and has access to Tier 3 miracles. It also starts with slightly better gear than Missionary, including better food and a belt full of throwing stars."
 
 /*/datum/outfit/job/roguetown/mercenary/shrine_priest //OV Edit - All Kazengun Patrons Unlocked
 	allowed_patrons = list(/datum/patron/divine/astrata)*/
@@ -46,9 +45,12 @@
 	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/reagent_containers/glass/bottle/waterskin // If only we had drinking gourds... This'll have to do
 	backpack_contents = list(
-		/obj/item/needle,
-		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
+		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 1,
+		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/meat/salami = 2, // We don't really have any Eastern travel food at the moment, so double down on the SLOMMI
+		/obj/item/needle = 1,
 		)
 
 	H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_JOURNEYMAN)
@@ -179,5 +181,3 @@
 	H.set_blindness(0)
 
 #undef SHRINEPRIEST_TUTORIAL
-#undef SHRINEPRIEST_CHOICE_MIRACLES
-#undef SHRINEPRIEST_CHOICE_BLADE
