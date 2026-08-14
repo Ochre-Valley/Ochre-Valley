@@ -8,14 +8,14 @@
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)
 	category_tags = list(CTAG_ADVENTURER)
-	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE) // NO dodge expert. Hit fast, hit hard, but survive attacks by sheer grit and avoidance. You have spacing tools to avoid getting whacked - use 'em!
+	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT) // Hit fast, hit hard, but survive attacks by  avoidance. You have spacing tools to avoid getting whacked - use 'em!
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	//OV edit
 	subclass_stats = list(
 		STATKEY_WIL = 1,
 		STATKEY_STR = 1,
 		STATKEY_SPD = 1,
-		// 5 stat weight. Unlike the advent Paladin (7 stat weight), these guys don't even have medium armor, but they do have crit resistance. A more lightweight, mobility-focused, Kazengunese paladin of sorts.
+		// 5 stat weight. Unlike the advent Paladin (7 stat weight), these guys don't even have medium armor, but they do have dodge expert. Aoh more lightweight, mobility-focused, Kazengunese paladin of sorts.
 	)
 	//OV edit end
 	subclass_skills = list(
