@@ -1,6 +1,4 @@
-#define SHRINEPRIEST_TUTORIAL "You are a shrine priest from the far eastern lands of Kazengun, trained in the holy arts of your homeland. You have a history, however vast or small, of performing rituals, communing with the spirits, laying those spirits to rest, and more such holy services at shrine that was your charge. For one reason or another you have departed from both your shrine and Kazengun, and have traveled far across the seas to the west." // OV Add
-#define SHRINEPRIEST_CHOICE_MIRACLES "Holy Arts (T3 Miracles + Medicine skill)" // OV Add
-#define SHRINEPRIEST_CHOICE_BLADE "Swordsmanship (T2 Miracles + Hwando) (-1 STR)" // OV Add
+#define SHRINEPRIEST_TUTORIAL "You are a shrine priest from the far eastern lands of Kazengun, trained in the holy arts of your homeland. You have a history, however vast or small, of performing rituals, communing with the spirits, laying those spirits to rest, and more such holy services at shrine that was your charge. For one reason or another you have departed from both your shrine and Kazengun, and have traveled far across the seas to the west. Your single-minded devotion to the holy arts will prove useful in these violent lands." // OV Add
 
 /datum/advclass/foreigner/shrine_priest
 	name = "Shrine Priest"
@@ -11,7 +9,6 @@
 	outfit = /datum/outfit/job/roguetown/mercenary/shrine_priest
 	subclass_languages = list(/datum/language/kazengunese)
 	category_tags = list(CTAG_ADVENTURER)
-	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_stats = list(
 		STATKEY_WIL = 1,
@@ -20,14 +17,19 @@
 		// 5 stat weight. Compared to Missionary (stat weight 7,) we start with slightly nicer gear, and we do have crit resistance, so we dock 2 comparative stat weight.
 	)
 	subclass_skills = list(
-		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_EXPERT
+		/datum/skill/craft/alchemy = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/swimming = SKILL_LEVEL_NOVICE,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 	)
+	extra_context = "This subclass regenerates Devotion far quicker, and has access to Tier 3 miracles. It also starts with slightly better gear than Missionary, such as "
 
 /*/datum/outfit/job/roguetown/mercenary/shrine_priest //OV Edit - All Kazengun Patrons Unlocked
 	allowed_patrons = list(/datum/patron/divine/astrata)*/
@@ -48,26 +50,10 @@
 		/obj/item/needle,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
 		)
-	// OV Edit Start - Choose between regular shrine priest (w/ sword) or focus more on miracles
-	var/options = list(SHRINEPRIEST_CHOICE_BLADE, SHRINEPRIEST_CHOICE_MIRACLES)
-	var/choice = tgui_input_list(H, "What was my dedication while I served my shrine?", "CHOOSE YOUR ARTS", options, default = SHRINEPRIEST_CHOICE_BLADE)
-	// If for whatever reason they closed the choice menu or cancelled, fall back to the default
-	if(!choice)
-		choice = SHRINEPRIEST_CHOICE_BLADE
 
-	switch(choice)
-		if(SHRINEPRIEST_CHOICE_BLADE)
-			H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_JOURNEYMAN)
-			r_hand = /obj/item/rogueweapon/sword/sabre/mulyeog
-			beltr = /obj/item/rogueweapon/scabbard/sword/kazengun
-			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_2)
-			H.change_stat(STATKEY_STR, -1) // Cuts down our stat weight to 3. You will pay the stat price if you want the cool sword AND T2 miracles AND crit resist on an adventurer!
-			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Although you are dedicated to the holy arts, you are not defenseless - your blade will see to that."))
-		// Sacrifice your neat sword for better holy magic and medicine! Kazengunese missionary, essentially.
-		if(SHRINEPRIEST_CHOICE_MIRACLES)
-			H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_JOURNEYMAN)
-			C.grant_miracles(H, cleric_tier = CLERIC_T3, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_3)//Minor regen, capped to T3, parity with other Holy and/or Arcyne caster - no others spend 15 minutes idling only to unlock their entire potencial.
-			to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL + " Your single-minded devotion to the holy arts will prove useful in these violent lands."))
+	H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_JOURNEYMAN)
+	C.grant_miracles(H, cleric_tier = CLERIC_T3, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_3)//Minor regen, capped to T3, parity with other Holy and/or Arcyne caster - no others spend 15 minutes idling only to unlock their entire potential.
+	to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL))
 
 	switch(H.patron?.type)
 		if(/datum/patron/old_god)
