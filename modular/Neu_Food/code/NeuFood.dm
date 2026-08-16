@@ -245,7 +245,7 @@
 	. += span_info("Many foodstuffs can be sliced into smaller portions by left-clicking them with a knife on the 'CUT' or 'CHOP' intents. This includes most meats, vegetables, fruits, bread, pies, cakes, saloumi, butter, salo, and more.")
 	. += span_info("Most food will eventually rot, if left out for long enough. Storing food in a closed chest or atop a platter will effectively prevent it from rotting.")
 	. += span_info("Rarer foods and drinks, or those made from more expensive recipes, can provide increased bonuses to the indulger's mood and health.")
-	. += span_info("Everyone has a favorite meal and drink to indulge in - and, conversely, a hated meal and drink that they absolutely despise. Serve them right, and their mood will greatly improve.")
+	. += span_info("Everyone favours a certain cuisine, dish, and drink. Serving someone Fine or better food or a Nice or better drink that matches one of their tastes lifts their mood.")
 	. += span_info("Those of nobility have much higher standards, when it comes to what - and how - they eat. They prefer to eat plattered meals with proper utensils, while disliking plainer and cheaper food.")
 	. += span_info("Set a recipe on accident? middleclick the item to reset the recipe back to nothing and pick a different one.")
 
@@ -338,7 +338,7 @@
 	icon_state = "flour"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 5
+	sellprice = 0
 	var/water_added
 	experimental_inhand = TRUE
 
@@ -419,7 +419,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 5
+	sellprice = 0
 
 /obj/item/reagent_containers/powder/salt/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/flour(get_turf(src))
@@ -482,7 +482,7 @@
 	list_reagents = list(/datum/reagent/floure = 1)
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/preserved/rice_cooked
 	volume = 1
-	sellprice = 5
+	sellprice = 0
 
 /obj/item/reagent_containers/powder/mineral
 	name = "coarse minerals"
@@ -491,7 +491,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 5
+	sellprice = 0
 	var/water_added
 
 /obj/item/reagent_containers/powder/coarse_salt
@@ -501,7 +501,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 3
+	sellprice = 0
 	color = "#999797"
 	mill_result = /obj/item/reagent_containers/powder/salt
 
@@ -560,7 +560,7 @@
 	list_reagents = list(/datum/reagent/consumable/pumpkinspice = 1)
 	grind_results = list(/datum/reagent/consumable/pumpkinspice = 10)
 	volume = 1
-	sellprice = 8
+	sellprice = 0
 
 /datum/reagent/consumable/pumpkinspice
 	name = "pumpkin spice"

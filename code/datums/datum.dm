@@ -178,6 +178,7 @@
 
 // OV Edit Start: Update serialization
 ///Return a LIST for serialize_datum to encode! Not the actual json!
+///Return a LIST for serialize_datum to encode! Not the actual json!
 /datum/proc/serialize_list(list/options, list/semvers)
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -246,7 +247,6 @@
 		qdel(D)
 	else
 		return D
-// OV Edit End
 
 /**
   * Callback called by a timer to end an associative-list-indexed cooldown.

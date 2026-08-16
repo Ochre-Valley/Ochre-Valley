@@ -402,6 +402,8 @@ To avoid TOO much conflicts w/random char parts, consider a proc that checks if 
 	/datum/species/dwarf/gnome\
 )
 
+#define OLD_GOD_PATRON list(/datum/patron/old_god)
+
 #define ALL_CLERIC_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra, /datum/patron/divine/ravox, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/divine/undivided) // Currently unused.
 
 #define ALL_PALADIN_PATRONS list(/datum/patron/divine/undivided, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/abyssor, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra, /datum/patron/divine/ravox, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/divine/xylix, /datum/patron/old_god) // Currently unused.
@@ -543,6 +545,13 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_HFT_KNIGHT "CAT_HFT_KNIGHT"  // Heartfelt Knight Class - Handles Heartfelt Knight class selector.
 #define CTAG_HFT_RETINUE "CAT_HFT_RETINUE"  // Heartfelt Retinue Class - Handles Heartfelt Retinue class selector.
 
+// Pentarchy wave archetype tags; between them they cover every mercenary subclass exactly once.
+#define CTAG_MERCPARTY_VANGUARD "CAT_MERCPARTY_VANGUARD"  // line soldiers
+#define CTAG_MERCPARTY_BULWARK "CAT_MERCPARTY_BULWARK"  // bruisers / tanks
+#define CTAG_MERCPARTY_MARKSMAN "CAT_MERCPARTY_MARKSMAN"  // ranged skirmishers
+#define CTAG_MERCPARTY_BRAVO "CAT_MERCPARTY_BRAVO"  // duelists / hunters
+#define CTAG_MERCPARTY_WARMAGE "CAT_MERCPARTY_WARMAGE"  // battle casters
+
 // List of mono-class categories. Only here for standardisation sake, but can be added on if desired.
 #define CTAG_BISHOP			"CAT_BISHOP"
 #define CTAG_MARTYR			"CAT_MARTYR"
@@ -562,6 +571,7 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_SHOPHAND		"CAT_SHOPHAND"
 #define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
 #define CTAG_KEEPER			"CAT_KEEPER"
+#define CTAG_PAINTER		"CAT_PAINTER"
 #define CTAG_TAILOR			"CAT_TAILOR"
 #define CTAG_SOILBRIDE		"CAT_SOILBRIDE"
 #define CTAG_INNKEEPER		"CAT_INNKEEPER"
@@ -576,6 +586,9 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define TRIUMPH_CAT_CHARACTER "CHARACTER"
 #define TRIUMPH_CAT_MISC "MISC!"
 #define TRIUMPH_CAT_ACTIVE_DATUMS "ACTIVE"
+
+// Suffix for a triumph entry so that it doesn't overlap
+#define TRIUMPH_STASH_SUFFIX " - TR"
 
 #define ARMOR_CLASS_NONE 0
 #define ARMOR_CLASS_LIGHT 1

@@ -278,17 +278,7 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 		var/id = num2hex(record_id_num++,6)
 		if(!C)
 			C = H.client
-		var/image = get_id_photo(H, C)
-		// OV Edit Start: Remove picture datums
-		// var/datum/picture/pf = new
-		// var/datum/picture/ps = new
-		// pf.picture_name = "[H]"
-		// ps.picture_name = "[H]"
-		// pf.picture_desc = ""
-		// ps.picture_desc = ""
-		// pf.picture_image = icon(image, dir = SOUTH)
-		// ps.picture_image = icon(image, dir = WEST)
-		// OV Edit End
+		var/image = get_id_photo(H, C, show_directions)
 
 		//These records should ~really~ be merged or something
 		//General Record

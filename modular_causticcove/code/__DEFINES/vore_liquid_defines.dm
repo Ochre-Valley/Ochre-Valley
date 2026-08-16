@@ -21,7 +21,7 @@
 #define REAGENT_TEA "Tea"
 #define REAGENT_ID_TEA /datum/reagent/consumable/caffeine/tea
 #define REAGENT_TEA_ROSE "Rose Tea"
-#define REAGENT_ID_TEA_ROSE /datum/reagent/water/rosewater
+#define REAGENT_ID_TEA_ROSE /datum/reagent/consumable/rosewater
 #define REAGENT_TEA_CALENDULA "Golden Calendula Tea"
 #define REAGENT_ID_TEA_CALENDULA /datum/reagent/consumable/golden_calendula_tea
 #define REAGENT_TEA_VALERIAN "Soothing Valerian Tea"
@@ -33,7 +33,7 @@
 #define REAGENT_PARAPOISON "Paralytic venom"
 #define REAGENT_ID_PARAPOISON /datum/reagent/toxin/spidervenom_paralytic
 #define REAGENT_SPACEDRUGS "Druggy venom"
-#define REAGENT_ID_SPACEDRUGS /datum/reagent/drug/space_drugs
+#define REAGENT_ID_SPACEDRUGS /datum/reagent/drug/swampweed
 #define REAGENT_POT_MANA "Mana potion"
 #define REAGENT_ID_POT_MANA /datum/reagent/medicine/manapot
 #define REAGENT_POT_HEALTH "Health potion"

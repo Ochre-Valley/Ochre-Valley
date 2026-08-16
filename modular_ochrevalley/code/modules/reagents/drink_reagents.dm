@@ -7,7 +7,7 @@
 	reagent_state = LIQUID
 	quality = DRINK_NICE
 
-/datum/reagent/water/bufftea/on_mob_life(mob/living/carbon/M) 
+/datum/reagent/water/bufftea/on_mob_life(mob/living/carbon/M)
 	//These may only give +1, but we still don't want stacking, especially since they stack with buff potions.
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(istype(R, /datum/reagent/water/bufftea) && R != src)
@@ -21,7 +21,7 @@
 	name = "Bog Tea"
 	description = "Before the bog guard was dissolved, this was their unoffical drink of choice. Doesn't get you high"
 	reagent_state = LIQUID
-	color = "#addfad" 
+	color = "#addfad"
 	taste_description = "resinous herbaceousness"
 	overdose_threshold = 0
 	metabolization_rate = REAGENTS_METABOLISM
@@ -55,7 +55,7 @@
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/HM = M
-		if(HM.culinary_preferences[CULINARY_FAVOURITE_DRINK] != type) //You shouldn't hate the bitterness if you love the drink!
+		if(HM.favorite_drink[DRINKTYPE_CAFFEINE] != type) //You shouldn't hate the bitterness if you love the drink!
 			M.add_stress(/datum/stressevent/bittertea)
 
 /datum/reagent/water/sagetea
@@ -92,10 +92,10 @@
 	if(!HAS_TRAIT(M, TRAIT_DEPRAVED) && volume > 0.09) //Baothans are immune, for culty reasons.
 		if(isdwarf(M))
 			M.add_nausea(1)
-			M.adjustToxLoss(1) 
+			M.adjustToxLoss(1)
 		else
-			M.add_nausea(3) 
-			M.adjustToxLoss(2.5) //A bit stronger than berry poison. Will put you into crit with a sip. 
+			M.add_nausea(3)
+			M.adjustToxLoss(2.5) //A bit stronger than berry poison. Will put you into crit with a sip.
 
 /datum/reagent/water/bufftea/eyebrighttea
     name = "Euphrasia Tea"
@@ -308,7 +308,7 @@
 	name = "Gerevine Brew"
 	description = "It is said that this drink was the first offered to the Saints, when they descended and walked among the faithful. They wept, for it reminded them of the Allfather."
 	reagent_state = LIQUID
-	color = "#fdbcb4" 
+	color = "#fdbcb4"
 	taste_description = "nostalgic homesickness"
 
 /datum/reagent/water/gerevine/on_mob_life(mob/living/carbon/M)
@@ -330,7 +330,7 @@
 	name = "Apfelschorle"
 	description = "Come! Watch me drink the orchard's finest nectar! Ah, lyfe can be so wonderful."
 	reagent_state = LIQUID
-	color = "#d0f0c0" 
+	color = "#d0f0c0"
 	taste_description = "pearly tartness" // drink of the gods
 	quality = DRINK_GOOD
 /datum/reagent/consumable/caffeine/schorle/on_mob_life(mob/living/carbon/M)
@@ -342,7 +342,7 @@
 	name = "Void's Embrace"
 	description = "So dark it swallows the stars. Regret incarnate. Sup from it and forget."
 	reagent_state = LIQUID
-	color = "#d00000" 
+	color = "#d00000"
 	taste_description = "merciful oblivion"
 	quality = DRINK_VERYGOOD
 
@@ -365,7 +365,7 @@ You have forgotten everything…"))
 	name = "Tea of Sisters"
 	description = "How can it be? Something so vile and something so pure combined brings forth something new and unprecedented."
 	reagent_state = LIQUID
-	color = "#de6fa1" 
+	color = "#de6fa1"
 	taste_description = "bittersweet nostalgia"
 	quality = DRINK_FANTASTIC
 
@@ -397,7 +397,7 @@ You see the sky from a pit and a palace both."))
 	name = "Chai"
 	description = "And on we march to unite the Isles. Gleaming naginatas clash against wicker shields and in the nite we drink Aisata's favoured tea."
 	reagent_state = LIQUID
-	color = "#b78727" 
+	color = "#b78727"
 	taste_description = "peppery-sweet grassiness"
 	quality = 2
 
@@ -419,36 +419,36 @@ You see the sky from a pit and a palace both."))
 	name = "Vargmjölk"
 	description = "And we ring the fire, backs turned in snide to the cold. Volf-skinned, we thank you for snatching this brew from the teats of the world…"
 	reagent_state = LIQUID
-	color = "#d3003f" 
+	color = "#d3003f"
 	taste_description = "warm, fruity sweetness"
 
 /datum/reagent/water/icetea
 	name = "Fruktte"
 	description = "And in the mountains we tear the frozen tears of the moose, for we do not lose ourselves in bloodshed yet like it wants us to. Instead, we enjoy a good cup with friends and clan."
 	reagent_state = LIQUID
-	color = "#0f4d92" 
+	color = "#0f4d92"
 	taste_description = "cooled fruitiness"
 
 /datum/reagent/water/barleytea
 	name = "Barley Tea" //Technically this is an asian drink but fuck it, I love the idea.
 	description = "Reality is a state of mind caused by the chronic lack of alcohol in the humours. This won't fix it, but at least it whets the tongue, lad."
 	reagent_state = LIQUID
-	color = "#e08d3c" 
-	taste_description = "toasty bitterness" 
+	color = "#e08d3c"
+	taste_description = "toasty bitterness"
 
 /datum/reagent/water/kvass
 	name = "Kvass" //Bread soder…
 	description = "Tis the bread we drink. Mount the saigas then and let us ride. For the steppe waits for no one and our forefather gave us this so we don't have to chew our meal."
 	reagent_state = LIQUID
-	color = "#b78727" 
-	taste_description = "astringent-sweet cereals" 
+	color = "#b78727"
+	taste_description = "astringent-sweet cereals"
 
 /datum/reagent/water/avantare
 	name = "Avantare" //Just made up.
 	description = "Furl the sails, take down the mizzenmast. Drink our Avantare and hug your wife. We are home, finally home again."
 	reagent_state = LIQUID
-	color = "#ffff66" 
-	taste_description = "freshening sourness" 
+	color = "#ffff66"
+	taste_description = "freshening sourness"
 
 /datum/reagent/water/gerevine/on_mob_life(mob/living/carbon/M) //Wards off illness, so make it a really weak antidote + heal
 	. = ..()

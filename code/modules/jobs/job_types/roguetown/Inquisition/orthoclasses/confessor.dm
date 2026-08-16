@@ -2,7 +2,7 @@
 	name = "Redactus" //OV Edit - was "Confessor"
 	tutorial = "Emissaries of the Otavan Faith, they are tasked to find relics and enemies to Humenkind. Maybe once you were an inquisitorial Confessor or just a really good relic hunter. Now you use your skills of subterfuge and investigation to protect those who cannot protect themselves." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
-	
+
 	outfit = /datum/outfit/job/roguetown/confessor
 	category_tags = list(CTAG_ORTHODOXIST)
 	subclass_languages = list(/datum/language/otavan)
@@ -12,9 +12,7 @@
 		TRAIT_BLACKBAGGER,
 		TRAIT_PERFECT_TRACKER,
 		TRAIT_PSYDONITE,
-		TRAIT_SLEUTH,
-		TRAIT_STEELHEARTED,
-		TRAIT_INQUISITION
+		TRAIT_SLEUTH
 	)
 	subclass_stats = list(
 		STATKEY_SPD = 3,
@@ -68,7 +66,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
 			if("Psydonic Flanged Mace")
 				l_hand = /obj/item/rogueweapon/mace/cudgel/flanged/psy
-				H.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)	
+				H.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
 		var/armors = list("Confessor - Dodge Expert, Complete Coverage", "Arbalist - Master Crossbows, +III STR / -III SPD")
 		var/armor_choice = input(H, "Choose your ARCHETYPE.", "TAKE UP PSYDON'S DUTY.") as anything in armors
 		switch(armor_choice)
@@ -79,7 +77,7 @@
 			if("Arbalist - Master Crossbows, +III STR / -III SPD")
 				head = /obj/item/clothing/head/roguetown/headband/bloodied
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fencer/psydon
-				shirt = /obj/item/clothing/suit/roguetown/armor/manual/sewable/confessor
+				shirt = /obj/item/clothing/suit/roguetown/armor/manual/sewable/padded/confessor
 				REMOVE_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 5, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/misc/swimming, 4, TRUE)

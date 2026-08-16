@@ -35,7 +35,7 @@
 	cooktime = STEW_COOKING_TIME / 4
 
 /datum/stew_recipe/bloomtea
-	inputs = list(/obj/item/reagent_containers/food/snacks/grown/manabloom)
+	inputs = list(/obj/item/alch/manabloompowder)
 	output = /datum/reagent/consumable/caffeine/bloomtea
 	cooktime = STEW_COOKING_TIME / 4
 

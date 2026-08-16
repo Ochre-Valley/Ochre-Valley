@@ -302,6 +302,8 @@
 	. = ..()
 
 /obj/machinery/light/rogue/torchholder/OnCrafted(dirin, user)
+	if(dirin == NORTH)
+		pixel_y = 32
 	dirin = turn(dirin, 180)
 	QDEL_NULL(torchy)
 	on = FALSE
@@ -309,6 +311,8 @@
 	update_icon()
 
 	..(dirin, user)
+
+
 
 /obj/machinery/light/rogue/torchholder/process()
 	if(on)
@@ -809,7 +813,7 @@
 		var/list/hearers_in_range = get_hearers_in_LOS(healing_range, src, RECURSIVE_CONTENTS_CLIENT_MOBS)
 		for(var/mob/living/carbon/human/human in hearers_in_range)
 			var/distance = get_dist(src, human)
-			if(distance > healing_range || HAS_TRAIT(human, TRAIT_IRONMAN))
+			if(distance > healing_range || HAS_TRAIT(human, TRAIT_IRONMAN) || HAS_TRAIT(human, TRAIT_NOREGEN))
 				continue
 			if(!human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
 				to_chat(human, span_info("The warmth of the fire comforts me, affording me a short rest. I would need to lie down on a bed to get a better rest."))

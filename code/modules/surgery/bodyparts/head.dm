@@ -4,7 +4,7 @@
 	icon = 'icons/mob/human_parts.dmi'
 	icon_state = "default_human_head"
 	slot_flags = ITEM_SLOT_HIP
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
 	w_class = WEIGHT_CLASS_NORMAL //Quite a hefty load
@@ -64,17 +64,6 @@
 	. = ..()
 	if(sellprice && !no_head_bounty)
 		. += span_notice("This head seems to be wanted by the Judiciary of Azuria. It can be turned in at a HEADEATER.")
-
-/obj/item/bodypart/head/drop_limb(special)
-	. = ..()
-	if(. && no_head_bounty && !special)
-		addtimer(CALLBACK(src, PROC_REF(dust_contract_head)), QUEST_HEAD_DUST_DELAY)
-
-/obj/item/bodypart/head/proc/dust_contract_head()
-	if(QDELETED(src))
-		return
-	dust_animation()
-	QDEL_IN(src, 1.2 SECONDS)
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
 	var/used_limb = precise

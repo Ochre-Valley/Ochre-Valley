@@ -36,7 +36,7 @@
 	var/needs_emotion = FALSE
 
 	/// For ranged targeted emotes, range of 2 is for adjacents
-	var/targetrange = 2 
+	var/targetrange = 2
 
 	/// Whether this emote will ONLY go through a few walls on the same z-level.
 	var/is_quiet = FALSE
@@ -150,7 +150,12 @@
 			emotelocation = message_origin
 		//OV Add End
 
-		playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
+		//OV edit
+		if(key == "burp" || key == "belch")
+			playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet, pref_toggle = "belch_noises")
+		else
+			playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
+		//OV edit end
 	if(!nomsg)
 		user.log_message(msg, LOG_EMOTE)
 		//OV Add Start
@@ -235,8 +240,8 @@
 				modifier = "old"
 			if((!ignore_silent && (H.silent)) || (!ignore_silent && !is_emote_muffled(H)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) ||  (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
 				modifier = "silenced"
-			//CC Edit - Burp Sound Exception
-			if(key != "burp" || H.client.prefs.belch_noises)
+			//OV Edit - Burp Sound Exception
+			if((key != "burp" && key != "belch") || H.client.prefs.belch_noises)
 				if(user.gender == FEMALE && H.dna.species.soundpack_f)
 					possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
 				else if(H.dna.species.soundpack_m)
@@ -251,7 +256,7 @@
 								possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
 							else
 								possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-			//CC Edit End
+			//OV Edit End
 			// LETHALSTONE ADDITION END
 			if(possible_sounds)
 				if(islist(possible_sounds))
@@ -266,21 +271,6 @@
 					used_sound = possible_sounds
 				H.last_sound = used_sound
 				return used_sound
-		else
-			// familiars get to do emotes with their weird planar being anatomy, so that they can caw and such
-			if(istype(user, /mob/living/simple_animal/pet/familiar))
-				var/mob/living/simple_animal/pet/familiar/fam = user
-				if(!fam.voice_pack)
-					return
-				var/possible_sounds = fam.voice_pack.get_sound(key)
-				var/used_sound
-				if(islist(possible_sounds))
-					used_sound = pick(possible_sounds)
-				else
-					used_sound = possible_sounds
-				return used_sound
-			if(key != "burp" || user.client.prefs.belch_noises) //CC Edit - Belch Noises
-				return user.get_sound(key)
 
 /mob/living/proc/get_sound(input)
 	return

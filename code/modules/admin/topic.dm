@@ -136,7 +136,7 @@
 				current_value = M.getToxLoss()
 			else if(damage_type == "oxy")
 				current_value = M.getOxyLoss()
-			
+
 			var/new_value = input(usr, "Set [damage_type] damage:", "Edit Damage", current_value) as num|null
 			if(new_value != null)
 				new_value = max(0, new_value)
@@ -163,7 +163,7 @@
 				current_value = H.getToxLoss()
 			else if(damage_type == "oxy")
 				current_value = H.getOxyLoss()
-			
+
 			var/new_value = input(usr, "Set [damage_type] damage:", "Edit Damage", current_value) as num|null
 			if(new_value != null)
 				new_value = max(0, new_value)
@@ -186,7 +186,7 @@
 				current_value = BP.brute_dam
 			else if(damage_type == "burn")
 				current_value = BP.burn_dam
-			
+
 			var/new_value = input(usr, "Set [damage_type] damage for [BP.name]:", "Edit Damage", current_value) as num|null
 			if(new_value != null)
 				new_value = max(0, new_value)
@@ -230,29 +230,29 @@
 			if(wound_choice)
 				var/wound_path = wound_types[wound_choice]
 				// Apply body-part-specific wound variants
-				
+
 				if(wound_choice == "Fracture")
 					if(BP.body_zone == BODY_ZONE_HEAD)
 						wound_path = /datum/wound/fracture/head
 					else if(BP.body_zone == BODY_ZONE_CHEST)
 						wound_path = /datum/wound/fracture/chest
-				
+
 				else if(wound_choice == "Artery")
 					if(BP.body_zone == BODY_ZONE_HEAD)
 						wound_path = /datum/wound/artery/neck
 					else if(BP.body_zone == BODY_ZONE_CHEST)
 						wound_path = /datum/wound/artery/chest
-				
+
 				else if(wound_choice == "Integrity")
 					if(BP.body_zone == BODY_ZONE_HEAD)
 						wound_path = /datum/wound/integrity/neck
 					else if(BP.body_zone == BODY_ZONE_CHEST)
 						wound_path = /datum/wound/integrity/chest
-				
+
 				else if(wound_choice == "Dislocation")
 					if(BP.body_zone == BODY_ZONE_HEAD)
 						wound_path = /datum/wound/dislocation/neck
-				
+
 				// Check for wound subtypes (like small/large punctures, small/large slashes, etc.)
 				var/list/wound_subtypes = list()
 				for(var/subtype in subtypesof(wound_path))
@@ -260,7 +260,7 @@
 					var/wound_name = initial(W.name)
 					if(wound_name && wound_name != initial(wound_path:name))
 						wound_subtypes[wound_name] = subtype
-				
+
 				// If there are subtypes, let the user choose
 				if(wound_subtypes.len > 0)
 					var/subtype_choice = input(usr, "Select wound severity:", "Wound Tier") as null|anything in wound_subtypes
@@ -269,7 +269,7 @@
 					else
 						show_heal_panel(M)
 						return
-				
+
 				BP.add_wound(wound_path)
 				var/datum/wound/applied_wound = wound_path
 				var/wound_display_name = initial(applied_wound:name)
@@ -796,7 +796,7 @@
 		log_admin("[key_name(usr)] has sent [key_name(M)] back to the Lobby.")
 		GLOB.chosen_names -= M.real_name
 		LAZYREMOVE(GLOB.actors_list, M.mobid)
-		LAZYREMOVE(GLOB.roleplay_ads, M.mobid)
+		LAZYREMOVE(GLOB.roleplay_ads, M.mobid) //OV ADD - Roleplay Ad Maint
 		SSdroning.kill_droning(M.client)
 		SSdroning.kill_loop(M.client)
 		SSdroning.kill_rain(M.client)
@@ -879,7 +879,7 @@
 			C.admin_ghost()
 		sleep(2)
 		C.jumptocoord(x,y,z)
-	
+
 	//OV edit
 	else if(href_list["adminplayereffects"])
 		var/mob/M = locate(href_list["adminplayereffects"])
@@ -1166,18 +1166,18 @@
 		var/patron_type = text2path(href_list["patron"])
 		if(!patron_type)
 			return
-		
+
 		// For divine spellcasters (those with devotion), we need to handle spells specially
 		var/is_divine_caster = FALSE
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.devotion)
 				is_divine_caster = TRUE
-		
+
 		// Remove old patron bonuses/spells
 		if(M.patron)
 			M.patron.on_loss(M)
-			
+
 			// For divine casters, remove devotion spells from old patron
 			if(is_divine_caster && ishuman(M))
 				var/mob/living/carbon/human/H = M
@@ -1185,10 +1185,10 @@
 					for(var/spell_type in M.patron.miracles)
 						if(H.mind?.has_spell(spell_type))
 							H.mind.RemoveSpell(spell_type)
-		
+
 		// Set new patron
 		M.set_patron(patron_type)
-		
+
 		// For divine casters, grant new patron's devotion spells
 		if(is_divine_caster && ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -1197,7 +1197,7 @@
 				H.devotion.patron = M.patron
 				// Update the level to trigger spell granting
 				H.devotion.try_add_spells(silent = FALSE)
-		
+
 		message_admins(span_danger("Admin [key_name_admin(usr)] changed [key_name_admin(M)]'s patron to [initial(M.patron.name)]"))
 		log_admin("[usr] changed [M]'s patron to [initial(M.patron.name)].")
 		show_player_panel_next(M, "patron")
@@ -1679,7 +1679,7 @@
 		var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", null, null)
 		if(!amt2change || !raisin)
 			return
-		M.adjust_triumphs(amt2change, FALSE, raisin)
+		M.adjust_triumphs(amt2change, FALSE, "Edit Triumphs (Game Master panel) by [usr.key]: [raisin]")
 		message_admins("[usr.key] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 		log_admin("[usr.key] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 

@@ -10,7 +10,7 @@
 	dodgetime = 30
 	d_intent = INTENT_DODGE
 	blood_toll_bucket = STATS_KILLED_DROWS
-	outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow
+	drowraider_outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow
 
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/ambush
 	threat_point = THREAT_ELITE
@@ -39,10 +39,10 @@
 		r_hand = /obj/item/rogueweapon/sword/sabre/stalker
 		l_hand = /obj/item/rogueweapon/sword/sabre/stalker
 	else // dual dirk
-		r_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish/drow
-		l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish/drow
+		r_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
+		l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
 
-	H.STASTR = 13 
+	H.STASTR = 13
 	H.STASPD = 14 // 3 points
 	H.STACON = 15 //Legs will be exposed, they need this, lmao
 	H.STAWIL = 9
@@ -61,7 +61,7 @@
 
 //LEGENDARY VARIANT FOR GM SPAWN ONLY
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/monstrous
-	outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous
+	drowraider_outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous
 	d_intent = INTENT_PARRY
 
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/monstrous/after_creation()
@@ -71,7 +71,7 @@
 /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous/pre_equip(mob/living/carbon/human/H)
 	var/taur_colour = pick("#0f0463", "#1a1540", "#271633", "#212021", "#361213", "#540305")
 	H.Taurize(/obj/item/bodypart/taur/spider/drider_only, taur_colour)
-	
+
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/shadowpants/drowraider
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/fluted/shadowplate
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shadowshirt/elflock/drowraider
@@ -82,7 +82,7 @@
 	r_hand = /obj/item/rogueweapon/whip/spiderwhip
 	l_hand = /obj/item/rogueweapon/shield/tower/spidershield
 
-	H.STASTR = 15 
+	H.STASTR = 15
 	H.STASPD = 13 // 3 points
 	H.STACON = 17 //Legs will be exposed, they need this, lmao
 	H.STAWIL = 11

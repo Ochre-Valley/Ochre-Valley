@@ -263,7 +263,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_APPRENTICE, TRUE) //Not a complete pushover
 				beltl = /obj/item/rogueweapon/scabbard/sword/noble
 				r_hand = /obj/item/rogueweapon/sword/sabre/dec
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				H.change_stat(STATKEY_WIL, 1)
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. With wealth, come the poor, ready to pilfer you of your hard earned (inherited) coin, so tread lightly unless you want to meet a grisly end."))
@@ -272,7 +272,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_APPRENTICE, TRUE) //Not a complete pushover
 				beltl = /obj/item/rogueweapon/scabbard/sword/noble
 				r_hand = /obj/item/rogueweapon/sword/rapier/dec
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				H.change_stat(STATKEY_WIL, 1)
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. With wealth, come the poor, ready to pilfer you of your hard earned (inherited) coin, so tread lightly unless you want to meet a grisly end."))
@@ -281,7 +281,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_APPRENTICE, TRUE) //Not a complete pushover
 				beltl = /obj/item/rogueweapon/scabbard/sword/noble
 				r_hand = /obj/item/rogueweapon/sword/decorated
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				H.change_stat(STATKEY_WIL, 1)
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. With wealth, come the poor, ready to pilfer you of your hard earned (inherited) coin, so tread lightly unless you want to meet a grisly end."))
@@ -290,7 +290,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_APPRENTICE, TRUE) //Not a complete pushover
 				beltl = /obj/item/rogueweapon/scabbard/sheath/noble
 				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/decorated
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				H.change_stat(STATKEY_WIL, 1)
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. With wealth, come the poor, ready to pilfer you of your hard earned (inherited) coin, so tread lightly unless you want to meet a grisly end."))
@@ -301,13 +301,13 @@
 				H.change_stat(STATKEY_PER, 1)
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
 				beltl = /obj/item/quiver/arrows
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/hunting_map/boars = 1, /obj/item/storage/belt/rogue/pouch/coins/mid = 1)
+				backpack_contents = list(/obj/item/hunting_map/boars = 1, /obj/item/storage/belt/rogue/pouch/coins/mid = 1)
 				ADD_TRAIT(H, TRAIT_MASTERFUL_HUNTER, TRAIT_GENERIC) //Unique starting prompt, you sort of did actually earn that
 				ADD_TRAIT(H, TRAIT_EXPERT_HUNTER, TRAIT_GENERIC)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands for a great hunter. With wealth, come the poor, ready to pilfer you of your hard earned coin, so tread lightly unless you want to meet a grisly end."))
 			if("Extra Coin + Expert Appraiser + Intellectual") //RP route, sacrifices practical skills for massive utility + wealth
 				H.adjust_skillrank_up_to(/datum/skill/misc/reading, SKILL_LEVEL_MASTER, TRUE)
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/veryrich = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/veryrich = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_INTELLECTUAL, TRAIT_GENERIC)
 				var/crowns = list(
@@ -330,7 +330,7 @@
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. With great wealth, come the poor and the greedy, ready to pilfer you of your hard earned (inherited) coin, so tread lightly, trust few unless you want to meet a grisly end."))
 			if("Inbred Noble - +5 LCK + Stat 8 baseline + Crit Weakness + No Run + Maille Training") //The Shitpost Option
 				//Honestly, the fact you can even wear maile is fucking hilarious
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/veryrich = 1) //Hilarious
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/veryrich = 1) //Hilarious
 				ADD_TRAIT(H, TRAIT_NORUN, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_GOODLOVER, TRAIT_GENERIC) //HILARIOUS
@@ -344,7 +344,7 @@
 				H.change_stat(STATKEY_LCK, 5) //Congratulations, you survived this long! Somehow. Here's our exclusion.
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. Despite all of the attempts of your family to off you, you've managed to make it this far somehow. Yet tread lightly, unless you want to meet a grisly end separated from your hard earned (inherited) riches"))
 			if("Survival Skills + Expert Hunter + Outdoorsman + Less Starting Coin + 1 PER") //Survival Skill Pack w/ outdoorsman on top
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/poor = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/poor = 1)
 				ADD_TRAIT(H, TRAIT_OUTDOORSMAN, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_EXPERT_HUNTER, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_SURVIVAL_EXPERT, JOB_TRAIT) //Yea sure.
@@ -363,10 +363,15 @@
 				H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_EXPERT, TRUE)
 				H.change_stat(STATKEY_PER, 1)
 				//No lockpicking, go thief for that. You're geared to cause problems, be it for or against the court.
-				backpack_contents = list(/obj/item/recipe_book/survival = 1, /obj/item/storage/belt/rogue/pouch/coins/rich = 1)
+				backpack_contents = list(/obj/item/storage/belt/rogue/pouch/coins/rich = 1)
 				ADD_TRAIT(H, TRAIT_KEENEARS, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_CICERONE, TRAIT_GENERIC)
-				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+
+				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_VIRTUE)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_descriptors)
+				add_verb(H, /mob/living/carbon/human/proc/emote_ffsalute)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_guarded)
+
 				//No darkvision, you're not /amazing/ at this vs a proper specialist
 				H.grant_language(/datum/language/thievescant)
 				to_chat(H, span_warning("You are a traveling noble visiting foreign lands. Perhaps sent as a spy, a liason, a part of a smuggling network or perhaps simply a hand to some small-time court, tread lightly however as your skills in espionage never covered escape, lest you meet a grisly end."))
@@ -408,7 +413,7 @@
 	if(H.mind)
 		to_chat(H, span_warning("You are a knight from a distant land, a scion of a noble house visiting Azuria for one reason or another."))
 		var/helmets = list(
-			"Pigface Bascinet" 	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
+			"Pigface Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
 			"Guard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
 			"Barred Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/sheriff,
 			"Bucket Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket,
@@ -417,13 +422,17 @@
 			"Knight's Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight/old,
 			"Knight's Greatplumed Armet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight/greatplume,
 			"Visored Sallet"			= /obj/item/clothing/head/roguetown/helmet/sallet/visored,
+			"Snouted Visored Sallet"			= /obj/item/clothing/head/roguetown/helmet/sallet/visored/snouted,
 			"Armet"				= /obj/item/clothing/head/roguetown/helmet/heavy/knight/armet,
+			"Snouted Armet"				= /obj/item/clothing/head/roguetown/helmet/heavy/knight/armet/snouted,
 			"Hounskull Bascinet" 		= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull,
 			"Etruscan Bascinet" 		= /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan,
 			"Slitted Kettle"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight/skettle,
 			"Visored Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/barbute/visor,
 			"Great Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/barbute/great,
 			"Volfskulle Bascinet"		= /obj/item/clothing/head/roguetown/helmet/heavy/volfplate,
+			"Roundface Bascinet"	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface,
+			"Snouted Roundface Bascinet"	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface/snouted,
 			"None"
 			)
 		var/helmchoice = input(H, "Choose your Helm.", "TAKE UP HELMS") as anything in helmets
@@ -450,7 +459,6 @@
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
-		/obj/item/recipe_book/survival = 1,
 		)
 	H.dna.species.soundpack_m = GLOB.voice_packs[/datum/voicepack/male/knight]
 	H.set_blindness(0)
@@ -510,58 +518,113 @@
 		STATKEY_PER = 1,
 		STATKEY_SPD = 1,
 	)
-	subclass_skills = list(
-		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
+	subclass_skills = list(	//Push come to shove, they can always rely on knives and swords.
+		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/shields = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/slings = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/hunting = SKILL_LEVEL_NOVICE,
+		/datum/skill/misc/hunting = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/labor/butchering = SKILL_LEVEL_APPRENTICE,
 	)
 	extra_context = "Chooses between Light Armor (Dodge Expert) and Medium Armor."
 
 /datum/outfit/job/roguetown/adventurer/squire/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_warning("You are a squire who has traveled far in search of a master to train you and a lord to knight you."))
-	head = /obj/item/clothing/head/roguetown/roguehood
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	cloak = /obj/item/clothing/cloak/tabard/stabard
-	neck = /obj/item/clothing/neck/roguetown/chaincoif/iron
+	neck = /obj/item/clothing/neck/roguetown/coif/padded
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	belt = /obj/item/storage/belt/rogue/leather
 	backr = /obj/item/storage/backpack/rogue/satchel
 	beltl = /obj/item/flashlight/flare/torch/lantern
-	backpack_contents = list(
-		/obj/item/storage/belt/rogue/pouch/coins/poor = 1, 
+	backpack_contents = list(		//no money, go find a master!
 		/obj/item/rogueweapon/hammer/iron = 1,
 		/obj/item/repair_kit/metal = 1,
 		/obj/item/repair_kit = 1,
 		/obj/item/armor_brush = 1,
 		/obj/item/polishing_cream = 1,
-		/obj/item/recipe_book/survival = 1,
+		/obj/item/rogueweapon/huntingknife/idagger = 1,
+		/obj/item/rogueweapon/scabbard/sheath = 1,
 	)
 	if(H.mind)
 		var/armors = list("Light Armor","Medium Armor")
-		var/armor_choice = input(H, "Choose your armor.", "TAKE UP ARMS") as anything in armors
+		var/armor_choice = input(H, "Choose your armor.", "DRESS UP!") as anything in armors
 		switch(armor_choice)
-			if("Light Armor")
+			if("Light Armor")	//For the ones who like Speed
 				shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
+				armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy
 				pants = /obj/item/clothing/under/roguetown/trou/leather
-				gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
-				beltr = /obj/item/rogueweapon/huntingknife/idagger
+				gloves = /obj/item/clothing/gloves/roguetown/angle
 				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-			if("Medium Armor")
-				shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
-				pants = /obj/item/clothing/under/roguetown/chainlegs/iron
-				gloves = /obj/item/clothing/gloves/roguetown/chain/iron
-				beltr = /obj/item/rogueweapon/sword/iron
+			if("Medium Armor")	//Arguably a 'weaker' armor start, but better mix and matching later on
+				shirt = /obj/item/clothing/suit/roguetown/shirt/tunic
+				armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/iron
+				pants = /obj/item/clothing/under/roguetown/trou/leather
+				gloves = /obj/item/clothing/gloves/roguetown/angle
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+		var/weapon = list("Spear","Shortsword & Shield","Arming Sword","Mace & Shield","Axe & Shield","Flail & Shield","Messer & Shield","Bow & Quiver","Crossbow & Quiver","Sling & Iron Balls")
+		var/weapon_choice = input(H, "Choose your weapon.", "PICK IT UP!") as anything in weapon
+		switch(weapon_choice)
+			if("Spear")
+				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/rogueweapon/spear
+				backl = /obj/item/rogueweapon/scabbard/gwstrap
+			if("Shortsword & Shield")
+				r_hand = /obj/item/rogueweapon/sword/short/iron
+				backl = /obj/item/rogueweapon/shield/tower
+				beltr = /obj/item/rogueweapon/scabbard/sword
+			if("Arming Sword")
+				r_hand = /obj/item/rogueweapon/sword/iron
+				beltr = /obj/item/rogueweapon/scabbard/sword
+			if("Mace & Shield")
+				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/rogueweapon/mace
+				backl = /obj/item/rogueweapon/shield/tower
+			if("Axe & Shield")
+				H.adjust_skillrank_up_to(/datum/skill/combat/axes, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/rogueweapon/stoneaxe/woodcut
+				backl = /obj/item/rogueweapon/shield/tower
+			if("Flail & Shield")
+				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/rogueweapon/flail
+				backl = /obj/item/rogueweapon/shield/tower
+			if("Messer & Shield")
+				r_hand = /obj/item/rogueweapon/sword/short/messer
+				backl = /obj/item/rogueweapon/shield/tower
+			if("Bow & Quiver")
+				H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/classic
+				backl = /obj/item/quiver/arrows
+			if("Crossbow & Quiver")
+				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+				backl = /obj/item/quiver/bolt
+			if("Sling & Iron Balls")
+				H.adjust_skillrank_up_to(/datum/skill/combat/slings, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/sling
+				beltr = /obj/item/quiver/sling/iron
+		var/helmets = list(
+			"Sallet" 	= /obj/item/clothing/head/roguetown/helmet/sallet/iron,
+			"Kettle Helmet"		= /obj/item/clothing/head/roguetown/helmet/kettle/iron,
+			"Bascinet"		= /obj/item/clothing/head/roguetown/helmet/bascinet/iron,
+			"Chain Coif"		= /obj/item/clothing/neck/roguetown/chaincoif/iron,
+			"None"
+			)
+		var/helmchoice = input(H, "Protect Thine Head.", "STRAP IT!") as anything in helmets
+		if(helmchoice != "None")
+			head = helmets[helmchoice]
+	H.set_blindness(0)
 	H.set_blindness(0)

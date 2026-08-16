@@ -246,6 +246,11 @@
 	icon_state = "branching_antlers"
 	relevant_layers = list(BODY_ADJ_LAYER, BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
 
+/datum/sprite_accessory/horns/large/wide_antlers
+	name = "Wide Antlers"
+	icon_state = "wide_antlers"
+	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
+
 /datum/sprite_accessory/horns/large/pronghorn
 	name = "Pronghorn Antlers"
 	icon_state = "pronghorn_antlers"
@@ -280,3 +285,15 @@
 	icon = 'icons/mob/sprite_accessory/halforc.dmi'
 	icon_state = "longtusk"
 	default_colors = list("#F4F4BE")
+
+/datum/sprite_accessory/horns/zard
+	name = "Zardish"
+	icon_state = "zard"
+
+/datum/sprite_accessory/horns/zard_cloth
+	name = "Zardish (Cloth)"
+	icon_state = "zard_cloth"
+	color_keys = 2
+	color_key_names = list("Horns", "Cloth")
+	default_colors = list("#555555", "#B41919")
+	relevant_layers = list(BODY_ADJ_LAYER)

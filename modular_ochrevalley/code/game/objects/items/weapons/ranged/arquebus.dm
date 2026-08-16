@@ -43,56 +43,9 @@
 	var/newtime = 40
 	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4.6
 	newtime -= user.STAPER
-	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY // NPCs shoot slower than players though.
+	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME // NPCs shoot slower than players though.
 
-/// Pistol Intents ///
-/datum/intent/shoot/arquebus/pistol
-    chargetime = 1
-    chargedrain = 0
-
-/datum/intent/shoot/arquebus/pistol/can_charge()
-    return TRUE
-
-/datum/intent/shoot/arquebus/pistol/get_chargetime()
-	if(mastermob)
-		var/newtime = 40
-		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4 // skill block
-		newtime -= mastermob.STAPER // per block
-		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item()) // If slurbows don't care if your other arm is disabled, I guess pistols don't either.
-			newtime *= 1.5 // It takes longer to aim one-handed.
-		return max(newtime, 1) // Legendary and 15 PER will hit the aim time floor.
-	return chargetime
-
-/datum/intent/arc/arquebus/pistol
-    chargetime = 12
-    chargedrain = 0
-
-/datum/intent/arc/arquebus/pistol/can_charge()
-	return TRUE
-
-/datum/intent/arc/arquebus/pistol/get_chargetime()
-	if(mastermob)
-		var/newtime = 40
-		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4
-		newtime -= mastermob.STAPER
-		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item())
-			newtime *= 1.5
-		return max(newtime, 12)
-	return chargetime
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/get_npc_chargetime(mob/living/user)
-	var/newtime = 40
-	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4
-	newtime -= user.STAPER
-	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
-		newtime *= 1.5
-	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY
-
-// --------------
-// The gun itself
-// --------------
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/
 	name = "arquebus rifle"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
 	icon = 'modular_causticcove/icons/weapons/arquebus.dmi'
@@ -124,7 +77,6 @@
 	minstr = 6
 	walking_stick = TRUE
 	experimental_onback = TRUE
-	flags_ai_inventory = AI_ITEM_GUN
 	cartridge_wording = "musketball"
 	load_sound = 'modular_causticcove/sound/arquebus/musketload.ogg'
 	fire_sound = "modular_causticcove/sound/arquebus/arquefire.ogg"
@@ -189,7 +141,7 @@
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_INSERT, PROC_REF(checkstoragevalidity))
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE, PROC_REF(checkstoragevalidity))
 	myrod = new /obj/item/ramrod(src)
-	
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/Destroy()
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_INSERT)
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE)
@@ -380,6 +332,40 @@
 	icon_state = "handgonne"
 	item_state = "handgonne"
 
+/datum/intent/shoot/arquebus/pistol/get_chargetime()
+	if(mastermob)
+		var/newtime = 40
+		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4 // skill block
+		newtime -= mastermob.STAPER // per block
+		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item()) // If slurbows don't care if your other arm is disabled, I guess pistols don't either.
+			newtime *= 1.5 // It takes longer to aim one-handed.
+		return max(newtime, 1) // Legendary and 15 PER will hit the aim time floor.
+	return chargetime
+
+/datum/intent/arc/arquebus/pistol
+    chargetime = 12
+    chargedrain = 0
+
+/datum/intent/arc/arquebus/pistol/can_charge()
+	return TRUE
+
+/datum/intent/arc/arquebus/pistol/get_chargetime()
+	if(mastermob)
+		var/newtime = 40
+		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4
+		newtime -= mastermob.STAPER
+		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item())
+			newtime *= 1.5
+		return max(newtime, 12)
+	return chargetime
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/get_npc_chargetime(mob/living/user)
+	var/newtime = 40
+	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4
+	newtime -= user.STAPER
+	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
+		newtime *= 1.5
+	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 	name = "arquebus pistol"

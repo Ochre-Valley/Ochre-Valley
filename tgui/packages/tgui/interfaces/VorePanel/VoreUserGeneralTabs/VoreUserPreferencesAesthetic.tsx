@@ -63,13 +63,13 @@ export const VoreUserPreferencesAesthetic = (props: {
                         editMode={editMode}
                         action="set_vs_color"
                         subAction={entry}
+                        value_of={entry}
                         back_color={vore_sprite_color[entry] || ''}
                         tooltip={
                           "Modify the sprite color of your '" +
                           entry +
                           "' sprite."
                         }
-                        presets={presets}
                       />
                       <Stack.Item>
                         <VorePanelEditSwitch

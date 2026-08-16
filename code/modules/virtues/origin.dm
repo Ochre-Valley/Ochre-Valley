@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(origins) // alist: origin name = origin desc. so we don't have to access client prefs midgame
+
 // Race list means RESTRICTED from the LISTED races.
 /datum/virtue/origin/unknown
 	name = "Nowhere"
@@ -70,7 +72,7 @@
 
 /datum/virtue/origin/raneshen
 	name = "Ranesheni"
-	origin_name = "Raneshan"
+	origin_name = "Raneshen"
 	added_languages = list(/datum/language/raneshi)
 	desc = "I originate from the lush valleys and harsh badlands of Raneshen -- The Autarchy, Merchants of Shifting Sands. Home to the zealous sun elves and many others looking to profit without judgement, build great works with cheap labor or simply fulfill their lyfe's desires with coin and flesh. The region sits at the center of the continent of Eastern Psydonia. Recently engulfed in a violent set of rebellions against the slaver regions, it has been enduring a tumultuous time with many refugees -- both slaver and slave, fleeing its hold.<br>"
 	origin_desc = "Raneshen - better known by its ancestral title, 'Zybantia' - resides across the ocean as Grenzelhoft's economic rival: \
@@ -107,8 +109,6 @@
 		if("Strict (Naledi Complex)")
 			ADD_TRAIT(H, TRAIT_NALEDI, TRAIT_GENERIC)
 			mask_type = /obj/item/clothing/mask/rogue/lordmask/naledi/lesser
-			H.apply_status_effect(/datum/status_effect/debuff/lost_naledi_mask)
-			H.add_stress(/datum/stressevent/naledimasklost)
 		else
 			mask_type = /obj/item/clothing/mask/rogue/lordmask/tarnished
 	H.mind.special_items["Naledian Mask"] = mask_type
@@ -274,3 +274,24 @@
 
 /datum/virtue/origin/apply_to_human(mob/living/carbon/human/recipient)
 	recipient.dna.species.origin = origin_name
+
+// Familiar origins
+/datum/virtue/origin/familiar/fae
+	name = "Fae"
+	origin_name = "The Faewyld"
+	origin_desc = "Little and less is known about where the fae come from. Some say another plane, layered over Psydonia; others say merely hidden groves, tucked far away from mortal sight. All that is certain is that wherever they come from, they rarely seem to leave."
+
+/datum/virtue/origin/familiar/elemental
+	name = "Elemental"
+	origin_name = "The Depths"
+	origin_desc = "Little and less is known about where elementals come from. Some say another plane, layered over Psydonia; others say they're merely deep underground, far below the caves-and-tunnels of mortals. All that is certain is that wherever they come from, they rarely seem to leave."
+
+/datum/virtue/origin/familiar/void
+	name = "Voidborn"
+	origin_name = "The Void"
+	origin_desc = "Little and less is known about the origin of void beings. Some magi claim it is the space between realms, filled with unfathomable predators; others claim it is the far past. Whatever the case, seeing a voidborn being can only mean two things: a powerful magos has been at work here, and you are in danger."
+
+/datum/virtue/origin/familiar/infernal
+	name = "Infernal"
+	origin_name = "The Hells"
+	origin_desc = "Infernals are tight-lipped about their home, and mortals tend to prefer sylver'd blades to questions. All that is known is that every being that crawls out of the hellish pits bears a deep-rooted malice towards Psydonia and all that dwell upon it."

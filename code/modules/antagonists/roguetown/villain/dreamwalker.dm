@@ -35,7 +35,9 @@
 		TRAIT_RITUALIST,
 		TRAIT_STRENGTH_UNCAPPED,
 		TRAIT_DREAMWALKER,
-		TRAIT_UNLYCKERABLE
+		TRAIT_UNLYCKERABLE,
+		TRAIT_NOWW,
+		TRAIT_UNCONVERTIBLE
 		)
 
 	var/STASTR = 15
@@ -70,7 +72,7 @@
 	owner.current.STACON = src.STACON
 	owner.current.STALUC = src.STALUC
 	//Dreamfiends fear them up close.
-	var/mob/living/carbon/human/body = owner.current 
+	var/mob/living/carbon/human/body = owner.current
 	body.faction |= "dream"
 	for (var/trait in traits_dreamwalker)
 		ADD_TRAIT(body, trait, "[type]")
@@ -355,7 +357,7 @@
 				if("Oozing Sword")
 					new_weapon = new /obj/item/rogueweapon/greatsword/bsword/dreamscape/active(user.loc)
 				if("Thunderous Trident")
-					new_weapon = new /obj/item/rogueweapon/spear/dreamscape_trident/active(user.loc)
+					new_weapon = new /obj/item/rogueweapon/spear/trident/dreamscape_trident/active(user.loc)
 
 			if(new_weapon)
 				to_chat(user, span_notice("You shape the sylveric ingots into a [choice]."))

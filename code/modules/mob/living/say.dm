@@ -674,7 +674,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 /mob/living/proc/get_message_language(message)
 	if(copytext(message, 1, 2) == ",")
-		var/key = copytext(message, 2, 3)
+		var/key = lowertext(copytext(message, 2, 3))
 		for(var/ld in GLOB.all_languages)
 			var/datum/language/LD = ld
 			if(initial(LD.key) == key)

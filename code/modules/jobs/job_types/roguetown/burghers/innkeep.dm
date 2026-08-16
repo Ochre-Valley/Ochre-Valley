@@ -24,6 +24,7 @@
 	job_subclasses = list(
 		/datum/advclass/innkeeper
 	)
+	has_subprefs = FALSE // only one subclass
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/innkeeper
@@ -73,7 +74,6 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 	backpack_contents = list(
-		/obj/item/recipe_book/survival,
 		/obj/item/bottle_kit,
 		/obj/item/storage/keyring/innkeep_rooms,
 		/obj/item/reagent_containers/glass/bucket/pot/kettle/tankard/silver,

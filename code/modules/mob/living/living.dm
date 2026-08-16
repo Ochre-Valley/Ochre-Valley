@@ -14,8 +14,6 @@
 		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
 			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
 				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			SSmatthios_mobs.register_mob(src)
 	update_a_intents()
 	swap_rmb_intent(num=1)
 	if(unique_name)
@@ -59,6 +57,11 @@
 	if(craftingthing)
 		QDEL_NULL(craftingthing)
 	QDEL_LIST(simple_wounds)
+	if(simple_embedded_objects)
+		for(var/obj/item/embedded as anything in simple_embedded_objects)
+			embedded.is_embedded = FALSE
+			embedded.embedded_host = null
+		simple_embedded_objects = null
 	return ..()
 
 /mob/living/onZImpact(turf/T, levels)
@@ -118,6 +121,9 @@
 /mob/living/proc/MobBump(mob/M)
 	//Even if we don't push/swap places, we "touched" them, so spread fire
 	spreadFire(M)
+
+	if(!M.density || !density)
+		return FALSE
 
 	if(now_pushing)
 		return TRUE
@@ -288,7 +294,7 @@
 				forceMove(target.loc)
 				now_pushing = FALSE
 				return TRUE
-			
+
 			if(!(istype(target.a_intent, INTENT_HELP) || target.get_active_held_item() || target.restrained()))
 				if(step_mechanics_pref && target.step_mechanics_pref)
 					if(handle_micro_bump_other(target)) return
@@ -409,6 +415,8 @@
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
 				CZ = TRUE
+				if(I.wlength < WLENGTH_GREAT) //only GREAT weapons reach the head from the ground
+					acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 			else
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 		else
@@ -820,6 +828,9 @@
 	if(pulledby)
 		to_chat(src, span_warning("I'm grabbed!"))
 		return
+	if(world.time < rest_locked_until)
+		to_chat(src, span_warning("I'm too charged with vigor to lie down!"))
+		return
 	if(!resting)
 		set_resting(TRUE, FALSE)
 
@@ -867,6 +878,9 @@
 		else
 			src.visible_message(span_warning("[src] struggles to stand up."))
 	else
+		if(world.time < rest_locked_until)
+			to_chat(src, span_warning("I'm too charged with vigor to lie down!"))
+			return
 		set_resting(TRUE, FALSE)
 
 /mob/living/proc/set_resting(rest, silent = TRUE)
@@ -1696,7 +1710,7 @@
 /mob/living/proc/check_weakness(obj/item/weapon, mob/living/attacker)
 	return 1 //This is not a boolean, it's the multiplier for the damage the weapon does.
 
-/mob/living/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force)
+/mob/living/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, throwvore = FALSE) //OV EDIT - Runtime Correction?
 	stop_pulling()
 	. = ..()
 
@@ -1734,6 +1748,7 @@
 	var/datum/status_effect/fire_handler/fire_stacks/fire_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/sunder_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder)
 	var/datum/status_effect/fire_handler/fire_stacks/divine/divine_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/divine)
+	var/datum/status_effect/fire_handler/fire_stacks/vheslyn/vheslyn_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/vheslyn)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/blessed/blessed_sunder = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
 
 	if(HAS_TRAIT(src, TRAIT_NOFIRE) && prob(90)) // Nofire is described as nonflammable, not immune. 90% chance of avoiding ignite
@@ -1744,6 +1759,9 @@
 
 	if(!divine_status?.on_fire)
 		divine_status?.ignite(silent)
+
+	if(!vheslyn_status?.on_fire)
+		vheslyn_status?.ignite(silent)
 
 	if(!sunder_status?.on_fire)
 		sunder_status?.ignite(silent)
@@ -1768,6 +1786,9 @@
 	var/datum/status_effect/fire_handler/fire_stacks/divine/divine_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/divine)
 	if(divine_status?.on_fire)
 		remove_status_effect(/datum/status_effect/fire_handler/fire_stacks/divine)
+	var/datum/status_effect/fire_handler/fire_stacks/divine/vheslyn_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/vheslyn)
+	if(vheslyn_status?.on_fire)
+		remove_status_effect(/datum/status_effect/fire_handler/fire_stacks/vheslyn)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/blessed/blessed_sunder = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
 	if(blessed_sunder?.on_fire)
 		remove_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
@@ -1984,7 +2005,8 @@
 			stop_pulling()
 	if(!(mobility_flags & MOBILITY_UI))
 		unset_machine()
-	density = !lying
+	if(initial(density))
+		density = !lying
 	if(lying)
 		if(!lying_prev)
 			fall(!canstand_involuntary)
@@ -2073,6 +2095,8 @@
 		return
 	if(user.incapacitated())
 		return
+	if(user == src)
+		return
 	if(can_be_held(user))
 		mob_try_pickup(user)
 
@@ -2110,6 +2134,18 @@
 			AT.get_remote_view_fullscreens(src)
 		else
 			clear_fullscreen("remote_view", 0)
+
+GLOBAL_LIST_INIT(sight_trait_signals, build_sight_trait_signals())
+
+/proc/build_sight_trait_signals()
+	. = list()
+	for(var/trait in list(TRAIT_DARKVISION, TRAIT_NITEVISION, TRAIT_NOCSHADES, TRAIT_GILDED_SIGHT, TRAIT_THERMAL_VISION, TRAIT_XRAY_VISION, TRAIT_ZIZOSIGHT))
+		. += SIGNAL_ADDTRAIT(trait)
+		. += SIGNAL_REMOVETRAIT(trait)
+
+/mob/living/proc/on_sight_trait_change(datum/source)
+	SIGNAL_HANDLER
+	update_sight()
 
 /mob/living/update_mouse_pointer()
 	if(!client)
@@ -2343,7 +2379,7 @@
 					if(current_mark && current_mark == L)
 						val += "m"	// "1m" appended to icon state later on.
 					z_highlights[T] = val
-			
+
 			if(turf_up_two)
 				for(var/mob/living/L in get_hearers_in_range(search_range, turf_up_two, RECURSIVE_CONTENTS_CLIENT_MOBS))
 					if((L.m_intent == MOVE_INTENT_SNEAK || HAS_TRAIT(src, TRAIT_LIGHT_STEP)) && !has_sleuth)
@@ -2363,12 +2399,12 @@
 					if(current_mark && current_mark == L)
 						val += "m"	// "3m" appended to icon state later on.
 					z_highlights[T] = val
-			
+
 			if(length(z_highlights))
 				for(var/turf/T in z_highlights)
 					if(!T.density)
 						found_ping_someone_above(T, client, z_highlights[T])
-			
+
 			#undef ZTAG_ONE
 			#undef ZTAG_TWO
 			#undef ZTAG_THREE
@@ -2419,7 +2455,7 @@
 	return
 
 /mob/living/look_up()
-	if(client.perspective != MOB_PERSPECTIVE) 
+	if(client.perspective != MOB_PERSPECTIVE)
 		stop_looking()
 		return
 	if(client.pixel_x || client.pixel_y)
@@ -2456,8 +2492,8 @@
 			to_chat(src, span_warning("There is nothing unusual about this weather.."))
 			do_time_change()
 		return
-		
-	else if(!istransparentturf(ceiling)) 
+
+	else if(!istransparentturf(ceiling))
 		to_chat(src, span_warning("There is a ceiling above my head."))
 		return
 
@@ -2472,7 +2508,7 @@
 
 	if(!do_after(src, ttime, target = src))
 		return
-		
+
 	reset_perspective(ceiling)
 	update_cone_show()
 //	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking)) //We stop looking up if we move.
@@ -2573,7 +2609,7 @@
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks down through [T]."))
 	else
-		to_chat(src, span_info("[src] looks down through [T]."))	
+		to_chat(src, span_info("[src] looks down through [T]."))
 
 	if(!do_after(src, ttime, target = src))
 		return
@@ -2585,6 +2621,8 @@
 
 /mob/living/proc/stop_looking()
 	if(!client)
+		return
+	if(!client.pixel_x && !client.pixel_y && client.perspective == MOB_PERSPECTIVE && client.eye == client.mob)
 		return
 	animate(client, pixel_x = 0, pixel_y = 0, 2, easing = SINE_EASING)
 	if(client)

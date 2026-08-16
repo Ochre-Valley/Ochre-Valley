@@ -65,6 +65,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
 	smeltresult = null
 	salvage_result = null
+	sellprice = 0
 
 /obj/item/clothing/head/roguetown/circlet/carvedgem/jade
 	name = "jade circlet"
@@ -105,7 +106,7 @@
 	name = "porcelain circlet"
 	desc = "An ornate circlet made out of porcelain."
 	icon_state = "circlet_porcelain"
-	sellprice = 20
+	toggle_icon_state = FALSE
 
 /obj/item/clothing/head/roguetown/circlet/carvedgem/opal
 	name = "opal circlet"

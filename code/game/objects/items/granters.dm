@@ -142,7 +142,7 @@
 	. = ..()
 	if(!user.mind)
 		return
-	
+
 	for(var/crafting_recipe_type in crafting_recipe_types)
 		var/datum/crafting_recipe/R = crafting_recipe_type
 		user.mind.teach_crafting_recipe(crafting_recipe_type)
@@ -275,8 +275,10 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 
 /obj/item/book/granter/spell/bonechill/sizespell/loadout // Loadout specific ones!
 	needLit = FALSE
+	pages_to_mastery = 0 //OV Edit: reads faster
 
 /obj/item/book/granter/spell/bonechill/mirror_transform/loadout // Mirror Transform Spell
-    needLit = FALSE
+	needLit = FALSE
+	pages_to_mastery = 0 //OV Edit: reads faster
 
 //Caustic Edit End

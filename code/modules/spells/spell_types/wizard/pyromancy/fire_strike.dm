@@ -1,7 +1,8 @@
 /datum/action/cooldown/spell/fire_strike
 	button_icon = 'icons/mob/actions/mage_pyromancy.dmi'
 	name = "Fire Strike"
-	desc = "Call down a fireball on a location after a short delay. It damage structures across a 5x5 area and leaves a cloud of smoke and a curtain of flame in its wake. You are not immune to your own fire."
+	desc = "Call down a fireball on a location after a short delay. It damages structures across a 5x5 area and leaves a cloud of smoke and a curtain of flame in its wake. You are not immune to your own fire.\n\
+	Fire spells apply scorched effects - at 4 scorched, an armor piercing wound is applied to the head or chest: whichever you are aiming at, and randomly if aiming elsewhere."
 	button_icon_state = "grenzel_meteor"
 	sound = 'sound/magic/fireball.ogg'
 	spell_color = GLOW_COLOR_FIRE
@@ -73,8 +74,6 @@
 			S.take_damage(structural_damage, BRUTE, "blunt", object_damage_multiplier = 2)
 		T.take_damage(structural_damage, BRUTE, "blunt", object_damage_multiplier = 2)
 		for(var/mob/living/L in T.contents)
-			if(L == owner)
-				continue
 			if(L.anti_magic_check())
 				continue
 			if(spell_guard_check(L, TRUE))

@@ -20,6 +20,12 @@ Icon: chonksqrl
 Creator / Copyright: VerySoft, Created for Rogue Star
 License: CC BY-SA 3.0
 
+Folder: modular_ochrevalley\icons\mob\tails\
+Title: large_tails.dmi
+Icon: flagtail
+Creator / Copyright: VerySoft, Created for Rogue Star
+License: CC BY-SA 3.0
+
 Folder: modular_ochrevalley\icons\mob\sprite_accessory\snouts\snouts.dmi
 Title: snouts.dmi
 Icon: short_beak, parrot_beak, thin_beak, finch_beak, pelican_beak, toucan_beak_alt, raptor_beak_small, raptor_beak_large

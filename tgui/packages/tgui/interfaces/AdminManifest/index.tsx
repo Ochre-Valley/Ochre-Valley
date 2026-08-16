@@ -12,15 +12,10 @@ export const AdminManifest = (props) => {
   const { directory } = data;
 
   return (
-    <Window
-      width={MANIFEST_WINDOW_WIDTH}
-      height={MANIFEST_WINDOW_HEIGHT}
-    >
-        <Window.Content scrollable>
-          <AdminManifestList 
-            directory={directory}
-          />
-        </Window.Content>
+    <Window width={MANIFEST_WINDOW_WIDTH} height={MANIFEST_WINDOW_HEIGHT}>
+      <Window.Content scrollable>
+        <AdminManifestList directory={directory} />
+      </Window.Content>
     </Window>
   );
 };

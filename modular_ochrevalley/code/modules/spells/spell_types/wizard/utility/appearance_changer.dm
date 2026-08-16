@@ -41,56 +41,56 @@
 	var/datum/customizer_choice/bodypart_feature/face_detail/face_choice = CUSTOMIZER_CHOICE(/datum/customizer_choice/bodypart_feature/face_detail)
 	if(!LAZYLEN(valid_hairstyles))
 		for(var/hair_type in hair_choice.sprite_accessories)
-			var/datum/sprite_accessory/hair/head/hair = new hair_type()
-			valid_hairstyles[hair.name] = hair_type
+			var/datum/sprite_accessory/hair/head/hair = hair_type
+			valid_hairstyles[hair::name] = hair_type
 	if(!LAZYLEN(valid_facial_hairstyles))
 		for(var/facial_type in facial_choice.sprite_accessories)
-			var/datum/sprite_accessory/hair/facial/facial = new facial_type()
-			valid_facial_hairstyles[facial.name] = facial_type
+			var/datum/sprite_accessory/hair/facial/facial = facial_type
+			valid_facial_hairstyles[facial::name] = facial_type
 	if(!LAZYLEN(valid_ears))
 		for(var/ears_path in subtypesof(/datum/sprite_accessory/ears))
-			var/datum/sprite_accessory/ears/ears = new ears_path()
-			valid_ears[ears.name] = ears_path
+			var/datum/sprite_accessory/ears/ears = ears_path
+			valid_ears[ears::name] = ears_path
 	if(!LAZYLEN(valid_tails))
 		for(var/tail_path in subtypesof(/datum/sprite_accessory/tail))
-			var/datum/sprite_accessory/tail/tail = new tail_path()
-			valid_tails[tail.name] = tail_path
+			var/datum/sprite_accessory/tail/tail = tail_path
+			valid_tails[tail::name] = tail_path
 	if(!LAZYLEN(valid_horns))
 		for(var/horns_path in subtypesof(/datum/sprite_accessory/horns))
-			var/datum/sprite_accessory/horns/horns = new horns_path()
-			valid_horns[horns.name] = horns_path
+			var/datum/sprite_accessory/horns/horns = horns_path
+			valid_horns[horns::name] = horns_path
 	if(!LAZYLEN(valid_wings))
 		for(var/wings_path in subtypesof(/datum/sprite_accessory/wings))
-			var/datum/sprite_accessory/wings/wings = new wings_path()
-			valid_wings[wings.name] = wings_path
+			var/datum/sprite_accessory/wings/wings = wings_path
+			valid_wings[wings::name] = wings_path
 	if(!LAZYLEN(valid_penises))
 		for(var/penis_path in subtypesof(/datum/sprite_accessory/penis))
-			var/datum/sprite_accessory/penis/penis = new penis_path()
-			valid_penises[penis.name] = penis_path
+			var/datum/sprite_accessory/penis/penis = penis_path
+			valid_penises[penis::name] = penis_path
 	if(!LAZYLEN(valid_testicles))
 		for(var/testicle_path in subtypesof(/datum/sprite_accessory/testicles))
-			var/datum/sprite_accessory/testicles/testicles = new testicle_path()
-			valid_testicles[testicles.name] = testicle_path
+			var/datum/sprite_accessory/testicles/testicles = testicle_path
+			valid_testicles[testicles::name] = testicle_path
 	if(!LAZYLEN(valid_vaginas))
 		for(var/vagina_path in subtypesof(/datum/sprite_accessory/vagina))
-			var/datum/sprite_accessory/vagina/vagina = new vagina_path()
-			valid_vaginas[vagina.name] = vagina_path
+			var/datum/sprite_accessory/vagina/vagina = vagina_path
+			valid_vaginas[vagina::name] = vagina_path
 	if(!LAZYLEN(valid_breasts))
 		for(var/breast_path in subtypesof(/datum/sprite_accessory/breasts))
-			var/datum/sprite_accessory/breasts/breasts = new breast_path()
-			valid_breasts[breasts.name] = breast_path
+			var/datum/sprite_accessory/breasts/breasts = breast_path
+			valid_breasts[breasts::name] = breast_path
 	if(!LAZYLEN(valid_accessories))
 		for(var/accessory_type in accessory_choice.sprite_accessories)
-			var/datum/sprite_accessory/accessory/acc = new accessory_type()
-			valid_accessories[acc.name] = accessory_type
+			var/datum/sprite_accessory/accessory/acc = accessory_type
+			valid_accessories[acc::name] = accessory_type
 	if(!LAZYLEN(valid_details))
 		for(var/detail_type in face_choice.sprite_accessories)
-			var/datum/sprite_accessory/face_detail/detail = new detail_type()
-			valid_details[detail.name] = detail_type
+			var/datum/sprite_accessory/face_detail/detail = detail_type
+			valid_details[detail::name] = detail_type
 	if(!LAZYLEN(valid_gradients))
 		for(var/gradient_type in GLOB.hair_gradients)
-			var/datum/hair_gradient/gradient = new gradient_type()
-			valid_gradients[gradient.name] = gradient_type
+			var/datum/hair_gradient/gradient = gradient_type
+			valid_gradients[gradient::name] = gradient_type
 /datum/appearance_changer/ui_static_data(mob/user)
 	//A bit cleaner now, should probably still just make all the style lists part of the datum.
 	var/list/data = list()
