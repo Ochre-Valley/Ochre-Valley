@@ -249,7 +249,7 @@
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=fortune'>-</a></li>"
 		body += "</ul>"
 		body += "</div>"
-		
+
 		// Patron Section
 		body += "<div id='patron-section'>"
 		body += "<h3>Patron</h3>"
@@ -266,7 +266,7 @@
 			body += "<li>[initial(P.name)] "
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];set_patron=[REF(M)];patron=[patron_type]'>Set</a></li>"
 		body += "</ul></div>"
-		
+
 
 		body += "</div>"
 		body += "</div>"
@@ -383,7 +383,7 @@
 
 	if(!check_rights())
 		return
-	
+
 	if(!M.ckey)
 		to_chat(src, span_warning("There is no ckey attached to this mob."))
 		return
@@ -900,7 +900,7 @@
 		alert(usr, "Target has no mind!") // Optional Error check that may or may not be neccessary
 	GLOB.chosen_names -= H.real_name
 	LAZYREMOVE(GLOB.actors_list, H.mobid)
-	LAZYREMOVE(GLOB.roleplay_ads, H.mobid)
+	LAZYREMOVE(GLOB.roleplay_ads, H.mobid) //OV ADD - Roleplay Ad Maint
 	H.returntolobby()
 
 

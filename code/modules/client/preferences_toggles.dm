@@ -29,7 +29,7 @@
 		usr.client.prefs.ShowChoices(usr, 4)
 
 /client/verb/toggle_fullscreen()
-	set name = "ToggleFullscreen"
+	set name = "Toggle Fullscreen"
 	set category = "Preferences.Options"
 	set desc = ""
 	if(prefs)
@@ -169,10 +169,14 @@
 	if(prefs)
 		prefs.no_redflash = !prefs.no_redflash
 		prefs.save_preferences()
+		var/mob/living/carbon/C = mob
+		if(istype(C))
+			C.update_damage_hud() // Fixes that the overlay is not removed when toggling if already present.
 		//Caustic Edit
 		to_chat(src, "You [prefs.no_redflash ? "will not" : "will"] see the red flashing effect.")
 		//Caustic Edit End
 
+//OV ADD START - Darkvision
 /client/verb/darkvision_accessibility()
 	set category = "Preferences.Options"
 	set name = "Darkvision Accessibility"
@@ -194,6 +198,7 @@
 	prefs.save_preferences()
 	mob?.update_sight()
 	to_chat(src, "Darkvision accessibility set to [prefs.darkvision_accessibility]%.")
+//OV ADD END
 
 /client/verb/toggle_topexamine()
 	set category = "Preferences.Options"
@@ -218,6 +223,7 @@
 		to_chat(src, "You will no longer hear music in the lobby.")
 		mob.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 
+//OV ADD START - Roleplay Ad Maint
 /client/verb/toggle_roleplay_ads()
 	set name = "Roleplay Ads (Toggle)"
 	set category = "OOC"
@@ -229,6 +235,7 @@
 		to_chat(src, "You will now be notified of new roleplay ads.")
 	else
 		to_chat(src, "You will no longer be notified of new roleplay ads.")
+//OV ADD END
 
 /client/verb/stop_sounds_rogue()
 	set name = "StopSounds"

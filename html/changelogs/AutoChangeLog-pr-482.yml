@@ -1,0 +1,5 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - qol: "Summons can now be picked up like players without vanishing"
+  - bugfix: "Transforming from dendor-touched while in a copied slot from a servant should no longer ghost you."

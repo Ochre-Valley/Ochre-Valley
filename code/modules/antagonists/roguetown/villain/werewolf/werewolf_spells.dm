@@ -113,11 +113,12 @@
 	name = "Terrifying Howl"
 	desc = "Let loose a howl of dread, repelling anyone around you."
 	button_icon_state = "howl"
-	cooldown_time = 6 MINUTES
+	cooldown_time = 2 MINUTES
 	charge_required = FALSE
 	showsparkles = FALSE
 	invocations = null
 	invocation_type = INVOCATION_NONE
+	spell_flags = SPELL_IGNORE_SPELLBLOCK
 	sound = 'sound/vo/mobs/wwolf/roar.ogg'
 	spell_requirements = NONE
 	spell_flags = SPELL_IGNORE_SPELLBLOCK

@@ -44,6 +44,9 @@
 	icon_state = "warlock"
 	storage = FALSE
 
+/obj/item/clothing/suit/roguetown/shirt/robe/unholy/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_ZIZO_MISC) //So Lich/Necro aren't immedately fragged, but the robes are blatently not normal
+
 /obj/item/clothing/suit/roguetown/shirt/robe/unholy/lich
 	name = "ominous robes"
 	desc = "An otherworldly veil, whispering a hundred paradoxical answers to the ultimate question. Her hand guides your grandest missive; to bring forth progress, no matter the cost."
@@ -62,7 +65,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "sun robe"
 	desc = "Just as Her radiance rises upon each morning, so too will order reign across the kingdoms."
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "astratarobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
@@ -77,7 +80,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "undivided robe"
 	desc = "Undivided, we stand - a Pantheon of Ten, shepherding Psydonia's flock towards providence."
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "undividedrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
@@ -91,7 +94,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "undivided clerical robe"
 	desc = "Undivided, we walk - a Pantheon of Ten, guiding Psydonia's wanderers towards providence."
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "tenclericrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
@@ -105,7 +108,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
 	name = "ravox robe"
 	desc = "None are above justice; none are beneath redemption."
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "ravoxrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
@@ -395,13 +398,30 @@
 	icon_state = "desertgown"
 	item_state = "desertgown"
 	color = null
+	detail_color = null
+	detail_tag = "_detail"
+	naledicolor = TRUE
 	storage = FALSE
+
+/obj/item/clothing/suit/roguetown/shirt/robe/hierophant/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/suit/roguetown/shirt/robe/hierophant/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
 
 /obj/item/clothing/suit/roguetown/shirt/robe/hierophant/loadout
 	name = "aesthetic hierophant's kandys"
-	armor = ARMOR_CLOTHING
-	max_integrity = ARMOR_INT_CHEST_CIVILIAN
-	armor_class = ARMOR_CLASS_NONE
+
+/obj/item/clothing/suit/roguetown/shirt/robe/hierophant/loadout/Initialize()
+	. = ..()
+	loadoutize()
 
 /obj/item/clothing/suit/roguetown/shirt/robe/pointfex
 	name = "pontifex's qaba"
@@ -410,15 +430,32 @@
 	icon_state = "monkcloth"
 	item_state = "monkcloth"
 	color = null
+	detail_color = null
+	detail_tag = "_detail"
+	naledicolor = TRUE
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	storage = FALSE
 
+/obj/item/clothing/suit/roguetown/shirt/robe/pointfex/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/suit/roguetown/shirt/robe/pointfex/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
+
 /obj/item/clothing/suit/roguetown/shirt/robe/pointfex/loadout
 	name = "aesthetic pontifex's qaba"
-	armor = ARMOR_CLOTHING
-	max_integrity = ARMOR_INT_CHEST_CIVILIAN
-	armor_class = ARMOR_CLASS_NONE
+
+/obj/item/clothing/suit/roguetown/shirt/robe/pointfex/loadout/Initialize()
+	. = ..()
+	loadoutize()
 
 /obj/item/clothing/suit/roguetown/shirt/robe/feld
 	name = "feldsher's robe"

@@ -39,8 +39,8 @@
 	var/newtime = 40
 	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4.6
 	newtime -= user.STAPER
-	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY // NPCs shoot slower than players though.
-	
+	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME // NPCs shoot slower than players though.
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/
 	name = "arquebus rifle"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
@@ -73,7 +73,6 @@
 	minstr = 6
 	walking_stick = TRUE
 	experimental_onback = TRUE
-	flags_ai_inventory = AI_ITEM_GUN
 	cartridge_wording = "musketball"
 	load_sound = 'modular_causticcove/sound/arquebus/musketload.ogg'
 	fire_sound = "modular_causticcove/sound/arquebus/arquefire.ogg"
@@ -135,7 +134,7 @@
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_INSERT, PROC_REF(checkstoragevalidity))
 	RegisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE, PROC_REF(checkstoragevalidity))
 	myrod = new /obj/item/ramrod(src)
-	
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/Destroy()
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_INSERT)
 	UnregisterSignal(src, COMSIG_AFTER_STORAGE_REMOVE)
@@ -353,7 +352,7 @@
 	newtime -= user.STAPER
 	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
 		newtime *= 1.5
-	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY
+	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 	name = "arquebus pistol"

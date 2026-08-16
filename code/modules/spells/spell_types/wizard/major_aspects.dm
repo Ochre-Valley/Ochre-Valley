@@ -19,7 +19,18 @@
 		"Ignis, a me discedere!",
 	)
 	fixed_spells = list(
+		/datum/action/cooldown/spell/telegraphed_strike/dragons_breath,
+		/datum/action/cooldown/spell/projectile/fireball/barrage,
+		/datum/action/cooldown/spell/fire_curtain,
+		/datum/action/cooldown/spell/projectile/smoke_burst,
+		/datum/action/cooldown/spell/create_campfire,
+	)
+	choice_spells = list(
 		/datum/action/cooldown/spell/projectile/spitfire,
+		/datum/action/cooldown/spell/ultio,
+	)
+	spell_order = list(
+		ASPECT_CHOICE,
 		/datum/action/cooldown/spell/telegraphed_strike/dragons_breath,
 		/datum/action/cooldown/spell/projectile/fireball/barrage,
 		/datum/action/cooldown/spell/fire_curtain,
@@ -322,6 +333,9 @@
 		/datum/action/cooldown/spell/conjure_summon/attacker,
 		/datum/action/cooldown/spell/conjure_summon/hordes,
 		/datum/action/cooldown/spell/conjure_summon/peasant_swarm,
+		//OV ADD START
+		/datum/action/cooldown/spell/conjure_summon/tribe,
+		//OV ADD END
 	)
 	mastery_choice_spells = list(
 		/datum/action/cooldown/spell/conjure_summon/peasant_swarm,

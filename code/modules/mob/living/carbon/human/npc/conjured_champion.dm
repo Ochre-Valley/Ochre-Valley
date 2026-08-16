@@ -103,9 +103,16 @@
 			upgrade_ai_controller(/datum/ai_controller/human_npc/archer)
 			outfit_champion(new /datum/outfit/job/roguetown/conjured_champion/doppelsoldner/xbow)
 			def_intent_change(INTENT_DODGE)
-		//OV Edit Servant option for champion
+		//OV Edit Servant option for champion. Gut their psycho tendencies while we're at it
 		if("servant")
 			outfit_champion(new /datum/outfit/job/roguetown/conjured_servant)
+			ai_controller.remove_subtree(/datum/ai_planning_subtree/find_weapon)
+			ai_controller.remove_subtree(/datum/ai_planning_subtree/equip_item)
+			ai_controller.remove_subtree(/datum/ai_planning_subtree/loot)
+			ai_controller.remove_subtree(/datum/ai_planning_subtree/kick_attack)
+			ai_controller.remove_subtree(/datum/ai_planning_subtree/generic_resist)
+			contract_spawned = FALSE
+			filters -= filters["conjureglow"]
 			def_intent_change(INTENT_DODGE)
 		//OV Edit End
 		else
@@ -147,10 +154,10 @@
 	H.STAPER = 10
 	H.STAINT = 10
 	H.STALUC = 10
-	H.adjust_skillrank(/datum/skill/combat/unarmed, skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, skill, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/misc/swimming, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_JOURNEYMAN, TRUE)
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	switch(tier)
 		if(2, 3)
@@ -172,29 +179,29 @@
 	. = ..()
 	var/skill = champion_skill(H)
 	var/tier = champion_tier(H)
-	H.adjust_skillrank(/datum/skill/combat/swords, skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/shields, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/sword
 	l_hand = (tier >= 2) ? /obj/item/rogueweapon/shield/tower/metal : /obj/item/rogueweapon/shield/wood
 
 /datum/outfit/job/roguetown/conjured_champion/greatswordman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
-	H.adjust_skillrank(/datum/skill/combat/swords, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/greatsword
 
 /datum/outfit/job/roguetown/conjured_champion/greataxeman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
-	H.adjust_skillrank(/datum/skill/combat/axes, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/axes, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/greataxe/steel
 
 /datum/outfit/job/roguetown/conjured_champion/axeman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
 	var/tier = champion_tier(H)
-	H.adjust_skillrank(/datum/skill/combat/axes, skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/axes, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/shields, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/stoneaxe/battle
 	l_hand = (tier >= 2) ? /obj/item/rogueweapon/shield/tower/metal : /obj/item/rogueweapon/shield/wood
 
@@ -202,27 +209,27 @@
 	. = ..()
 	var/skill = champion_skill(H)
 	var/tier = champion_tier(H)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/shields, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/flail/sflail
 	l_hand = (tier >= 2) ? /obj/item/rogueweapon/shield/tower/metal : /obj/item/rogueweapon/shield/wood
 
 /datum/outfit/job/roguetown/conjured_champion/greatflailman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/flail/peasantwarflail/iron
 
 /datum/outfit/job/roguetown/conjured_champion/spearman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
-	H.adjust_skillrank(/datum/skill/combat/polearms, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/polearms, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/spear
 
 /datum/outfit/job/roguetown/conjured_champion/maceman/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	var/skill = champion_skill(H)
-	H.adjust_skillrank(/datum/skill/combat/maces, skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/maces, skill, TRUE)
 	r_hand = /obj/item/rogueweapon/mace/goden/steel
 
 /datum/outfit/job/roguetown/conjured_champion/archer/pre_equip(mob/living/carbon/human/H, visualsOnly)
@@ -231,8 +238,8 @@
 	H.STAPER = 13 + champion_tier(H)
 	H.STACON -= 1
 	H.STAWIL -= 1
-	H.adjust_skillrank(/datum/skill/combat/bows, ranged_skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, clamp(ranged_skill - 1, 2, 6), TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/bows, ranged_skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, clamp(ranged_skill - 1, SKILL_LEVEL_APPRENTICE, SKILL_LEVEL_LEGENDARY), TRUE)
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow
 	backl = /obj/item/quiver/conjured
 	beltr = /obj/item/rogueweapon/sword/short/iron
@@ -243,8 +250,8 @@
 	H.STAPER = 13 + champion_tier(H)
 	H.STACON -= 1
 	H.STAWIL -= 1
-	H.adjust_skillrank(/datum/skill/combat/crossbows, ranged_skill, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, clamp(ranged_skill - 1, 2, SKILL_LEVEL_EXPERT), TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, ranged_skill, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, clamp(ranged_skill - 1, SKILL_LEVEL_APPRENTICE, SKILL_LEVEL_EXPERT), TRUE)
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/quiver/bolt/conjured
 	beltr = /obj/item/rogueweapon/sword/short/iron
@@ -272,21 +279,21 @@
 
 /datum/outfit/job/roguetown/conjured_champion/doppelsoldner/spear/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
-	H.adjust_skillrank(/datum/skill/combat/polearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
 	r_hand = /obj/item/rogueweapon/spear
 
 /datum/outfit/job/roguetown/conjured_champion/doppelsoldner/swb/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
-	H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_JOURNEYMAN, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/shields, SKILL_LEVEL_JOURNEYMAN, TRUE)
 	r_hand = /obj/item/rogueweapon/sword/iron
 	l_hand = /obj/item/rogueweapon/shield/buckler
 
 /datum/outfit/job/roguetown/conjured_champion/doppelsoldner/xbow/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	H.STAPER = 12
-	H.adjust_skillrank(/datum/skill/combat/crossbows, SKILL_LEVEL_JOURNEYMAN, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_APPRENTICE, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_APPRENTICE, TRUE)
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/quiver/bolt/conjured
 	beltr = /obj/item/rogueweapon/sword/short/iron
@@ -315,8 +322,13 @@
 
 /datum/action/cooldown/spell/apply_prefs/cast()
 	. = ..()
-	if(owner.client)
-		owner.client.prefs.copy_to(owner, TRUE, FALSE)
+	if(owner.client && ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		owner.client.prefs.copy_to(H , TRUE, FALSE)
+		//Dendortouched breaks things
+		for(var/datum/charflaw/cf in H.charflaws)
+			if(istype(cf, /datum/charflaw/dendor_touched))
+				H.charflaws.Remove(cf)
 		return TRUE
 	return FALSE
 //OV Edit end

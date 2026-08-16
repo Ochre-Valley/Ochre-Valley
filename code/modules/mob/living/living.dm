@@ -14,8 +14,6 @@
 		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
 			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
 				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			SSmatthios_mobs.register_mob(src)
 	update_a_intents()
 	swap_rmb_intent(num=1)
 	if(unique_name)
@@ -123,6 +121,9 @@
 /mob/living/proc/MobBump(mob/M)
 	//Even if we don't push/swap places, we "touched" them, so spread fire
 	spreadFire(M)
+
+	if(!M.density || !density)
+		return FALSE
 
 	if(now_pushing)
 		return TRUE
@@ -414,6 +415,8 @@
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
 				CZ = TRUE
+				if(I.wlength < WLENGTH_GREAT) //only GREAT weapons reach the head from the ground
+					acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 			else
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 		else
@@ -2002,7 +2005,8 @@
 			stop_pulling()
 	if(!(mobility_flags & MOBILITY_UI))
 		unset_machine()
-	density = !lying
+	if(initial(density))
+		density = !lying
 	if(lying)
 		if(!lying_prev)
 			fall(!canstand_involuntary)
@@ -2090,6 +2094,8 @@
 	if(!istype(user))
 		return
 	if(user.incapacitated())
+		return
+	if(user == src)
 		return
 	if(can_be_held(user))
 		mob_try_pickup(user)

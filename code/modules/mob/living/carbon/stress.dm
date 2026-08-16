@@ -52,6 +52,11 @@
 	if(event.stacks >= event.max_stacks)
 		return event
 	event.stacks++
+
+	if(event.stressadd <= -2)
+		for(var/mob/living/carbon/human/L in viewers(2,src))
+			if(L != src && L.has_flaw(/datum/charflaw/addiction/voyeur))
+				L.sate_addiction(/datum/charflaw/addiction/voyeur)
 	return event
 
 /mob/living/carbon/remove_stress(event_type)

@@ -265,6 +265,7 @@
 	zombie.vomit(1, blood = TRUE, stun = FALSE)
 	playsound(get_turf(zombie), 'sound/magic/woundheal_crunch.ogg', 80, FALSE, -1) //Horrible noises
 	to_chat(zombie, span_narsie("Death is not the end..."))
+	to_chat(zombie, span_warning("You are a deadite! You are a mindless beast inhabiting the shell of your body, with little to no remnant of your former self. The beast wants to bite and feed and infect, but it is truly mindless and you may just shamble about passively, too. A passive deadite is easier to cure, while an aggressive one may have to be put down by force before such a thing happens. Choose your actions wisely, and remember that the rules around PVP still apply as a deadite!")) //OV Edit
 	sleep(2 SECONDS) //now get them up to go fight and die
 	if(zombie.resting)
 		zombie.set_resting(FALSE, FALSE) //GET UP, KILL, CONSUME.
@@ -343,6 +344,11 @@
 		return
 
 	if (istype(zombie.loc, /obj/structure/closet/dirthole) || istype(zombie.loc, /obj/structure/closet/crate/coffin)) // Buried
+		qdel(zombie)
+		return
+
+	var/turf/T = get_turf(zombie)
+	if(T && (locate(/obj/structure/bed/rogue/sanctuary/pestra) in T)) // Pestra's bed prevents zombiefication
 		qdel(zombie)
 		return
 

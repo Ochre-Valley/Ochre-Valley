@@ -338,20 +338,24 @@
 
 /obj/item/clothing/shoes/roguetown/grenzelhoft/loadout
 	name = "aesthetic grenzelhoft boots"
-	max_integrity = ARMOR_INT_CHEST_CIVILIAN
-	armor = ARMOR_CLOTHING
+
+/obj/item/clothing/shoes/roguetown/grenzelhoft/loadout/Initialize()
+	. = ..()
+	loadoutize()
 
 /obj/item/clothing/shoes/roguetown/grenzelhoft/freifechter
 	name = "fencing boots"
 	desc = "A pair of lightweight snugly fitting boots. They're reinforced along the toes and ankles and offer a measure of protection against missteps and glancing blows during close exchanges, often favoured by duelists and other itinerant swordsmen."
 	icon_state = "freiboots"
 	item_state = "freiboots"
-	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + 50
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + ARMOR_INT_LIGHT_FENCER_MODIFIER
 
 /obj/item/clothing/shoes/roguetown/grenzelhoft/freifechter/loadout
 	name = "aesthetic fencing boots"
-	max_integrity = ARMOR_INT_CHEST_CIVILIAN
-	armor = ARMOR_CLOTHING
+
+/obj/item/clothing/shoes/roguetown/grenzelhoft/freifechter/loadout/Initialize()
+	. = ..()
+	loadoutize()
 
 /obj/item/clothing/shoes/roguetown/boots/armor/dwarven
 	name = "grudgebearer dwarven boots"
@@ -861,6 +865,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/courtphys.dmi'
 	salvage_result = /obj/item/natural/hide/cured
+	sewrepair = TRUE
 
 /obj/item/clothing/shoes/courtphysician/female
 	name = "sanguine heels"

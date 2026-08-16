@@ -29,7 +29,8 @@
 		"Thief-of-Fyre",
 		"Thief-of-Fire", // aaaaaaaa
 		"Lord", // catchall for various titles of his
-		"Matoko"
+		"Matoko",
+		"Bear" // fjall
 	)
 
 // When near coin of at least 100 mammon, zchurch, bad-cross, or ritual talk
@@ -39,7 +40,7 @@
 	if(istype(get_area(follower), /area/rogue/under/cave/inhumen))
 		return TRUE
 	// Allows prayer near EEEVIL psycross
-	for(var/obj/structure/fluff/psycross/zizocross/cross in view(4, get_turf(follower)))
+	for(var/obj/structure/fluff/psycross/cross in view(4, get_turf(follower)))
 		if(cross.divine == TRUE)
 			to_chat(follower, span_danger("That acсursed cross interupts my prayers!"))
 			return FALSE

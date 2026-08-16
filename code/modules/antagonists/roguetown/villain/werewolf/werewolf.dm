@@ -118,6 +118,7 @@
 	owner.special_role = name
 	if(increase_votepwr)
 		forge_werewolf_objectives()
+
 	// OV Edit Start
 	var/mob/living/carbon/human/H = owner?.current
 	if(H)
@@ -190,7 +191,7 @@
 	//No cross species pollination!!!
 	if(mind.has_antag_datum(/datum/antagonist/gnoll))
 		return FALSE
-	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED) || HAS_TRAIT(src, TRAIT_IRONMAN) || HAS_TRAIT(src, TRAIT_ROTMAN) || HAS_TRAIT(src, TRAIT_REGROW_LIMBS)) // i don't know if other padding keeps them from turning but just to make sure lmao //OV EDIT - Excluded Oozes via TRAIT_REGROW_LIMBS
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED) || HAS_TRAIT(src, TRAIT_IRONMAN) || HAS_TRAIT(src, TRAIT_ROTMAN) || HAS_TRAIT(src, TRAIT_NOWW) || HAS_TRAIT(src, TRAIT_REGROW_LIMBS)) // i don't know if other padding keeps them from turning but just to make sure lmao //OV EDIT - Excluded Oozes via TRAIT_REGROW_LIMBS
 		return FALSE
 	return TRUE
 
@@ -240,19 +241,28 @@
 
 /obj/item/clothing/suit/roguetown/armor/regenerating/skin/werewolf_skin
 	slot_flags = null
+	blocking_behavior = null
 	name = "verewolf's skin"
 	desc = "an impenetrable hide of dendor's fury"
 	icon_state = null
-	body_parts_covered = FULL_BODY
-	body_parts_inherent = FULL_BODY
+	body_parts_covered = CHEST
+	body_parts_inherent = CHEST
 	armor = ARMOR_WWOLF
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = FALSE
-	max_integrity = 550
+	max_integrity = 750
 	item_flags = DROPDEL
-	repair_time = 15 SECONDS
+	repair_time = 20 SECONDS
 	interrupt_damount = 35
+
+/obj/item/clothing/suit/roguetown/armor/regenerating/skin/werewolf_skin/extremities
+	max_integrity = 550
+	slot_flags = ITEM_SLOT_ARMOR
+	repair_time = 20 SECONDS
+	body_parts_covered = FULL_BODY_NO_CHEST
+	body_parts_inherent = FULL_BODY_NO_CHEST
+	name = "verewolf's thin skin"
 
 /datum/intent/simple/werewolf
 	name = "claw"

@@ -343,6 +343,7 @@
 /obj/item/clothing/wrists/roguetown/gem
 	name = "gem bracelet base"
 	desc = "You shouldn't be seeing this."
+	body_parts_covered = ARMS
 	slot_flags = ITEM_SLOT_WRISTS
 	armor = ARMOR_PLATE
 	max_integrity = ARMOR_INT_SIDE_CLOTH
@@ -608,22 +609,6 @@
 	/*add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 */ // Combine with #c1b18d to make an easier, do-it-yourself version of Avantyne items without the need for exotic sprites.
 
-/obj/item/clothing/wrists/roguetown/bracers/zizo/get_examine_highlight_status()
-	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_ZIZO_ARMOR)
-
-/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy
-	name = "fused avantyne bracers"
-	desc = "Clasped yet practical, these avantyne wristguards are bound to the wearer forever. Once you have plunged deep into knowledge forbidden, there is no going back.."
-
-/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy/Initialize()
-	. = ..()
-	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Removal
-
-/*/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy/dropped(mob/living/carbon/human/user) //OV Edit Start - Armor Removal
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)*/ //OV Edit End
 //
 
 /obj/item/clothing/wrists/roguetown/bracers/graggar

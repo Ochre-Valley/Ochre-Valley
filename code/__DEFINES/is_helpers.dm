@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 #define isharpy(A) (is_species(A, /datum/species/harpy)) // OV Add
 #define isooze(A) (is_species(A, /datum/species/ooze)) //OV ADD
 #define isgnoll(A) (is_species(A, /datum/species/gnoll))
-
+#define isfamiliar(A) (istype(A, /mob/living/carbon/human/species/familiar))
 
 //Simple animals
 #define isanimal(A) (istype(A, /mob/living/simple_animal))

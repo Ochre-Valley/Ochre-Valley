@@ -237,10 +237,13 @@
 #define COMSIG_MOVABLE_UPDATE_GLIDE_SIZE "movable_glide_size"	//Called when the movable's glide size is updated: (new_glide_size)
 
 // /mob signals
+#define COMSIG_MOB_SLEEP "mob_sleep" 							//from base of mob/living/carbon/handle_sleep(): (mob/sleeper)
 #define COMSIG_MOB_BREAK_SNEAK "mob_break_sneak"
 #define COMSIG_MOB_DEATH "mob_death"							//from base of mob/death(): (gibbed)
 #define COMSIG_MOB_TRY_BARK "try_bark"
 #define COMSIG_MOB_TRY_EMOTE "try_emote"
+#define COMSIG_MOB_EMOTED "mob_emoted"							//from /mob/proc/emote() when a keyed emote is intentionally invoked
+#define COMSIG_MOB_MEDITATED "mob_meditated"						//from /datum/emote/living/meditate/run_emote() when a meditation focus completes uninterrupted: ()
 #define COMSIG_MOB_MODIFY_AGGRO_LINES "comsig_mob_modify_aggro_lines"
 #define COMSIG_MOB_MODIFY_DEATH_LINES "comsig_mob_modify_death_lines"
 
@@ -256,7 +259,7 @@
 	#define COMPONENT_BLOCK_MAGIC 1
 #define COMSIG_MOB_HUD_CREATED "mob_hud_created"				//from base of mob/create_mob_hud(): ()
 #define COMSIG_MOB_ATTACK_HAND "mob_attack_hand"				//from base of
-#define COMSIG_MOB_ATTACK_BITE "mob_attack_bite"				
+#define COMSIG_MOB_ATTACK_BITE "mob_attack_bite"
 #define COMSIG_MOB_ATTACKED_BY_HAND	"mob_attacked_by_hand"		//from base of datum/species/proc/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
 #define COMSIG_MOB_ATTACKED_BY_BITE	"mob_attacked_by_bite"		//from base of /datum/intent/bite/on_mmb(atom/target, mob/living/user, params): (mob/living/user)
 	#define COMPONENT_HAND_NO_ATTACK 1
@@ -369,6 +372,7 @@
 #define COMSIG_ITEM_BROKEN "item_broken"                        //from base of /obj/proc/obj_break(damage_flag)
 #define COMSIG_ITEM_PICKUP "item_pickup"						//from base of obj/item/pickup(): (/mob/taker)
 #define COMSIG_OBJ_TAKE_DAMAGE "obj_take_damage"				//from base of obj/take_damage() (damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
+#define COMSIG_MOB_ARMOR_INTEGRITY_DAMAGED "mob_armor_integrity_damaged"            //from base of /mob/living/carbon/human/proc/checkarmor(): (damage_taken, obj/item/clothing/damaged_item, current_layer, total_layers)
 #define COMSIG_ITEM_ATTACK_ZONE "item_attack_zone"				//from base of mob/living/carbon/attacked_by(): (mob/living/carbon/target, mob/living/user, hit_zone)
 #define COMSIG_ITEM_IMBUE_SOUL "item_imbue_soul" 				//return a truthy value to prevent ensouling, checked in /obj/effect/proc_holder/spell/targeted/lichdom/cast(): (mob/user)
 #define COMSIG_ITEM_MARK_RETRIEVAL "item_mark_retrieval"			//called before marking an object for retrieval, checked in /obj/effect/proc_holder/spell/targeted/summonitem/cast() : (mob/user)
@@ -378,6 +382,7 @@
 #define COMSIG_ITEM_WEARERCROSSED "wearer_crossed"                //called on item when crossed by something (): (/atom/movable, mob/living/crossed)
 #define COMSIG_ITEM_ATTACK_TURF "item_attack_turf"
 #define COMSIG_ITEM_GUN_PROCESS_FIRE	"item_gun_process_fire"		//called on /obj/item/gun/proc/process_fire
+#define COMSIG_ITEM_RESTORE_BINTEGRITY "item_restore_bintegrity"	//called on /obj/item/proc/restore_bintegrity()
 #define COMSIG_ITEM_UNDERWEAR_EQUIPPED "undies_equip"			//OV ADD - from base of /obj/item/undies/attack(): (/mob/equipper)
 #define COMSIG_ITEM_UNDERWEAR_REMOVE "undies_unequip"			//OV ADD - from base of /mob/living/carbon/human/MiddleClick() and /mob/living/carbon/human/Topic(): (/mob/user) Also applies to piercings and legwear
 // /obj/item/clothing signals

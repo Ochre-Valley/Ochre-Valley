@@ -28,6 +28,8 @@
 	if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
 		update_stamina() //needs to go before updatehealth to remove stamcrit
 		updatehealth()
+	if(client)
+		update_damage_hud()
 	if (times_fired % 3 == 0) // every 3rd tick, fire stress handler. it isn't time-critical, so we don't particularly need it to go EVERY tick
 		update_stress()
 	handle_nausea()
@@ -81,7 +83,7 @@
 					emote("painmoan")
 			else
 				if(painpercent >= 100)
-					if(prob(25) && (HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) || STAWIL >= 15) && !(HAS_TRAIT(src, TRAIT_NOPAINSTUN) || HAS_TRAIT(src, TRAIT_IRONMAN))) // PSYDONIC WEIGHTED COINFLIP. TWEAK THIS AS THOU WILT. DON'T LET THEM BE BROKEN, PSYDON WILLING. THROW CON-MAXXERS A BONE, TOO. //OV EDIT - Pain Fix Maybe
+					if(prob(25) && (HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) || STAWIL >= 15) && (!HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !HAS_TRAIT(src, TRAIT_IRONMAN))) // PSYDONIC WEIGHTED COINFLIP. TWEAK THIS AS THOU WILT. DON'T LET THEM BE BROKEN, PSYDON WILLING. THROW CON-MAXXERS A BONE, TOO.
 						Immobilize(15) // EAT A MICROSTUN. YOU'RE AVOIDING A PAINCRIT.
 						if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
 							visible_message(span_info("[src] audibly grits [src.p_their()] teeth, ENDURING through [src.p_their()] pain."), span_info("Through my faith in HIM, I ENDURE."))
@@ -737,9 +739,11 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 							sleepless_flaw.dream_prob += 500
 							sleepless_flaw.drugged_up = FALSE
 							Sleeping(250)
+							SEND_SIGNAL(src, COMSIG_MOB_SLEEP)
 						else
 							teleport_to_dream(src, 10000, dream_prob)
 							Sleeping(300)
+							SEND_SIGNAL(src, COMSIG_MOB_SLEEP)
 
 			else
 				is_asleep = FALSE

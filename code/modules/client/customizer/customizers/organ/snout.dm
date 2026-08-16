@@ -234,6 +234,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		//Caustic edit
 		/datum/sprite_accessory/snout/caustic/extra_magus,
 		//Caustic edit end
@@ -329,6 +330,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		//Caustic edit
 		/datum/sprite_accessory/snout/caustic/extra_magus,
 		//Caustic edit end
@@ -425,6 +427,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		)
 
 /datum/customizer/organ/snout/akula

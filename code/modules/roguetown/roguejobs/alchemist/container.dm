@@ -1,15 +1,12 @@
 
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot
-	list_reagents = list(/datum/reagent/medicine/healthpot = 60)
-	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
+	list_reagents = list(/datum/reagent/medicine/healthpot = 60) //OV EDIT
 
 /obj/item/reagent_containers/glass/bottle/rogue/healthpotnew
-	list_reagents = list(/datum/reagent/medicine/stronghealth = 60)
-	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
+	list_reagents = list(/datum/reagent/medicine/stronghealth = 60) //OV EDIT
 
 /obj/item/reagent_containers/glass/bottle/rogue/restoration
-	list_reagents = list(/datum/reagent/medicine/restoration = 50)
-	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
+	list_reagents = list(/datum/reagent/medicine/restoration = 60) //OV EDIT
 
 /obj/item/reagent_containers/glass/bottle/rogue/manapot
 	list_reagents = list(/datum/reagent/medicine/manapot = 60)
@@ -21,10 +18,10 @@
 	list_reagents = list(/datum/reagent/sleep_powder = 50)
 
 /obj/item/reagent_containers/glass/bottle/rogue/water
-	list_reagents = list(/datum/reagent/water = 60)
+	list_reagents = list(/datum/reagent/water = 60) //OV EDIT
 
 /obj/item/reagent_containers/glass/bottle/mercury
-	list_reagents = list(/datum/reagent/mercury = 60)
+	list_reagents = list(/datum/reagent/mercury = 60) //OV EDIT
 
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot/zarum
 	name = "bottle of medicinal fish vinegar"
@@ -107,6 +104,9 @@
 
 /obj/item/reagent_containers/glass/bottle/alchemical/restoration
 	list_reagents = list(/datum/reagent/medicine/restoration = 30)
+
+/obj/item/reagent_containers/glass/bottle/alchemical/water
+	list_reagents = list(/datum/reagent/water = 30)
 
 //////////////////////////
 /// ALCOHOLIC BOTTLES ///

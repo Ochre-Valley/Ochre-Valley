@@ -359,7 +359,7 @@
 	maximum_possible_slots = 1 //Had one dungeoneer before, this is how many we get to keep still.
 
 	category_tags = list(CTAG_MENATARMS)
-	traits_applied = list(TRAIT_CIVILIZEDBARBARIAN)//This is surely going to be funny //OV EDIT - Removed TRAIT_JAILOR
+	traits_applied = list(TRAIT_CIVILIZEDBARBARIAN)//This is surely going to be funny
 	subclass_stats = list(
 		STATKEY_STR = 3,
 		STATKEY_CON = 2,
@@ -367,8 +367,8 @@
 		STATKEY_INT = -1//Old dungeoneer statspread more or less
 	)
 	subclass_skills = list(
-		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE, // Still can have a cudgel.
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,//Primary way they are meant to dispose of ppl
+		/datum/skill/combat/shields = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT, //hilarious
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/slings = SKILL_LEVEL_JOURNEYMAN,//Funny
@@ -388,20 +388,33 @@
 /datum/outfit/job/roguetown/manorguard/bailiff/pre_equip(mob/living/carbon/human/H)
 	..()
 
-	head = /obj/item/clothing/head/roguetown/menacing/executioner
-	neck = /obj/item/clothing/neck/roguetown/gorget
-	mask = /obj/item/clothing/head/roguetown/roguehood/black
-	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/disciple/bailiff
-	wrists = /obj/item/clothing/wrists/roguetown/bracers
-	gloves = /obj/item/clothing/gloves/roguetown/leather
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
-	beltl = /obj/item/rogueweapon/mace/cudgel
+	head = /obj/item/clothing/head/roguetown/helmet/sallet/visored/iron
+	neck = /obj/item/clothing/neck/roguetown/bevor/iron
+	mask = /obj/item/clothing/mask/rogue/ragmask/black
+//	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/light/retinue //OV EDIT - Moved to Armor Choice
+//	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson //OV Edit - Moved to Armor Choice
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/cloth/monk
+	gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
+	pants = /obj/item/clothing/under/roguetown/brigandinelegs
+	beltl = /obj/item/rogueweapon/flail
 	beltr = /obj/item/rogueweapon/whip/antique
-	backl = /obj/item/rogueweapon/sword/long/exe/cloth
+	backl = /obj/item/rogueweapon/shield/iron
 
 	H.adjust_blindness(-3)
 	if(H.mind)
+//OV ADD START - Bailiff Skin Armor
+		var/armor_options = list("Bailiff's Skin Armor", "Light Brigandine Armor")
+		var/armor_choice = input(H, "Choose your armor.", "TAKE UP ARMS") as anything in armor_options
 		H.set_blindness(0)
+		switch(armor_choice)
+			if("Bailiff's Skin Armor")
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/pushups/barbarian //a leather armor.
+				shirt = /obj/item/clothing/suit/roguetown/armor/manual/resting/barbarian/chest //chest-only leather armor.
+			if("Light Brigandine Armor")
+				armor = /obj/item/clothing/suit/roguetown/armor/brigandine/light/retinue //OV EDIT - Moved to Armor Choice
+				shirt = /obj/item/clothing/suit/roguetown/armor/gambeson //OV Edit - Moved to Armor Choice
+//OV ADD END
+
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rope/chain = 1,

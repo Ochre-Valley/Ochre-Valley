@@ -166,6 +166,10 @@
 	var/mob/living/vessel = vessel_ref?.resolve()
 	if(!body || !vessel)
 		return
+	//OV Edit: Stop tether from breaking during scene things
+	if(isbelly(body.loc) || isbelly(vessel.loc) || istype(body.loc, /obj/item/holder/micro) || istype(vessel.loc, /obj/item/holder/micro))
+		return
+	//OV Edit End
 	if(body.z != vessel.z || get_dist(body, vessel) > leash_range)
 		INVOKE_ASYNC(src, PROC_REF(return_to_body), "out_of_range")
 

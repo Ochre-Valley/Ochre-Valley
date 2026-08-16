@@ -271,15 +271,8 @@
 		to_chat(src, span_warning("I am clinging to [L]! I need a stronger grip to stop them!"))
 		return TRUE
 
-	if(isanimal(mob.pulling))
-		var/mob/living/simple_animal/bound = mob.pulling
-		if(bound.binded)
-			move_delay = world.time + 10
-			to_chat(src, span_warning("[bound] is bound in a summoning circle. I can't move them!"))
-			return TRUE
-
-	if(isanimal(mob.pulling))
-		var/mob/living/simple_animal/bound = mob.pulling
+	if(istype(mob.pulling, /mob/living/carbon/human/species/familiar))
+		var/mob/living/carbon/human/species/familiar/bound = mob.pulling
 		if(bound.binded)
 			move_delay = world.time + 10
 			to_chat(src, span_warning("[bound] is bound in a summoning circle. I can't move them!"))

@@ -2,6 +2,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 GLOBAL_LIST_EMPTY(chosen_names)
 
+#define MAX_SONG_TITLE_LENGTH 60
+
 /datum/preferences
 	var/client/parent
 	//doohickeys for savefiles
@@ -124,6 +126,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	//Job preferences 2.0 - indexed by job title , no key or value implies never
 	var/list/job_preferences = list()
+	/// Preferences specific to a job. Alist, job title = (some object, usually a list)
+	var/list/job_subprefs = list()
 
 		// Want randomjob if preferences already filled - Donkie
 	var/joblessrole = RETURNTOLOBBY  //defaults to 1 for fewer assistants
@@ -234,9 +238,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/favorite_cuisine = NONE
 	var/favorite_dish = NONE
 	var/favorite_drink = NONE
-
-
-	var/tgui_pref = TRUE
 
 	var/race_bonus
 
@@ -872,7 +873,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>TGUI Theme:</b> <a href='?_src_=prefs;preference=tgui_theme'>[get_tgui_theme_display_name()]</a><br>"
 			dat += "<b>Parchment Theme:</b> <a href='?_src_=prefs;preference=parchment_skin'>[get_parchment_skin_display_name()]</a><br>"
 			dat += "<b>Panel Theme:</b> <a href='?_src_=prefs;preference=statbrowser_theme'>[get_statbrowser_theme_display_name()]</a><br>"
-			dat += "<b>UI Mode:</b> <a href='?_src_=prefs;preference=tgui_ui_prefs;task=menu'>[tgui_pref ? "TGUI" : "Legacy"]</a><br>"
 			dat += "<b>tgui Monitors:</b> <a href='?_src_=prefs;preference=tgui_lock'>[(tgui_lock) ? "Primary" : "All"]</a><br>"
 			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'>[ambientocclusion ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=winflash'>[(windowflashing) ? "Enabled":"Disabled"]</a><br>"
@@ -1237,7 +1237,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 }
 
 </style>
-
+[job.has_subprefs ? "<div class='tutorialhover'><a href='?src=[REF(job)];subprefs=1'>\[+\]</a><span class='tutorial'>Class Preferences</span></div>" : ""]
 <div class="tutorialhover"> [job.class_setup_examine ? "<a href='?src=[REF(job)];explainjob=1'><font>[job_display]</font></a>" : "<font>[job_display]</font>"]</span>
 <span class="tutorial">[job.tutorial]<br>
 Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contrib_points]" : ""]</span>
@@ -1617,8 +1617,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				SetAntag(user)
 			else
 				SetAntag(user)
-	else if(href_list["preference"] == "tgui_ui_prefs")
-		tgui_pref = !tgui_pref
+
 	///Caustic edit
 	else if(href_list["preference"] == "epilepsy")
 		epilepsy = !epilepsy
@@ -2254,9 +2253,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
 					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
 					to_chat(user, "<span class='notice'>Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look.</span>")
-					var/new_headshot_link = tgui_input_text(user, "Input the headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Headshot", headshot_link,  encode = FALSE)
-					if(new_headshot_link == null)
+					var/new_headshot_link = tgui_input_text(user, "Input the headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Headshot", headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
+					if(isnull(new_headshot_link))
 						return
+					new_headshot_link = trim(new_headshot_link, MAX_MESSAGE_LEN)
 					if(new_headshot_link == "")
 						headshot_link = null
 						ShowChoices(user)
@@ -2272,9 +2272,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
 					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
 					to_chat(user, "<span class='notice'>Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look.</span>")
-					var/new_lich_headshot_link = tgui_input_text(user, "Input the Lich headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Lich Headshot", lich_headshot_link,  encode = FALSE)
-					if(new_lich_headshot_link == null)
+					var/new_lich_headshot_link = tgui_input_text(user, "Input the Lich headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Lich Headshot", lich_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
+					if(isnull(new_lich_headshot_link))
 						return
+					new_lich_headshot_link = trim(new_lich_headshot_link, MAX_MESSAGE_LEN)
 					if(new_lich_headshot_link == "")
 						lich_headshot_link = null
 						ShowChoices(user)
@@ -2290,9 +2291,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
 					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
 					to_chat(user, "<span class='notice'>Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look.</span>")
-					var/new_vampire_headshot_link = tgui_input_text(user, "Input the vampire headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Vampire Headshot", vampire_headshot_link,  encode = FALSE)
-					if(new_vampire_headshot_link == null)
+					var/new_vampire_headshot_link = tgui_input_text(user, "Input the vampire headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Vampire Headshot", vampire_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
+					if(isnull(new_vampire_headshot_link))
 						return
+					new_vampire_headshot_link = trim(new_vampire_headshot_link, MAX_MESSAGE_LEN)
 					if(new_vampire_headshot_link == "")
 						vampire_headshot_link = null
 						ShowChoices(user)
@@ -2360,9 +2362,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					popup.open(FALSE)
 				if("flavortext")
 					to_chat(user, "<span class='notice'>["<span class='bold'>Flavortext should not include nonphysical nonsensory attributes such as backstory or the character's internal thoughts.</span>"]</span>")
-					var/new_flavortext = tgui_input_text(user, "Input your character description:", "Flavortext", flavortext, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
-					if(new_flavortext == null)
+					var/new_flavortext = tgui_input_text(user, "Input your character description:", "Flavortext", flavortext, max_length = MAX_NOTE_SIZE, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_flavortext))
 						return
+					new_flavortext = trim(new_flavortext, MAX_NOTE_SIZE)
 					if(new_flavortext == "")
 						flavortext = null
 						ShowChoices(user)
@@ -2402,9 +2405,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				// OC Edit End
 				if("ooc_notes")
 					to_chat(user, "<span class='notice'>["<span class='bold'>OOC notes should be used for roleplay hooks and general information about your character.</span>"]</span>")
-					var/new_ooc_notes = tgui_input_text(user, "Input your OOC preferences:", "OOC notes", ooc_notes, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
-					if(new_ooc_notes == null)
+					var/new_ooc_notes = tgui_input_text(user, "Input your OOC preferences:", "OOC notes", ooc_notes, max_length = MAX_NOTE_SIZE, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_ooc_notes))
 						return
+					new_ooc_notes = trim(new_ooc_notes, MAX_NOTE_SIZE)
 					if(new_ooc_notes == "")
 						ooc_notes = null
 						ShowChoices(user)
@@ -2416,9 +2420,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 				if("rumour")
 					to_chat(user, span_notice("Rumours are things others might know, or think they know about you, they don't necessarily have to be precise, or even true. But remember that they can provide a hint to another player on how to interact with, or even think about your character.\n<b>Avoid explicit bodily descriptions, though rumors like \"sleeps around a lot\" are fine.</b>"))
-					var/new_rumour = tgui_input_text(user, "Input rumours about your character: (400 Character Limit)", "Rumours", rumour, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
-					if(new_rumour == null)
+					var/new_rumour = tgui_input_text(user, "Input rumours about your character: (400 Character Limit)", "Rumours", rumour, max_length = 400, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_rumour))
 						return
+					new_rumour = trim(new_rumour, 400)
 					if(new_rumour == "")
 						rumour = null
 						ShowChoices(user)
@@ -2433,9 +2438,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 				if("gossip")
 					to_chat(user, span_notice("Gossip is rumours spread around, and known only in Noble circles, only other well-born individuals are aware of it. Gossip, similarly to standard rumours does not need to be precise or true, but remember that it can provide hints and avenues for other Nobles to interact with, and judge your Character.\n<b>Avoid explicit bodily descriptions, though rumors like \"sleeps around a lot\" are fine.</b>"))
-					var/new_gossip = tgui_input_text(user, "Input noble gossip about your character: (400 Character Limit)", "Noble Gossip", noble_gossip, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
-					if(new_gossip == null)
+					var/new_gossip = tgui_input_text(user, "Input noble gossip about your character: (400 Character Limit)", "Noble Gossip", noble_gossip, max_length = 400, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_gossip))
 						return
+					new_gossip = trim(new_gossip, 400)
 					if(new_gossip == "")
 						noble_gossip = null
 						ShowChoices(user)
@@ -2451,9 +2457,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if("nsfwflavortext")
 					to_chat(user, "<span class='notice'>["<span class='bold'>NSFW Flavortext can be used for setting things like body descriptions and other physical details that may be conisdered explicit.</span>"]</span>")
 					to_chat(user, "<font color = '#d6d6d6'>Leave blank to clear.</font>")
-					var/new_nsfwflavortext = tgui_input_text(user, "Input your character description:", "NSFW Flavortext", nsfwflavortext, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
-					if(new_nsfwflavortext == null)
+					var/new_nsfwflavortext = tgui_input_text(user, "Input your character description:", "NSFW Flavortext", nsfwflavortext, max_length = MAX_NOTE_SIZE, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_nsfwflavortext))
 						return
+					new_nsfwflavortext = trim(new_nsfwflavortext, MAX_NOTE_SIZE)
 					if(new_nsfwflavortext == "")
 						new_nsfwflavortext = null
 						nsfwflavortext = null
@@ -2467,9 +2474,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if("erpprefs")
 					to_chat(user, "<span class='notice'>["<span class='bold'>Erotic Roleplay preferences. If you put 'anything goes' or 'no limits' here, do not be surprised if people take you up on it.</span>"]</span>")
 					to_chat(user, "<font color = '#d6d6d6'>Leave blank to clear.</font>")
-					var/new_erpprefs = tgui_input_text(user, "Input your preferences:", "ERP Preferences", erpprefs, multiline = TRUE,  encode = FALSE, bigmodal = TRUE)
-					if(new_erpprefs == null)
+					var/new_erpprefs = tgui_input_text(user, "Input your preferences:", "ERP Preferences", erpprefs, max_length = MAX_NOTE_SIZE, multiline = TRUE, encode = FALSE, bigmodal = TRUE)
+					if(isnull(new_erpprefs))
 						return
+					new_erpprefs = trim(new_erpprefs, MAX_NOTE_SIZE)
 					if(new_erpprefs == "")
 						new_erpprefs = null
 						erpprefs = null
@@ -2482,7 +2490,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					log_game("[user] has set their ERP preferences'.")
 
 				if("img_gallery")
-
 					if(img_gallery.len >= 3)
 						to_chat(user, "You already have three images in your gallery!")
 						return
@@ -2492,10 +2499,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>Keep in mind that all three images are displayed next to eachother and justified to fill a horizontal rectangle. As such, vertical images work best.</span>")
 					to_chat(user, "<span class='notice'>You can only have a maximum of ["<span class='bold'>THREE IMAGES</span>"] in your gallery at a time.</span>")
 
-					var/new_galleryimg = tgui_input_text(user, "Input the image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Gallery Image",  encode = FALSE)
+					var/new_galleryimg = tgui_input_text(user, "Input the image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Gallery Image", max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
 
-					if(new_galleryimg == null)
+					if(isnull(new_galleryimg))
 						return
+					new_galleryimg = trim(new_galleryimg, MAX_MESSAGE_LEN)
 					if(new_galleryimg == "")
 						new_galleryimg = null
 						ShowChoices(user)
@@ -2520,10 +2528,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>Keep in mind that all three images are displayed next to eachother and justified to fill a horizontal rectangle. As such, vertical images work best.</span>")
 					to_chat(user, "<span class='notice'>You can only have a maximum of ["<span class='bold'>THREE IMAGES</span>"] in your NSFW gallery at a time.</span>")
 
-					var/new_galleryimg_nsfw = tgui_input_text(user, "Input the image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "NSFW Gallery Image",  encode = FALSE)
+					var/new_galleryimg_nsfw = tgui_input_text(user, "Input the image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "NSFW Gallery Image", max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
 
-					if(new_galleryimg_nsfw == null)
+					if(isnull(new_galleryimg_nsfw))
 						return
+					new_galleryimg_nsfw = trim(new_galleryimg_nsfw, MAX_MESSAGE_LEN)
 					if(new_galleryimg_nsfw == "")
 						new_galleryimg_nsfw = null
 						ShowChoices(user)
@@ -2611,9 +2620,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					to_chat(user, "<span class='notice'>If the song doesn't  play properly, ensure that it's a direct link that opens properly in a browser.</span>")
 					to_chat(user, "<font color = '#d6d6d6'>Leave blank to clear your current song.</font>")
 					to_chat(user, "<font color ='red'>Abuse of this will get you banned.</font>")
-					var/new_extra_link = tgui_input_text(user, "Input the accessory link (https, hosts: catbox):", "Song URL", ooc_extra, encode = FALSE)
-					if(new_extra_link == null)
+					var/new_extra_link = tgui_input_text(user, "Input the accessory link (https, hosts: catbox):", "Song URL", ooc_extra, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Discord Removed
+					if(isnull(new_extra_link))
 						return
+					new_extra_link = trim(new_extra_link, MAX_MESSAGE_LEN)
 					if(new_extra_link == "")
 						new_extra_link = null
 						ooc_extra = null
@@ -2636,9 +2646,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						log_game("[user] has set their Song URL to '[ooc_extra]'.")
 
 				if("change_artist")
-					var/new_artist = tgui_input_text(user, "Input your song's artist:", "Song Artist", song_artist,  encode = FALSE)
-					if(new_artist == null)
+					var/new_artist = tgui_input_text(user, "Input your song's artist:", "Song Artist", song_artist, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+					if(isnull(new_artist))
 						return
+					new_artist = trim(new_artist, MAX_MESSAGE_LEN)
 					if(new_artist == "")
 						ShowChoices(user)
 						return
@@ -2647,7 +2658,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					log_game("[user] has set their song artist.")
 
 				if("change_title")
-					var/new_title = tgui_input_text(user, "Input your song's title:", "Song title", song_title,  encode = FALSE)
+					var/new_title = tgui_input_text(user, "Input your song's title (Character limit is [MAX_SONG_TITLE_LENGTH]):", "Song title", song_title,  encode = FALSE, max_length = MAX_SONG_TITLE_LENGTH)
 					if(new_title== null)
 						return
 					if(new_title == "")
@@ -2868,6 +2879,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						if (istype(V, /datum/virtue/origin/racial))
 							if(!(pref_species.type in V.races))
 								continue
+						if (istype(V, /datum/virtue/origin/familiar))
+							continue
 						virtue_choices[V.name] = V
 					var/result = tgui_input_list(user, "From where do you come?", "ORIGINS",virtue_choices)
 
@@ -3629,8 +3642,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	parent?.ensure_keys_set(src)
 
 /datum/preferences/proc/try_update_mutant_colors()
-	reset_body_marking_colors()
-	reset_all_customizer_accessory_colors()
+	if(update_mutant_colors)
+		reset_body_marking_colors()
+		reset_all_customizer_accessory_colors()
 
 /proc/valid_headshot_link(mob/user, value, silent = FALSE, list/valid_extensions = list("jpg", "png", "jpeg"))
 	var/static/link_regex = regex(@"i\.gyazo.com|.\.l3n\.co|images2\.imgbox\.com|thumbs2\.imgbox\.com|files\.catbox\.moe") //gyazo, discord, lensdump, imgbox, catbox
@@ -3728,6 +3742,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	var/datum/browser/noclose/popup  = new(user, "lore_primer", "<div align='center'>Lore Primer</div>", 650, 900)
 	popup.set_content(build_lore_primer_content())
 	popup.open(FALSE)
+
+#undef MAX_SONG_TITLE_LENGTH
 
 //OV edit
 /datum/preferences/proc/ensure_sizecat(new_body_size)

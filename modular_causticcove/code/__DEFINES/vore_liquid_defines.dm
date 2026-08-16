@@ -33,7 +33,7 @@
 #define REAGENT_PARAPOISON "Paralytic venom"
 #define REAGENT_ID_PARAPOISON /datum/reagent/toxin/spidervenom_paralytic
 #define REAGENT_SPACEDRUGS "Druggy venom"
-#define REAGENT_ID_SPACEDRUGS /datum/reagent/drug/space_drugs
+#define REAGENT_ID_SPACEDRUGS /datum/reagent/drug/swampweed
 #define REAGENT_POT_MANA "Mana potion"
 #define REAGENT_ID_POT_MANA /datum/reagent/medicine/manapot
 #define REAGENT_POT_HEALTH "Health potion"

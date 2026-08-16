@@ -149,8 +149,7 @@
 			if(U.attached_accessory)
 				accessory_msg += " with [icon2html(U.attached_accessory, user)] \a [U.attached_accessory]"
 		var/str = "[m3] [wear_pants.generate_tooltip(wear_pants.get_examine_string(user))][accessory_msg]. "
-		if(!wear_armor)
-			str += wear_pants.integrity_check(is_smart, guarded)
+		str += wear_pants.integrity_check(is_smart, guarded)
 		if(is_stupid)
 			str = "[m3] a pair of some pants! "
 		. += str
@@ -888,6 +887,7 @@
 				. += span_notice("A practitioner of the old ways.")
 			else
 				. += span_notice("Something about them seems... different.")
+
 // Caustic Edit Start
 		if(HAS_TRAIT(src, TRAIT_FERAL))
 			if(HAS_TRAIT(user, TRAIT_NOBLE) || HAS_TRAIT(user, TRAIT_INQUISITION) || HAS_TRAIT(user, TRAIT_WITCH))
@@ -905,10 +905,11 @@
 			else
 				. += span_danger("THE HOWL OF A MAD GOD SHAKES YOUR BONES! FLESH SHORN INTO VISCERA SPRAYS THE WALLS! RIP AND TEAR!") // Default 'npc' werewolf examine. Thought it seemed edgy enough.
 // OV Edit End
-		if((HAS_TRAIT(user, TRAIT_ANCIENT_HAG) || HAS_TRAIT(user, TRAIT_FEYTOUCHED) || istype(user, /mob/living/simple_animal/pet/familiar/fae)) && HAS_TRAIT(src, TRAIT_FEYTOUCHED))
+
+		if((HAS_TRAIT(user, TRAIT_ANCIENT_HAG) || HAS_TRAIT(user, TRAIT_FEYTOUCHED) || istype(user, /mob/living/carbon/human/species/familiar/fae)) && HAS_TRAIT(src, TRAIT_FEYTOUCHED))
 			. += span_nicegreen("Someone touched by, or created by fey. Perhaps a vessel of the past, or a deeply affected puppet.")
 
-		if((HAS_TRAIT(user, TRAIT_FEYTOUCHED) ||  istype(user, /mob/living/simple_animal/pet/familiar/fae)) && HAS_TRAIT(src, TRAIT_ANCIENT_HAG))
+		if((HAS_TRAIT(user, TRAIT_FEYTOUCHED) ||  istype(user, /mob/living/carbon/human/species/familiar/fae)) && HAS_TRAIT(src, TRAIT_ANCIENT_HAG))
 			. += span_nicegreen("A true force of the fey, the mossmother speaks to this one closely.")
 
 		if(SSticker.rulermob == src)
@@ -1120,7 +1121,7 @@
 			. += span_redtext("[m3] strange glowing eyes and fangs!")
 
 		//Blackblood Inquisition trauma
-		if(HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_BLACKBLOOD) && src != user) // OV Edit - we can examine OURSELVES
+		if((HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_BLACKBLOOD)) && src != user)
 			var/mob/living/carbon/carbs = user
 			if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT) || HAS_TRAIT(user, TRAIT_NOMOOD))
 				return

@@ -88,11 +88,11 @@
 		/datum/customizer/bodypart_feature/underwear,
 		/datum/customizer/bodypart_feature/legwear,
 		/datum/customizer/bodypart_feature/piercing,
-		/datum/customizer/organ/tail/harpy,
 		/datum/customizer/organ/ears/harpy,
 		/datum/customizer/organ/horns/anthro,
 		/datum/customizer/organ/frills/anthro, //OV Add
 		/datum/customizer/organ/wings/harpy,
+		/datum/customizer/organ/tail/harpy,
 		/datum/customizer/organ/neck_feature/anthro,
 		/datum/customizer/organ/snout/harpy,
 		/datum/customizer/organ/testicles/anthro,
@@ -161,7 +161,7 @@
 		/datum/descriptor_choice/prominent_three_wild,
 		/datum/descriptor_choice/prominent_four_wild,
 	)
-	
+
 	mechanics_explanations = list(
 		"Are able to fly using a unique ability, (after a slow initial takeoff,) carrying them up a floor above them. Using the ability again will send them back down.",
 		"Can sing using a unique ability. Requires a free hand to use."

@@ -69,19 +69,6 @@
 		if(helmchoice != "None")
 			mask = hoods[hoodchoice]
 
-	var/techniques = list("Dropkick - Pushback + Extra Damage", "Chokeslam - Stamina Damage", "Stunner - Dazed Debuff", "Headbutt - Vulnerable Debuff") // cool wrestling moves
-	var/technique_choice = input(H,"Choose your TECHNIQUE.", "TOSS THEM.") as anything in techniques
-	switch(technique_choice)
-		if("Dropkick - Pushback + Extra Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/dropkick)
-		if("Chokeslam - Stamina Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/chokeslam)
-		if("Stunner - Dazed Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/stunner)
-		if("Headbutt - Vulnerable Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/headbutt)
-
-
 /datum/outfit/job/roguetown/warden/wildsoul/proc/give_feral_eyes(mob/living/carbon/human/man)
 	var/obj/item/organ/eyes/eyes = man.getorganslot(ORGAN_SLOT_EYES)
 	var/color_one

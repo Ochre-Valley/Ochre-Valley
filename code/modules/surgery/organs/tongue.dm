@@ -84,6 +84,11 @@
 		/mob/living/carbon/human/proc/emote_lizard_hiss,
 		/mob/living/carbon/human/proc/emote_lizard_squeal,
 		/mob/living/carbon/human/proc/emote_lizard_thump,
+		/mob/living/carbon/human/proc/emote_growl,
+		/mob/living/carbon/human/proc/emote_purr,
+		/mob/living/carbon/human/proc/emote_squeak,
+		/mob/living/carbon/human/proc/emote_hiss,
+		/mob/living/carbon/human/proc/emote_phiss,
 	)
 //	modifies_speech = TRUE
 /*
@@ -294,6 +299,13 @@
 		/mob/living/carbon/human/proc/emote_growl,
 		/mob/living/carbon/human/proc/emote_prbt,
 		/mob/living/carbon/human/proc/emote_bleat,
+		/mob/living/carbon/human/proc/emote_chitter,
+		/mob/living/carbon/human/proc/emote_flutter,
+		/mob/living/carbon/human/proc/emote_yip,
+		/mob/living/carbon/human/proc/emote_lizard_bellow,
+		/mob/living/carbon/human/proc/emote_lizard_hiss,
+		/mob/living/carbon/human/proc/emote_lizard_squeal,
+		/mob/living/carbon/human/proc/emote_lizard_thump,
 		/mob/living/carbon/human/proc/emote_warble, // OV Add Start
 		/mob/living/carbon/human/proc/emote_raptor,
 		/mob/living/carbon/human/proc/emote_dove,
@@ -307,9 +319,11 @@
 	emote_verbs = list(
 		/mob/living/carbon/human/proc/emote_chitter,
 		/mob/living/carbon/human/proc/emote_flutter,
+		/mob/living/carbon/human/proc/emote_squeak,
 	)
 
-/obj/item/organ/tongue/harpy // OV Add Start
+// OV Add Start
+/obj/item/organ/tongue/harpy
 	name = "bird tongue"
 	desc = "Chirp chirp chirp chirp chirp!!"
 	icon_state = "tongue-con"
@@ -344,4 +358,5 @@
 		/mob/living/carbon/human/proc/emote_loudcaw,
 		/mob/living/carbon/human/proc/emote_raptor,
 		/mob/living/carbon/human/proc/wurble
-	) // OV Add End
+	)
+// OV Add End

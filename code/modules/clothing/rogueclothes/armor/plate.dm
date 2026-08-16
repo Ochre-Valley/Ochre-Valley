@@ -162,6 +162,7 @@
 	icon_state = "artificerplate"
 	item_state = "artificerplate"
 	armor_class = ARMOR_CLASS_LIGHT // Artificer made gilbronze.
+	max_integrity = ARMOR_INT_CHEST_LIGHT_ELITE
 	var/powered = FALSE
 	var/mode = 1
 	var/active_item = FALSE //Prevents issues like dragon ring giving negative str instead
@@ -939,6 +940,7 @@
 	hope to bear its burden, both metaphorically and quite literally."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
+	boobed = FALSE
 
 /obj/item/clothing/suit/roguetown/armor/plate/scale/marshal/update_icon()
 	cut_overlays()
@@ -987,7 +989,7 @@
 	icon_state = "inqcoat"
 	item_state = "inqcoat"
 	sleevetype = "shirt"
-	max_integrity = 300
+	max_integrity = ARMOR_INT_CHEST_LIGHT_ELITE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	equip_delay_self = 4 SECONDS
 	armor_class = ARMOR_CLASS_LIGHT
