@@ -29,7 +29,7 @@
 	name = "Itinerant Tinkerer"
 	tutorial = "In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."
 	outfit = /datum/outfit/job/roguetown/adventurer/tinkerer
-	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
+	cmode_music = 'sound/music/combat_dungeoneer.ogg'
 	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 3,
