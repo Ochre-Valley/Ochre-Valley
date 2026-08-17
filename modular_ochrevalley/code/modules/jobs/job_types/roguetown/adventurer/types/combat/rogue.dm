@@ -80,13 +80,10 @@
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 				beltl = /obj/item/quiver/bolt/standard
 			if("Grappling Hook")
-				H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_EXPERT, TRUE)
 				r_hand = /obj/item/grapplinghook
 			if("Clockwork Drill")
-				H.adjust_skillrank_up_to(/datum/skill/labor/mining, SKILL_LEVEL_APPRENTICE, TRUE)
 				backr = /obj/item/rogueweapon/contraption/pick/drill/precharged
 			if("Voltic Gauntlets")
-				H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_APPRENTICE, TRUE)
 				gloves = /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
 			if("Bronze Limbs")
 				var/obj/item/bodypart/rightarm = H.get_bodypart(BODY_ZONE_R_ARM)
