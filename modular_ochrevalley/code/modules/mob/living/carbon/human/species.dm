@@ -1,13 +1,20 @@
-/* CURRENTLY, THIS FILE IS FOR MARKING AND FEATURE USAGE. 
-ALL MARKINGS AND FEATURES SHOULD BE ADDED TO THEIR RESPECTIVE LISTS HERE, 
+/* CURRENTLY, THIS FILE IS FOR MARKING AND FEATURE USAGE.
+ALL MARKINGS AND FEATURES SHOULD BE ADDED TO THEIR RESPECTIVE LISTS HERE,
 FOR SPECIES WHICH GET ACCESS TO ALL MARKINGS/FEATURES
-NEW FEATURES SHOULD BE ADDED TO RELEVANT GENERIC FILES UNDER 
+NEW FEATURES SHOULD BE ADDED TO RELEVANT GENERIC FILES UNDER
 \modular_ochrevalley\code\modules\client\customizer\customizers\organ
 ADDITIONALLY, THE FOLLOWING RACES HAVE THEIR OWN FEATURE LISTS IN MODULAR FILES, AND ARE INTENDED TO HAVE ACCESS TO ALL FEATURES:
 Dullahans. They need their own set of features defined, due to having their special Soul customizer
-Fluvians. They have special wing and eye variants. 
+Fluvians. They have special wing and eye variants.
 */
 /datum/species
+	cosmetic_claw_types = list(
+		CLAW_STYLE_RETRACTABLE = /datum/intent/unarmed/punch/cosmetic_claw/retractable,
+		CLAW_STYLE_HOOKED = /datum/intent/unarmed/punch/cosmetic_claw/hooked,
+		CLAW_STYLE_HEAVY = /datum/intent/unarmed/punch/cosmetic_claw/heavy,
+		CLAW_STYLE_TALONS = /datum/intent/unarmed/punch/cosmetic_claw/talons,
+		CLAW_STYLE_CHITINOUS = /datum/intent/unarmed/punch/cosmetic_claw/chitinous,
+	)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 		/datum/body_marking_set/construct_plating_light,
@@ -124,8 +131,8 @@ Fluvians. They have special wing and eye variants.
 	)
 	customizers = list(
 		/datum/customizer/organ/eyes/generic,
-		/datum/customizer/bodypart_feature/hair/head/generic, 
-		/datum/customizer/bodypart_feature/hair/facial/humanoid, 
+		/datum/customizer/bodypart_feature/hair/head/generic,
+		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
@@ -135,7 +142,7 @@ Fluvians. They have special wing and eye variants.
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
 		/datum/customizer/organ/belly/human,
-		/datum/customizer/organ/butt/human, 
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/tail/generic,
 		/datum/customizer/organ/tail_feature/anthro,

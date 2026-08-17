@@ -1958,7 +1958,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				H.dodgetime = (clamp(H.dodgetime - 8, 0, CLICK_CD_DODGE))	//We reset the dodgetime after getting struck directly in the body.
 				if(!has_vuln_or_exposed)
 					H.changeMaxDodge(5, clamp = TRUE)
-					
+
 //		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
 //			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
