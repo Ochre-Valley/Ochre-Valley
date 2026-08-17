@@ -1,11 +1,18 @@
 /obj/item/rogueweapon/contraption/linker/mace
 	special = /datum/special_intent/dissassemble
 
+/datum/intent/mace/demolish/lesser //defined downstream as I remove demolish from wrenches upstream. For lovely upstream reasons
+	demolition_mod = 2.5
+
+/obj/item/rogueweapon/contraption/linker/mace/big
+	gripped_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/strike/dislocate, /datum/intent/mace/demolish/lesser)
+
+
 /obj/item/rogueweapon/contraption/linker/mace/preloaded
-	//current_charge = 80
+	current_charge = 80
 
 /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
-	//current_charge = 80
+	current_charge = 80
 
 /datum/special_intent/dissassemble
 	name = "Dissassemble"
