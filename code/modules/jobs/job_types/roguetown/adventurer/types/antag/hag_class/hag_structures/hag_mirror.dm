@@ -121,6 +121,11 @@
 				to_chat(user, span_warning("The gaze of the roots is rebuffed by a ward!"))
 				return
 			target = HL
+			// OV Edit Start
+			if(target.do_not_disturb == TRUE) 
+				to_chat(user, span_warning("The gaze of the roots is rebuffed by a ward! (This player is under privacy rule protections! Please be respectful.)")) 
+				return
+			// OV Edit End
 	if(!target)
 		to_chat(user, span_warning("They are not within the gaze of the mirror; they may be destroyed, utterly."))
 		return

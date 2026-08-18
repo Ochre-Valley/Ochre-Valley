@@ -88,7 +88,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/baothablend
 	name = "Void Blend"
-	desc = "Perform the rite. Atropa, for her sickly sweet smile. Defiled lux, for her anguish of betrayal. This is the drink… Forget and sleep. Forget. Outrun your pain, if you dare." 
+	desc = "Perform the rite. Atropa, for her sickly sweet smile. Defiled lux, for her anguish of betrayal. This is the drink… Forget and sleep. Forget. Outrun your pain, if you dare."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "baothablend"
 	tastes = list("sweet, sickly oblivion" = 1)
@@ -99,7 +99,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/forgottenlove
 	name = "The Sisters Blend"
-	desc = "An union of love and pain. Eorans and Baothans both fear this brew, for it promises the impossible. Or does it? " 
+	desc = "An union of love and pain. Eorans and Baothans both fear this brew, for it promises the impossible. Or does it? "
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "forgottenlove"
 	tastes = list("bitter, incomplete nostalgia" = 1)
@@ -110,7 +110,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/chai
 	name = "Chai Blend"
-	desc = "A spiced tea blend from the eastern lands. Kazengun and Lingyue both claim they have created it, while some western scholars say it is from eastern Raneshen. True esoterics claim it was actually invented by a foolish snake." 
+	desc = "A spiced tea blend from the eastern lands. Kazengun and Lingyue both claim they have created it, while some western scholars say it is from eastern Raneshen. True esoterics claim it was actually invented by a foolish snake."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "chai"
 	tastes = list("bitterness" = 1, "a mouthful of cough-inducing powderiness" = 1)
@@ -121,7 +121,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/volfmilk
 	name = "Vargmjölk syrup"
-	desc = "A sticky, sugary granulate of chopped, dried and thickened blend of berries, predominantly the humble raspberry. Gronnites drink this in the cold nites of their homeland, to stay hardy and fend off the cold." 
+	desc = "A sticky, sugary granulate of chopped, dried and thickened blend of berries, predominantly the humble raspberry. Gronnites drink this in the cold nites of their homeland, to stay hardy and fend off the cold."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "volfmilk"
 	tastes = list("syrupy fruitiness" = 1)
@@ -132,9 +132,9 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/frukkte
 	name = "Fruktte granules"
-	desc = "Fjallites carve glacier ice to cool down in their surprisingly hot summers and prepare Fruktte - dried and chopped berries, which are then cooked down to a thick syrup, which is diluted with melting ice. Invigorating and fresh." 
+	desc = "Fjallites carve glacier ice to cool down in their surprisingly hot summers and prepare Fruktte - dried and chopped berries, which are then cooked down to a thick syrup, which is diluted with melting ice. Invigorating and fresh."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
-	icon_state = "frukkte"
+	icon_state = "fruktte"
 	tastes = list("syrupy fruitiness" = 1)
 	bitesize = 1
 	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
@@ -143,7 +143,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/barleytea
 	name = "Prepared barley"
-	desc = "Toasted grains of barley mixed with clippings of artemisia, as bittering agents. Hammerhold dwarves swear by beers and ales, but they too recognize that sickness isn’t the time for drinking. So they simply made a non-alcoholic substitute." 
+	desc = "Toasted grains of barley mixed with clippings of artemisia, as bittering agents. Hammerhold dwarves swear by beers and ales, but they too recognize that sickness isn’t the time for drinking. So they simply made a non-alcoholic substitute."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "barleytea"
 	tastes = list("astringent graininess" = 1)
@@ -154,7 +154,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/kvass
 	name = "Kvass Mixture"
-	desc = "Originally just a way to extend the shelf life of bread a little bit more, Kvass has become quite popular a summer (when cold) and winter (when warm) drink in Aavnr, making it synonymous with the steppes." 
+	desc = "Originally just a way to extend the shelf life of bread a little bit more, Kvass has become quite popular a summer (when cold) and winter (when warm) drink in Aavnr, making it synonymous with the steppes."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "kvass"
 	tastes = list("fruity breadiness" = 1)
@@ -165,7 +165,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/avantare
 	name = "Avantare Blend"
-	desc = "Some ports make it illegal for sailors to not enter before they have consumed a quart of Avantare - a mixture of lemon juice and minthra, to fend off shipborne disease and bad breath." 
+	desc = "Some ports make it illegal for sailors to not enter before they have consumed a quart of Avantare - a mixture of lemon juice and minthra, to fend off shipborne disease and bad breath."
 	icon = 'modular_ochrevalley/icons/roguetown/items/teablends.dmi'
 	icon_state = "avantare"
 	tastes = list("fresh sourness" = 1)

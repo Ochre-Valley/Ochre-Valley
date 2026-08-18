@@ -157,6 +157,11 @@
 	if(HAS_TRAIT(target, TRAIT_ANTISCRYING))
 		to_chat(user, span_warning("They are not within the gaze of the Orb."))
 		return
+	// OV Edit Start
+	if(target.do_not_disturb == TRUE)
+		to_chat(user, span_warning("They are not within the gaze of the Orb. (This player is under privacy rule protections! Please be respectful.)"))
+		return
+	// OV Edit End
 
 	if(!prob(success_chance))
 		on_failure(user, target, failure_severity)
