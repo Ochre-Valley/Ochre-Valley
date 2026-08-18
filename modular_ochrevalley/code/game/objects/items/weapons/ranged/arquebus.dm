@@ -332,6 +332,13 @@
 	icon_state = "handgonne"
 	item_state = "handgonne"
 
+/datum/intent/shoot/arquebus/pistol
+    chargetime = 1
+    chargedrain = 0
+
+/datum/intent/shoot/arquebus/pistol/can_charge()
+	return TRUE
+
 /datum/intent/shoot/arquebus/pistol/get_chargetime()
 	if(mastermob)
 		var/newtime = 40
