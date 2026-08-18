@@ -1,7 +1,7 @@
 /obj/item/rogueweapon/contraption/linker/mace
 	special = /datum/special_intent/dissassemble
 
-/datum/intent/mace/demolish/lesser //defined downstream as I remove demolish from wrenches upstream. For lovely upstream reasons
+/datum/intent/mace/demolish/lesser //defined downstream as I remove demolish from wrenches upstream.
 	demolition_mod = 2.5
 
 /obj/item/rogueweapon/contraption/linker/mace/big
