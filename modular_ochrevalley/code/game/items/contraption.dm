@@ -139,3 +139,31 @@
 		else if(target.mob_biotypes & MOB_UNDEAD) //things that'd normally have easydismember as carbons take more damage
 			realdamage *= 1.5 //equivalent to dismember chance bonus from easydismember, and the damage boost recieved from hitting a torso dismember!
 		apply_generic_weapon_damage(target, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE)
+
+
+/obj/item/rogueweapon/contraption/linker/mace/attack_turf(turf/T, mob/living/user, multiplier)
+	. = ..()
+	if(. && istype(user?.used_intent, /datum/intent/mace/demolish))
+		demolish_turf(T, user)
+
+/obj/item/rogueweapon/contraption/linker/mace/attack_obj(obj/O, mob/living/user)
+	. = ..()
+	if(. && istype(user?.used_intent, /datum/intent/mace/demolish))
+		demolish_obj(O, user)
+
+/obj/item/rogueweapon/contraption/linker/mace/proc/demolish_turf(turf/T, mob/living/user)
+	if(QDELETED(T))
+		return FALSE
+
+	if(isnull(T.max_integrity))
+		return FALSE
+
+	if(T.max_integrity > 3000)
+		to_chat(user, "Too hard, sire!")
+		return FALSE
+
+	var/bonus_damage = round(T.max_integrity * 0.15)
+
+	T.take_damage(bonus_damage, BRUTE, d_type, 1)
+	to_chat(user, span_warning("Your blow expertly caves into [T]! (+[bonus_damage])"))
+	return TRUE
