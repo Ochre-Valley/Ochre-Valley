@@ -111,6 +111,7 @@
 		/datum/customizer/organ/butt/human,
 		//Caustic edit end
 		)
+	/*  OV edit- these are defined on the base type in a modular file
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 		/datum/body_marking_set/belly,
@@ -130,6 +131,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	)*/
 
 
 	gender_swapping = TRUE

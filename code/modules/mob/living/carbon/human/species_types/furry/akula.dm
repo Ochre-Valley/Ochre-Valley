@@ -18,7 +18,7 @@
 	find their sanity being clawed away as they find themselves stuck in one place."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 
-	///Caustic edit
+	/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/tent,
@@ -34,7 +34,7 @@
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
 	)
-	///Caustic edit end
+	*/
 
 	inherent_traits = list(TRAIT_WATERBREATHING, TRAIT_SEA_DRINKER)
 	possible_ages = ALL_AGES_LIST
@@ -86,6 +86,7 @@
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
+	/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -131,6 +132,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
 		/datum/descriptor_choice/stature,

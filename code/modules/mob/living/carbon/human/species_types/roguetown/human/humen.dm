@@ -65,6 +65,7 @@
 		/datum/customizer/organ/butt/human,
 		//Caustic edit end
 		)
+	/*
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 		/datum/body_marking_set/belly,
@@ -84,6 +85,11 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
+	//ov edit start
+	allowed_taur_types = list(
+	)
+	//ov edit end
 
 /datum/species/human/northern/check_roundstart_eligible()
 	return TRUE

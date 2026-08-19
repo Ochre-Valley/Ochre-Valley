@@ -45,6 +45,10 @@
 		/datum/sprite_accessory/tail_feature/taur/noodle_marking_belly, // OV ADD
 		/datum/sprite_accessory/tail_feature/taur/noodle_marking_tail, // OV ADD
 		/datum/sprite_accessory/tail_feature/taur/sloogmarkings, //OV ADD
+		//ov edit
+		/datum/sprite_accessory/tail_feature/large_snake/under,
+		/datum/sprite_accessory/tail_feature/large_snake/brush,
+		//ov edit end
 		)
 
 /datum/customizer/organ/tail_feature/vox_markings

@@ -48,7 +48,7 @@
 						TRAIT_REGROW_LIMBS,
 						TRAIT_ZOMBIE_IMMUNE,
 						)
-	//OV Add Start
+	/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/spider,
@@ -166,6 +166,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/ooze,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart/ooze,

@@ -14,7 +14,7 @@
 	use_skin_tone_wording_for_examine = FALSE
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY,NOBLOOD,MUTCOLORS) //OV EDIT
-	///Caustic edit
+	/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/lamia,
 		/obj/item/bodypart/taur/spider,
@@ -47,6 +47,7 @@
 		/obj/item/bodypart/taur/sloog, //OV ADD
 		/obj/item/bodypart/taur/noodle, // OV ADD
 	)
+	*/
 	///Caustic edit end
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
@@ -96,6 +97,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver/construct,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/construct,
 		)
+	/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -174,7 +176,7 @@
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
 		//Caustic edit end
-	)
+	)*/
 
 	restricted_virtues = list(/datum/virtue/utility/hollow) //OV Edit - removed nobility restriction
 

@@ -21,7 +21,7 @@
 		LIPS,
 		HAIR,
 	)
-	///Caustic edit
+		/*  OV edit- these are defined on the base type in a modular file
 	allowed_taur_types = list(
 		/obj/item/bodypart/taur/otie,
 		/obj/item/bodypart/taur/wolf,
@@ -32,6 +32,7 @@
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
 	)
+	*/
 	///Caustic edit end
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	use_skintones = TRUE
@@ -79,6 +80,7 @@
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
+		/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -132,6 +134,7 @@
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
 	)
+	*/
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
 		/datum/descriptor_choice/stature,

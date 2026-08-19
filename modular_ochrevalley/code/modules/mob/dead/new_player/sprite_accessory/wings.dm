@@ -3,6 +3,13 @@
 	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/wings/moth_wings.dmi'
 	icon_state = "monarch_color"
 
+/datum/sprite_accessory/wings/moth/cloak
+	name = "Cloaking with Eyes (colorable)"
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/wings/moth_wings.dmi'
+	icon_state = "cloakmoth"
+	color_keys = 3
+	color_key_names = list("Wings","Eyes", "Inner")
+
 /datum/sprite_accessory/wings/ochre/
 	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/wings/wings.dmi'
 

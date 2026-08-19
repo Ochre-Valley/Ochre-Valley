@@ -100,6 +100,14 @@
 		/datum/language/common,
 		/datum/language/orcish
 	)
+	//ov edit start
+	allowed_taur_types = list(
+	)
+	body_marking_sets = list(
+	)
+	body_markings = list(
+	)
+	//ov edit end
 	stress_examine = TRUE
 	stress_desc = span_red("Horrid little goblin...")
 	descriptor_choices = list(

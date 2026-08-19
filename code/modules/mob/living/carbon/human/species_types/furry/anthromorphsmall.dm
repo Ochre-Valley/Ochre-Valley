@@ -64,6 +64,7 @@
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
+	/*  OV edit- these are defined on the base type in a modular file
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
@@ -90,6 +91,7 @@
 		/datum/customizer/organ/butt/animal,
 		//Caustic edit end
 		)
+		*/
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 	)

@@ -48,3 +48,39 @@
 	name = "Raptor Beak, Large"
 	color_keys = 1
 	color_key_names = list("Beak")
+
+/datum/sprite_accessory/snout/ochre/sharp
+	icon_state = "sharpsnout"
+	name = "Sharp Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
+
+/datum/sprite_accessory/snout/ochre/longsharp
+	icon_state = "longsharpsnout"
+	name = "Long Sharp Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
+
+/datum/sprite_accessory/snout/ochre/longestsharp
+	icon_state = "longersharpsnout"
+	name = "Longer Sharp Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
+
+/datum/sprite_accessory/snout/ochre/thin
+	icon_state = "thinsnout"
+	name = "Thin Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
+
+/datum/sprite_accessory/snout/ochre/longthin
+	icon_state = "longthinsnout"
+	name = "Long Thin Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
+
+/datum/sprite_accessory/snout/ochre/longestthin
+	icon_state = "longerthinsnout"
+	name = "Longer Thin Snout, Dual-Color"
+	color_keys = 2
+	color_key_names = list("Snout","Underside")
