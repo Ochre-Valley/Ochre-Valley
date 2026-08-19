@@ -169,3 +169,20 @@
 	T.take_damage(bonus_damage, BRUTE, d_type, 1)
 	to_chat(user, span_warning("Your blow expertly caves into [T]! (+[bonus_damage])"))
 	return TRUE
+
+/obj/item/rogueweapon/contraption/linker/mace/proc/demolish_obj(obj/O, mob/living/user)
+	if(QDELETED(O))
+		return FALSE
+
+	if(isnull(O.max_integrity))
+		return FALSE
+
+	if(O.max_integrity > 3000)
+		to_chat(user, "Too hard, sire!")
+		return FALSE
+
+	var/bonus_damage = round(O.max_integrity * demomod)
+
+	O.take_damage(bonus_damage, BRUTE, d_type, 1)
+	to_chat(user, span_warning("Your blow expertly caves into [O]! (+[bonus_damage])"))
+	return TRUE
