@@ -74,7 +74,7 @@
 				l_hand = /obj/item/powderflask
 			if("Rifle")
 				beltl = /obj/item/quiver/bulletpouch/iron
-				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
+				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
 				l_hand = /obj/item/powderflask
 			if("Crossbow")
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
