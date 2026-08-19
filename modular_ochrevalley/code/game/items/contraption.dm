@@ -1,7 +1,9 @@
 /obj/item/rogueweapon/contraption/linker/mace
+	var/demomod = 0.05 //amount of a structure destroyed with a single hit
 	special = /datum/special_intent/dissassemble
 
 /datum/intent/mace/demolish/lesser //defined downstream as I remove demolish from wrenches upstream.
+	desc = "A deliberate structure-breaking blow. Deals bonus damage equal to a percentage of a target structure's maximum integrity."
 	demolition_mod = 2.5
 
 /obj/item/rogueweapon/contraption/linker/mace/big
@@ -162,7 +164,7 @@
 		to_chat(user, "Too hard, sire!")
 		return FALSE
 
-	var/bonus_damage = round(T.max_integrity * 0.15)
+	var/bonus_damage = round(T.max_integrity * demomod)
 
 	T.take_damage(bonus_damage, BRUTE, d_type, 1)
 	to_chat(user, span_warning("Your blow expertly caves into [T]! (+[bonus_damage])"))

@@ -70,7 +70,7 @@
 		switch(gadget_choice)
 			if("Pistol")
 				beltl = /obj/item/quiver/bulletpouch/iron
-				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 				l_hand = /obj/item/powderflask
 			if("Rifle")
 				beltl = /obj/item/quiver/bulletpouch/iron
@@ -129,6 +129,7 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	belt = /obj/item/storage/belt/rogue/leather
+	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
