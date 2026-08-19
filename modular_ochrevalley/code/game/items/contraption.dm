@@ -122,10 +122,10 @@
 				if(!vulnerable)
 					userstrength = min(5, userstrength / 2)
 				var/attemptforce = realdamage * min(userstrength, 10)
-				if(prob(bodypart.dismemberment_chance_from_force(attemptforce)))
+				if(prob(bodypart.dismemberment_chance_from_force(attemptforce))) //checks chance to dismember.
 					if(istype(bodypart, /obj/item/bodypart/head) || istype(bodypart, /obj/item/bodypart/chest)) //we don't decap or disembowel.
 						apply_generic_weapon_damage(H, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE) //instead, just do another damage proc
-					else if(bodypart.dismember(BRUTE, BCLASS_TWIST, howner, damage = attemptforce))
+					else if(bodypart.dismember(BRUTE, BCLASS_TWIST, howner, damage = attemptforce))//armor is checked in this proc. if there's armor, we don't get the dismember. this can, however, deal particularly nasty damage to armor with poor blunt protection
 						if(robottarget)
 							playsound(howner.loc, 'sound/items/beartrap2.ogg', 100, FALSE)
 						else
