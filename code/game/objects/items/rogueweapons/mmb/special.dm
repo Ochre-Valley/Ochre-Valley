@@ -20,7 +20,6 @@
 			return
 	if(user.has_status_effect(/datum/status_effect/debuff/specialcd))
 		return
-
 	user.face_atom(target)
 
 	var/obj/item/rogueweapon/W = user.get_active_held_item()
@@ -30,6 +29,13 @@
 	if(istype(W, /obj/item/rogueweapon) && W.special)
 		active_special = W.special
 		skillreq = W.associated_skill
+		//ovedit start, martial arts mechanics
+		if(istype(W, /obj/item/rogueweapon))
+			var/obj/item/rogueweapon/abstractweapon/martialart/fist = W
+			if(fist.specialtier < fist.tier)
+				to_chat(user, span_info("I'm not using this art at a high enough level to employ this technique."))
+				return
+		//ovedit end
 	else if(!W && ishuman(user))
 		var/mob/living/carbon/human/HU = user
 		if(HU.unarmed_special)

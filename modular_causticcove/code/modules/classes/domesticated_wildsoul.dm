@@ -69,6 +69,21 @@
 		if(helmchoice != "None")
 			mask = hoods[hoodchoice]
 
+			//ovedit- martial arts added to wrasslin' techniques
+		var/techniques = list("Boxing - Martial Art", "Hollow Hands - Martial Art", "Lynx Claws - Martial Art", "Direbear Claws - Martial art") // cool wrestling moves
+		var/technique_choice = input(H,"Choose your martial art.", "SHARPEN YOUR CLAWS.") as anything in techniques
+		switch(technique_choice)
+			if("Boxing - Martial Art")
+				H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+			if("Hollow Hands - Martial Art")
+				H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/karate)
+			if("Lynx Claws - Martial Art")
+				H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/claws)
+			if("Direbear Claws - Martial art")
+				H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/bigclaws)
+		//ovedit end
+
+
 /datum/outfit/job/roguetown/warden/wildsoul/proc/give_feral_eyes(mob/living/carbon/human/man)
 	var/obj/item/organ/eyes/eyes = man.getorganslot(ORGAN_SLOT_EYES)
 	var/color_one

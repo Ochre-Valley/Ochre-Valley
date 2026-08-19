@@ -85,6 +85,20 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/dense //OV EDIT
 	give_feral_eyes(H)
 
+	//ovedit- martial arts added
+	var/techniques = list("Boxing - Martial Art", "Hollow Hands - Martial Art", "Lynx Claws - Martial Art", "Direbear Claws - Martial art") // cool wrestling moves
+	var/technique_choice = input(H,"Choose your martial art.", "SHARPEN YOUR CLAWS.") as anything in techniques
+	switch(technique_choice)
+		if("Boxing - Martial Art")
+			H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+		if("Hollow Hands - Martial Art")
+			H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/karate)
+		if("Lynx Claws - Martial Art")
+			H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/claws)
+		if("Direbear Claws - Martial art")
+			H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/bigclaws)
+		//ovedit end
+
 /datum/advclass/wildsoul/mantid
 	name = "Soul of the Mantid"
 	tutorial = "To fight head on never was your style. You prefer the subtle options; to be hidden, quiet, and strike at the opportune moment. But be wary, as that lack of brute strength and thick armor means you can't cut yourself out of an aspiring hunter's net so easily."

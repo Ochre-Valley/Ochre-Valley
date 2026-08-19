@@ -314,7 +314,20 @@
 			gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
 			armor = /obj/item/clothing/suit/roguetown/armor/manual/resting/barbarian //gambeson.
 			shirt = /obj/item/clothing/suit/roguetown/armor/manual/resting/barbarian/chest //a leather armor, this one chest-only. The skin armor options start better protected, but cannot upgrade. A basic gamby + leather armor will match them, and heavy gamby + light brig will eclipse them significantly.
-		if ("Discipline - Bodybuilder") //its actually not that bad now. Better starting protection than the bronze sword option, but cannot upgrade to brigandine.
+			//ovedit- martial arts added to wrasslin' techniques
+			var/techniques = list("Boxing - Martial Art", "Hollow Hands - Martial Art", "Lynx Claws - Martial Art", "Direbear Claws - Martial art") // cool wrestling moves
+			var/technique_choice = input(H,"Choose your martial art.", "PUNCH THEM.") as anything in techniques
+			switch(technique_choice)
+				if("Boxing - Martial Art")
+					H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+				if("Hollow Hands - Martial Art")
+					H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/karate)
+				if("Lynx Claws - Martial Art")
+					H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/claws)
+				if("Direbear Claws - Martial art")
+					H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/bigclaws)
+				//ovedit end
+		if("Discipline - Bodybuilder") //its really not that good
 			H.adjust_skillrank_up_to(/datum/skill.combat/swords, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			armor = /obj/item/clothing/suit/roguetown/armor/manual/pushups/barbarian //a leather armor.
 			shirt = /obj/item/clothing/suit/roguetown/armor/manual/resting/barbarian/chest //chest-only leather armor.
