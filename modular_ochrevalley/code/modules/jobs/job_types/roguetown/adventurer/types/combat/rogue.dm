@@ -56,7 +56,7 @@
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/blacksmithing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/engineering = SKILL_LEVEL_EXPERT,
-		/datum/skill/craft/smelting = SKILL_LEVEL_JOURNEYMAN
+		/datum/skill/craft/smelting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE
 	)
 	extra_context = "Chooses between a Pistol, a Rifle, a Grappler, a Clockwork Drill, Voltic Gauntlets, or Bronze Limbs. May have a big wrench, or a small wrench."
