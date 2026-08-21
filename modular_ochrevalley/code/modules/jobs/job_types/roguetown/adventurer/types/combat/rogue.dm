@@ -30,13 +30,13 @@
 	tutorial = "In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."
 	outfit = /datum/outfit/job/roguetown/adventurer/tinkerer
 	cmode_music = 'sound/music/combat_dungeoneer.ogg'
-	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT)
+	traits_applied = list(TRAIT_SEEPRICES, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 3,
 		STATKEY_PER = 2,
 		STATKEY_SPD = 1,
 	)
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 4, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE)
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 3, "locked_aspects" = list(/datum/magic_aspect/artifice))
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
