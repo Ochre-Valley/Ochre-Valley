@@ -116,7 +116,7 @@
 					var/obj/item/bodypart/l_leg/prosthetic/bronzeleft/leftbleg = new()
 					leftbleg.attach_limb(H)
 		var/wrenches = list("Compact Wrench", "Massive Wrench")
-		var/wrench_choice = input(H, "Choose your tool.", "TINKERER'S PRIDE") as anything in wrenches
+		var/wrench_choice = input(H, "Choose your tool!", "TINKERER'S PRIDE") as anything in wrenches
 		switch(wrench_choice)
 			if("Compact Wrench")
 				beltr = /obj/item/rogueweapon/contraption/linker/mace/preloaded
