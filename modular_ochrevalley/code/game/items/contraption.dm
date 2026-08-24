@@ -7,10 +7,6 @@
 	desc = "A deliberate structure-breaking blow. Deals bonus damage equal to a percentage of a target structure's maximum integrity."
 	demolition_mod = 2.5
 
-/obj/item/rogueweapon/contraption/linker/mace/big
-	gripped_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/strike/dislocate, /datum/intent/mace/demolish/lesser)
-
-
 /obj/item/rogueweapon/contraption/linker/mace/preloaded
 	current_charge = 80
 
