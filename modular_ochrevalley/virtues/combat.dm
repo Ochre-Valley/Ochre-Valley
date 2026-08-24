@@ -4,6 +4,7 @@
 	custom_text = "+1 to Firearms, Up to Legendary, Minimum Apprentice"
 	added_stashed_items = list(
 		"Arquebus Bullet Pouch" = /obj/item/quiver/bulletpouch/iron
+		"Powder Flask" = /obj/item/powderflask
 	)
 
 /datum/virtue/combat/musketeer/apply_to_human(mob/living/carbon/human/recipient)
