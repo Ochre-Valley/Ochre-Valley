@@ -1,6 +1,7 @@
 /obj/item/rogueweapon/contraption/linker/mace
 	var/demomod = 0.05 //amount of a structure destroyed with a single hit
 	special = /datum/special_intent/dissassemble
+	associated_skill = /datum/skill/combat/maces
 
 /datum/intent/mace/demolish/lesser //defined downstream as I remove demolish from wrenches upstream.
 	desc = "A deliberate structure-breaking blow. Deals bonus damage equal to a percentage of a target structure's maximum integrity."
