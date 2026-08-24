@@ -20,12 +20,12 @@
 	post_icon_state = "aimwarn"
 	pre_icon_state = "trap"
 	respect_adjacency = TRUE
-	delay = 0.4 SECONDS //not a long delay, but perhaps too long. This can be countered easily by kicking the attacker
+	delay = 0.6 SECONDS //not a long delay, but perhaps too long. This can be countered easily by kicking the attacker
 	cooldown = 30 SECONDS
 	stamcost = 25
 	custom_skill = /datum/skill/craft/engineering
 	var/dam = 10 //applies this, and then this again, multiplied by five, through armor.
-	var/wrenchdelay = 1 SECONDS
+	var/wrenchdelay = 1.2 SECONDS
 
 /datum/special_intent/dissassemble/apply_hit(turf/T)
 	var/list/targets = list()
