@@ -4,7 +4,7 @@
 		TAG_COMBAT,
 		TAG_VILLIAN,
 	)
-	roundstart = TRUE
+	roundstart = FALSE // OV Edit - disabled.
 	antag_flag = ROLE_PREBEL
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
