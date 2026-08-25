@@ -28,7 +28,9 @@ const GITHUB_ACTION = process.env.GITHUB_ACTION;
 // Helpers
 const reportError = (file: string, message: string) => {
   if (GITHUB_ACTION) {
-    console.error(`::error file=${file},title=OV Edit Check::${message}`);
+    console.log(
+      `::error file=${file},title=OV Edit Check::${file}: ${message}`,
+    );
   } else {
     console.log(util.styleText('red', `${file}: Error: ${message}`));
   }
@@ -36,7 +38,9 @@ const reportError = (file: string, message: string) => {
 
 const reportWarning = (file: string, message: string) => {
   if (GITHUB_ACTION) {
-    console.error(`::warning file=${file},title=OV Edit Check::${message}`);
+    console.log(
+      `::warning file=${file},title=OV Edit Check::${file}: ${message}`,
+    );
   } else {
     console.log(util.styleText('yellow', `${file}: Warning: ${message}`));
   }
@@ -44,7 +48,9 @@ const reportWarning = (file: string, message: string) => {
 
 const reportNotice = (file: string, message: string) => {
   if (GITHUB_ACTION) {
-    console.error(`::notice file=${file},title=OV Edit Check::${message}`);
+    console.log(
+      `::notice file=${file},title=OV Edit Check::${file}: ${message}`,
+    );
   } else {
     console.log(util.styleText('blue', `${file}: Notice: ${message}`));
   }
@@ -66,12 +72,12 @@ if (!CHANGED_FILES) {
   );
 
   const diff = runGitCommand('diff', '--name-only', BASE_BRANCH);
-  CHANGED_FILES = diff.stdout;
+  CHANGED_FILES = diff.stdout.replaceAll(/(\r\n|\n)/, ' ');
 }
 
 // I tried so hard and got so far
 // But in the end, it doesn't even matter
-if (!CHANGED_FILES.includes('\n')) {
+if (!CHANGED_FILES.match(/\s/)) {
   reportError(
     SELF_NAME,
     'No changed files could be detected even with fallback, linter cannot run.',
@@ -121,7 +127,7 @@ const checkFile = async (path: string): Promise<CheckFileResult> => {
 
 // Main loop
 const main = async () => {
-  const filesChanged = CHANGED_FILES.split('\n');
+  const filesChanged = CHANGED_FILES.split(/\s/);
 
   reportNotice(SELF_NAME, `${filesChanged.length} files to check`);
   // The weird code with GITHUB_ACTION beyond here is just making it so that in github actions we get

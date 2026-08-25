@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 0 }}
 
       - name: Setup cache
         uses: actions/cache@v4
@@ -57,17 +59,11 @@ jobs:
       # OV Edit Start: Needed for ov-lint
       - name: Modified files
         run: |
-          case '${{ github.event_name }}' in
-            push)
-              BASE_COMMIT='${{ github.event.commits[0].id }}'
-              HEAD_COMMIT='${{ github.event.commits[-1].id }}'
-              ;;
-            pull_request)
-              BASE_COMMIT='${{ github.event.base_ref }}'
-              HEAD_COMMIT='${{ github.event.head_ref }}'
-              ;;
-          esac
-          CHANGED_FILES=$(git diff --name-only --diff-filter=d "${firstCommit}~1" "${lastCommit}")
+          if ${{ github.event_name == 'pull_request' }}; then
+              echo "CHANGED_FILES=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_ENV
+          else
+              echo "CHANGED_FILES=$(git diff --name-only -r ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_ENV
+          fi
       # OV Edit End
 
       - name: Give Linters A Go
@@ -128,3 +124,9 @@ jobs:
       - name: Run TGUI Checks
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: tools/build/build.sh --ci lint tgui-test
+
+      # OV Add: Run OV Lints separately
+      - name: Run OV Lints
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: tools/build/build.sh --ci ov-lint
+      # OV Add End

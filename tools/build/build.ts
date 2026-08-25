@@ -233,15 +233,11 @@ export const TestTarget = new Juke.Target({
   dependsOn: [DmTestTarget, TguiTestTarget],
 });
 
-// OV Edit Start: Add OV specific lints
-export * from './ov.js';
-
-import { OvLintTarget } from './ov.js';
+export * from './ov.js'; // // OV Add: OV Specific Lints
 
 export const LintTarget = new Juke.Target({
-  dependsOn: [TguiLintTarget, OvLintTarget],
+  dependsOn: [TguiLintTarget],
 });
-// OV Edit End
 
 export const BuildTarget = new Juke.Target({
   dependsOn: [TguiTarget, TgFontTarget, DmTarget],
