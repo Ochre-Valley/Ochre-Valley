@@ -20,12 +20,12 @@
 	post_icon_state = "aimwarn"
 	pre_icon_state = "trap"
 	respect_adjacency = TRUE
-	delay = 0.6 SECONDS //not a long delay, but perhaps too long. This can be countered easily by kicking the attacker
-	cooldown = 30 SECONDS
+	delay = 0.5 SECONDS //not a long delay, but perhaps too long. This can be countered easily by kicking the attacker
+	cooldown = 20 SECONDS
 	stamcost = 25
 	custom_skill = /datum/skill/craft/engineering
-	var/dam = 10 //applies this, and then this again, multiplied by five, through armor.
-	var/wrenchdelay = 1.2 SECONDS
+	var/dam = 10
+	var/wrenchdelay = 1 SECONDS
 
 /datum/special_intent/dissassemble/apply_hit(turf/T)
 	var/list/targets = list()
@@ -60,7 +60,7 @@
 	if(finaltarget)
 		if(finaltarget.has_status_effect(/datum/status_effect/debuff/exposed) || finaltarget.has_status_effect(/datum/status_effect/debuff/vulnerable))
 			vulnerableto = TRUE
-		apply_generic_weapon_damage(finaltarget, dam, "blunt", target_zone, bclass = BCLASS_TWIST, no_pen = TRUE)
+		apply_generic_weapon_damage(finaltarget, dam, "blunt", target_zone, bclass = BCLASS_TWIST)
 		playsound(finaltarget.loc, 'sound/items/bsmithfail.ogg', 100, TRUE)
 		howner.Immobilize(wrenchdelay)
 		finaltarget.Immobilize(wrenchdelay)
@@ -105,7 +105,7 @@
 		realdamage = get_complex_damage(I, howner)
 	if(ishuman(target))
 		var/mob/living/carbon/H = target
-		apply_generic_weapon_damage(H, realdamage * 2, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE)//simple, really. this is all that's applied
+		apply_generic_weapon_damage(H, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE)//simple, really. this is all that's applied
 		var/obj/item/bodypart/bodypart = H.get_bodypart(target_zone)
 		if(bodypart && !QDELETED(bodypart))
 			if(bodypart.status == BODYPART_ROBOTIC || HAS_TRAIT(target, TRAIT_IRONMAN))
