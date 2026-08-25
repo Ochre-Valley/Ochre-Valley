@@ -54,6 +54,22 @@ jobs:
           bash tools/ci/install_ripgrep.sh
           tools/bootstrap/python -c ''
 
+      # OV Edit Start: Needed for ov-lint
+      - name: Modified files
+        run: |
+          case '${{ github.event_name }}' in
+            push)
+              BASE_COMMIT='${{ github.event.commits[0].id }}'
+              HEAD_COMMIT='${{ github.event.commits[-1].id }}'
+              ;;
+            pull_request)
+              BASE_COMMIT='${{ github.event.base_ref }}'
+              HEAD_COMMIT='${{ github.event.head_ref }}'
+              ;;
+          esac
+          CHANGED_FILES=$(git diff --name-only --diff-filter=d "${firstCommit}~1" "${lastCommit}")
+      # OV Edit End
+
       - name: Give Linters A Go
         id: linter-setup
         run: ":"
