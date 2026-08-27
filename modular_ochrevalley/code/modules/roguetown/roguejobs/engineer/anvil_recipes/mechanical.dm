@@ -1,5 +1,5 @@
 // OV File
-/*
+
 // Obsolete anvil recipes. See modular_ochrevalley/code/modules/roguetown/roguecrafting/engineering.dm
 /datum/anvil_recipe/engineering/arquebus
 	name = "Arquebus (+1 bronze, +2 cog, +1 wood)"
@@ -14,4 +14,4 @@
     additional_items = list(/obj/item/ingot/bronze, /obj/item/roguegear, /obj/item/grown/log/tree/small)
     created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
     craftdiff = 5
-*/
+

@@ -1,5 +1,6 @@
 // OV File
 
+/* Disabled for the time being, reverting to old crafting
 /datum/crafting_recipe/roguetown/engineering/arquebus
 	name = "arquebus rifle"
 	category = "Weapons"
@@ -29,3 +30,4 @@
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
 	craftdiff = 6 // whereas pistols could easily become a pipe bomb if you didn't know what you were doing.
+*/
