@@ -179,7 +179,7 @@
 			var/color_to_use = human.voice_color
 			if(human.voicecolor_override)
 				color_to_use = human.voicecolor_override
-			styled_name = "<span style='color:#[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emote_display_name]</b></span>" //OV Edit
+			styled_name = "<span style='color:[color_to_use];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>[emote_display_name]</b></span>" //OV Edit
 		else
 			styled_name = "<b>[emote_display_name]</b>" //OV Edit
 		// If the message contains $n, substitute it with the name instead of prepending
@@ -188,13 +188,6 @@
 			pre_color_msg = trim(replacetext(pre_color_msg, "$n", "[emote_display_name]")) //OV Edit
 		else
 			msg = "[styled_name] [msg]"
-		msg = "<span class='game-emote'>[msg]</span>"
-		for(var/mob/M in GLOB.dead_mob_list)
-			if(!M.client || isnewplayer(M))
-				continue
-			var/T = get_turf(emotelocation)
-			if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
-				M.show_message(msg)
 		var/runechat_msg_to_use = null
 		if(show_runechat)
 			runechat_msg_to_use = runechat_msg ? runechat_msg : pre_color_msg

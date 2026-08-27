@@ -44,13 +44,6 @@
 	else
 		message = "[styled_name] " + message
 	// OV Edit End
-/*
-	for(var/mob/M in GLOB.dead_mob_list)
-		if(!M.client || isnewplayer(M))
-			continue
-		var/T = get_turf(user)
-		if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
-			M.show_message(message)*/
 	user.do_subtle_emote(message)
 
 /mob/proc/do_subtle_emote(message)

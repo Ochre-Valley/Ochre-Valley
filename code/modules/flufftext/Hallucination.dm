@@ -239,6 +239,103 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 	qdel(src)
 
+/*/datum/hallucination/items_other
+
+/datum/hallucination/items_other/New(mob/living/carbon/C, forced = TRUE, item_type)
+	set waitfor = FALSE
+	..()
+	var/item
+	if(!item_type)
+		item = pick(list("esword","taser","ebow","baton","dual_esword","clockspear","ttv","flash","armblade"))
+	else
+		item = item_type
+	feedback_details += "Item: [item]"
+	var/side
+	var/image_file
+	var/image/A = null
+	var/list/mob_pool = list()
+
+	for(var/mob/living/carbon/human/M in view(7,target))
+		if(M != target)
+			mob_pool += M
+	if(!mob_pool.len)
+		return
+
+	var/mob/living/carbon/human/H = pick(mob_pool)
+	feedback_details += " Mob: [H.real_name]"
+
+	var/free_hand = H.get_empty_held_index_for_side(LEFT_HANDS)
+	if(free_hand)
+		side = "left"
+	else
+		free_hand = H.get_empty_held_index_for_side(RIGHT_HANDS)
+		if(free_hand)
+			side = "right"
+
+	if(side)
+		switch(item)
+			if("esword")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+				A = image(image_file,H,"swordred", layer=ABOVE_MOB_LAYER)
+			if("dual_esword")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+				A = image(image_file,H,"dualsabrered1", layer=ABOVE_MOB_LAYER)
+			if("taser")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+				A = image(image_file,H,"advtaserstun4", layer=ABOVE_MOB_LAYER)
+			if("ebow")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+				A = image(image_file,H,"crossbow", layer=ABOVE_MOB_LAYER)
+			if("baton")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
+				target.playsound_local(H, "sparks",75,1,-1)
+				A = image(image_file,H,"baton", layer=ABOVE_MOB_LAYER)
+			if("ttv")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/bombs_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/bombs_lefthand.dmi'
+				A = image(image_file,H,"ttv", layer=ABOVE_MOB_LAYER)
+			if("flash")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
+				A = image(image_file,H,"flashtool", layer=ABOVE_MOB_LAYER)
+			if("armblade")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',30,1)
+				A = image(image_file,H,"arm_blade", layer=ABOVE_MOB_LAYER)
+		if(target.client)
+			target.client.images |= A
+			sleep(rand(150,250))
+			if(item == "esword" || item == "dual_esword")
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+			if(item == "armblade")
+				target.playsound_local(H, 'sound/blank.ogg',30,1)
+			target.client.images.Remove(A)
+	qdel(src)
+*/
 /datum/hallucination/delusion
 	var/list/image/delusions = list()
 
@@ -442,13 +539,12 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			sleep(30)
 			target.client.images.Remove(speech_overlay)
 		var/spans = list(person.speech_span)
-		if(target.client?.prefs)
-			if(target.client?.prefs.chat_on_map)
-				sleep(rand(8,15))
-				to_chat(target, message)
-				target.create_chat_message(person, understood_language, chosen, spans, 0)
-				spawn(1)
-					target.playsound_local(get_turf(person), 'sound/misc/talk.ogg', 100, FALSE, -1)
+		if(target.client)
+			sleep(rand(8,15))
+			to_chat(target, message)
+			target.create_chat_message(person, understood_language, chosen, spans, 0)
+			spawn(1)
+				target.playsound_local(get_turf(person), 'sound/misc/talk.ogg', 100, FALSE, -1)
 	if(!person)
 		//If we can't find anyone nearby, reduce the next hallucination tick to 10-30 seconds.
 		target.next_hallucination = world.time + rand(100, 300)

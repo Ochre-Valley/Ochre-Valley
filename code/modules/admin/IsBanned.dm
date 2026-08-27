@@ -56,18 +56,6 @@ GLOBAL_VAR(last_connection)
 				return list("reason"="trialexpire", "desc" = "\nBecome whitelisted to continue playing here! discord.gg/6UzZQYqVHT")
 #endif
 */
-/*	//Blacklist
-	if(!real_bans_only && !C && CONFIG_GET(flag/useblacklist))
-		if(check_blacklist(ckey))
-			if (admin)
-				log_admin("The admin [key] has been allowed to bypass the blacklist")
-				if (message)
-					message_admins(span_adminnotice("The admin [key] has been allowed to bypass the blacklist"))
-					addclientmessage(ckey,span_adminnotice("I have been allowed to bypass the blacklist"))
-			else
-				log_access("Failed Login: [key] - Blacklisted")
-				return list("reason"="blacklist", "desc" = "\nSomething went wrong. Contact the Game Master.")
-*/
 	//OV Edit: Whitelist checking
 	if(!amia_whitelistcheck(ckey))
 		log_access("Failed Login: [key] - Not whitelisted and on the discord.")
@@ -261,7 +249,7 @@ GLOBAL_VAR(last_connection)
 		. = list("reason" = "Stickyban", "desc" = desc)
 		log_access("Failed Login: [key] [computer_id] [address] - StickyBanned [ban["message"]] Target Username: [bannedckey] Placed by [ban["admin"]]")
 
-	
+
 
 	if(!.)
 		GLOB.last_connection = world.time
@@ -282,14 +270,6 @@ GLOBAL_VAR(last_connection)
 	if (GLOB.stickbanadminexemptiontimerid)
 		deltimer(GLOB.stickbanadminexemptiontimerid)
 	GLOB.stickbanadminexemptiontimerid = null
-
-/client/proc/is_new_player()
-#ifdef ALLOWPLAY
-	return FALSE
-#endif
-#ifdef TESTSERVER
-	return FALSE
-#endif
 
 #undef STICKYBAN_MAX_MATCHES
 #undef STICKYBAN_MAX_EXISTING_USER_MATCHES
