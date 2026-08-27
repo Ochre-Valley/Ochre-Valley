@@ -319,4 +319,14 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	taur_icon_state = "satyr_s"
 
 	has_taur_color = TRUE
+
+/obj/item/bodypart/taur/saiga
+	name = "Saiga Taur Body"
+
+	offset_x = -16
+	taur_clothing_category = "e" //OV ADD
+	taur_icon_state = "saiga_s"
+
+	has_taur_color = TRUE
+
 //OV edit end
