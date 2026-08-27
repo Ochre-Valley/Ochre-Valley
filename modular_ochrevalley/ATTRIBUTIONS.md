@@ -60,3 +60,7 @@ Folder: modular_ochrevalley\icons\roguetown\clothing\onmob\taur_clothing.dmi
 Title: taur_clothing.dmi
 Creator / Copyright: Toriate, Created for Ratwood, Ported Per Original Commissioner Roguenoob
 License: CC BY-SA 3.0
+
+Folder: modular_ochrevalley\icons\roguetown\clothing\onmob\taur_clothing.dmi
+Title: taur_clothing.dmi
+added more assets to taur clothing made by dongwaiver! Commissioner ButteryToast
