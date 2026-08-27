@@ -38,7 +38,7 @@
 	chair_skill_level = 2
 	current_brew = 50
 
-/obj/structure/chair/frankenstein/Initialize()
+/obj/structure/chair/frankenstein/Initialize(mapload)
 	. = ..()
 	update_icon()
 
@@ -165,7 +165,7 @@
 	taste_description = "lightning and regret"
 
 /obj/item/reagent_containers/glass/bottle/frankenbrew
-	name = "vial of Reanimation Elixir"
+	name = "bottle of Reanimation Elixir"
 	desc = "A volatile chemical mixture that helps the deceased conduct electricity. Looks expensive..."
 	list_reagents = list(/datum/reagent/frankenbrew = 50)
 

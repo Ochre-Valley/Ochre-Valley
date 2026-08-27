@@ -1,0 +1,5 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - bugfix: "fixed removing Boatha armor deleting the armor still"
+  - bugfix: "Golden Jade Amulet item pathing"

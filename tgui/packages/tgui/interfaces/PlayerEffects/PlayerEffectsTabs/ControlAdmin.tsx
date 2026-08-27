@@ -34,6 +34,9 @@ export const ControlAdmin = (props) => {
       <Button fluid onClick={() => act('check_traits')}>
         Check Traits
       </Button>
+      <Button fluid onClick={() => act('far_travel')}>
+        Safely Far Travel
+      </Button>
     </Section>
   );
 };

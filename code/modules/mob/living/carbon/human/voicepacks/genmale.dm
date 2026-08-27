@@ -73,6 +73,8 @@
 					used = 'sound/vo/male/gen/HEY.ogg'
 			if("hic","hiccup") // OV Add
 				used = list('modular_ochrevalley/sounds/vo/vore/hiccups/hic.ogg','modular_ochrevalley/sounds/vo/vore/hiccups/hiccup.ogg') // OV Add
+			if("hackle") // OV Add
+				used = list('sound/vo/mobs/hyena/cackle.ogg') //OV ADD
 			if("hmm")
 				used = 'sound/vo/male/gen/hmm.ogg'
 			if("huh")

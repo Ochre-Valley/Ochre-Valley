@@ -6,7 +6,6 @@ import {
   Button,
   RestrictedInput,
   Section,
-  Slider,
   Stack,
 } from 'tgui-core/components';
 import { isEscape, KEY } from 'tgui-core/keys';
@@ -41,14 +40,12 @@ export function NumberInputModal(props) {
 
   const [value, setValue] = useState(init_value);
   const [isValid, setIsValid] = useState(true);
-  const hasSlider = Number.isFinite(min_value) && Number.isFinite(max_value);
 
   // Dynamically changes the window height based on the message.
   const windowHeight =
     190 +
     (message.length > 30 ? Math.ceil(message.length / 3) : 0) +
-    (message.length && large_buttons ? 5 : 0) +
-    (hasSlider ? 30 : 0);
+    (message.length && large_buttons ? 5 : 0);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === KEY.Enter && isValid) {
@@ -131,21 +128,6 @@ export function NumberInputModal(props) {
                 </Stack.Item>
               </Stack>
             </Stack.Item>
-            {hasSlider && (
-              <Stack.Item>
-                <Slider
-                  width="100%"
-                  minValue={min_value}
-                  maxValue={max_value}
-                  step={round_value ? 1 : 0.01}
-                  stepPixelSize={5}
-                  value={value}
-                  onChange={(e, value: number) =>
-                    setValue(round_value ? Math.round(value) : value)
-                  }
-                />
-              </Stack.Item>
-            )}
             <Stack.Item>
               <InputButtons input={value} disabled={!isValid} />
             </Stack.Item>

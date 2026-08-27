@@ -1,0 +1,4 @@
+author: "ShadowLarkens"
+delete-after: True
+changes:
+  - rscadd: "You can now dance with people and spin around! To dance, you must *passively* grab one of their hands and right click them. You also have to have the grab in your active hand, be cardinally adjacent (no diagonals), and neither of you can be in combat mode."

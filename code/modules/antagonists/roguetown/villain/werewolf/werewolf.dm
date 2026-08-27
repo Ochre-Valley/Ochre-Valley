@@ -84,7 +84,7 @@
 		M.verbs -= verb_path
 
 /proc/examine_span_details(title, content) // This feels dumb. Original define at 'modular_causticcove/__DEFINES/slop.dm', it's not loaded when 'code/modules/mob/living/carbon/human/examine.dm' is. -- Umbree.
-    return "<details><summary>[title]</summary>[content]</details>"
+	return "<details><summary>[title]</summary>[content]</details>"
 // OV EDIT END
 /datum/antagonist/werewolf/lesser
 	name = "Lesser Verewolf"
@@ -319,6 +319,6 @@
 /obj/item/rogueweapon/werewolf_claw/left
 	icon_state = "claw_l"
 
-/obj/item/rogueweapon/werewolf_claw/Initialize()
+/obj/item/rogueweapon/werewolf_claw/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NOEMBED, TRAIT_GENERIC)

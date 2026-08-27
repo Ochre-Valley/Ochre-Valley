@@ -47,7 +47,7 @@
 	/// Total triumph invested in this wave
 	var/triumph_total = 0
 	/// Threshold at which this wave is guaranteed to be next
-	var/triumph_threshold = 25
+	var/triumph_threshold = 5 //OV EDIT - Was 25, lowered to make it easier to forcespawn
 	/// Whether triumph contributions reset after wave spawns
 	var/reset_contributions_on_spawn = TRUE
 

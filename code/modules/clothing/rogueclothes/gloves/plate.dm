@@ -62,7 +62,7 @@
 	smeltresult = /obj/item/ingot/component/graggar
 	unenchantable = TRUE
 
-/obj/item/clothing/gloves/roguetown/plate/graggar/Initialize()
+/obj/item/clothing/gloves/roguetown/plate/graggar/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 
@@ -75,7 +75,7 @@
 	icon_state = "graggarplategloves_heavy"
 	smeltresult = /obj/item/ingot/component/graggar
 
-/*/obj/item/clothing/gloves/roguetown/plate/graggar/heavy/Initialize() //OV Edit Start - Armor Remove Maint
+/*/obj/item/clothing/gloves/roguetown/plate/graggar/heavy/Initialize(mapload) //OV Edit Start - Armor Remove Maint
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
 
@@ -93,7 +93,7 @@
 	smeltresult = /obj/item/ingot/component/matthios
 	unenchantable = TRUE
 
-/obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
+/obj/item/clothing/gloves/roguetown/plate/matthios/Initialize(mapload)
 	. = ..()
 	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Remove Maint
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
@@ -117,16 +117,16 @@
 	armor_class = ARMOR_CLASS_LIGHT
 	smeltresult = /obj/item/ingot/component/baotha
 
-/obj/item/clothing/gloves/roguetown/plate/baotha/Initialize()
+/obj/item/clothing/gloves/roguetown/plate/baotha/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_DEPRAVED, "GLOVES")
 	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV EDIT - Removable
 
-/obj/item/clothing/gloves/roguetown/plate/baotha/dropped(mob/living/carbon/human/user)
+/*/obj/item/clothing/gloves/roguetown/plate/baotha/dropped(mob/living/carbon/human/user) //OV EDIT - Armor Removal
 	. = ..()
 	if(QDELETED(src))
 		return
-	qdel(src)
+	qdel(src)*/
 
 /obj/item/clothing/gloves/roguetown/plate/baotha/get_examine_highlight_status()
 	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_BAOTHA_ARMOR)
@@ -143,7 +143,7 @@
 	smeltresult = /obj/item/ingot/component/zizo
 	unenchantable = TRUE
 
-/obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
+/obj/item/clothing/gloves/roguetown/plate/zizo/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 
@@ -160,7 +160,7 @@
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	smeltresult = /obj/item/ingot/component/zizo
 
-/obj/item/clothing/gloves/roguetown/plate/zizo/heavy/Initialize()
+/obj/item/clothing/gloves/roguetown/plate/zizo/heavy/Initialize(mapload)
 	. = ..()
 	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Remove Maint
 

@@ -29,15 +29,15 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Make Simple Animal"
 
 	if(!SSticker.HasRoundStarted())
-		alert("Wait until the game starts")
+		alert(src, "Wait until the game starts")
 		return
 
 	if(!M)
-		alert("That mob doesn't seem to exist, close the panel and try again.")
+		alert(src, "That mob doesn't seem to exist, close the panel and try again.")
 		return
 
 	if(isnewplayer(M))
-		alert("The mob must not be a new_player.")
+		alert(src, "The mob must not be a new_player.")
 		return
 
 	log_admin("[key_name(src)] has animalized [M.key].")
@@ -73,7 +73,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set desc = ""
 
 	if(M.ckey)
-		if(alert("This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.",,"Yes","No") != "Yes")
+		if(alert(src, "This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.",,"Yes","No") != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
@@ -213,7 +213,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Game Master"
 	set name = "Loadout Manager"
 	if(!(ishuman(M) || isobserver(M)))
-		alert("Invalid mob")
+		alert(src, "Invalid mob")
 		return
 
 	var/mob/living/carbon/human/H
@@ -338,7 +338,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 				GLOB.loadout_selected_advclasses[REF(H)] = only_choice
 				to_chat(usr, span_notice("Auto-selected advclass: [only_choice_name]"))
 			else
-				var/selected = input("Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
+				var/selected = input(usr, "Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
 				if(selected)
 					GLOB.loadout_selected_advclasses[REF(H)] = advclass_choices[selected]
 					to_chat(usr, span_notice("Advclass selected: [selected]"))
@@ -356,7 +356,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 					var/datum/advclass/AC = advclass_path
 					advclass_choices[initial(AC.name)] = advclass_path
 
-				var/selected = input("Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
+				var/selected = input(usr, "Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
 				if(selected)
 					GLOB.loadout_selected_advclasses[REF(H)] = advclass_choices[selected]
 					to_chat(usr, span_notice("Advclass selected: [selected]"))
@@ -378,14 +378,14 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		if("select_job")
 			var/list/job_list = build_loadout_job_list()
 			var/list/all_jobs = list("Search..." = "search") + sortList(job_list)
-			var/selected_title = input("Select job:", "Job Selection") as null|anything in all_jobs
+			var/selected_title = input(usr, "Select job:", "Job Selection") as null|anything in all_jobs
 			if(!selected_title)
 				show_loadout_panel(H)
 				return TRUE
 
 			var/job_type_path
 			if(all_jobs[selected_title] == "search")
-				var/search_term = input("Enter job name or search term:", "Job Search") as text|null
+				var/search_term = input(usr, "Enter job name or search term:", "Job Search") as text|null
 				if(!search_term)
 					show_loadout_panel(H)
 					return TRUE
@@ -393,7 +393,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 				// Filter by search term
 				var/list/matching_jobs = list()
 				for(var/job_title in job_list)
-					if(findtext(lowertext(job_title), lowertext(search_term)))
+					if(findtext(LOWER_TEXT(job_title), LOWER_TEXT(search_term)))
 						matching_jobs[job_title] = job_list[job_title]
 
 				if(!matching_jobs.len)
@@ -401,7 +401,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 					show_loadout_panel(H)
 					return TRUE
 
-				selected_title = input("Select job (found [matching_jobs.len] matches):", "Job Search Results") as null|anything in sortList(matching_jobs)
+				selected_title = input(usr, "Select job (found [matching_jobs.len] matches):", "Job Search Results") as null|anything in sortList(matching_jobs)
 				if(!selected_title)
 					show_loadout_panel(H)
 					return TRUE
@@ -441,7 +441,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 					show_loadout_panel(H)
 					return TRUE
 
-				var/selected = input("Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
+				var/selected = input(usr, "Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
 				if(selected)
 					GLOB.loadout_selected_advclasses[REF(H)] = advclass_choices[selected]
 					to_chat(usr, span_notice("Advclass selected: [selected]"))
@@ -463,7 +463,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 					var/datum/advclass/AC = advclass_path
 					advclass_choices[initial(AC.name)] = advclass_path
 
-				var/selected = input("Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
+				var/selected = input(usr, "Select advclass:", "Advclass Selection") as null|anything in sortList(advclass_choices)
 				if(selected)
 					GLOB.loadout_selected_advclasses[REF(H)] = advclass_choices[selected]
 				to_chat(usr, span_notice("Advclass selected: [selected]"))
@@ -596,14 +596,14 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 
 	var/list/baseoutfits = list("Naked","Custom", "As Roguetown Job...", "Search Jobs...")
 	var/list/outfits = list()
-	var/list/paths = subtypesof(/datum/outfit) - typesof(/datum/outfit/job)  - typesof(/datum/outfit/job/roguetown)
+	var/list/paths = subtypesof(/datum/outfit) - typesof(/datum/outfit/job)	- typesof(/datum/outfit/job/roguetown)
 
 	for(var/path in paths)
 		var/datum/outfit/O = path //not much to initalize here but whatever
 		if(initial(O.can_be_admin_equipped))
 			outfits[initial(O.name)] = path
 
-	var/dresscode = input("Select outfit", "Robust quick dress shop") as null|anything in baseoutfits + sortList(outfits)
+	var/dresscode = input(usr, "Select outfit", "Robust quick dress shop") as null|anything in baseoutfits + sortList(outfits)
 	if (isnull(dresscode))
 		return
 
@@ -614,13 +614,13 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		var/list/custom_names = list()
 		for(var/datum/outfit/D in GLOB.custom_outfits)
 			custom_names[D.name] = D
-		var/selected_name = input("Select outfit", "Robust quick dress shop") as null|anything in sortList(custom_names)
+		var/selected_name = input(usr, "Select outfit", "Robust quick dress shop") as null|anything in sortList(custom_names)
 		dresscode = custom_names[selected_name]
 		if(isnull(dresscode))
 			return
 
 	if (dresscode == "Search Jobs...")
-		var/search_term = input("Search for a job (enter keywords):", "Job Search") as text|null
+		var/search_term = input(usr, "Search for a job (enter keywords):", "Job Search") as text|null
 		if(!search_term)
 			return
 
@@ -630,7 +630,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		for(var/path in roguejob_paths)
 			var/datum/outfit/O = path
 			var/path_string = "[path]"
-			if(findtext(lowertext(path_string), lowertext(search_term)))
+			if(findtext(LOWER_TEXT(path_string), LOWER_TEXT(search_term)))
 				if(initial(O.can_be_admin_equipped))
 					matching_jobs["[path]"] = path
 
@@ -638,7 +638,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 			to_chat(usr, span_warning("No jobs found matching '[search_term]'."))
 			return
 
-		dresscode = input("Select job (found [matching_jobs.len] matches)", "Job Search Results") as null|anything in sortList(matching_jobs)
+		dresscode = input(usr, "Select job (found [matching_jobs.len] matches)", "Job Search Results") as null|anything in sortList(matching_jobs)
 		dresscode = matching_jobs[dresscode]
 		if(isnull(dresscode))
 			return
@@ -652,7 +652,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 			if(initial(O.can_be_admin_equipped))
 				roguejob_outfits["[path]"] = path
 
-		dresscode = input("Select job equipment", "Robust quick dress shop") as null|anything in sortList(roguejob_outfits)
+		dresscode = input(usr, "Select job equipment", "Robust quick dress shop") as null|anything in sortList(roguejob_outfits)
 		dresscode = roguejob_outfits[dresscode]
 		if(isnull(dresscode))
 			return
@@ -780,7 +780,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 
 	// Call after_spawn if job exists (latejoin=TRUE to skip spawn protection and ready-up bonuses)
 	if(job_datum && hascall(job_datum, "after_spawn"))
-		H.islatejoin = TRUE  // Mark as latejoin to prevent ready-up bonuses
+		H.islatejoin = TRUE	// Mark as latejoin to prevent ready-up bonuses
 		job_datum.announce_latejoin = FALSE
 		job_datum.hidden_job = TRUE
 		job_datum.show_in_credits = FALSE
@@ -1084,8 +1084,6 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		var/title = job_datum.title
 		if(job_datum.f_title && (H.titles_pref == TITLES_F))
 			title = job_datum.f_title
-		if(job_datum.n_title && (H.titles_pref == TITLES_N)) //OV Add: Gender Neutral Revamp
-			title = job_datum.n_title //OV Add: Gender Neutral Revamp
 
 		// Set the job
 		H.job = title
@@ -1183,7 +1181,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 		to_chat(usr, span_warning("No valid humanoid mobs found!"))
 		return
 
-	var/source_name = input("Select character to copy from:", "Copy From...") as null|anything in sortList(possible_sources)
+	var/source_name = input(usr,"Select character to copy from:", "Copy From...") as null|anything in sortList(possible_sources)
 	if(!source_name)
 		return
 
@@ -1194,12 +1192,12 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 
 	// Confirm what to copy
 	var/list/copy_options = list("Equipment Only", "Equipment + Skills", "Equipment + Skills + Stats", "Everything (Equipment + Skills + Stats + Traits)")
-	var/copy_choice = input("What should be copied?", "Copy Options") as null|anything in copy_options
+	var/copy_choice = input(usr, "What should be copied?", "Copy Options") as null|anything in copy_options
 	if(!copy_choice)
 		return
 
 	// Clear target's equipment first
-	if(alert("Clear target's current equipment?", "Confirm", "Yes", "No") == "Yes")
+	if(alert(src, "Clear target's current equipment?", "Confirm", "Yes", "No") == "Yes")
 		for(var/obj/item/I in target.get_equipped_items(TRUE))
 			qdel(I)
 
@@ -1342,7 +1340,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 	set name = "Debug Mob Lists"
 	set desc = ""
 
-	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs","Clients","Joined Clients"))
+	switch(input(usr, "Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs","Clients","Joined Clients"))
 		if("Players")
 			to_chat(usr, jointext(GLOB.player_list,","))
 		if("Admins")
@@ -1435,7 +1433,7 @@ GLOBAL_LIST_EMPTY(loadout_selected_advclasses)
 
 		names[name] = ruin_landmark
 
-	var/ruinname = input("Select ruin", "Jump to Ruin") as null|anything in sortList(names)
+	var/ruinname = input(usr, "Select ruin", "Jump to Ruin") as null|anything in sortList(names)
 
 
 	var/obj/effect/landmark/ruin/landmark = names[ruinname]

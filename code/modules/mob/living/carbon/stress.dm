@@ -188,7 +188,7 @@
 			random_stress_message()
 
 	if(new_stress >= 20)
-		if(!HAS_TRAIT(src, TRAIT_EORAN_CALM) && !HAS_TRAIT(src, TRAIT_EORAN_SERENE))
+		if(!HAS_TRAIT(src, TRAIT_EORAN_CALM) && !HAS_TRAIT(src, TRAIT_EORAN_SERENE) && !HAS_TRAIT(src, TRAIT_BAOTHAN_CALM))
 			roll_streak_freakout()
 	*/
 	//Caustic edit end

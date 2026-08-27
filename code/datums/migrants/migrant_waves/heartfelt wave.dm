@@ -11,7 +11,7 @@
 		/datum/migrant_role/heartfelt/knight = 1,
 		/datum/migrant_role/heartfelt/retinue = 4,
 	)
-	min_optional_fills = 2
+	min_optional_fills = 1 //OV EDIT - Was 2
 	greet_text = "You're the mighty Count of Heartfelt, the second most powerful lord of Azuria. Whether compelled by an invasion at the border, a sheer desire to sightsee and visit the Capital, or some political plot known only to you and your court, you have come to visit the capital of Azuria with a small, elite picked retinue."
 	greet_text_by_fill = list(
 		"5" = "You're the mighty Count of Heartfelt, the second most powerful lord of Azuria. Whether compelled by an invasion at the border, a sheer desire to sightsee and visit the Capital, or some political plot known only to you and your court, you have come to visit the capital of Azuria with a small, elite picked retinue.",

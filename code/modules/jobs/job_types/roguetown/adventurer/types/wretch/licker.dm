@@ -40,13 +40,13 @@
 		to_chat(H, span_danger("You are playing a soft-antagonist role: an outcast, an outlaw, or even possibly a heretic of your faith. You are unwanted by society and likely have a bounty others may try to collect. By choosing to spawn as a Wretch, you are expected to provide texture to the round and setting's story through your actions, friction with other narratives, or possibly outright conflict with other players. This role does not give you the go-ahead to attack others without proper escalation, to bypass server etiquette rules such as rushing PvE content or breaking into undefended areas, or cause major disruptions such as summoning skeletons in the town square. Failure to treat this with appropriate gravitas may result in administrative action. Play these roles to enhance the story for everyone, not to win for yourself.")) //OV Edit
 		//leaving the below in if people want to give lickers outlaw/bounty status again, this will keep it off the trader roles but combat roles will have to choose a bounty
 		/*var/list/traderjobs = list("Aristocrat",
-									"Scholar", 
-								   "Peddler", 
-								   "Jeweler", 
-								   "Harlequin", 
-								   "Doomsayer", 
-								   "Cuisiner", 
-								   "Brewer") 
+									"Scholar",
+									"Peddler",
+									"Jeweler",
+									"Harlequin",
+									"Doomsayer",
+									"Cuisiner",
+									"Brewer")
 		if(H.advjob in traderjobs)
 			REMOVE_TRAIT(H, TRAIT_OUTLAW, JOB_TRAIT) //removing since these are non-combat roles and they need to be able to use the stocks and miesters to blend in
 			to_chat(H, span_danger("You are playing an Antagonist role. By choosing to spawn as a Wretch, you are expected to actively create conflict with other players. Failing to play this role with the appropriate gravitas may result in punishment for Low Roleplay standards.")) //giving this notice, since its part of the bounty system

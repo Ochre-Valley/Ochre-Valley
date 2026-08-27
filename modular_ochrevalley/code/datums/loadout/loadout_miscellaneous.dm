@@ -9,6 +9,6 @@
     sort_category = "Misc"
 
 /datum/loadout_item/item_tf_chalk
-	name = "Consolidation Chalk"
-	path = /obj/item/item_tf_chalk
-	sort_category = "Misc"
+    name = "Consolidation Chalk"
+    path = /obj/item/item_tf_chalk
+    sort_category = "Misc"

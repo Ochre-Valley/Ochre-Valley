@@ -37,7 +37,6 @@
 	extra_choices = list(
 		SPARK_CHILLFOOD,
 		SPARK_CAMPFIRE,
-		SPARK_CLEANING,
 		SPARK_FETCH,
 		SPARK_REPEL,
 		SPARK_LIGHT,
@@ -53,7 +52,6 @@
 	choice_tooltips = list(
 		SPARK_CHILLFOOD = "Chill a piece of food with a touch of frost without affecting its quality, extending its freshness by a half of a dae (15 MINUTES OOC).",
 		SPARK_CAMPFIRE = "Creates a magical campfire to cook on. 3 tiles range. Lasts for 10 minutes.",
-		SPARK_CLEANING = "Unleash a wave of kinetic force that scours a nearby area clean of grime and debris.",
 		SPARK_FETCH = "Shoot out a magical bolt that draws in a freestanding item towards the caster. Doesn't work on living targets.",
 		SPARK_REPEL = "Shoot out a magical bolt that pushes away a freestanding item from the caster. Doesn't work on large or living targets. Instead of repelling a target, it will throw an object in your hand if cast while in throw mode.",
 		SPARK_LIGHT = "Summons a condensed orb of light.",
@@ -81,9 +79,6 @@
 			if(SPARK_CAMPFIRE)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/create_campfire))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/create_campfire)
-			if(SPARK_CLEANING)
-				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/greater_cleaning))
-					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/greater_cleaning)
 			if(SPARK_FETCH)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/projectile/fetch))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/fetch)
@@ -120,7 +115,6 @@
 
 #undef SPARK_CHILLFOOD
 #undef SPARK_CAMPFIRE
-#undef SPARK_CLEANING
 #undef SPARK_FETCH
 #undef SPARK_REPEL
 #undef SPARK_LIGHT
@@ -138,3 +132,7 @@
 	desc = "You have trained and become fit enough to function as a suitable mount. People may ride you as they would a saiga."
 	added_traits = list(TRAIT_MOUNTABLE)
 
+/datum/virtue/utility/niteyes
+	name = "Nite Eyes"
+	desc = "I don't need a light source when I'm travelling through darkened areas - my eyes are well used to the gloom of nite."
+	added_traits = list(TRAIT_NITEVISION)

@@ -111,12 +111,12 @@
 	grid_width = 32
 	grid_height = 64
 
-	resistance_flags = FLAMMABLE
+	resistance_flags = FIRE_PROOF | UNACIDABLE
 
 /obj/item/bodypart/proc/operator""()
 	return "\proper"+name
 
-/obj/item/bodypart/proc/adjust_marking_overlays(var/list/appearance_list)
+/obj/item/bodypart/proc/adjust_marking_overlays(list/appearance_list)
 	return
 
 /obj/item/bodypart/proc/get_specific_markings_overlays(list/specific_markings, aux = FALSE, mob/living/carbon/human/human_owner, override_color)
@@ -265,8 +265,8 @@
 				return
 	return ..()
 
+// OV EDIT START - Petri Head Smash
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
-	// OV Edit Start
 	var/mob/living/original_living = original_owner
 	if(!owner && original_living?.IsPetrified() && original_living.stat != DEAD && I.force && !I.get_sharpness())
 		user.visible_message(span_danger("[user] begins smashing [src] apart with [I]."), span_warning("I begin smashing [src] apart with [I]."))
@@ -276,18 +276,7 @@
 				user.visible_message(span_danger("[user] smashes [src] apart!"), span_warning("I smash [src] apart."))
 				qdel(src)
 		return TRUE
-	// OV Edit End
-	if(length(contents) && I.get_sharpness() && !user.cmode)
-		add_fingerprint(user)
-		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
-		user.visible_message(span_warning("[user] begins to cut open [src]."),\
-			span_notice("You begin to cut open [src]..."))
-		if(do_after(user, 5 SECONDS, target = src))
-			drop_organs(user)
-			user.visible_message(span_danger("[user] cuts [src] open!"),\
-				span_notice("You finish cutting [src] open."))
-		return
-	return ..()
+//OV EDIT END
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
@@ -346,7 +335,7 @@
 		heal_damage(0, 0, INFINITY, null, FALSE)
 		. |= BODYPART_LIFE_UPDATE_HEALTH
 
-/obj/item/bodypart/Initialize()
+/obj/item/bodypart/Initialize(mapload)
 	. = ..()
 	update_HP()
 

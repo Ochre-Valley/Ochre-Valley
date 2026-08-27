@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - balance: "Grand Duke cannot be revived from traditional deaths."

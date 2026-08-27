@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a \"Safely Far Travel\" button to the admin tab of the player effects menu that will remove someone safely from the round."
+  - bugfix: "Fixed reform portals runtiming on being deleted."

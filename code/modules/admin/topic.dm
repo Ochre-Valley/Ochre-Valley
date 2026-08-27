@@ -465,7 +465,7 @@
 
 		var/delmob = TRUE
 		if(!isobserver(M))
-			switch(alert("Delete old mob?","Message","Yes","No","Cancel"))
+			switch(alert(usr, "Delete old mob?","Message","Yes","No","Cancel"))
 				if("Cancel")
 					return
 				if("No")
@@ -556,7 +556,7 @@
 	else if(href_list["deletemessage"])
 		if(!check_rights(R_BAN))
 			return
-		var/safety = alert("Delete message/note?",,"Yes","No");
+		var/safety = alert(usr, "Delete message/note?",,"Yes","No");
 		if (safety == "Yes")
 			var/message_id = href_list["deletemessage"]
 			delete_message(message_id)
@@ -564,7 +564,7 @@
 	else if(href_list["deletemessageempty"])
 		if(!check_rights(R_BAN))
 			return
-		var/safety = alert("Delete message/note?",,"Yes","No");
+		var/safety = alert(usr, "Delete message/note?",,"Yes","No");
 		if (safety == "Yes")
 			var/message_id = href_list["deletemessageempty"]
 			delete_message(message_id, browse = TRUE)
@@ -693,7 +693,7 @@
 		GLOB.master_mode = href_list["c_mode2"]
 		log_admin("[key_name(usr)] set the mode as [GLOB.master_mode].")
 		message_admins(span_adminnotice("[key_name_admin(usr)] set the mode as [GLOB.master_mode]."))
-		to_chat(world, span_adminnotice("<b>The mode is now: [GLOB.master_mode]</b>"))
+		to_world(span_adminnotice("<b>The mode is now: [GLOB.master_mode]</b>"))
 		Game() // updates the main game menu
 		if (askuser(usr, "Would you like to save this as the default mode for the server?", "Save mode", "Yes", "No", Timeout = null) == 1)
 			SSticker.save_mode(GLOB.master_mode)
@@ -735,7 +735,7 @@
 		if(!ismob(M))
 			to_chat(usr, "this can only be used on instances of type /mob.")
 
-		var/speech = input("What will [key_name(M)] say?", "Force speech", "")// Don't need to sanitize, since it does that in say(), we also trust our admins.
+		var/speech = input(usr, "What will [key_name(M)] say?", "Force speech", "")// Don't need to sanitize, since it does that in say(), we also trust our admins.
 		if(!speech)
 			return
 		M.say(speech, forced = "admin speech")
@@ -1260,7 +1260,7 @@
 			return
 
 		if(!SSticker.HasRoundStarted())
-			alert("The game hasn't started yet!")
+			alert(usr, "The game hasn't started yet!")
 			return
 
 		var/mob/M = locate(href_list["traitor"])
@@ -1331,10 +1331,10 @@
 			paths += path
 
 		if(!paths)
-			alert("The path list you sent is empty.")
+			alert(usr, "The path list you sent is empty.")
 			return
 		if(length(paths) > 5)
-			alert("Select fewer object types, (max 5).")
+			alert(usr, "Select fewer object types, (max 5).")
 			return
 
 		var/list/offset = splittext(href_list["offset"],",")
@@ -1351,7 +1351,7 @@
 		var/obj_quality_set = FALSE
 		if(length(quality_raw))
 			obj_quality = text2num(quality_raw)
-			if(obj_quality != null && obj_quality >= ITEM_QUALITY_RUINED && obj_quality <= ITEM_QUALITY_MASTERWORK)
+			if(!isnull(obj_quality) && obj_quality >= ITEM_QUALITY_RUINED && obj_quality <= ITEM_QUALITY_MASTERWORK)
 				obj_quality_set = TRUE
 			else
 				obj_quality = null
@@ -1425,9 +1425,7 @@
 									var/obj/item/ingot/ING = spawned_item
 									ING.apply_smelt_quality(obj_quality)
 								else if(spawned_item.has_item_quality)
-									spawned_item.item_quality = obj_quality
-									if(initial(spawned_item.sellprice) > 0)
-										spawned_item.sellprice = max(1, round(initial(spawned_item.sellprice) * ITEM_QUALITY_MULT(obj_quality)))
+									spawned_item.apply_quality(null, null, obj_quality)
 							if(obj_name)
 								O.name = obj_name
 								if(ismob(O))
@@ -1487,7 +1485,7 @@
 			return
 		if(SSticker.IsRoundInProgress())
 			var/afkonly = text2num(href_list["afkonly"])
-			if(alert("Are you sure you want to kick all [afkonly ? "AFK" : ""] clients from the lobby??","Message","Yes","Cancel") != "Yes")
+			if(alert(usr, "Are you sure you want to kick all [afkonly ? "AFK" : ""] clients from the lobby??","Message","Yes","Cancel") != "Yes")
 				to_chat(usr, "Kick clients from lobby aborted")
 				return
 			var/list/listkicked = kick_clients_in_lobby(span_danger("I were kicked from the lobby by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"]."), afkonly)
@@ -1590,7 +1588,7 @@
 	else if(href_list["rebootworld"])
 		if(!check_rights(R_ADMIN))
 			return
-		var/confirm = alert("Are you sure you want to reboot the server?", "Confirm Reboot", "Yes", "No")
+		var/confirm = alert(usr, "Are you sure you want to reboot the server?", "Confirm Reboot", "Yes", "No")
 		if(confirm == "No")
 			return
 		if(confirm == "Yes")
@@ -1648,15 +1646,15 @@
 			return
 		var/mob/M = locate(href_list["mob"]) in GLOB.mob_list
 		var/client/mob_client = M.client
-		var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
+		var/amt2change = input(usr, "How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
 		if(!check_rights(R_BAN,0))
 			amt2change = CLAMP(amt2change, -20, 20)
-		var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
+		var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", "", null)
 		if((!isnull(amt2change) && amt2change != 0) && !raisin)
 			return
 		adjust_playerquality(amt2change, mob_client.ckey, usr.ckey, raisin)
 		for(var/client/C in GLOB.clients) // I hate this, but I'm not refactoring the cancer above this point.
-			if(lowertext(C.key) == lowertext(mob_client.ckey))
+			if(LOWER_TEXT(C.key) == LOWER_TEXT(mob_client.ckey))
 				to_chat(C, "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">Your PQ has been adjusted by [amt2change] by [usr.key] for reason: [raisin]</span></span>")
 				return
 	else if(href_list["showpq"])

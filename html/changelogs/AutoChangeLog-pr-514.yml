@@ -1,0 +1,4 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - rscadd: "Added OV specific version of the hunted subvice text implying you need to have an ooc notes entry about it and character directory entry."

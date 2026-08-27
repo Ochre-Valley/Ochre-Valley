@@ -52,7 +52,7 @@
 
 ///CC Edit End
 
-//Gemcarving gems. Currently following the 1.6x sell price of the gem format.  This currently makes most gems generally a loss, or at least only minorly profitable, to buy, carve, resell
+//Gemcarving gems. Currently following the 1.6x sell price of the gem format.	This currently makes most gems generally a loss, or at least only minorly profitable, to buy, carve, resell
 
 /datum/supply_pack/rogue/gems/jade
 	name = "jade"

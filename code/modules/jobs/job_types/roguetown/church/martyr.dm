@@ -1,4 +1,4 @@
-#define STATE_SAFE 			0
+#define STATE_SAFE			0
 #define STATE_MARTYR		1
 #define STATE_MARTYRULT		2
 
@@ -225,12 +225,12 @@
 								success = TRUE
 								break
 						if(success)	//The SAFE option
-							if(alert("You are within holy grounds. Do you wish to call your god to aid in its defense? (You will live if the duration ends within the Church.)", "Your Oath", "Yes", "No") == "Yes")
+							if(alert(user, "You are within holy grounds. Do you wish to call your god to aid in its defense? (You will live if the duration ends within the Church.)", "Your Oath", "Yes", "No") == "Yes")
 								is_activating = TRUE
 								activate(user, STATE_SAFE)
 						else	//The NOT SAFE option
-							if(alert("You are trying to activate the weapon outside of holy grounds. Do you wish to fulfill your Oath of Vengeance? (You will die.)", "Your Oath", "Yes", "No") == "Yes")
-								var/choice = alert("You pray to your god. How many minutes will you ask for? (Shorter length means greater boons)","Your Oath (It is up to you if your death is canon)", "Six", "Two", "Nevermind")
+							if(alert(user, "You are trying to activate the weapon outside of holy grounds. Do you wish to fulfill your Oath of Vengeance? (You will die.)", "Your Oath", "Yes", "No") == "Yes")
+								var/choice = alert(user, "You pray to your god. How many minutes will you ask for? (Shorter length means greater boons)","Your Oath (It is up to you if your death is canon)", "Six", "Two", "Nevermind")
 								switch(choice)
 									if("Six")
 										is_activating = TRUE
@@ -321,9 +321,6 @@
 				current_holder.STAPER += stat_bonus_martyr
 				current_holder.STALUC += stat_bonus_martyr
 				H.energy_add(9999)
-				// OV Edit Start
-				H.update_sight()
-				// OV Edit End
 
 //This is called regardless of the activated state (safe or not)
 /datum/component/martyrweapon/proc/deactivate()
@@ -446,9 +443,6 @@
 				current_holder.STAINT = 20
 				current_holder.STAPER = 20
 				current_holder.STALUC = 20
-				// OV Edit Start
-				current_holder.update_sight()
-				// OV Edit End
 
 				current_holder.energy = current_holder.max_energy
 				current_holder.stamina = 0
@@ -657,7 +651,7 @@
 		blade_class = BCLASS_CHOP
 
 
-/obj/item/rogueweapon/sword/long/martyr/Initialize()
+/obj/item/rogueweapon/sword/long/martyr/Initialize(mapload)
 	. = ..()
 	if(SSroguemachine.martyrweapon)
 		qdel(src)
@@ -763,7 +757,7 @@
 		item_d_type = "fire"
 		blade_class = BCLASS_SMASH
 
-/obj/item/rogueweapon/greataxe/steel/doublehead/martyr/Initialize()
+/obj/item/rogueweapon/greataxe/steel/doublehead/martyr/Initialize(mapload)
 	. = ..()
 	if(SSroguemachine.martyrweapon)
 		qdel(src)
@@ -852,7 +846,7 @@
 		blade_class = BCLASS_EFFECT
 		swingdelay = 2
 
-/obj/item/rogueweapon/mace/goden/martyr/Initialize()
+/obj/item/rogueweapon/mace/goden/martyr/Initialize(mapload)
 	. = ..()
 	if(SSroguemachine.martyrweapon)
 		qdel(src)
@@ -943,7 +937,7 @@
 		item_d_type = "fire"
 
 
-/obj/item/rogueweapon/spear/partizan/martyr/Initialize()
+/obj/item/rogueweapon/spear/partizan/martyr/Initialize(mapload)
 	. = ..()
 	if(SSroguemachine.martyrweapon)
 		qdel(src)

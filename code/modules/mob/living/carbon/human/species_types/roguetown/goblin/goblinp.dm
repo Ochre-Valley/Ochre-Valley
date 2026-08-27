@@ -90,7 +90,9 @@
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
 		/datum/customizer/organ/ears/goblin,
+		/datum/customizer/organ/horns/humanoid/goblin,
 		/datum/customizer/organ/horns/tusks,
+		/datum/customizer/organ/tail/goblin,
 		//Caustic edit
 		/datum/customizer/organ/belly/human,
 		/datum/customizer/organ/butt/human,

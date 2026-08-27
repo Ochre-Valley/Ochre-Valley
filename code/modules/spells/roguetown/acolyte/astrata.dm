@@ -127,7 +127,6 @@
 /datum/action/cooldown/spell/projectile/sacred_flame
 	name = "Sacred Flame"
 	desc = "Emit a bolt of holy fire that sunders a target, setting them on fire and slowing them down for 6 seconds. \
-	Damage is increased by 100% versus simple-minded creechurs. \
 	The CC effects cannot be reapplied to the same target within 15 seconds."
 	fluff_desc = "The fourth gift to men, sliver of Astrata's fury against the horrors of Psydonia, bringing evyl to its knees at hands of Her devoted."
 	background_icon = 'icons/mob/actions/astratamiracles.dmi'
@@ -171,7 +170,7 @@
 
 /obj/projectile/magic/sacred_flame
 	name = "bolt of holy fire"
-	tracer_type = /obj/effect/projectile/tracer/stun
+	tracer_type = /obj/effect/projectile/tracer/solar_beam
 	muzzle_type = null
 	impact_type = null
 	hitscan = TRUE
@@ -180,7 +179,6 @@
 	expose_caster_on_deflect = TRUE
 	light_color = "#a98107"
 	damage = 50
-	npc_simple_damage_mult = 2
 	damage_type = BURN
 	accuracy = 50 //Astrata show me true or something?
 	nodamage = FALSE
@@ -202,7 +200,6 @@
 			if(out_of_effective_range())
 				return
 			if(blocked < 100)
-				L.electrocute_act(1, src, 1, SHOCK_NOSTUN)
 				if(HAS_TRAIT(L, TRAIT_SILVER_WEAK))
 					L.adjust_fire_stacks(4, /datum/status_effect/fire_handler/fire_stacks/sunder)
 					L.Immobilize(0.5 SECONDS)
@@ -223,269 +220,6 @@
 /datum/action/cooldown/spell/miracle/fortify/astrata
 	background_icon = 'icons/mob/actions/astratamiracles.dmi'
 	button_icon = 'icons/mob/actions/astratamiracles.dmi'
-
-//OV ADD START
-////////////////////////////////////////////////////////////////
-// T2 - Solar BLade / Sceptre - Choose between one or the other. //
-////////////////////////////////////////////////////////////////
-
-/datum/action/cooldown/spell/astrata/bladeorfist
-	name = "Solar Blade/Sceptre"
-	desc = "Choose between Solar Blade (SWORD) or Solar Sceptre (MACE)."
-	button_icon_state = "blade_grasp"
-	sound = 'sound/items/firelight.ogg'
-	sparks_amt = 2
-
-	click_to_activate = FALSE
-	cast_range = SPELL_RANGE_ADJACENT
-
-	primary_resource_cost = SPELLCOST_MIRACLE_MINOR
-
-	secondary_resource_cost = SPELLCOST_MINOR_PROJECTILE
-
-	invocation_type = INVOCATION_NONE //It has seperate message ON USE
-
-	charge_required = FALSE
-	cooldown_time = 10 SECONDS//Does not matter it's single use
-
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
-
-	var/chosen_spell
-	var/solar_blade = /datum/action/cooldown/spell/astrata/scepter
-	var/solar_blade2 = /datum/action/cooldown/spell/astrata/sword
-	var/choosingspell = FALSE
-
-/datum/intent/mace/strike/astrata
-	hitsound = list('sound/items/firelight.ogg', 'sound/misc/frying.ogg', 'sound/misc/explode/incendiary (1).ogg', 'sound/misc/explode/incendiary (2).ogg')
-
-/datum/intent/mace/smash/astrata
-	hitsound = list('sound/items/firelight.ogg', 'sound/misc/frying.ogg', 'sound/misc/explode/incendiary (1).ogg', 'sound/misc/explode/incendiary (2).ogg')
-
-/datum/action/cooldown/spell/astrata/bladeorfist/cast(atom/cast_on)
-	. = ..()
-	if(choosingspell == TRUE)
-		to_chat(owner, span_warning("I'm already choosing a spell!"))
-	else
-		var/choice = chosen_spell
-		choosingspell = TRUE
-		if(!chosen_spell)
-			choice = alert(owner, "BLADE, or SCEPTRE", "ORDER OR ANARCHY", "Sceptre", "Blade")
-			chosen_spell = choice
-		switch(choice)
-			if("Sceptre")
-				owner.mind?.AddSpell(new solar_blade, owner)
-				owner.mind?.RemoveSpell(src.type)
-			if("Blade")
-				owner.mind?.AddSpell(new solar_blade2, owner)
-				owner.mind?.RemoveSpell(src.type)
-			else
-				return FALSE
-
-//////////////////////////////////////////////
-// T2 - Solar Blade - Summon a flame sword. //
-//////////////////////////////////////////////
-
-/datum/action/cooldown/spell/astrata/scepter
-	name = "Solar Scepter"
-	desc = "Conjure a flaming scepter to strike down your enemies with, doubles as a cautery and can ignite objects."
-	button_icon_state = "blade"
-	sound = 'sound/magic/whiteflame.ogg'
-	spell_color = GLOW_COLOR_ASTRATA
-	glow_intensity = GLOW_INTENSITY_MEDIUM
-
-	click_to_activate = TRUE
-	self_cast_possible = TRUE
-
-	primary_resource_type = SPELL_COST_DEVOTION
-	primary_resource_cost = SPELLCOST_MIRACLE
-
-	secondary_resource_type = SPELL_COST_STAMINA
-	secondary_resource_cost = SPELLCOST_CONJURE
-
-	invocations = list("Astrata, grant me your fury!")
-	invocation_type = INVOCATION_SHOUT
-
-	charge_required = TRUE
-	charge_time = 2 SECONDS
-	hold_drain = 1
-	charge_slowdown = CHARGING_SLOWDOWN_HEAVY
-	charge_sound = 'sound/magic/holycharging.ogg'
-	cooldown_time = 90 SECONDS
-
-	ignore_armor_penalty = TRUE
-	associated_stat = null
-	associated_skill = /datum/skill/magic/holy
-	spell_tier = 0
-	spell_impact_intensity = SPELL_IMPACT_NONE
-
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
-
-	var/obj/item/rogueweapon/sword/astrata_sword/conjured_weapon
-
-/datum/action/cooldown/spell/astrata/scepter/cast(atom/cast_on)
-	. = ..()
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
-		return FALSE
-
-	if(H.get_num_arms() <= 0)
-		to_chat(H, span_warning("I don't have any usable hands!"))
-		return FALSE
-
-	// Destroy previous conjured shield
-	if(conjured_weapon && !QDELETED(conjured_weapon))
-		conjured_weapon.visible_message(span_warning("[conjured_weapon] flickers and fades away!"))
-		qdel(conjured_weapon)
-
-	var/obj/item/rogueweapon/sword/astrata_sword/S = new(H.drop_location())
-	S.linked_spell = src
-	S.caster_ref = WEAKREF(H)
-	S.AddComponent(/datum/component/conjured_item, null, TRUE)
-	H.put_in_hands(S)
-	conjured_weapon = S
-	H.visible_message("[H] conjures a shimmering shield of arcyne energy!")
-	return TRUE
-
-/datum/action/cooldown/spell/astrata/scepter/Destroy()
-	if(conjured_weapon && !QDELETED(conjured_weapon))
-		conjured_weapon.visible_message(span_warning("[conjured_weapon] flickers and fades away!"))
-		qdel(conjured_weapon)
-	conjured_weapon = null
-	return ..()
-
-// The conjured weapon
-/obj/item/rogueweapon/sword/astrata_sword
-	name = "Solar Scepter"
-	desc = "A scepter of flames conjured by righteous hatred of its user. Astrata's unbridled rage at display."
-	force = 10			//more comparable to a dagger than a sword, for it is ultimately a tool
-	force_wielded = 15
-	damtype = BURN
-	possible_item_intents = list(/datum/intent/mace/strike/astrata, /datum/intent/mace/smash/astrata)//Oversized cautery
-	gripped_intents = list(/datum/intent/mace/strike/astrata, /datum/intent/mace/smash/astrata)
-	alt_grips = null
-	max_blade_int = 100
-	max_integrity = 50
-	minstr = 6
-	wdefense = 5
-	wdefense_wbonus = 3 //8 total. 1 better than a basic arming sword
-	tool_behaviour = TOOL_CAUTERY //The Main Gimmick here
-	smeltresult = null
-
-	icon = 'icons/roguetown/weapons/special/astratablade.dmi'
-	icon_state = "solar_blade"
-	var/datum/action/cooldown/spell/astrata/scepter/linked_spell
-	var/datum/weakref/caster_ref
-
-/obj/item/rogueweapon/sword/astrata_sword/Initialize()
-	. = ..()
-	set_light(5, 4, l_color = LIGHT_COLOR_WHITE)
-
-/obj/item/rogueweapon/sword/astrata_sword/obj_break()
-	. = ..()
-	if(!QDELETED(src))
-		dispel()
-
-/obj/item/rogueweapon/sword/astrata_sword/attack_hand(mob/living/user)
-	. = ..()
-	if(!QDELETED(src) && !(user.get_active_held_item() == src || user.get_inactive_held_item() == src))
-		dispel()
-
-/obj/item/rogueweapon/sword/astrata_sword/dropped(mob/living/user)
-	. = ..()
-	if(QDELETED(src))
-		return
-	var/mob/caster = caster_ref?.resolve()
-	// Only dispel if dropped on the ground (not held by the caster)
-	if(!caster || loc != caster)
-		dispel()
-
-/obj/item/rogueweapon/sword/astrata_sword/proc/dispel()
-	if(QDELETED(src))
-		return
-	visible_message(span_warning("[src] shatters into motes of divine light!"))
-	playsound(get_turf(src), 'sound/magic/magic_nulled.ogg', 80)
-	if(linked_spell)
-		linked_spell.conjured_weapon = null
-	qdel(src)
-
-
-//OV edit - Actual sword version
-/datum/action/cooldown/spell/astrata/sword
-	name = "Solar Sword"
-	desc = "Call for a blade to preserve light and order in Psydonia. Its strength is middling, but it glows fiercely and can be used to cauterize wounds."
-
-	button_icon_state = "blade"
-	sound = 'sound/magic/whiteflame.ogg'
-	spell_color = GLOW_COLOR_ASTRATA
-	glow_intensity = GLOW_INTENSITY_MEDIUM
-
-	click_to_activate = TRUE
-	self_cast_possible = TRUE
-
-	primary_resource_type = SPELL_COST_DEVOTION
-	primary_resource_cost = SPELLCOST_MIRACLE
-
-	secondary_resource_type = SPELL_COST_STAMINA
-	secondary_resource_cost = SPELLCOST_CONJURE
-
-	invocations = list("Astrata, grant me your fury!")
-	invocation_type = INVOCATION_SHOUT
-
-	charge_required = TRUE
-	charge_time = 2 SECONDS
-	hold_drain = 1
-	charge_slowdown = CHARGING_SLOWDOWN_HEAVY
-	charge_sound = 'sound/magic/holycharging.ogg'
-	cooldown_time = 90 SECONDS
-
-	ignore_armor_penalty = TRUE
-	associated_stat = null
-	associated_skill = /datum/skill/magic/holy
-	spell_tier = 0
-	spell_impact_intensity = SPELL_IMPACT_NONE
-
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
-
-	var/obj/item/rogueweapon/sword/astrata_sword/actual_sword/conjured_weapon
-
-/datum/action/cooldown/spell/astrata/sword/cast(atom/cast_on)
-	. = ..()
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
-		return FALSE
-
-	if(H.get_num_arms() <= 0)
-		to_chat(H, span_warning("I don't have any usable hands!"))
-		return FALSE
-
-	// Destroy previous conjured shield
-	if(conjured_weapon && !QDELETED(conjured_weapon))
-		conjured_weapon.visible_message(span_warning("[conjured_weapon] flickers and fades away!"))
-		qdel(conjured_weapon)
-
-	var/obj/item/rogueweapon/sword/astrata_sword/actual_sword/S = new(H.drop_location())
-	S.linked_spell = src
-	S.caster_ref = WEAKREF(H)
-	S.AddComponent(/datum/component/conjured_item, null, TRUE)
-	H.put_in_hands(S)
-	conjured_weapon = S
-	H.visible_message("[H] conjures a shimmering shield of arcyne energy!")
-	return TRUE
-
-/datum/action/cooldown/spell/astrata/sword/Destroy()
-	if(conjured_weapon && !QDELETED(conjured_weapon))
-		conjured_weapon.visible_message(span_warning("[conjured_weapon] flickers and fades away!"))
-		qdel(conjured_weapon)
-	conjured_weapon = null
-	return ..()
-
-/obj/item/rogueweapon/sword/astrata_sword/actual_sword
-	name = "Solar Sabre"
-	desc = "More a holy tool of ceremony than a weapon of her fury. \
-	It harshly radiates sacred light, rebuking rot and darkness alike; \
-	it is a ruler's blade, knight your soldiers and cleanse their wounds."
-	icon = 'modular_ochrevalley/icons/roguetown/weapons/special/astratablade.dmi'
-//OV Add End
 
 ////////////////////////////////////////////////////////////////
 // T3 - Solar Eruption - Finisher for the rest of the spells. //
@@ -571,7 +305,7 @@
 				human.apply_status_effect(/datum/status_effect/buff/pyre)
 				human.add_stress(/datum/stressevent/astrata_pyre)
 
-/obj/machinery/light/rogue/campfire/miracle_pyre/Initialize()
+/obj/machinery/light/rogue/campfire/miracle_pyre/Initialize(mapload)
 	. = ..()
 	if(lifespan)
 		QDEL_IN(src, lifespan) //delete after it runs out
@@ -667,117 +401,13 @@
 // T3 - Anastasis - Revive. //
 //////////////////////////////
 
-/obj/effect/proc_holder/spell/invoked/revive
-	name = "Anastasis"
-	desc = "Focus Astratas energy through a stationary psycross, reviving the target from death."
-	action_icon = 'icons/mob/actions/astratamiracles.dmi'
-	overlay_icon = 'icons/mob/actions/astratamiracles.dmi'
-	overlay_state = "revive"
-	releasedrain = 90
-	chargedrain = 0
-	chargetime = 50
-	range = 1
-	warnie = "sydwarning"
-	no_early_release = TRUE
-	movement_interrupt = TRUE
-	chargedloop = /datum/looping_sound/invokeholy
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
-	sound = 'sound/magic/revive.ogg'
-	associated_skill = /datum/skill/magic/holy
-	antimagic_allowed = TRUE
-	recharge_time = 2 MINUTES
-	miracle = TRUE
-	devotion_cost = 80
-	/// Amount of PQ gained for reviving people
-	var/revive_pq = PQ_GAIN_REVIVE
-
-/obj/effect/proc_holder/spell/invoked/revive/start_recharge()
-	var/old_recharge = recharge_time
-	// Because the cooldown for anastasis is so incredibly low, not having tech impacts them more heavily than other faiths
-	var/tech_resurrection_modifier = SSchimeric_tech.get_resurrection_multiplier()
-	if(tech_resurrection_modifier > 1)
-		recharge_time = initial(recharge_time) * (tech_resurrection_modifier * 1.25)
-	else
-		recharge_time = initial(recharge_time)
-	if(charge_counter >= old_recharge && old_recharge > 0)
-		charge_counter = recharge_time
-	. = ..()
-
-/obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
-	..()
-
-	if(!isliving(targets[1]))
-		revert_cast()
-		return FALSE
-
-	var/mob/living/target = targets[1]
-	//OV edit
-	if(istype(target, /mob/living/simple_animal/hostile/retaliate/rogue/ooze_blob/suffering))
-		target.revive()
-		return TRUE
-	//OV edit end
-	if(!target.check_revive(user))
-		revert_cast()
-		return FALSE
-	if(GLOB.tod == "night")
-		to_chat(user, span_warning("Let there be light."))
-	for(var/obj/structure/fluff/psycross/S in oview(5, user))
-		S.AOE_flash(user, range = 8)
-	if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-		if(alert(user, "[target]'s body rattles and seizes under the divine force. This will likely unmake them permanently. Continue?", "Divine Revival", "PURGE THE UNCLEAN!", "Stop") != "PURGE THE UNCLEAN!")
-			to_chat(user, span_notice("You halt the rite before the divine force can fully take hold."))
-			revert_cast()
-			return FALSE
-		target.visible_message(span_danger("[target] is unmade by divine magic!"), span_userdanger("Holy power tears my undead form apart!"))
-		playsound(target.loc, 'sound/magic/churn.ogg', 100, TRUE)
-		target.dust()
-		return TRUE
-	if(alert(target, "They are calling for you. Are you ready?", "Revival", "I need to wake up", "Don't let me go") != "I need to wake up")
-		target.visible_message(span_astrata("Nothing happens. They are not being let go."))
-		return FALSE
-	target.adjustOxyLoss(-target.getOxyLoss()) //Ye Olde CPR
-	if(!target.revive(full_heal = FALSE))
-		to_chat(user, span_warning("Nothing happens."))
-		revert_cast()
-		return FALSE
-
-	var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
-	//GET OVER HERE!
-	if(underworld_spirit)
-		var/mob/dead/observer/ghost = underworld_spirit.ghostize()
-		qdel(underworld_spirit)
-		ghost.mind.transfer_to(target, TRUE)
-	target.grab_ghost(force = TRUE) // even suicides
-	target.emote("breathgasp")
-	target.Jitter(100)
-	record_round_statistic(STATS_ASTRATA_REVIVALS)
-	target.update_body()
-	target.visible_message(span_astrata("[target] is revived by holy light!"), span_green("I awake from the void."))
-	if(revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
-		adjust_playerquality(revive_pq, user.ckey)
-		ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
-	target.mind.remove_antag_datum(/datum/antagonist/zombie)
-	target.remove_status_effect(/datum/status_effect/debuff/rotted_zombie)	//Removes the rotted-zombie debuff if they have it - Failsafe for it.
-	target.apply_status_effect(/datum/status_effect/debuff/revived)	//Temp debuff on revive, your stats get hit temporarily. Doubly so if having rotted.
-	if(HAS_TRAIT(target, TRAIT_IRONMAN))
-		target.apply_status_effect(/datum/status_effect/debuff/integrity_rig, 11 MINUTES)
-		target.visible_message(span_danger("[target] is looking on the verge of exploding again! Their core may need an extra whack from a hammer."))
-
-	return TRUE
-
-/obj/effect/proc_holder/spell/invoked/revive/cast_check(skipcharge, mob/user = usr)
-	if(!..())
-		return FALSE
-	var/found = null
-	for(var/obj/structure/fluff/psycross/S in oview(5, user))
-		found = S
-	if(!found)
-		to_chat(user, span_warning("I need a holy cross."))
-		return FALSE
-	return TRUE
-
-
-
+/datum/action/cooldown/spell/miracle/anastasis/astrata
+	name = "Sunblessed Anastasis"
+	desc = "Resurrect a person that is free of rot and decay, deadites (such as lyckers / skeletons) instead explode when it is attempted."
+	fluff_desc = "The greatest feat any priest can manage is reversion of death, a true rebirth unlike the perversion Necromancers aspire to."
+	background_icon = 'icons/mob/actions/astratamiracles.dmi'
+	button_icon = 'icons/mob/actions/astratamiracles.dmi'
+	spell_color = GLOW_COLOR_ASTRATA
 
 // =====================
 // Immolation Component
@@ -804,7 +434,7 @@
 	ispartner = TRUE
 	immolate = TRUE
 
-/datum/component/immolation/Initialize(mob/living/partner_mob, mob/living/carbon/caster_mob, var/holy_skill, var/is_astrata)
+/datum/component/immolation/Initialize(mob/living/partner_mob, mob/living/carbon/caster_mob, holy_skill, is_astrata)
 	if(!isliving(parent) || !iscarbon(partner_mob))
 		return COMPONENT_INCOMPATIBLE
 
@@ -831,7 +461,7 @@
 	START_PROCESSING(SSprocessing, src)
 	RegisterSignal(parent, COMSIG_LIVING_MIRACLE_HEAL_APPLY, PROC_REF(on_heal))
 	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_deletion))
-	addtimer(CALLBACK(src, .proc/remove_immolation), duration)
+	addtimer(CALLBACK(src, PROC_REF(remove_immolation)), duration)
 
 	// Apply visual effect
 	var/mob/living/L = parent

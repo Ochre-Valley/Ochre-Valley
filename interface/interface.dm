@@ -1,12 +1,12 @@
 //Please use mob or src (not usr) in these procs. This way they can be called in the same fashion as procs.
 /client/verb/wiki(query as text)
-	set name = "wiki"
+	set name = "Wiki"
 	set desc = ""
 	set category = "OOC"
 	var/wikiurl = CONFIG_GET(string/wikiurl)
 	if(wikiurl)
 		if(query)
-			var/output = wikiurl + "/index.php?title=Special%3ASearch&profile=default&search=" + query
+			var/output = wikiurl + "/w/index.php?search=" + query
 			src << link(output)
 		else if (query != null)
 			src << link(wikiurl)
@@ -15,13 +15,13 @@
 	return
 
 /client/verb/discord()
-	set name = "discord"
+	set name = "Discord"
 	set desc = ""
 	set category = "OOC"
 	set hidden = 1
 	var/discordurl = CONFIG_GET(string/discordurl)
 	if(discordurl)
-		if(alert("This will open the discord. Are you sure?",,"Yes","No")!="Yes")
+		if(alert(usr, "This will open the discord. Are you sure?",,"Yes","No")!="Yes")
 			return
 		src << link(discordurl)
 	else
@@ -29,13 +29,13 @@
 	return
 
 /client/verb/rules()
-	set name = "rules"
+	set name = "Rules"
 	set desc = ""
 	set category = "OOC"
 	set hidden = 1
 	var/rulesurl = CONFIG_GET(string/rulesurl)
 	if(rulesurl)
-		if(alert("This will open the rules in your browser. Are you sure?",,"Yes","No")!="Yes")
+		if(alert(usr, "This will open the rules in your browser. Are you sure?",,"Yes","No")!="Yes")
 			return
 		src << link(rulesurl)
 	else
@@ -43,13 +43,13 @@
 	return
 
 /client/verb/github()
-	set name = "github"
+	set name = "Github"
 	set desc = ""
 	set category = "OOC"
 	set hidden = 1
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
-		if(alert("This will open the Github repository in your browser. Are you sure?",,"Yes","No")!="Yes")
+		if(alert(usr, "This will open the Github repository in your browser. Are you sure?",,"Yes","No")!="Yes")
 			return
 		src << link(githuburl)
 	else

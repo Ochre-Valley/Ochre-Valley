@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new Become Deadite verb for emergencies where nobody can revive you and you're stuck dead in town."

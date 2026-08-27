@@ -47,6 +47,7 @@
 						TRAIT_EASYDISMEMBER,
 						TRAIT_REGROW_LIMBS,
 						TRAIT_ZOMBIE_IMMUNE,
+						TRAIT_WATERBREATHING,
 						)
 	//OV Add Start
 	allowed_taur_types = list(

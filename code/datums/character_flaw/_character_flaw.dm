@@ -50,6 +50,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	/datum/charflaw/hemovore::name=/datum/charflaw/hemovore,
 	/datum/charflaw/dendor_touched::name=/datum/charflaw/dendor_touched,
 	/datum/charflaw/ravenous::name=/datum/charflaw/ravenous,
+	/datum/charflaw/changeling::name=/datum/charflaw/changeling,
 	//OV Add End
 	))
 
@@ -220,14 +221,14 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/rogue/spectacles(H), SLOT_WEAR_MASK)
 	else
 		new /obj/item/clothing/mask/rogue/spectacles(get_turf(H))
-	
+
 	// we don't seem to have a mind when on_mob_creation fires, so set up a timer to check when we probably will
 	addtimer(CALLBACK(src, PROC_REF(apply_reading_skill), H), 5 SECONDS)
 
 /datum/charflaw/badsight/proc/apply_reading_skill(mob/living/carbon/human/H)
 	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 
-/datum/charflaw/proc/get_nearby_humans(mob/user, range, var/include_prey = FALSE) //OV EDIT - Add include_prey argument to check for prey in the user's vore organs
+/datum/charflaw/proc/get_nearby_humans(mob/user, range, include_prey = FALSE) //OV EDIT - Add include_prey argument to check for prey in the user's vore organs
 	. = list()
 	for(var/mob/M in get_hearers_in_view(range, user, RECURSIVE_CONTENTS_CLIENT_MOBS))
 		if(M == user)
@@ -410,7 +411,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/clingy/apply_post_equipment(mob/user)
 	if(user.mind)
 		is_active = TRUE
-	
+
 
 /datum/charflaw/noeyer
 	name = "Cyclops (R)"
@@ -475,9 +476,12 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		ADD_TRAIT(H, TRAIT_ARMOR_BREAK, TRAIT_GENERIC)
 /datum/charflaw/hunted
 	name = "Hunted"
+	//OV edit start
 	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
-	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED BY GNOLLS. \
-	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
+	\nTHIS FLAW HAS ROLEPLAY EXPECTATIONS, YOU MAY BE HUNTED BY GNOLLS. \
+	YOU ARE EXPECTED TO DETAIL WHAT YOU WANT FROM YOUR GNOLL ENCOUNTER IN YOUR OOC NOTES \
+	AND HAVE A CHARACTER DIRECTORY ENTRY. PLAY AT YOUR OWN RISK. IT REQUIRES AN EXTRA VICE."
+	//OV edit end
 	needs_extra_vice = TRUE
 	var/logged = FALSE
 
@@ -758,7 +762,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	insane_fool.hallucination = INFINITY
 	ADD_TRAIT(insane_fool, TRAIT_PSYCHOSIS, TRAIT_GENERIC)
 	insane_fool.adjust_triumphs(3)
-	if(insane_fool.patron?.type == /datum/patron/divine/abyssor) 
+	if(insane_fool.patron?.type == /datum/patron/divine/abyssor)
 		insane_fool.grant_language(/datum/language/abyssal)
 
 /datum/charflaw/indebted

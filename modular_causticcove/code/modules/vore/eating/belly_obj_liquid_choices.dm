@@ -14,7 +14,7 @@
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_WATER)
 			gen_amount = 2
-			gen_cost = 0
+			gen_cost = 1
 			reagentid = REAGENT_WATER
 			reagentcolor = "#0064C877"
 		if(REAGENT_WATER_BATH)

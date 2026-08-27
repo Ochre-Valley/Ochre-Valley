@@ -9,7 +9,7 @@
 	max_pq = null
 
 	allowed_sexes = list(MALE, FEMALE)
-	
+
 	tutorial = "Make Graggar proud or die trying."
 
 	outfit = /datum/outfit/job/roguetown/npc/goblin
@@ -17,7 +17,7 @@
 	give_bank_account = FALSE
 /datum/job/roguetown/goblin/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
 	. = ..()
-	return  H.change_mob_type(/mob/living/carbon/human/species/goblin/cave, delete_old_mob = TRUE)
+	return	H.change_mob_type(/mob/living/carbon/human/species/goblin/cave, delete_old_mob = TRUE)
 
 /datum/job/roguetown/goblin/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -51,7 +51,7 @@
 		eyes = new /obj/item/organ/eyes/night_vision/zombie
 		eyes.Insert(H)
 		H.ambushable = FALSE
-		H.underwear = "Nude"
+		H.underwear = null //OV EDIT
 		for(var/datum/charflaw/cf in H.charflaws)
 			H.charflaws.Remove(cf)
 			QDEL_NULL(cf)

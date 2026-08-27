@@ -48,6 +48,8 @@
 //			src.emote("attackgrunt")
 		if(used_intent.releasedrain)
 			stamina_add(ceil(used_intent.releasedrain * rmb_stam_penalty))
+		if(HAS_TRAIT(src, TRAIT_DUALWIELDER))
+			process_dualwield(L, null, null)
 		if(L.has_status_effect(/datum/status_effect/buff/clash) && L.get_active_held_item() && ishuman(L))
 			var/mob/living/carbon/human/H = L
 			var/obj/item/IM = L.get_active_held_item()
@@ -108,17 +110,17 @@
 				I.try_damage_pushback(src)
 				changeNext_move(CLICK_CD_MELEE)
 				var/verbu = pick(used_intent.attack_verb)
-				log_combat(src, I, "attacked with fists")
+				log_combat(src, I, "attacked with fists", zone=zone_selected, intent=used_intent.name)
 				visible_message(span_danger("[src] [verbu] [I]!"))
 				var/tempsound = used_intent.hitsound
-				playsound(loc,  tempsound, 100, FALSE, -1)
+				playsound(loc,	tempsound, 100, FALSE, -1)
 		else
 			A.attack_hand(src, params)
 		if(pulling)
 			changeNext_move(CLICK_CD_MELEE)
 
 /mob/living/rmb_on(atom/A, params)
-	if(stat)
+	if(incapacitated(ignore_restraints = TRUE))
 		return
 
 	// OV Edit Start
@@ -134,6 +136,11 @@
 	if(!has_hand_for_held_index(used_hand)) //can't attack without a hand.
 		to_chat(src, span_warning("I can't move this hand."))
 		return
+
+	// OV Edit Start: Dancing
+	if(ov_try_dance_move(A))
+		return
+	// OV Edit End
 
 	if(check_arm_grabbed(used_hand))
 		to_chat(src, span_warning("[pulledby] is restraining my arm!"))

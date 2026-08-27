@@ -378,7 +378,7 @@ GLOBAL_LIST_INIT(t4rune_types, generate_t4rune_types())
 			living_invoker.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 		if(invoke_damage)
 			living_invoker.apply_damage(invoke_damage, BRUTE)
-			to_chat(living_invoker,  span_italics("[src] saps your strength!"))
+			to_chat(living_invoker,	span_italics("[src] saps your strength!"))
 	do_invoke_glow()
 
 /* /obj/effect/decal/cleanable/roguerune/arcyne/empowerment //OV Add - Empowerment //OV Edit AP Merge 4.2.26 - Commented Out Pending Rework
@@ -785,7 +785,7 @@ GLOBAL_LIST_INIT(t4rune_types, generate_t4rune_types())
 			living_invoker.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 		if(invoke_damage)
 			living_invoker.apply_damage(invoke_damage, BRUTE)
-			to_chat(living_invoker,  span_italics("[src] saps your strength!"))
+			to_chat(living_invoker,	span_italics("[src] saps your strength!"))
 	do_invoke_glow()
 
 /obj/effect/decal/cleanable/roguerune/arcyne/verglas
@@ -853,7 +853,7 @@ GLOBAL_LIST_INIT(t4rune_types, generate_t4rune_types())
 			living_invoker.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 		if(invoke_damage)
 			living_invoker.apply_damage(invoke_damage, BRUTE)
-			to_chat(living_invoker,  span_italics("[src] saps your strength!"))
+			to_chat(living_invoker,	span_italics("[src] saps your strength!"))
 	do_invoke_glow()
 
 /obj/effect/decal/cleanable/roguerune/arcyne/wallgreater
@@ -907,7 +907,7 @@ GLOBAL_LIST_INIT(t4rune_types, generate_t4rune_types())
 			living_invoker.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 		if(invoke_damage)
 			living_invoker.apply_damage(invoke_damage, BRUTE)
-			to_chat(living_invoker,  span_italics("[src] saps your strength!"))
+			to_chat(living_invoker,	span_italics("[src] saps your strength!"))
 	do_invoke_glow()
 
 // Summoning circles — draw near a leyline to trigger encounters.

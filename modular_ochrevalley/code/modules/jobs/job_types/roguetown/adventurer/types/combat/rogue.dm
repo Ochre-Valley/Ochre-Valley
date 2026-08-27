@@ -78,7 +78,7 @@
 				r_hand = /obj/item/grapplinghook
 			if("Clockwork Drill")
 				H.adjust_skillrank_up_to(/datum/skill/labor/mining, SKILL_LEVEL_APPRENTICE, TRUE)
-				r_hand = /obj/item/contraption/pick/drill/precharged
+				r_hand = /obj/item/rogueweapon/contraption/pick/drill/precharged
 			if("Voltic Gauntlets")
 				H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_APPRENTICE, TRUE)
 				gloves = /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
@@ -148,5 +148,5 @@
 /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
 	current_charge = 20
 
-/obj/item/contraption/pick/drill/precharged
+/obj/item/rogueweapon/contraption/pick/drill/precharged
 	current_charge = 600

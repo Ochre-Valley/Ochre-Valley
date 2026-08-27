@@ -69,7 +69,6 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail/harpy,
 		ORGAN_SLOT_WINGS = /obj/item/organ/wings/harpy,
 		ORGAN_SLOT_VOICE = /obj/item/organ/vocal_cords/harpy,
 		)
@@ -163,8 +162,17 @@
 	)
 
 	mechanics_explanations = list(
-		"Are able to fly using a unique ability, (after a slow initial takeoff,) carrying them up a floor above them. Using the ability again will send them back down.",
-		"Can sing using a unique ability. Requires a free hand to use."
+		"Are able to fly using a unique ability. Using the ability again will cancel their flight.\n\
+		\t<b>While flying,</b> harpies:\n\
+		\t- Consume stamina rapidly.\n\
+		\t- Are not slowed down by turfs.\n\
+		\t- Have both hand slots taken up by their talons.\n\
+		\t\t<i>(The talons make for decent cutting weapons. Only usable during flight.)</i>\n\
+		\t- Cast a visible shadow below them.\n\
+		\t- Can move up or down by using the \"Fly Up / Down\" hotkeys.\n\
+		\t\t<i>(Must be bound in your keybinds.)</i>",
+		"Can sing using a unique ability. Requires no hands to use. Cannot be used with bard abilities.",
+		"Have a natural Journeyman skill in music."
 	)
 	//OV Edit End
 
@@ -275,4 +283,4 @@
 	qdel(src)
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/harpy_skin/obj_destruction()
-	visible_message("The skin on the feet is torn!", span_bloody("<b>THE SKIN ON MY FEET IS TORN!!</b>"))
+	visible_message("The skin on the harpy's feet is torn!", span_bloody("<b>THE SKIN ON MY FEET IS TORN!!</b>"))

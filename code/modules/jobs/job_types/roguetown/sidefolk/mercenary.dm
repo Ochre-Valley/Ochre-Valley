@@ -49,11 +49,12 @@
 		/datum/advclass/mercenary/rumaclan_sasu,
 		/datum/advclass/mercenary/hangyaku,
 		/datum/advclass/mercenary/chonin,
-		/datum/advclass/mercenary/seonjang,
+		/* OV Remove
 		//Caustic add start
 		/datum/advclass/mercenary/shrine_priest,
 		/datum/advclass/mercenary/shrine_guardian,
 		//Caustic add end
+		*/
 		/datum/advclass/mercenary/steppesman,
 		/datum/advclass/mercenary/warscholar,
 		/datum/advclass/mercenary/warscholar_pontifex,

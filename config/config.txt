@@ -251,13 +251,13 @@ USEBLACKLIST
 # SERVER ss13.example.com:2506
 
 ## Discod address
-# DISCORDURL https://discord.gg/bx9c7ha5Qk
+# DISCORDURL https://discord.gg/E2ay9BUszE
 
 ## Wiki address
-# WIKIURL https://wiki.moviesfreepremium.xyz/blackstone
+WIKIURL https://ochrevalley.miraheze.org
 
 ## Rules address
-# RULESURL https://wiki.moviesfreepremium.xyz/blackstone/rules
+RULESURL https://ochrevalley.miraheze.org/wiki/Rules
 
 ## Github address
 GITHUBURL https://github.com/Ochre-Valley/Ochre-Valley

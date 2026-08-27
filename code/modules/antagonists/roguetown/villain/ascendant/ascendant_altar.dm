@@ -1,7 +1,7 @@
 // OH GOD IT'S SO SHITTY IM SO SORRY PLEASE PLEAS EPLEASEP ELEA
 
 GLOBAL_LIST_INIT(psydon_pool, list(
-	/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk,  //todo: items lol
+	/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk,	//todo: items lol
 	/obj/item/clothing/suit/roguetown/armor/gambeson,
 	/obj/item/clothing/suit/roguetown/armor/leather,
 	/obj/item/reagent_containers/glass/bottle/waterskin,
@@ -75,9 +75,6 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 	user.STAWIL += 2
 	user.STASPD += 2
 	user.STALUC += 2
-	// OV Edit Start
-	user.update_sight()
-	// OV Edit End
 
 	//check what ascendpoint they are on and add that trait
 	switch(ascendpoints)
@@ -147,9 +144,6 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 	user.STAWIL += 2
 	user.STASPD += 2
 	user.STALUC += 2
-	// OV Edit Start
-	user.update_sight()
-	// OV Edit End
 
 	switch(ascend_stage)
 		if(1)
@@ -224,9 +218,6 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 			user.STAWIL += 10
 			user.STASPD += 10
 			user.STALUC += 6
-			// OV Edit Start
-			user.update_sight()
-			// OV Edit End
 
 			heavensaysdanger() //Roger, our deal is honored; you will be rewarded in heaven.
 			addomen(ASCEND_ASCENDANT)
@@ -244,4 +235,4 @@ GLOBAL_LIST_INIT(capstone_pool, list(
 /obj/structure/ascendant_altar/proc/heavensaysdanger()
 	priority_announce("THE DREAMER HAS ASCENDED - MAJOR ARCANA : T$yh3 TOW##ER, RE v3RSED", "GOD IS COMING", 'sound/villain/ascendant_intro.ogg')
 	sleep(15 SECONDS)
-	to_chat(world, span_danger("The ground underneath THE THRONE shakes. The sky is opening."))
+	to_world(span_danger("The ground underneath THE THRONE shakes. The sky is opening."))

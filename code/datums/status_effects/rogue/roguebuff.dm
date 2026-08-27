@@ -447,7 +447,7 @@
 
 	var/datum/component/arousal/arousal_comp = owner?.GetComponent(/datum/component/arousal)
 	if(arousal_comp)
-		arousal_comp.set_charge(SEX_MAX_CHARGE)  // Fully restore charge
+		arousal_comp.set_charge(SEX_MAX_CHARGE)	// Fully restore charge
 
 /datum/status_effect/buff/fermented_crab/on_remove()
 	. = ..()
@@ -1222,7 +1222,7 @@
 /datum/status_effect/buff/guidinglight // Hey did u follow us from ritualcircles? Cool, okay this stuff is pretty simple yeah? Most ritual circles use some sort of status effects to get their effects ez.
 	id = "guidinglight"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/guidinglight
-	duration = 30 MINUTES // Lasts for 30 minutes, roughly an ingame day. This should be the gold standard for rituals, unless its some particularly powerul effect or one-time effect(Flylord's triage)
+	duration = 20 MINUTES
 	status_type = STATUS_EFFECT_REFRESH
 	effectedstats = list(STATKEY_PER = 2) // This is for basic stat effects, I would consider these a 'little topping' and not what you should rlly aim for for rituals. Ideally we have cool flavor boons, rather than combat stims.
 	examine_text = "SUBJECTPRONOUN walks with Her Light!"
@@ -1270,7 +1270,7 @@
 	id = "Moonsight"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/moonlightdance
 	effectedstats = list(STATKEY_INT = 2)
-	duration = 25 MINUTES
+	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/moonlightdance
 	name = "Moonlight Dance"
@@ -1401,7 +1401,7 @@
 /datum/status_effect/buff/undermaidenbargain
 	id = "undermaidenbargain"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/undermaidenbargain
-	duration = 30 MINUTES
+	duration = 20 MINUTES
 
 /datum/status_effect/buff/undermaidenbargain/on_apply()
 	. = ..()
@@ -1477,7 +1477,7 @@
 /datum/status_effect/buff/lesserwolf
 	id = "lesserwolf"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/lesserwolf
-	duration = 30 MINUTES
+	duration = 20 MINUTES
 
 /datum/status_effect/buff/lesserwolf/on_apply()
 	. = ..()
@@ -1530,7 +1530,7 @@
 /datum/status_effect/buff/pacify
 	id = "pacify"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/pacify
-	duration = 30 MINUTES
+	duration = 20 MINUTES
 
 /datum/status_effect/buff/pacify/on_apply()
 	. = ..()
@@ -1919,8 +1919,8 @@
 	target.stamina_add((target.max_stamina / 3))
 	target.energy_add((-target.max_energy / 5))
 
-#define LGUARD_SHARPNESS_LOSS     150
-#define LGUARD_INTEG_LOSS		  100
+#define LGUARD_SHARPNESS_LOSS		150
+#define LGUARD_INTEG_LOSS			100
 
 /datum/status_effect/buff/clash/limbguard/proc/perform_disarm(mob/living/carbon/human/target)
 	var/obj/item/I = target.get_active_held_item()
@@ -1952,6 +1952,16 @@
 		owner.remove_status_effect(/datum/status_effect/buff/clash/limbguard)
 	else
 		qdel(src)
+
+// When a spell is blocked and a weapon isn't logically involved. It will deflect, blocks the spell, but will not remotely disarm them, since that make no sense. I.e. Dragons Breath.
+/datum/status_effect/buff/clash/limbguard/proc/block_spell(mob/living/target, mob/living/attacker, spell_name = "the spell")
+	if(!is_active || target != owner)
+		return FALSE
+	do_sparks(2, TRUE, get_turf(owner))
+	playsound(owner, 'sound/combat/limbguard_struck.ogg', 100, TRUE)
+	owner.visible_message(span_warning("[owner] wards [owner.p_their()] [parse_zone(protected_zone)] against [spell_name]!"), \
+		span_notice("My guard wards off [spell_name]!"))
+	return TRUE
 
 //Projectile struck our protected limb. Unlike regular Riposte, this will block the projectile at no cost.
 /datum/status_effect/buff/clash/limbguard/guard_struck_by_projectile(mob/living/target, obj/P, hit_zone)
@@ -2037,11 +2047,11 @@
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
 	if(HAS_TRAIT(owner, TRAIT_MEDIUMARMOR) && !HAS_TRAIT(owner, TRAIT_HEAVYARMOR))
-		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /datum/status_effect/buff/psydonic_endurance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
 	name = "Psydonic Vitality"
@@ -2067,12 +2077,12 @@
 /datum/status_effect/buff/griefflower/on_apply()
 	. = ..()
 	to_chat(owner, span_notice("The Rosa’s ring draws blood, but it’s the memories that truly wound. Failure after failure surging through you like thorns blooming inward."))
-	ADD_TRAIT(owner, TRAIT_CRACKHEAD, src)
+	ADD_TRAIT(owner, TRAIT_CRACKHEAD, REF(src))
 
 /datum/status_effect/buff/griefflower/on_remove()
 	. = ..()
 	to_chat(owner, span_notice("You part from the Rosa’s touch. The ache retreats..."))
-	REMOVE_TRAIT(owner, TRAIT_CRACKHEAD, src)
+	REMOVE_TRAIT(owner, TRAIT_CRACKHEAD, REF(src))
 
 /atom/movable/screen/alert/status_effect/buff/griefflower
 	name = "Rosa Ring"
@@ -2254,9 +2264,8 @@
 /datum/status_effect/buff/ravox_vow
 	id = "ravox_vow"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/ravox_vow
-	effectedstats = list(STATKEY_STR = 1, STATKEY_WIL = 1)
 	status_type = STATUS_EFFECT_UNIQUE
-	duration = -1
+	duration = 20 MINUTES
 	tick_interval = -1
 
 /datum/status_effect/buff/ravox_vow/proc/on_life()
@@ -2320,7 +2329,7 @@
 /datum/status_effect/joybringer
 	id = "joybringer"
 	var/outline_colour = "#a529e8"
-	duration = -1
+	duration = 20 MINUTES
 	tick_interval = -1
 	examine_text = span_love("SUBJECTPRONOUN is bathed in Baotha's blessings!")
 	alert_type = null
@@ -2647,7 +2656,7 @@
 /datum/status_effect/plaguebringer
 	id = "plaguebringer"
 	var/outline_colour = "#2C4628"
-	duration = -1
+	duration = 20 MINUTES
 	tick_interval = -1
 	examine_text = span_good("SUBJECTPRONOUN is emanating Rot!")
 	alert_type = null
@@ -2668,6 +2677,7 @@
 
 	owner.overlays_standing[PLAGUEBRINGER_FILTER] = effect
 	owner.apply_overlay(PLAGUEBRINGER_FILTER)
+	ADD_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_RITUAL)
 
 	RegisterSignal(owner, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 
@@ -2676,6 +2686,8 @@
 
 	owner.remove_filter(PLAGUEBRINGER_FILTER)
 	owner.remove_overlay(PLAGUEBRINGER_FILTER)
+
+	REMOVE_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_RITUAL)
 
 	UnregisterSignal(owner, COMSIG_LIVING_LIFE)
 
@@ -2777,7 +2789,7 @@
 /datum/status_effect/eoranaura
 	id = "eoranaura"
 	var/outline_colour = "#EEBBBB"
-	duration = -1
+	duration = 10 MINUTES
 	tick_interval = -1
 	examine_text = span_good("SUBJECTPRONOUN is bathed in Eora's Light!")
 	alert_type = null
@@ -2798,6 +2810,7 @@
 
 	owner.overlays_standing[EORANAURA_FILTER] = effect
 	owner.apply_overlay(EORANAURA_FILTER)
+	ADD_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_RITUAL)
 
 	RegisterSignal(owner, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 
@@ -2806,6 +2819,7 @@
 
 	owner.remove_filter(EORANAURA_FILTER)
 	owner.remove_overlay(EORANAURA_FILTER)
+	REMOVE_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_RITUAL)
 
 	UnregisterSignal(owner, COMSIG_LIVING_LIFE)
 
@@ -2813,7 +2827,7 @@
 	SIGNAL_HANDLER
 
 	for(var/mob/living/mob in get_hearers_in_view(2, owner))
-		if(HAS_TRAIT(mob,  TRAIT_PSYDONITE) || HAS_TRAIT(mob,  TRAIT_UNFORGIVABLE))
+		if(HAS_TRAIT(mob,	TRAIT_PSYDONITE) || HAS_TRAIT(mob,	TRAIT_UNFORGIVABLE))
 			continue
 
 		mob.apply_status_effect(/datum/status_effect/eora_blessing)
@@ -2835,16 +2849,25 @@
 	var/energy_per_tick = 0
 	var/total_to_restore = 0
 	var/currently_restored = 0
+	/// Missing energy percentage to restore
+	var/restore_percent_missing = 34
+	/// Minimum safety floor percentage to restore
+	var/min_restore_percent = 20
 
-/datum/status_effect/buff/invigoration/on_creation(mob/living/new_owner, set_duration = 10 SECONDS, restore_percent_missing = 34, min_restore_percent = 20)
+/datum/status_effect/buff/invigoration/on_creation(mob/living/new_owner, set_duration, set_restore_missing, set_min_restore)
+	// Respect custom overrides passed in, otherwise fall back to path variables
 	if(set_duration)
 		duration = set_duration
+	if(set_restore_missing)
+		restore_percent_missing = set_restore_missing
+	if(set_min_restore)
+		min_restore_percent = set_min_restore
 
 	var/missing_energy = new_owner.max_energy - new_owner.energy
 	var/percent_missing = (missing_energy / new_owner.max_energy) * 100
 	var/percent_missing_percent = percent_missing * (restore_percent_missing / 100)
 
-	// either the provided restore missing % or the minimum safety floor
+	// Either the calculated missing % or the minimum safety floor
 	var/restore_target_percent = max(percent_missing_percent, min_restore_percent)
 
 	// Total amount we want to restore over the whole duration
@@ -2852,8 +2875,9 @@
 
 	// Divide that total by the number of ticks
 	var/tick_interval = 1 SECONDS
-	var/num_ticks = max(round(set_duration / tick_interval), 1)
+	var/num_ticks = max(round(duration / tick_interval), 1)
 	energy_per_tick = total_to_restore / num_ticks
+
 	return ..()
 
 /datum/status_effect/buff/invigoration/on_apply()

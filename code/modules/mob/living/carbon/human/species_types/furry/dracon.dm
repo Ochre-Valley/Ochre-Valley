@@ -9,7 +9,7 @@
 	origin = "Lirvas"
 	base_name = "Zard"
 	desc_title = "Drakian"
-	desc = "Mighty scaled individuals who claim to be descendants of the dragons of yore."
+	desc = "Hailing from Lirvas, Drakians are winged relatives of the Zardmen, results of Matthios's doomed attempts to mimic the forms of drakkyn. Though they may share visual similarities, and their pride tends to befit such, no Drakian would ever claim to be a descendent of the drakkyn, as to do so is to invite a terrible wasting curse."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	///Caustic edit
 	allowed_taur_types = list(

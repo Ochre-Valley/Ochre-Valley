@@ -145,7 +145,7 @@
 		return
 	. = A.forceMove(dest)
 
-/obj/structure/fluff/railing/Initialize()
+/obj/structure/fluff/railing/Initialize(mapload)
 	. = ..()
 	init_connect_loc_element()
 	var/lay = getwlayer(dir)
@@ -300,7 +300,7 @@
 	pass_crawl = FALSE
 	climb_offset = 6
 
-/obj/structure/fluff/railing/fence/Initialize()
+/obj/structure/fluff/railing/fence/Initialize(mapload)
 	. = ..()
 	smooth_fences()
 
@@ -347,7 +347,7 @@
 	density = TRUE
 	anchored = TRUE
 	blade_dulling = DULLING_BASHCHOP
-	max_integrity = 700
+	max_integrity = 1400
 	damage_deflection = 12
 	integrity_failure = 0.15
 	dir = SOUTH
@@ -381,7 +381,7 @@
 
 /obj/structure/bars/steel
 	name = "steel bars"
-	max_integrity = 2000
+	max_integrity = 2500
 
 /obj/structure/bars/tough
 	max_integrity = 9000
@@ -397,7 +397,10 @@
 	..()
 */
 /obj/structure/bars/obj_break(damage_flag)
-	icon_state = "[initial(icon_state)]b"
+	if(isnull(broken_icon_state))
+		icon_state = "[initial(icon_state)]b"
+	else
+		icon_state = broken_icon_state
 	density = FALSE
 	..()
 
@@ -408,12 +411,13 @@
 	icon_state = "passage0"
 	desc = "This looks like it can open and close!"
 	density = TRUE
-	max_integrity = 1500
+	max_integrity = 2000
 	redstone_structure = TRUE
+	broken_icon_state = "passage1b"
 
 /obj/structure/bars/passage/steel
 	name = "steel bars"
-	max_integrity = 2000
+	max_integrity = 2500
 
 /obj/structure/bars/passage/redstone_triggered()
 	if(obj_broken)
@@ -459,7 +463,7 @@
 		user.visible_message("<span class='info'>[user] Carves a name into the passage.</span>")
 		if(do_after(user, 10))
 			var/passagename
-			passagename = sanitize(input("What name would you like to carve into the passage?"))
+			passagename = sanitize(input(user, "What name would you like to carve into the passage?"))
 			if (passagename)
 				name = passagename + "(passage)"
 				desc = "a passage with a name carved into it"
@@ -476,7 +480,7 @@
 	desc = ""
 	icon_state = "floorgrille"
 	density = FALSE
-	layer = TABLE_LAYER
+	//layer = TABLE_LAYER
 	plane = GAME_PLANE
 	damage_deflection = 5
 	blade_dulling = DULLING_BASHCHOP
@@ -485,7 +489,7 @@
 	var/togg = FALSE
 	redstone_structure = TRUE
 
-/obj/structure/bars/grille/Initialize()
+/obj/structure/bars/grille/Initialize(mapload)
 	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40)
 	dir = pick(GLOB.cardinals)
 	return ..()
@@ -526,7 +530,7 @@
 		user.visible_message("<span class='info'>[user] Carves a name into the grille.</span>")
 		if(do_after(user, 10))
 			var/grillename
-			grillename = sanitize(input("What name would you like to carve into the grille?"))
+			grillename = sanitize(input(user, "What name would you like to carve into the grille?"))
 			if (grillename)
 				name = grillename + "(grille)"
 				desc = "a grille with a name carved into it"
@@ -578,7 +582,7 @@
 	var/datum/looping_sound/clockloop/soundloop
 	drag_slowdown = 3
 
-/obj/structure/fluff/clock/Initialize()
+/obj/structure/fluff/clock/Initialize(mapload)
 	soundloop = new(src, FALSE)
 	soundloop.start()
 	. = ..()
@@ -605,7 +609,7 @@
 	. = ..()
 	if(obj_broken)
 		return
-	var/day = lowertext(get_current_day_of_week_name())
+	var/day = LOWER_TEXT(get_current_day_of_week_name())
 	. += "Oh no, it's [station_time_timestamp("hh:mm")] on a [day]"
 //		if(SSshuttle.emergency.mode == SHUTTLE_DOCKED)
 //			if(SSshuttle.emergency.timeLeft() < 30 MINUTES)
@@ -657,10 +661,10 @@
 	. = ..()
 	if(obj_broken)
 		return
-	var/day = lowertext(get_current_day_of_week_name())
+	var/day = LOWER_TEXT(get_current_day_of_week_name())
 	. += "Oh no, it's [station_time_timestamp("hh:mm")] on a [day]"
 
-/obj/structure/fluff/wallclock/Initialize()
+/obj/structure/fluff/wallclock/Initialize(mapload)
 	soundloop = new(src, FALSE)
 	soundloop.start()
 	. = ..()
@@ -812,7 +816,7 @@
 	. = ..()
 	. += span_info("Right-click to access your personal stash. This not only contains the loadout you might've asseembled in the character creation menu, but virtue- and role-specific items as well.")
 
-/obj/structure/fluff/statue/Initialize()
+/obj/structure/fluff/statue/Initialize(mapload)
 	. = ..()
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
 	AddElement(/datum/element/connect_loc, loc_connections)
@@ -994,7 +998,7 @@
 		return
 	practice(user, attacking_weapon.associated_skill, user.used_intent.animname)
 
-/obj/structure/fluff/statue/tdummy/proc/practice(var/mob/living/living_mob, var/associated_skill, var/attack_animation)
+/obj/structure/fluff/statue/tdummy/proc/practice(mob/living/living_mob, associated_skill, attack_animation)
 	living_mob.changeNext_move(CLICK_CD_MELEE)
 	living_mob.stamina_add(rand(4, 6))
 
@@ -1060,7 +1064,7 @@
 		/obj/item/candle/candlestick/gold,
 		/obj/item/kitchen/fork/silver,
 		/obj/item/kitchen/fork/gold,
-        /obj/item/kitchen/spoon/silver,
+		/obj/item/kitchen/spoon/silver,
 		/obj/item/kitchen/spoon/gold,
 		/obj/item/roguestatue,
 		/obj/item/riddleofsteel,
@@ -1073,7 +1077,7 @@
 		/obj/item/scomstone,
 		/obj/item/rogueweapon/greatsword/psygsword,
 		/obj/item/clothing/head/roguetown/circlet,
-		/obj/item/carvedgem,  //Some of these aren't particularly worth much, but it'd be REALLY unintuitive for "valuables" to not actually be offerings
+		/obj/item/carvedgem,	//Some of these aren't particularly worth much, but it'd be REALLY unintuitive for "valuables" to not actually be offerings
 		/obj/item/rogueweapon/huntingknife/combat/jadekukri,
 		/obj/item/rogueweapon/huntingknife/combat/opalknife,
 		/obj/item/rogueweapon/spear/turq,
@@ -1162,7 +1166,7 @@
 		. += span_info("As an Eoran, you can marry two people by having them both bite an apple, then offering it to the cross.")
 		. += span_info("The second person to bite the apple will take the last name of whoever bit it first.")
 
-/obj/structure/fluff/psycross/Initialize()
+/obj/structure/fluff/psycross/Initialize(mapload)
 	. = ..()
 	become_hearing_sensitive()
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
@@ -1493,7 +1497,7 @@
 	else
 		to_chat(user, span_warning("No weapon was chosen."))
 
-/obj/structure/fluff/psycross/proc/summon_and_equip(mob/user, var/obj/item/rogueweapon/weapontype)
+/obj/structure/fluff/psycross/proc/summon_and_equip(mob/user, obj/item/rogueweapon/weapontype)
 	var/obj/item/rogueweapon/old_weapon = SSroguemachine.martyrweapon
 	var/integrity
 
@@ -1594,7 +1598,7 @@
 	update_icon()
 	stake = locate(/obj/item/grown/log/tree/stake) in parts_list
 
-///obj/structure/fluff/headstake/Initialize()
+///obj/structure/fluff/headstake/Initialize(mapload)
 //	. = ..()
 
 /obj/structure/fluff/headstake/OnCrafted(dirin, user)

@@ -64,15 +64,17 @@
 	AIStatus = AI_OFF
 	can_have_ai = FALSE
 	ai_controller = /datum/ai_controller/volf
+	move_base_delay = MOVEMENT_DELAY_SPD_3
 	melee_cooldown = WOLF_ATTACK_SPEED
 	capture_difficulty = 10 //OV ADD
 
-/mob/living/simple_animal/hostile/retaliate/rogue/werewolf_npc/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/werewolf_npc/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	regenerate_icons()
 	ADD_TRAIT(src, TRAIT_SIMPLE_WOUNDS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_SILVER_WEAK, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NPC_EXAMINE, TRAIT_GENERIC)
 	update_icon()
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, food_type)
 
@@ -81,9 +83,10 @@
 	icon_living = "wwolf_f"
 	gender = FEMALE
 
-/mob/living/simple_animal/hostile/retaliate/rogue/werewolf_npc/f/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/werewolf_npc/f/Initialize(mapload)
 	. = ..()
 	regenerate_icons()
 	regenerate_icons()
 	ADD_TRAIT(src, TRAIT_SIMPLE_WOUNDS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_SILVER_WEAK, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NPC_EXAMINE, TRAIT_GENERIC)

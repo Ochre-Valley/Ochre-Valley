@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(reformation_portals)
 	qdel(src)
 
 /obj/structure/respawn_portal/Destroy()
-	soundloop.stop()
+//	soundloop.stop() //OV REMOVE
 	. = ..()
 
 /mob/dead/observer/proc/bring_body(var/turf/portal_loc) //OV EDIT

@@ -54,12 +54,40 @@
 	grid_width = 32
 	grid_height = 32
 
+/obj/item/clothing/mask/rogue/spectacles/fancy
+	name = "fancy spectacles"
+	desc = "Delicate, thin-lensed spectacles of foreign make, their craft finer than most local wares."
+	icon_state = "glassesb"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/masks.dmi'
+	break_sound = "glassbreak"
+	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	max_integrity = 30
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+
+/obj/item/clothing/mask/rogue/spectacles/fancy_dark
+	name = "fancy tinted spectacles"
+	desc = "Delicate, thin-lensed spectacles of foreign make, their craft finer than most local wares. This variant has a darker tint to its lenses."
+	icon_state = "glassesb_dark"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/masks.dmi'
+	break_sound = "glassbreak"
+	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	max_integrity = 30
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+
 /obj/item/clothing/mask/rogue/faceveil
 	name = "simple veil"
-	icon_state = "faceveil"
 	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
+	icon_state = "faceveil"
+	flags_inv = HIDEFACE|HIDESNOUT
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
 	grid_width = 32
 	grid_height = 32
+
+/obj/item/clothing/mask/rogue/faceveil/ComponentInitialize()
+	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/foley/equip/rummaging-03.ogg', null, (UPD_HEAD|UPD_MASK))	//Standard mask
 
 /obj/item/clothing/mask/rogue/spectacles/inq
 	name = "otavan nocshade lens-pair"
@@ -108,7 +136,8 @@
 /obj/item/clothing/mask/rogue/spectacles/golden
 	name = "golden spectacles"
 	icon_state = "goggles"
-	max_integrity = 35
+	max_integrity = 35 //this'll stop one or two good hits
+	armor = ARMOR_PLATE_BSTEEL //however, it can stop some *very strong* piercing. Essentially, ablative armor
 	adjustable = CAN_CADJUST
 	var/active_item = FALSE
 
@@ -156,7 +185,7 @@
 	desc = "Death has come to your little town, Sheriff. Now, you can either ignore it, or you can help me to stop it."
 	icon_state = "sglasses"
 
-/obj/item/clothing/mask/rogue/spectacles/Initialize()
+/obj/item/clothing/mask/rogue/spectacles/Initialize(mapload)
 	..()
 	AddComponent(/datum/component/spill, null, 'sound/blank.ogg')
 
@@ -756,9 +785,8 @@
 	name = "iron spectacles"
 	desc = "Iron-framed spectacles built to weather rough treatment. They sit firm upon the face, no matter how heated the exchange."
 	icon_state = "igoggles"
-	break_sound = "glassbreak"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 30
+	armor = ARMOR_PLATE_BSTEEL
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 
@@ -769,9 +797,8 @@
 	name = "bronze spectacles"
 	desc = "Bronze frames holding thick glass lenses. Favored by those who would rather trust tempered metal than delicate craft."
 	icon_state = "bgoggles"
-	break_sound = "glassbreak"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 30
+	armor = ARMOR_PLATE_BSTEEL
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 
@@ -779,12 +806,12 @@
 	name = "steel spectacles"
 	desc = "Steel spectacles wrought with a artificier's pragmatism. Clear sight is worth little if the frame shatters at the first strike."
 	icon_state = "sgoggles"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 40 // slightly more durable for the cqc nerds (stills 1 hit to break)
+	armor = ARMOR_PLATE_BSTEEL
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 
-// Duelist Goggles = New invention that protects your eyes against critical hits +  doesn't hide your identity
+// Duelist Goggles = New invention that protects your eyes against critical hits +	doesn't hide your identity
 
 /obj/item/clothing/mask/rogue/spectacles/duelist
 	name = "iron duelist goggles"
@@ -902,6 +929,25 @@
 
 /obj/item/clothing/mask/rogue/facemask/maille/fluted/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/foley/equip/chain_equip.ogg', null, (UPD_HEAD|UPD_MASK))	//Standard mask
+
+/obj/item/clothing/mask/rogue/facemask/steel/visor
+	name = "helmetless visor"
+	desc = "Fashion eschewing any practicality, or a knight's belonging so downtrodden the rest of their helmet was lost. Only seems to cover the eyes and nose, if barely."
+	icon_state = "helmetless_visor"
+	armor = ARMOR_PLATE
+	flags_inv = HIDEFACE|HIDESNOUT
+	body_parts_covered = EYES | NOSE
+	block2add = FOV_DEFAULT
+	max_integrity = ARMOR_INT_MASK_STEEL
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP|ITEM_SLOT_HEAD
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/mask/rogue/facemask/steel/visor/flimsy
+	name = "flimsy helmetless visor"
+	desc = "Hand-made by misplaced Ranesheni tailors that had never touched a real iron bar, this flimsy mask offers barely any protection, as it was made for fashion."
+	armor = ARMOR_BRONZE
+	max_integrity = ARMOR_INT_MASK_STONE
+	smeltresult = null
 
 //OV ADD START
 /obj/item/clothing/mask/rogue/xylixmask/xylixhalfmask

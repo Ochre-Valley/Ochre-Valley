@@ -47,7 +47,9 @@
 		/datum/advclass/wretch/vigilante,
 		/datum/advclass/wretch/munitioneer,
 		/datum/advclass/wretch/pariah,
+		/datum/advclass/wretch/profane_champion,
 		/datum/advclass/wretch/heretic_spellblade,
+		/datum/advclass/wretch/heretic_spellfist,
 		/datum/advclass/wretch/ancient_spellblade,
 		/datum/advclass/wretch/ancient_deathknight,
 		/datum/advclass/wretch/slasher,
@@ -105,17 +107,17 @@
 		winset(usr, "[JOB_SUBPREFS_WINDOW_ID]", "focus=true")
 
 /datum/job/roguetown/wretch/special_job_check(mob/dead/new_player/player)
-    /*OV Remove - Psydon should not block wretches even if they are soft antags!
+	/*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
-    */
+	*/
 	return ..()
 
 /datum/job/roguetown/wretch/special_check_latejoin(client/C)
-    /*OV Remove - Psydon should not block wretches even if they are soft antags!
+	/*OV Remove - Psydon should not block wretches even if they are soft antags!
 	if(is_storyteller_soft_antag_blocked())
 		return FALSE
-    */
+	*/
 	return ..()
 
 /datum/job/roguetown/wretch/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -232,7 +234,7 @@
 		result["tier2_extra"] = 0
 		result["final_slots"] = 0
 		return result
-    */
+	*/
 
 
 	// Check for major round antagonists (lich, vampire lord, any bandits) — they lock tier 2.

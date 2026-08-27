@@ -69,8 +69,10 @@
 		if(isaasimar(target) && !(HAS_TRAIT(target, TRAIT_ANCIENT_HAG) || HAS_TRAIT(target, TRAIT_FEYTOUCHED)))
 			new /obj/item/reagent_containers/lux(target.loc)
 			apply_greater = TRUE
-		else if(HAS_TRAIT(target, TRAIT_ANCIENT_HAG) || HAS_TRAIT(target, TRAIT_FEYTOUCHED))
+		//ov edit, feycursed
+		else if(HAS_TRAIT(target, TRAIT_ANCIENT_HAG) || HAS_TRAIT(target, TRAIT_FEYTOUCHED) || HAS_TRAIT(target, TRAIT_FEYCURSED))
 			new /obj/item/reagent_containers/lux_moss(target.loc)
+		//ov edit end
 		else
 			new /obj/item/reagent_containers/lux_impure(target.loc)
 

@@ -113,4 +113,4 @@
 /// * SPAN_LINKIFY doesn't work here.
 #define SPAN_TOOLTIP_DANGEROUS_HTML(tip, str) ("<span data-component=\"TooltipHTML\" data-html=\"[html_encode(tip)]\" class=\"tooltip\">[str]</span>")
 
-#define span_spoiler(str) ("<span class='spoiler'>" + str + "</span>") // OC EDIT
+#define span_spoiler(str) ("<span class='spoiler'>" + str + "</span>") // OV EDIT

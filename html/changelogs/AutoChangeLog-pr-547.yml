@@ -1,0 +1,5 @@
+author: "SomeDeviant"
+delete-after: True
+changes:
+  - rscadd: "added Nite Eyes Virtue"
+  - balance: "reverted Darkvision to AP Standard"

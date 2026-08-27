@@ -1,10 +1,5 @@
-/mob/living/carbon/Initialize()
+/mob/living/carbon/Initialize(mapload)
 	..()
-
-	//OV Add Start
-	RegisterSignal(src, list(SIGNAL_ADDTRAIT(TRAIT_DARKVISION), SIGNAL_ADDTRAIT(TRAIT_ZIZOSIGHT)), PROC_REF(on_darkvision_trait_changed))
-	RegisterSignal(src, list(SIGNAL_REMOVETRAIT(TRAIT_DARKVISION), SIGNAL_REMOVETRAIT(TRAIT_ZIZOSIGHT)), PROC_REF(on_darkvision_trait_changed))
-	//OV Add End
 
 	recalculate_pain_threshold()
 
@@ -19,9 +14,7 @@
 
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
-	. =  ..()
-
-	UnregisterSignal(src, list(SIGNAL_ADDTRAIT(TRAIT_DARKVISION), SIGNAL_REMOVETRAIT(TRAIT_DARKVISION), SIGNAL_ADDTRAIT(TRAIT_ZIZOSIGHT), SIGNAL_REMOVETRAIT(TRAIT_ZIZOSIGHT)))
+	. =	..()
 
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
@@ -30,11 +23,6 @@
 	QDEL_NULL(dna)
 	QDEL_NULL(underwear)
 	GLOB.carbon_list -= src
-
-/mob/living/carbon/proc/on_darkvision_trait_changed()
-	SIGNAL_HANDLER
-
-	update_sight()
 
 /mob/living/carbon/ZImpactDamage(turf/T, levels)
 	var/obj/item/bodypart/affecting
@@ -106,7 +94,7 @@
 		selhand = (active_hand_index % held_items.len)+1
 
 	if(istext(selhand))
-		selhand = lowertext(selhand)
+		selhand = LOWER_TEXT(selhand)
 		if(selhand == "right" || selhand == "r")
 			selhand = 2
 		if(selhand == "left" || selhand == "l")
@@ -184,11 +172,7 @@
 			visible_message("<span class='danger'>[src] crashes into [victim]!",\
 				"<span class='danger'>I violently crash into [victim]!</span>")
 			playsound(src,"genblunt",100,TRUE)
-			/*var/nomprob //Caustic Edit - Commented this out, and it was added but never marked lol, but it was for the unfinished vore implementation
-			if(voremode)
-				nomprob = ((get_stat(STATKEY_LCK - 10) * 10) + ((get_stat(STATKEY_STR) - 10) * 10) + (get_stat(STATKEY_SPD)))
-				if(prob(nomprob))
-					spontaneous_vore_attackby(victim, src)*/
+
 
 
 //Throwing stuff
@@ -333,7 +317,7 @@
 
 	for(var/i in 1 to held_items.len)
 		var/obj/item/I = get_item_for_held_index(i)
-		dat += "<BR><B>[get_held_index_name(i)]:</B> </td><td><A href='?src=[REF(src)];item=[SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "Nothing"]</a>"
+		dat += "<BR><B>[get_held_index_name(i)]:</B> <A href='?src=[REF(src)];item=[SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "Nothing"]</a>"
 
 	dat += "<BR><B>Back:</B> <A href='?src=[REF(src)];item=[SLOT_BACK]'>[back ? back : "Nothing"]</A>"
 
@@ -818,26 +802,9 @@
 		if(!isnull(G.lighting_alpha))
 			lighting_alpha = min(lighting_alpha, G.lighting_alpha)
 
-	// OV Edit Start
-	if(HAS_TRAIT(src, TRAIT_DARKVISION) || HAS_TRAIT(src, TRAIT_ZIZOSIGHT))
-		var/perception = clamp(get_stat(STATKEY_PER), 8, 15)
-		// Remap the old PER 10-13 Darksight range across PER 8-15.
-		var/perception_ratio = (perception - 8) / 7
-		var/perception_bonus = 1 + (perception_ratio * 3)
-		var/vision_ratio = perception_bonus / 6
-		var/darksight_alpha = round(LIGHTING_PLANE_ALPHA_DARKVISION * (1 - vision_ratio))
-		var/darkvision_accessibility = client?.prefs ? client.prefs.darkvision_accessibility : 0
-		var/min_darkvision_potency = DARKVISION_BASE_POTENCY + (DARKVISION_ACCESSIBILITY_MIN / 100)
-		var/max_darkvision_potency = DARKVISION_BASE_POTENCY + (DARKVISION_ACCESSIBILITY_MAX / 100)
-		var/darkvision_potency = clamp(DARKVISION_BASE_POTENCY + (darkvision_accessibility / 100), min_darkvision_potency, max_darkvision_potency)
-		var/darkvision_effect = LIGHTING_PLANE_ALPHA_VISIBLE - darksight_alpha
-		var/darksight_level = 9 + round(perception_bonus * darkvision_potency)
-		// Scale the alpha reduction so the default is substantially darker while accessibility can restore strength.
-		darksight_alpha = round(LIGHTING_PLANE_ALPHA_VISIBLE - (darkvision_effect * darkvision_potency))
-
-		lighting_alpha = min(lighting_alpha, darksight_alpha)
-		see_in_dark = max(see_in_dark, darksight_level)
-	// OV Edit End
+	if(HAS_TRAIT(src, TRAIT_DARKVISION))
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_DARKVISION)
+		see_in_dark = max(see_in_dark, 12)
 
 	if(HAS_TRAIT(src, TRAIT_NITEVISION))
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
@@ -865,6 +832,10 @@
 
 	if(HAS_TRAIT(src, TRAIT_XRAY_VISION))
 		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		see_in_dark = max(see_in_dark, 8)
+
+	if(HAS_TRAIT(src, TRAIT_ZIZOSIGHT))
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_ZIZOVISION)
 		see_in_dark = max(see_in_dark, 8)
 
 	if(see_override)

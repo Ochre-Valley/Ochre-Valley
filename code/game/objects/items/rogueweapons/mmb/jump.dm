@@ -30,6 +30,9 @@
 	if(src.get_num_legs() < 2)
 		return FALSE
 
+	if(incapacitated(ignore_restraints = TRUE))
+		return FALSE
+
 	if(pulledby && pulledby != src)
 		to_chat(src, span_warning("I'm being grabbed."))
 		changeNext_move(mmb_intent.clickcd)
@@ -199,6 +202,8 @@
 	if(A == src || A == src.loc)
 		return FALSE
 	if(get_num_legs() < 2)
+		return FALSE
+	if(incapacitated(ignore_restraints = TRUE))
 		return FALSE
 	if(pulledby && pulledby != src)
 		to_chat(src, span_warning("I'm being grabbed."))

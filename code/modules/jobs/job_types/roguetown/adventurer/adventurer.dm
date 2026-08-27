@@ -75,6 +75,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/rogue/tinkerer,
 		///Caustic edit end
 		/datum/advclass/true_random, //OV ADD
+		/datum/advclass/foreigner/shrine_guardian, // OV ADD
 		/datum/advclass/foreigner/shepherd,
 		/datum/advclass/foreigner/fencerguy,
 		/datum/advclass/foreigner/bronzeclad,

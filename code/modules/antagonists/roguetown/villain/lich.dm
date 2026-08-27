@@ -87,7 +87,6 @@
 	STALUC = owner.current.STALUC
 
 /datum/antagonist/lich/proc/set_stats()
-	// OV Edit Start
 	owner.current.STASTR = src.STASTR
 	owner.current.STAPER = src.STAPER
 	owner.current.STACON = src.STACON
@@ -95,8 +94,6 @@
 	owner.current.STASPD = src.STASPD
 	owner.current.STAWIL = src.STAWIL
 	owner.current.STALUC = src.STALUC
-	owner.current.update_sight()
-	// OV Edit End
 
 /datum/antagonist/lich/proc/skele_look()
 	var/mob/living/carbon/human/L = owner.current
@@ -364,9 +361,9 @@
 	var/datum/antagonist/lich/possessor
 	var/datum/mind/mind
 
-/obj/item/phylactery/Initialize()
-  ..()
-  add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = GLOW_COLOR_VAMPIRIC, "alpha" = 255, "size" = 1))
+/obj/item/phylactery/Initialize(mapload)
+	..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = GLOW_COLOR_VAMPIRIC, "alpha" = 255, "size" = 1))
 
 /obj/item/phylactery/examine(mob/user)
 	. = ..()
@@ -407,7 +404,7 @@
 	if(user.stat)
 		return FALSE
 
-	var/calltext = sanitize(input("Send Your Will To Your Undead", "UNDEAD ANNOUNCE") as text|null)
+	var/calltext = sanitize(input(user, "Send Your Will To Your Undead", "UNDEAD ANNOUNCE") as text|null)
 	if(!calltext)
 		return FALSE
 
@@ -464,7 +461,7 @@
 	caster.visible_message(span_danger("[caster] begins chanting a deep, primal incantation as lightning arcs nearby!"))
 	new /obj/structure/terrorhog_summon_rune(target_turf, hog_name)
 
-	addtimer(CALLBACK(src, .proc/self_consume, caster), 1)
+	addtimer(CALLBACK(src, PROC_REF(self_consume), caster), 1)
 	return TRUE
 
 /datum/action/cooldown/spell/summon_terrorhog/proc/self_consume(mob/living/L)

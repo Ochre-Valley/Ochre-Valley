@@ -856,8 +856,8 @@
 	var/mob/living/carbon/human/climber
 
 /datum/status_effect/debuff/climbing_lfwb/on_creation(mob/living/new_owner, new_stamcost)
-    stamcost = new_stamcost
-    return ..()
+	stamcost = new_stamcost
+	return ..()
 
 /datum/status_effect/debuff/climbing_lfwb/on_apply()
 	. = ..()
@@ -958,10 +958,10 @@
 	ADD_TRAIT(harpy, TRAIT_SPELLCOCKBLOCK, ORGAN_TRAIT)
 	harpy.flying = TRUE
 	init_signals()
-	var/mob/buckled_rider = harpy.buckled_mobs[1]
+	/*var/mob/buckled_rider = harpy.buckled_mobs[1] //OV EDIT - HARPY BUCKLE REMOVAL TEST
 	if(!isnull(buckled_rider))
 		buckled_mob = WEAKREF(buckled_rider)
-		buckled_rider.movement_type |= FLYING
+		buckled_rider.movement_type |= FLYING*/
 
 /datum/status_effect/debuff/harpy_flight/tick()
 	. = ..()
@@ -1007,10 +1007,10 @@
 		for(var/obj/item/rogueweapon/huntingknife/idagger/harpy_talons/talons in harpy.held_items)
 			harpy.dropItemToGround(talons, TRUE)
 			return
-	var/mob/buckled_rider = buckled_mob.resolve()
+	/*var/mob/buckled_rider = buckled_mob.resolve() //OV EDIT - HARPY BUCKLE RUNTIME FIX
 	if(!isnull(buckled_rider))
 		buckled_rider.movement_type &= ~FLYING
-	buckled_mob = null
+	buckled_mob = null*/
 
 /atom/movable/screen/alert/status_effect/debuff/harpy_flight
 	name = "Flying..."
@@ -1244,7 +1244,7 @@
 	owner.overlay_fullscreen("joybringer_weeds", /atom/movable/screen/fullscreen/weedsm)
 	owner.overlay_fullscreen("joybringer_druqks", /atom/movable/screen/fullscreen/druqks)
 
-	ADD_TRAIT(owner, TRAIT_DRUQK, src)
+	ADD_TRAIT(owner, TRAIT_DRUQK, REF(src))
 
 	if(owner.client)
 		SSdroning.play_area_sound(get_area(owner), owner.client)
@@ -1254,7 +1254,7 @@
 	owner.clear_fullscreen("joybringer_druqks")
 	owner.clear_fullscreen("joybringer_weeds")
 
-	REMOVE_TRAIT(owner, TRAIT_DRUQK, src)
+	REMOVE_TRAIT(owner, TRAIT_DRUQK, REF(src))
 
 	if(owner.hallucination > 0)
 		owner.hallucination = max(0, owner.hallucination - 15)

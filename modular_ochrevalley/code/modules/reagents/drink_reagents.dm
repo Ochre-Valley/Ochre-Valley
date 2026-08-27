@@ -28,28 +28,28 @@
 	alpha = 173
 
 /datum/reagent/water/bufftea/minttea
-    name = "Mint Tea"
-    description = "Steeped minthra. Etruscans love this stuff before going out for courting."
-    reagent_state = LIQUID
-    color = "#e5ffe5"
-    taste_description = "peppermint"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
-    alpha = 173
+	name = "Mint Tea"
+	description = "Steeped minthra. Etruscans love this stuff before going out for courting."
+	reagent_state = LIQUID
+	color = "#e5ffe5"
+	taste_description = "peppermint"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
 
 /datum/reagent/water/bufftea/minttea/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/tea/intellegencetea)
 	return ..()
 
 /datum/reagent/water/wormwoodtea
-    name = "Wormwood Tea"
-    description = "Usually this is used as an intense bittering agent. Why would you drink this pure?"
-    reagent_state = LIQUID
-    color = "#2f4f4f"
-    taste_description = "extreme bitterness"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
-    alpha = 173
+	name = "Wormwood Tea"
+	description = "Usually this is used as an intense bittering agent. Why would you drink this pure?"
+	reagent_state = LIQUID
+	color = "#2f4f4f"
+	taste_description = "extreme bitterness"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
 
 /datum/reagent/water/wormwoodtea/on_mob_life(mob/living/carbon/M)
 	. = ..()
@@ -59,33 +59,33 @@
 			M.add_stress(/datum/stressevent/bittertea)
 
 /datum/reagent/water/sagetea
-    name = "Sage Tea"
-    description = "A pungent flavour, but favoured by Grenzelhoftian grandmothers to cure the sniffles."
-    reagent_state = LIQUID
-    color = "#c2b280"
-    taste_description = "herbal pepperiness"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
-    alpha = 173
+	name = "Sage Tea"
+	description = "A pungent flavour, but favoured by Grenzelhoftian grandmothers to cure the sniffles."
+	reagent_state = LIQUID
+	color = "#c2b280"
+	taste_description = "herbal pepperiness"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
 
 /datum/reagent/water/valeriantea
-    name = "Valerian Tea"
-    description = "Most people don’t drink this for its taste, but because it is reputed to ward off nightmares."
-    reagent_state = LIQUID
-    color = "#967117"
-    taste_description = "musky bitterness"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
-    alpha = 173
+	name = "Valerian Tea"
+	description = "Most people don’t drink this for its taste, but because it is reputed to ward off nightmares."
+	reagent_state = LIQUID
+	color = "#967117"
+	taste_description = "musky bitterness"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
 
 /datum/reagent/water/baothatea
-    name = "Baothan Tea"
-    description = "Those with little regard for their lyfe or Baothans drink this."
-    reagent_state = LIQUID
-    color = "#ba55d3"
-    taste_description = "sweet oblivion"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
+	name = "Baothan Tea"
+	description = "Those with little regard for their lyfe or Baothans drink this."
+	reagent_state = LIQUID
+	color = "#ba55d3"
+	taste_description = "sweet oblivion"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/water/baothatea/on_mob_life(mob/living/carbon/M)
 	. = ..()
@@ -98,35 +98,35 @@
 			M.adjustToxLoss(2.5) //A bit stronger than berry poison. Will put you into crit with a sip.
 
 /datum/reagent/water/bufftea/eyebrighttea
-    name = "Euphrasia Tea"
-    description = "Old people drink this to keep their eyes sharp. Some say elves distill its oil for a better effect."
-    reagent_state = LIQUID
-    color = "#f3e5ab"
-    taste_description = "astringent, herbal bitterness"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
+	name = "Euphrasia Tea"
+	description = "Old people drink this to keep their eyes sharp. Some say elves distill its oil for a better effect."
+	reagent_state = LIQUID
+	color = "#f3e5ab"
+	taste_description = "astringent, herbal bitterness"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/water/bufftea/eyebrighttea/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/tea/perceptiontea)
 	return ..()
 
 /datum/reagent/consumable/caffeine/bloomtea
-    name = "Bloom Tea"
-    description = "The drink of choice of the Celestial Academy, reputed to recover magical fatigue. Everyone knows they just like the pretty, deep blue colour."
-    reagent_state = LIQUID
-    color = "#000080"
-    taste_description = "tingling electricity"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
+	name = "Bloom Tea"
+	description = "The drink of choice of the Celestial Academy, reputed to recover magical fatigue. Everyone knows they just like the pretty, deep blue colour."
+	reagent_state = LIQUID
+	color = "#000080"
+	taste_description = "tingling electricity"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/water/eorantea
-    name = "Eoran Tea"
-    description = "Every child from Gronn to Naledi knows - if you are sick, drink this. You will feel better. At least that is what parents insist on."
-    reagent_state = LIQUID
-    color = "#e9d66b"
-    taste_description = "citric earthiness"
-    overdose_threshold = 0
-    metabolization_rate = REAGENTS_METABOLISM
+	name = "Eoran Tea"
+	description = "Every child from Gronn to Naledi knows - if you are sick, drink this. You will feel better. At least that is what parents insist on."
+	reagent_state = LIQUID
+	color = "#e9d66b"
+	taste_description = "citric earthiness"
+	overdose_threshold = 0
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/water/eorantea/on_mob_life(mob/living/carbon/M) //Just the same as rose tea. Both herb-based, and calendula's the health one.
 	. = ..()
@@ -143,56 +143,56 @@
 				M.update_damage_overlays()
 
 /datum/reagent/water/ashtea
-    name = "Ashtray Tea"
-    description = "This is like zig butts steeped in hot water. Yummy."
-    reagent_state = LIQUID
-    color = "#4b5320"
-    taste_description = "zig roaches"
-    overdose_threshold = 0
+	name = "Ashtray Tea"
+	description = "This is like zig butts steeped in hot water. Yummy."
+	reagent_state = LIQUID
+	color = "#4b5320"
+	taste_description = "zig roaches"
+	overdose_threshold = 0
 
 /datum/reagent/water/ashtea/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	M.add_nausea(1) //Makes you sort of sick.
 
 /datum/reagent/water/bufftea/psytea
-    name = "Pilgrim Tea"
-    description = "A favourite among psydonic pilgrims, the hardy plant makes for a surprisingly palatable tea."
-    reagent_state = LIQUID
-    color = "#87a96b"
-    taste_description = "nostalgic herbaceousness"
-    overdose_threshold = 0
+	name = "Pilgrim Tea"
+	description = "A favourite among psydonic pilgrims, the hardy plant makes for a surprisingly palatable tea."
+	reagent_state = LIQUID
+	color = "#87a96b"
+	taste_description = "nostalgic herbaceousness"
+	overdose_threshold = 0
 
 /datum/reagent/water/bufftea/psytea/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/tea/willpowertea)
 	return ..()
 
 /datum/reagent/water/bufftea/dandelioncoffee
-    name = "Dandelion Coffee"
-    description = "Ravoxians and Graggarites alike drink this when not feasting, for it's reputed to give you a lion’s heart."
-    reagent_state = LIQUID
-    color = "#fdee00"
-    taste_description = "dark, nutty bitterness"
-    overdose_threshold = 0
+	name = "Dandelion Coffee"
+	description = "Ravoxians and Graggarites alike drink this when not feasting, for it's reputed to give you a lion’s heart."
+	reagent_state = LIQUID
+	color = "#fdee00"
+	taste_description = "dark, nutty bitterness"
+	overdose_threshold = 0
 
 /datum/reagent/water/bufftea/dandelioncoffee/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/tea/constitutiontea)
 	return ..()
 
 /datum/reagent/water/nettletea
-    name = "Nettle Tea"
-    description = "Drunk by soldiers who want to freshen up their water rations in the field."
-    reagent_state = LIQUID
-    color = "#87a96b"
-    taste_description = "mild herbaceousness"
-    overdose_threshold = 0
+	name = "Nettle Tea"
+	description = "Drunk by soldiers who want to freshen up their water rations in the field."
+	reagent_state = LIQUID
+	color = "#87a96b"
+	taste_description = "mild herbaceousness"
+	overdose_threshold = 0
 
 /datum/reagent/water/chamomiletea
-    name = "Chamomile Tea"
-    description = "9 out of 10 barber-surgeons prescribe this for tooth aches. The last one just pulls it out."
-    reagent_state = LIQUID
-    color = "#b8860b"
-    taste_description = "herbaceous grassiness"
-    overdose_threshold = 0
+	name = "Chamomile Tea"
+	description = "9 out of 10 barber-surgeons prescribe this for tooth aches. The last one just pulls it out."
+	reagent_state = LIQUID
+	color = "#b8860b"
+	taste_description = "herbaceous grassiness"
+	overdose_threshold = 0
 
 //New blends:
 

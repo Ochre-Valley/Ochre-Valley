@@ -5,7 +5,7 @@
 	faction = "Station"
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1
-	forbidden_races = list(RACES_OOZE)
+	//forbidden_races = list(RACES_OOZE) //OV EDIT - REMOVES OOZE RACISM
 	allowed_patrons = list(/datum/patron/old_god) //Requires the character to be a practicing Psydonite.
 	tutorial = "Once, you were alone in your endurance against the darkness of the world. Now you have a flock to shepherd and protect with the shard of PSYDON's divinity entrusted to you. Temper their zeal with kindness, for you have sworn absolute pacifism, while they have no such compunctions. Guide the flock with your wisdom, take their pain and syphon their wounds with your blessings and bring the light of hope, redemption and absolution to the world until the paradise-to-come." //OV Edit per Lore Doc
 	selection_color = JCOLOR_INQUISITION

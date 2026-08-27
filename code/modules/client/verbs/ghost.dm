@@ -31,7 +31,16 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 			return
 	// OV Edit End
 
-	switch(alert("Descend to the Underworld?",,"Yes","No"))
+	// OV Edit Start
+	if(isliving(mob))
+		var/mob/living/living_mob = mob
+		if(living_mob.stat != DEAD && living_mob.IsPetrified())
+			living_mob.petrification_surrender()
+			return
+	// OV Edit End
+
+
+	switch(alert(usr, "Descend to the Underworld?",,"Yes","No"))
 		if("Yes")
 			if(istype(mob, /mob/living/carbon/spirit))
 				return

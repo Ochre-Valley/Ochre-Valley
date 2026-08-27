@@ -66,6 +66,8 @@
 				used = list('sound/vo/female/gen/haltyell (1).ogg','sound/vo/female/gen/haltyell (2).ogg')
 			if("hic","hiccup") // OV Add
 				used = list('modular_ochrevalley/sounds/vo/vore/hiccups/hic.ogg','modular_ochrevalley/sounds/vo/vore/hiccups/hiccup.ogg') // OV Add
+			if("hackle") // OV Add
+				used = list('sound/vo/mobs/hyena/cackle.ogg') //OV ADD
 			if("hmm")
 				used = 'sound/vo/female/gen/hmm.ogg'
 			if("huh")

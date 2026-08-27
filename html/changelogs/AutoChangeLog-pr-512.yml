@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - bugfix: "Prevented Oozes from using blobform if they are wounded or suffocating, as this is glitchy and can be used to make them borderline invincible."

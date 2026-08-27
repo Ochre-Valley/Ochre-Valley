@@ -18,7 +18,7 @@
 		allowed_types = list(/obj/item/rogueweapon/woodstaff,
 											/obj/item/storage/belt
 											)
-	
+
 	drop_all_held_items() //Drop what were in your hands
 
 	for(var/obj/item/I in src)
@@ -59,7 +59,12 @@
 	playsound(W.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	//W.spawn_gibs(FALSE) //Caustic Edit - Turned off the gibs on Wildshaping
 	src.forceMove(W)
+	// re-equip our stored neck and ring items, if we have them
+	if (stored_ring)
+		W.equip_to_slot_if_possible(stored_ring, SLOT_RING) // have to do this because we can wear psycrosses as rings even though we shouldn't be able to
 
+	if (stored_neck)
+		W.equip_to_slot_if_possible(stored_neck, SLOT_NECK)
 	W.after_creation()
 	W.stored_language = new
 	W.stored_language.copy_known_languages_from(src)
@@ -88,14 +93,14 @@
 	if(woundlist.len)
 		for(var/datum/wound/wound in woundlist)
 			if (istype(wound, /datum/wound/dismemberment))
-				continue				
+				continue
 			var/target_zone = wound.bodypart_owner.body_zone
 			if (target_zone == BODY_ZONE_TAUR)
 				target_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-			
+
 			var/bleedrate = wound.bleed_rate
 			var/obj/item/bodypart/w_bp = W.get_bodypart(target_zone)
-			
+
 			wound.apply_to_bodypart(w_bp, silent = TRUE, crit_message = FALSE)
 			wound.set_bleed_rate(bleedrate) // restore bleed rate, since apply_to_bodypart resets it.
 
@@ -131,17 +136,14 @@
 	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_SOURCE_WILDSHAPE)
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_SOURCE_WILDSHAPE)
 	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_SOURCE_WILDSHAPE)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WILDSHAPE)	
+	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WILDSHAPE)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_SOURCE_WILDSHAPE)
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_SOURCE_WILDSHAPE)
 	ADD_TRAIT(src, TRAIT_PACIFISM, TRAIT_SOURCE_WILDSHAPE) // just an extra layer of protection in case something will go wrong
 	src.status_flags |= GODMODE // so they won't die by any means
 	invisibility = oldinv
 
-	// OV Edit Start
 	W.gain_inherent_skills()
-	W.update_sight()
-	// OV Edit End
 
 /mob/living/carbon/human/proc/wildshape_untransform(dead,gibbed)
 	if(!stored_mob)
@@ -171,7 +173,12 @@
 	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_SOURCE_WILDSHAPE)
 	REMOVE_TRAIT(W, TRAIT_PACIFISM, TRAIT_SOURCE_WILDSHAPE)
 	W.status_flags &= ~GODMODE
+	// re-equip our stored neck and ring items, if we have them
+	if (stored_ring)
+		W.equip_to_slot_if_possible(stored_ring, SLOT_RING) // have to do this because we can wear psycrosses as rings even though we shouldn't be able to
 
+	if (stored_neck)
+		W.equip_to_slot_if_possible(stored_neck, SLOT_NECK)
 	if(dead)
 		W.death()
 
@@ -183,10 +190,10 @@
 	if(woundlist.len)
 		for(var/datum/wound/wound in woundlist)
 			var/target_zone = wound.bodypart_owner.body_zone
-			
+
 			var/bleedrate = wound.bleed_rate
 			var/obj/item/bodypart/w_bp = W.get_bodypart(target_zone)
-			
+
 			wound.apply_to_bodypart(w_bp, silent = TRUE, crit_message = FALSE)
 			wound.set_bleed_rate(bleedrate)
 
@@ -232,10 +239,7 @@
 			if(wildspell != originspell)
 				W.RemoveSpell(wildspell)
 
-	// OV Edit Start
 	W.regenerate_icons()
-	W.update_sight()
-	// OV Edit End
 	to_chat(W, span_userdanger("I return to my old form."))
 
 	qdel(src)

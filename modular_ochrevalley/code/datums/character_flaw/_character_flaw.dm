@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 		if(target.cmode)
 			to_chat(user, span_warning("My meal is fighting back! I can't get a clean bite."))
 			return FALSE //target is actively fighting
-		if(ishuman(target)) //check if the target is human, so their armor can be checked. If the target is human, we get the best stab resist on this zone. 
+		if(ishuman(target)) //check if the target is human, so their armor can be checked. If the target is human, we get the best stab resist on this zone.
 			var/mob/living/carbon/human/humantarget = target
 			var/def_zone = limb_grabbed.body_zone
 			var/obj/item/clothing/prot = humantarget.get_best_worn_armor(def_zone, "stab")
@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 /datum/charflaw/dendor_touched/on_mob_creation(mob/user)
 	next_check = world.time + starting_leeway
 	last_transform = world.time
-	
+
 /datum/charflaw/dendor_touched/flaw_on_life(mob/user)
 	if(!user)
 		return
@@ -125,7 +125,7 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 			shape.name = "[animal_curse]"
 			shape.icon_state = "[animal_curse]"
 			shape.color = animal_colour
-			
+
 			for(var/obj/effect/proc_holder/spell/targeted/shapeshift/the_spell in shape.mind.spell_list)
 				the_spell.charge_counter = 0
 				the_spell.start_recharge()
@@ -143,3 +143,30 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 		to_chat(user, span_warning("I can feel my animal form being drawn out in the darkness..."))
 	countdown = countdown + 1
 	next_check = world.time + 5
+
+/datum/charflaw/changeling
+	name = "Fey Cursed"
+	desc = "You owe your life, through continuation or creation, to the fey. They know your true name, but you may not know of them, or of your nature. Unlike those who have embraced their fey heritage, you are unable to take advantage of it, and a hag may choose to curse you at their leisure"
+	needs_extra_vice = TRUE
+
+/datum/charflaw/changeling/apply_post_equipment(mob/user)
+	ADD_TRAIT(user, TRAIT_FEYCURSED, TRAIT_GENERIC)
+	for(var/mob/living/hag_mob in GLOB.active_hags)
+		var/datum/mind/hag_mind = hag_mob.mind
+		if(!hag_mind)
+			continue
+		hag_mind.i_know_person(user)
+		to_chat(hag_mind.current, span_boldnotice("The roots watch a dormant seedling... [user.real_name] is walking the lands this week. The hag may curse them, but cursing their Wyrd Lux will gain no spite"))
+		var/datum/component/hag_curio_tracker/HCT = hag_mob.GetComponent(/datum/component/hag_curio_tracker)
+		if(!HCT)
+			continue
+		if(HCT.find_boon_by_type(user.real_name, /datum/hag_boon/changeling))
+			continue
+		HCT.grant_boon(user.real_name, /datum/hag_boon/changeling, 100)
+
+/datum/hag_boon/changeling
+	name = "Wyrd Lux"
+	desc = "The lux of one who bears this mark has been blessed with the mossmother's influence, whether to weave the first thread, or mend what was broken. They are as the mossmother's own offspring, and at the mercy of their discipline. Will not gain Spite when transmuted to a curse"
+	points = 100
+	transmutable = TRUE
+	hag_curse = FALSE

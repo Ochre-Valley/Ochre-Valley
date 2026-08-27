@@ -64,7 +64,7 @@
 /datum/emote/proc/adjacentaction(mob/user, mob/target)
 	return
 
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targetted = FALSE, animal = FALSE)
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targetted = FALSE, animal = FALSE, quiet = FALSE)
 	. = TRUE
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
@@ -82,7 +82,7 @@
 		var/atom/target_origin = get_turf(message_origin) || message_origin
 		for(var/mob/living/M in range(target_origin, targetrange))
 		//OV Edit End
-			if(M != user)
+			if(M != user && !M.rogue_sneaking && (M.name != "Unknown"))
 				mobsadjacent += M
 		//OV Edit: Let held micros be targetable
 		for(var/thing in user.contents)
@@ -94,7 +94,7 @@
 			mobsadjacent |= M.held_mob
 		//OV Edit End
 		if(mobsadjacent.len)
-			chosenmob = input("[key] who?") in mobsadjacent
+			chosenmob = input(user, "[key] who?") in mobsadjacent
 		if(chosenmob)
 			if(target_origin.Adjacent(chosenmob)) //OV Edit
 				params = chosenmob.name
@@ -145,6 +145,10 @@
 				emotelocation = dullahan.my_head
 			else// if(!vision.viewing_head)
 				emotelocation = user
+		var/sound_range = snd_range
+		if(quiet)
+			sound_range = -6
+
 		//OV Add Start
 		if(message_origin != user)
 			emotelocation = message_origin
@@ -152,12 +156,13 @@
 
 		//OV edit
 		if(key == "burp" || key == "belch")
-			playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet, pref_toggle = "belch_noises")
+			playsound(emotelocation, tmp_sound, snd_vol, FALSE, sound_range, soundping = soundping, animal_pref = animal, quiet = is_quiet, pref_toggle = "belch_noises")
 		else
-			playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
+			playsound(emotelocation, tmp_sound, snd_vol, FALSE, sound_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
 		//OV edit end
 	if(!nomsg)
-		user.log_message(msg, LOG_EMOTE)
+		if(user.key)
+			user.log_message(msg, LOG_EMOTE)
 		//OV Add Start
 		var/emote_display_name = "[emotelocation]"
 		if(message_origin != user)
@@ -194,9 +199,9 @@
 		if(show_runechat)
 			runechat_msg_to_use = runechat_msg ? runechat_msg : pre_color_msg
 		if(emote_type == EMOTE_AUDIBLE)
-			emotelocation.audible_message(msg, runechat_message = runechat_msg_to_use, log_seen = SEEN_LOG_EMOTE)
+			emotelocation.audible_message(msg, runechat_message = runechat_msg_to_use, log_seen = SEEN_LOG_EMOTE, hearing_distance = (quiet ? 1 : DEFAULT_MESSAGE_RANGE))
 		else
-			emotelocation.visible_message(msg, runechat_message = runechat_msg_to_use, log_seen = SEEN_LOG_EMOTE)
+			emotelocation.visible_message(msg, runechat_message = runechat_msg_to_use, log_seen = SEEN_LOG_EMOTE, vision_distance = (quiet ? 1 : DEFAULT_MESSAGE_RANGE))
 
 /mob/living/proc/get_emote_pitch()
 	return clamp(voice_pitch, 0.5, 2)
@@ -238,7 +243,7 @@
 			var/modifier
 			if(H.age == AGE_OLD)
 				modifier = "old"
-			if((!ignore_silent && (H.silent)) || (!ignore_silent && !is_emote_muffled(H)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) ||  (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
+			if((!ignore_silent && (H.silent)) || (!ignore_silent && !is_emote_muffled(H)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) ||	(!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
 				modifier = "silenced"
 			//OV Edit - Burp Sound Exception
 			if((key != "burp" && key != "belch") || H.client.prefs.belch_noises)
@@ -246,7 +251,7 @@
 					possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
 				else if(H.dna.species.soundpack_m)
 					possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
-				 // LETHALSTONE ADDITION BEGIN: use preference-set voice types where possible
+					// LETHALSTONE ADDITION BEGIN: use preference-set voice types where possible
 				if(H.voice_type)
 					switch (H.voice_type)
 						if (VOICE_TYPE_MASC)
@@ -271,6 +276,15 @@
 					used_sound = possible_sounds
 				H.last_sound = used_sound
 				return used_sound
+		else if(user.mind && isanimal(user))
+			var/mob/living/simple_animal/A = user
+			var/datum/voicepack/VP = A.get_animal_voicepack()
+			if(VP)
+				var/possible_sounds = VP.get_sound(key)
+				if(possible_sounds)
+					if(islist(possible_sounds))
+						return pick(possible_sounds)
+					return possible_sounds
 
 /mob/living/proc/get_sound(input)
 	return
