@@ -30,7 +30,7 @@
 		generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BUTT, OFFSET_BUTT)
 /datum/sprite_accessory/butt/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
-	return "butt_[icon_state]_[buttie.organ_size]"
+	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ

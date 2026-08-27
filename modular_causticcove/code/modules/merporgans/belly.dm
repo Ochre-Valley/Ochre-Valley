@@ -20,16 +20,16 @@
 	belly_organ.belly_size = belly_size
 
 GLOBAL_LIST_INIT(named_belly_sizes, list(
-	"flat" = 0,
-	"small" = 1,
-	"medium" = 2,
-	"large" = 3,
-	"enormous" = 5,
-	"towering" = 6,
-	"gigantic" = 7,
-	"gargantuan" = 8,
-	"colossal" = 9,
-	"ungodly big" = 10,
+	"Flat" = 0,
+	"Small" = 1,
+	"Medium" = 2,
+	"Large" = 3,
+	"Enormous" = 5,
+	"Towering" = 6,
+	"Gigantic" = 7,
+	"Gargantuan" = 8,
+	"Colossal" = 9,
+	"Ungodly big" = 10,
 ))
 
 /datum/sprite_accessory/belly
