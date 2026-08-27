@@ -61,7 +61,7 @@
 	if(H.mind)
 		var/weapons = list("Rapier","Parrying Dagger", "Whip")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
-		var/rangedweapons = list("Slurbow", "Crossbow")
+		var/rangedweapons = list("Slurbow", "Crossbow", "Arquebus Pistol") //OV EDIT
 		var/rangedweapon_choice = input(H,"Choose your BOW.", "TAKE AIM.") as anything in rangedweapons
 		var/specialization = list("Fleet-Footed","Marksmanship","Athleticism","Night-Burglar","Master-Tracker","Dualist")
 		var/specialization_choice = input(H, "Choose your talent.", "TAKE UP ARMS") as anything in specialization
@@ -84,12 +84,31 @@
 			if("Crossbow")
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 				beltr = /obj/item/quiver/bolt/standard
+			//OV EDIT
+			if("Arquebus Pistol")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
+				beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				backpack_contents = list(
+					/obj/item/lockpickring/mundane = 1,
+					/obj/item/flashlight/flare/torch/lantern/prelit = 1,
+					/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
+					/obj/item/reagent_containers/glass/bottle/alchemical/healthpot = 1,
+					/obj/item/rogueweapon/scabbard/sheath = 1,
+					/obj/item/powderflask, //Backpack needed special rearranging to fit it all.
+					/obj/item/quiver/bulletpouch/iron
+					)
+			//OV EDIT END
 		switch(specialization_choice)
 			if("Fleet-Footed")
 				H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, SKILL_LEVEL_LEGENDARY, TRUE)
 				ADD_TRAIT(H, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 			if("Marksmanship")
-				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_LEGENDARY, TRUE)
+				//OV EDIT
+				if(rangedweapon_choice == "Arquebus Pistol")
+					H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_LEGENDARY, TRUE)
+				else
+					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_LEGENDARY, TRUE)
+				//OV EDIT END
 				H.change_stat(STATKEY_PER, 1)
 			if("Athleticism")
 				H.adjust_skillrank_up_to(/datum/skill/misc/athletics, SKILL_LEVEL_MASTER, TRUE)
