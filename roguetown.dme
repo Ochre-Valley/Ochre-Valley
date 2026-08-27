@@ -1097,7 +1097,6 @@
 #include "code\datums\status_effects\rogue\roguestatus.dm"
 #include "code\datums\storytellers\_base.dm"
 #include "code\datums\storytellers\gods.dm"
-#include "code\datums\storytellers\presets.dm"
 #include "code\datums\stress\_stressevent.dm"
 #include "code\datums\stress\negative_events.dm"
 #include "code\datums\stress\positive_events.dm"

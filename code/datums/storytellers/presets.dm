@@ -1,3 +1,7 @@
+// OV Add Start: We use our own gamemode presets (See modular_ochrevalley/code/datums/storytellers/presets.dm)
+#error This file has been deliberately disabled by Ochre Valley and must remain unticked!
+// OV Add End
+
 /// Code-defined gamemode presets. These replace the old storyteller gods. Players vote between them (grouped
 /// into three pools - see GAMEMODE_POOL_* in __DEFINES/storytellers.dm) or admins fine-tune the roundstart
 /// antag config directly. A preset's vote pool is set by preset_pool, independent of its type hierarchy.
