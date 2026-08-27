@@ -17,7 +17,7 @@
 	organ_type = /obj/item/organ/belly
 	organ_slot = ORGAN_SLOT_BELLY
 	organ_dna_type = /datum/organ_dna/belly
-		tgui_template = "FeatureChoiceBelly"
+	tgui_template = "FeatureChoiceBelly"
 
 /datum/customizer_choice/organ/belly/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
