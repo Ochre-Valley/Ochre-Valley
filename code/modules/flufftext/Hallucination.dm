@@ -533,9 +533,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		if(target.client)
 			target.client.images |= speech_overlay
 			sleep(rand(8,15)) //Simulate human delay.
-			if(target.client?.prefs)
-				if(!target.client?.prefs.chat_on_map) //Only if they don't have chat_on_map prefs enabled send this message
-					to_chat(target, message)
+			to_chat(target, message)
 			sleep(30)
 			target.client.images.Remove(speech_overlay)
 		var/spans = list(person.speech_span)
