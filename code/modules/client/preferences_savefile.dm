@@ -246,7 +246,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	asaycolor			= sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, TRUE, initial(asaycolor)))
 	lastchangelog		= sanitize_text(lastchangelog, initial(lastchangelog))
 	preferred_ui_language = sanitize_preferred_ui_language(preferred_ui_language)
-	masked_examine		= sanitize_integer(masked_examine, 0, 1, initial(masked_examine)) //OV EDIT
 
 	if(parent && is_banned_from(parent.ckey, ROLE_SYNDICATE))
 		be_special = list()
