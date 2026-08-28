@@ -64,6 +64,16 @@
 /datum/outfit/job/roguetown/adventurer/tinkerer/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_warning("In another life, your intellect, connections, and aptitude for blending well-worked bronze with Arcyne mysteries would have made for a fine guildsman. Whilst unnaccustomed to combat, your cleverness and inventions offer you a novel edge."))
+	armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
+	head = /obj/item/clothing/mask/rogue/spectacles/golden //DRIP
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
+	backl = /obj/item/storage/backpack/rogue/backpack
+	pants = /obj/item/clothing/under/roguetown/trou/leather
+	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	belt = /obj/item/storage/belt/rogue/leather
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
+	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	if(H.mind)
 		var/gadgets = list("Pistol", "Rifle", "Crossbow", "Grappling Hook", "Clockwork Drill", "Voltic Gauntlets", "Bronze Limbs")
 		var/gadget_choice = input(H, "Choose a gadget.", "YOUR LATEST CREATION") as anything in gadgets
@@ -122,16 +132,6 @@
 				beltr = /obj/item/rogueweapon/contraption/linker/mace/preloaded
 			if("Massive Wrench")
 				beltr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded
-	armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
-	head = /obj/item/clothing/mask/rogue/spectacles/golden //DRIP
-	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
-	backl = /obj/item/storage/backpack/rogue/backpack
-	pants = /obj/item/clothing/under/roguetown/trou/leather
-	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	belt = /obj/item/storage/belt/rogue/leather
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
