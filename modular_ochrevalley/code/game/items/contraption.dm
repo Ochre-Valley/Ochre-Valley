@@ -105,7 +105,7 @@
 		realdamage = get_complex_damage(I, howner)
 	if(ishuman(target))
 		var/mob/living/carbon/H = target
-		apply_generic_weapon_damage(H, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE)//simple, really. this is all that's applied
+		apply_generic_weapon_damage(H, realdamage * 2.5, "blunt", target_zone, bclass = BCLASS_TWIST)
 		var/obj/item/bodypart/bodypart = H.get_bodypart(target_zone)
 		if(bodypart && !QDELETED(bodypart))
 			if(bodypart.status == BODYPART_ROBOTIC || HAS_TRAIT(target, TRAIT_IRONMAN))
@@ -121,7 +121,7 @@
 				var/attemptforce = realdamage * min(userstrength, 10)
 				if(prob(bodypart.dismemberment_chance_from_force(attemptforce))) //checks chance to dismember.
 					if(istype(bodypart, /obj/item/bodypart/head) || istype(bodypart, /obj/item/bodypart/chest)) //we don't decap or disembowel.
-						apply_generic_weapon_damage(H, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE) //instead, just do another damage proc
+						apply_generic_weapon_damage(H, realdamage, "blunt", target_zone, bclass = BCLASS_BLUNT, full_pen = TRUE) //instead, just do another damage proc
 					else if(bodypart.dismember(BRUTE, BCLASS_TWIST, howner, damage = attemptforce))//armor is checked in this proc. if there's armor, we don't get the dismember. this can, however, deal particularly nasty damage to armor with poor blunt protection
 						if(robottarget)
 							playsound(howner.loc, 'sound/items/beartrap2.ogg', 100, FALSE)
@@ -132,12 +132,12 @@
 			playsound(howner.loc, 'sound/items/garrotebreak.ogg', 100, FALSE)
 			H.visible_message(span_warning("[howner] twists [H]'s [bodypart] with [iparent]!"), span_userdanger("[howner] painfully twists your [bodypart] with [iparent]!"))
 	else  //simplemob! we deal double damage, with a bonus against equivalent biotypes
-		realdamage *= 2
+		realdamage *= 2.5
 		if(target.mob_biotypes & MOB_ROBOTIC) //theoretically, very powerful. In practice, there are no robotic simplemobs.
 			realdamage *= howner.get_skill_level(/datum/skill/craft/engineering)
 		else if(target.mob_biotypes & MOB_UNDEAD) //things that'd normally have easydismember as carbons take more damage
 			realdamage *= 1.5 //equivalent to dismember chance bonus from easydismember, and the damage boost recieved from hitting a torso dismember!
-		apply_generic_weapon_damage(target, realdamage, "blunt", target_zone, bclass = BCLASS_TWIST, full_pen = TRUE)
+		apply_generic_weapon_damage(target, realdamage, "blunt", target_zone, bclass = BCLASS_BLUNT, full_pen = TRUE)
 
 
 /obj/item/rogueweapon/contraption/linker/mace/attack_turf(turf/T, mob/living/user, multiplier)
