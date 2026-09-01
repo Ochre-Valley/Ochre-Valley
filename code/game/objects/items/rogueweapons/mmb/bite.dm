@@ -432,14 +432,17 @@
 		return
 	sippy = TRUE
 	to_chat(user, span_warning("You tighten your lips and attempt to drink blood!"))
-	//ov edit- taste them
-	to_chat(user, span_danger("[grabbed] tastes of [grabbed.get_taste_message()]"))
-	//ov edit end
+
 
 	while(src && user && grabbed && sippy)
 		var/mob/living/carbon/C = grabbed
 		if(QDELETED(src) || !user || !grabbed || !sippy)
 			break
+
+		//ov edit- taste them
+		to_chat(user, span_danger("[C] tastes of [C.get_taste_message()]"))
+		//ov edit end
+
 		if(C.blood_volume <= 0)
 			to_chat(user, span_warning("--But there's no blood left to drink."))
 			break
