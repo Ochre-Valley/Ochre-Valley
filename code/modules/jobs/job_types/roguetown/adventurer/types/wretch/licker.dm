@@ -77,6 +77,9 @@
 	show_when_dead = FALSE
 
 /datum/reagent/vampsolution/on_mob_metabolize(mob/living/M, mob/living/S)
+	//ov edit
+	M.sate_addiction(/datum/charflaw/addiction/junkie)
+	//ov edit end
 	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
 	if(M.client)
 		ADD_TRAIT(M, TRAIT_DRUQK, "based")
