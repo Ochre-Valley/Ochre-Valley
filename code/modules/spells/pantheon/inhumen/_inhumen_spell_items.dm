@@ -1513,6 +1513,9 @@ GLOBAL_LIST_INIT(da_bubbles, list('sound/foley/bubb (1).ogg','sound/foley/bubb (
 				target.apply_status_effect(/datum/status_effect/buff/vitae)
 			else
 				to_chat(target, span_notice("It tastes like old wine... Strange, but not entirely unpleasant."))
+				//ov edit: hemovore gains nutrition
+				target.check_hemovore_nutrition(100, goodmeal = TRUE)
+				//ov edit end
 
 			target.visible_message(span_notice("[target] drinks from [src]."))
 

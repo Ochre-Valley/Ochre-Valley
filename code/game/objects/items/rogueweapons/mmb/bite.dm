@@ -414,7 +414,9 @@
 					span_userdanger("[user] bites my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), span_hear("I hear a sickening sound of chewing!"), COMBAT_MESSAGE_RANGE, user)
 	to_chat(user, span_danger("I bite [C]'s [parse_zone(sublimb_grabbed)].[C.next_attack_msg.Join()]"))
 	C.next_attack_msg.Cut()
-
+	//ov edit- taste them
+	to_chat(user, span_danger("They taste of [C.get_taste_message()]"))
+	//ov edit end
 	log_combat(user, C, "limb chewed [sublimb_grabbed] ")
 
 /obj/item/grabbing/bite/proc/drinklimb(mob/living/user)
@@ -431,19 +433,23 @@
 	sippy = TRUE
 	to_chat(user, span_warning("You tighten your lips and attempt to drink blood!"))
 
+
 	while(src && user && grabbed && sippy)
 		var/mob/living/carbon/C = grabbed
 		if(QDELETED(src) || !user || !grabbed || !sippy)
 			break
+
+		//ov edit- taste them
+		to_chat(user, span_danger("[C] tastes of [C.get_taste_message()]"))
+		//ov edit end
+
 		if(C.blood_volume <= 0)
 			to_chat(user, span_warning("--But there's no blood left to drink."))
 			break
-		//OV edit start. This proc is for hemovores- we check if the user has TRAIT_LYFE_DRINK, if the target location is unarmored, and if the target is not in combat mode. If so, drink, and apply drugs, without checking for bleeding
-		if(check_hemovore(user))
-			return
-		//OV edit end. if this returns false, the target is either actively fighting, or protected- check normally
 
-		if(!limb_grabbed.get_bleed_rate())
+		//OV edit start- adds Check_hemovore. This allows hemovores to penetrate armor and inject drugs, if the target isn't actively in combat mode
+		if(!limb_grabbed.get_bleed_rate() && !check_hemovore(user))
+		//OV edit end
 			to_chat(user, span_warning("--But they're not bleeding, I should chew."))
 			break
 		if(!user.Adjacent(grabbed))
