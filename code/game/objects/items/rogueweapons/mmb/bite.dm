@@ -413,11 +413,10 @@
 	C.visible_message(span_danger("[user] bites [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), \
 					span_userdanger("[user] bites my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), span_hear("I hear a sickening sound of chewing!"), COMBAT_MESSAGE_RANGE, user)
 	to_chat(user, span_danger("I bite [C]'s [parse_zone(sublimb_grabbed)].[C.next_attack_msg.Join()]"))
+	C.next_attack_msg.Cut()
 	//ov edit- taste them
 	to_chat(user, span_danger("They taste of [C.get_taste_message()]"))
 	//ov edit end
-	C.next_attack_msg.Cut()
-
 	log_combat(user, C, "limb chewed [sublimb_grabbed] ")
 
 /obj/item/grabbing/bite/proc/drinklimb(mob/living/user)
@@ -433,6 +432,9 @@
 		return
 	sippy = TRUE
 	to_chat(user, span_warning("You tighten your lips and attempt to drink blood!"))
+	//ov edit- taste them
+	to_chat(user, span_danger("[grabbed] tastes of [grabbed.get_taste_message()]"))
+	//ov edit end
 
 	while(src && user && grabbed && sippy)
 		var/mob/living/carbon/C = grabbed
