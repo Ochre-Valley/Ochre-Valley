@@ -1,5 +1,9 @@
 // OV File
 
+// ----------------
+// Arquebus intents
+// ----------------
+
 /datum/intent/shoot/arquebus
     chargetime = 1 // Fallback value if something that isn't a mob/living aims this.
     chargedrain = 0
@@ -79,13 +83,13 @@
 	anvilrepair = /datum/skill/craft/engineering
 	smeltresult = /obj/item/ingot/bronze
 	obj_flags = CAN_BE_HIT | UNIQUE_RENAME | CLAMP_BREAK // You need to be able to hit it to repair it. Adding other rogueweapon tags too.
-	max_integrity = 250
+	max_integrity = 100 // As a melee weapon, this is weaker than a quarterstaff.
 	integrity_failure = 0.2
 	bolt_type = BOLT_TYPE_NO_BOLT
 	casing_ejector = FALSE
 	pickup_sound = 'modular_causticcove/sound/sheath_sounds/draw_from_holster.ogg'
 	var/spread_num = 10
-	damfactor = 2
+	damfactor = 1.2
 	var/range = 30
 	var/onehanded = FALSE
 	var/reloaded = FALSE
@@ -93,6 +97,9 @@
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
+	var/ranged_skill = /datum/skill/combat/firearms
+	wdefense = 0 // Can't parry if it's not held in two hands.
+	wdefense_wbonus = 10 // Parrying with two hands is very effective. This sounds awesome until your gun fucking shatters. :)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/examine(mob/user)
 	. = ..()
@@ -166,6 +173,11 @@
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB
+		if(!BB)
+			continue
+		BB.accuracy += accfactor * (user.STAPER - 8) * 3 // 8+ PER gives +3 per level. Exponential.
+		BB.bonus_accuracy += (user.STAPER - 8) // 8+ PER gives +1 per level. Does not decrease over range.
+		BB.bonus_accuracy += (user.get_skill_level(ranged_skill) * 5) // +5 per skill level.
 		BB.damage = BB.damage * damfactor
 		BB.range = range
 	gunpowder = FALSE
@@ -312,12 +324,20 @@
 		return FALSE
 	return ..()
 
+
+/obj/item/gun/ballistic/arquebus/handgonne // Currently just a reskin. Not implimented yet. No crafting recipe, no class to spawn with it.
+	name = "handgonne"
+	desc = "An antique gunpowder weapon that shoots an armor piercing metal ball."
+	icon = 'modular_causticcove/icons/weapons/handgonne.dmi'
+	icon_state = "handgonne"
+	item_state = "handgonne"
+
 /datum/intent/shoot/arquebus/pistol
     chargetime = 1
     chargedrain = 0
 
 /datum/intent/shoot/arquebus/pistol/can_charge()
-    return TRUE
+	return TRUE
 
 /datum/intent/shoot/arquebus/pistol/get_chargetime()
 	if(mastermob)
@@ -373,10 +393,11 @@
 	unequip_delay_self = 1.5 SECONDS
 	inv_storage_delay = 2 SECONDS
 	walking_stick = FALSE
-	max_integrity = 80
+	//max_integrity = 80
 	slot_flags = ITEM_SLOT_HIP
 	range = 10
 	onehanded = TRUE
+	damfactor = 1
 	var/can_spin = TRUE
 	var/last_spunned
 	var/spin_cooldown = 3 SECONDS
@@ -415,10 +436,10 @@
 		user.visible_message("<span class='emote'>[user] spins [src] around their fingers [string]!</span>")
 		playsound(src, spin_sound, 100, FALSE, ignore_walls = FALSE)
 		last_spunned = world.time
-		/*if(firearm_skill <= 2)
+		/*if(firearm_skill <= 2) // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
 			if(prob(35))
 				shoot_live_shot(message = 0)
-				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/ // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
+				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/
 		if(firearm_skill <= 3)
 			if(prob(50))
 				user.visible_message(span_danger("[user] accidentally drops [src]!"))
