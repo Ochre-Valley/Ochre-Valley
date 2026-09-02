@@ -7,6 +7,7 @@
         "code/modules/events/raids/goblin.dm",
         "code/modules/events/raids/skeleton.dm",
 		"code/modules/events/antagonist/solo/dreamwalker.dm",
+		"code/datums/storytellers/presets.dm",
 		"code/modules/tgs/**/*.dm",
 		"code/modules/unit_tests/[!_]*.dm"
 	]
