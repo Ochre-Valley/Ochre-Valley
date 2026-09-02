@@ -3723,6 +3723,7 @@
 #include "modular_causticcove\code\modules\accessability\epilepsy.dm"
 #include "modular_causticcove\code\modules\accessability\epilepsy_prefs.dm"
 #include "modular_ochrevalley\code\modules\mob\living\become_deadite.dm"
+#include "modular_ochrevalley\code\game\items\contraption.dm"
 #include "modular_causticcove\code\modules\antagonists\roguetown\villains\werewolf\werewolf_transformation_resist.dm"
 #include "modular_causticcove\code\modules\baycode_port_helpers\baycode_port_helpers.dm"
 #include "modular_causticcove\code\modules\baycode_port_helpers\chemcolour.dm"
