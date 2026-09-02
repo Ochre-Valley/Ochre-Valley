@@ -1,5 +1,9 @@
 // OV File
 
+// ----------------
+// Arquebus intents
+// ----------------
+
 /datum/intent/shoot/arquebus
     chargetime = 1 // Fallback value if something that isn't a mob/living aims this.
     chargedrain = 0
@@ -39,9 +43,56 @@
 	var/newtime = 40
 	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4.6
 	newtime -= user.STAPER
-	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME // NPCs shoot slower than players though.
+	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY // NPCs shoot slower than players though.
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/
+/// Pistol Intents ///
+/datum/intent/shoot/arquebus/pistol
+    chargetime = 1
+    chargedrain = 0
+
+/datum/intent/shoot/arquebus/pistol/can_charge()
+    return TRUE
+
+/datum/intent/shoot/arquebus/pistol/get_chargetime()
+	if(mastermob)
+		var/newtime = 40
+		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4 // skill block
+		newtime -= mastermob.STAPER // per block
+		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item()) // If slurbows don't care if your other arm is disabled, I guess pistols don't either.
+			newtime *= 1.5 // It takes longer to aim one-handed.
+		return max(newtime, 1) // Legendary and 15 PER will hit the aim time floor.
+	return chargetime
+
+/datum/intent/arc/arquebus/pistol
+    chargetime = 12
+    chargedrain = 0
+
+/datum/intent/arc/arquebus/pistol/can_charge()
+	return TRUE
+
+/datum/intent/arc/arquebus/pistol/get_chargetime()
+	if(mastermob)
+		var/newtime = 40
+		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4
+		newtime -= mastermob.STAPER
+		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item())
+			newtime *= 1.5
+		return max(newtime, 12)
+	return chargetime
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/get_npc_chargetime(mob/living/user)
+	var/newtime = 40
+	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4
+	newtime -= user.STAPER
+	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
+		newtime *= 1.5
+	return max(newtime, 1) * ARCHER_NPC_ROF_PENALTY
+
+// --------------
+// The gun itself
+// --------------
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
 	name = "arquebus rifle"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
 	icon = 'modular_causticcove/icons/weapons/arquebus.dmi'
@@ -79,7 +130,7 @@
 	anvilrepair = /datum/skill/craft/engineering
 	smeltresult = /obj/item/ingot/bronze
 	obj_flags = CAN_BE_HIT | UNIQUE_RENAME | CLAMP_BREAK // You need to be able to hit it to repair it. Adding other rogueweapon tags too.
-	max_integrity = 250
+	max_integrity = 100 // As a melee weapon, this is weaker than a quarterstaff.
 	integrity_failure = 0.2
 	bolt_type = BOLT_TYPE_NO_BOLT
 	casing_ejector = FALSE
@@ -93,6 +144,8 @@
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
+	wdefense = 0 // Can't parry if it's not held in two hands.
+	wdefense_wbonus = 10 // Parrying with two hands is very effective. This sounds awesome until your gun fucking shatters. :)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/examine(mob/user)
 	. = ..()
@@ -312,47 +365,14 @@
 		return FALSE
 	return ..()
 
-/datum/intent/shoot/arquebus/pistol
-    chargetime = 1
-    chargedrain = 0
 
-/datum/intent/shoot/arquebus/pistol/can_charge()
-    return TRUE
+/obj/item/gun/ballistic/arquebus/handgonne // Currently just a reskin. Not implimented yet. No crafting recipe, no class to spawn with it.
+	name = "handgonne"
+	desc = "An antique gunpowder weapon that shoots an armor piercing metal ball."
+	icon = 'modular_causticcove/icons/weapons/handgonne.dmi'
+	icon_state = "handgonne"
+	item_state = "handgonne"
 
-/datum/intent/shoot/arquebus/pistol/get_chargetime()
-	if(mastermob)
-		var/newtime = 40
-		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4 // skill block
-		newtime -= mastermob.STAPER // per block
-		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item()) // If slurbows don't care if your other arm is disabled, I guess pistols don't either.
-			newtime *= 1.5 // It takes longer to aim one-handed.
-		return max(newtime, 1) // Legendary and 15 PER will hit the aim time floor.
-	return chargetime
-
-/datum/intent/arc/arquebus/pistol
-    chargetime = 12
-    chargedrain = 0
-
-/datum/intent/arc/arquebus/pistol/can_charge()
-	return TRUE
-
-/datum/intent/arc/arquebus/pistol/get_chargetime()
-	if(mastermob)
-		var/newtime = 40
-		newtime -= mastermob.get_skill_level(/datum/skill/combat/firearms) * 4
-		newtime -= mastermob.STAPER
-		if(mastermob.get_num_arms(FALSE) < 2 || mastermob.get_inactive_held_item())
-			newtime *= 1.5
-		return max(newtime, 12)
-	return chargetime
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/get_npc_chargetime(mob/living/user)
-	var/newtime = 40
-	newtime -= user.get_skill_level(/datum/skill/combat/firearms) * 4
-	newtime -= user.STAPER
-	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
-		newtime *= 1.5
-	return max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 	name = "arquebus pistol"
@@ -373,7 +393,7 @@
 	unequip_delay_self = 1.5 SECONDS
 	inv_storage_delay = 2 SECONDS
 	walking_stick = FALSE
-	max_integrity = 80
+	//max_integrity = 80
 	slot_flags = ITEM_SLOT_HIP
 	range = 10
 	onehanded = TRUE
@@ -415,10 +435,10 @@
 		user.visible_message("<span class='emote'>[user] spins [src] around their fingers [string]!</span>")
 		playsound(src, spin_sound, 100, FALSE, ignore_walls = FALSE)
 		last_spunned = world.time
-		/*if(firearm_skill <= 2)
+		/*if(firearm_skill <= 2) // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
 			if(prob(35))
 				shoot_live_shot(message = 0)
-				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/ // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
+				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/
 		if(firearm_skill <= 3)
 			if(prob(50))
 				user.visible_message(span_danger("[user] accidentally drops [src]!"))
