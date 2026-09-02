@@ -922,6 +922,10 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+	//OV Edit: Don't let item TFed players pick themselves up
+	if(mob_possession == user)
+		return
+	//OV Edit End
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
 	item_flags |= IN_INVENTORY
 

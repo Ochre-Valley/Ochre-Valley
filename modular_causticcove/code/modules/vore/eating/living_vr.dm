@@ -829,6 +829,11 @@
 		if(!I.mob_possession.devourable)
 			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
 			return
+	if(istype(I, /obj/item/soulgem))
+		var/obj/item/soulgem/S = I
+		if(S.trapped && !S.trapped.devourable)
+			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
+			return
 	//OV edit end
 
 	//if(I.) //Caustic - Potential Whitelist can go here.
