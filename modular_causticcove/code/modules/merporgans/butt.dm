@@ -4,7 +4,7 @@
 	icon_state = "butt"
 	dropshrink = 0.5
 	visible_organ = TRUE
-	zone = BODY_ZONE_PRECISE_STOMACH
+	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_BUTT
 	organ_dna_type = /datum/organ_dna/butt
 	accessory_type = /datum/sprite_accessory/butt/pair
@@ -26,14 +26,17 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 	"small" = 1,
 	"medium" = 2,
 	"large" = 3,
-	"massive" = 4,
-	"enormous" = 5,
+	"extra-large" = 4,
+	"massive" = 5,
+	"enormous" = 6,
+	"gigantic" = 7,
+	"gargantuan" = 8,
 ))
 
 /datum/sprite_accessory/butt
 	icon = 'modular_causticcove/icons/mob/merp_organs/butt.dmi'
 	color_key_name = "Butt"
-	relevant_layers = list(BODY_ADJ_LAYER)
+	relevant_layers = list(BODY_ASS_LAYER/*, BODY_FRONT_LAYER*/)
 
 /datum/sprite_accessory/butt/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	if(!isdwarf(owner) && !isgoblinp(owner) && !iskobold(owner) && !isvermin(owner))
@@ -50,7 +53,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		return FALSE
 	if(!buttie.visible_organ)
 		return FALSE
-	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
+	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDECROTCH)
 
 /datum/sprite_accessory/butt/pair
 	name = "Pair"

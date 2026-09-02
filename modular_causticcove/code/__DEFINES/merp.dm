@@ -8,4 +8,4 @@
 
 #define DEFAULT_BUTT_SIZE 0
 #define MIN_BUTT_SIZE 0
-#define MAX_BUTT_SIZE 5
+#define MAX_BUTT_SIZE 8

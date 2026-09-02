@@ -51,8 +51,12 @@
 	var/penis_size = DEFAULT_PENIS_SIZE
 	var/functional = TRUE
 
+//Caustic Edit - Added Nondescript Penis to all types
 /datum/customizer/organ/penis/human
-	customizer_choices = list(/datum/customizer_choice/organ/penis/human)
+	customizer_choices = list(
+		/datum/customizer_choice/organ/penis/human,
+		/datum/customizer_choice/organ/penis/nondescript,
+		)
 
 /datum/customizer/organ/penis/anthro
 	customizer_choices = list(
@@ -66,12 +70,14 @@
 		/datum/customizer_choice/organ/penis/barbed,
 		/datum/customizer_choice/organ/penis/barbed_knotted,
 		/datum/customizer_choice/organ/penis/tentacle,
+		/datum/customizer_choice/organ/penis/nondescript,
 		)
 
 /datum/customizer/organ/penis/canine
 	customizer_choices = list(
 		/datum/customizer_choice/organ/penis/human_anthro,
 		/datum/customizer_choice/organ/penis/knotted,
+		/datum/customizer_choice/organ/penis/nondescript,
 		)
 
 /datum/customizer/organ/penis/feline
@@ -79,6 +85,7 @@
 		/datum/customizer_choice/organ/penis/human_anthro,
 		/datum/customizer_choice/organ/penis/barbed,
 		/datum/customizer_choice/organ/penis/barbed_knotted,
+		/datum/customizer_choice/organ/penis/nondescript,
 		)
 
 /datum/customizer/organ/penis/lizard
@@ -87,13 +94,16 @@
 		/datum/customizer_choice/organ/penis/tapered,
 		/datum/customizer_choice/organ/penis/tapered_double,
 		/datum/customizer_choice/organ/penis/tapered_double_knot,
+		/datum/customizer_choice/organ/penis/nondescript,
 		)
 
 /datum/customizer/organ/penis/equine
 	customizer_choices = list(
 		/datum/customizer_choice/organ/penis/human_anthro,
 		/datum/customizer_choice/organ/penis/equine,
+		/datum/customizer_choice/organ/penis/nondescript,
 		)
+//Caustic Edit End
 
 /datum/customizer_choice/organ/penis/human
 	name = "Plain Penis"
@@ -112,7 +122,6 @@
 	organ_type = /obj/item/organ/penis/knotted
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/knotted,
-		/datum/sprite_accessory/penis/knotted2,
 		)
 
 /datum/customizer_choice/organ/penis/equine
@@ -200,6 +209,13 @@
 	user.regenerate_icons()
 //OV edit end
 
+/datum/customizer_choice/organ/penis/nondescript
+	name = "Nondescript Penis"
+	organ_type = /obj/item/organ/penis/nondescript
+	sprite_accessories = list(
+		/datum/sprite_accessory/penis/nondescript,
+		)
+
 /datum/customizer/organ/testicles
 	abstract_type = /datum/customizer/organ/testicles
 	name = "Testicles"
@@ -264,12 +280,17 @@
 /datum/customizer/organ/testicles/anthro
 	customizer_choices = list(
 		/datum/customizer_choice/organ/testicles/external,
+		/datum/customizer_choice/organ/testicles/sheath,
 		/datum/customizer_choice/organ/testicles/internal,
 	)
 
 /datum/customizer_choice/organ/testicles/external
 	name = "Testicles"
 	sprite_accessories = list(/datum/sprite_accessory/testicles/pair)
+
+/datum/customizer_choice/organ/testicles/sheath
+	name = "Testicles with Sheath"
+	sprite_accessories = list(/datum/sprite_accessory/testicles/sheath)
 
 /datum/customizer_choice/organ/testicles/human
 	name = "Testicles"

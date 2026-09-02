@@ -149,3 +149,10 @@
 	name = "tentacle penis"
 	penis_type = PENIS_TYPE_TENTACLE
 	sheath_type = SHEATH_TYPE_NONE
+
+//Caustic Edit - Add Non-descript Penis type
+/obj/item/organ/penis/nondescript
+	name = "nondescript penis"
+	penis_type = PENIS_TYPE_NONDESCRIPT
+	sheath_type = SHEATH_TYPE_NONE
+//Caustic Edit End

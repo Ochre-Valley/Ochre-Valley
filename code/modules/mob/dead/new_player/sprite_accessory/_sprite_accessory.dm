@@ -182,6 +182,10 @@
 		if(BODY_FRONT_LAYER)
 			return "FRONT"
 		//Caustic Edit
+		if(BODY_ASS_LAYER)
+			return "ASS"
+		if(BODY_NOTSOFRONT_LAYER)
+			return "NSFRONT"
 		if(BODY_FRONTER_LAYER)
 			return "FRONT"
 		if(BODY_FRONTEST_LAYER)
