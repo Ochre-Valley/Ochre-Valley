@@ -1,3 +1,13 @@
+/datum/sprite_accessory/ears/ochre
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/ears/ears.dmi'
+
+/datum/sprite_accessory/ears/ochre/shadekin
+	icon_state = "shadekin"
+	name = "Shadekin"
+	color_keys = 2
+	color_key_names = list("Ears","Lower")
+	relevant_layers = list(BODY_ADJ_LAYER)
+
 /datum/sprite_accessory/ears/big/ochre/
 	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/ears/ears_32x64.dmi'
 
