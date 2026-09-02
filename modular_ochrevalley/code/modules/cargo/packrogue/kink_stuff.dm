@@ -94,6 +94,13 @@
 					/obj/item/book/granter/spell/bonechill/mirror_transform
 				)
 
+/datum/supply_pack/rogue/kink_toy/spell_instant_tf
+	name = "Scroll of Instant Transform"
+	cost = 20
+	contains = list(
+					/obj/item/book/granter/spell/bonechill/instant_transform
+				)
+
 /datum/supply_pack/rogue/kink_toy/taur_potion
 	name = "Crurahol (Taur) Potion"
 	cost = 20
