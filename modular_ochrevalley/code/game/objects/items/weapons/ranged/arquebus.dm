@@ -399,13 +399,13 @@
 	var/noob_spin_sound = 'sound/combat/weaponr1.ogg'
 	var/pro_spin_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
 	var/spin_sound
-	if(firearm_skill <= 2)
+	if(firearm_skill < 3)
 		string = pick(strings_noob)
 		spin_sound = noob_spin_sound
-	if((firearm_skill > 2) && (firearm_skill <= 4))
+	if((firearm_skill >= 3) && (firearm_skill <= 4))
 		string = pick(strings_moderate)
 		spin_sound = pro_spin_sound
-	if((firearm_skill > 4) && (firearm_skill <= 6))
+	if(firearm_skill > 4)
 		string = pick(strings_pro)
 		spin_sound = pro_spin_sound
 	if(world.time > last_spunned + spin_cooldown)
@@ -419,9 +419,9 @@
 			if(prob(35))
 				shoot_live_shot(message = 0)
 				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/ // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
-		if(firearm_skill <= 3)
+		if(firearm_skill < 3)
 			if(prob(50))
-				user.visible_message(span_danger("[user] accidentally drops [src]!"))
+				user.visible_message(span_danger("[user] clumsily drops [src]!"))
 				user.dropItemToGround(src)
 		can_spin = FALSE
 
