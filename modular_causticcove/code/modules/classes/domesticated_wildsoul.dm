@@ -36,7 +36,8 @@
 	H.adjust_blindness(-3)
 	shoes = /obj/item/clothing/shoes/roguetown/boots/furlinedanklets
 	beltr = /obj/item/rogueweapon/huntingknife/stoneknife //OV Edit - Warden Sync
-	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/warden //OV EDIT
+	armor = /obj/item/clothing/suit/roguetown/armor/manual/resting/ochre/overskin/fullbody/wildsoul/tame //OV EDIT
+	shirt = /obj/item/clothing/suit/roguetown/armor/manual/resting/ochre/chestskin/wildsoul/tame //OV EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/knuckles //OV Edit added steel knuckles
 	//OV Add Start
 	backpack_contents = list(

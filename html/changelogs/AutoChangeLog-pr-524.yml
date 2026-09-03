@@ -1,0 +1,7 @@
+author: "FeniaFox"
+delete-after: True
+changes:
+  - rscadd: "Added custom skins for bailiff."
+  - rscadd: "Added chest-layer secondary skins to mantis, dire, and warden wildsouls."
+  - balance: "rebalanced wildsoul skin fullbody armors."
+  - refactor: "refactored wildsoul & OV modular skin armor code."
