@@ -43,6 +43,7 @@
 	dna?.species?.stop_wagging_tail(src)
 
 	//OV edit
+	/*
 	if(isooze(src) && !(HAS_TRAIT(src, TRAIT_ANCIENT_HAG)) && !istype(src, /mob/living/carbon/human/species/human/northern/doppelganger)) //Exception for hags, as turning to ooze would break their gameplay loop
 		var/obj/shapeshift_holder/ooze_death/H = locate() in src
 		if(!H)
@@ -56,6 +57,7 @@
 			shape.mind.RemoveSpell(/obj/effect/proc_holder/spell/targeted/shapeshift/ooze)
 
 			return
+	*/
 	//OV edit end
 
 	if(client)
