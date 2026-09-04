@@ -80,7 +80,7 @@
 			if(!isbelly(content_obj))
 				non_belly++
 			else
-				var/our_belly = content_obj
+				var/obj/belly/our_belly = content_obj
 				if(our_belly.contents) //If we have any human prey in our bellies, exclude us
 					for(var/mob/living/carbon/human/our_prey in our_belly.contents)
 						return FALSE
