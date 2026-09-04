@@ -143,6 +143,12 @@
 	SIGNAL_HANDLER
 	if(QDELETED(src))
 		return
+	//OV EDIT
+	if(isbelly(source.loc))
+		return
+	if((source.x == 1) && (source.y == 1) && (source.z == 1))
+		return
+	//OV EDIT END
 	// 5-minute grace period: a revive-die-revive-die loop within 5 min of the last death
 	// counts as continuing trauma, not fresh trauma, so we skip the stack.
 	var/datum/stressevent/existing = get_stress_event(/datum/stressevent/protege_dead)
@@ -156,6 +162,12 @@
 	SIGNAL_HANDLER
 	if(QDELETED(src))
 		return
+	//OV EDIT
+	if(isbelly(source.loc))
+		return
+	if((source.x == 1) && (source.y == 1) && (source.z == 1))
+		return
+	//OV EDIT END
 	var/datum/stressevent/existing = get_stress_event(/datum/stressevent/protege_lord_dead)
 	if(existing && (world.time - existing.time_added) < 5 MINUTES)
 		return
