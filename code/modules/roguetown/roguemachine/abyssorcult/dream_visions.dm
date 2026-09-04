@@ -73,8 +73,35 @@
 		return FALSE
 	// I'm- not sure how else to prevent abyssorites from seeing emotional roleplay too often.
 	// So we'll assume anyone wearing three items or less is doing emotional roleplay.
-	if(target.contents && target.contents.len < 4)
+	//OV EDIT - Expand contents check to exclude bellies
+	if(target.contents)
+		var/non_belly = 0
+		for(var/obj/content_obj in target.contents)
+			if(!isbelly(content_obj))
+				non_belly++
+			else
+				var/obj/belly/our_belly = content_obj
+				if(our_belly.contents) //If we have any human prey in our bellies, exclude us
+					for(var/mob/living/carbon/human/our_prey in our_belly.contents)
+						return FALSE
+		if(non_belly < 4)
+			return FALSE
+	//OV EDIT END
+
+	//OV EDIT - Make sure they aren't in a scene using checks specific to our server
+	if(isbelly(target.loc)) //Exclude prey in bellies
 		return FALSE
+
+	if(target.do_not_disturb) //Exclude people who have toggled scene privacy
+		return FALSE
+
+	for(var/datum/sex_session/session as anything in GLOB.sex_sessions) //Check if they are currently in an active sex session
+		if(session.user != target)
+			return FALSE
+		if(session.target != target)
+			return FALSE
+	//OV EDIT END
+
 	if(length(valid_roles))
 		if(target.mind.assigned_role in valid_roles)
 			return TRUE
