@@ -1,0 +1,4 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Added a new button to the IC tab called \"Open ERP Panel\". This gives you a list of nearby people to open the ERP panel with."

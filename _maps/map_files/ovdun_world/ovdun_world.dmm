@@ -97644,10 +97644,6 @@
 	},
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
-"sdJ" = (
-/obj/effect/landmark/chest_or_mimic/loot_chest,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "sdQ" = (
 /obj/machinery/light/rogue/firebowl/church,
 /turf/open/floor/rogue/carpet/lord/right,
@@ -109201,12 +109197,6 @@
 	},
 /turf/open/floor/rogue/twig,
 /area/rogue/outdoors/rtfield)
-"ukB" = (
-/obj/structure/bars/passage/shutter{
-	redstone_id = "rd3tc1"
-	},
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "ukC" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/rogue/grassred,
@@ -160851,9 +160841,9 @@ eJs
 toJ
 toJ
 qHj
-toJ
-toJ
-toJ
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
@@ -161302,10 +161292,10 @@ tum
 toJ
 toJ
 toJ
-ukB
-toJ
-sdJ
-toJ
+qHj
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
@@ -161755,9 +161745,9 @@ toJ
 ckW
 toJ
 qHj
-toJ
-toJ
-toJ
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
