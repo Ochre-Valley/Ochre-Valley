@@ -63,4 +63,4 @@ License: CC BY-SA 3.0
 
 Folder: modular_ochrevalley\icons\roguetown\clothing\onmob\taur_clothing.dmi
 Title: taur_clothing.dmi
-added more assets to taur clothing made by dongwaiver! Commissioner ButteryToast
+added more assets to taur clothing made by dongwaiver! Commissioner ButteryToast Even more wonderful assets added in by the amazing dongwaiver
