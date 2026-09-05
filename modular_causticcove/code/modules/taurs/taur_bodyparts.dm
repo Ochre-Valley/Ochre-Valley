@@ -66,8 +66,9 @@
 
 /obj/item/bodypart/taur/cow
 	name = "Cow Body"
-	
+
 	offset_x = -16
+	taur_clothing_category = "cow" //OV ADD
 	taur_icon_state = "cow_s"
 
 	has_taur_color = TRUE
@@ -76,6 +77,7 @@
 	name = "Lizard Body"
 
 	offset_x = -16
+	taur_clothing_category = "lizard" //OV ADD
 	taur_icon_state = "lizard_s"
 
 	has_taur_color = TRUE
@@ -109,6 +111,7 @@
 	name = "Slug Body"
 
 	offset_x = -16
+	taur_clothing_category = "slug" //OV ADD
 	taur_icon_state = "slug_s"
 
 	has_taur_color = TRUE
@@ -162,6 +165,7 @@
 	name = "Frog Body"
 
 	offset_x = -16
+	taur_clothing_category = "frog" //OV ADD
 	taur_icon_state = "frog_s"
 
 	has_taur_color = TRUE
@@ -179,6 +183,7 @@
 	name = "Wasp Body"
 
 	offset_x = -16
+	taur_clothing_category = "wasp" //OV ADD
 	taur_icon_state = "wasp_s"
 
 	has_taur_color = TRUE
@@ -205,6 +210,7 @@
 	name = "Mermaid Body"
 
 	offset_x = -16
+	taur_clothing_category = "mermaid" //OV ADD
 	taur_icon_state = "mermaid_s"
 
 	has_taur_color = TRUE
@@ -213,6 +219,7 @@
 	name = "Alt Naga Body"
 
 	offset_x = -16
+	taur_clothing_category = "altnaga" //OV ADD
 	taur_icon_state = "altnaga_s"
 
 	has_taur_color = TRUE
@@ -221,6 +228,7 @@
 	name = "Alt Naga Tailmaw Body"
 
 	offset_x = -16
+	taur_clothing_category = "altnaga" //OV ADD
 	taur_icon_state = "altnagatailmaw_s"
 
 	has_taur_color = TRUE
@@ -229,6 +237,7 @@
 	name = "Fat Naga Body"
 
 	offset_x = -16
+	taur_clothing_category = "fatnaga" //OV ADD
 	taur_icon_state = "fatnaga_s"
 
 	has_taur_color = TRUE
@@ -245,6 +254,7 @@
 	name = "Mammoth Body"
 
 	offset_x = -16
+	taur_clothing_category = "mammoth" //OV ADD
 	taur_icon_state = "mammoth_s"
 
 	has_taur_color = TRUE
