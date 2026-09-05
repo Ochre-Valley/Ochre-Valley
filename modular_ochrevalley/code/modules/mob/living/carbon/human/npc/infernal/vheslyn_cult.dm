@@ -571,6 +571,14 @@ GLOBAL_LIST_INIT(vheslyn_cult_aggro, world.file2list("modular_ochrevalley/string
 	ADD_TRAIT(src, TRAIT_BLOOD_RESISTANCE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HARDDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_INFINITE_STAMINA, TRAIT_GENERIC)
+	for(var/obj/item/gear in get_equipped_items() + held_items)
+		lock_gear_piece(gear, "legendary_cultist_gear")
+
+/mob/living/carbon/human/species/human/northern/infernal_cultist/legendary/death(gibbed, nocutscene = FALSE)
+	. = ..()
+	for(var/obj/item/gear in get_equipped_items() + held_items)
+		REMOVE_TRAIT(gear, TRAIT_NODROP, "legendary_cultist_gear")
+//They will drop their helmet, gloves, boots, and held items when they detonate providing 4-5 blacksteel on death.
 
 /datum/outfit/job/roguetown/human/northern/infernal_cult_legendary/pre_equip(mob/living/carbon/human/H)
 	..()
