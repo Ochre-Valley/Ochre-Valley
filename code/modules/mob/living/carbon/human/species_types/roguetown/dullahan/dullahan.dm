@@ -49,6 +49,7 @@
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
 		/obj/item/bodypart/taur/noodle, // OV ADD
+		/obj/item/bodypart/taur/saiga, //OV ADD
 		//OV Edit End
 	)
 	base_name = "Godtouched"
