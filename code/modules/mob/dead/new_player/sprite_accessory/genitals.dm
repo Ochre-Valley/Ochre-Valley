@@ -1,5 +1,5 @@
 /datum/sprite_accessory/penis
-	icon = 'icons/mob/sprite_accessory/genitals/pintle.dmi'
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/genitals/pintle.dmi'
 	color_keys = 2
 	color_key_names = list("Member", "Skin")
 //Caustic Edit, adds dynamic state changes
