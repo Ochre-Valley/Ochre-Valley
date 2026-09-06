@@ -185,14 +185,14 @@
 	customizer_choices = list(/datum/customizer_choice/organ/butt/human)
 
 /datum/customizer_choice/organ/butt/human
-	sprite_accessories = list(/datum/sprite_accessory/butt/pair)
+	sprite_accessories = list(/datum/sprite_accessory/butt/plain)
 	allows_accessory_color_customization = FALSE
 
 /datum/customizer/organ/butt/animal
 	customizer_choices = list(/datum/customizer_choice/organ/butt/animal)
 
 /datum/customizer_choice/organ/butt/animal
-	sprite_accessories = list(/datum/sprite_accessory/butt/pair)
+	sprite_accessories = list(/datum/sprite_accessory/butt/plain)
 
 //OV edit
 /mob/living/carbon/proc/change_butt_size_customizer(mob/living/carbon/user) // This could have been done better, but i'm too stupid and tired to get something out of it

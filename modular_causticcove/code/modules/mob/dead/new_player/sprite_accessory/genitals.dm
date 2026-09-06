@@ -12,9 +12,9 @@
 /datum/sprite_accessory/belly/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
-/datum/sprite_accessory/belly
+/datum/sprite_accessory/belly/plain
 	icon_state = "pair"
-	name = "Belly"
+	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTER_LAYER)
 
@@ -40,7 +40,7 @@
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain"
 	icon_state = "pair"
 	color_key_defaults = list(KEY_SKIN_COLOR)
