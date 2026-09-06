@@ -1,6 +1,8 @@
 /datum/preferences/handle_title_pref_selection(mob/user)
 	var/old = titles_pref
-	tgui_input_list
+	var/titles_input = tgui_input_list(user, "Choose your character's titles", "TITLES", GLOB.titles_list)
+	if(titles_input)
+		titles_pref = titles_input
 	verbose_pref_log_change(user, "notice", "Titles", old, titles_pref)
 
 /datum/job/constant_ui_data()
