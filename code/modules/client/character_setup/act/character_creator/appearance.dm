@@ -84,6 +84,20 @@
 			if(new_body_size)
 				new_body_size = round(clamp(new_body_size * 0.01, BODY_SIZE_MIN, BODY_SIZE_MAX), 0.01)
 				verbose_pref_log_change(user, "notice", "Body Size", "[features["body_size"] * 100]%", "[new_body_size * 100]%")
+				//OV ADD START
+				ensure_sizecat(new_body_size)
+				switch(new_body_size)
+					if(0 to 0.45)
+						to_chat(user, span_alert("You are now considered a micro."))
+					if(0.45 to 0.85)
+						to_chat(user, span_alert("You are now considered small."))
+					if(0.85 to 1.15)
+						to_chat(user, span_alert("You are now considered a normal height."))
+					if(1.15 to 1.5)
+						to_chat(user, span_alert("You are now considered large."))
+					if(1.5 to INFINITY)
+						to_chat(user, span_alert("You are now considered a macro."))
+				//OV ADD END
 				features["body_size"] = new_body_size
 			return CHARACTER_ACT_PREVIEW_UPDATE
 
