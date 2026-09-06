@@ -91,7 +91,7 @@ const WelcomeAnimation = (props) => {
     <Box mt={1}>
       <TegakiAnimation
         height={4}
-        time={{ mode: 'uncontrolled', speed: 10, loop: false }}
+        // time={{ mode: 'uncontrolled', speed: 10, loop: false }} OV EDIT - Removed to fix welcome message
         style={{ fontSize: 30, textAlign: 'center' }}
       >
         Welcome To {toTitleCase(server_name)}

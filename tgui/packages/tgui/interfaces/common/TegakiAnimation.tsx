@@ -29,15 +29,37 @@ export type TegakiAnimationProps = { height: number } & Pick<
   'time' | 'children' | 'style'
 >;
 
+// OV EDITS - FIXING WELCOME MESSAGE
 export const TegakiAnimation = (props: TegakiAnimationProps) => {
   const { height } = props;
   const [font, setFont] = useState<undefined | null | TegakiBundle>(undefined);
+  const [prog, setProg] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     (async () => {
       setFont(await getFont());
+      setPlaying(true);
     })();
   }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    let id: any | null = setInterval(() => {
+      setProg((x) => {
+        if (x > 100) {
+          clearInterval(id);
+          id = null;
+          return 100;
+        }
+        return x + 0.15;
+      });
+    });
+    return () => {
+      if (!id) return;
+      clearInterval(id);
+    };
+  }, [playing]);
 
   let inner: ReactNode;
   if (font === undefined) {
@@ -55,7 +77,7 @@ export const TegakiAnimation = (props: TegakiAnimationProps) => {
       </Box>
     );
   } else {
-    inner = <TegakiRenderer font={font} {...props} />;
+    inner = <TegakiRenderer font={font} time={`${prog}%`} {...props} />;
   }
 
   return (
@@ -64,3 +86,4 @@ export const TegakiAnimation = (props: TegakiAnimationProps) => {
     </Stack>
   );
 };
+// OV EDITS END - FIXING WELCOME MESSAGE
