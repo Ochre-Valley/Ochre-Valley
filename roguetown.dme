@@ -3796,7 +3796,7 @@
 #include "modular_ochrevalley\code\modules\reagents\hemovore_snacks.dm"
 #include "modular_ochrevalley\code\modules\roguetown\roguecrafting\alchemy\alchemy.dm"
 #include "modular_causticcove\code\modules\extra_virtue\prefs.dm"
-#include "modular_ochrevalley\code\modules\clothing\rogueclothes\armor\regenerating.dm"
+#include "modular_ochrevalley\code\modules\clothing\rogueclothes\armor\skin.dm"
 #include "modular_causticcove\code\modules\grazer\stomach.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_triumph.dm"
 #include "modular_ochrevalley\code\datums\pollutants\foods.dm"
