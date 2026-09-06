@@ -66,10 +66,12 @@
 			var/datum/virtue/origin/origin = virtue
 			GLOB.origins[origin.origin_name] = origin.origin_desc
 
+	//OV ADD START
 	for (var/path in subtypesof(/datum/sizecat))
 		var/datum/sizecat/sc = new path()
 		GLOB.sizecats[path] = sc
-	
+	//OV ADD END
+
 	// Loadout items
 	for (var/path in subtypesof(/datum/loadout_item))
 		var/datum/loadout_item/loadout_item = new path()
