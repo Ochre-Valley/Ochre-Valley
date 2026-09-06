@@ -7,7 +7,7 @@
 	zone = BODY_ZONE_PRECISE_STOMACH
 	slot = ORGAN_SLOT_BUTT
 	organ_dna_type = /datum/organ_dna/butt
-	accessory_type = /datum/sprite_accessory/butt/pair
+	accessory_type = /datum/sprite_accessory/butt/plain
 	var/butt_size = DEFAULT_BUTT_SIZE
 
 /obj/item/organ/butt/get_cache_key()
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain"
 	icon_state = "pair"
 	color_key_defaults = list(KEY_SKIN_COLOR)

@@ -24,12 +24,13 @@ GLOBAL_LIST_INIT(named_belly_sizes, list(
 	"Small" = 1,
 	"Medium" = 2,
 	"Large" = 3,
-	"Enormous" = 5,
-	"Towering" = 6,
-	"Gigantic" = 7,
-	"Gargantuan" = 8,
-	"Colossal" = 9,
-	"Ungodly big" = 10,
+	"Enormous" = 4,
+	"Towering" = 5,
+	"Gigantic" = 6,
+	"Gargantuan" = 7,
+	"Colossal" = 8,
+	"Ungodly big" = 9,
+	"Baothan" = 10,
 ))
 
 /datum/sprite_accessory/belly
@@ -46,8 +47,8 @@ GLOBAL_LIST_INIT(named_belly_sizes, list(
 /datum/sprite_accessory/belly/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
-/datum/sprite_accessory/belly
+/datum/sprite_accessory/belly/plain
 	icon_state = "pair"
-	name = "Belly"
+	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTER_LAYER)

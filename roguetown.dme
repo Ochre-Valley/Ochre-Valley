@@ -3948,6 +3948,7 @@
 #include "modular_ochrevalley\code\vore_verb.dm"
 
 
+#include "modular_ochrevalley\code\modules\character_setup_overrides\character_overrides.dm"
 #include "modular_ochrevalley\code\game\objects\items\weapons\ranged\ammo.dm"
 #include "modular_ochrevalley\code\game\objects\items\weapons\ranged\arquebus.dm"
 #include "modular_ochrevalley\code\modules\cargo\packsrogue\merchant\weapons\merch_weapons_foreign.dm"

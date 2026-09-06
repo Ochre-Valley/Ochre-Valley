@@ -47,7 +47,7 @@
 	var/datum/customizer_entry/organ/belly/belly_entry = entry
 	switch(params["customizer_task"])
 		if("belly_size")
-			var/named_size = tgui_input_list(user, "Choose your belly size:", "Character Preference", BELLY_SIZES_BY_NAME, find_key_by_value(BELLY_SIZES_BY_NAME, belly_entry.belly_size))
+			var/named_size = tgui_input_list(user, "Choose your belly size:", "Belly Size", BELLY_SIZES_BY_NAME, find_key_by_value(BELLY_SIZES_BY_NAME, belly_entry.belly_size))
 			if(isnull(named_size))
 				return TRUE
 			var/new_size = BELLY_SIZES_BY_NAME[named_size]
@@ -64,16 +64,14 @@
 	customizer_choices = list(/datum/customizer_choice/organ/belly/human)
 
 /datum/customizer_choice/organ/belly/human
-	sprite_accessories = list(/datum/sprite_accessory/belly)
+	sprite_accessories = list(/datum/sprite_accessory/belly/plain)
 	allows_accessory_color_customization = FALSE
 
 /datum/customizer/organ/belly/animal
 	customizer_choices = list(/datum/customizer_choice/organ/belly/animal)
 
 /datum/customizer_choice/organ/belly/animal
-	sprite_accessories = list(
-		/datum/sprite_accessory/belly
-		)
+	sprite_accessories = list(/datum/sprite_accessory/belly/plain)
 
 //OV edit
 /mob/living/carbon/verb/changebellysize()
@@ -170,7 +168,7 @@
 	var/datum/customizer_entry/organ/butt/butt_entry = entry
 	switch(params["customizer_task"])
 		if("butt_size")
-			var/named_size = tgui_input_list(user, "Choose your butt size:", "Character Preference", BUTT_SIZES_BY_NAME, find_key_by_value(BUTT_SIZES_BY_NAME, butt_entry.butt_size))
+			var/named_size = tgui_input_list(user, "Choose your butt size:", "Butt Size", BUTT_SIZES_BY_NAME, find_key_by_value(BUTT_SIZES_BY_NAME, butt_entry.butt_size))
 			if(isnull(named_size))
 				return TRUE
 			var/new_size = BUTT_SIZES_BY_NAME[named_size]
