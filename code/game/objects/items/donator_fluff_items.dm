@@ -169,8 +169,6 @@
 	verbage_simple = "arranged"
 	verbage = "arranges"
 
-//
-
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/donator
 	name = "maillekini"
 	desc = "A curious - and particularly revealing - variant of a common maille-aketon. It's said that the intentionally provocative design \
@@ -3459,6 +3457,7 @@ As Excaliber."
 /obj/item/clothing/suit/roguetown/armor/gambeson/donator_arming
 	name = "jacketed gambeson"
 	icon_state = "darming"
+	item_state = "darming"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
 	sleeved = 'icons/clothing/onmob/donor_sleeves_armor.dmi'
@@ -3494,6 +3493,7 @@ As Excaliber."
 /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/donator_arming
 	name = "heavy jacketed gambeson"
 	icon_state = "darming"
+	item_state = "darming"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
 	sleeved = 'icons/clothing/onmob/donor_sleeves_armor.dmi'
@@ -3529,6 +3529,7 @@ As Excaliber."
 /obj/item/clothing/suit/roguetown/armor/gambeson/donator_jacket
 	name = "jacketed gambeson"
 	icon_state = "djacket"
+	item_state = "djacket"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
 	sleeved = 'icons/clothing/onmob/donor_sleeves_armor.dmi'
@@ -3564,6 +3565,7 @@ As Excaliber."
 /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/donator_jacket
 	name = "heavy jacketed gambeson"
 	icon_state = "djacket"
+	item_state = "djacket"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
 	sleeved = 'icons/clothing/onmob/donor_sleeves_armor.dmi'
@@ -3629,7 +3631,7 @@ As Excaliber."
 	threatening it may be, it won't make your ears longer."
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
 	icon_state = "stalkerino_drowsword"
-	sheathe_icon = "nscabbard_spidersaber"
+	sheathe_icon = "nscabbard_spidersabre"
 	bigboy = TRUE
 	smeltresult = /obj/item/ingot/drow
 

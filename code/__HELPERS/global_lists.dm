@@ -66,25 +66,17 @@
 			var/datum/virtue/origin/origin = virtue
 			GLOB.origins[origin.origin_name] = origin.origin_desc
 
+	//OV ADD START
 	for (var/path in subtypesof(/datum/sizecat))
 		var/datum/sizecat/sc = new path()
 		GLOB.sizecats[path] = sc
-	
+	//OV ADD END
+
 	// Loadout items
 	for (var/path in subtypesof(/datum/loadout_item))
 		var/datum/loadout_item/loadout_item = new path()
 		GLOB.loadout_items[path] = loadout_item
 		GLOB.loadout_items_by_name[loadout_item.name] = loadout_item
-
-
-	// Combat Music Overrides
-	for (var/path in subtypesof(/datum/combat_music))
-		var/datum/combat_music/combat_music = new path()
-		GLOB.cmode_tracks_by_type[path] = combat_music
-
-	for (var/path in GLOB.cmode_tracks_by_type)
-		var/datum/combat_music/trackref = GLOB.cmode_tracks_by_type[path]
-		cmode_track_to_namelist(trackref)
 
 	// Inquisition Hermes list
 	for (var/path in subtypesof(/datum/inqports))

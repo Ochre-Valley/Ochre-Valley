@@ -172,7 +172,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else if(stat == UNCONSCIOUS && !forced)
 		if(!(unconscious_allowed_modes[message_mode]))
 			return
-	
+
 	//OV edit
 	if(isitem(loc))
 		var/obj/item/the_item = loc
@@ -377,18 +377,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		mob_color = H.voice_color
 		if(H.voicecolor_override)
 			mob_color = H.voicecolor_override
-	var/chatmsg = "<font color = #[mob_color]><b>[src]</b></font> " + sign_verb + "."
+	var/chatmsg = "<font color = [mob_color]><b>[src]</b></font> " + sign_verb + "."
 	speech_source.visible_message(chatmsg, runechat_message = sign_verb, log_seen = SEEN_LOG_EMOTE, ignored_mobs = understanders) //OV Edit
-
-	//speech bubble
-	var/list/speech_bubble_recipients = list()
-	for(var/mob/M in listening)
-		if(M.client?.prefs)
-			if(M.client && !M.client.prefs.chat_on_map)
-				speech_bubble_recipients.Add(M.client)
-	var/image/I = image('icons/mob/talk.dmi', speech_source, "[bubble_type][say_test(message)]", FLY_LAYER) //OV Edit
-	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay), I, speech_bubble_recipients, 30)
 
 /datum/species/proc/get_span_language(datum/language/message_language)
 	if(!message_language)
@@ -403,11 +393,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(!speaker)
 		return FALSE
 	//OV Add End
-	if(!client.prefs.chat_on_map)
-		return FALSE
 	if(stat >= UNCONSCIOUS)
-		return FALSE
-	if(!ismob(speaker) && !speaker.is_character_message_origin() && !client.prefs.see_chat_non_mob) //OV Edit
 		return FALSE
 	return TRUE
 
@@ -609,16 +595,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_LIVING_SAY_SPECIAL, src, message)
-
-	//speech bubble
-	var/list/speech_bubble_recipients = list()
-	for(var/mob/M in listening)
-		if(M.client?.prefs)
-			if(M.client && !M.client.prefs.chat_on_map)
-				speech_bubble_recipients.Add(M.client)
-	var/image/I = image('icons/mob/talk.dmi', speech_source, "[bubble_type][say_test(message)]", FLY_LAYER) //OV Edit
-	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay), I, speech_bubble_recipients, 30)
 
 	//Listening gets trimmed here if a vocal bark's present. If anyone ever makes this proc return listening, make sure to instead initialize a copy of listening in here to avoid wonkiness
 	if(SEND_SIGNAL(src, COMSIG_MOVABLE_QUEUE_BARK, listening, args) || vocal_bark || vocal_bark_id)

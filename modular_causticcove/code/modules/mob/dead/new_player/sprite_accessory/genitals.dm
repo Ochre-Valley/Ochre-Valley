@@ -12,9 +12,9 @@
 /datum/sprite_accessory/belly/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
-/datum/sprite_accessory/belly
+/datum/sprite_accessory/belly/plain
 	icon_state = "pair"
-	name = "Belly"
+	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTER_LAYER)
 
@@ -30,7 +30,7 @@
 		generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BUTT, OFFSET_BUTT)
 /datum/sprite_accessory/butt/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
-	return "butt_[icon_state]_[buttie.organ_size]"
+	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
@@ -40,7 +40,7 @@
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain"
 	icon_state = "pair"
 	color_key_defaults = list(KEY_SKIN_COLOR)

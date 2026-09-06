@@ -7,19 +7,19 @@
 	zone = BODY_ZONE_PRECISE_STOMACH
 	slot = ORGAN_SLOT_BUTT
 	organ_dna_type = /datum/organ_dna/butt
-	accessory_type = /datum/sprite_accessory/butt/pair
-	var/organ_size = DEFAULT_BUTT_SIZE
+	accessory_type = /datum/sprite_accessory/butt/plain
+	var/butt_size = DEFAULT_BUTT_SIZE
 
 /obj/item/organ/butt/get_cache_key()
-	return "[..()]-[organ_size]"
+	return "[..()]-[butt_size]"
 
 /datum/organ_dna/butt
-	var/organ_size = DEFAULT_BUTT_SIZE
+	var/butt_size = DEFAULT_BUTT_SIZE
 
 /datum/organ_dna/butt/imprint_organ(obj/item/organ/organ)
 	..()
 	var/obj/item/organ/butt/butt_organ = organ
-	butt_organ.organ_size = organ_size
+	butt_organ.butt_size = butt_size
 
 GLOBAL_LIST_INIT(named_butt_sizes, list(
 	"flat" = 0,
@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BUTT, OFFSET_BUTT)
 /datum/sprite_accessory/butt/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
-	return "butt_[icon_state]_[buttie.organ_size]"
+	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain"
 	icon_state = "pair"
 	color_key_defaults = list(KEY_SKIN_COLOR)

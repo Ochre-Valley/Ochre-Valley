@@ -6,6 +6,55 @@
 #define MIN_BELLY_SIZE 0
 #define MAX_BELLY_SIZE 10
 
+#define BELLY_SIZE_FLAT 0
+#define BELLY_SIZE_SMALL 1
+#define BELLY_SIZE_MEDIUM 2
+#define BELLY_SIZE_LARGE 3
+#define BELLY_SIZE_ENORMOUS 4
+#define BELLY_SIZE_TOWERING 5
+#define BELLY_SIZE_GIGANTIC 6
+#define BELLY_SIZE_GARGANTUAN 7
+#define BELLY_SIZE_COLOSSAL 8
+#define BELLY_SIZE_UNGODLYBIG 9
+#define BELLY_SIZE_BAOTHAN 10
+
+#define BELLY_SIZES list(\
+	BELLY_SIZE_FLAT, \
+	BELLY_SIZE_SMALL, \
+	BELLY_SIZE_MEDIUM, \
+	BELLY_SIZE_LARGE, \
+	BELLY_SIZE_ENORMOUS, \
+	BELLY_SIZE_TOWERING, \
+	BELLY_SIZE_GIGANTIC, \
+	BELLY_SIZE_GARGANTUAN, \
+	BELLY_SIZE_COLOSSAL, \
+	BELLY_SIZE_UNGODLYBIG, \
+	BELLY_SIZE_BAOTHAN, \
+)
+
+#define BELLY_SIZES_BY_NAME list(\
+	"Flat" = BELLY_SIZE_FLAT, \
+	"Small" = BELLY_SIZE_SMALL, \
+	"Medium" = BELLY_SIZE_MEDIUM, \
+	"Large" = BELLY_SIZE_LARGE, \
+	"Enormous" = BELLY_SIZE_ENORMOUS, \
+	"Towering" = BELLY_SIZE_TOWERING, \
+	"Gigantic" = BELLY_SIZE_GIGANTIC, \
+	"Gargantuan" = BELLY_SIZE_GARGANTUAN, \
+	"Colossal" = BELLY_SIZE_COLOSSAL, \
+	"Ungodly big" = BELLY_SIZE_UNGODLYBIG, \
+	"Baothan" = BELLY_SIZE_BAOTHAN, \
+)
+
 #define DEFAULT_BUTT_SIZE 0
 #define MIN_BUTT_SIZE 0
 #define MAX_BUTT_SIZE 5
+
+#define BUTT_SIZES_BY_NAME list(\
+	"Flat" = 0, \
+	"Small" = 1, \
+	"Medium" = 2, \
+	"Large" = 3, \
+	"Massive" = 4, \
+	"Enormous" = 5, \
+)
