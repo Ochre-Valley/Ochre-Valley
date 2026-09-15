@@ -67,7 +67,7 @@
 	max_integrity = 600
 
 /turf/closed/wall/mineral/rogue/wood/window/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
+	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	return ..()
 
@@ -155,7 +155,7 @@
 	max_integrity = 800
 
 /turf/closed/wall/mineral/rogue/wooddark/window/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
+	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	return ..()
 
@@ -283,7 +283,7 @@
 	max_integrity = 800
 
 /turf/closed/wall/mineral/rogue/stone/window/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
+	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	return ..()
 

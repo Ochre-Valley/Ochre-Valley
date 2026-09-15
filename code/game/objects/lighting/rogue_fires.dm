@@ -27,7 +27,7 @@
 	. += span_info("If extinguished, this can be rekindled by left-clicking it with a torch, lamptern, flint, or any other source of ignition. In a pinch, the sparks that're born from sharpening bladed weapons and hitting stones together can suffice.")
 
 /obj/machinery/light/rogue/firebowl/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && (mover.pass_flags & PASSTABLE))
+	if(istype(mover) && (mover.pass_flags & PASSTABLE) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	if(mover.throwing)
 		return 1
@@ -463,7 +463,7 @@
 		SEND_SIGNAL(attachment, COMSIG_STORAGE_CLOSED)
 
 /obj/machinery/light/rogue/hearth/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && (mover.pass_flags & PASSTABLE))
+	if(istype(mover) && (mover.pass_flags & PASSTABLE) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	if(mover.throwing)
 		return 1
@@ -941,7 +941,7 @@
 	healing_range = 4
 
 /obj/machinery/light/rogue/campfire/densefire/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && (mover.pass_flags & PASSTABLE))
+	if(istype(mover) && (mover.pass_flags & PASSTABLE) && !(mover.pass_flags & SIZEPASS)) // OV Edit: prevent micros from going through
 		return 1
 	if(mover.throwing)
 		return 1
