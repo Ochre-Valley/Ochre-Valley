@@ -83,8 +83,10 @@ export const DmTarget = new Juke.Target({
     'sound/**',
     'tgui/public/tgui.html',
     'modular/**',
+    // OV Edit Start: Add our modular directories to DmTarget
     'modular_causticcove/**',
     'modular_ochrevalley/**',
+    // OV Edit End
     `${DME_NAME}.dme`,
     NamedVersionFile,
   ],
@@ -230,6 +232,8 @@ export const TguiAnalyzeTarget = new Juke.Target({
 export const TestTarget = new Juke.Target({
   dependsOn: [DmTestTarget, TguiTestTarget],
 });
+
+export * from './ov.js'; // // OV Add: OV Specific Lints
 
 export const LintTarget = new Juke.Target({
   dependsOn: [TguiLintTarget],
