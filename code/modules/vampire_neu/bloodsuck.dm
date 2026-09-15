@@ -57,14 +57,7 @@
 			to_chat(src, span_warning("I'm going to puke..."))
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
 		//OV ADD START: Hemovore Nutrient and Hydration procs, piggybacking off Vamp Multipliers
-		if(HAS_TRAIT(src, TRAIT_LYFE_DRINK))
-			var/gained_food = 100
-			if(victim.mind)
-				gained_food = gained_food * CLIENT_VITAE_MULTIPLIER
-				victim.blood_volume = max(victim.blood_volume - 45, 0)
-				src.apply_status_effect(/datum/status_effect/buff/mealbuff)
-			adjust_nutrition(gained_food)
-			adjust_hydration(gained_food)
+		check_hemovore_nutrition(100, victim)
 		//OV ADD END
 		return
 
@@ -77,15 +70,7 @@
 		return
 
 	//OV ADD START: Hemovore - Blackblood check
-	if(HAS_TRAIT(src, TRAIT_BLACKBLOOD))
-		if(HAS_TRAIT(src, TRAIT_LYFE_DRINK))
-			var/gained_food = 100
-			if(victim.mind)
-				gained_food = gained_food * CLIENT_VITAE_MULTIPLIER
-				victim.blood_volume = max(victim.blood_volume - 45, 0)
-				src.apply_status_effect(/datum/status_effect/buff/mealbuff)
-			adjust_nutrition(gained_food)
-			adjust_hydration(gained_food)
+	if(HAS_TRAIT(src, TRAIT_BLACKBLOOD) && check_hemovore_nutrition(100, victim))
 		return
 	//OV ADD END
 
