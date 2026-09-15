@@ -142,6 +142,20 @@
 	contains = list(
 					/obj/item/reagent_containers/glass/bottle/alchemical/normal
 				)
+
+/datum/supply_pack/rogue/kink_toy/soulgem
+	name = "Luxseal Gem"
+	cost = 30
+	contains = list(
+					/obj/item/soulgem
+				)
+
+/datum/supply_pack/rogue/kink_toy/soulgemeffigy
+	name = "Luxseal Effigy"
+	cost = 30
+	contains = list(
+					/obj/item/soulgem/effigy
+				)
 //for armored collars, prices are 110% the gorget they are based on, because dirtyfaces randomize pricing a bit
  //bronze gorgets are assigned a value of 40 because vibes (more than its mechanically worth), since the normal bronze gorget is not sold.
 
