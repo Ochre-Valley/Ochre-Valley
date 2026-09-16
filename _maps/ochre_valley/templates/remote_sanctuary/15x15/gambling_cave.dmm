@@ -1,0 +1,1595 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"af" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"aE" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/structure/table/wood/long_table/east,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"aH" = (
+/obj/structure/fluff/railing/border/west,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"aP" = (
+/obj/structure/ritualcircle/baotha{
+	icon_state = "baotha_active"
+	},
+/turf/open/floor/rogue/tile/harem,
+/area/rogue/indoors/remote_sanctuary)
+"aV" = (
+/turf/closed/wall/mineral/rogue/decostone/cand{
+	max_integrity = 99999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"bo" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 36;
+	pixel_x = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 39;
+	pixel_x = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 42;
+	pixel_x = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 36;
+	pixel_x = 7
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 39;
+	pixel_x = 7
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 42;
+	pixel_x = 7
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"bw" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"bZ" = (
+/obj/structure/mineral_door/wood/deadbolt{
+	locked = 1;
+	dir = 1
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"cc" = (
+/turf/open/water/river/flow/north,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"dw" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/rogue/carpet/lord/right,
+/area/rogue/indoors/remote_sanctuary)
+"dy" = (
+/obj/structure/table/wood/long_table,
+/obj/machinery/light/rogue/candle/floorcandle/pink{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/turf/open/floor/rogue/tile/masonic/single,
+/area/rogue/indoors/remote_sanctuary)
+"dD" = (
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"dF" = (
+/obj/structure/table/wood,
+/obj/machinery/light/rogue/candle/floorcandle/alt/blue{
+	pixel_y = -7
+	},
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"dJ" = (
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/indoors/remote_sanctuary/cave)
+"ek" = (
+/obj/structure/fermentation_keg/distiller,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"eY" = (
+/obj/structure/ritualcircle/eora{
+	icon_state = "eora_active"
+	},
+/turf/open/floor/rogue/tile/harem,
+/area/rogue/indoors/remote_sanctuary/cave)
+"fU" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/obj/structure/chair/bench/ultimacouch,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"fV" = (
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"gk" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"gl" = (
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/remote_sanctuary/cave)
+"gs" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 5
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"gE" = (
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"gK" = (
+/obj/machinery/light/rogue/hearth,
+/obj/item/reagent_containers/glass/bucket/pot,
+/obj/machinery/light/rogue/oven/south,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/remote_sanctuary)
+"gX" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"hs" = (
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"hv" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/remote_sanctuary)
+"hx" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 11
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 7;
+	pixel_x = -12
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 7;
+	pixel_x = 11
+	},
+/turf/open/floor/rogue/tile/masonic/single,
+/area/rogue/indoors/remote_sanctuary)
+"hz" = (
+/obj/machinery/light/rogue/candle/blue,
+/obj/structure/fluff/pillow/magenta{
+	dir = 8
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"hF" = (
+/obj/structure/table/wood/betting,
+/obj/item/storage/pill_bottle/dice/farkle{
+	pixel_x = -15
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"iw" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"iB" = (
+/obj/structure/table/wood/long_table/right,
+/obj/structure/rack/rogue/shelf,
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = -10
+	},
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = -6
+	},
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = -2
+	},
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = 2
+	},
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = 6
+	},
+/obj/item/kitchen/spoon/bronze{
+	pixel_y = 35;
+	pixel_x = 10
+	},
+/obj/item/millstone{
+	pixel_y = 17;
+	pixel_x = 10
+	},
+/obj/item/kitchen/rollingpin{
+	pixel_x = 11
+	},
+/obj/item/flint{
+	pixel_x = -5;
+	pixel_y = 1
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"jf" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 1
+	},
+/obj/machinery/light/rogue/campfire/fireplace{
+	color = "#ee76c2"
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"jT" = (
+/obj/machinery/light/rogue/candle/blue{
+	pixel_y = -32
+	},
+/obj/effect/decal/wood/herringbone,
+/obj/machinery/light/rogue/candle/floorcandle/alt/pink{
+	pixel_y = -18
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"kH" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/chair/bench/ultimacouch,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"kM" = (
+/turf/closed/wall/mineral/rogue/decostone/long{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"kU" = (
+/turf/closed/wall/mineral/rogue/decostone/end/north{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"lf" = (
+/obj/effect/decal/wood/herringbone,
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"lg" = (
+/obj/structure/bars,
+/obj/effect/solid_invisible_barrier,
+/turf/open/water/river/flow/north,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"lE" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"nr" = (
+/obj/structure/chair/stool/rogue,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"nt" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"nw" = (
+/obj/structure/fluff/railing/corner,
+/obj/structure/table/wood,
+/obj/item/storage/bag/tray,
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"nz" = (
+/turf/open/transparent/openspace,
+/area/rogue/indoors/remote_sanctuary)
+"nB" = (
+/obj/machinery/light/rogue/candle/blue,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"nH" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 1
+	},
+/obj/machinery/light/rogue/campfire/fireplace{
+	color = "#ee76c2"
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/obj/effect/decal/carpet/kover_purple{
+	pixel_x = -17;
+	pixel_y = -1
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"nQ" = (
+/turf/closed/wall/mineral/rogue/decostone/center{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"oa" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/cooking/platter{
+	pixel_y = 34;
+	pixel_x = -8
+	},
+/obj/item/cooking/platter{
+	pixel_y = 37;
+	pixel_x = -8
+	},
+/obj/item/cooking/platter{
+	pixel_y = 40;
+	pixel_x = -8
+	},
+/obj/item/cooking/platter{
+	pixel_y = 34;
+	pixel_x = 6
+	},
+/obj/item/cooking/platter{
+	pixel_y = 37;
+	pixel_x = 6
+	},
+/obj/item/cooking/platter{
+	pixel_y = 40;
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = -8;
+	pixel_y = 13
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 11;
+	pixel_y = 15
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 3;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = -7;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 3;
+	pixel_y = 2
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"om" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"os" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"ow" = (
+/obj/structure/table/wood/long_table/right,
+/obj/machinery/light/rogue/candle/floorcandle/alt/pink{
+	pixel_x = 2
+	},
+/obj/item/storage/pill_bottle/dice{
+	pixel_y = -8;
+	pixel_x = 3
+	},
+/turf/open/floor/rogue/tile/masonic/single,
+/area/rogue/indoors/remote_sanctuary)
+"oI" = (
+/turf/closed/wall/mineral/rogue/decostone/long/east_west{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"pJ" = (
+/obj/structure/chair/wood/rogue/chair4{
+	dir = 8
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"pT" = (
+/obj/structure/table/wood/large_table,
+/obj/structure/fluff/wallclock/l,
+/turf/open/floor/rogue/churchmarble,
+/area/rogue/indoors/remote_sanctuary)
+"ra" = (
+/obj/structure/fluff/railing/corner/south_west,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"rL" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/indoors/remote_sanctuary/cave)
+"sh" = (
+/obj/structure/stairs/fancy/r,
+/obj/structure/stairs/fancy/r{
+	dir = 1
+	},
+/turf/open/floor/rogue/tile/harem,
+/area/rogue/indoors/remote_sanctuary)
+"sk" = (
+/obj/machinery/light/rogue/candle/blue/l,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"sn" = (
+/obj/structure/table/wood/betting,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 5
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"ti" = (
+/obj/machinery/light/rogue/candle/blue/l,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"tJ" = (
+/obj/structure/roguemachine/lottery_roguetown{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/remote_sanctuary)
+"tV" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/chair/wood/rogue/chair4{
+	dir = 8
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"uk" = (
+/obj/machinery/light/rogue/candle/blue,
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"vL" = (
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"we" = (
+/obj/machinery/light/rogue/campfire/fireplace{
+	pixel_x = -32;
+	pixel_y = 0;
+	color = "#ee76c2"
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"wf" = (
+/obj/structure/roguemachine/withdraw{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"wE" = (
+/obj/structure/table/wood/betting,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 6
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"xk" = (
+/obj/machinery/light/rogue/candle/blue{
+	pixel_y = -32
+	},
+/obj/structure/fluff/pillow/magenta{
+	dir = 4;
+	pixel_y = 4
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"xK" = (
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"yf" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"yi" = (
+/obj/machinery/light/rogue/candle/blue,
+/turf/open/floor/rogue/carpet/lord/right,
+/area/rogue/indoors/remote_sanctuary)
+"yn" = (
+/obj/structure/fluff/pillow/magenta{
+	dir = 8;
+	pixel_y = -5;
+	pixel_x = -4
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"yp" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"yr" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/structure/table/wood/long_table/north_east,
+/obj/structure/roguemachine/musicbox{
+	pixel_y = 12
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"zb" = (
+/obj/structure/roguewindow/harem2,
+/turf/closed/wall/mineral/rogue/decostone/long/east_west{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"zD" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"zS" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/structure/chair/bench/ultimacouch/r,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"AK" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = -11
+	},
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = -7
+	},
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = -3
+	},
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = 1
+	},
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = 5
+	},
+/obj/item/kitchen/fork/bronze{
+	pixel_y = 34;
+	pixel_x = 9
+	},
+/obj/item/rogueweapon/huntingknife/chefknife{
+	pixel_y = 8;
+	pixel_x = 11
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"AN" = (
+/obj/machinery/light/rogue/torchholder/l,
+/obj/structure/chair/wood/rogue/chair4{
+	dir = 4
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Bk" = (
+/obj/structure/roguemachine/lottery_roguetown{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/chair/stool/rogue{
+	name = "lucky stool"
+	},
+/obj/structure/ritualcircle/xylix,
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/remote_sanctuary)
+"BE" = (
+/obj/structure/mineral_door/wood/deadbolt{
+	dir = 4
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"BI" = (
+/obj/structure/fluff/railing/corner/south_west,
+/turf/open/floor/rogue/carpet/lord/center,
+/area/rogue/indoors/remote_sanctuary)
+"Cs" = (
+/obj/structure/fermentation_keg/beer,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"CB" = (
+/obj/machinery/light/rogue/candle/blue,
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/remote_sanctuary)
+"CH" = (
+/obj/machinery/light/rogue/campfire/fireplace{
+	pixel_x = 32;
+	pixel_y = 0;
+	color = "#ee76c2"
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/structure/table/wood/long_table/mid,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Dx" = (
+/turf/closed/wall/mineral/rogue/stone{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"DA" = (
+/obj/structure/table/wood,
+/obj/structure/bakers_trough{
+	pixel_y = 15
+	},
+/obj/item/storage/bag/tray/peel{
+	pixel_x = -9;
+	pixel_y = -9
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ev" = (
+/obj/structure/roguewindow/harem1,
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"EC" = (
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/remote_sanctuary)
+"FK" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/chair/wood/rogue/chair4{
+	dir = 4
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"FN" = (
+/obj/structure/table/wood/betting,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"FQ" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Gf" = (
+/obj/structure/fluff/railing/corner/south_east,
+/turf/open/floor/rogue/carpet/lord/center,
+/area/rogue/indoors/remote_sanctuary)
+"Gm" = (
+/obj/structure/chair/wood/rogue/chair4,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"GU" = (
+/obj/structure/roguewindow/harem2,
+/turf/closed/wall/mineral/rogue/decostone/long{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Ha" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"HB" = (
+/obj/structure/fluff/pillow/magenta{
+	dir = 1;
+	pixel_y = -8
+	},
+/obj/structure/roguemachine/goldface/public/toys{
+	pixel_x = -32
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"HH" = (
+/turf/open/floor/rogue/dirt,
+/area/rogue/indoors/remote_sanctuary/cave)
+"HI" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/table/wood/poor,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"HT" = (
+/turf/closed/basic,
+/area/rogue/indoors/remote_sanctuary/cave)
+"Id" = (
+/obj/structure/chair/wood/rogue/chair4{
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"IR" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"IU" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/obj/machinery/light/rogue/candle/floorcandle/pink,
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"Ja" = (
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"Jc" = (
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/indoors/remote_sanctuary/cave)
+"Je" = (
+/turf/closed/mineral/rogue/bedrock,
+/area/rogue/indoors/remote_sanctuary/cave)
+"Js" = (
+/turf/open/floor/rogue/carpet/lord/center,
+/area/rogue/indoors/remote_sanctuary)
+"JF" = (
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"JT" = (
+/turf/closed/wall/mineral/rogue/decostone/end/north{
+	max_integrity = 999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Kx" = (
+/obj/structure/mineral_door/wood/violet,
+/turf/open/floor/rogue/tile/bluebrick,
+/area/rogue/indoors/remote_sanctuary)
+"Ll" = (
+/obj/structure/roguemachine/lottery_roguetown{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/carpet/lord/right,
+/area/rogue/indoors/remote_sanctuary)
+"LH" = (
+/obj/machinery/tanningrack,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Md" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 1
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/obj/effect/decal/carpet/kover_purple{
+	pixel_x = -17;
+	pixel_y = -1
+	},
+/obj/structure/bed/rogue/inn/double{
+	dir = 4
+	},
+/obj/item/bedsheet/rogue/double_pelt{
+	dir = 4
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"My" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"Ns" = (
+/obj/effect/decal/wood/herringbone,
+/obj/machinery/light/rogue/candle/floorcandle/alt/pink{
+	pixel_y = -18
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"NQ" = (
+/obj/machinery/light/rogue/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/rogue/tile/brick,
+/area/rogue/indoors/remote_sanctuary)
+"NV" = (
+/obj/structure/chair/stool/rogue,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Ol" = (
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"Pm" = (
+/obj/structure/table/wood/poor,
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Pr" = (
+/turf/closed/wall/mineral/rogue/decostone/end/east{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"PD" = (
+/obj/structure/table/wood/betting,
+/obj/item/toy/cards/deck{
+	pixel_x = 4
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"PF" = (
+/obj/structure/mineral_door/swing_door,
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"Qe" = (
+/obj/machinery/light/rogue/hearth,
+/obj/item/cooking/pan,
+/obj/machinery/light/rogue/oven/south,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/remote_sanctuary)
+"QL" = (
+/obj/structure/table/wood/betting,
+/obj/item/storage/pill_bottle/dice{
+	pixel_y = -10
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Rh" = (
+/obj/structure/chair/stool/rogue,
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Rk" = (
+/obj/structure/closet/crate/roguecloset/inn,
+/turf/open/floor/rogue/ruinedwood/herringbone,
+/area/rogue/indoors/remote_sanctuary)
+"RH" = (
+/obj/structure/chair/stool/rogue,
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"RJ" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/chair/bench/ultimacouch/r,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"Sr" = (
+/turf/closed/wall/mineral/rogue/stone{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary/cave)
+"Sx" = (
+/turf/open/floor/rogue/carpet/lord/right,
+/area/rogue/indoors/remote_sanctuary)
+"SE" = (
+/obj/structure/mineral_door/wood,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"TG" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/machinery/light/rogue/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"TR" = (
+/turf/closed/wall/mineral/rogue/stone{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Us" = (
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"UJ" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/obj/machinery/light/rogue/candle/floorcandle/pink,
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"UQ" = (
+/obj/structure/table/wood/large_table,
+/turf/open/floor/rogue/churchmarble,
+/area/rogue/indoors/remote_sanctuary)
+"Vd" = (
+/turf/closed/wall/mineral/rogue/decostone/end/west{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Vn" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"VK" = (
+/turf/closed/wall/mineral/rogue/stone/moss,
+/area/rogue/indoors/remote_sanctuary)
+"WA" = (
+/obj/structure/chair/stool/rogue,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Xc" = (
+/obj/structure/table/wood/poor,
+/turf/closed/wall/mineral/rogue/decostone/long{
+	max_integrity = 9999999
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Xv" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary)
+"Xy" = (
+/obj/structure/far_travel,
+/turf/closed/basic,
+/area/rogue/indoors/remote_sanctuary/cave)
+"XD" = (
+/obj/effect/decal/wood/herringbone,
+/obj/effect/decal/wood/herringbone{
+	dir = 4
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"XZ" = (
+/obj/structure/table/wood/long_table,
+/obj/structure/rack/rogue/shelf/biggest{
+	pixel_y = 32
+	},
+/obj/structure/fermentation_keg/random/water{
+	icon_state = "barrel_tapped_ready";
+	pixel_y = 29
+	},
+/obj/item/ration_lootbox,
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/remote_sanctuary)
+"YL" = (
+/turf/closed/wall/mineral/rogue/decostone/end,
+/area/rogue/indoors/remote_sanctuary)
+"YO" = (
+/obj/structure/fermentation_keg/redwine,
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"YR" = (
+/obj/structure/roguewindow/harem2,
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Zq" = (
+/obj/structure/stairs/fancy/l,
+/obj/structure/stairs/fancy/l{
+	dir = 1
+	},
+/turf/open/floor/rogue/tile/harem,
+/area/rogue/indoors/remote_sanctuary)
+"ZB" = (
+/obj/effect/decal/wood/herringbone{
+	dir = 1
+	},
+/obj/effect/decal/wood/herringbone{
+	dir = 8
+	},
+/obj/structure/bed/rogue/inn/double{
+	dir = 1
+	},
+/obj/item/bedsheet/rogue/double_pelt{
+	dir = 1
+	},
+/turf/open/floor/rogue/ruinedwood/herringbone_clear,
+/area/rogue/indoors/remote_sanctuary)
+"ZC" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 9
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/remote_sanctuary)
+"ZQ" = (
+/obj/structure/fluff/railing/border/west,
+/obj/structure/fermentation_keg/spicedwine,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"ZW" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+
+(1,1,1) = {"
+xK
+YR
+xK
+YR
+xK
+xK
+aV
+xK
+Ev
+aV
+Ev
+xK
+Ev
+xK
+xK
+"}
+(2,1,1) = {"
+xK
+ZB
+UJ
+lf
+bZ
+fV
+sk
+fV
+fV
+sk
+yf
+kH
+vL
+ti
+Ev
+"}
+(3,1,1) = {"
+aV
+nH
+os
+Ns
+aV
+CB
+Bk
+tJ
+tJ
+EC
+hv
+zS
+Vn
+gs
+xK
+"}
+(4,1,1) = {"
+xK
+xK
+xK
+Rk
+xK
+Js
+YL
+kM
+JT
+Js
+BI
+Zq
+EC
+My
+Ev
+"}
+(5,1,1) = {"
+xK
+Rk
+xK
+YR
+xK
+Js
+YL
+kM
+JT
+Js
+Gf
+sh
+Sx
+TG
+xK
+"}
+(6,1,1) = {"
+aV
+jf
+bw
+jT
+aV
+yi
+Ll
+Ll
+Ll
+Sx
+dw
+fU
+zD
+ZC
+Ev
+"}
+(7,1,1) = {"
+xK
+Md
+IU
+XD
+bZ
+fV
+fV
+fV
+fV
+fV
+yf
+RJ
+vL
+vL
+xK
+"}
+(8,1,1) = {"
+xK
+YR
+nQ
+YL
+kM
+kM
+kM
+kM
+kU
+BE
+nQ
+xK
+nB
+vL
+Ev
+"}
+(9,1,1) = {"
+xK
+Pr
+aV
+uk
+JF
+HB
+we
+JF
+yn
+NQ
+kM
+xK
+lE
+lE
+xK
+"}
+(10,1,1) = {"
+xK
+oI
+dy
+JF
+Xv
+om
+nr
+om
+IR
+JF
+Pr
+xK
+xK
+xK
+xK
+"}
+(11,1,1) = {"
+xK
+oI
+hx
+JF
+af
+QL
+PD
+FN
+gX
+JF
+zb
+xK
+aP
+xK
+xK
+"}
+(12,1,1) = {"
+xK
+oI
+ow
+JF
+NV
+hF
+hs
+FN
+WA
+JF
+Vd
+xK
+xK
+xK
+xK
+"}
+(13,1,1) = {"
+xK
+Vd
+aV
+hz
+Rh
+sn
+fV
+wE
+RH
+xk
+aV
+xK
+xK
+xK
+xK
+"}
+(14,1,1) = {"
+xK
+xK
+nQ
+YL
+kM
+yr
+CH
+aE
+kM
+kM
+nQ
+xK
+xK
+xK
+xK
+"}
+(15,1,1) = {"
+xK
+xK
+xK
+xK
+kM
+GU
+kM
+GU
+kM
+xK
+xK
+xK
+xK
+xK
+xK
+"}
+
+(1,1,2) = {"
+Sr
+TR
+TR
+TR
+TR
+TR
+Je
+Je
+Je
+Je
+Je
+Je
+Je
+Je
+Je
+"}
+(2,1,2) = {"
+HT
+lg
+cc
+cc
+cc
+TR
+TR
+Je
+Je
+HH
+gl
+gl
+Je
+Je
+Je
+"}
+(3,1,2) = {"
+Sr
+TR
+ZQ
+aH
+aH
+nw
+TR
+Je
+Jc
+Jc
+Jc
+Jc
+Xy
+Je
+Je
+"}
+(4,1,2) = {"
+Je
+TR
+YO
+ZW
+ZW
+DA
+TR
+dJ
+Jc
+Jc
+gl
+gl
+Xy
+Je
+Je
+"}
+(5,1,2) = {"
+Je
+TR
+Cs
+ZW
+ZW
+Ha
+TR
+Jc
+Jc
+Jc
+Jc
+Je
+Je
+Je
+Je
+"}
+(6,1,2) = {"
+Je
+TR
+ek
+FQ
+ZW
+LH
+TR
+rL
+Jc
+Jc
+Je
+Je
+Je
+Je
+Je
+"}
+(7,1,2) = {"
+Je
+TR
+TR
+TR
+SE
+TR
+TR
+Dx
+Kx
+Dx
+Dx
+VK
+Dx
+Dx
+Dx
+"}
+(8,1,2) = {"
+Je
+Je
+Dx
+XZ
+Us
+gE
+pT
+Ja
+dD
+dD
+AN
+FK
+nz
+nz
+Dx
+"}
+(9,1,2) = {"
+Je
+Je
+Dx
+oa
+Us
+Us
+UQ
+Ja
+Ol
+Ol
+Xc
+HI
+nz
+nz
+Dx
+"}
+(10,1,2) = {"
+Sr
+Sr
+Dx
+bo
+Us
+Us
+UQ
+Ja
+Ol
+Ol
+pJ
+tV
+yp
+yp
+Dx
+"}
+(11,1,2) = {"
+Sr
+eY
+Dx
+AK
+Us
+Us
+UQ
+Ja
+Ol
+Ol
+Ol
+ra
+iw
+iw
+Dx
+"}
+(12,1,2) = {"
+Sr
+Sr
+Dx
+iB
+Us
+Us
+UQ
+Ja
+Ol
+Ol
+Ol
+Ol
+Ol
+Ol
+Dx
+"}
+(13,1,2) = {"
+Je
+Je
+Dx
+gK
+Us
+Us
+UQ
+Ja
+Ol
+Ol
+Ol
+Ol
+Ol
+Ol
+Dx
+"}
+(14,1,2) = {"
+Je
+Je
+Dx
+Qe
+wf
+nt
+PF
+dD
+dD
+gk
+Gm
+Pm
+Id
+dF
+Dx
+"}
+(15,1,2) = {"
+Je
+Je
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+Dx
+"}

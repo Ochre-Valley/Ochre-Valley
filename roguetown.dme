@@ -9,6 +9,7 @@
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
 #include "_maps\map_files\ovdun_world\ochre_CentCom.dmm"
+#include "_maps\ochre_valley\templates\remote_sanctuary\templates.dm"
 #include "_maps\templates\arcyne_fortress.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
@@ -3751,6 +3752,7 @@
 #include "modular\Neu_Food\code\recipes\veggies_recipes.dm"
 #include "modular\Neu_teas_and_brews\code\drink_mix_recipes.dm"
 #include "modular\Neu_teas_and_brews\code\drink_mixes.dm"
+#include "modular_ochrevalley\code\game\area\ochrevalleyareas.dm"
 #include "modular\Neu_teas_and_brews\code\drink_reagents_tea.dm"
 #include "modular\piercing\carbon_defines.dm"
 #include "modular\piercing\features.dm"
@@ -3767,6 +3769,7 @@
 #include "modular_causticcove\code\datums\loadout\loadout_shirts.dm"
 #include "modular_causticcove\code\modules\abberant_eater.dm"
 #include "modular_ochrevalley\code\modules\admin\event_portal.dm"
+#include "modular_ochrevalley\code\modules\remote_sanctuaries\remote_sanctuaries.dm"
 #include "modular_causticcove\code\modules\icon_gen\icon_gen_human.dm"
 #include "modular_causticcove\code\datums\combat_music.dm"
 #include "modular_causticcove\code\datums\loadout.dm"

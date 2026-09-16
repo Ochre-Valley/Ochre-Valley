@@ -1,0 +1,1084 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"al" = (
+/obj/machinery/light/rogue/campfire/fireplace{
+	pixel_x = 32;
+	pixel_y = 6
+	},
+/obj/structure/fluff/railing/border/east,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"aU" = (
+/turf/open/water/river/flow/east,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"bq" = (
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"br" = (
+/obj/structure/table/wood/poor,
+/obj/structure/rack/rogue/shelf,
+/obj/item/reagent_containers/food/snacks/rogue/meat/salami{
+	pixel_y = 14;
+	pixel_x = -6
+	},
+/obj/item/reagent_containers/glass/bucket{
+	pixel_y = 7;
+	pixel_x = 10
+	},
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"bP" = (
+/obj/structure/table/wood/poor,
+/obj/item/millstone{
+	pixel_y = 19;
+	pixel_x = 12
+	},
+/obj/item/rogueweapon/huntingknife/chefknife{
+	pixel_y = 10;
+	pixel_x = -7
+	},
+/obj/structure/rack/rogue/shelf,
+/obj/machinery/light/rogue/candle/r,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"bR" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"bS" = (
+/obj/structure/fluff/railing/border/west,
+/obj/machinery/light/rogue/torchholder/c,
+/obj/structure/fluff/grindwheel,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"ca" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"cd" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"ce" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"cu" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8;
+	pixel_x = 14
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"dc" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"dv" = (
+/obj/effect/decal/cobbleedge{
+	dir = 6;
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"dQ" = (
+/obj/structure/fermentation_keg/random/water,
+/obj/effect/decal/cobbleedge{
+	dir = 6
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary)
+"eh" = (
+/obj/structure/ritualcircle/graggar{
+	icon_state = "graggar_active"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"fD" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"fQ" = (
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"gb" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5;
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"gc" = (
+/obj/structure/fluff/railing/border/east,
+/obj/effect/decal/cobbleedge{
+	dir = 10
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"gR" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"gS" = (
+/obj/structure/fluff/railing/border/west,
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"hs" = (
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"hB" = (
+/obj/structure/chair/wood/rogue/fancy,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"is" = (
+/obj/machinery/light/rogue/lanternpost,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"iM" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"jC" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"lf" = (
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"li" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/structure/fluff/railing/border/north,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"lI" = (
+/obj/structure/chair/wood/rogue,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"lX" = (
+/obj/structure/chair/bench/church/smallbench,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"mG" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"nd" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"nV" = (
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"oN" = (
+/obj/structure/closet/crate/chest,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"oX" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/obj/structure/table/wood/poor,
+/obj/item/rogueweapon/hammer/iron{
+	pixel_y = 13;
+	pixel_x = -6
+	},
+/obj/item/rogueweapon/hammer/iron{
+	pixel_y = 6
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"pc" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"qb" = (
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/outdoors/remote_sanctuary)
+"rt" = (
+/obj/structure/chair/wood/rogue,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"so" = (
+/obj/effect/decal/cobbleedge{
+	dir = 9;
+	pixel_y = 19
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 10;
+	pixel_y = -13
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"sr" = (
+/obj/structure/roguemachine/withdraw{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"sY" = (
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"ta" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"vr" = (
+/obj/structure/bars,
+/obj/effect/solid_invisible_barrier,
+/turf/open/water/river/flow/north,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"vH" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"wG" = (
+/obj/structure/table/wood,
+/obj/item/clothing/ring/duelist{
+	pixel_y = 11;
+	pixel_x = -4
+	},
+/obj/item/clothing/ring/duelist{
+	pixel_y = 6;
+	pixel_x = 7
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"xF" = (
+/obj/structure/fluff/walldeco/customflag,
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"xG" = (
+/obj/structure/closet/crate/roguecloset/dark,
+/obj/item/rogueweapon/mace/wsword,
+/obj/item/rogueweapon/mace/wsword,
+/obj/item/rogueweapon/mace/woodclub,
+/obj/item/rogueweapon/mace/woodclub,
+/turf/open/floor/rogue/concrete,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"yO" = (
+/obj/structure/fluff/railing/corner,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"zQ" = (
+/obj/structure/bars,
+/turf/closed/indestructible/riveted/boss/see_through{
+	name = "reinforced window"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"zZ" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"AD" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary)
+"BP" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"BU" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8;
+	pixel_x = 14
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"BX" = (
+/obj/effect/decal/cobbleedge{
+	dir = 10
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"CM" = (
+/obj/structure/mineral_door/bars,
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/indoors/remote_sanctuary)
+"Dg" = (
+/obj/structure/fluff/railing/border/north,
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Dr" = (
+/obj/structure/table/wood/poor,
+/obj/item/reagent_containers/glass/bucket{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"Dt" = (
+/obj/structure/table/wood/poor,
+/obj/item/storage/belt/rogue/surgery_bag/improv{
+	pixel_y = 2;
+	pixel_x = 5
+	},
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"DR" = (
+/obj/structure/far_travel,
+/turf/closed/basic,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Er" = (
+/obj/structure/fluff/railing/corner,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"FA" = (
+/obj/structure/fluff/railing/corner,
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Ge" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/structure/fluff/railing/border/north,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Gf" = (
+/obj/structure/closet/crate/roguecloset/dark,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/turf/open/floor/rogue/concrete,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"GT" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Hb" = (
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"Hl" = (
+/obj/structure/table/wood/poor,
+/obj/item/natural/bundle/cloth/roll{
+	pixel_y = -12;
+	pixel_x = -2
+	},
+/obj/item/needle/thorn{
+	pixel_y = 4;
+	pixel_x = -7
+	},
+/obj/item/needle/thorn{
+	pixel_y = 9;
+	pixel_x = 2
+	},
+/obj/item/needle/thorn{
+	pixel_y = -6;
+	pixel_x = 12
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"Iv" = (
+/obj/structure/fluff/walldeco/customflag,
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Iw" = (
+/obj/structure/mineral_door/bars,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Jt" = (
+/obj/structure/fluff/railing/border/east,
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ju" = (
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"JW" = (
+/obj/structure/chair/bench/church/smallbench,
+/obj/structure/chair/bench/church/smallbench,
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"JX" = (
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"Mm" = (
+/turf/open/water/cleanshallow,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"NU" = (
+/obj/structure/ritualcircle/ravox{
+	icon_state = "ravox_active"
+	},
+/turf/open/floor/rogue/blocks/flipped,
+/area/rogue/indoors/remote_sanctuary)
+"ON" = (
+/obj/structure/mineral_door/bars,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"Qv" = (
+/obj/machinery/light/rogue/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"SC" = (
+/obj/structure/fluff/railing/corner/south_east,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"SD" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"TP" = (
+/turf/open/water/river/flow/north,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ub" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8;
+	pixel_x = 14
+	},
+/obj/machinery/light/rogue/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"Ue" = (
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"UL" = (
+/obj/effect/decal/cobbleedge{
+	dir = 10
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/obj/structure/table/wood/poor,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"WD" = (
+/obj/structure/fluff/walldeco/customflag,
+/turf/closed/wall/mineral/rogue/stonebrick{
+	damage_deflection = 99999999;
+	max_integrity = 10000000
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"WF" = (
+/obj/structure/bed/rogue/inn/hay,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/remote_sanctuary)
+"Xm" = (
+/obj/structure/table/wood/poor,
+/obj/structure/rack/rogue/shelf,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+"XS" = (
+/obj/structure/bars,
+/obj/effect/solid_invisible_barrier,
+/turf/open/water/river/flow/east,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ym" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Zt" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"ZL" = (
+/obj/machinery/light/rogue/lanternpost{
+	dir = 1
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/remote_sanctuary)
+"ZW" = (
+/obj/machinery/light/rogue/hearth,
+/obj/machinery/light/rogue/oven/south,
+/obj/item/reagent_containers/glass/bucket/pot{
+	pixel_y = 2
+	},
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/remote_sanctuary)
+
+(1,1,1) = {"
+lf
+XS
+lf
+lf
+lf
+DR
+lf
+qb
+qb
+qb
+qb
+qb
+qb
+qb
+qb
+"}
+(2,1,1) = {"
+lf
+aU
+Mm
+lf
+BP
+vH
+WD
+pc
+is
+Hb
+Hb
+Hb
+Hb
+is
+qb
+"}
+(3,1,1) = {"
+lf
+aU
+lf
+lf
+bR
+Ym
+Iw
+jC
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(4,1,1) = {"
+vr
+TP
+iM
+vH
+cd
+dv
+WD
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(5,1,1) = {"
+lf
+bS
+Er
+SC
+gc
+Jt
+zQ
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Qv
+qb
+"}
+(6,1,1) = {"
+lf
+wG
+vH
+vH
+lX
+Ge
+zQ
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(7,1,1) = {"
+lf
+xG
+gb
+Ym
+zZ
+Ge
+zQ
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(8,1,1) = {"
+lf
+Gf
+fD
+BX
+so
+ca
+zQ
+BU
+cu
+cu
+cu
+cu
+cu
+Ub
+qb
+"}
+(9,1,1) = {"
+lf
+oX
+vH
+vH
+lX
+Ge
+zQ
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(10,1,1) = {"
+lf
+UL
+cd
+vH
+lX
+li
+zQ
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(11,1,1) = {"
+lf
+lf
+lf
+Iw
+lf
+lf
+lf
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Qv
+qb
+"}
+(12,1,1) = {"
+fQ
+dQ
+Dr
+SD
+Hl
+Dt
+xF
+pc
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(13,1,1) = {"
+fQ
+AD
+SD
+SD
+SD
+SD
+ON
+jC
+Hb
+Hb
+Hb
+Hb
+Hb
+Hb
+qb
+"}
+(14,1,1) = {"
+fQ
+WF
+WF
+al
+WF
+WF
+xF
+pc
+ZL
+Hb
+Hb
+Hb
+Hb
+ZL
+qb
+"}
+(15,1,1) = {"
+fQ
+fQ
+fQ
+fQ
+fQ
+fQ
+fQ
+qb
+qb
+qb
+qb
+qb
+qb
+qb
+qb
+"}
+
+(1,1,2) = {"
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+"}
+(2,1,2) = {"
+Iv
+Ju
+hs
+dc
+sY
+Dg
+ce
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(3,1,2) = {"
+nV
+nd
+Ju
+dc
+sY
+mG
+ta
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(4,1,2) = {"
+nV
+Ju
+Ju
+gS
+gS
+FA
+ta
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(5,1,2) = {"
+nV
+Ju
+hs
+Ju
+hs
+Ju
+JW
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(6,1,2) = {"
+nV
+hs
+Ju
+Ju
+Ju
+Ju
+ce
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(7,1,2) = {"
+nV
+GT
+hs
+Ju
+Ju
+hs
+rt
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(8,1,2) = {"
+Iv
+hs
+hs
+hs
+hs
+Ju
+hB
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(9,1,2) = {"
+fQ
+fQ
+fQ
+CM
+fQ
+nd
+lI
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(10,1,2) = {"
+fQ
+br
+JX
+bq
+fQ
+hs
+gR
+Zt
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(11,1,2) = {"
+fQ
+Xm
+bq
+bq
+fQ
+fQ
+xF
+yO
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(12,1,2) = {"
+fQ
+ZW
+bq
+bq
+fQ
+NU
+fQ
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(13,1,2) = {"
+fQ
+Xm
+bq
+Ue
+fQ
+fQ
+fQ
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(14,1,2) = {"
+fQ
+bP
+sr
+oN
+fQ
+eh
+fQ
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+nV
+"}
+(15,1,2) = {"
+fQ
+fQ
+fQ
+fQ
+fQ
+fQ
+fQ
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+nV
+"}

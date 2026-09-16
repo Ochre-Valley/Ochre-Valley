@@ -89,6 +89,7 @@ SUBSYSTEM_DEF(mapping)
 	repopulate_sorted_areas()
 	initialize_reserved_level(transit.z_value)
 	generate_z_level_linkages()
+	preload_remote_sanctuary_templates() // OV ADD
 	return ..()
 
 /datum/controller/subsystem/mapping/proc/generate_z_level_linkages()
