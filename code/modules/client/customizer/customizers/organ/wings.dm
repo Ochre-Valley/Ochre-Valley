@@ -46,6 +46,32 @@
 		/datum/sprite_accessory/wings/large/harpyowl,
 		/datum/sprite_accessory/wings/large/harpybat_alt,
 		/datum/sprite_accessory/wings/ochre/speckled_tricolor, // OV Add
+		//OV ADD START - FLUVIAN WINGS
+		/datum/sprite_accessory/wings/moth/plain,
+		/datum/sprite_accessory/wings/moth/monarch,
+		/datum/sprite_accessory/wings/moth/monarch_colorable, // OV Edit
+		/datum/sprite_accessory/wings/moth/luna,
+		/datum/sprite_accessory/wings/moth/atlas,
+		/datum/sprite_accessory/wings/moth/reddish,
+		/datum/sprite_accessory/wings/moth/royal,
+		/datum/sprite_accessory/wings/moth/gothic,
+		/datum/sprite_accessory/wings/moth/lovers,
+		/datum/sprite_accessory/wings/moth/whitefly,
+		/datum/sprite_accessory/wings/moth/punished,
+		/datum/sprite_accessory/wings/moth/firewatch,
+		/datum/sprite_accessory/wings/moth/deathhead,
+		/datum/sprite_accessory/wings/moth/poison,
+		/datum/sprite_accessory/wings/moth/ragged,
+		/datum/sprite_accessory/wings/moth/moonfly,
+		/datum/sprite_accessory/wings/moth/snow,
+		/datum/sprite_accessory/wings/moth/oakworm,
+		/datum/sprite_accessory/wings/moth/jungle,
+		/datum/sprite_accessory/wings/moth/witchwing,
+		/datum/sprite_accessory/wings/moth/rosy,
+		/datum/sprite_accessory/wings/moth/featherful,
+		/datum/sprite_accessory/wings/moth/brown,
+		/datum/sprite_accessory/wings/moth/plasmafire,
+		//OV ADD END
 		)
 
 /datum/customizer/organ/wings/moth

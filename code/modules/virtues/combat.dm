@@ -107,7 +107,7 @@
 		"Bow Skill (JMAN)" = /datum/skill/combat/bows, // this is JMAN now cause of ansari's changes making having PER mandatory, should be fine I hope? nerf later if it isn't
 		"Crossbow Skill (JMAN)" = /datum/skill/combat/crossbows, // ditto also crossbows fucking suck at any level below expert D:
 		"Firearm Skill (JMAN)" = /datum/skill/combat/firearms, //OV ADD
-		"Stashed Messer" = list(/obj/item/rogueweapon/sword/short/messer/iron/virtue),
+		"Stashed Dueling Messer" = list(/obj/item/rogueweapon/sword/short/messer/iron/virtue),
 		"Stashed Arming Sword" = list(/obj/item/rogueweapon/sword/iron),
 		"Stashed Parrying Dagger" = list(/obj/item/rogueweapon/huntingknife/idagger/virtue),
 		"Stashed Axe" = list(/obj/item/rogueweapon/stoneaxe/woodcut),

@@ -383,6 +383,7 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/proc/get_vote_power(mob/voter)
 	var/vote_power = 1
+	/* //OV EDIT START - KILLS VOTE POWER DEAD
 	if(ishuman(voter))
 		var/mob/living/carbon/H = voter
 		if(H.stat != DEAD)
@@ -396,6 +397,7 @@ SUBSYSTEM_DEF(vote)
 					for(var/datum/antagonist/D in H.mind.antag_datums)
 						if(D.increase_votepwr)
 							vote_power += 3
+	*/ //OV EDIT END
 	if(mode in everyone_is_equal)
 		vote_power = 1
 	return vote_power

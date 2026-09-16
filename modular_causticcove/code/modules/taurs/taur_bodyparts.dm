@@ -245,6 +245,7 @@
 /obj/item/bodypart/taur/bunny
 	name = "Bunny Taur Body"
 	icon = 'modular_causticcove/icons/mob/taurs/taur.dmi'
+	taur_clothing_category = "m" //OV ADD
 	offset_x = -16
 	taur_icon_state = "bigbunny_s"
 
