@@ -8,7 +8,7 @@
 	hand_path = /obj/item/rogueweapon/abstractweapon/martialart
 	button_icon = 'modular_ochrevalley/icons/mob/actions/roguespells.dmi'
 	button_icon_state = "boxing"
-	draw_message = "Enters coderbus stance!" 
+	draw_message = "Enters coderbus stance!"
 	drop_message = "Drops their stance."
 	spell_requirements = SPELL_REQUIRES_SAME_Z | SPELL_REQUIRES_HUMAN //doesn't care about antimagic cuz its not real magics!
 	charge_required = TRUE
@@ -36,13 +36,13 @@
 	righthand_file = null
 	var/list/baseintents = list()
 	var/list/basegrips = list()
-	var/list/masterintents = list() //intents given if you meet Mastertier. 
+	var/list/masterintents = list() //intents given if you meet Mastertier.
 	var/list/mastergrips = list() //alt grips given if you meet Mastertier.
 	var/masterstring = "I am a master of this stance"//if you have special master effects, please state them here
 	var/wiznerf = TRUE //if casters get a lower tier cap based on their highest spell level
 	var/clernerf = TRUE //ditto for miracles
 	var/tier = 0 //martial art tiers!! cap is determined by skill, tier is determined by effective unarmed. Tier 4 should be roughly equivalent to a katar in power, tier 0 equivalent to normal unarmed
-	var/tiermult = 2.5 //how much the tier of the art affects the damage. multiply tier by tiermult before adding. 
+	var/tiermult = 2.5 //how much the tier of the art affects the damage. multiply tier by tiermult before adding.
 	//var/demotier = 3 //the breakpoint at which this martial art can damage structures and shields. 3 is the minimum tier which requires equipment to reach
 	var/mastertier = 4 //the breakpoint at which this martial art can get truly impactful abilities, if any. Tier 4 requires at least expert skill, with minimal magic
 	//var/demolition = TRUE //if it can destroy structures and shields at demotier
@@ -63,14 +63,12 @@
 	if(H.mind && wiznerf)
 		var/spelltier = 0
 		if(H.mind.mage_aspect_config)
-			if(H.mind.mage_aspect_config["minor"] >= 1)
-				spelltier = 2
 			if(H.mind.mage_aspect_config["major"] >= 1)
 				spelltier = 3
 			if(H.mind.mage_aspect_config["mastery"] >= 1)
 				spelltier = 4
 		for(var/datum/action/cooldown/spell/spellcheck in H.mind.spell_list)
-			var/isutility = FALSE 
+			var/isutility = FALSE
 			if(istype(spellcheck, /datum/action/cooldown/spell/miracle)) //should be handled under cleric aspects!
 				continue
 			if(istype(spellcheck, /datum/action/cooldown/spell/touch/prestidigitation))//basically a utility spell with how common it is
@@ -85,13 +83,14 @@
 					break
 			if(isutility)
 				continue//for classes like spellfist, we check our entire spell list and single out the tier of the highest tier spell
-			spelltier = CLAMP(spellcheck.spell_tier, spelltier, 3)
+			if(spellcheck.spell_tier >= 3)
+				spelltier = max(3, spelltier)
 		spelllevel = max(spelllevel, spelltier)
 	maximum_tier = min(maximum_tier, max(2, maximum_tier - spelllevel)) //we nerf the maximum damage tier of martial arts based on how much of a spellcaster you are
 	var/ourtier = 0
 	var/obj/G = H.get_item_by_slot(SLOT_GLOVES)
 	if(HAS_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN)) //pugilists get boosted by two tiers
-		ourtier = 2 
+		ourtier = 2
 	var/dambonus = H.dna.species.punch_damage
 	if(istype(G, /obj/item/clothing/gloves/roguetown))
 		var/obj/item/clothing/gloves/roguetown/GL = G
@@ -126,7 +125,7 @@
 	H.update_a_intents()
 	/*for(var/datum/intent/I in possible_item_intents)
 		to_chat(H, span_userdanger("[I]"))
-		if(demolition) 
+		if(demolition)
 			to_chat(H, span_userdanger("demolition"))
 			I.demolition_mod = initial(I.demolition_mod)
 		else
@@ -142,10 +141,10 @@
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
 	chargetime = 0
 	penfactor = PEN_NONE
-	unarmed = FALSE //I am defining this here, same as the base type, to remind you to keep this FALSE if you edit it. 
+	unarmed = FALSE //I am defining this here, same as the base type, to remind you to keep this FALSE if you edit it.
 	swingdelay = 0
 	icon_state = "inpunch"
 	item_d_type = "blunt"
 	clickcd = CLICK_CD_FAST //speed of unarmed
 	intent_intdamage_factor = PUNCH_INT_DAMAGEFACTOR // set to BLUNT_DEFAULT_INT_DAMAGEFACTOR on slower attacks
-	
+
