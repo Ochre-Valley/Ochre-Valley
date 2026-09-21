@@ -38838,6 +38838,8 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy,
+/obj/item/roguegem/random,
+/obj/item/roguegem/random,
 /turf/open/floor/rogue/carpet/lord/left,
 /area/rogue/under/cave/dukecourt)
 "hkB" = (
@@ -90160,30 +90162,8 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/town/sewer)
 "qwQ" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	skel_fragile = 0
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/roguetown/crown/fakecrown{
-	name = "Crown of The Mad Duke";
-	desc = "A pristine crown, cold, heavy...it feels wrong. Are you brave enough?"
-	},
-/obj/item/rogueweapon/sword/rapier/lord{
-	sellprice = 100;
-	max_blade_int = 500;
-	max_integrity = 500;
-	name = "Sword of the Mad Duke"
-	},
-/obj/item/clothing/cloak/lordcloak,
-/obj/item/clothing/ring/ruby,
-/obj/item/clothing/mask/rogue/facemask/goldmask,
-/obj/item/clothing/suit/roguetown/shirt/dress/royal/prince,
-/obj/item/clothing/gloves/roguetown/plate/paalloy,
-/obj/item/clothing/neck/roguetown/gorget/paalloy,
-/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/paalloy,
-/obj/item/clothing/under/roguetown/platelegs/paalloy,
-/obj/item/clothing/wrists/roguetown/bracers/paalloy,
-/obj/item/clothing/shoes/roguetown/boots/nobleboot,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/under/cave/dukecourt)
 "qwT" = (
@@ -95416,6 +95396,7 @@
 /obj/item/ash,
 /obj/effect/decal/remains/human,
 /obj/structure/fluff/walldeco/chains,
+/mob/living/carbon/human/species/skeleton/npc/fallenduke,
 /turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/under/cave/dukecourt)
 "rvc" = (
@@ -96695,6 +96676,8 @@
 /obj/item/reagent_containers/glass/cup/golden{
 	pixel_x = -8
 	},
+/obj/effect/spawner/lootdrop/valuable_jewelry_spawner,
+/obj/effect/spawner/lootdrop/general_loot_hi,
 /turf/open/floor/rogue/carpet/lord/right,
 /area/rogue/under/cave/dukecourt)
 "rHs" = (
