@@ -188,6 +188,9 @@
 	var/dream_dust = retained_dust
 	dream_dust += BASE_DREAM_DUST
 
+	if(HAS_TRAIT(mind.current, TRAIT_GOODSLEEP))
+		dream_dust += floor(BASE_DREAM_DUST)
+
 	/*
 	CC Edit: Moved this to nightshift.dm
 	var/int = mind.current.STAINT
