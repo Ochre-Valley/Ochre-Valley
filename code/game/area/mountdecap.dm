@@ -22,8 +22,8 @@
 				/datum/npc_warband/duo_treasure_hunter = 2,
 				/datum/npc_warband/medium_skeleton_party = 10,
 				/datum/npc_warband/heavy_skeleton_party = 5,
-				new /datum/ambush_config/doppelganger = 2, //OV ADD
-				new /datum/ambush_config/doppelgangers = 1, //OV ADD
+				/datum/npc_warband/doppelganger = 2, //OV ADD
+				/datum/npc_warband/doppelgangers = 1, //OV ADD
 				)
 	droning_sound = 'sound/music/area/decap.ogg'
 	droning_sound_dusk = null
@@ -72,7 +72,7 @@
 				/datum/npc_warband/duo_treasure_hunter = 1,
 				/datum/npc_warband/medium_skeleton_party = 20,
 				/datum/npc_warband/heavy_skeleton_party = 10,
-				new /datum/ambush_config/doppelganger = 1, //OV ADD
+				/datum/npc_warband/doppelganger = 1, //OV ADD
 				)
 	droning_sound = 'sound/music/area/decap_deeper.ogg'
 	droning_sound_dusk = null

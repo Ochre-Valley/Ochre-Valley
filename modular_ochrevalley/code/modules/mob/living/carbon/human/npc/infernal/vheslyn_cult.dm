@@ -571,8 +571,8 @@ GLOBAL_LIST_INIT(vheslyn_cult_aggro, world.file2list("modular_ochrevalley/string
 	ADD_TRAIT(src, TRAIT_BLOOD_RESISTANCE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HARDDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_INFINITE_STAMINA, TRAIT_GENERIC)
-	for(var/obj/item/gear in get_equipped_items() + held_items)
-		lock_gear_piece(gear, "legendary_cultist_gear")
+	/*for(var/obj/item/gear in get_equipped_items() + held_items) //OV EDIT - Commented out pending rework
+		lock_gear_piece(gear, "legendary_cultist_gear")*/
 
 /mob/living/carbon/human/species/human/northern/infernal_cultist/legendary/death(gibbed, nocutscene = FALSE)
 	. = ..()

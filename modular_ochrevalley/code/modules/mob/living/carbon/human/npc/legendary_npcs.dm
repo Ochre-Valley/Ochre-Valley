@@ -1,6 +1,7 @@
 //These are GM spawn only mobs for events, designed to be proper boss enemies
 GLOBAL_LIST_INIT(psydonite_aggro, world.file2list("modular_ochrevalley/strings/rt/psydonhereticlines.txt"))
 GLOBAL_LIST_INIT(bogbun_aggro, world.file2list("modular_ochrevalley/strings/rt/bogbunlines.txt"))
+GLOBAL_LIST_INIT(searaider_aggro, world.file2list("strings/rt/searaideraggrolines.txt"))
 
 //SEA RAIDER
 /mob/living/carbon/human/species/human/northern/searaider_legendary
@@ -126,9 +127,9 @@ GLOBAL_LIST_INIT(bogbun_aggro, world.file2list("modular_ochrevalley/strings/rt/b
 	equipOutfit(new /datum/outfit/job/roguetown/orc/orc_legendary)
 	gender = pick(MALE, FEMALE)
 	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	var/hairf = pick(list(/datum/sprite_accessory/hair/head/lowbraid, 
+	var/hairf = pick(list(/datum/sprite_accessory/hair/head/lowbraid,
 						/datum/sprite_accessory/hair/head/countryponytailalt))
-	var/hairm = pick(list(/datum/sprite_accessory/hair/head/ponytailwitcher, 
+	var/hairm = pick(list(/datum/sprite_accessory/hair/head/ponytailwitcher,
 						/datum/sprite_accessory/hair/head/lowbraid))
 	var/beard = pick(list(/datum/sprite_accessory/hair/facial/viking,
 						/datum/sprite_accessory/hair/facial/manly,
@@ -162,7 +163,7 @@ GLOBAL_LIST_INIT(bogbun_aggro, world.file2list("modular_ochrevalley/strings/rt/b
 	else
 		new_hair.set_accessory_type(hairm, null, src)
 		new_facial.set_accessory_type(beard, null, src)
-		
+
 	head.add_bodypart_feature(new_hair)
 	head.add_bodypart_feature(new_facial)
 
@@ -501,7 +502,7 @@ GLOBAL_LIST_INIT(bogbun_aggro, world.file2list("modular_ochrevalley/strings/rt/b
 
 	head.add_bodypart_feature(new_hair)
 	head.add_bodypart_feature(new_facial)
-	
+
 	//Bog bunny ears
 	var/obj/item/organ/ears/new_ears = new /obj/item/organ/ears/anthro
 	new_ears.accessory_colors = new_hair.hair_color
@@ -541,8 +542,8 @@ GLOBAL_LIST_INIT(bogbun_aggro, world.file2list("modular_ochrevalley/strings/rt/b
 	pants = /obj/item/clothing/under/roguetown/chainlegs
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
 
-	add_random_deserter_beltl_stuff(H)
-	add_random_deserter_beltr_stuff(H)
+	//add_random_deserter_beltl_stuff(H) //OV EDIT - COMMENTED OUT PENDING REWORK
+	//add_random_deserter_beltr_stuff(H) //OV EDIT - COMMENTED OUT PENDING REWORK
 
 	l_hand = /obj/item/rogueweapon/shield/tower/metal
 	if(prob(30))
