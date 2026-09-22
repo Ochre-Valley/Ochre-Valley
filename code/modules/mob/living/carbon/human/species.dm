@@ -70,7 +70,7 @@ GLOBAL_LIST_EMPTY(roundstart_races_paths)
 
 /datum/body_build/elven/anthro
 	id = BODY_BUILD_ELVEN_ANTHRO
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/met.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/metanthro.dmi'
 // OV ADD END
 
 GLOBAL_LIST_INIT(body_builds, init_body_builds())
