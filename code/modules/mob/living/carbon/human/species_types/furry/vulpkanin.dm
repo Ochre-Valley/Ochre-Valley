@@ -42,9 +42,9 @@
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fma.dmi'
 	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
-	allowed_body_builds = ALL_BODY_BUILDS
-	default_body_build_m = BODY_BUILD_BULKY
-	default_body_build_f = BODY_BUILD_SLIM
+	allowed_body_builds = ALL_BODY_BUILDS_ANTHRO //OV EDIT
+	default_body_build_m = BODY_BUILD_BULKY_ANTHRO //OV EDIT
+	default_body_build_f = BODY_BUILD_SLIM_ANTHRO //OV EDIT
 	race_bonus = list(STAT_PERCEPTION = 1, STAT_INTELLIGENCE = 1)
 	enflamed_icon = "widefire"
 	organs = list(

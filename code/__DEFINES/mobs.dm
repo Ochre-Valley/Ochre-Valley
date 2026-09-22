@@ -357,8 +357,16 @@
 #define BODY_BUILD_SLIM "slim"
 /// The old Wood Elf male sprite: the slim body raised a pixel. Masculine only, and offered to elves alone.
 #define BODY_BUILD_ELVEN "elven"
+// OV ADD START
+// anthro variants of the above, greyscaled for better color matching
+#define BODY_BUILD_BULKY_ANTHRO "bulky greyscaled"
+#define BODY_BUILD_SLIM_ANTHRO "slim greyscaled"
+#define BODY_BUILD_ELVEN_ANTHRO "elven greyscaled"
+//OV ADD END
 /// Every build, in the order they should be listed to the player.
 #define ALL_BODY_BUILDS list(BODY_BUILD_BULKY, BODY_BUILD_SLIM, BODY_BUILD_ELVEN)
+/// Every build, anthro variant //OV ADD
+#define ALL_BODY_BUILDS_ANTHRO list(BODY_BUILD_BULKY_ANTHRO, BODY_BUILD_SLIM_ANTHRO, BODY_BUILD_ELVEN_ANTHRO) //OV ADD
 /// The two builds any human-shaped species can offer.
 #define STANDARD_BODY_BUILDS list(BODY_BUILD_BULKY, BODY_BUILD_SLIM)
 

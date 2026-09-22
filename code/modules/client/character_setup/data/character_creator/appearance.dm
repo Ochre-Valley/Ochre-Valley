@@ -67,6 +67,11 @@
 		for(var/build in ALL_BODY_BUILDS)
 			if(pref_species.is_body_build_valid(build, option_gender))
 				.["[gender_key]_[build]"] = "[capitalize(gender_key)] ([capitalize(build)])"
+		//OV ADD
+		for(var/build in ALL_BODY_BUILDS_ANTHRO)
+			if(pref_species.is_body_build_valid(build, option_gender))
+				.["[gender_key]_[build]"] = "[capitalize(gender_key)] ([capitalize(build)])"
+		//OV ADD END
 
 /// Gets all valid skintones as an assoc list Name -> Hex
 /datum/preferences/proc/get_valid_skin_tones()

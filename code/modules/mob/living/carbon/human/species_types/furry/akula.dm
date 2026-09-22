@@ -46,9 +46,9 @@
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
 	soundpack_m = /datum/voicepack/male
 	soundpack_f = /datum/voicepack/female
-	allowed_body_builds = ALL_BODY_BUILDS
-	default_body_build_m = BODY_BUILD_BULKY
-	default_body_build_f = BODY_BUILD_SLIM
+	allowed_body_builds = ALL_BODY_BUILDS_ANTHRO //OV EDIT
+	default_body_build_m = BODY_BUILD_BULKY_ANTHRO //OV EDIT
+	default_body_build_f = BODY_BUILD_SLIM_ANTHRO //OV EDIT
 	race_bonus = list(STAT_WILLPOWER = 1, STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
 	attack_verb = "slash"

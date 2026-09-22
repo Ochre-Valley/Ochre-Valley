@@ -56,6 +56,23 @@ GLOBAL_LIST_EMPTY(roundstart_races_paths)
 		BODY_ZONE_R_ARM = 1,
 	)
 
+// OV ADD START
+/// Anthro Builds, using greyscaled base sprites
+/datum/body_build/bulky/anthro
+	id = BODY_BUILD_BULKY_ANTHRO
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mta.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/f/ft_muscularanthro.dmi'
+
+/datum/body_build/slim/anthro
+	id = BODY_BUILD_SLIM_ANTHRO
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/memanthro.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fma.dmi'
+
+/datum/body_build/elven/anthro
+	id = BODY_BUILD_ELVEN_ANTHRO
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/met.dmi'
+// OV ADD END
+
 GLOBAL_LIST_INIT(body_builds, init_body_builds())
 
 /proc/init_body_builds()
