@@ -222,7 +222,12 @@
 	// OV Edit Start: Belly Sex/Petrified Head
 	if(!rev_exemption && !user.Adjacent(target) && !action.ranged_action && !held_petrified_head)
 		if(!isbelly(user.loc) || user.loc != target.loc)
-			return FALSE
+			if(isbelly(user.loc)) //allow ERP actions with your pred
+				var/obj/belly/our_belly = user.loc
+				if(target != our_belly.owner)
+					return FALSE
+			else
+				return FALSE
 	// OV Edit End
 	if(target.freeuse)
 		return TRUE
