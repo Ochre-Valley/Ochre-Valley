@@ -1,0 +1,5 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - balance: "misc tinkerer tweaks- reworked spells, gadget options and primary weapon choice"
+  - balance: "adds Disassemble to battlewrenches"
