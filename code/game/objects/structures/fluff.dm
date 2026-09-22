@@ -1727,6 +1727,7 @@
 		H.adjustOxyLoss(-H.getOxyLoss()) //Ye Olde CPR
 		H.emote("breathgasp")
 		H.Jitter(100)
+		H.update_body()
 		H.Paralyze(40) //Take some minor burn damage you vile fiend!
 		H.adjust_fire_stacks(2)
 		playsound(src, 'sound/magic/revive.ogg', 33, 0, 4)
@@ -1735,7 +1736,6 @@
 		H.mind.remove_antag_datum(/datum/antagonist/zombie)
 		H.remove_status_effect(/datum/status_effect/debuff/rotted_zombie) //Removes the rotted-zombie debuff if they have it - Failsafe for it.
 		H.apply_status_effect(/datum/status_effect/debuff/self_revived)	//Longer debuff for self revival. Hurts like a fuckin' TRUCK.
-		H.update_body()
 		//addtimer(CALLBACK(src, GLOBAL_PROC_REF(deathmark), H), 5 MINUTES) //Performs a check after the listed time has elapsed, post-resurrection. If the target is still alive by then, it'll apply the 'DNR' trait. //OV Edit - Commented Out
 	else
 		H.visible_message(span_notice("[H] hopelessly clutches the cross, sorrow filling their cold, dead eyes..."), span_red("The Ten cannot help me here... I must find a church..."))
