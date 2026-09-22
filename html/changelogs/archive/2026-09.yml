@@ -1651,12 +1651,16 @@
     - rscadd: Adds porthole doors as a recipe
   MortoSasye:
     - image: Updated the underwear sprites for briefs, panties, leotards, and bikini's.
+  NickBelmont:
+    - server: Manifest relay now gives current map
   OrbisAnima:
     - bugfix:
         Removes the ability from Bats and Zads (crows) to go through bars, while
         leaving their ability to go thrrough people and windows unnafected. Rous (rats)
         forms are unnafected, and can still go through bars as usual, as they dont have
         a flying ability like the aforementioned forms do.
+  SomeDeviant:
+    - rscadd: Added new AP Sync 9.13.26
   mumblemancer:
     - balance:
         all assassin classes have received a passover. ranger (now headhunter)
@@ -1712,10 +1716,6 @@
     - bugfix: fixed hag having ability to become roundstart ww
     - bugfix: athletics skill description is no longer psyop
     - bugfix: fixed nodrop items from conjured summons
-  NickBelmont:
-    - server: Manifest relay now gives current map
-  SomeDeviant:
-    - rscadd: Added new AP Sync 9.13.26
 2026-09-16:
   DmitriyPershukov:
     - rscadd: added bulk pure moondust recipe
@@ -1942,12 +1942,12 @@
         Clamps the precision of ligthing cache values for sunlight so we have
         more cached types in the ligthing system instead of infinite stuff due to how
         long numbers can be in byond. Conservative Values were used to avoid artifacts.
+  SomeDeviant:
+    - bugfix: fixed config
   WeNeedMorePhoron:
     - bugfix: Burn wounds should now take longer to sew the more severe the wound is.
   mumblemancer:
     - rscadd: jesters can now flip thru their Japes
-  SomeDeviant:
-    - bugfix: fixed config
 2026-09-20:
   BurpleBineapple:
     - rscadd: adds a heavy AC reskin of the brigandine as a triumph/donor item.
@@ -2035,6 +2035,18 @@
         (Donor) Greatcoats now layer on top of most articles of clothing, similarly
         to the longcoat.
 2026-09-22:
+  Ochre Valley Staff:
+    - balance:
+        Micros can no longer pass through windows and braziers; tables remain
+        the same.
+  SatinIsle:
+    - rscadd: Added a pistol option to outlaw.
+  ShadowLarkens:
+    - rscadd:
+        You can now export all of your savefiles together using the built-in export
+        button.
+  SomeDeviant:
+    - rscadd: Added new AP Content 9.14.26 to 9.19.26
   BurpleBineapple:
     - bugfix:
         Fixes missing sleeves on side sprites for the heavy brigandine triumph
