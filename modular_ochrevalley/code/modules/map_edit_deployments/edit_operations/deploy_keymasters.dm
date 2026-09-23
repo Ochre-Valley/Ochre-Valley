@@ -1,4 +1,4 @@
-/datum/map_edit_operation/template_deployment/deploy_keymasters
+/datum/map_edit_operation/precise_coordinates/template_deployment/deploy_keymasters
 	name = "Deploy KEYMASTERs"
 
 	templates_by_mappath = alist(

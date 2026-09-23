@@ -1,5 +1,5 @@
-/datum/map_edit_operation/template_deployment/deploy_keymasters
-	name = "Deploy KEYMASTERs"
+/datum/map_edit_operation/precise_coordinates/template_deployment/chest_to_gobbos
+	name = "Replace Mines Chest With Gobbos"
 
 	templates_by_mappath = alist(
 		"map_files/ovdun_world" = list(
