@@ -461,7 +461,7 @@
 		if(tasted.skin_reagent && ishuman(src) && (tasted != src))
 			var/mob/living/carbon/human/us_but_human = src
 			us_but_human.reagents.add_reagent(tasted.skin_reagent, 5)
-		
+
 		visible_message(span_warning("[src] licks [tasted]!"),span_notice("You lick [tasted]. They taste rather like [tasted.get_taste_message()]."),span_info(span_bold("Slurp!")))
 		//balloon_alert_visible("licks [tasted]!", "tastes like [tasted.get_taste_message()]")
 	/* //Caustic - Maybe we add this in sometime?
@@ -555,7 +555,7 @@
 		log_and_message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(B.owner)] ([B.owner ? "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservecoodjump=1;X=[B.owner.x];Y=[B.owner.y];Z=[B.owner.z]'>JMP</a>" : "null"])", src)
 
 		B.owner.handle_belly_update() //This is run whenever a belly's contents are changed.
-	
+
 	//You've been turned into an item!
 	/*else if(tf_mob_holder && isvoice(src) && istype(src.loc, /obj/item)) //Commented out the TF stuff for now to get the rest working.
 		var/obj/item/item_to_destroy = src.loc //If so, let's destroy the item they just TF'd out of.
@@ -823,12 +823,16 @@
 	if(!I)
 		to_chat(src, span_notice("You are not holding anything."))
 		return
-	
+
 	//OV edit
 	if(I.mob_possession)
 		if(!I.mob_possession.devourable)
 			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
 			return
+
+	if(istype(I, /obj/item/storage/roguebag))
+		to_chat(src, span_notice("You don't want to eat this sack."))
+		return
 	//OV edit end
 
 	//if(I.) //Caustic - Potential Whitelist can go here.
