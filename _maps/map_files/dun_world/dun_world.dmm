@@ -12051,7 +12051,9 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/exposed/magiciantower)
 "coe" = (
-/obj/structure/roguemachine/potionseller/university,
+/obj/structure/roguemachine/potionseller/university{
+	keycontrol = "apothecary"
+	},
 /turf/closed/wall/mineral/rogue/craftstone,
 /area/rogue/indoors/town/physician)
 "cof" = (
@@ -12389,7 +12391,8 @@
 /area/rogue/under/cave/taricheamanor)
 "crw" = (
 /obj/effect/decal/cobbleedge{
-	dir = 5
+	dir = 5;
+	pixel_y = 0
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave/abyssor/inner)
@@ -23630,7 +23633,8 @@
 "evh" = (
 /obj/structure/bars/pipe{
 	dir = 8;
-	pixel_x = 10
+	pixel_x = 10;
+	pixel_y = 0
 	},
 /turf/open/water/cleanshallow,
 /area/rogue/under/town/sewer)
@@ -98780,6 +98784,10 @@
 	},
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
+"sdJ" = (
+/obj/effect/landmark/chest_or_mimic/loot_chest,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cave)
 "sdQ" = (
 /obj/machinery/light/rogue/firebowl/church,
 /turf/open/floor/rogue/carpet/lord/right,
@@ -108936,6 +108944,7 @@
 	},
 /obj/structure/rack/rogue{
 	density = 0;
+	pixel_y = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/rogue/wood/herringbone,
@@ -162834,7 +162843,7 @@ toJ
 toJ
 ukB
 toJ
-toJ
+sdJ
 toJ
 qHj
 qHj

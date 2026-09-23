@@ -3942,6 +3942,12 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/mountains/decap/gunduzirak)
+"aNb" = (
+/obj/machinery/light/rogue/campfire/densefire{
+	fueluse = 99999999
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
 "aNl" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/rogue/wood,
@@ -12085,7 +12091,9 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/exposed/magiciantower)
 "coe" = (
-/obj/structure/roguemachine/potionseller/university,
+/obj/structure/roguemachine/potionseller/university{
+	keycontrol = "apothecary"
+	},
 /turf/closed/wall/mineral/rogue/craftstone,
 /area/rogue/indoors/town/physician)
 "cof" = (
@@ -12423,7 +12431,8 @@
 /area/rogue/under/cave/taricheamanor)
 "crw" = (
 /obj/effect/decal/cobbleedge{
-	dir = 5
+	dir = 5;
+	pixel_y = 0
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave/abyssor/inner)
@@ -23678,7 +23687,8 @@
 "evh" = (
 /obj/structure/bars/pipe{
 	dir = 8;
-	pixel_x = 10
+	pixel_x = 10;
+	pixel_y = 0
 	},
 /turf/open/water/cleanshallow,
 /area/rogue/under/town/sewer)
@@ -48343,6 +48353,10 @@
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
+"iXn" = (
+/obj/effect/landmark/start/wildsoullate,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
 "iXq" = (
 /obj/effect/decal/cobbleedge{
 	dir = 10;
@@ -67754,6 +67768,10 @@
 /obj/structure/telescope,
 /turf/open/floor/rogue/tile/brick,
 /area/rogue/indoors/cave)
+"mrT" = (
+/obj/structure/far_travel,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
 "mrV" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
@@ -84389,6 +84407,15 @@
 /obj/structure/globe,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
+"ptq" = (
+/obj/effect/particle_effect/smoke{
+	lifetime = 14400
+	},
+/obj/structure/respawn_portal/permanent{
+	name = "vore reformation portal - Druid's Grove"
+	},
+/turf/open/water/cleanshallow,
+/area/rogue/druidsgrove)
 "ptr" = (
 /obj/structure/chair/wood/rogue{
 	dir = 4
@@ -94020,6 +94047,12 @@
 /obj/structure/fluff/railing/border/north,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/physician)
+"rgH" = (
+/obj/structure/respawn_portal/permanent{
+	name = "vore reformation portal - Beach"
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "rgI" = (
 /obj/structure/fluff/railing/wood/west,
 /turf/open/floor/rogue/ruinedwood/turned,
@@ -95795,6 +95828,13 @@
 /obj/effect/landmark/chest_or_mimic/locked_or_trapped,
 /turf/open/floor/rogue/cobble/mossy,
 /area/rogue/under/cave/his_vault/three)
+"ryZ" = (
+/obj/structure/roguemachine/bathvend/public{
+	density = 0;
+	pixel_y = 32
+	},
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/town/bath)
 "rzb" = (
 /obj/structure/fluff/railing/corner/south_west,
 /obj/effect/decal/cobbleedge{
@@ -107468,6 +107508,13 @@
 /obj/structure/flora/newleaf,
 /turf/open/transparent/openspace,
 /area/rogue/druidsgrove)
+"tEn" = (
+/obj/structure/hotspring,
+/obj/structure/respawn_portal/permanent{
+	name = "vore reformation portal - Eoran Pond"
+	},
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/rtfield/eora)
 "tEp" = (
 /turf/open/water/swamp,
 /area/rogue/outdoors/woods/north)
@@ -109253,6 +109300,7 @@
 	},
 /obj/structure/rack/rogue{
 	density = 0;
+	pixel_y = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/rogue/wood/herringbone,
@@ -111856,6 +111904,10 @@
 /obj/structure/chair/wood/rogue,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/inq)
+"uvv" = (
+/obj/structure/roguemachine/goldface/public/toys,
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town/bath)
 "uvy" = (
 /obj/structure/roguewindow,
 /turf/open/floor/rogue/concrete,
@@ -164667,7 +164719,7 @@ qfv
 lfu
 rqY
 rqY
-uIl
+ryZ
 uIl
 pNQ
 rqY
@@ -166477,7 +166529,7 @@ uQa
 rJE
 vqD
 uQa
-rqY
+uvv
 rqY
 xPZ
 spI
@@ -221075,7 +221127,7 @@ tXb
 tXb
 tXb
 tXb
-tXb
+rgH
 tXb
 tXb
 tXb
@@ -253227,7 +253279,7 @@ bhJ
 bhJ
 bhJ
 cmi
-cmi
+ptq
 aDx
 aDx
 aDx
@@ -547654,10 +547706,10 @@ qPv
 qPv
 qPv
 qPv
-qPv
-qPv
-qPv
-qPv
+ujm
+ujm
+ujm
+ujm
 ujm
 ujm
 ujm
@@ -547860,7 +547912,7 @@ nhl
 fvO
 ygf
 sQv
-ygf
+tEn
 oMF
 nBf
 nNa
@@ -548106,13 +548158,13 @@ onF
 onF
 onF
 onF
-qPv
-qPv
-qPv
-qPv
 ujm
-ujm
-ujm
+mrT
+iXn
+fnC
+fnC
+fnC
+fnC
 xBW
 xBW
 xBW
@@ -548558,13 +548610,13 @@ onF
 onF
 onF
 onF
-qPv
-qPv
-qPv
-qPv
 ujm
-ujm
-ujm
+mrT
+iXn
+fnC
+aNb
+fnC
+fnC
 xBW
 xBW
 xBW
@@ -549010,13 +549062,13 @@ onF
 onF
 onF
 onF
-qPv
-qPv
-qPv
-qPv
 ujm
-ujm
-ujm
+mrT
+iXn
+fnC
+fnC
+fnC
+fnC
 xBW
 xBW
 xBW
@@ -549462,12 +549514,12 @@ onF
 onF
 onF
 onF
-qPv
-qPv
-qPv
-qPv
 ujm
-ujm
+mrT
+iXn
+fnC
+fnC
+fnC
 xBW
 xBW
 xBW
