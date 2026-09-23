@@ -1,5 +1,5 @@
 /datum/sex_action/vore/bounce
-	name = "Bounce Your Belly"
+	name = "Bounce your belly"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 

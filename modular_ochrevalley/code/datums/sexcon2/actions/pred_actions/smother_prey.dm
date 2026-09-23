@@ -1,5 +1,5 @@
 /datum/sex_action/vore/smother
-	name = "Smother Prey With Belly"
+	name = "Smother prey with belly"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 

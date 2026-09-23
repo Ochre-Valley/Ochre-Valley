@@ -1,5 +1,5 @@
 /datum/sex_action/vore/stroke
-	name = "Stroke Over Prey"
+	name = "Stroke over prey"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 

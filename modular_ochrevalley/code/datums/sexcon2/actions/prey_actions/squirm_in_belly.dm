@@ -1,5 +1,5 @@
 /datum/sex_action/vore/prey_squirm
-	name = "Squirm In Belly"
+	name = "Squirm in belly"
 	debug_erp_panel_verb = FALSE
 	prey_action = TRUE
 

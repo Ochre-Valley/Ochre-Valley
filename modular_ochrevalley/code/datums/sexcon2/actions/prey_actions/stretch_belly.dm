@@ -1,5 +1,5 @@
 /datum/sex_action/vore/stretch
-	name = "Stretch Belly"
+	name = "Stretch belly"
 	debug_erp_panel_verb = FALSE
 	prey_action = TRUE
 

@@ -1,5 +1,5 @@
 /datum/sex_action/vore/submit
-	name = "Submit To Pred"
+	name = "Submit to pred"
 	debug_erp_panel_verb = FALSE
 	prey_action = TRUE
 

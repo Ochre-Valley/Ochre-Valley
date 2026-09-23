@@ -1,5 +1,5 @@
 /datum/sex_action/vore/grope
-	name = "Grope Prey"
+	name = "Grope prey"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 

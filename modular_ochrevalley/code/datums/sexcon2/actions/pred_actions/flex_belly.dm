@@ -1,5 +1,5 @@
 /datum/sex_action/vore/flex
-	name = "Tighten Belly Around Prey"
+	name = "Tighten belly around prey"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 

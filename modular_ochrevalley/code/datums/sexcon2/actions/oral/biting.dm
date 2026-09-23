@@ -1,5 +1,5 @@
 /datum/sex_action/oral/biting
-	name = "Bite Them"
+	name = "Bite them"
 	check_same_tile = FALSE
 	target_priority = 100
 	intensity = 2

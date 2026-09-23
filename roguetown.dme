@@ -4029,4 +4029,5 @@
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\hump_as_prey.dm"
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\squirm_in_belly.dm"
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\submit.dm"
+#include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\kiss_inside_belly.dm"
 // END_INCLUDE

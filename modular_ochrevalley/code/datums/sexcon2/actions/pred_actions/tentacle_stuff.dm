@@ -1,5 +1,5 @@
 /datum/sex_action/vore/tentacle
-	name = "Fuck Prey"
+	name = "Fuck prey with appendage"
 	debug_erp_panel_verb = FALSE
 	pred_action = TRUE
 
