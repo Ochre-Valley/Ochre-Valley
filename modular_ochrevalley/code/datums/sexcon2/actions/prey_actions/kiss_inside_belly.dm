@@ -1,5 +1,5 @@
 /datum/sex_action/vore/kiss_inside
-	name = "Kiss inside of belly"
+	name = "Kiss belly"
 	debug_erp_panel_verb = FALSE
 	prey_action = TRUE
 
@@ -36,7 +36,6 @@
 /datum/sex_action/vore/kiss_inside/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/do_subtle = sex_session.doing_subtly
-	var/slosh_sound = pick(GLOB.slosh)
 	user.make_sucking_noise(do_subtle)
 
 	sex_session.perform_sex_action(target, 1, 0, TRUE, sex_session.speed, sex_session.force)
