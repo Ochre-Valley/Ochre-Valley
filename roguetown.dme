@@ -3737,6 +3737,7 @@
 #include "modular\Neu_Food\code\raw\raw_pies.dm"
 #include "modular\Neu_Food\code\raw\raw_shellfish.dm"
 #include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\chest_to_gobbos.dm"
+#include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\deploy_dirtyface_plus_purity.dm"
 #include "modular\Neu_Food\code\raw\raw_veggies.dm"
 #include "modular\Neu_Food\code\recipes\baked_recipes.dm"
 #include "modular\Neu_Food\code\recipes\boiled_recipes.dm"

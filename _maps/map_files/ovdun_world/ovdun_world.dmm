@@ -95809,13 +95809,6 @@
 /obj/effect/landmark/chest_or_mimic/locked_or_trapped,
 /turf/open/floor/rogue/cobble/mossy,
 /area/rogue/under/cave/his_vault/three)
-"ryZ" = (
-/obj/structure/roguemachine/bathvend/public{
-	density = 0;
-	pixel_y = 32
-	},
-/turf/open/floor/rogue/tile/harem2,
-/area/rogue/indoors/town/bath)
 "rzb" = (
 /obj/structure/fluff/railing/corner/south_west,
 /obj/effect/decal/cobbleedge{
@@ -111877,10 +111870,6 @@
 /obj/structure/chair/wood/rogue,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/inq)
-"uvv" = (
-/obj/structure/roguemachine/goldface/public/toys,
-/turf/closed/wall/mineral/rogue/craftstone,
-/area/rogue/indoors/town/bath)
 "uvy" = (
 /obj/structure/roguewindow,
 /turf/open/floor/rogue/concrete,
@@ -164692,7 +164681,7 @@ qfv
 lfu
 rqY
 rqY
-ryZ
+uIl
 uIl
 pNQ
 rqY
@@ -166502,7 +166491,7 @@ uQa
 rJE
 vqD
 uQa
-uvv
+rqY
 rqY
 xPZ
 spI

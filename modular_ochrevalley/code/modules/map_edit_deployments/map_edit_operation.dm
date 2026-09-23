@@ -35,7 +35,7 @@
 	return SSmapping.levels_by_trait(ZTRAIT_STATION)[1]
 
 
-/// Clears a predefined zone on a given Z-level of objects.
+/// Clears a predefined zone on a given Z-level of objects and mobs.
 /datum/map_edit_operation/proc/clear_area(min_x, min_y, max_x, max_y, z)
 	// Atoms have not yet initialized while we're doing this, so this should be fine...?
 	for(var/s_x in min_x to max_x)
@@ -43,6 +43,8 @@
 			var/turf/T = locate(s_x, s_y, z)
 			for(var/thing in T.contents)
 				if(isobj(thing))
+					qdel(thing)
+				if(ismob(thing))
 					qdel(thing)
 
 /datum/map_edit_operation/precise_coordinates
@@ -223,5 +225,14 @@
 	var/spawn_name = L["name"]
 	if(spawn_name)
 		A.name = spawn_name
+	var/spawn_px = L["pixel_x"]
+	if(isnum(spawn_px))
+		A.pixel_x = spawn_px
+	var/spawn_py = L["pixel_y"]
+	if(isnum(spawn_py))
+		A.pixel_y = spawn_py
+	var/spawn_density = L["density"]
+	if(isnum(spawn_density))
+		A.density = spawn_density
 
 	return TRUE
