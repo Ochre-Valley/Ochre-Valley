@@ -31,7 +31,7 @@
 				beltl = /obj/item/quiver/bulletpouch/powderkit/iron
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 			if("Blunderbuss and Scattershot")
-				beltl = /obj/item/quiver/bulletpouch/powderkit/ironscatter
+				beltl = /obj/item/quiver/bulletpouch/powderkit/bronzescatter
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
 
 /datum/advclass/rogue/tinkerer //
