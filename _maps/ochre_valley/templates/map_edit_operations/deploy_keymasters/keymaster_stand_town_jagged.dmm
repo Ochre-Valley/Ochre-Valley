@@ -1,0 +1,215 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/roguemachine/atm,
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"e" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"g" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/effect/decal/cobbleedge{
+	pixel_y = -6;
+	dir = 4;
+	pixel_x = -15
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"i" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"n" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"o" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"s" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"v" = (
+/obj/effect/decal/cobbleedge{
+	dir = 6;
+	pixel_x = -9;
+	pixel_y = -1
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"w" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"x" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"A" = (
+/obj/effect/decal/cobbleedge{
+	pixel_y = 7;
+	dir = 8
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"B" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"D" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"E" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/obj/effect/decal/cobbleedge{
+	pixel_y = 7;
+	dir = 10
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"F" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"H" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	pixel_x = -16
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 9
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"J" = (
+/obj/item/roguemachine/keymaster,
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"K" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 6
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"N" = (
+/turf/closed/wall/mineral/rogue/stone,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"P" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 5
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"Q" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"V" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"X" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/obj/effect/decal/cobbleedge{
+	pixel_y = 7
+	},
+/turf/open/floor/rogue/cobblerock/no_smooth,
+/area/rogue/outdoors/exposed/town/keep/grim)
+"Y" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep/grim)
+
+(1,1,1) = {"
+N
+a
+Y
+e
+D
+"}
+(2,1,1) = {"
+x
+H
+v
+A
+E
+"}
+(3,1,1) = {"
+V
+o
+J
+s
+X
+"}
+(4,1,1) = {"
+V
+P
+Q
+K
+B
+"}
+(5,1,1) = {"
+g
+F
+w
+n
+i
+"}

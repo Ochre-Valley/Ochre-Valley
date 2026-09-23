@@ -1,0 +1,6 @@
+{
+	"map_name": "OV Remote Sanctuary Zone",
+	"map_path": "ochre_valley",
+	"map_file": "remote_sanctuary_zone.dmm",
+	"traits": [{"Name": "Remote Sanctuary Zone", "Up": true}, {"Down": true}]
+}

@@ -125,6 +125,7 @@
 #define INIT_ORDER_WARDROBE			54
 #define INIT_ORDER_AI_IDLE_CONTROLLERS 51
 #define INIT_ORDER_MAPPING			50
+#define INIT_ORDER_OV_MAP_EDITS		47 // OV ADD - Needs to be after mapping for obvious reasons
 #define INIT_ORDER_NETWORKS			45
 #define INIT_ORDER_SPATIAL_GRID		43
 #define INIT_ORDER_OUTPUTS			35

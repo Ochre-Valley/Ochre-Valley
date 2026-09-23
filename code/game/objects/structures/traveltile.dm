@@ -130,6 +130,10 @@
 		return FALSE
 	if(L.pulledby)
 		return FALSE
+	// OV ADD START: Remote sanctuaries disclaimer
+	if(shows_remote_sanctuary_disclaimer() && !is_mob_okay_with_the_sex(L))
+		return FALSE
+	// OV ADD END
 	to_chat(L, "<b>[travel_message]</b>")
 	if(do_after(L, travel_time, needhand = FALSE, target = src))
 		if(L.pulledby)
@@ -189,7 +193,7 @@
 		return FALSE
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(world.time > L.last_client_interact + 0.3 SECONDS)
+		if(!shows_remote_sanctuary_disclaimer() && world.time > L.last_client_interact + 0.3 SECONDS) // OV Edit: Account for disclaimer if we use it. We have our own checks to make sure they can still use the traveltile
 			return FALSE
 	return TRUE
 

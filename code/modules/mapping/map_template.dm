@@ -3,6 +3,7 @@
 	var/id = null //The internal ID of a template, so we don't need to use name
 	var/width = 0
 	var/height = 0
+	var/floors = 0 // OV ADD
 	var/mappath = null
 	var/loaded = 0 // Times loaded this round
 	var/datum/parsed_map/cached_map
@@ -28,6 +29,7 @@
 	if(bounds)
 		width = bounds[MAP_MAXX] // Assumes all templates are rectangular, have a single Z level, and begin at 1,1,1
 		height = bounds[MAP_MAXY]
+		floors = bounds[MAP_MAXZ] // OV ADD
 		if(cache)
 			cached_map = parsed
 	return bounds
