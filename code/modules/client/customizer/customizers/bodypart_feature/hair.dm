@@ -1057,7 +1057,10 @@
 		/datum/sprite_accessory/hair/head/strand,
 		/datum/sprite_accessory/hair/head/sodden,
 		/datum/sprite_accessory/hair/head/lizbeth,
-		/datum/sprite_accessory/hair/head/skunky
+		/datum/sprite_accessory/hair/head/skunky,
+		//OV ADD START
+		/datum/sprite_accessory/hair/head/ochre/drillandbun,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/bodypart_feature/hair/head/humanoid/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)

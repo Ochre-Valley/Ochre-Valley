@@ -4027,6 +4027,7 @@
 #include "modular_ochrevalley\code\modules\reagents\teabuffs.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\antennas.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\ears.dm"
+#include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\hair.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\snout.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\tails.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\wings.dm"
