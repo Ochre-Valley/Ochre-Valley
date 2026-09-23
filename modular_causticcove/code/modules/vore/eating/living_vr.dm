@@ -825,14 +825,14 @@
 		return
 
 	//OV edit
+	if(istype(I, /obj/item/storage/roguebag))
+		to_chat(src, span_notice("You don't want to eat this sack."))
+		return
+
 	if(I.mob_possession)
 		if(!I.mob_possession.devourable)
 			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
 			return
-
-	if(istype(I, /obj/item/storage/roguebag))
-		to_chat(src, span_notice("You don't want to eat this sack."))
-		return
 	//OV edit end
 
 	//if(I.) //Caustic - Potential Whitelist can go here.
