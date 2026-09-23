@@ -2142,6 +2142,18 @@
     - bugfix: fixed grenzelhat sallet crafting making it steel while asking iron
     - qol: cosmetic revamp is back
 2026-09-23:
+  zeskorion:
+    - balance:
+        misc tinkerer tweaks- reworked spells, gadget options and primary weapon
+        choice
+    - balance: adds Disassemble to battlewrenches
+    - balance: hemovores can now gain nutrition from kingsblood and  heartblood
+    - balance:
+        hemovores now care how their victims taste (ie- saltwater oozes, blackbloods,
+        and deathless have different blood tastes)
+    - balance: vampdrugs now satisfy the junkie vice
+    - balance: hemovores can now eat organs and raw food
+    - qol: biting and drinking from mobs now tastes them
   FreeStylaLT:
     - bugfix: Fixed blood miracle increasing its restored blood volume with every cast.
     - bugfix:
