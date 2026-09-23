@@ -114,6 +114,7 @@
 	damfactor = 1.2
 	accfactor = 1.2
 	penfactor = 1
+	twirl_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
 	var/onehanded = FALSE
 	var/reloaded = FALSE
 	var/reloadtime = 50
@@ -132,6 +133,14 @@
 	onehanded_arc_draw_mult = CROSSBOW_ONEHANDED_ARC_DRAW_MULT
 	wdefense = 4
 	wdefense_wbonus = 5 //slightly lower than a wooden staff
+	twirly = 3
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/twirl_skill_needed()
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.get_skill_level(ranged_skill) >= twirly)
+			return 0
+	return twirly
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/examine(mob/user)
 	. = ..()
@@ -302,6 +311,27 @@
 			if(do_after(user, reloadtime, src))
 				user.visible_message(span_notice("[user] unloads [src]."))
 				unload(user)
+		if(held_item == src)
+			if(myrod && !reloaded && chambered && gunpowder)
+				playsound(src, "sound/items/sharpen_short1.ogg",  100)
+				to_chat(user, span_notice("I draw the ramrod from [src]!"))
+				var/obj/item/ramrod/AM
+				for(AM in src)
+					user.put_in_hands(AM)
+					myrod = null
+					sleep(2)
+					if(user.get_inactive_held_item() == AM)
+						var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
+						playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
+						user.visible_message(span_notice("[user] begins ramming the [AM] down the barrel of [src]."))
+						if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
+							user.visible_message(span_notice("[user] has finished reloading [src]."))
+							reloaded = TRUE
+					if(user.get_inactive_held_item() == AM)
+						attackby(AM, user)
+					break
+				return
+			return ..()
 		return
 	else
 		if(myrod)
@@ -317,7 +347,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/attackby(obj/item/A, mob/living/carbon/user, params) // Reloading code for rifle
 	if (gunchannel) // If you send null, you're going to stop all sound channels!
 		user.stop_sound_channel(gunchannel)
-	var/load_time_skill = reloadtime - user.get_skill_level(ranged_skill)
+	var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
 	gunchannel = SSsounds.random_available_channel()
 
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
@@ -342,7 +372,7 @@
 			user.visible_message(span_notice("[src] is already filled with gunpowder!</span>"))
 			return
 		playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
-		if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
+		if(do_after(user, load_time_skill, src))
 			user.visible_message(span_notice("[user] fills [src] with gunpowder.</span>"))
 			gunpowder = TRUE
 		return
@@ -353,7 +383,7 @@
 				return
 			user.visible_message(span_notice("[user] begins ramming the [R] down the barrel of [src]."))
 			playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
-			if(do_after(user, load_time_skill, src))
+			if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
 				user.visible_message(span_notice("[user] has finished reloading [src]."))
 				reloaded = TRUE
 			return
@@ -422,6 +452,17 @@
 	max_range_override = null
 	accfactor = 1
 	damfactor = 1.1
+	quick_reload = TRUE
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
 
 // ------------
 // PISTOL
@@ -452,7 +493,7 @@
 	onehanded = TRUE
 	damfactor = 1
 	accfactor = 1
-	quick_reload = FALSE
+	quick_reload = TRUE
 	onehanded_draw_mult = 1
 	onehanded_arc_draw_mult = 1
 	associated_skill = /datum/skill/combat/maces
@@ -471,41 +512,6 @@
                 return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
             if("onbelt")
                 return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/attack_self(mob/living/user)
-	var/string = "smoothly"
-	var/list/strings_noob = list("unsurely", "nervously", "anxiously", "timidly", "shakily", "clumsily", "fumblingly", "awkwardly")
-	var/list/strings_moderate = list("smoothly", "confidently", "determinately", "calmly", "skillfully", "decisively")
-	var/list/strings_pro = list("masterfully", "expertly", "flawlessly", "elegantly", "artfully", "impeccably")
-	var/firearm_skill = (user?.mind ? user.get_skill_level(/datum/skill/combat/firearms) : 1)
-	var/noob_spin_sound = 'sound/combat/weaponr1.ogg'
-	var/pro_spin_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
-	var/spin_sound
-	if(firearm_skill <= 2)
-		string = pick(strings_noob)
-		spin_sound = noob_spin_sound
-	if((firearm_skill > 2) && (firearm_skill <= 4))
-		string = pick(strings_moderate)
-		spin_sound = pro_spin_sound
-	if((firearm_skill > 4) && (firearm_skill <= 6))
-		string = pick(strings_pro)
-		spin_sound = pro_spin_sound
-	if(world.time > last_spunned + spin_cooldown)
-		can_spin = TRUE
-	if(can_spin)
-		user.play_overhead_indicator('icons/effects/effects.dmi', "emote", 10, OBJ_LAYER)
-		user.visible_message("<span class='emote'>[user] spins [src] around their fingers [string]!</span>")
-		playsound(src, spin_sound, 50, FALSE, ignore_walls = FALSE)
-		last_spunned = world.time
-		/*if(firearm_skill <= 2) // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
-			if(prob(35))
-				shoot_live_shot(message = 0)
-				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/
-		if(firearm_skill <= 3)
-			if(prob(50))
-				user.visible_message(span_danger("[user] accidentally drops [src]!"))
-				user.dropItemToGround(src)
-		can_spin = FALSE
 
 // ------------
 // AMMO AND LOADING HARDWARE
@@ -562,8 +568,8 @@
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
 		if(B.gunpowder && powderkit && ismob(loc))
 			var/mob/M = loc
-			var/load_time_skill = B.reloadtime - M.get_skill_level(B.ranged_skill)
-			if(do_after(M, load_time_skill, B, allow_movement = B.quick_reload))
+			var/load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+			if(do_after(M, load_time_skill, B))
 				M.visible_message(span_notice("[M] fills [B] with gunpowder.</span>"))
 				B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
@@ -594,8 +600,8 @@
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
 		if(B.gunpowder && powderkit && ismob(loc))
 			var/mob/M = loc
-			var/load_time_skill = B.reloadtime - M.get_skill_level(B.ranged_skill)
-			if(do_after(M, load_time_skill, B, allow_movement = B.quick_reload))
+			var/load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+			if(do_after(M, load_time_skill, B))
 				M.visible_message(span_notice("[M] fills [B] with gunpowder.</span>"))
 				B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
