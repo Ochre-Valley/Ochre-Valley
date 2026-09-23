@@ -3942,12 +3942,6 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/mountains/decap/gunduzirak)
-"aNb" = (
-/obj/machinery/light/rogue/campfire/densefire{
-	fueluse = 99999999
-	},
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/indoors/cave)
 "aNl" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/rogue/wood,
@@ -48349,10 +48343,6 @@
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
-"iXn" = (
-/obj/effect/landmark/start/wildsoullate,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/indoors/cave)
 "iXq" = (
 /obj/effect/decal/cobbleedge{
 	dir = 10;
@@ -67763,10 +67753,6 @@
 /obj/structure/fluff/railing/border/north,
 /obj/structure/telescope,
 /turf/open/floor/rogue/tile/brick,
-/area/rogue/indoors/cave)
-"mrT" = (
-/obj/structure/far_travel,
-/turf/open/floor/rogue/naturalstone,
 /area/rogue/indoors/cave)
 "mrV" = (
 /obj/effect/decal/edge{
@@ -547668,10 +547654,10 @@ qPv
 qPv
 qPv
 qPv
-ujm
-ujm
-ujm
-ujm
+qPv
+qPv
+qPv
+qPv
 ujm
 ujm
 ujm
@@ -548120,13 +548106,13 @@ onF
 onF
 onF
 onF
+qPv
+qPv
+qPv
+qPv
 ujm
-mrT
-iXn
-fnC
-fnC
-fnC
-fnC
+ujm
+ujm
 xBW
 xBW
 xBW
@@ -548572,13 +548558,13 @@ onF
 onF
 onF
 onF
+qPv
+qPv
+qPv
+qPv
 ujm
-mrT
-iXn
-fnC
-aNb
-fnC
-fnC
+ujm
+ujm
 xBW
 xBW
 xBW
@@ -549024,13 +549010,13 @@ onF
 onF
 onF
 onF
+qPv
+qPv
+qPv
+qPv
 ujm
-mrT
-iXn
-fnC
-fnC
-fnC
-fnC
+ujm
+ujm
 xBW
 xBW
 xBW
@@ -549476,12 +549462,12 @@ onF
 onF
 onF
 onF
+qPv
+qPv
+qPv
+qPv
 ujm
-mrT
-iXn
-fnC
-fnC
-fnC
+ujm
 xBW
 xBW
 xBW

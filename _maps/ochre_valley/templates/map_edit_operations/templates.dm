@@ -22,3 +22,8 @@
 	name = "OV Map Edit - Mines Chest Room Replacement"
 	id = "chest_to_gobbos"
 	mappath = "_maps/ochre_valley/templates/map_edit_operations/chest_to_gobbos/chest_to_gobbos.dmm"
+
+/datum/map_template/dun_wildsoul_cave
+	name = "OV Map Edit - Dun World Wildsoul Cave"
+	id = "dun_wildsoul_cave"
+	mappath = "_maps/ochre_valley/templates/map_edit_operations/dun_wildsoul_cave/dun_wildsoul_cave.dmm"
