@@ -197472,13 +197472,6 @@
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/grim)
-"yeG" = (
-/obj/structure/hotspring,
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Eoran Pond"
-	},
-/turf/open/floor/rogue/grass,
-/area/rogue/outdoors/rtfield/eora/grim)
 "yeH" = (
 /obj/effect/decal/cleanable/debris/stony,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -694993,7 +694986,7 @@ eOj
 rUJ
 aiL
 cNF
-yeG
+aiL
 rWL
 sCa
 gmq

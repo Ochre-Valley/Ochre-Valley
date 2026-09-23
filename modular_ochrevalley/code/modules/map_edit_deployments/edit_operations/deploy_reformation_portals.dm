@@ -45,7 +45,7 @@
 				"name" = "vore reformation portal - South of Town",
 				"x" = 142,
 				"y" = 33,
-				"z" = 3z
+				"z" = 3
 			),
 		),
 	)
