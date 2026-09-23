@@ -88,14 +88,14 @@
 			//OV EDIT
 			if("Arquebus Pistol")
 				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
-				beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				beltr = /obj/item/quiver/bulletpouch/powderkit/hollowpoint
 				backpack_contents = list(
 					/obj/item/lockpickring/mundane = 1,
 					/obj/item/flashlight/flare/torch/lantern/prelit = 1,
 					/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
 					/obj/item/reagent_containers/glass/bottle/alchemical/healthpot = 1,
 					/obj/item/rogueweapon/scabbard/sheath = 1,
-					/obj/item/powderflask, //Backpack needed special rearranging to fit it all.
+					/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol, //Backpack needed special rearranging to fit it all.
 					/obj/item/quiver/bulletpouch/iron
 					)
 			//OV EDIT END
