@@ -3751,6 +3751,7 @@
 #include "modular_ochrevalley\code\modules\map_edit_deployments\map_edit_deployments.dm"
 #include "modular_ochrevalley\code\modules\map_edit_deployments\map_edit_operation.dm"
 #include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\deploy_keymasters.dm"
+#include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\deploy_reformation_portals.dm"
 #include "modular\Neu_Food\code\recipes\egg_recipes.dm"
 #include "modular\Neu_Food\code\recipes\fish_recipes.dm"
 #include "modular\Neu_Food\code\recipes\meat_meal_recipes.dm"

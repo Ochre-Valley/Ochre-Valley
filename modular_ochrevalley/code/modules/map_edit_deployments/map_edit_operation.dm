@@ -35,7 +35,7 @@
 	return SSmapping.levels_by_trait(ZTRAIT_STATION)[1]
 
 
-/// Clears a predefined zone on a given Z-level of objects and mobs.
+/// Clears a predefined zone on a given Z-level of objects.
 /datum/map_edit_operation/proc/clear_area(min_x, min_y, max_x, max_y, z)
 	// Atoms have not yet initialized while we're doing this, so this should be fine...?
 	for(var/s_x in min_x to max_x)
@@ -43,8 +43,6 @@
 			var/turf/T = locate(s_x, s_y, z)
 			for(var/thing in T.contents)
 				if(isobj(thing))
-					qdel(thing)
-				if(ismob(thing))
 					qdel(thing)
 
 /datum/map_edit_operation/precise_coordinates
@@ -164,6 +162,7 @@
 
 	Value is a list of nested associated lists containing:
 	- `"type"` - The type of the atom to spawn
+	- `"name"` - If defined, the object of this spawned type will be given this as a name. (Optional)
 	- `"x"` - X coordinate WITHIN THE MAP BOUNDS at which to deploy the template (AKA, the Z coordinate to deploy it relative to the map itself. Z 1 is the bottommost z-level of the current map, 2 is the 2nd from the bottom, etc.)
 	- `"y"` - Y coordinate
 	- `"z"` - Z coordinate
@@ -175,6 +174,7 @@
 		"map_files/ovdun_world" = list(
 			list(
 				"type" = /mob/living/carbon/human/species/goblin/npc/cave,
+				"name" = "surprise gobbo", // The "name" parameter is optional!
 				"x" = 106,
 				"y" = 88,
 				"z" = 2
@@ -191,6 +191,7 @@
 	spawntypes_by_mappath_wretchcoast = list(
 		list(
 			"type" = /mob/living/carbon/human/species/goblin/npc/cave,
+			"name" = "surprise gobbo", // The "name" parameter is optional!
 			"x" = 9,
 			"y" = 48,
 			"z" = 2
@@ -219,5 +220,8 @@
 	var/atom/A = new spawn_type(T)
 	if(!A)
 		return FALSE
+	var/spawn_name = L["name"]
+	if(spawn_name)
+		A.name = spawn_name
 
 	return TRUE

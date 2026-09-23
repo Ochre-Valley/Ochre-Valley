@@ -12091,9 +12091,7 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/exposed/magiciantower)
 "coe" = (
-/obj/structure/roguemachine/potionseller/university{
-	keycontrol = "apothecary"
-	},
+/obj/structure/roguemachine/potionseller/university,
 /turf/closed/wall/mineral/rogue/craftstone,
 /area/rogue/indoors/town/physician)
 "cof" = (
@@ -12431,8 +12429,7 @@
 /area/rogue/under/cave/taricheamanor)
 "crw" = (
 /obj/effect/decal/cobbleedge{
-	dir = 5;
-	pixel_y = 0
+	dir = 5
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave/abyssor/inner)
@@ -23687,8 +23684,7 @@
 "evh" = (
 /obj/structure/bars/pipe{
 	dir = 8;
-	pixel_x = 10;
-	pixel_y = 0
+	pixel_x = 10
 	},
 /turf/open/water/cleanshallow,
 /area/rogue/under/town/sewer)
@@ -84407,15 +84403,6 @@
 /obj/structure/globe,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
-"ptq" = (
-/obj/effect/particle_effect/smoke{
-	lifetime = 14400
-	},
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Druid's Grove"
-	},
-/turf/open/water/cleanshallow,
-/area/rogue/druidsgrove)
 "ptr" = (
 /obj/structure/chair/wood/rogue{
 	dir = 4
@@ -94047,12 +94034,6 @@
 /obj/structure/fluff/railing/border/north,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/physician)
-"rgH" = (
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Beach"
-	},
-/turf/open/water/ocean/deep,
-/area/rogue/outdoors/beach)
 "rgI" = (
 /obj/structure/fluff/railing/wood/west,
 /turf/open/floor/rogue/ruinedwood/turned,
@@ -107508,13 +107489,6 @@
 /obj/structure/flora/newleaf,
 /turf/open/transparent/openspace,
 /area/rogue/druidsgrove)
-"tEn" = (
-/obj/structure/hotspring,
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Eoran Pond"
-	},
-/turf/open/floor/rogue/grass,
-/area/rogue/outdoors/rtfield/eora)
 "tEp" = (
 /turf/open/water/swamp,
 /area/rogue/outdoors/woods/north)
@@ -109300,7 +109274,6 @@
 	},
 /obj/structure/rack/rogue{
 	density = 0;
-	pixel_y = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/rogue/wood/herringbone,
@@ -221127,7 +221100,7 @@ tXb
 tXb
 tXb
 tXb
-rgH
+tXb
 tXb
 tXb
 tXb
@@ -253279,7 +253252,7 @@ bhJ
 bhJ
 bhJ
 cmi
-ptq
+cmi
 aDx
 aDx
 aDx
@@ -547912,7 +547885,7 @@ nhl
 fvO
 ygf
 sQv
-tEn
+ygf
 oMF
 nBf
 nNa
