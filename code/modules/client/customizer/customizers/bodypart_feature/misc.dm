@@ -53,6 +53,12 @@
 		/datum/sprite_accessory/accessory/harlequin,
 		/datum/sprite_accessory/accessory/warpaint,
 		/datum/sprite_accessory/accessory/warpaint_stripes,
+		//OV ADD START
+		/datum/sprite_accessory/accessory/ochre/earrings,
+		/datum/sprite_accessory/accessory/ochre/earrings/sil,
+		/datum/sprite_accessory/accessory/ochre/earrings/hoop,
+		/datum/sprite_accessory/accessory/ochre/earrings/hoop/sil,
+		//OV ADD END
 		)
 
 /datum/customizer/bodypart_feature/accessory
