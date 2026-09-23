@@ -1,54 +1,54 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/rogue/naturalstone,
-/area/rogue)
-"y" = (
-/mob/living/carbon/human/species/hobgoblin/npc,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue)
-"R" = (
+/area/rogue/under/cave)
+"l" = (
 /turf/closed/mineral/random/rogue/high,
-/area/rogue)
-"S" = (
+/area/rogue/under/cave)
+"C" = (
 /obj/item/paper{
 	info = "[ Scrawled upon the parchment is an incredibly crude, poorly drawn image of a hand giving the viewer the middle finger. ]";
 	name = "???"
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue)
+/area/rogue/under/cave)
+"K" = (
+/mob/living/carbon/human/species/hobgoblin/npc,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cave)
 
 (1,1,1) = {"
 a
 a
-R
-R
-R
+l
+l
+l
 "}
 (2,1,1) = {"
 a
 a
 a
-y
+K
 a
 "}
 (3,1,1) = {"
 a
 a
-S
+C
 a
-R
+l
 "}
 (4,1,1) = {"
 a
-y
+K
 a
 a
-R
+l
 "}
 (5,1,1) = {"
 a
-R
-R
-R
-R
+l
+l
+l
+l
 "}
