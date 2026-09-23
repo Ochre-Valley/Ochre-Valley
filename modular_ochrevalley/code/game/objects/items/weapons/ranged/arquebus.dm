@@ -451,7 +451,7 @@
 	min_range_override = 1
 	max_range_override = null
 	accfactor = 1
-	damfactor = 1.1
+	damfactor = 1
 	quick_reload = TRUE
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss/getonmobprop(tag)
@@ -491,7 +491,7 @@
 	//max_integrity = 80
 	slot_flags = ITEM_SLOT_HIP
 	onehanded = TRUE
-	damfactor = 1
+	damfactor = .9
 	accfactor = 1
 	quick_reload = TRUE
 	onehanded_draw_mult = 1
@@ -559,6 +559,13 @@
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron/A = new()
+		arrows += A
+	update_icon()
+
+/obj/item/quiver/bulletpouch/powderkit/bronzescatter/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/scatter/A = new()
 		arrows += A
 	update_icon()
 

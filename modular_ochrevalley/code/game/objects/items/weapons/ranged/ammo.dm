@@ -97,10 +97,11 @@
 	damage = 70
 	flag = BCLASS_PICK //essentially, "old" bullet damage style, but you're not hitting the same level of damage, nor penetration
 
-/obj/projectile/bullet/scatter/ricochet
+/obj/projectile/bullet/reusable/bullet/bronze/ricochet
 	name = "shimmering bullet"
-	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/ricochet
 	icon_state = "ricobullet_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/bronze
+	armor_penetration = PEN_MEDIUM
 	min_range = MIN_OVBULLET_RANGE
 	max_range = MAX_OVBULLET_RANGE
 	damage = 40 //on a direct hit, low damage for a gun. after one ricochet, 60 damage- less than other bullets. After two, 90. 135 if it hits on the third ricochet.
@@ -131,9 +132,10 @@
 	if(T)
 		new /obj/effect/hotspot(T, null, null, 15)
 
-/obj/projectile/bullet/scatter/concussive
+/obj/projectile/bullet/reusable/bullet/bronze/concussive
 	name = "concussive bullet"
 	icon_state = "concbullet_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/bronze
 	damage_type = BRUTE
 	armor_penetration = PEN_NONE
 	woundclass = BCLASS_BLUNT
@@ -204,13 +206,13 @@
 	name = "shimmering arquebus shot"
 	desc = "A small bronze sphere to be fired from a gun. It shimmers with iridescence, and can never seem to sit still. Enchanted rounds shatter on impact"
 	icon_state = "feyshot"
-	projectile_type = /obj/projectile/bullet/scatter/ricochet
+	projectile_type = /obj/projectile/bullet/reusable/bullet/bronze/ricochet
 
 /obj/item/ammo_casing/caseless/rogue/bullet/concussive
 	name = "concussive arquebus shot"
 	desc = "A small bronze sphere to be fired from a gun. It sits heavy in your hand. This round will deal BLUNT damage, shattering armor instead of punching through. Enchanted rounds shatter on impact."
 	icon_state = "earthshot"
-	projectile_type = /obj/projectile/bullet/scatter/concussive
+	projectile_type = /obj/projectile/bullet/reusable/bullet/bronze/concussive
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter
 	name = "scattershot packet"
