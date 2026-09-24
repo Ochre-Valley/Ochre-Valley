@@ -144,7 +144,6 @@
 	max_range = MAX_OVBULLET_RANGE
 	flag = "blunt"
 	speed = 3.5
-	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/concussive
 	damage = 65
 	object_damage_multiplier = 18 //at 65 damage and 18 multiplier, a blunderbus or pistol's damage will destroy most, but not all, wood defenses, whilst a rifle can destroy objects with roughly siegebow equivalence
 	damages_turf_walls = TRUE

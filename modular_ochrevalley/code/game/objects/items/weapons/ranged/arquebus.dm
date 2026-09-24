@@ -117,7 +117,7 @@
 	twirl_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
 	var/onehanded = FALSE
 	var/reloaded = FALSE
-	var/reloadtime = 50
+	var/reloadtime = 40
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
@@ -429,7 +429,7 @@
 	icon = 'icons/roguetown/weapons/64.dmi'
 	dam_icon = 'icons/effects/item_damage64.dmi'
 	icon_state = "longgun_0"
-	item_state = "longgun_0"
+	item_state = null//"longgun_0"
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -600,8 +600,8 @@
 	name = "mechanized shot kit"
 	desc = "A mechanical bag with a pouch of shot and a flask of powder. Will suck up bullets from the ground,"
 	icon = 'modular_ochrevalley/icons/roguetown/weapons/ammo.dmi'
-	icon_state = "mechpowderkit"
-	item_state = "mechpowderkit"
+	icon_state = "mechpowderkit0"
+	item_state = "mechpowderkit0"
 	max_storage = 18
 	powderkit = TRUE
 	allowed_ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
