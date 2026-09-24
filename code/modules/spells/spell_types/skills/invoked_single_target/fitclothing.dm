@@ -3,8 +3,11 @@
 
 /obj/effect/proc_holder/spell/invoked/fittedclothing
 	name = "Fit Clothing"
-	desc = "Fit Clothing will allow you to fit a cloth or leather garment to an individual, allowing greater durability for a duration of time. \n\
-	You can increase this time with an essence of wilderness, seeping it into the material and reinforcing it permanently.\n\ "
+	desc = "Fit Clothing will allow you to fit a cloth or leather garment to an individual, allowing greater durability for a time \n\
+	You can increase this time with an essence of wilderness, seeping it into the material\n\ "
+	overlay_state = "fitclothes"
+	overlay_icon = 'icons/mob/actions/townerspells.dmi'
+	action_icon = 'icons/mob/actions/townerspells.dmi'
 	releasedrain = 50
 	chargedrain = 0
 	chargetime = 0

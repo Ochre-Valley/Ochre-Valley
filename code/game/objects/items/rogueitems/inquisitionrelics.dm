@@ -1588,9 +1588,6 @@ Inquisitorial armory down here
 				update_icon()
 		return
 
-/obj/item/inqarticles/bmirror/rmb_self(mob/user, keybind = FALSE)
-	src.attack_right(user)
-
 /obj/item/inqarticles/bmirror/attack_right(mob/user, obj/item/T)
 	..()
 	if(!user.mind)
