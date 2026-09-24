@@ -68,7 +68,7 @@
 	range = 12
 	dam_falloff_factor = DAM_FALLOFF_OVBULLET
 	speed = 0.1
-	npc_simple_damage_mult = 2
+	npc_simple_damage_mult = 4
 	damage_type = BRUTE
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
@@ -101,7 +101,7 @@
 	name = "shimmering bullet"
 	icon_state = "ricobullet_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/bronze
-	armor_penetration = PEN_MEDIUM
+	armor_penetration = PEN_HEAVY
 	min_range = MIN_OVBULLET_RANGE
 	max_range = MAX_OVBULLET_RANGE
 	damage = 40 //on a direct hit, low damage for a gun. after one ricochet, 60 damage- less than other bullets. After two, 90. 135 if it hits on the third ricochet.

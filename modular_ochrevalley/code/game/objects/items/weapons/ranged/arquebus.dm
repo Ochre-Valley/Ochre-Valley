@@ -3,12 +3,12 @@
 // ----------------
 // Arquebus intents
 // ----------------
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_draw_time(mob/living/user, arcing = FALSE)
+/*/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_draw_time(mob/living/user, arcing = FALSE) //unreachable with rifle, and current desire is for pistols to point as fast as rifles
 	. = ..()
 	if(!. || !onehanded)
 		return
 	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
-		. *= arcing ? onehanded_arc_draw_mult : onehanded_draw_mult
+		. *= arcing ? onehanded_arc_draw_mult : onehanded_draw_mult*/
 
 /datum/intent/shoot/arquebus
     chargedrain = 0
@@ -300,6 +300,27 @@
 		return TRUE
 	return FALSE
 
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/rmb_self(mob/user, keybind)
+	if(!reloaded && gunpowder && chambered && myrod)
+		playsound(src, "sound/items/sharpen_short1.ogg",  100)
+		to_chat(user, span_notice("I draw the ramrod from [src]!"))
+		var/obj/item/ramrod/AM
+		for(AM in src)
+			user.put_in_hands(AM)
+			myrod = null
+			sleep(2)
+			if(user.get_inactive_held_item() == AM)
+				var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
+				playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
+				user.visible_message(span_notice("[user] begins ramming the [AM] down the barrel of [src]."))
+				if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
+					user.visible_message(span_notice("[user] has finished reloading [src]."))
+					reloaded = TRUE
+				if(user.get_inactive_held_item() == AM)
+					attackby(AM, user)
+				break
+		return
+	return ..()
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/attack_right(mob/user)
 	var/held_item = user.get_active_held_item()
@@ -311,27 +332,6 @@
 			if(do_after(user, reloadtime, src))
 				user.visible_message(span_notice("[user] unloads [src]."))
 				unload(user)
-		if(held_item == src)
-			if(myrod && !reloaded && chambered && gunpowder)
-				playsound(src, "sound/items/sharpen_short1.ogg",  100)
-				to_chat(user, span_notice("I draw the ramrod from [src]!"))
-				var/obj/item/ramrod/AM
-				for(AM in src)
-					user.put_in_hands(AM)
-					myrod = null
-					sleep(2)
-					if(user.get_inactive_held_item() == AM)
-						var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
-						playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
-						user.visible_message(span_notice("[user] begins ramming the [AM] down the barrel of [src]."))
-						if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
-							user.visible_message(span_notice("[user] has finished reloading [src]."))
-							reloaded = TRUE
-					if(user.get_inactive_held_item() == AM)
-						attackby(AM, user)
-					break
-				return
-			return ..()
 		return
 	else
 		if(myrod)
@@ -369,11 +369,11 @@
 		if(user.get_inactive_held_item() != src) // You have to hold it to load it.
 			return
 		if(gunpowder)
-			user.visible_message(span_notice("[src] is already filled with gunpowder!</span>"))
+			user.visible_message(span_notice("[src] is already filled with gunpowder!"))
 			return
 		playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
 		if(do_after(user, load_time_skill, src))
-			user.visible_message(span_notice("[user] fills [src] with gunpowder.</span>"))
+			user.visible_message(span_notice("[user] fills [src] with gunpowder."))
 			gunpowder = TRUE
 		return
 	if(istype(A, /obj/item/ramrod))
@@ -430,12 +430,14 @@
 	dam_icon = 'icons/effects/item_damage64.dmi'
 	icon_state = "longgun_0"
 	item_state = "longgun_0"
+	pixel_y = -16
+	pixel_x = -16
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
 	force_wielded = null
 	possible_item_intents = list(/datum/intent/shoot/arquebus, /datum/intent/arc/arquebus, /datum/intent/mace/strike/wood)
 	gripped_intents = null
 	force = 20 //of the guns, it's the best weighted to
-	pixel_y = 0
-	pixel_x = 0
 	bigboy = FALSE
 	gripsprite = FALSE
 	wlength = WLENGTH_NORMAL
@@ -551,7 +553,7 @@
 /obj/item/quiver/bulletpouch/powderkit/hollowpoint/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/datum/crafting_recipe/roguetown/engineering/hollowpoint/A = new()
+		var/obj/item/ammo_casing/caseless/rogue/bullet/bronze/hollowpoint/A = new()
 		arrows += A
 	update_icon()
 
@@ -573,12 +575,15 @@
 	// /obj/item/quiver/attackby(obj/A, loc, params) already handles feeding ammo to the pouch.
 	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus))
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
-		if(B.gunpowder && powderkit && ismob(loc))
-			var/mob/M = loc
-			var/load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
-			if(do_after(M, load_time_skill, B))
-				M.visible_message(span_notice("[M] fills [B] with gunpowder.</span>"))
-				B.gunpowder = TRUE
+		if(!B.gunpowder && powderkit)
+			var/load_time_skill = B.reloadtime
+			if(ismob(B.loc))
+				var/mob/M = B.loc
+				playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
+				load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+				if(do_after(M, load_time_skill, B))
+					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
+					B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
 			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
 			if(AR)
@@ -605,12 +610,15 @@
 /obj/item/quiver/mechanized/shotkit/attackby(obj/A, loc, params)
 	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus))
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
-		if(B.gunpowder && powderkit && ismob(loc))
-			var/mob/M = loc
-			var/load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
-			if(do_after(M, load_time_skill, B))
-				M.visible_message(span_notice("[M] fills [B] with gunpowder.</span>"))
-				B.gunpowder = TRUE
+		if(!B.gunpowder && powderkit)
+			var/load_time_skill = B.reloadtime
+			if(ismob(B.loc))
+				var/mob/M = B.loc
+				playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
+				load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+				if(do_after(M, load_time_skill, B))
+					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
+					B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
 			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
 			if(AR)
