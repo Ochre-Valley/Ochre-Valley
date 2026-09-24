@@ -117,7 +117,7 @@
 	twirl_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
 	var/onehanded = FALSE
 	var/reloaded = FALSE
-	var/reloadtime = 40
+	var/reloadtime = 45
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
@@ -426,10 +426,11 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
 	name = "blunderbuss"
 	desc = "A cogwork mechanism within this iron tube turns a simple twitch of a finger into a spark, an ignition of alchemical powders with which a small projectile is propelled at lethal speed. A short barrel compared to a rifle, and relatively weighty construction, make this weapon suited for both short and medium range. It also works as a decent bludgeon."
-	icon = 'icons/roguetown/weapons/64.dmi'
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/firearms.dmi'
 	dam_icon = 'icons/effects/item_damage64.dmi'
-	icon_state = "longgun_0"
-	item_state = null//"longgun_0"
+	icon_state = "longgun"
+	item_state = "longgun"
+	gripsprite = FALSE
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -437,9 +438,8 @@
 	force_wielded = null
 	possible_item_intents = list(/datum/intent/shoot/arquebus, /datum/intent/arc/arquebus, /datum/intent/mace/strike/wood)
 	gripped_intents = null
-	force = 20 //of the guns, it's the best weighted to
-	bigboy = FALSE
-	gripsprite = FALSE
+	force = 20 //of the guns, it's the best weighted to bash some poor sod's face in
+	bigboy = TRUE
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_BULKY
 	equip_delay_self = 1.5 SECONDS
@@ -463,7 +463,7 @@
 			if("gen")
 				return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onback")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
 
 // ------------
