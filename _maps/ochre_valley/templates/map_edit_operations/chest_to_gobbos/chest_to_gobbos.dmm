@@ -5,13 +5,6 @@
 "l" = (
 /turf/closed/mineral/random/rogue/high,
 /area/rogue/under/cave)
-"C" = (
-/obj/item/paper{
-	info = "[ Scrawled upon the parchment is an incredibly crude, poorly drawn image of a hand giving the viewer the middle finger. ]";
-	name = "???"
-	},
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "K" = (
 /mob/living/carbon/human/species/hobgoblin/npc,
 /turf/open/floor/rogue/naturalstone,
@@ -34,7 +27,7 @@ a
 (3,1,1) = {"
 a
 a
-C
+a
 a
 l
 "}
