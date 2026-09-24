@@ -149,7 +149,7 @@
 	else if(chambered)
 		. += span_notice("It is loaded with [chambered]. It still needs to be tamped down")
 		if(myrod)
-			. += span_notice("The ramrod can be retrieved by right-clicking [src] with an empty hand")
+			. += span_notice("The ramrod can be retrieved by right-clicking [src] with an empty hand, or right clicking the firearm whilst it's inhand to reload automatically.")
 	else if(gunpowder)
 		. += span_notice("It's filled with powder, and ready for shot!")
 	else
@@ -158,10 +158,11 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_mechanics_examine(mob/user)
 	. = ..()
-	. += span_info("Black powder weapons increase in accuracy with a higher <b>PERCEPTION</b>, but deal a static amount of damage \
+	. += span_info("Black powder weapons increase in accuracy with a higher firearms skill, but deal a static amount of damage \
 	regardless of character stats.")
 	. += span_info("Black powder weapons must be loaded with powder, then a bullet, which must then be forced down the barrel with a ramrod.")
 	. += span_info("Most black powder weapons come with a ramroad stored on them, which can be pulled out with a right click from an empty hand. They can be stored back on the weapon by left clicking them when there isn't a bullet that needs ramming down.")
+	. += span_info("Right clicking the firearm whilst it's inhand will pull out a ramrod, force powder down, and stow the ramrod automatically. If this is unecessary, you'll instead flip the weapon")
 	. += span_info("The weapon's ramrod may be used to unload the weapon, by right-clicking on it while it's loaded.")
 	if(onehanded)
 		. += span_info("This weapon can be used in one hand, at the penalty of aim time.")
@@ -536,6 +537,10 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 
+/obj/item/quiver/bulletpouch/powderkit/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("This is a powder-and-shot kit. Using a black powder weapon on it will automatically fill the weapon, and load a round")
+
 /obj/item/quiver/bulletpouch/powderkit/iron/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
@@ -606,6 +611,10 @@
 	powderkit = TRUE
 	allowed_ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	valid_weapon = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
+
+/obj/item/quiver/mechanized/shotkit/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("This is a powder-and-shot kit. Using a black powder weapon on it will automatically fill the weapon, and load a round")
 
 /obj/item/quiver/mechanized/shotkit/attackby(obj/A, loc, params)
 	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus))
