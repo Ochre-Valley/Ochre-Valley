@@ -27,8 +27,3 @@
 	name = "OV Map Edit - Dun World Wildsoul Cave"
 	id = "dun_wildsoul_cave"
 	mappath = "_maps/ochre_valley/templates/map_edit_operations/deploy_wildsoul_spawns/dun_wildsoul_cave.dmm"
-
-/datum/map_template/jagged_wildsoul_cave
-	name = "OV Map Edit - Pilgrim Wildsoul Cave"
-	id = "jagged_wildsoul_cave"
-	mappath = "_maps/ochre_valley/templates/map_edit_operations/deploy_wildsoul_spawns/jagged_wildsoul_cave.dmm"
