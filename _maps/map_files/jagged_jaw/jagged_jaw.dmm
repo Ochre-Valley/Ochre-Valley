@@ -34119,10 +34119,6 @@
 	},
 /turf/open/floor/rogue/church,
 /area/rogue/under/cave/orcdungeon)
-"ehs" = (
-/obj/structure/roguemachine/goldface/public/toys,
-/turf/closed/wall/mineral/rogue/craftstone,
-/area/rogue/indoors/town/bath/grim)
 "ehw" = (
 /obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/dirt/road,
@@ -80901,12 +80897,6 @@
 /obj/structure/fluff/railing/corner/south_west,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/outdoors/town/roofs/keep/grim)
-"jRi" = (
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Druid's Grove"
-	},
-/turf/open/water/pond,
-/area/rogue/druidsgrove/grim)
 "jRj" = (
 /obj/structure/fluff/railing/border/west{
 	dir = 9
@@ -94436,10 +94426,6 @@
 /obj/structure/fluff/railing/corner/north_east,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/grim)
-"lzI" = (
-/obj/effect/landmark/start/wildsoullate,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave/grimspyre)
 "lzJ" = (
 /obj/structure/closet/crate/roguecloset/inn,
 /obj/effect/spawner/lootdrop/valuable_candle_spawner,
@@ -185463,13 +185449,6 @@
 /obj/effect/landmark/chimeric_calyx_spawner/fifteen,
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/beach/north/grim)
-"wzF" = (
-/obj/structure/roguemachine/bathvend/public{
-	density = 0;
-	pixel_y = 32
-	},
-/turf/open/floor/rogue/tile/bluebrick,
-/area/rogue/indoors/town/bath/grim)
 "wzG" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4
@@ -194285,12 +194264,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/his_vault)
-"xCx" = (
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Beach"
-	},
-/turf/open/water/cleanshallow,
-/area/rogue/outdoors/beach/south/grim)
 "xCy" = (
 /obj/structure/closet/crate/roguecloset,
 /obj/item/cooking/platter,
@@ -198898,13 +198871,6 @@
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/grim)
-"yeG" = (
-/obj/structure/hotspring,
-/obj/structure/respawn_portal/permanent{
-	name = "vore reformation portal - Eoran Pond"
-	},
-/turf/open/floor/rogue/grass,
-/area/rogue/outdoors/rtfield/eora/grim)
 "yeH" = (
 /obj/effect/decal/cleanable/debris/stony,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -367647,7 +367613,7 @@ pHG
 pYh
 fLA
 gnz
-xCx
+wVt
 pYh
 pHG
 pHG
@@ -382041,7 +382007,7 @@ nno
 kPV
 kPV
 kPV
-wzF
+nHU
 nHU
 gIo
 kPV
@@ -383567,7 +383533,7 @@ eNq
 sjQ
 mcE
 kPV
-ehs
+kPV
 kPV
 kPV
 kPV
@@ -477189,7 +477155,7 @@ iLY
 iLY
 iLY
 iLY
-jRi
+iLY
 iLY
 iLY
 iLY
@@ -622944,7 +622910,7 @@ tnn
 tnn
 nBZ
 mbL
-lzI
+qsP
 qsP
 qsP
 qsP
@@ -623326,7 +623292,7 @@ tnn
 tnn
 nBZ
 mbL
-lzI
+qsP
 qsP
 hOO
 qsP
@@ -623708,7 +623674,7 @@ tnn
 tnn
 nBZ
 mbL
-lzI
+qsP
 qsP
 qsP
 qsP
@@ -624090,7 +624056,7 @@ tnn
 tnn
 nBZ
 mbL
-lzI
+qsP
 qsP
 qsP
 qsP
@@ -696422,7 +696388,7 @@ eOj
 rUJ
 aiL
 cNF
-yeG
+aiL
 rWL
 sCa
 gmq
