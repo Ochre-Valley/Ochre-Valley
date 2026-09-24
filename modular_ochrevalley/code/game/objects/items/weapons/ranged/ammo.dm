@@ -161,7 +161,7 @@
 	object_damage_multiplier = 18 //at 65 damage and 18 multiplier, a blunderbus or pistol's damage will destroy most, but not all, wood defenses, whilst a rifle can destroy objects with roughly siegebow equivalence
 	damages_turf_walls = TRUE
 
-/obj/projectile/bullet/scatter/concussive/on_hit(target) //somewhere between a siegebow and a heavy sling bullet, but not terribly easy to get
+/obj/projectile/bullet/reusable/bullet/bronze/concussive/on_hit(target) //somewhere between a siegebow and a heavy sling bullet, but not terribly easy to get
 	. = ..()
 	var/mob/living/M = target
 	if(ismob(target))
