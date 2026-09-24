@@ -5,8 +5,8 @@
 		"map_files/ovdun_world" = list(
 			list(
 				"template" = "keymaster_stand_town_dun",
-				"x" = 106,
-				"y" = 88,
+				"x" = 128,
+				"y" = 56,
 				"z" = 2
 			)
 		),
