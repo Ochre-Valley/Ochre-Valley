@@ -78,6 +78,8 @@
 	character.ooc_notes = ooc_notes
 	character.nsfwflavortext = nsfwflavortext
 	character.erpprefs = erpprefs
+
+	character.freeuse = free_use_default //OV ADD
 	// Rumours / Noble gossip
 	character.rumour = rumour
 	character.noble_gossip = noble_gossip
