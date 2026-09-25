@@ -77,7 +77,7 @@ if (!CHANGED_FILES) {
 
 // I tried so hard and got so far
 // But in the end, it doesn't even matter
-if (!CHANGED_FILES.match(/\s/)) {
+if (!CHANGED_FILES?.length) {
   reportError(
     SELF_NAME,
     'No changed files could be detected even with fallback, linter cannot run.',
