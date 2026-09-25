@@ -1,0 +1,8 @@
+author: "anything86"
+delete-after: True
+changes:
+  - rscadd: "billhook and ji get an unique anti-cavalry intent"
+  - balance: "naginata gets some extra blade integrity"
+  - bugfix: "fixes a few blacksteel weapons not having appropriate defense"
+  - bugfix: "fixes a few unique glaive/halberds having less blade integrity than intended"
+  - bugfix: "fixes quarterstaff thrust not having integrity damage factor"

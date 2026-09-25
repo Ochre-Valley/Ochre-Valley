@@ -4209,7 +4209,7 @@ As Excaliber."
 /obj/item/rogueweapon/example/lagomorphica_delirante
 	name = "Delirante"
 	desc = "A slightly curved sword of Ranesheni origin, designed for cleaving bone and flesh alike to inflict punishment. A representation of the true nature of the blade: violence, combat, and \
-	war. To draw it is to act in the name of the Justiciar, if one can convince themselves of that."
+	war. To draw it is to act in the name of the Justicar, if one can convince themselves of that."
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
 	icon_state = "lago_zestycleaver"
 	sheathe_icon = "lago_zestycleaver"
