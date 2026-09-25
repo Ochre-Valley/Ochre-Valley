@@ -1,0 +1,4 @@
+author: "NonQueueingMatt"
+delete-after: True
+changes:
+  - admin: "Full heal now restores thirst and energy (blue)."
