@@ -89,21 +89,22 @@ GLOBAL_LIST_INIT(digest_modes, list())
 		damage_gain = damage_gain * 0.5
 	var/offset = (1 + ((L.weight - 137) / 137)) // 130 pounds = .95 140 pounds = 1.02
 	var/difference = B.owner.size_multiplier / L.size_multiplier
-	
+
 	if(B.health_impacts_size)
 		B.owner.handle_belly_update()
 
 	consider_healthbar(L, old_health, B.owner)
-	if(offset && damage_gain > 0) // If any different than default weight, multiply the % of offset.
-		if(B.show_liquids && B.reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && B.reagents.total_volume < B.reagents.maximum_volume) //digestion producing reagents
-			B.owner_adjust_nutrition(offset * (3 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier()) //Uncertain if balanced fairly, can adjust by multiplier for the cost of reagent, dont go below 1 or else it will result in more nutrition than normal - Jack
-			B.digest_nutri_gain += offset * (1.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier() //for transfering nutrition value over to GenerateBellyReagents_digesting()
-			B.GenerateBellyReagents_digesting()
-		else
-			B.owner_adjust_nutrition(offset * (4.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier()) //4.5 nutrition points per health point. Normal same size 100+100 health prey with average weight would give 900 points if the digestion was instant. With all the size/weight offset taxes plus over time oxyloss+hunger taxes deducted with non-instant digestion, this should be enough to not leave the pred starved.
-	else
-		B.owner_adjust_nutrition(offset * (4.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier())
 	//OV edit
+	if(L.mind)
+		if(offset && damage_gain > 0) // If any different than default weight, multiply the % of offset.
+			if(B.show_liquids && B.reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && B.reagents.total_volume < B.reagents.maximum_volume) //digestion producing reagents
+				B.owner_adjust_nutrition(offset * (3 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier()) //Uncertain if balanced fairly, can adjust by multiplier for the cost of reagent, dont go below 1 or else it will result in more nutrition than normal - Jack
+				B.digest_nutri_gain += offset * (1.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier() //for transfering nutrition value over to GenerateBellyReagents_digesting()
+				B.GenerateBellyReagents_digesting()
+			else
+				B.owner_adjust_nutrition(offset * (4.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier()) //4.5 nutrition points per health point. Normal same size 100+100 health prey with average weight would give 900 points if the digestion was instant. With all the size/weight offset taxes plus over time oxyloss+hunger taxes deducted with non-instant digestion, this should be enough to not leave the pred starved.
+		else
+			B.owner_adjust_nutrition(offset * (4.5 * damage_gain / difference) * L.get_digestion_nutrition_modifier() * B.owner.get_digestion_efficiency_modifier())
 	if((L.getActualFuckingHealth()) <= -100)
 		B.handle_digestion_death(L)
 	//OV edit end

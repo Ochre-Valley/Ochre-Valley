@@ -49,7 +49,7 @@
 		to_chat(user, span_warning("\The [target] has no breakable organs."))
 		return FALSE
 
-	var/obj/item/bodypart/BP = pick(possible_targets)
+	var/obj/item/bodypart/BP = tgui_input_list(user, "Which limb to break?", "Break Bone", possible_targets) //OV EDIT - Necessary to avoid killing prey
 	var/wound_path = /datum/wound/fracture
 	// Apply body-part-specific wound variants
 	if(BP.body_zone == BODY_ZONE_HEAD)
