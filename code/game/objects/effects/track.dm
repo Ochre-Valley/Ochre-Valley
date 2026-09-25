@@ -470,14 +470,14 @@
 	if(!.)
 		return
 	var/bonus_weight = 0
-	if(wear_armor)
+	if(wear_armor && istype(wear_armor, /obj/item/clothing)) //OV Edit: More powder flask runtimes
 		switch(wear_armor.armor_class)
 			if(ARMOR_CLASS_HEAVY)
 				bonus_weight += 0.5
 			if(ARMOR_CLASS_MEDIUM)
 				bonus_weight = 0.25
 			else
-	if(wear_shirt)
+	if(wear_shirt && istype(wear_shirt, /obj/item/clothing)) //OV Edit: More powder flask runtimes
 		switch(wear_shirt.armor_class)
 			if(ARMOR_CLASS_HEAVY)
 				bonus_weight += 0.5
