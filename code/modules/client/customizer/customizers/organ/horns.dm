@@ -63,6 +63,7 @@
 		/datum/sprite_accessory/horns/doublehorns,
 		/datum/sprite_accessory/horns/tiefling,
 		/datum/sprite_accessory/horns/tieflingalt,
+		/datum/sprite_accessory/horns/sarkaz,
 		/datum/sprite_accessory/horns/large/big_antlers,
 		/datum/sprite_accessory/horns/large/large_antlers,
 		/datum/sprite_accessory/horns/large/regal_antlers,
@@ -133,6 +134,7 @@
 		/datum/sprite_accessory/horns/doublehorns,
 		/datum/sprite_accessory/horns/tiefling,
 		/datum/sprite_accessory/horns/tieflingalt,
+		/datum/sprite_accessory/horns/sarkaz,
 		/datum/sprite_accessory/horns/large/big_antlers,
 		/datum/sprite_accessory/horns/large/large_antlers,
 		/datum/sprite_accessory/horns/large/regal_antlers,
@@ -199,6 +201,7 @@
 		/datum/sprite_accessory/horns/doublehorns,
 		/datum/sprite_accessory/horns/tiefling,
 		/datum/sprite_accessory/horns/tieflingalt,
+		/datum/sprite_accessory/horns/sarkaz,
 		/datum/sprite_accessory/horns/large/big_antlers,
 		/datum/sprite_accessory/horns/large/large_antlers,
 		/datum/sprite_accessory/horns/large/regal_antlers,
@@ -272,6 +275,7 @@
 		/datum/sprite_accessory/horns/doublehorns,
 		/datum/sprite_accessory/horns/tiefling,
 		/datum/sprite_accessory/horns/tieflingalt,
+		/datum/sprite_accessory/horns/sarkaz,
 		/datum/sprite_accessory/horns/large/big_antlers,
 		/datum/sprite_accessory/horns/large/large_antlers,
 		/datum/sprite_accessory/horns/large/regal_antlers,
@@ -302,6 +306,7 @@
 		/datum/sprite_accessory/horns/goblin,
 		/datum/sprite_accessory/horns/tiefling,
 		/datum/sprite_accessory/horns/tieflingalt,
+		/datum/sprite_accessory/horns/sarkaz,
 		)
 
 /datum/customizer/organ/horns/tusks
