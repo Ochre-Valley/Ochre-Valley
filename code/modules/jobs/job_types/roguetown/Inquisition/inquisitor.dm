@@ -27,7 +27,7 @@
 	)
 
 /datum/outfit/job/roguetown/inquisitor
-	name = "Arch-Lector" //OV Edit - Was "Inquisitor"
+	name = "Inquisitor" //OV Edit - Was "Inquisitor"
 	jobtype = /datum/job/roguetown/inquisitor
 	job_bitflag = BITFLAG_HOLY_WARRIOR	//Counts as church.
 	allowed_patrons = list(/datum/patron/old_god)
@@ -35,7 +35,7 @@
 //// The Inquisitor. Jack of all trades, master of none. Respectable assortment of skills, stats, and equipment; good at both subterfuge and combat. Functions very well on their own, and even better with a full sect.
 
 /datum/advclass/inquisitor/inspector
-	name = "Arch-Lector" //OV Edit - Was "Inquisitor"
+	name = "Inquisitor" //OV Edit - Was "Inquisitor"
 	tutorial = "Relic hunters and diplomats, selected from a wide range of able candidates, they have shown their aptitude to spread the word of Psydon - a torch in the darkness, an inquisitive mind separating truth from fiction, they are the outstretched hand of Otava to faithful and wayward alike. Preach the word of Psydon and strike fear into the Archdevil's minions." //OV Edit per Lore Doc
 	outfit = /datum/outfit/job/roguetown/inquisitor/inspector
 	subclass_languages = list(/datum/language/otavan)
