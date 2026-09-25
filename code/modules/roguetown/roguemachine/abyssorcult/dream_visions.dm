@@ -96,9 +96,9 @@
 		return FALSE
 
 	for(var/datum/sex_session/session as anything in GLOB.sex_sessions) //Check if they are currently in an active sex session
-		if(session.user != target)
+		if(session.user == target)
 			return FALSE
-		if(session.target != target)
+		if(session.target == target)
 			return FALSE
 	//OV EDIT END
 
