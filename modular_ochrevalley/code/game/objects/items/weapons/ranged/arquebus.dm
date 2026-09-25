@@ -3,12 +3,12 @@
 // ----------------
 // Arquebus intents
 // ----------------
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_draw_time(mob/living/user, arcing = FALSE)
+/*/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_draw_time(mob/living/user, arcing = FALSE) //unreachable with rifle, and current desire is for pistols to point as fast as rifles
 	. = ..()
 	if(!. || !onehanded)
 		return
 	if(user.get_num_arms(FALSE) < 2 || user.get_inactive_held_item())
-		. *= arcing ? onehanded_arc_draw_mult : onehanded_draw_mult
+		. *= arcing ? onehanded_arc_draw_mult : onehanded_draw_mult*/
 
 /datum/intent/shoot/arquebus
     chargedrain = 0
@@ -57,9 +57,19 @@
 		newtime *= chambered.charge_time_mult
 	return (max(0, newtime) + ARCHER_NPC_MIN_AIM_TIME + ARCHER_NPC_NOCK_TIME) * ARCHER_NPC_ROF_PENALTY
 
+/datum/intent/shoot/arquebus/pistol
+    chargedrain = 0
+
+/datum/intent/arc/arquebus/pistol
+    chargedrain = 0
+
+// ------------
+// BASIC RIFLE
+// ------------
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/
 	name = "arquebus rifle"
-	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
+	desc = "A cogwork mechanism within this steel tube turns a simple twitch of a finger into a spark, an ignition of alchemical powders with which a small projectile is propelled at lethal speed. A rifle such as this is uniquely suited to long ranged engagements, but suffers up close."
 	icon = 'modular_causticcove/icons/weapons/arquebus.dmi'
 	dam_icon = 'icons/effects/item_damage64.dmi'
 	icon_state = "arquebus"
@@ -102,22 +112,35 @@
 	pickup_sound = 'modular_causticcove/sound/sheath_sounds/draw_from_holster.ogg'
 	var/spread_num = 10
 	damfactor = 1.2
-	accfactor = 1.1
-	var/range = 30
+	accfactor = 1.2
+	penfactor = 1
+	twirl_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
 	var/onehanded = FALSE
 	var/reloaded = FALSE
-	var/reloadtime = 25
+	var/reloadtime = 45
 	var/gunpowder = FALSE
 	var/obj/item/ramrod/myrod = null
 	var/gunchannel
+	var/quick_reload = FALSE
+	var/min_range_override = 3
+	var/max_range_override = 20
 	ranged_skill = /datum/skill/combat/firearms
+	associated_skill = /datum/skill/combat/staves
 	draw_base = CROSSBOW_DRAW_BASE
 	draw_floor = CROSSBOW_DRAW_FLOOR
 	draw_per_skill = CROSSBOW_DRAW_PER_SKILL
 	onehanded_draw_mult = CROSSBOW_ONEHANDED_DRAW_MULT
 	onehanded_arc_draw_mult = CROSSBOW_ONEHANDED_ARC_DRAW_MULT
-	wdefense = 0 // Can't parry if it's not held in two hands.
-	wdefense_wbonus = 10 // Parrying with two hands is very effective. This sounds awesome until your gun fucking shatters. :)
+	wdefense = 4
+	wdefense_wbonus = 5 //slightly lower than a wooden staff
+	twirly = 3
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/twirl_skill_needed()
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.get_skill_level(ranged_skill) >= twirly)
+			return 0
+	return twirly
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/examine(mob/user)
 	. = ..()
@@ -126,7 +149,7 @@
 	else if(chambered)
 		. += span_notice("It is loaded with [chambered]. It still needs to be tamped down")
 		if(myrod)
-			. += span_notice("The ramrod can be retrieved by right-clicking [src] with an empty hand")
+			. += span_notice("The ramrod can be retrieved by right-clicking [src] with an empty hand, or right clicking the firearm whilst it's inhand to reload automatically.")
 	else if(gunpowder)
 		. += span_notice("It's filled with powder, and ready for shot!")
 	else
@@ -135,10 +158,11 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/get_mechanics_examine(mob/user)
 	. = ..()
-	. += span_info("Black powder weapons increase in accuracy with a higher <b>PERCEPTION</b>, but deal a static amount of damage \
+	. += span_info("Black powder weapons increase in accuracy with a higher firearms skill, but deal a static amount of damage \
 	regardless of character stats.")
 	. += span_info("Black powder weapons must be loaded with powder, then a bullet, which must then be forced down the barrel with a ramrod.")
 	. += span_info("Most black powder weapons come with a ramroad stored on them, which can be pulled out with a right click from an empty hand. They can be stored back on the weapon by left clicking them when there isn't a bullet that needs ramming down.")
+	. += span_info("Right clicking the firearm whilst it's inhand will pull out a ramrod, force powder down, and stow the ramrod automatically. If this is unecessary, you'll instead flip the weapon")
 	. += span_info("The weapon's ramrod may be used to unload the weapon, by right-clicking on it while it's loaded.")
 	if(onehanded)
 		. += span_info("This weapon can be used in one hand, at the penalty of aim time.")
@@ -192,6 +216,10 @@
 		apply_ranged_accuracy(BB, user)
 		BB.armor_penetration = max(PEN_NONE, BB.armor_penetration + penfactor)
 		BB.damage *= damfactor
+		if(min_range_override)
+			BB.min_range = min_range_override
+		if(max_range_override && ((BB.max_range >= 12) || (BB.max_range >= max_range_override)))//if you use ammo with a
+			BB.max_range = max_range_override
 
 	gunpowder = FALSE
 	reloaded = FALSE
@@ -242,7 +270,6 @@
 		wield(user)
 	update_icon()
 
-
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/proc/checkstoragevalidity(datum/source, obj/storage_master, mob/user, datum/storage_datum)
 	var/force_unload = FALSE
 	if(istype(storage_master, /obj/item/storage))
@@ -274,6 +301,27 @@
 		return TRUE
 	return FALSE
 
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/rmb_self(mob/user, keybind)
+	if(!reloaded && gunpowder && chambered && myrod)
+		playsound(src, "sound/items/sharpen_short1.ogg",  100)
+		to_chat(user, span_notice("I draw the ramrod from [src]!"))
+		var/obj/item/ramrod/AM
+		for(AM in src)
+			user.put_in_hands(AM)
+			myrod = null
+			sleep(2)
+			if(user.get_inactive_held_item() == AM)
+				var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
+				playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
+				user.visible_message(span_notice("[user] begins ramming the [AM] down the barrel of [src]."))
+				if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
+					user.visible_message(span_notice("[user] has finished reloading [src]."))
+					reloaded = TRUE
+				if(user.get_inactive_held_item() == AM)
+					attackby(AM, user)
+				break
+		return
+	return ..()
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/attack_right(mob/user)
 	var/held_item = user.get_active_held_item()
@@ -300,7 +348,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/attackby(obj/item/A, mob/living/carbon/user, params) // Reloading code for rifle
 	if (gunchannel) // If you send null, you're going to stop all sound channels!
 		user.stop_sound_channel(gunchannel)
-	var/load_time_skill = reloadtime - user.get_skill_level(ranged_skill)
+	var/load_time_skill = reloadtime - (user.get_skill_level(ranged_skill) * 5)
 	gunchannel = SSsounds.random_available_channel()
 
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
@@ -318,15 +366,15 @@
 		playsound(src, 'modular_causticcove/sound/arquebus/musketload.ogg',  100)
 		user.visible_message(span_notice("[user] forces [A] down the barrel of [src]."))
 
-	if(istype(A, /obj/item/powderflask))
+	if(istype(A, /obj/item/powderflask) || istype(A, /obj/item/quiver/bulletpouch/powderkit || istype(A, /obj/item/quiver/mechanized/shotkit)))
 		if(user.get_inactive_held_item() != src) // You have to hold it to load it.
 			return
 		if(gunpowder)
-			user.visible_message(span_notice("[src] is already filled with gunpowder!</span>"))
+			user.visible_message(span_notice("[src] is already filled with gunpowder!"))
 			return
 		playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
 		if(do_after(user, load_time_skill, src))
-			user.visible_message(span_notice("[user] fills [src] with gunpowder.</span>"))
+			user.visible_message(span_notice("[user] fills [src] with gunpowder."))
 			gunpowder = TRUE
 		return
 	if(istype(A, /obj/item/ramrod))
@@ -336,7 +384,7 @@
 				return
 			user.visible_message(span_notice("[user] begins ramming the [R] down the barrel of [src]."))
 			playsound(src, 'modular_causticcove/sound/arquebus/ramrod.ogg',  100)
-			if(do_after(user, load_time_skill, src))
+			if(do_after(user, load_time_skill, src, allow_movement = quick_reload))
 				user.visible_message(span_notice("[user] has finished reloading [src]."))
 				reloaded = TRUE
 			return
@@ -361,6 +409,9 @@
 		return FALSE
 	return ..()
 
+// ------------
+// HANDGONNE
+// ------------
 
 /obj/item/gun/ballistic/arquebus/handgonne // Currently just a reskin. Not implimented yet. No crafting recipe, no class to spawn with it.
 	name = "handgonne"
@@ -369,16 +420,60 @@
 	icon_state = "handgonne"
 	item_state = "handgonne"
 
-/datum/intent/shoot/arquebus/pistol
-    chargetime = 1
-    chargedrain = 0
+// ------------
+// BLUNDERBUSS
+// ------------
 
-/datum/intent/arc/arquebus/pistol
-    chargetime = 12
-    chargedrain = 0
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
+	name = "blunderbuss"
+	desc = "A cogwork mechanism within this iron tube turns a simple twitch of a finger into a spark, an ignition of alchemical powders with which a small projectile is propelled at lethal speed. A short barrel compared to a rifle, and relatively weighty construction, make this weapon suited for both short and medium range. It also works as a decent bludgeon."
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/firearms.dmi'
+	dam_icon = 'icons/effects/item_damage64.dmi'
+	icon_state = "longgun"
+	item_state = "longgun"
+	gripsprite = FALSE
+	pixel_y = -16
+	pixel_x = -16
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	force_wielded = null
+	possible_item_intents = list(/datum/intent/shoot/arquebus, /datum/intent/arc/arquebus, /datum/intent/mace/strike/wood)
+	gripped_intents = null
+	force = 20 //of the guns, it's the best weighted to bash some poor sod's face in
+	bigboy = TRUE
+	wlength = WLENGTH_NORMAL
+	w_class = WEIGHT_CLASS_BULKY
+	equip_delay_self = 1.5 SECONDS
+	unequip_delay_self = 1.5 SECONDS
+	inv_storage_delay = 2 SECONDS
+	walking_stick = FALSE
+	slot_flags = ITEM_SLOT_BACK
+	onehanded = TRUE
+	associated_skill = /datum/skill/combat/maces
+	wdefense = 2
+	min_range_override = 1
+	max_range_override = null
+	accfactor = 1
+	damfactor = 1
+	quick_reload = TRUE
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+
+
+// ------------
+// PISTOL
+// ------------
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 	name = "arquebus pistol"
+	desc = "A cogwork mechanism within this iron tube turns a simple twitch of a finger into a spark, an ignition of alchemical powders with which a small projectile is propelled at lethal speed. A pistol can be stored at the hip, drawn quickly, and fire just as fast, but suffers at range."
 	icon = 'icons/roguetown/weapons/32.dmi'
 	dam_icon = 'icons/effects/item_damage32.dmi'
 	icon_state = "pistol"
@@ -398,9 +493,16 @@
 	walking_stick = FALSE
 	//max_integrity = 80
 	slot_flags = ITEM_SLOT_HIP
-	range = 10
 	onehanded = TRUE
-	damfactor = 1
+	damfactor = 0.9
+	accfactor = 1
+	quick_reload = TRUE
+	onehanded_draw_mult = 1
+	onehanded_arc_draw_mult = 1
+	associated_skill = /datum/skill/combat/maces
+	wdefense = 0
+	min_range_override = 1
+	max_range_override = 7
 	var/can_spin = TRUE
 	var/last_spunned
 	var/spin_cooldown = 3 SECONDS
@@ -414,45 +516,79 @@
             if("onbelt")
                 return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/attack_self(mob/living/user)
-	var/string = "smoothly"
-	var/list/strings_noob = list("unsurely", "nervously", "anxiously", "timidly", "shakily", "clumsily", "fumblingly", "awkwardly")
-	var/list/strings_moderate = list("smoothly", "confidently", "determinately", "calmly", "skillfully", "decisively")
-	var/list/strings_pro = list("masterfully", "expertly", "flawlessly", "elegantly", "artfully", "impeccably")
-	var/firearm_skill = (user?.mind ? user.get_skill_level(/datum/skill/combat/firearms) : 1)
-	var/noob_spin_sound = 'sound/combat/weaponr1.ogg'
-	var/pro_spin_sound = 'modular_causticcove/sound/arquebus/gunspin.ogg'
-	var/spin_sound
-	if(firearm_skill <= 2)
-		string = pick(strings_noob)
-		spin_sound = noob_spin_sound
-	if((firearm_skill > 2) && (firearm_skill <= 4))
-		string = pick(strings_moderate)
-		spin_sound = pro_spin_sound
-	if((firearm_skill > 4) && (firearm_skill <= 6))
-		string = pick(strings_pro)
-		spin_sound = pro_spin_sound
-	if(world.time > last_spunned + spin_cooldown)
-		can_spin = TRUE
-	if(can_spin)
-		user.play_overhead_indicator('icons/effects/effects.dmi', "emote", 10, OBJ_LAYER)
-		user.visible_message("<span class='emote'>[user] spins [src] around their fingers [string]!</span>")
-		playsound(src, spin_sound, 100, FALSE, ignore_walls = FALSE)
-		last_spunned = world.time
-		/*if(firearm_skill <= 2) // This is supposed to make the gun go off but someone forgot what they were doing while writing it I guess.
-			if(prob(35))
-				shoot_live_shot(message = 0)
-				user.visible_message("<span class='danger'>[user] accidentally discharges [src]!</span>")*/
-		if(firearm_skill <= 3)
-			if(prob(50))
-				user.visible_message(span_danger("[user] accidentally drops [src]!"))
-				user.dropItemToGround(src)
-		can_spin = FALSE
+// ------------
+// AMMO AND LOADING HARDWARE
+// ------------
+
+/obj/item/powderflask
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+
+/obj/item/quiver/bulletpouch
+	max_storage = 18 //slightly higher than crossbow, but you must juggle slots with this and a powderflask
+
+/obj/item/quiver/bulletpouch/powderkit
+	name = "powder-and-shot kit"
+	desc = "A handy leather pouch, with everything you need to load a firearm."
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/ammo.dmi'
+	icon_state = "powderkit"
+	item_state = "powderkit"
+	max_storage = 12
+	powderkit = TRUE
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_BULKY
+
+/obj/item/quiver/bulletpouch/powderkit/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("This is a powder-and-shot kit. Using a black powder weapon on it will automatically fill the weapon, and load a round")
+
+/obj/item/quiver/bulletpouch/powderkit/iron/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/A = new()
+		arrows += A
+	update_icon()
+
+/obj/item/quiver/bulletpouch/powderkit/bronze/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/bronze/A = new()
+		arrows += A
+	update_icon()
+
+/obj/item/quiver/bulletpouch/powderkit/hollowpoint/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/bronze/hollowpoint/A = new()
+		arrows += A
+	update_icon()
+
+/obj/item/quiver/bulletpouch/powderkit/ironscatter/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron/A = new()
+		arrows += A
+	update_icon()
+
+/obj/item/quiver/bulletpouch/powderkit/bronzescatter/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/ammo_casing/caseless/rogue/bullet/scatter/A = new()
+		arrows += A
+	update_icon()
 
 /obj/item/quiver/bulletpouch/attackby(obj/A, loc, params)
 	// /obj/item/quiver/attackby(obj/A, loc, params) already handles feeding ammo to the pouch.
 	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus))
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
+		if(!B.gunpowder && powderkit)
+			var/load_time_skill = B.reloadtime
+			if(ismob(B.loc))
+				var/mob/M = B.loc
+				playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
+				load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+				if(do_after(M, load_time_skill, B))
+					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
+					B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
 			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
 			if(AR)
@@ -465,16 +601,63 @@
 		return
 	..()
 
+/obj/item/quiver/mechanized/shotkit
+	name = "mechanized shot kit"
+	desc = "A mechanical bag with a pouch of shot and a flask of powder. Will suck up bullets from the ground,"
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/ammo.dmi'
+	icon_state = "mechpowderkit0"
+	item_state = "mechpowderkit0"
+	max_storage = 18
+	powderkit = TRUE
+	allowed_ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
+	valid_weapon = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
+
+/obj/item/quiver/mechanized/shotkit/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("This is a powder-and-shot kit. Using a black powder weapon on it will automatically fill the weapon, and load a round")
+
+/obj/item/quiver/mechanized/shotkit/attackby(obj/A, loc, params)
+	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus))
+		var/obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/B = A
+		if(!B.gunpowder && powderkit)
+			var/load_time_skill = B.reloadtime
+			if(ismob(B.loc))
+				var/mob/M = B.loc
+				playsound(src, 'modular_causticcove/sound/arquebus/pour_powder.ogg',  100)
+				load_time_skill = B.reloadtime - (M.get_skill_level(B.ranged_skill) * 5)
+				if(do_after(M, load_time_skill, B))
+					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
+					B.gunpowder = TRUE
+		if(arrows.len && B.gunpowder && !B.chambered)
+			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
+			if(AR)
+				arrows -= AR
+				B.attackby(AR, loc, params)
+				if(ismob(loc))
+					var/mob/M = loc
+					if(HAS_TRAIT(M, TRAIT_COMBAT_AWARE))
+						M.balloon_alert(M, "[length(arrows)] left...")
+		return
+	..()
+
+/obj/item/quiver/mechanized/shotkit/hip
+	name = "light mechanized shot kit"
+	desc = "A mechanical bag with a pouch of shot and a flask of powder. Will suck up bullets from the ground, but can only hold a pistol."
+	max_storage = 12
+	slot_flags = ITEM_SLOT_HIP
+	valid_weapon = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+
+
+// ------------
+// OVERRIDES
+// ------------
+
+
 /obj/item/storage
 	var/force_stored_weapon_unload = TRUE
 
 /obj/item/clothing
 	var/force_stored_weapon_unload = TRUE
 
-/* Definitions for if someone wants to allow guns into belts, cloaks, or what have you later. I've erred on the side of conservative for now
-/obj/item/clothing/cloak
-	force_stored_weapon_unload = FALSE
-
-/obj/item/storage/belt
-	force_stored_weapon_unload = FALSE
-*/
+/obj/item/quiver
+	var/powderkit = FALSE
