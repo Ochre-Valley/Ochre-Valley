@@ -2317,3 +2317,22 @@
         fixed atgervi shaman, cantor and witch (miracle focused variants) not
         having order and gravemark if zizo is chosen
     - refactor: changed logic for giving skeleton's controlling abilities
+2026-09-26:
+  Lamasmaster:
+    - spellcheck:
+        Makes Ravox just Justicar in game, Justiciar is left up to secular
+        matters (the Crown).
+  NonQueueingMatt:
+    - admin: Full heal now restores thirst and energy (blue).
+  Ryan180602:
+    - bugfix: garrote grips now stay through z transition
+  anything86:
+    - balance: gives vigilante wretch some love
+    - rscadd: billhook and ji get an unique anti-cavalry intent
+    - balance: naginata gets some extra blade integrity
+    - bugfix: fixes a few blacksteel weapons not having appropriate defense
+    - bugfix: fixes a few unique glaive/halberds having less blade integrity than intended
+    - bugfix: fixes quarterstaff thrust not having integrity damage factor
+  zRainbowcat:
+    - bugfix: second chance options description fix
+    - bugfix: fixed some service bells not working at all
