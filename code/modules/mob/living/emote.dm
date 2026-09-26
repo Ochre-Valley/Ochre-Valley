@@ -540,7 +540,7 @@
 				message_param = "kisses %t on the cheek."
 			//OV EDIT
 			else if(H.zone_selected == BODY_ZONE_PRECISE_STOMACH)
-				message_param = "kisses %t on their belly."
+				message_param = "kisses %t on the belly."
 			//OV EDIT END
 			else
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
