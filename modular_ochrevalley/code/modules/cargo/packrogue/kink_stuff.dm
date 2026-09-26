@@ -87,6 +87,13 @@
 					/obj/item/book/granter/spell/bonechill/sizespell
 				)
 
+/datum/supply_pack/rogue/kink_toy/self_tf
+	name = "Scroll of Self Transmutation"
+	cost = 20
+	contains = list(
+					/obj/item/book/granter/spell/bonechill/self_tf
+				)
+
 /datum/supply_pack/rogue/kink_toy/spell_mirror
 	name = "Scroll of Mirror Transform"
 	cost = 20
@@ -147,7 +154,7 @@
 
 /datum/supply_pack/rogue/kink_toy/collar/leather
 	name = "Armored Collar (Leather)"
-	cost = 33 
+	cost = 33
 	contains = list(
 					/obj/item/clothing/neck/roguetown/leather/collar
 				)
