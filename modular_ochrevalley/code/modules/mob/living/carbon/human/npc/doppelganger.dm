@@ -138,9 +138,9 @@
 			continue
 		selected_audience = audience
 		break
-	
+
 	var/our_message
-	
+
 	if(dying)
 		if(patron)
 			switch(patron.name)
@@ -180,7 +180,7 @@
 			dying_voicelines += "[selected_audience.real_name], why?"
 		our_message = pick(dying_voicelines)
 		return our_message
-	
+
 	if(selected_audience)
 		combat_voicelines += "Help, [selected_audience.nickname]!"
 		combat_voicelines += "Please, [selected_audience.real_name]!"
@@ -190,7 +190,7 @@
 		combat_voicelines += "[selected_audience.real_name]..."
 		combat_voicelines += "[selected_audience.nickname], get the fake [real_name]!"
 		combat_voicelines += "[real_name] is a fake!"
-	
+
 	if(patron)
 		switch(patron.name)
 			if("Psydon")
@@ -236,7 +236,7 @@
 		return FALSE
 	if(our_target == src)
 		return FALSE
-	
+
 
 	if(npc_setup)
 		ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
@@ -255,34 +255,34 @@
 	mob_descriptors = our_target.mob_descriptors.Copy()
 	voice_type = our_target.voice_type
 	d_intent = our_target.d_intent
-	
+
 
 	//head
 	for(var/obj/item/bodypart/head/our_head in bodyparts)
 		for(var/obj/item/bodypart/head/their_head in our_target.bodyparts)
 			for(var/datum/bodypart_feature/part in their_head.bodypart_features)
 				our_head.clone_bodypart_feature(part)
-	
+
 	//taur
 	for(var/obj/item/bodypart/taur/part in our_target.bodyparts)
 		Taurize(part.type)
-	
+
 	//tail
 	for(var/obj/item/organ/tail/part in our_target.internal_organs)
 		var/obj/item/organ/tail/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/tail/old_part = getorganslot(ORGAN_SLOT_TAIL)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//ears
 	for(var/obj/item/organ/ears/part in our_target.internal_organs)
 		var/obj/item/organ/ears/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/ears/old_part = getorganslot(ORGAN_SLOT_EARS)
 		if(old_part)
 			old_part.Remove(src)
@@ -293,98 +293,98 @@
 	for(var/obj/item/organ/snout/part in our_target.internal_organs)
 		var/obj/item/organ/snout/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/snout/old_part = getorganslot(ORGAN_SLOT_SNOUT)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//horns
 	for(var/obj/item/organ/horns/part in our_target.internal_organs)
 		var/obj/item/organ/horns/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/horns/old_part = getorganslot(ORGAN_SLOT_HORNS)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//wings
 	for(var/obj/item/organ/wings/part in our_target.internal_organs)
 		var/obj/item/organ/wings/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/wings/old_part = getorganslot(ORGAN_SLOT_WINGS)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//frills
 	for(var/obj/item/organ/frills/part in our_target.internal_organs)
 		var/obj/item/organ/frills/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/frills/old_part = getorganslot(ORGAN_SLOT_FRILLS)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//belly
 	for(var/obj/item/organ/belly/part in our_target.internal_organs)
 		var/obj/item/organ/belly/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		new_part.belly_size = part.belly_size
 		var/obj/item/organ/belly/old_part = getorganslot(ORGAN_SLOT_BELLY)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//breasts
 	for(var/obj/item/organ/breasts/part in our_target.internal_organs)
 		var/obj/item/organ/breasts/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		new_part.breast_size = part.breast_size
 		var/obj/item/organ/breasts/old_part = getorganslot(ORGAN_SLOT_BREASTS)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//vagina
 	for(var/obj/item/organ/vagina/part in our_target.internal_organs)
 		var/obj/item/organ/vagina/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		var/obj/item/organ/vagina/old_part = getorganslot(ORGAN_SLOT_VAGINA)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//penis
 	for(var/obj/item/organ/penis/part in our_target.internal_organs)
 		var/obj/item/organ/penis/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		new_part.penis_size = part.penis_size
 		var/obj/item/organ/penis/old_part = getorganslot(ORGAN_SLOT_PENIS)
 		if(old_part)
 			old_part.Remove(src)
 			qdel(old_part)
 		new_part.Insert(src, TRUE, FALSE)
-	
+
 	//balls
 	for(var/obj/item/organ/testicles/part in our_target.internal_organs)
 		var/obj/item/organ/testicles/new_part = new part.type()
 		new_part.accessory_colors = part.accessory_colors
-		new_part.accessory_type = part.accessory_type 
+		new_part.accessory_type = part.accessory_type
 		new_part.ball_size = part.ball_size
 		var/obj/item/organ/testicles/old_part = getorganslot(ORGAN_SLOT_PENIS)
 		if(old_part)
@@ -507,7 +507,7 @@
 		var/obj/item/equipping_skin = our_target.skin_armor
 		if(equipping_skin)
 			skin_armor = new equipping_skin.type(src)
-	
+
 	update_body()
 	update_hair()
 	update_icon()
@@ -517,17 +517,21 @@
 
 /// AMBUSHES
 
-/datum/ambush_config/doppelganger
-	mob_types = list(
+/datum/npc_warband/doppelganger
+	name = "Doppelganger"
+	category = FACTION_BANDITS
+	faction_tag = "bandits"
+	members = list(
 		/mob/living/carbon/human/species/human/northern/doppelganger/ambush = 1
 	)
-	threat_point = THREAT_HIGH
 
-/datum/ambush_config/doppelgangers
-	mob_types = list(
+/datum/npc_warband/doppelgangers
+	name = "Doppelgangers"
+	category = FACTION_BANDITS
+	faction_tag = "bandits"
+	members = list(
 		/mob/living/carbon/human/species/human/northern/doppelganger/ambush = 2
 	)
-	threat_point = 2* THREAT_HIGH
 
 //DOPPEL HEART!
 

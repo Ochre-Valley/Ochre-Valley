@@ -357,8 +357,18 @@
 #define BODY_BUILD_SLIM "slim"
 /// The old Wood Elf male sprite: the slim body raised a pixel. Masculine only, and offered to elves alone.
 #define BODY_BUILD_ELVEN "elven"
+// OV ADD START
+// anthro variants of the above, greyscaled for better color matching
+#define BODY_BUILD_BULKY_ANTHRO "bulky greyscaled"
+#define BODY_BUILD_SLIM_ANTHRO "slim greyscaled"
+#define BODY_BUILD_ELVEN_ANTHRO "elven greyscaled"
+//OV ADD END
 /// Every build, in the order they should be listed to the player.
 #define ALL_BODY_BUILDS list(BODY_BUILD_BULKY, BODY_BUILD_SLIM, BODY_BUILD_ELVEN)
+//OV ADD
+/// Every build, anthro variant
+#define ALL_BODY_BUILDS_ANTHRO list(BODY_BUILD_BULKY_ANTHRO, BODY_BUILD_SLIM_ANTHRO, BODY_BUILD_ELVEN_ANTHRO)
+//OV ADD
 /// The two builds any human-shaped species can offer.
 #define STANDARD_BODY_BUILDS list(BODY_BUILD_BULKY, BODY_BUILD_SLIM)
 
@@ -384,7 +394,7 @@
 // one); the feminine keys are the fm.dmi values every human-shaped species already shared. Males on this
 // build read the masculine keys and females the feminine ones, as elves have always done.
 #define OFFSET_FEATURES_SLIM_REFERENCE list(\
-	OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1), OFFSET_HANDS = list(0,0), \
+	OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,-1), OFFSET_WRISTS = list(0,-1), OFFSET_HANDS = list(0,0), \
 	OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), \
 	OFFSET_FACE = list(0,0), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), \
 	OFFSET_NECK = list(0,0), OFFSET_MOUTH = list(0,0), OFFSET_PANTS = list(0,0), \
@@ -397,12 +407,12 @@
 	OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0), \
 	)
 
-// Offset table for the elven build: the slim table raised a pixel, except on the legs. A raised body lifts
+// Offset table for the elven build: the slim table raised a pixel, except on the legs and arms. A raised body lifts
 // the torso but leaves the feet planted, so the leg slots keep their slim values while everything hanging
 // off the body moves up with it. Written out in full so it reads the same way as its two neighbours.
 #define OFFSET_FEATURES_ELVEN_REFERENCE list(\
-	OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,2), OFFSET_WRISTS = list(0,2), \
-	OFFSET_HANDS = list(0,1), OFFSET_CLOAK = list(0,2), OFFSET_FACEMASK = list(0,1), \
+	OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,0), OFFSET_WRISTS = list(0,0), \
+	OFFSET_HANDS = list(0,0), OFFSET_CLOAK = list(0,2), OFFSET_FACEMASK = list(0,1), \
 	OFFSET_HEAD = list(0,1), OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), \
 	OFFSET_BACK = list(0,1), OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), \
 	OFFSET_PANTS = list(0,0), OFFSET_SHIRT = list(0,2), OFFSET_ARMOR = list(0,2), \

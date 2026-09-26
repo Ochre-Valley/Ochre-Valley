@@ -13,7 +13,7 @@
 	storyteller_rumour_name = "a vampire masquerade with only towners"
 	storyteller_slot_key = "Masquerade Lite"
 
-	weight = 20 //OV EDIT - Was 8
+	weight = 8 //OV EDIT - Was 8
 
 	denominator = 80
 

@@ -411,13 +411,13 @@
 				this_track.ambiguous_track_type = "humanoid footprints"
 
 		var/bonus_weight = 0
-		if(wear_armor && wear_armor.armor_class)
+		if(wear_armor && wear_armor.armor_class) //OV EDIT - Powder Flask Runtime Fix
 			switch(wear_armor.armor_class)
 				if(ARMOR_CLASS_HEAVY)
 					bonus_weight += 1
 				if(ARMOR_CLASS_MEDIUM)
 					bonus_weight = 0.5
-		if(wear_shirt && wear_shirt.armor_class)
+		if(wear_shirt && wear_shirt.armor_class) //OV EDIT - Powder Flask Runtime Fix
 			switch(wear_shirt.armor_class)
 				if(ARMOR_CLASS_HEAVY)
 					bonus_weight += 1
@@ -470,14 +470,14 @@
 	if(!.)
 		return
 	var/bonus_weight = 0
-	if(wear_armor)
+	if(wear_armor && istype(wear_armor, /obj/item/clothing)) //OV Edit: More powder flask runtimes
 		switch(wear_armor.armor_class)
 			if(ARMOR_CLASS_HEAVY)
 				bonus_weight += 0.5
 			if(ARMOR_CLASS_MEDIUM)
 				bonus_weight = 0.25
 			else
-	if(wear_shirt)
+	if(wear_shirt && istype(wear_shirt, /obj/item/clothing)) //OV Edit: More powder flask runtimes
 		switch(wear_shirt.armor_class)
 			if(ARMOR_CLASS_HEAVY)
 				bonus_weight += 0.5

@@ -1,10 +1,13 @@
 #define ENCHANT_DURATION 15 MINUTES
-#define ENCHANT_DURATION_WILDERNESS 300 MINUTES
+#define ENCHANT_DURATION_WILDERNESS 200 MINUTES
 
 /obj/effect/proc_holder/spell/invoked/fittedclothing
 	name = "Fit Clothing"
-	desc = "Fit Clothing will allow you to fit a cloth or leather garment to an individual, allowing greater durability for a duration of time. \n\
-	You can increase this time with an essence of wilderness, seeping it into the material and reinforcing it permanently.\n\ "
+	desc = "Fit Clothing will allow you to fit a cloth or leather garment to an individual, allowing greater durability for a time \n\
+	You can increase this time with an essence of wilderness, seeping it into the material\n\ "
+	overlay_state = "fitclothes"
+	overlay_icon = 'icons/mob/actions/townerspells.dmi'
+	action_icon = 'icons/mob/actions/townerspells.dmi'
 	releasedrain = 50
 	chargedrain = 0
 	chargetime = 0
@@ -23,9 +26,8 @@
 
 	if(istype(target, /obj/item/clothing/))
 		var/obj/item/clothing/suit/roguetown/armor/clothingenchant = target
-		//Fit any sewn item.
-		if((!(clothingenchant.sewrepair)||isnull(clothingenchant.sewrepair)))
-			to_chat(user, span_warning("You can only fit leathers and fabrics."))
+		if((!(clothingenchant.sewrepair)||isnull(clothingenchant.sewrepair) || !(clothingenchant.armor_class == ARMOR_CLASS_LIGHT)))
+			to_chat(user, span_warning("You can only fit light armor pieces"))
 			return
 		var/enchant_type = DURABILITY_ENCHANT
 		var/enchant_duration = sacrifice ? ENCHANT_DURATION_WILDERNESS : ENCHANT_DURATION
@@ -36,10 +38,10 @@
 		if(clothingenchant.GetComponent(/datum/component/fit_clothing))
 			qdel(clothingenchant.GetComponent(/datum/component/fit_clothing))
 		clothingenchant.AddComponent(/datum/component/fit_clothing, enchant_duration, TRUE, /datum/skill/magic/arcane, enchant_type)
-		user.visible_message("[user] fits the [clothingenchant], allowing them to fit their wearer better.")
+		user.visible_message("[user] fits the [clothingenchant], allowing them to fit their wearer better")
 		return TRUE
 	else
-		to_chat(user, span_warning("You can only fit leathers and fabrics."))
+		to_chat(user, span_warning("You can only fit light armor pieces"))
 		revert_cast()
 		return FALSE
 

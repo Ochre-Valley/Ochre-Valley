@@ -1,5 +1,5 @@
 /datum/advclass/disciple
-	name = "Orator" //OV Edit - was "Disciple"
+	name = "Disciple" //OV Edit - was "Disciple"
 	tutorial = "Once you have been a monk or priest of PSYDON, but your wanderlust got the better of you. Joining the Missionata, you now preach before wayward children and aberrants - and have learned to knock their lights out when they try to silence you with violence." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
 
@@ -7,7 +7,8 @@
 	subclass_languages = list(/datum/language/otavan)
 	category_tags = list(CTAG_ORTHODOXIST)
 	traits_applied = list(
-		TRAIT_CIVILIZEDBARBARIAN
+		TRAIT_CIVILIZEDBARBARIAN,
+		TRAIT_BLOOD_RESISTANCE
 	)
 	subclass_stats = list(
 		STATKEY_STR = 3,
@@ -97,7 +98,7 @@
 	//OV Edit: Let more classes test faith
 	add_verb(H, /mob/living/carbon/human/proc/faith_test)
 	add_verb(H, /mob/living/carbon/human/proc/torture_victim)
-	
+
 	var/origins = list("Otava", "Naledi")
 	var/origin_choice = input(H,"Choose your HERALDRY.", "TAKE UP PSYDON'S ARMS.") as anything in origins
 	if(origin_choice == "Naledi")

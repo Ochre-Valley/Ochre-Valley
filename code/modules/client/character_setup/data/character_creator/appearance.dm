@@ -64,7 +64,7 @@
 	. = list()
 	for(var/gender_key in list("masculine", "feminine"))
 		var/option_gender = (gender_key == "masculine") ? MALE : FEMALE
-		for(var/build in ALL_BODY_BUILDS)
+		for(var/build in ALL_BODY_BUILDS + ALL_BODY_BUILDS_ANTHRO) //OV EDIT
 			if(pref_species.is_body_build_valid(build, option_gender))
 				.["[gender_key]_[build]"] = "[capitalize(gender_key)] ([capitalize(build)])"
 

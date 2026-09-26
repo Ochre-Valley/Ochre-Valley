@@ -281,7 +281,7 @@
 /datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
 	set name = "Mob - Heal"
 	set desc = "Heal a mob to full health"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -294,7 +294,7 @@
 	log_admin("[key_name(usr)] healed [key_name(M)].")
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -309,7 +309,7 @@
 /datum/admins/proc/admin_revive(mob/living/M in GLOB.mob_list)
 	set name = "Mob - Revive"
 	set desc = "Resuscitate a mob"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -338,7 +338,7 @@
 /datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
 	set name = "Toggle Sleeping"
 	set desc = "Toggle a mob's sleeping state"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -647,7 +647,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set desc = ""
 	set name = "Spawn..."
 
@@ -906,7 +906,7 @@
 
 /datum/admins/proc/sleep_view()
 	set name = "inview Sleep"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set hidden = FALSE
 
 	if(!check_rights(R_ADMIN))
@@ -921,7 +921,7 @@
 
 /datum/admins/proc/wake_view()
 	set name = "inview Wake"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set hidden = FALSE
 
 	if(!check_rights(R_ADMIN))
