@@ -5,21 +5,20 @@
 	cmode_music = 'sound/music/combat_dwarf.ogg'
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT, TRAIT_JACKOFALLTRADES) //gains jackofalltrades in place of forgeblessed, such that you don't have to be a malumite to effectively level crafting skills
+	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT, TRAIT_JACKOFALLTRADES) //gains jackofalltrades in place of forgeblessed, such that you don't have to be a malumite to effectively level crafting skills
 	subclass_stats = list(
-		STATKEY_INT = 3,
+		STATKEY_INT = 4,
 		STATKEY_PER = 2,
 		STATKEY_SPD = 1,
-		STATKEY_WIL = 1,
 		STATKEY_FOR = 1
 	)
 
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE, //crossbows, firearms, and a big wrench
 		/datum/skill/combat/firearms = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/arcyne = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
@@ -44,7 +43,7 @@
 	)
 
 /datum/outfit/job/roguetown/wretch/madtinkerer/pre_equip(mob/living/carbon/human/H)
-	to_chat(H, span_warning("Combat is not ideal, but you're no pushover. Your prowess would be called madness, to the close-minded folks of 'proper society'. They might even say your ambition will lead to ruin. You know better."))
+	to_chat(H, span_warning("Your prowess in your craft would be called madness, to the close-minded folks of 'proper society'. They might even say your ambition will lead to ruin. You know better."))
 	mask = /obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer
 	cloak = /obj/item/clothing/suit/roguetown/shirt/robe/physician/tinkerer
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced/labboots
@@ -72,7 +71,6 @@
 		)
 	if(H.mind)
 		H.AddComponent(/datum/component/ore_sight)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/engineeranalyze)
 		var/fixations = list("Of Arcyne Laws and Convolutions", "Of Lux, Metal, and Flesh", "Of Cog-song and Alchymical Truimph")
 		var/fixation_choice = input(H, "What is your pursuit?", "THEY CALLED ME MAD!") as anything in fixations
 		var/mage = FALSE
@@ -121,9 +119,9 @@
 					beltl = /obj/item/rogueweapon/scabbard/sheath
 		wretch_select_bounty(H)
 
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/lensed/tinkerer
 	name = "strange mask"
-	desc = "A product of strange artifice, protecting the wearer from noxious fumes and shrapnel to the eyes. You can taste copper whenever you draw breath."
+	desc = "A product of strange artifice, painstakingly replicated from ancient design. Protects the wearer from noxious fumes and shrapnel to the eyes. You can taste copper whenever you draw breath."
 	icon_state = "tinkerermask"
 	icon = 'modular_ochrevalley/icons/roguetown/clothing/masks.dmi'
 	mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/masks.dmi'
@@ -133,7 +131,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	block2add = FOV_DEFAULT //similar to the malpractitioner's mask, you get full vision for the sake of drip. You do not, however, gain the full integrity of the confessor's mask
 
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/lensed/tinkerer/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/clothing/mask/rogue/spectacles/inq))
 		to_chat(user, span_info("The lenses won't fit your mask."))
 	else
