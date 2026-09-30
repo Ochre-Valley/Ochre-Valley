@@ -1,13 +1,13 @@
-# OCHRE VALLEY
+# OLD PIDGEON'S KEEP
 
 | Website                   | Link                                           |
 |---------------------------|------------------------------------------------|
-| Discord | [https://discord.gg/qpf3BtBUXq](https://discord.gg/qpf3BtBUXq)
-| Code    | [https://github.com/Ochre-Valley/Ochre-Valley](https://github.com/Ochre-Valley/Ochre-Valley)    |
+| Discord | TBA                                                              |
+| Code    | [https://github.com/Old-Pidgeon's Keep/Old-Pidgeon's-Keep](https://github.com/Old-Pidgeons-Keep/Old-Pidgeons-Keep)    |
 | Wiki    | [https://ochrevalley.miraheze.org/wiki/Main_Page](https://ochrevalley.miraheze.org/wiki/Main_Page) |
 
 ## LICENSE
-Original Fork Originates from [commit c28b351807bad950d2b323ada048190844bbda32](https://github.com/tgstation/tgstation/commit/c28b351807bad950d2b323ada048190844bbda32).
+Original Fork Originates from [https://github.com/Ochre-Valley/Ochre-Valley/commit/27aa8dd32ae0de24960edf678b704786eef88128](https://github.com/Ochre-Valley/Ochre-Valley/commit/27aa8dd32ae0de24960edf678b704786eef88128).
 
 All code after [commit 333c566b88108de218d882840e61928a9b759d8f on 2014/31/12 at 4:38 PM PST](https://github.com/tgstation/tgstation/commit/333c566b88108de218d882840e61928a9b759d8f) is licensed under [GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html).
 
