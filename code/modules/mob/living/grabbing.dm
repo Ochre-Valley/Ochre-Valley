@@ -279,6 +279,34 @@
 
 						U.hostage = H
 						H.hostagetaker = U
+		//OV edit start - scruff intent on neck grabs, for adult tabaxis and lupians
+		if(/datum/intent/grab/scruff)
+			if(user.buckled)
+				to_chat(user, span_warning("I can't do this while buckled!"))
+				return FALSE
+			if(limb_grabbed && grab_state > GRAB_PASSIVE)
+				if(ishuman(M) && M != user)
+					var/mob/living/carbon/human/H = M
+					if((istabaxi(H) || islupian(H)) && sublimb_grabbed == BODY_ZONE_PRECISE_NECK)
+						if(get_location_accessible(H, BODY_ZONE_PRECISE_NECK))
+							if(H.age == AGE_ADULT)
+								if(H.cmode == 0) //added for the OV version, doesn't work if the target is in combat mode, to prevent any combat application
+									if(user && (H.dir == turn(get_dir(H, user), 180))) // extra bit of balancing, only gonna work from behind
+										user.stamina_add(rand(2,5))
+										H.Paralyze(20) // 2 seconds of paralysis, might be a bit much...?
+										H.visible_message(span_danger("[user] grabs [H] by the scruff, causing them to go limp!"), \
+												span_userdanger("You go limp as your scruff is twisted!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, user)
+										to_chat(user, span_warning("You twist [H]'s scruff, causing them to go limp!"))
+										log_combat(user, H, "scruffed")
+									else
+										to_chat(user, span_warning("I need to be behind [H] to scruff them!"))
+								else
+									to_chat(user, span_warning("[H] is too tense, I can't get a good grip!"))
+							else
+								to_chat(user, span_warning("Scruffing doesn't work on older adults!"))
+						else
+							to_chat(user, span_warning("[H]'s neck is covered!"))
+		//OV edit end
 		if(/datum/intent/grab/twist)
 			if(HAS_TRAIT(user, TRAIT_PACIFISM))
 				to_chat(user, span_warning("Why would I do this! Am I insane?!"))
@@ -772,6 +800,14 @@
 	name = "disarm"
 	desc = ""
 	icon_state = "intake"
+
+//OV edit start - scruff intent on neck grabs, for adult tabaxis and lupians
+/datum/intent/grab/scruff
+	name = "scruff"
+	desc = ""
+	icon_state = "inscruff"
+	clickcd = CLICK_CD_RESIST
+//OV edit end
 
 /obj/item/grabbing/bite
 	name = "bite"
