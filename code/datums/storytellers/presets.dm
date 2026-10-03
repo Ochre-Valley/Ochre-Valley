@@ -21,7 +21,7 @@
 	block_soft = TRUE
 	allow_dreamwalker = FALSE
 	preferred_gnoll_mode = GNOLL_SCALING_NONE
-	wretch_slot_cap = 0
+	// wretch_slot_cap = 0 // OV Remove
 	roundstart_prob = 0
 	guarantees_roundstart_roleset = FALSE
 	starting_point_multipliers = list(
@@ -62,7 +62,7 @@
 	guarantees_roundstart_roleset = FALSE
 	roundstart_prob = 0
 	preferred_gnoll_mode = GNOLL_SCALING_DYNAMIC	// max 3
-	wretch_slot_cap = 12
+	// wretch_slot_cap = 12  // OV Remove
 
 	starting_point_multipliers = list(
 		EVENT_TRACK_MUNDANE = 1,
@@ -100,7 +100,7 @@
 	block_soft = FALSE
 	allow_dreamwalker = TRUE
 	preferred_gnoll_mode = GNOLL_SCALING_FLAT	// max 2
-	wretch_slot_cap = 9
+	// wretch_slot_cap = 9 // OV Remove
 
 /datum/storyteller/gamemode/guaranteed_antag/low_wretch
 	name = "Tempered Intensity"
@@ -111,7 +111,7 @@
 	block_soft = FALSE
 	allow_dreamwalker = FALSE
 	preferred_gnoll_mode = GNOLL_SCALING_SINGLE	// max 1
-	wretch_slot_cap = 4
+	// wretch_slot_cap = 4  // OV Remove
 
 // ----------------------------------------------------------------------------------------------------------
 // TEN pool - no hard antags, soft antags only. Standard is the lighter option, Medium the default fallback.
@@ -127,7 +127,7 @@
 	block_soft = FALSE
 	allow_dreamwalker = FALSE
 	preferred_gnoll_mode = GNOLL_SCALING_DYNAMIC	// max 3
-	wretch_slot_cap = 12
+	// wretch_slot_cap = 12  // OV Remove
 	roundstart_prob = 50
 	guarantees_roundstart_roleset = FALSE
 
@@ -138,7 +138,7 @@
 	color_theme = "#37b3a6"
 	allow_dreamwalker = FALSE
 	preferred_gnoll_mode = GNOLL_SCALING_FLAT	// max 2
-	wretch_slot_cap = 6
+	// wretch_slot_cap = 6  // OV Remove
 
 // Low Intensity - votes in the PSYDON pool (see preset_pool) despite being a no_antag subtype.
 /datum/storyteller/gamemode/no_antag/small_wretch
@@ -149,7 +149,7 @@
 	preset_pool = GAMEMODE_POOL_EXTENDED
 	allow_dreamwalker = FALSE
 	preferred_gnoll_mode = GNOLL_SCALING_NONE
-	wretch_slot_cap = 4
+	// wretch_slot_cap = 4  // OV Remove
 	roundstart_prob = 0
 
 	starting_point_multipliers = list(
