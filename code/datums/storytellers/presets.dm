@@ -95,7 +95,7 @@
 	preset_pool = GAMEMODE_POOL_GUARANTEED
 	guaranteed_hard = FALSE //OV EDIT
 	guarantees_roundstart_roleset = FALSE //OV Edit
-	roundstart_prob = 100
+	roundstart_prob = 80 //100 //OV EDIT
 	block_hard = FALSE
 	block_soft = FALSE
 	allow_dreamwalker = TRUE

@@ -234,7 +234,7 @@
 	var/green = hex2num(copytext(render_color, 4, 6)) / 255
 	var/blue = hex2num(copytext(render_color, 6, 8)) / 255
 	if(!isnum(red) || !isnum(green) || !isnum(blue))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	return list(
 		LUMA_R * red, LUMA_R * green, LUMA_R * blue, 0,
 		LUMA_G * red, LUMA_G * green, LUMA_G * blue, 0,
@@ -341,7 +341,7 @@
 	if(!isturf(loc))
 		to_chat(src,span_warning("You need to be on the open ground to do that."))
 		return
-	
+
 	var/list/potential_targets = list()
 
 	for(var/mob/living/L in view(1))
@@ -352,7 +352,7 @@
 		if(!vore_pref_compat(src,L))
 			continue
 		potential_targets |= L
-	
+
 	for(var/thing in contents)
 		if(!istype(thing,/obj/item/holder/micro))	//U can also eat players in your hand
 			continue
@@ -361,13 +361,13 @@
 			continue
 		if(!vore_pref_compat(src,M.held_mob))
 			continue
-	
+
 		potential_targets |= M.held_mob
-		
+
 	if(potential_targets.len <= 0)
 		to_chat(src, span_warning("There are no valid targets in range."))
 		return
-	
+
 	var/mob/living/choice = tgui_input_list(src,"Who would you like to eat?","Vore Target",potential_targets)
 
 	if(!choice)
@@ -387,7 +387,7 @@
 
 	if(!prey.devourable)
 		return FALSE
-	
+
 	return TRUE
 
 /mob/living/verb/petrification()
