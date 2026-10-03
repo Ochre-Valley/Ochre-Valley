@@ -1,4 +1,29 @@
 // OV File
+/datum/advclass/rogue/buccaneer
+	name = "Buccaneer"
+	tutorial = "You are a daring rogue of the seas! Buccaneers wield deadly firearms and ruthless cunning - fighting dirty to outgun foes with swagger."
+	outfit = /datum/outfit/job/roguetown/adventurer/buccaneer
+	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
+	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_NUTCRACKER, TRAIT_DECEIVING_MEEKNESS)
+	subclass_stats = list(
+		STATKEY_SPD = 2,
+		STATKEY_STR = 1,
+		STATKEY_WIL = 1,
+	)
+	subclass_skills = list(
+		/datum/skill/combat/firearms = SKILL_LEVEL_JOURNEYMAN, // Instead of throwing knives, you have a gun!
+		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/music = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
+	)
 
 /datum/outfit/job/roguetown/adventurer/buccaneer/pre_equip(mob/living/carbon/human/H)
     ..()
