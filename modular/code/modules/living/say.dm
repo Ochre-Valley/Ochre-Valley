@@ -4,7 +4,7 @@
 		var/obj/item/the_item = loc
 		if(the_item.mob_possession == src)
 			message = copytext_char(message, 2)
-			the_item.visible_message(span_italics("[the_item] [message]"), vision_distance = 1)
+			do_subtle_emote("[the_item] [message]")
 			log_talk(message, LOG_EMOTE)
 			return 1
 	if(muffled && (copytext_char(message, 1, 2) == "*")) //muffled by belly but trying to emote
