@@ -217,6 +217,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/badge_erp = "No"
 	var/badge_lean = "Unset"
 	var/badge_type = "Unset"
+
+	var/free_use_default = FALSE
 	//OV edit end
 
 /datum/preferences/New(client/C)

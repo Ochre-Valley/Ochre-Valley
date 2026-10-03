@@ -477,6 +477,17 @@
 		prefs.hide_pq = TRUE
 		to_chat(src, "You will no longer be able to view your PQ values until you contact a staff member to reenable them.")
 		prefs.save_preferences()
+
+/client/verb/toggle_free_use_default()
+	set category = "Preferences.Options"
+	set name = "Toggle Free Use Default"
+	if(prefs)
+		prefs.free_use_default = !prefs.free_use_default
+		if(prefs.free_use_default)
+			to_chat(src, "You will now start with Free Use enabled by default.")
+		else
+			to_chat(src, "You will no longer start with Free Use enabled by default.")
+		prefs.save_preferences()
 //OV edit end
 
 #undef TOGGLE_CHECKBOX
