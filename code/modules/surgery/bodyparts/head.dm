@@ -82,7 +82,12 @@
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_NECK)
-			return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage)
+		//OV edit start - scruff intent on neck grabs, for adult tabaxis and lupians
+			if(istabaxi(owner) || islupian(owner))
+				return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage, /datum/intent/grab/scruff)
+			else
+		//OV edit end
+				return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage)
 
 /obj/item/bodypart/head/Destroy()
 	// OV Edit Start
