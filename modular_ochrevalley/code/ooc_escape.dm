@@ -43,6 +43,27 @@
 	else if(istype(where,/obj/item/holder/micro))	//For micros
 		var/obj/item/holder/micro/mh = where
 		mh.dump_mob()
+	else if(istype(where, /obj/item/soulgem))
+		var/obj/item/soulgem/S = where
+		var/mob/living/carbon/human/H = S.body_tracker.resolve()
+		if(H)
+			H.key = key
+			if(S.originalDead)
+				var/mob/dead/observer/G = H.ghostize(TRUE)
+				if(G)
+					G.forceMove(loc)
+					G.vore_death = TRUE
+					G.bring_body(loc)
+					G.rise_body()
+			qdel(S.trapped)
+		else
+			to_chat(src, span_warning("Your body seems to have been destroyed, making a backup, but you should probably ahelp!"))
+			forceMove(get_turf(S))
+			msg += "Their body has somehow been destroyed and they may need assistance."
+		S.set_icon(FALSE)
+		S.trapped = null
+		S.body_tracker = null
+		S.originalDead = FALSE
 	else	//For everything else
 		msg += "They were in [where]. "
 	msg += "They have been placed on \the [loc]. [ADMIN_JMP(src)]"
