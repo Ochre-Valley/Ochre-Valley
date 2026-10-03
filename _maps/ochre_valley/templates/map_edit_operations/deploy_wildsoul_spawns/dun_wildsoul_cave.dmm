@@ -1,0 +1,54 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
+"u" = (
+/obj/machinery/light/rogue/campfire/densefire{
+	fueluse = 99999999
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
+"y" = (
+/obj/effect/landmark/start/wildsoullate,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
+"J" = (
+/obj/structure/far_travel,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/indoors/cave)
+"X" = (
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach/forest/south)
+
+(1,1,1) = {"
+J
+y
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+J
+y
+a
+u
+a
+a
+"}
+(3,1,1) = {"
+J
+y
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+J
+y
+a
+a
+a
+X
+"}

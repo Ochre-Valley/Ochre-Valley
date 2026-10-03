@@ -1,150 +1,186 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /obj/item/roguemachine/keymaster,
-/obj/effect/decal/cobbleedge{
-	dir = 8
-	},
-/turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
 "b" = (
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/mossy{
 	dir = 4
 	},
-/obj/structure/flora/roguegrass,
-/turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
 "f" = (
-/turf/closed/wall/mineral/rogue/stone,
-/area/rogue/outdoors/town)
-"i" = (
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"k" = (
-/turf/open/floor/rogue/rooftop/green/north,
-/area/rogue/outdoors/town/roofs)
-"l" = (
-/obj/effect/decal/edge_corner{
-	color = "#3f3f3f";
-	dir = 4
-	},
-/obj/machinery/light/rogue/torchholder/r,
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"o" = (
-/obj/effect/decal/edge_corner{
-	color = "#3f3f3f";
-	dir = 8
-	},
-/obj/structure/roguemachine/atm,
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"v" = (
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
-	dir = 5
-	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"w" = (
 /obj/effect/decal/edge_corner{
 	color = "#3f3f3f"
 	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"g" = (
+/obj/structure/fluff/railing/corner/south_west,
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
 /turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"z" = (
+/area/rogue/outdoors/exposed/town/keep)
+"i" = (
+/obj/effect/decal/mossy{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"k" = (
+/obj/structure/fluff/railing/corner/south_east,
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
 /obj/effect/decal/cobbleedge{
 	dir = 6
 	},
-/turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
-"B" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8
+/obj/structure/flora/hotspring_rocks/small{
+	pixel_y = 5;
+	pixel_x = -6
 	},
 /turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
+/area/rogue/outdoors/exposed/town/keep)
+"l" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"o" = (
+/obj/structure/fluff/railing/border/west,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"v" = (
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"w" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"z" = (
+/obj/effect/decal/mossy,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"B" = (
+/obj/effect/decal/mossy{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
 "C" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
-	dir = 6
+	dir = 8
 	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
+/obj/machinery/light/rogue/torchholder/hotspring{
+	pixel_x = -2
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
 "D" = (
-/obj/effect/decal/edge_corner{
-	color = "#3f3f3f";
-	dir = 1
-	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
+/obj/structure/fluff/railing/wood/east,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
 "E" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 8
 	},
+/obj/structure/fluff/railing/wood/west{
+	pixel_x = -4
+	},
+/obj/effect/decal/mossy,
 /turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
+/area/rogue/outdoors/exposed/town/keep)
 "I" = (
-/obj/effect/decal/cobbleedge{
-	dir = 5
+/obj/effect/decal/mossy{
+	dir = 4
 	},
-/obj/effect/decal/edge_corner{
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 4
 	},
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
 /turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
+/area/rogue/outdoors/exposed/town/keep)
+"L" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/structure/flora/roguegrass{
+	pixel_y = -5
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"N" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood/east,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
 "O" = (
-/obj/effect/decal/edge_corner{
-	color = "#3f3f3f";
-	dir = 8
-	},
-/obj/machinery/light/rogue/torchholder/l,
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"P" = (
-/obj/effect/decal/edge{
-	color = "#3f3f3f"
-	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"R" = (
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
-	dir = 10
-	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"S" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/mossy{
 	dir = 4
 	},
-/turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
-"V" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 1
 	},
 /turf/open/floor/rogue/cobble,
-/area/rogue/outdoors/town)
-"X" = (
+/area/rogue/outdoors/exposed/town/keep)
+"P" = (
+/obj/effect/decal/mossy{
+	dir = 8
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"R" = (
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"S" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"V" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
-	dir = 9
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 4
+	dir = 1
 	},
 /turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/town)
+/area/rogue/outdoors/exposed/town/keep)
+"X" = (
+/obj/structure/flora/hotspring_rocks/small{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
 
 (1,1,1) = {"
-f
+g
 o
 E
-w
+C
 f
 "}
 (2,1,1) = {"
@@ -162,52 +198,16 @@ i
 P
 "}
 (4,1,1) = {"
-D
+L
 v
 S
-C
+S
 l
 "}
 (5,1,1) = {"
-f
+N
 D
 b
 I
-f
-"}
-
-(1,1,2) = {"
-k
-k
-k
-k
-k
-"}
-(2,1,2) = {"
-k
-k
-k
-k
-k
-"}
-(3,1,2) = {"
-k
-k
-k
-k
-k
-"}
-(4,1,2) = {"
-k
-k
-k
-k
-k
-"}
-(5,1,2) = {"
-k
-k
-k
-k
 k
 "}
