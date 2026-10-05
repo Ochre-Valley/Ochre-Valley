@@ -52,7 +52,7 @@
 			cf.target.visible_message(span_warning("[cf.target] glows momentarily, before their form morphs into that of [cf.target]!"))
 			cf.target.mob_possession = H
 		else if(H.loc == cf.target)
-			if(H.energy <= H.max_energy/2)
+			if(H.energy < H.max_energy/2)
 				to_chat(usr, span_warning("You lack the energy to return to your active form!"))
 				return FALSE
 			else
