@@ -27,7 +27,7 @@
 // OV ADD: Proc to stock us up with reform gems
 /obj/structure/roguemachine/vendor/proc/add_reform_gems(num_gems = 10)
 	for(var/i in 1 to num_gems)
-		var/obj/item/reformation_gem/RG = new()
+		var/obj/item/reformation_gem/RG = new(src)
 		held_items[RG] = list()
 		held_items[RG]["NAME"] = RG.name
 		held_items[RG]["PRICE"] = 5
