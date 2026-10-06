@@ -1,5 +1,0 @@
-author: "WeNeedMorePhoron"
-delete-after: True
-changes:
-  - rscadd: "Letter message in chat no longer display who it is from"
-  - rscadd: "Opening letter no longer display who it is from to the entire chat."

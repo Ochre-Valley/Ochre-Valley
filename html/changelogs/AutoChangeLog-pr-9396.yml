@@ -1,7 +1,0 @@
-author: "WeNeedMorePhoron"
-delete-after: True
-changes:
-  - rscadd: "Reduce notorious contract's proportion since people don't seems to take it a lot, it is occupying too much of the existing pool at the moment"
-  - rscadd: "When a wave in a blockade is complete, a 3 minutes timer is started before the next blockade come, so that players don't need to be gamey and leave one guy to bleed out for much needed rest time. (It also prevent them from being surprised). Reused some sound effects for warning"
-  - rscadd: "Added an admin force complete button for testing purpose"
-  - rscadd: "Added much more detailed contracts statistics for analysis purpose"

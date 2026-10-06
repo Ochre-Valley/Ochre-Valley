@@ -1,6 +1,0 @@
-author: "Ollanius"
-delete-after: True
-changes:
-  - bugfix: "Bronze chainmail and lamellar now has bronze-tier protection, instead of mistakingly inheriting the protection levels from their up-path counterparts."
-  - bugfix: "Wearing a plated ordinator coat as a Psydonian now applies the Psydonic Grit active event, as it normally would with the standalone variant."
-  - code_imp: "Minor rearranging of hauberk-related wordings."

@@ -1,6 +1,0 @@
-author: "borneblood"
-delete-after: True
-changes:
-  - bugfix: "Fixed a bunch of explosive runtimes, code oddities, odd qdel wordings, misplaced parent calls and so on."
-  - balance: "Bombs can now critically hit NPCs, which will make them meet their maker in peace."
-  - balance: "TRAIT_BOMBER_EXPERT now offers a bunch of interactions with battle bombs and trapmaking."

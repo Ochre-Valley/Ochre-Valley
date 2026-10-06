@@ -1,4 +1,0 @@
-author: "KatTheFox"
-delete-after: True
-changes:
-  - rscadd: "The INDEXER report no longer gaslights you with a fake false positive chance. Instead, it actually does have a false positive chance now. This works generally how you'd expect - and in some cases the chance can be increased, like anyone pallid or who's been bitten by a vampire having a chance to be flagged AS a vamp. The false positive chance for patron type is lower than what it says unless you've ever been affected by a miracle of the Four."

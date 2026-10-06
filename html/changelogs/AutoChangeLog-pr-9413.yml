@@ -1,7 +1,0 @@
-author: "Ollanius"
-delete-after: True
-changes:
-  - qol: "Katzbelgers(?) (sorry Spear, I can't spell this for crap) can now be morphed from other sidearm-styled swords; the arming sword and messer, specifically."
-  - qol: "Knight's Armets are no longer proportioned like bobbleheads (my bad for that in the first place), and should now be more properly fitting to shorter races in particular."
-  - bugfix: "Burgonets and Blacksteel Plate Helmets now properly use the right detail sprites (and listings in the .dmis)."
-  - rscadd: "Open-faced variant of the Burgonet, transformable from a Sallet."
