@@ -157,19 +157,6 @@
   zRainbowcat:
     - rscadd: New sack-like container called basket
 2026-10-04:
-  NickBelmont:
-    - rscadd: Luxseal gems and effigies, two new scene tools.
-    - rscadd: Self Transmutation spell, along with item and loadout scrolls for it.
-    - bugfix: Subtles now work properly while item-tfed.
-  Randroid001:
-    - rscadd:
-        Billy Goats and Bulls can now be purchased from the Silverface or Merchant!
-        Animal breeders around Azuria rejoice.
-    - rscadd:
-        Saiga ribs, loins and prime cuts can now be deposited into the stockpile!
-        Now hunters can sell their entire Saiga haul instead of letting three of the
-        four extremely rare pieces of meat rot because the machine says no.
-    - rscadd: Boar Ham can be deposited into the stockpile, too!
   KatTheFox:
     - rscadd:
         You can now set an 'artist credit' and 'artist link' for your headshot.
@@ -179,6 +166,10 @@
     - bugfix:
         Inq/church folks no longer get notified twice that someone's their ally
         when examining them.
+  NickBelmont:
+    - rscadd: Luxseal gems and effigies, two new scene tools.
+    - rscadd: Self Transmutation spell, along with item and loadout scrolls for it.
+    - bugfix: Subtles now work properly while item-tfed.
   OrbisAnima:
     - code_imp: Fixes a runtime with leeches checking for the wrong user trait.
     - code_imp: Fixes a runtime with goblin underwear when they were being deleted.
@@ -212,6 +203,15 @@
         when death already was qdeleting them, placed a guard so they dont get deleted
         if they are already deleted.
     - code_imp: Fixes a runtime with stakes trying to move a victim that is not there.
+  Randroid001:
+    - rscadd:
+        Billy Goats and Bulls can now be purchased from the Silverface or Merchant!
+        Animal breeders around Azuria rejoice.
+    - rscadd:
+        Saiga ribs, loins and prime cuts can now be deposited into the stockpile!
+        Now hunters can sell their entire Saiga haul instead of letting three of the
+        four extremely rare pieces of meat rot because the machine says no.
+    - rscadd: Boar Ham can be deposited into the stockpile, too!
   Ryan180602:
     - balance: changes around all of the silver weapons.
     - bugfix: fixes certain grammatical issues in texts.
@@ -315,6 +315,8 @@
         bookcase etc. - report any issues.
     - rscadd: When you the extract of lux from mindless mobs, mindless mobs die.
 2026-10-06:
+  SomeDeviant:
+    - rscadd: Added AP sync 9.26.26 to 10.5.26
   KatTheFox:
     - rscadd:
         The INDEXER report no longer gaslights you with a fake false positive
