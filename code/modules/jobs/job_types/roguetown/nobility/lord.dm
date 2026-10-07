@@ -354,8 +354,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/obj/item/rogueweapon/scabbard/sheath/royal = 1
 	)
 
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rogueweapon/spellbook = 1, /obj/item/blueprint/mace_mushroom = 1, /obj/item/chalk = 1, /obj/item/hunting_map/white_stag = 1,)
-
 /**
 	Inbred Lord subclass. A joke class, evolution of the Inbred Wastrel.
 	Literally the same stat line and skills line, but with one exception - 10 Fortune.
