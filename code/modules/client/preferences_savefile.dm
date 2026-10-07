@@ -420,6 +420,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	///Caustic edit end
 	//OV Edit: Any persistent OV Prefs
 	WRITE_FILE(S["block_mindlink"], block_mindlink)
+	WRITE_FILE(S["free_use_default"], free_use_default)
 	//OV Edit Start
 	return TRUE
 
@@ -743,6 +744,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["badge_erp"] >> badge_erp
 	S["badge_lean"] >> badge_lean
 	S["badge_type"] >> badge_type
+
+	S["free_use_default"] >> free_use_default
 	//OV edit end
 
 	S["img_gallery"]		>> img_gallery
