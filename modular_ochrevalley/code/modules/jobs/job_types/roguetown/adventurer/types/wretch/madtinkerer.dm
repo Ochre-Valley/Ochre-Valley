@@ -52,7 +52,6 @@
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/white
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/labcoat
 	gloves = /obj/item/clothing/gloves/roguetown/angle/labgloves
-	cloak = /obj/item/clothing/suit/roguetown/shirt/robe/physician/tinkerer
 	belt = /obj/item/storage/belt/rogue/leather/black
 	neck = /obj/item/clothing/neck/roguetown/leather
 	backl = /obj/item/storage/backpack/rogue/backpack
@@ -86,18 +85,15 @@
 				H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_EXPERT, TRUE)//allows for organ manipulation, and use of the fulmenor chair
 				H.adjust_skillrank_up_to(/datum/skill/labor/butchering, SKILL_LEVEL_JOURNEYMAN, TRUE)
 				backpack_contents += /obj/item/storage/belt/rogue/surgery_bag/full/physician
-
-			if("Of Cog-song and Alchymical Truimph")//classic tinkerer. You get to start with a bunch of fun gadgets. And explosives!
-				ADD_TRAIT(H, TRAIT_EXPLOSIVE_SUPPLY, TRAIT_GENERIC)
+			if("Of Cog-song and Alchymical Truimph")//this one's an experiment. You get transmutation!
 				to_chat(H, span_warning("The dance of the cosmos is the stage of the divine, yet measurable all the same in teeth of a simple bronze cog. With the correct reagents and medicines, under the correct sky, the work of humen hands might shape the tapestry of the world. No pursuit is greater"))
-				H.adjust_skillrank_up_to(/datum/skill/labor/farming, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, SKILL_LEVEL_EXPERT, TRUE)
 				cloak = /obj/item/twstrap/bombstrap/bomb_and_fire
-				gloves = /obj/item/clothing/gloves/roguetown/chain/contraption/voltic/precharged
-				backpack_contents += /obj/item/grapplinghook
-				backpack_contents += /obj/item/herbseed/fyritius //for blowing things up ::)
+				backpack_contents += /obj/item/alch/catalyst/aeneic
+				backpack_contents += /obj/item/alch/catalyst/chrysopoeia
+				backpack_contents += /obj/item/trans_table_upgrade
 				backpack_contents += /obj/item/folding_alchcauldron_stored
 				backpack_contents += /obj/item/folding_alchstation_stored
-				backpack_contents += /obj/item/reagent_containers/glass/bottle/waterskin/purifier
 		if(!mage)
 			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 5, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
 			H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
@@ -117,9 +113,21 @@
 					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
 					beltl = /obj/item/rogueweapon/scabbard/sheath
+		else
+			var/weapons = list("Slurbow", "Arcyne Silver Dagger")
+			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
+			switch(weapon_choice)
+				if("Slurbow")
+					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_JOURNEYMAN, TRUE)
+					beltl = /obj/item/quiver/bolt/light
+					beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+				if("Arcyne Silver Dagger")
+					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_JOURNEYMAN, TRUE)
+					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
+					beltl = /obj/item/rogueweapon/scabbard/sheath
 		wretch_select_bounty(H)
 
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/lensed/tinkerer
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer
 	name = "strange mask"
 	desc = "A product of strange artifice, painstakingly replicated from ancient design. Protects the wearer from noxious fumes and shrapnel to the eyes. You can taste copper whenever you draw breath."
 	icon_state = "tinkerermask"
@@ -131,7 +139,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	block2add = FOV_DEFAULT //similar to the malpractitioner's mask, you get full vision for the sake of drip. You do not, however, gain the full integrity of the confessor's mask
 
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/lensed/tinkerer/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/clothing/mask/rogue/spectacles/inq))
 		to_chat(user, span_info("The lenses won't fit your mask."))
 	else
@@ -152,7 +160,7 @@
 	if(HAS_TRAIT(user, TRAIT_IRONMAN)) //there's a bunch of construct jank if they get shock immunity. don't fuck wth it
 		return
 	if(slot == SLOT_ARMOR)
-		ADD_TRAIT(user, TRAIT_SHOCKIMMUNE, "labcoat") //not a terribly relevant trait here, but it'll come up at times
+		ADD_TRAIT(user, TRAIT_SHOCKIMMUNE, "labcoat") //not a terribly relevant trait here, but it'll come up at times. Mostly, it makes you immune to kneestingers in an odd way
 		return
 
 /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/labcoat/dropped(mob/user, slot)
