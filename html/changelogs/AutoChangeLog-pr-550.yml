@@ -1,0 +1,4 @@
+author: "Tenryumi"
+delete-after: True
+changes:
+  - balance: "Wretches are always capped at 12, regardless of game mode."
