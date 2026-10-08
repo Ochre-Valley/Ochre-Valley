@@ -1,0 +1,5 @@
+author: "TheToaster98"
+delete-after: True
+changes:
+  - rscadd: "OV-custom drinks now interact with the cuisine system."
+  - refactor: "OV-custom drinks now use consumable instead of water paths."
