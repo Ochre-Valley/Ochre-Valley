@@ -78,7 +78,31 @@
 			r_hand = /obj/effect/spawner/lootdrop/roguetown/dungeon/weapons
 	if(H.mind)
 		SStreasury.grant_savings(ECONOMIC_LOWER_CLASS, H)
-
+///OV edit
+	var/prefixs = list(
+		"Skinny" = "Skinny",
+		"Fat" = "Fat",
+		"Big" = "Big", // Yes, There is two cases where if someone calls themselves "Boss", we need to explode them.
+		"Small" = "Small",
+		"Huge" = "Huge",
+		"Little" = "Little",
+		"Thick" = "Thick",
+		"Thin" = "Thin",
+		"Long" = "Long",
+		"Short" = "Short",
+		"Wide" = "Wide",
+		"Slug" = "Slug",
+		"Molasses" = "Molasses",
+		"Stony" = "Stony",
+		"Quick" = "Quick"
+		)
+	var/prefixchoice = input(H, "What did people start calling you.", "YOU GOON") as anything in prefixs
+	var/prev_real_name = H.real_name
+	var/prev_name = H.name
+	var/prefix = prefixs[prefixchoice]
+	H.real_name = "[prefix] [prev_real_name]"
+	H.name = "[prefix] [prev_name]"
+///OV edit end 
 /datum/advclass/thug/wiseguy
 	name = "Wise Guy"
 	tutorial = "You're smarter than the rest, by a stone's throw - and you know better than to get up close and personal. Unlike most others, you can read."
@@ -149,7 +173,31 @@
 			r_hand = /obj/item/lockpickring/mundane
 	if(H.mind)
 		SStreasury.grant_savings(ECONOMIC_LOWER_CLASS, H)
-
+///OV edit
+	var/prefixs = list(
+		"Skinny" = "Skinny",
+		"Fat" = "Fat",
+		"Big" = "Big", // Yes, There is two cases where if someone calls themselves "Boss", we need to explode them.
+		"Small" = "Small",
+		"Huge" = "Huge",
+		"Little" = "Little",
+		"Thick" = "Thick",
+		"Thin" = "Thin",
+		"Long" = "Long",
+		"Short" = "Short",
+		"Wide" = "Wide",
+		"Slug" = "Slug",
+		"Molasses" = "Molasses",
+		"Stony" = "Stony",
+		"Quick" = "Quick"
+		)
+	var/prefixchoice = input(H, "What did people start calling you.", "YOU WISE FELLA") as anything in prefixs
+	var/prev_real_name = H.real_name
+	var/prev_name = H.name
+	var/prefix = prefixs[prefixchoice]
+	H.real_name = "[prefix] [prev_real_name]"
+	H.name = "[prefix] [prev_name]"
+///OV edit end.
 /datum/advclass/thug/bigman
 	name = "Big Fella"
 	tutorial = "More akin to a cabbage-fed monster than a normal person, your size and strength are your greatest weapons; though they hardly supplement what's missing of your brains."
