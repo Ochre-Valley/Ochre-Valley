@@ -14,7 +14,7 @@ export const getTagColor = (tag: string) => {
     case 'Switch':
       return 'yellow';
     case 'Non-Vore':
-      return 'black';
+      return 'grey';
   }
 };
 
