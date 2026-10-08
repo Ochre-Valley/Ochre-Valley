@@ -1,0 +1,5 @@
+author: "WeNeedMorePhoron"
+delete-after: True
+changes:
+  - rscadd: "Unhandled blockades now increase the cost of goods in Goldface / Silverface, with blockades affecting specifically the type of goods that the region provides, but also generally raising the cost of gears. It will NOT applies to Vile Vheslie"
+  - bugfix: "Fixed Illicit Utility and Medical supplies not showing, which is not related to this PR but a prior bug"

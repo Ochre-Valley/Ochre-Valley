@@ -1,0 +1,5 @@
+author: "borneblood"
+delete-after: True
+changes:
+  - bugfix: "Impact grenades, satchel charges and so on will now explode properly when tripped."
+  - bugfix: "Can't stack tripbombs on the same tile."

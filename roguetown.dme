@@ -3202,6 +3202,7 @@
 #include "code\modules\roguetown\roguestock\_crown_imports.dm"
 #include "code\modules\roguetown\roguestock\_roguestock.dm"
 #include "code\modules\roguetown\roguestock\blockade.dm"
+#include "code\modules\roguetown\roguestock\blockade_surcharge.dm"
 #include "code\modules\roguetown\roguestock\crown_imports.dm"
 #include "code\modules\roguetown\roguestock\economic_events.dm"
 #include "code\modules\roguetown\roguestock\pricing_engine.dm"

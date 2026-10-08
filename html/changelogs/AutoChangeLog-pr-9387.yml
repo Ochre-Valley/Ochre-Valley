@@ -1,0 +1,6 @@
+author: "Ryan180602"
+delete-after: True
+changes:
+  - balance: "unarmed weapons cannot be used with shields anymore."
+  - balance: "knuckledusters in glove slots means you can't use weapons"
+  - balance: "claws are rebalanced/nerfed"
