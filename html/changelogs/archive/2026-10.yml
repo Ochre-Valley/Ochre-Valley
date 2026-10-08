@@ -320,3 +320,9 @@
   - balance: you can no longer bleed people out by nuking people w/ your ERP related
       organs on top of regular ones by exploding via calcic as a wretch skeleton,
       literally 1984.
+2026-10-08:
+  Tenryumi:
+  - balance: Wretches are always capped at 12, regardless of game mode.
+  TheToaster98:
+  - rscadd: OV-custom drinks now interact with the cuisine system.
+  - refactor: OV-custom drinks now use consumable instead of water paths.
