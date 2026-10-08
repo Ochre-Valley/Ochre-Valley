@@ -1,0 +1,7 @@
+author: "Ryan180602"
+delete-after: True
+changes:
+  - balance: "Change Inquisitor statline."
+  - balance: "Inquisitor gets Master in a particular weapon (Your Faith still gives Expert as it used to)"
+  - balance: "Confessors get a choice between Couir-Boulli and the existing tunic as underarmour."
+  - rscadd: "A small system to bypass certain armour layers to be worn with other armour."
