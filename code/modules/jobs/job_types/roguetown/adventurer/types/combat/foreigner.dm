@@ -585,6 +585,9 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_JOURNEYMAN, TRUE)
 				gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
 				ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
+				//ov edit
+				H.mind.AddSpell(new /datum/action/cooldown/spell/abstractweapon/martialart/boxing)
+				//ov edit end
 				H.change_stat(STATKEY_STR, 1)
 				H.change_stat(STATKEY_WIL, -1)
 
