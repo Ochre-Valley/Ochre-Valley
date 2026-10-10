@@ -1,6 +1,6 @@
 /mob/living/carbon/human/species/familiar
-	can_do_sex = TRUE //Fixing that for you.
-	mob_size = MOB_SMALL
+	can_do_sex = TRUE //Fixing that for OV.
+	mob_size = MOB_MEDIUM
 
 /datum/species/familiar
 	name = "base familiar"
@@ -42,6 +42,7 @@
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
+		ORGAN_SLOT_BUTT = /obj/item/organ/butt,
 		)
 
 	languages = list( // we're pAI equivalent extraplanar beings and this avoids weird edge cases like infernals not speaking infernal
