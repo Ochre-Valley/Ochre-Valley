@@ -87,6 +87,13 @@
 					/obj/item/book/granter/spell/bonechill/sizespell
 				)
 
+/datum/supply_pack/rogue/kink_toy/self_tf
+	name = "Scroll of Self Transmutation"
+	cost = 20
+	contains = list(
+					/obj/item/book/granter/spell/bonechill/self_tf
+				)
+
 /datum/supply_pack/rogue/kink_toy/spell_mirror
 	name = "Scroll of Mirror Transform"
 	cost = 20
@@ -142,12 +149,26 @@
 	contains = list(
 					/obj/item/reagent_containers/glass/bottle/alchemical/normal
 				)
+
+/datum/supply_pack/rogue/kink_toy/soulgem
+	name = "Luxseal Gem"
+	cost = 30
+	contains = list(
+					/obj/item/soulgem
+				)
+
+/datum/supply_pack/rogue/kink_toy/soulgemeffigy
+	name = "Luxseal Effigy"
+	cost = 30
+	contains = list(
+					/obj/item/soulgem/effigy
+				)
 //for armored collars, prices are 110% the gorget they are based on, because dirtyfaces randomize pricing a bit
  //bronze gorgets are assigned a value of 40 because vibes (more than its mechanically worth), since the normal bronze gorget is not sold.
 
 /datum/supply_pack/rogue/kink_toy/collar/leather
 	name = "Armored Collar (Leather)"
-	cost = 33 
+	cost = 33
 	contains = list(
 					/obj/item/clothing/neck/roguetown/leather/collar
 				)

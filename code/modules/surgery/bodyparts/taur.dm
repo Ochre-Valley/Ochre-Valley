@@ -146,7 +146,7 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	has_taur_color = TRUE
 
 /obj/item/bodypart/taur/tent
-	name = "Tent Body (whatever the fuck that is)"
+	name = "Tentacle Body Alt"
 
 	offset_x = -16
 	taur_icon_state = "tent_s"

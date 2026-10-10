@@ -12,7 +12,8 @@ SUBSYSTEM_DEF(map_edit_deployments)
 
 /datum/controller/subsystem/map_edit_deployments/proc/prepare_deployment_operations()
 	for(var/datum/map_edit_operation/op_type as anything in subtypesof(/datum/map_edit_operation))
-		if(initial(op_type.name) == "NAME THIS OPERATION, SIRE!")
+		var/datum/map_edit_operation/basetype = /datum/map_edit_operation
+		if(initial(op_type.name) == initial(basetype.name))
 			continue
 		var/datum/map_edit_operation/O = new op_type()
 

@@ -92,6 +92,8 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		//Caustic edit - If the chest is human, so is the butt?
 		/datum/customizer/organ/belly/animal,
 		/datum/customizer/organ/butt/human,

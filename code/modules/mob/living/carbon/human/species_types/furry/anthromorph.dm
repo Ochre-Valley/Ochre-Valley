@@ -110,6 +110,8 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/vagina/anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		//Caustic edit
 		/datum/customizer/organ/belly/animal,
 		/datum/customizer/organ/butt/animal,

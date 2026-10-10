@@ -16,6 +16,19 @@
 // Above all else? Have fun! If you have any questions, let me know.
 
 // -1 TRI
+
+/datum/loadout_item/shirt/ilamellar
+	name = "Gift - Iron Lamellar Armor decoration"
+	path = /obj/item/clothing/suit/roguetown/shirt/ilamellar
+	triumph_cost = 1
+	sort_category = "Triumphs"
+
+/datum/loadout_item/shirt/blamellar
+	name = "Gift - Bronze Lamellar Armor decoration"
+	path = /obj/item/clothing/suit/roguetown/shirt/blamellar
+	triumph_cost = 1
+	sort_category = "Triumphs"
+
 /datum/loadout_item/psicross/noc/bronze
 	name = "Bronze Amulet of Noc"
 	path = /obj/item/clothing/neck/roguetown/psicross/noc/bronze
@@ -375,7 +388,7 @@
 
 /datum/loadout_item/triumph_plaquegoldenbeltfancy
 	name = "Belt of Plaque, Golden, Fancy"
-	path = /obj/item/storage/belt/rogue/leather/plaquegold/steward
+	path = /obj/item/storage/belt/rogue/leather/plaquegold/noble
 	triumph_cost = 7
 	sort_category = "Triumphs"
 
