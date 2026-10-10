@@ -1,11 +1,7 @@
 /mob/living/carbon/human/species/familiar
 	can_do_sex = TRUE //Fixing that for OV.
-	mob_size = MOB_MEDIUM
 
 /datum/species/familiar
-	name = "base familiar"
-	id = "familiar"
-	species_traits = list(NO_UNDERWEAR, NO_ORGAN_FEATURES, NO_BODYPART_FEATURES, NOBLOOD)
 	inherent_traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_NOFALLDAMAGE1,
@@ -25,12 +21,7 @@
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_UNCONVERTIBLE,
 		TRAIT_NASTY_EATER,
-	)
-	inherent_biotypes = MOB_HUMANOID
-	no_equip = list(SLOT_SHIRT, SLOT_HEAD, SLOT_WEAR_MASK, SLOT_ARMOR, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_CLOAK, SLOT_BELT, SLOT_BACK_R, SLOT_BACK_L, SLOT_S_STORE, SLOT_BELT_L, SLOT_BELT_R, SLOT_WRISTS, SLOT_RING)
-	nojumpsuit = 1
-	sexes = 0
-	offset_features = list(OFFSET_HANDS = list(0,2), OFFSET_HANDS_F = list(0,2))
+		)
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
@@ -44,30 +35,3 @@
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 		ORGAN_SLOT_BUTT = /obj/item/organ/butt,
 		)
-
-	languages = list( // we're pAI equivalent extraplanar beings and this avoids weird edge cases like infernals not speaking infernal
-		/datum/language/common,
-		/datum/language/elvish,
-		/datum/language/dwarvish,
-		/datum/language/orcish,
-		/datum/language/hellspeak,
-		/datum/language/draconic,
-		/datum/language/celestial,
-		/datum/language/raneshi,
-		/datum/language/grenzelhoftian,
-		/datum/language/kazengunese,
-		/datum/language/lingyuese,
-		/datum/language/etruscan,
-		/datum/language/gronnic,
-		/datum/language/otavan,
-		/datum/language/aavnic,
-		/datum/language/undercommon,
-		/datum/language/oldazurian,
-		/datum/language/abyssal,
-		/datum/language/beast,
-		/datum/language/undead,
-	)
-
-/mob/living/carbon/human/species/familiar/can_be_held(mob/by)
-	return FALSE
-

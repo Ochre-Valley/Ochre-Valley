@@ -1,6 +1,4 @@
 /datum/species/familiar/infernal
-	name = "Infernal"
-	id = "infernal"
 	inherent_traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_NOFALLDAMAGE1,
@@ -24,5 +22,3 @@
 		TRAIT_UNCONVERTIBLE,
 		TRAIT_NASTY_EATER,
 	)
-	origin = "The Hells"
-	origin_default = /datum/virtue/origin/unselectable/infernal

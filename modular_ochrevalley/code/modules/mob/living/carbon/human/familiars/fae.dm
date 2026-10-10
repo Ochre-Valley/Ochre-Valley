@@ -1,6 +1,4 @@
 /datum/species/familiar/fae
-	name = "Faerie"
-	id = "fae"
 	inherent_traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_NOFALLDAMAGE1,
@@ -24,6 +22,3 @@
 		TRAIT_UNCONVERTIBLE,
 		TRAIT_NASTY_EATER,
 	)
-	origin = "The Faewyld"
-	origin_default = /datum/virtue/origin/unselectable/fae
-	species_traits = list(NO_UNDERWEAR, NO_ORGAN_FEATURES, NO_BODYPART_FEATURES, NOBLOOD, NOSTOMACH)
