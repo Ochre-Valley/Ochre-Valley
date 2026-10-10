@@ -90,6 +90,8 @@
 		/datum/customizer/organ/belly/human, //OV Add
 		/datum/customizer/organ/butt/human, //OV Add
 		/datum/customizer/organ/testicles/anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		//OV Edit Start
 		/datum/customizer/organ/tail/anthro,
 		/datum/customizer/organ/tail_feature/anthro,
@@ -168,7 +170,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver/ooze,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/ooze,
 		)
-	
+
 	mechanics_explanations = list("Have no bones to break. However, upon suffering a severe blunt wound, or when a limb would experience a bone fracture, the limb melts. Lost limbs similarly melt off.",
 		"Can regenerate lost limbs by sleeping, at a great cost to their bodily nutrition.",
 		"Have uniquely colored blood that matches the color of their bodies.",

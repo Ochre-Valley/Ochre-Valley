@@ -59,6 +59,28 @@
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 
+//OV ADD START
+/obj/item/clothing/neck/roguetown/coif/padded/AdjustClothes(mob/user)
+	if(loc == user)
+		if(adjustable == CAN_CADJUST)
+			adjustable = CADJUSTED
+			if(toggle_icon_state)
+				icon_state = "ccoif_t"
+			flags_inv = null
+			body_parts_covered = NECK
+			body_parts_covered_dynamic = body_parts_covered
+			if(ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_neck()
+				H.update_inv_head()
+		else if(adjustable == CADJUSTED)
+			ResetAdjust(user)
+		if(ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_neck()
+			H.update_inv_head()
+//OV ADD END
+
 /obj/item/clothing/neck/roguetown/coif/heavypadding
 	name = "heavy padded coif"
 	desc = "A padded gambeson's coif, bearing the distinct dorpel-styled stitchwork of its larger cousin. When layered properly, it can last through even the busiest of daes."
@@ -184,6 +206,13 @@
 	body_parts_covered = NECK|MOUTH
 	slot_flags = ITEM_SLOT_NECK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
+
+/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/lamplighter
+	name = "lamplighter's collar"
+	desc = "A large neck covering made to protect the neck from splashing oil and jumping flames."
+	icon = 'icons/roguetown/clothing/special/lamplighter.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/lamplighter.dmi'
+	icon_state = "lampneck"
 
 /obj/item/clothing/neck/roguetown/chaincoif/iron
 	name = "iron chain coif"
@@ -445,6 +474,7 @@
 	name = "forlorn collar"
 	desc = "A old reminder."
 	icon_state = "iwolfcollaralt"
+	max_integrity = ARMOR_INT_SIDE_STEEL + ARMOR_INT_SIDE_COVERAGE_BONUS //Thicker than a standard iron gorget.
 
 /obj/item/clothing/neck/roguetown/gorget/steel
 	name = "steel gorget"

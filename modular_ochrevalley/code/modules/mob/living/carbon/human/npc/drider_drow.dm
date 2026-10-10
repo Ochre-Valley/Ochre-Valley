@@ -10,7 +10,6 @@
 	dodgetime = 30
 	d_intent = INTENT_DODGE
 	blood_toll_bucket = STATS_KILLED_DROWS
-	drowraider_outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow
 
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/ambush
 	threat_point = THREAT_ELITE
@@ -19,6 +18,7 @@
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_BADTRAINER, TRAIT_GENERIC)
+	equipOutfit(new /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow)
 	resize(1.3)
 
 /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/pre_equip(mob/living/carbon/human/H)
@@ -61,11 +61,11 @@
 
 //LEGENDARY VARIANT FOR GM SPAWN ONLY
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/monstrous
-	drowraider_outfit = /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous
 	d_intent = INTENT_PARRY
 
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/monstrous/after_creation()
 	..()
+	equipOutfit(new /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous)
 	resize(1.5)
 
 /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/monstrous/pre_equip(mob/living/carbon/human/H)

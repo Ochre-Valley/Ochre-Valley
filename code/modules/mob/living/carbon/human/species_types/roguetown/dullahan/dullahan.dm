@@ -118,10 +118,13 @@
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
-		/datum/customizer/organ/vagina/anthro,
+		/datum/customizer/organ/vagina/anthro, //OV EDIT
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
+		//OV EDIT START
 		/datum/customizer/organ/belly/animal,
 		/datum/customizer/organ/butt/animal,
-		//Caustic edit end
+		//OV EDIT END
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,

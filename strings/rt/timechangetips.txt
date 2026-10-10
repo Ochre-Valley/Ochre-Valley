@@ -196,6 +196,7 @@ POISON JACKSBERRIES can be ground in a mortar to produce poison.
 It possible, albeit rare, for both poisonous and safe jacksberries to be the same color.
 Your "STANCE" determines a number of factors in combat. Check your HOTKEYS to see what is bound to what-- a quick switch to defense or aimed may save your lyfe!
 Most shields can be given heraldry by RIGHT-MOUSE clicking on them.
+ACTORS should take good care of their ears! Adjust your volume in the PREFERENCES menu. If your COMBATIVE ORCHESTRA is too loud, adjust the Music Volume!
 DON'T GO INTO THE KEEP, THEY'RE A CANNIBAL CULT.
 Many call Noc he, but equally many call Noc a she. What they truly are is for the enlightened to know and the curious to find out.
 I FUCKING HATE BAOTHANS, THEY KEEP SAYING HOW FULL AND ROUND THEY ARE.

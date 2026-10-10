@@ -718,6 +718,8 @@ Inquisitorial armory down here
 	. += span_info("It takes several cycles to fill the INDEXER with blood - at which point, it will automatically retract the blade and seal itself. This may prove dangerous if used on someone who's already suffering from blood loss.")
 	. += span_info("Once filled, left-clicking the INDEXER on a signed ACCUSATION or CONFESSION will combine them into a foldable package. This package can be then folded, stamped, and mailed back to Otava through the HERMES.")
 	. += span_info("Mailing an INDEXER reveals the worshipped pantheon of whoever's blood was gathered. More MARQUES are rewarded if the INDEXER was filled with the blood of an ASCENDANT, NITEBEASTE, or CURSEBOUND.")
+	. += span_info("This has a significant false-positive chance. Anything from the effects of inhumen miracles to ambient rot in the air can cause someone's patron to be read as inhumen.")
+	. += span_info("Certain conditions can also cause a false-positive for cursed blood.")
 
 /obj/item/inqarticles/indexer/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -1715,6 +1717,10 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	var/report_html = ""
 	var/report_id
 
+/obj/item/paper/inquisition_report/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("A report on taint present in an INDEXED subject's blood. It is known to have a high rate of false-positives, attributed to anything from nitebeaste bites to inhumen miracle aftereffects to ambient rot in the air. Despite this, the Otavan Inquisition evidently considers it useful enough to keep around.")
+
 /obj/item/paper/inquisition_report/update_icon_state()
 	icon_state = "confession_signed"
 	slot_flags |= ITEM_SLOT_HIP
@@ -1722,6 +1728,32 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 
 /obj/item/paper/inquisition_report/attack_right(mob/user)
 	return
+
+/obj/item/paper/inquisition_report/read(mob/user)
+	if(!report_html || !length(report_html))
+		to_chat(user, span_warning("The certificate appears to be... blank? Report this in an A-HELP or file a Bug Report, please!"))
+		return
+
+	var/html = {"
+	<html>
+	<head>
+		<title>Haemological Report</title>
+	</head>
+	<body bgcolor='#E8DFC4'>
+		<div style='
+			font-family: Georgia, Times New Roman, serif;
+			padding: 16px;
+			max-width: 800px;
+			margin: auto;
+			color: black;
+		'>
+			[report_html]
+		</div>
+	</body>
+	</html>
+	"}
+
+	user << browse(html, "window=inquisition_report;size=750x850;can_resize=1")
 
 /obj/item/paper/inquisition_report/attack_self(mob/user)
 	if(!report_html || !length(report_html))
@@ -1747,7 +1779,7 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	"}
 	user << browse(html, "window=inquisition_report;size=750x850;can_resize=1")
 
-/obj/item/paper/inquisition_report/proc/fill_report(mob/living/carbon/human/H, mob/writer)
+/obj/item/paper/inquisition_report/proc/fill_report(mob/living/carbon/human/H, mob/writer, mistake, patron_type, is_vamp)
 	if(!H)
 		return
 
@@ -1810,7 +1842,6 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 		"Final classification withheld pending Lux Resonance Determination."
 	)
 
-	var/mistake = rand(1,80)
 	var/error_chance = "For this INDEXED sample, a false-positive chance of [mistake]% must be accounted for."
 
 	report_html = ""
@@ -1837,26 +1868,25 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	var/list/d = H.get_mob_descriptors()
 	report_html += "Height: [build_coalesce_description_nofluff(d, H, list(MOB_DESCRIPTOR_SLOT_HEIGHT), "%DESC1%")]<br>"
 	report_html += "Build: [build_coalesce_description_nofluff(d, H, list(MOB_DESCRIPTOR_SLOT_BODY), "%DESC1%")]<br>"
-	if(HAS_TRAIT(H, TRAIT_BLACKBLOOD))
+	if(HAS_TRAIT(H, TRAIT_BLACKBLOOD)) // blackbloods are just checking records, no mistake chance needed
 		report_html += "<i>By decree of the Holy Otavan Inquisition, the subject is judged CURED and restored to the flock of commonfolk. Should they ever stray from the Allfather's Light and back to evil against humenkind, let His 'Final Mercy' be carried out in due diligence. <b>They shall NOT be granted another second chance</b>.</i><br>"
 	report_html += "<hr>"
-
 	report_html += "<b>LYFEBLOOD-LUX RESONATOR RESULTS</b><br><br>"
 	if(HAS_TRAIT(H, TRAIT_ANCIENT_HAG))
 		report_html += "<font color='#1e8b61'><b><u>Anomalous Lux</b></u></font><br><br>"
 		report_html += "<i>No measurable corruption or hallowed overresonance could be detected through our devices, the nature of this sample cannot be traced to anything within our Grand Archives. It does not seem to be neither Divine nor Inhumen, yet it is not Pure either.</i><br><br>"
-	else if(H.patron?.type in ALL_DIVINE_PATRONS)
+	else if(patron_type == 1)
 		report_html += "<font color='#e8da5a'><b><u>Blessed Lux</b></u></font><br><br>"
 		report_html += "<i>Minor hallowed resonance permeates the subject's Lux. The sample bears evidence of covenant with saintly energies consistent with apostate worship and prolonged participation in rites associated with the <b>Ten Saints</b>.</i><br><br>"
-	else if(H.patron?.type in ALL_INHUMEN_PATRONS)
+	else if(patron_type == 2)
 		report_html += "<font color='#8B1E1E'><b><u>Tainted Lux</b></u></font><br><br>"
 		report_html += "<i>The Lux has suffered measurable spiritual degradation. The sample carries contamination consistent with apostate worship and prolonged participation in rites associated with the <b>Inhumen</b>.</i><br><br>"
-	else if(H.patron?.type in OLD_GOD_PATRON)
+	else if(patron_type == 3)
 		report_html += "<font color='#00b7ff'><b><u>Pure Lux</b></u></font><br><br>"
 		report_html += "<i>No measurable corruption or hallowed overresonance could be detected through our devices. The subject's Lux is devoid of external influence.</i><br><br>"
 	else
 		report_html += "<font color='#1e8b61'><b><u>Anomalous Lux</b></u></font><br><br>"
-		report_html += "<i>No measurable corruption or hallowed overresonance could be detected through our devices, the nature of this sample cannot be traced to anything within our Grand Archives. It does not seem to be neither Divine nor Inhumen, yet it is not Pure either.</i><br><br>"
+		report_html += "<i>No measurable corruption or hallowed overresonance could be detected through our devices, the nature of this sample cannot be traced to anything within our Grand Archives. It seems to be neither Divine nor Inhumen, yet it is not Pure either.</i><br><br>"
 
 	report_html += "<b>CROSS-REFERENCED PUBLIC RECORDS</b><br><br>"
 	var/list/crimes = list()
@@ -1887,22 +1917,27 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 			report_html += "<font color='#5C3A6E'><b>Anomalous Blood</b></font><br><br>"
 			report_html += "<i>The sample is laden with accursed humours and bears the unmistakable taint of ancient malisons. Though greatly withered by age, the blood yet clings to unnatural vigor, a condition recorded only in those sustained by profane sorceries and long familiarity with the Devil's arts.</i><br><br>"
 			found = TRUE
-		for(var/datum/antagonist/D in H.mind.antag_datums)
-			if(istype(D, /datum/antagonist/vampire))
-				found = TRUE
-				report_html += "<font color='#7B0000'><b>Porphylick Haemophilia</b></font><br><br>"
-				report_html += "<i>The sample exhibits severe depletion of natural Vitae alongside unusual sanguine persistence beyond expected mortal limits. Coagulation is markedly impaired, while traces of necrotic resonance permeate the blood. It cannot sustain itself, should fresh blood not be appended to it.</i><br><br>"
-				break
-			if(istype(D, /datum/antagonist/werewolf))
-				found = TRUE
-				report_html += "<font color='#6E4F2C'><b>Liquid Madness Corrosion</b></font><br><br>"
-				report_html += "<i>The sample displays extreme humoral instability, with recurrent fluctuations in viscosity, coloration, and saturation occurring during examination. Such volatility is consistent with advanced moonlit transmutative contamination. It carries traces of hallowed energy, however.</i><br><br>"
-				break
-			if(istype(D, /datum/antagonist/gnoll))
-				found = TRUE
-				report_html += "<font color='#6E4F2C'><b>Anthropophagic Corruption</b></font><br><br>"
-				report_html += "<i>The sample demonstrates irreversible haemological restructuring characterized by predatory adaptation, excessive ferric saturation, and biochemical residues consistent with prolonged consumption of human flesh. Such degeneration has historically been observed only in individuals subjected to advanced war-cults devoted to the Inhumen, whose champions abandon their humanity through ritual slaughter and cannibalism.</i><br><br>"
-				break
+		if(is_vamp)
+			found = TRUE
+			report_html += "<font color='#7B0000'><b>Porphylick Haemophilia</b></font><br><br>"
+			report_html += "<i>The sample exhibits severe depletion of natural Vitae alongside unusual sanguine persistence beyond expected mortal limits. Coagulation is markedly impaired, while traces of necrotic resonance permeate the blood. It cannot sustain itself, should fresh blood not be appended to it.</i><br><br>"
+		else
+			for(var/datum/antagonist/D in H.mind.antag_datums)
+				if(istype(D, /datum/antagonist/vampire))
+					found = TRUE
+					report_html += "<font color='#7B0000'><b>Porphylick Haemophilia</b></font><br><br>"
+					report_html += "<i>The sample exhibits severe depletion of natural Vitae alongside unusual sanguine persistence beyond expected mortal limits. Coagulation is markedly impaired, while traces of necrotic resonance permeate the blood. It cannot sustain itself, should fresh blood not be appended to it.</i><br><br>"
+					break
+				if(istype(D, /datum/antagonist/werewolf))
+					found = TRUE
+					report_html += "<font color='#6E4F2C'><b>Liquid Madness Corrosion</b></font><br><br>"
+					report_html += "<i>The sample displays extreme humoral instability, with recurrent fluctuations in viscosity, coloration, and saturation occurring during examination. Such volatility is consistent with advanced moonlit transmutative contamination. It carries traces of hallowed energy, however.</i><br><br>"
+					break
+				if(istype(D, /datum/antagonist/gnoll))
+					found = TRUE
+					report_html += "<font color='#6E4F2C'><b>Anthropophagic Corruption</b></font><br><br>"
+					report_html += "<i>The sample demonstrates irreversible haemological restructuring characterized by predatory adaptation, excessive ferric saturation, and biochemical residues consistent with prolonged consumption of human flesh. Such degeneration has historically been observed only in individuals subjected to advanced war-cults devoted to the Inhumen, whose champions abandon their humanity through ritual slaughter and cannibalism.</i><br><br>"
+					break
 		if(!found)
 			report_html += "<font color='#2D7A42'><b>Clean</b></font><br><br>"
 			report_html += "<i>No significant haemological abnormalities were identified. The sample falls within accepted physiological baselines for the INDEXED subject.</i><br><br>"

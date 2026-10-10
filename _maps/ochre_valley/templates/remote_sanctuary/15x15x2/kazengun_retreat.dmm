@@ -524,8 +524,7 @@
 /area/rogue/outdoors/remote_sanctuary)
 "CO" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	dir = 1;
-	name = "confessional door"
+	dir = 1
 	},
 /turf/open/floor/rogue/ruinedwood/herringbone,
 /area/rogue/indoors/remote_sanctuary)
@@ -811,8 +810,7 @@
 /area/rogue/indoors/remote_sanctuary)
 "RF" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	dir = 1;
-	name = "confessional door"
+	dir = 1
 	},
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/indoors/remote_sanctuary)
@@ -1273,7 +1271,7 @@ jW
 kQ
 hr
 hr
-hr
+kV
 kV
 kV
 kV
@@ -1290,7 +1288,7 @@ pE
 kQ
 hr
 hr
-hr
+kV
 kV
 kV
 kV
@@ -1307,7 +1305,7 @@ gy
 VW
 hr
 hr
-hr
+kV
 kV
 kV
 kV
@@ -1406,7 +1404,7 @@ BG
 ZL
 Of
 DT
-hr
+kV
 kV
 kV
 kV
@@ -1423,7 +1421,7 @@ BG
 qC
 Ic
 VW
-hr
+kV
 kV
 kV
 kV

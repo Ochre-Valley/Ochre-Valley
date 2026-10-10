@@ -93,6 +93,8 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		/datum/customizer/organ/horns/tusks,
 		/datum/customizer/organ/ears/halforc,
 		//Caustic edit
@@ -123,9 +125,12 @@
 		"Murkwalker" = SKIN_COLOR_MURKWALKER,
 		"Shatterhorn" = SKIN_COLOR_SHATTERHORN,
 		"Spirit Crusher" = SKIN_COLOR_SPIRITCRUSHER,
+		"Iron Splinter" = SKIN_COLOR_IRON_SPLINTER,
+		"Glass Crag" = SKIN_COLOR_GLASS_CRAG,
+		"Daemonscar" = SKIN_COLOR_DAEMONSCAR,
 		//Caustic edit
 		"Avalanche" = SKIN_COLOR_AVALANCHE,
-		"Grove-Ward" = SKIN_COLUR_GROVE_WARD
+		"Grove-Ward" = SKIN_COLUR_GROVE_WARD,
 		//Caustic edit end
 	)
 

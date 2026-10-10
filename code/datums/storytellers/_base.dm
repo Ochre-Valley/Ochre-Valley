@@ -89,7 +89,7 @@
 	/// Which kind of gnoll scaling this preset prefers, default is 1 gnoll spawn.
 	var/preferred_gnoll_mode = GNOLL_SCALING_SINGLE
 	/// Hard cap on wretch job slots this preset will ever open. Default 10 = T1 max - lower clamps T1 and skips T2.
-	var/wretch_slot_cap = 10
+	var/wretch_slot_cap = 12 // OV Edit - 12 wretch cap (was 10)
 
 	// --- Gamemode preset configuration ---
 	/// Which vote pool this preset belongs to (GAMEMODE_POOL_*). Presets sharing a pool are excluded together the round after one wins.

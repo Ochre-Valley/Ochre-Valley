@@ -11,7 +11,9 @@
 		. *= arcing ? onehanded_arc_draw_mult : onehanded_draw_mult
 
 /datum/intent/shoot/arquebus
-    chargedrain = 0
+	chargedrain = 0
+	hold_grace = 0
+	hold_ramp = 0
 
 /datum/intent/shoot/arquebus/prewarning()
 	if(masteritem && mastermob)
@@ -33,6 +35,8 @@
 /datum/intent/arc/arquebus
 	chargetime = 1
 	chargedrain = 0
+	hold_grace = 0
+	hold_ramp = 0
 
 /datum/intent/arc/arquebus/prewarning()
 	if(masteritem && mastermob)
@@ -370,12 +374,12 @@
 	item_state = "handgonne"
 
 /datum/intent/shoot/arquebus/pistol
-    chargetime = 1
-    chargedrain = 0
+	chargetime = 1
+	chargedrain = 0
 
 /datum/intent/arc/arquebus/pistol
-    chargetime = 12
-    chargedrain = 0
+	chargetime = 12
+	chargedrain = 0
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 	name = "arquebus pistol"
@@ -406,13 +410,13 @@
 	var/spin_cooldown = 3 SECONDS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/getonmobprop(tag)
-    . = ..()
-    if(tag)
-        switch(tag)
-            if("gen")
-                return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-            if("onbelt")
-                return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.4,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -30,"wturn" = -30,"eturn" = 30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol/attack_self(mob/living/user)
 	var/string = "smoothly"

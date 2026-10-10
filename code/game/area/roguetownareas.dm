@@ -188,14 +188,10 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	name = "Azure Basin"
 	icon_state = "rtfield"
 	soundenv = 19
-	ambush_times = list("night")
+	ambush_factions = list()
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/rogue/badger = 10,
-				/mob/living/simple_animal/hostile/retaliate/rogue/raccoon = 25,
-				/mob/living/simple_animal/hostile/retaliate/rogue/bobcat = 20,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
-				/mob/living/simple_animal/hostile/retaliate/rogue/fox = 30,
-				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
+		/mob/living/simple_animal/hostile/retaliate/rogue/fox = 26,
+	)
 	first_time_text = "AZURE BASIN"
 	droning_sound = 'sound/music/area/field.ogg'
 	droning_sound_dusk = 'sound/music/area/septimus.ogg'
@@ -249,12 +245,11 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	ambientnight = AMB_CAVELAVA
 	spookysounds = SPOOKY_CAVE
 	spookynight = SPOOKY_CAVE
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_factions = list()
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 10,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 20,
-				/mob/living/carbon/human/species/goblin/npc/hell = 25,
-				/mob/living/simple_animal/hostile/retaliate/rogue/minotaur = 15)
+		/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 25,
+		/mob/living/carbon/human/species/skeleton/npc/ambush = 50,
+	)
 	droning_sound = 'sound/music/area/decap.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
@@ -415,14 +410,10 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	name = "Jaggedjaw Basin"
 	icon_state = "rtfield"
 	soundenv = 19
-	ambush_times = list("night")
+	ambush_factions = list()
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/rogue/badger = 10,
-				/mob/living/simple_animal/hostile/retaliate/rogue/raccoon = 25,
-				/mob/living/simple_animal/hostile/retaliate/rogue/bobcat = 20,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
-				/mob/living/simple_animal/hostile/retaliate/rogue/fox = 30,
-				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
+		/mob/living/simple_animal/hostile/retaliate/rogue/fox = 26,
+	)
 	first_time_text = "JAGGEDJAW BASIN"
 	droning_sound = list(, 'sound/music/area/grimtwilight.ogg', 'sound/music/area/grimdrama.ogg')
 	droning_sound_dusk = 'sound/music/area/grimdusk.ogg'
@@ -437,14 +428,10 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	name = "Jaggedjaw Basin South"
 	icon_state = "rtfield"
 	soundenv = 19
-	ambush_times = list("night")
+	ambush_factions = list()
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/rogue/badger = 10,
-				/mob/living/simple_animal/hostile/retaliate/rogue/raccoon = 25,
-				/mob/living/simple_animal/hostile/retaliate/rogue/bobcat = 20,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
-				/mob/living/simple_animal/hostile/retaliate/rogue/fox = 30,
-				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
+		/mob/living/simple_animal/hostile/retaliate/rogue/fox = 26,
+	)
 	first_time_text = "JAGGEDJAW BASIN SOUTH"
 	droning_sound = list(, 'sound/music/area/grimtwilight.ogg', 'sound/music/area/grimdrama.ogg')
 	droning_sound_dusk = 'sound/music/area/grimdusk.ogg'
