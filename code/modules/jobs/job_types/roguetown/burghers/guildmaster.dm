@@ -21,7 +21,7 @@
 	round_contrib_points = 3
 	cmode_music = 'sound/music/cmode/towner/combat_retired.ogg'
 
-	job_traits = list(TRAIT_TRAINED_SMITH, TRAIT_SEEPRICES, TRAIT_SMITHING_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_HOMESTEAD_EXPERT)
+	job_traits = list(TRAIT_TRAINED_SMITH, TRAIT_SEEPRICES, TRAIT_SMITHING_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_HOMESTEAD_EXPERT, TRAIT_ARCYNE, TRAIT_ALCHEMY_EXPERT)
 	// Guildmaster get way less gate due to their role
 
 	advclass_cat_rolls = list(CTAG_GUILDSMASTER = 2)
@@ -44,6 +44,7 @@
 		STATKEY_INT = 1
 	)
 	age_mod = /datum/class_age_mod/guildmaster
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "locked_aspects" = list(/datum/magic_aspect/battlewardry, /datum/magic_aspect/artifice), "post_aspect_spells" = list(/obj/effect/proc_holder/spell/invoked/takeapprentice), "ward" = TRUE) //OV edit 
 	subclass_skills = list(
 		/datum/skill/combat/axes = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
@@ -58,6 +59,8 @@
 		/datum/skill/craft/blacksmithing = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_MASTER,
+		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE, //OV edit.
+		/datum/skill/craft/alchemy = SKILL_LEVEL_APPRENTICE, //OV edit.
 		/datum/skill/craft/smelting = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/engineering = SKILL_LEVEL_JOURNEYMAN, // 2 Engineering, let them make more artificers stuffs
 		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE, // Worse than the real tailor, so can't steal their job right away
