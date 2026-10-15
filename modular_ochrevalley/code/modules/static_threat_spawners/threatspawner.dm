@@ -2,7 +2,7 @@
 *	So, here's the general idea behind these:
 *	These are static threat spawners. They routinely will, at random, generate enemies
 *	in the same way that ambushes spawn them - that is, spawning them around random
-*	trees/mushrooms/etc within view of the target. However, unlike ambushes, THESE
+*	trees/mushrooms/etc within view of the spawner. However, unlike ambushes, THESE
 *	mobs will actually stick around and not despawn!
 *
 *	After a specified time into the round, the threat spawners become "active," and will
@@ -31,9 +31,9 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	icon_state = "threatspawner"
 	/// How long we wait at round start before becoming active
 	var/inital_cooldown = 30 MINUTES
-	/// Max range around us to search for spawnable objects
+	/// Max range around us to search for spots to spawn mobs
 	var/spawn_range = 5
-	/// The time at which we will spawn more dudes
+	/// The time at which we will spawn more mobs
 	var/next_spawn_time = 0
 	/// List of our spawned mobs who are still able to fight
 	var/list/mob/living/able_mobs = list()
@@ -55,8 +55,6 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 /obj/effect/landmark/threatspawner/process()
 	if(world.time > next_spawn_time)
 		consider_spawning()
-	if(world.time > next_mob_check)
-		check_our_mobs()
 
 /obj/effect/landmark/threatspawner/proc/consider_spawning()
 	// I shamelessly stole a lot of this from ambush code hehehehe
@@ -106,6 +104,7 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		var/spawnloc = pick(possible_targets)
 		if(spawnloc)
 			var/mob/living/spawnedmob = new spawnedtype(spawnloc)
+			RegisterSignal(spawnedmob, COMSIG_MOB_DEATH, PROC_REF(on_our_mobs_death))
 			able_mobs.Add(spawnedmob)
 			if(istype(spawnedmob, /mob/living/simple_animal/hostile))
 				var/mob/living/simple_animal/hostile/M = spawnedmob
@@ -115,41 +114,8 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	start_cooldown()
 	start_check_cooldown()
 
-/obj/effect/landmark/threatspawner/proc/check_our_mobs()
-	for(var/mob/living/M in able_mobs)
-		if(!is_our_baby_okay(M))
-			able_mobs.Remove(M)
-	// can_spawn = able_mobs.len <= 1 // commented out to reel back mob induced lag a bit
-	can_spawn = able_mobs.len <= 0
-	start_check_cooldown()
-
-
-/obj/effect/landmark/threatspawner/proc/is_our_baby_okay(mob/living/M)
-	if(!M)
-		return FALSE
-	if(isanimal(M))
-		var/mob/living/simple_animal/A = M
-		return is_animal_able_2fight(A)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		return is_human_able_2fight(H)
-	// Uhhh we shouldn't reach this point ever but just in case
-	return FALSE
-
-/obj/effect/landmark/threatspawner/proc/is_human_able_2fight(mob/living/carbon/human/H)
-	// Can't fight if you're dead!
-	if(H.stat >= UNCONSCIOUS)
-		return FALSE
-	// If the mob is unable to walk/stand, they can no longer fight for us and we must sadly let them go
-	if((H.mobility_flags & (MOBILITY_MOVE | MOBILITY_STAND)) != (MOBILITY_MOVE | MOBILITY_STAND))
-		return FALSE // o7
-	return TRUE
-
-/obj/effect/landmark/threatspawner/proc/is_animal_able_2fight(mob/living/simple_animal/A)
-	if(A.health <= 0)
-		return FALSE
-	else
-		return TRUE
+/obj/effect/landmark/threatspawner/proc/on_our_mobs_death(mob/living/source)
+	able_mobs.Remove(source)
 
 /// Returns the type of the mob that the spawner will create
 /obj/effect/landmark/threatspawner/proc/get_mob_spawn_type(area/AR)
