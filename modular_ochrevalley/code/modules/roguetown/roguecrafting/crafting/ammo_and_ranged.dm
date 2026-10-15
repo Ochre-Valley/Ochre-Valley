@@ -69,7 +69,7 @@
 	skillcraft = /datum/skill/craft/engineering
 	craftdiff = 1
 
-/datum/crafting_recipe/roguetown/engineering/burnscatter
+/*/datum/crafting_recipe/roguetown/engineering/burnscatter
 	name = "infernal scattershot (x3)"
 	category = "Ranged"
 	display_category = ITEM_CAT_ENG_COMBAT
@@ -124,4 +124,4 @@
 	tools = list(/obj/item/chalk)
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 5
+	craftdiff = 5*/
