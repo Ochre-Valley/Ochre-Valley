@@ -3,14 +3,14 @@
 /mob/living/carbon/human/proc/admin_buff(var/mob/user, var/buff_cat)
 	if(!user.client.holder)
 		return
-	
+
 	if(!buff_cat)
 		buff_cat = tgui_input_list(user, "Which type of buff category do you want to use?", "Buff Category", list("spell", "order", "divine", "song", "general"))
 		if(!buff_cat)
 			return
-	
+
 	var/chosen_buff
-	
+
 	var/list/spell_buffs = list(
 		"Hawk Eyes" = /datum/status_effect/buff/attune_hawk,
 		"Dragon Eyes" = /datum/status_effect/buff/dragonhide,
@@ -56,7 +56,7 @@
 		"Psydon Enduring" = /datum/status_effect/buff/psyhealing,
 		"Psydon Absolved" = /datum/status_effect/buff/psyvived,
 	)
-	
+
 	var/list/song_buffs = list(
 		"Rejuvinating Song" = /datum/status_effect/buff/healing/rejuvenationsong,
 		"Recovery Song" = /datum/status_effect/buff/song/recovery,
@@ -73,13 +73,13 @@
 		"Refocus" = /datum/status_effect/buff/refocus,
 		// "Intelligence" = /datum/status_effect/buff/magic/knowledge,
 		"Adrenaline Rush" = /datum/status_effect/buff/adrenaline_rush,
-		"Vigorized" = /datum/status_effect/buff/vigorized,
+		"Vigorized" = /datum/status_effect/buff/brew/vigorized,
 		"Call To Arms" = /datum/status_effect/buff/call_to_arms,
 		"Guiding Light" = /datum/status_effect/buff/guidinglight,
 		"Healing" = /datum/status_effect/buff/healing,
 		"Feather Fall" = /datum/status_effect/buff/featherfall,
 	)
-	
+
 	var/choice
 	switch(buff_cat)
 		if("spell")
@@ -123,7 +123,7 @@
 		if("30 Minutes") duration = 30 MINUTES
 		if("60 Minutes") duration = 60 MINUTES
 		if("4 Hours") duration = 4 HOURS
-	
+
 	if(apply_status_effect(chosen_buff))
 		message_admins(span_notice("Admin [key_name_admin(user)] blessed [key_name_admin(src)] with [chosen_buff]! Duration: [duration_choice]."))
 		playsound_local(get_turf(src), 'sound/magic/bless.ogg', 100, FALSE)

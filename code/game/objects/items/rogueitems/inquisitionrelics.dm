@@ -30,12 +30,12 @@
 				if("Melancholic Crankbox - Antimagic")
 					choice = /obj/item/psydonmusicbox
 				if("Daybreak - Silver Whip")
-					choice = /obj/item/rogueweapon/whip/antique/psywhip
+					choice = /obj/item/rogueweapon/whip/antique/psy
 				if("Stigmata - Silver Halberd")
-					choice = /obj/item/rogueweapon/halberd/psyhalberd
+					choice = /obj/item/rogueweapon/halberd/silver/psy
 					user.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)	//We make sure the weapon is usable by the Inquisitor.
 				if("Apocrypha - Silver Greatsword")
-					choice = /obj/item/rogueweapon/greatsword/psygsword
+					choice = /obj/item/rogueweapon/greatsword/silver/psy
 					user.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)		//Ditto.
 				if("Golgatha - SYON Shard Censer")
 					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
@@ -324,15 +324,15 @@ Inquisitorial armory down here
 
 /obj/structure/closet/crate/chest/inqarmory/PopulateContents()
 	.=..()
-	new /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger(src)
-	new /obj/item/rogueweapon/greatsword/psygsword(src)
-	new /obj/item/rogueweapon/halberd/psyhalberd(src)
-	new /obj/item/rogueweapon/whip/psywhip_lesser
-	new /obj/item/rogueweapon/flail/sflail/psyflail
-	new /obj/item/rogueweapon/spear/psyspear(src)
-	new /obj/item/rogueweapon/sword/long/psysword(src)
-	new /obj/item/rogueweapon/mace/goden/psymace(src)
-	new /obj/item/rogueweapon/stoneaxe/battle/psyaxe(src)
+	new /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy(src)
+	new /obj/item/rogueweapon/greatsword/silver/psy(src)
+	new /obj/item/rogueweapon/halberd/silver/psy(src)
+	new /obj/item/rogueweapon/whip/silver/psy
+	new /obj/item/rogueweapon/flail/sflail/silver/psy
+	new /obj/item/rogueweapon/spear/silver/psy(src)
+	new /obj/item/rogueweapon/sword/long/silver/psy(src)
+	new /obj/item/rogueweapon/mace/goden/psy(src)
+	new /obj/item/rogueweapon/stoneaxe/battle/silver/psy(src)
 	*/
 
 /obj/item/flashlight/flare/torch/lantern/psycenser
@@ -437,7 +437,8 @@ Inquisitorial armory down here
 		// hey guys its me again profane dagger bc i cant figure out a better way to do this!! ANOTHER SMARTER DEV PLS REPLACE THIS SNOWFLAKE SHIT
 		if(istype(A, /obj/item/rogueweapon/huntingknife/idagger/steel/profane))
 			if(user.mind?.assigned_role == "Absolver")
-				destroy_that_dagger(user, A)
+				var/obj/item/rogueweapon/huntingknife/idagger/steel/profane/zevil_dagger = A
+				zevil_dagger.attempt_to_break(zevil_dagger, user, 2)
 				return
 			else
 				to_chat(user, span_warning("Only an ABSOLVER can use Golgatha to free the souls within this dagger!"))
@@ -476,35 +477,6 @@ Inquisitorial armory down here
 				new /obj/effect/temp_visual/censer_dust(get_turf(H))
 		else
 			to_chat(user, span_warning("They've already been blessed."))
-
-/obj/item/flashlight/flare/torch/lantern/psycenser/proc/destroy_that_dagger(mob/user, obj/item/target)
-	var/obj/item/rogueweapon/huntingknife/idagger/steel/profane/pissdagger = target
-	// assassin must be dead
-	if(!pissdagger.is_my_owner_dead())
-		to_chat(user, span_warning("I hear weeping from within the dagger. The assassin is not yet dead... their foul magicks still \
-		protect this dagger!"))
-		return
-	// im so fucking sorry for the if chain. conceptually we're invoking ravox & necra verus graggar in a tiny battle.
-	user.visible_message(span_warning("[user] begins reciting a prayer over [pissdagger]..."), span_info("I begin to recite a prayer over [pissdagger]... this will take some time."))
-	playsound(user, 'sound/magic/psyabsolution.ogg', 100)
-	if(do_after(user, 15 SECONDS))
-		user.say("PSY 60:5... With the wave of a hand, HE could turn back the tide of darkness, and impart upon the land peace and justice!")
-		playsound(user, 'sound/magic/ENDVRE.ogg', 100)
-		if(do_after(user, 10 SECONDS))
-			user.say("PSY 80:2... The fighting stopped as they all watched the heavens; HE had struck the DOOMSTAR alone and with it, swallowed the lands in an immense light.")
-			pissdagger.say(span_gamedeadsay("WE SEE YOUR LIGHT! PLEASE! FREE US!"))
-			playsound(user, 'sound/magic/psydonrespite.ogg', 100)
-			if(do_after(user, 10 SECONDS))
-				user.say("PSY 9:4... Lo, HIS tears healed even the deepest of wounds; the droplets would spur LYFE wherever they fell!")
-				pissdagger.say(span_artery("...why am I... so tired? Maaaasteeer?"))
-				playsound(user, 'sound/magic/ENDVRE.ogg', 100)
-				if(do_after(user, 10 SECONDS))
-					user.say("PSY 1:30... HE is our shepherd, and cradles those who’ve passed while waiting for the salvation of our kind; HE holds them with loving arms!")
-					pissdagger.say(span_artery("Master... I don't want to go to sleep...!"))
-					playsound(user, 'sound/magic/psyabsolution.ogg', 100)
-					if(do_after(user, 3 SECONDS))
-						pissdagger.release_profane_souls(user)
-						pissdagger.shatter_dagger()
 
 /mob/living/carbon/human/proc/has_active_golgatha()
 	for(var/obj/item/flashlight/flare/torch/lantern/psycenser/G in contents)
@@ -1619,7 +1591,7 @@ Inquisitorial armory down here
 	if(target)
 		target.playsound_local(src, 'sound/items/blackeye_warn.ogg', 100, FALSE)
 		effect = target.throw_alert(usr, "blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
-		effect.source = src
+		effect?.source = src
 	if(active)
 		soundloop.start()
 	opened = TRUE

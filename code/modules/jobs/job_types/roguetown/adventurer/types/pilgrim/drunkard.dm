@@ -40,7 +40,7 @@
 						/obj/item/storage/pill_bottle/dice = 1,
 						/obj/item/storage/pill_bottle/dice/farkle = 1,
 						/obj/item/reagent_containers/glass/cup = 1,
-						/obj/item/toy/cards/deck = 1,
+						/obj/item/deck/playing_cards = 1,
 						/obj/item/reagent_containers/glass/bottle/rogue/wine = 1,
 						/obj/item/flashlight/flare/torch = 1,
 						)

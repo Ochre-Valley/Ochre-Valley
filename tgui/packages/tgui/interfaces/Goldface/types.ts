@@ -196,7 +196,17 @@ export type VendingPack = {
   qty: number;
   price: number;
   price_base: number;
+  price_blockade: number;
+  blockade_pct: number;
   price_tariff: number;
+};
+
+export type BlockadeRow = {
+  region: string;
+  pct: number;
+  base_pct: number;
+  categories: string[];
+  reason: string;
 };
 
 export type VendingData = {
@@ -213,6 +223,12 @@ export type VendingData = {
   dodging: BooleanLike;
   public_margin_pct?: number;
   public_margin_label?: string;
+  active_blockades?: BlockadeRow[];
+  blockade_gear_pct?: number;
+  blockade_gear_base_pct?: number;
+  blockade_mult_pct?: number;
+  blockade_pop_half?: number;
+  blockade_pop_full?: number;
   categories: string[];
   current_category: string;
   search: string;

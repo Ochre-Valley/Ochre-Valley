@@ -218,7 +218,7 @@
 	record_round_statistic(STATS_PEOPLE_GIBBED)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))
 		if(CA != src && !HAS_TRAIT(CA, TRAIT_BLIND))
-			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
+			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED) || HAS_TRAIT(CA, TRAIT_NIHILIST))
 				continue
 			if(CA.marriedto == name) // OV Edit: Fix bug
 				CA.adjust_triumphs(-1)
