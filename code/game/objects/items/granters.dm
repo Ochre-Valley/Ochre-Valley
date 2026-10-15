@@ -283,6 +283,7 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 
 /obj/item/book/granter/spell/bonechill/instant_transform/loadout // Mirror Transform Spell
     needLit = FALSE
+	pages_to_mastery = 0
 //OV edit end
 
 /obj/item/book/granter/spell/bonechill/sizespell/loadout // Loadout specific ones!
