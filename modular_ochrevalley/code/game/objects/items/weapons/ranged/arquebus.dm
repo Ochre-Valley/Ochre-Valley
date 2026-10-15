@@ -138,6 +138,7 @@
 	wdefense = 4
 	wdefense_wbonus = 5 //slightly lower than a wooden staff
 	twirly = 3
+	var/scattershot = FALSE
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/twirl_skill_needed()
 	if(ismob(loc))
@@ -363,6 +364,14 @@
 		if(!istype(A, /obj/item/ammo_casing/caseless/rogue/bullet))
 			to_chat(user, span_warning("[A] cannot be fired from [src]."))
 			return
+		if(!scattershot && istype(A, /obj/item/ammo_casing/caseless/rogue/bullet/scatter))
+			to_chat(user, span_warning("[A] cannot be fired from [src]."))
+			return
+		//hacky code start- remove this if blunderbuss can use normal ammo
+		if(scattershot && !istype(A, /obj/item/ammo_casing/caseless/rogue/bullet/scatter))
+			to_chat(user, span_warning("[A] cannot be fired from [src]."))
+			return
+		//hacky code end
 		playsound(src, 'modular_causticcove/sound/arquebus/musketload.ogg',  100)
 		user.visible_message(span_notice("[user] forces [A] down the barrel of [src]."))
 
@@ -456,6 +465,7 @@
 	accfactor = 1
 	damfactor = 1
 	quick_reload = TRUE
+	scattershot = TRUE
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss/getonmobprop(tag)
 	. = ..()
@@ -590,8 +600,25 @@
 					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
 					B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
+			//hacky code start- remove this if blunderbuss is no longer scattershot exclusive
+			if(B.scattershot)
+				var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet/scatter)
+				if(AR)
+					arrows -= AR
+					B.attackby(AR, loc, params)
+					if(ismob(loc))
+						var/mob/M = loc
+						if(HAS_TRAIT(M, TRAIT_COMBAT_AWARE))
+							M.balloon_alert(M, "[length(arrows)] left...")
+					return
+				//hacky code end
 			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
 			if(AR)
+				if(!B.scattershot && istype(AR, /obj/item/ammo_casing/caseless/rogue/bullet/scatter))
+					if(ismob(loc))
+						var/mob/M = loc
+						M.balloon_alert(M, "Can't load this.")
+						return
 				arrows -= AR
 				B.attackby(AR, loc, params)
 				if(ismob(loc))
@@ -629,8 +656,25 @@
 					M.visible_message(span_notice("[M] fills [B] with gunpowder."))
 					B.gunpowder = TRUE
 		if(arrows.len && B.gunpowder && !B.chambered)
+			//hacky code start- remove this if blunderbuss is no longer scattershot exclusive
+			if(B.scattershot)
+				var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet/scatter)
+				if(AR)
+					arrows -= AR
+					B.attackby(AR, loc, params)
+					if(ismob(loc))
+						var/mob/M = loc
+						if(HAS_TRAIT(M, TRAIT_COMBAT_AWARE))
+							M.balloon_alert(M, "[length(arrows)] left...")
+				return
+				//hacky code end
 			var/obj/item/ammo_casing/caseless/rogue/AR = pick_ammo(/obj/item/ammo_casing/caseless/rogue/bullet)
 			if(AR)
+				if(!B.scattershot && istype(AR, /obj/item/ammo_casing/caseless/rogue/bullet/scatter))
+					if(ismob(loc))
+						var/mob/M = loc
+						M.balloon_alert(M, "Can't load this.")
+						return
 				arrows -= AR
 				B.attackby(AR, loc, params)
 				if(ismob(loc))
