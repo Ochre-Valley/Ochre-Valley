@@ -494,7 +494,7 @@
 	//max_integrity = 80
 	slot_flags = ITEM_SLOT_HIP
 	onehanded = TRUE
-	damfactor = 0.9
+	damfactor = 1
 	accfactor = 1
 	quick_reload = TRUE
 	onehanded_draw_mult = 1
