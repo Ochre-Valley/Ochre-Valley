@@ -36,16 +36,11 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	/// The time at which we will spawn more mobs
 	var/next_spawn_time = 0
 	/// List of our spawned mobs who are still able to fight
-	var/list/mob/living/able_mobs = list()
-	/// The time at which we will check our living mobs to see if they're still kickin'
-	var/next_mob_check = 0
-	/// Can we spawn more mobs?
-	var/can_spawn = FALSE
+	var/list/mob/living/our_living_mobs = list()
 
 /obj/effect/landmark/threatspawner/Initialize()
 	. = ..()
 	next_spawn_time = world.time + inital_cooldown
-	start_check_cooldown()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/effect/landmark/threatspawner/Destroy(force)
@@ -54,40 +49,47 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 
 /obj/effect/landmark/threatspawner/process()
 	if(world.time > next_spawn_time)
-		consider_spawning()
+		if(consider_spawning())
+			spawn_threats()
 
 /obj/effect/landmark/threatspawner/proc/consider_spawning()
-	// I shamelessly stole a lot of this from ambush code hehehehe
-	if(!can_spawn)
-		start_cooldown()
-		return
 	var/turf/T = get_turf(src)
 	if(!T)
-		return
-	// First, make sure nobody is able to see us or anything we might spawn!
-	var/viewers = 0
-	for(var/mob/living/carbon/human/L in viewers(src, 7 + spawn_range))
-		if(L.stat == CONSCIOUS)
-			viewers++
-	if(viewers)
-		// If there are viewers, we'll just wait a bit and then try again.
-		next_spawn_time = world.time + 30 SECONDS
-		return
+		next_spawn_time = world.time + INFINITY
+		CRASH("A threat spawner doesn't have a valid turf... SOMEHOW!")
+	// If we have spawned mobs that are still alive, wait a while longer.
+	if(our_living_mobs.len > 0)
+		next_spawn_time = world.time + 1 MINUTES
+		return FALSE
+	// Make sure nobody is able to see us or anything we might spawn!
+	for(var/mob/living/carbon/human/L in range(src, spawn_range + 7))
+		if(L.ckey)
+			// If there are viewers, we'll just wait a bit and then try again.
+			next_spawn_time = world.time + 1 MINUTES
+			return FALSE
 	// Now, make sure we don't have any lit objects around us!
 	// (This way we don't wind up spawning dudes in a space a player might be building in)
-	var/lights = 0
-	for(var/obj/machinery/light/rogue/RF in view(spawn_range, src))
-		if(RF.on)
-			lights++
-	if(lights > 0)
+	var/lights_around = FALSE
+	for(var/obj/O in range(spawn_range, src))
+		if(istype(O, /obj/item/flashlight/flare))
+			var/obj/item/flashlight/flare/F = O
+			if(F.on)
+				lights_around = TRUE
+				break
+		if(istype(O, /obj/machinery/light/rogue))
+			var/obj/machinery/light/rogue/L = O
+			if(L.on)
+				lights_around = TRUE
+				break
+	if(lights_around)
 		// If there are, well, guess we'll wait a good while before checking again.
 		start_cooldown()
-		return
-	spawn_threats()
+		return FALSE
+	return TRUE
 
 /obj/effect/landmark/threatspawner/proc/spawn_threats()
 	var/list/possible_targets = list()
-	for(var/obj/structure/flora/F in view(src, spawn_range))
+	for(var/obj/structure/flora/F in range(src, spawn_range))
 		if(isturf(F.loc))
 			possible_targets += F.loc
 	// If we find no valid flora to spawn them on, then um... uh... I guess we wait a while??
@@ -105,17 +107,11 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		if(spawnloc)
 			var/mob/living/spawnedmob = new spawnedtype(spawnloc)
 			RegisterSignal(spawnedmob, COMSIG_MOB_DEATH, PROC_REF(on_our_mobs_death))
-			able_mobs.Add(spawnedmob)
-			if(istype(spawnedmob, /mob/living/simple_animal/hostile))
-				var/mob/living/simple_animal/hostile/M = spawnedmob
-				M.attack_same = FALSE
-			if(istype(spawnedmob, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = spawnedmob
+			our_living_mobs.Add(spawnedmob)
 	start_cooldown()
-	start_check_cooldown()
 
 /obj/effect/landmark/threatspawner/proc/on_our_mobs_death(mob/living/source)
-	able_mobs.Remove(source)
+	our_living_mobs.Remove(source)
 
 /// Returns the type of the mob that the spawner will create
 /obj/effect/landmark/threatspawner/proc/get_mob_spawn_type(area/AR)
@@ -123,6 +119,3 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 
 /obj/effect/landmark/threatspawner/proc/start_cooldown()
 	next_spawn_time = world.time + rand(GLOB.threatspawner_cd_min, GLOB.threatspawner_cd_max)
-
-/obj/effect/landmark/threatspawner/proc/start_check_cooldown()
-	next_mob_check = world.time + 30 SECONDS
