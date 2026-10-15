@@ -92,7 +92,8 @@
 				beltl = /obj/item/quiver/bulletpouch/powderkit/bronze
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
 			if("Blunderbuss")
-				beltl = /obj/item/quiver/bulletpouch/powderkit/bronze //the tinkerer needs to make their own scattershot
+				//beltl = /obj/item/quiver/bulletpouch/powderkit/bronze //the tinkerer needs to make their own scattershot
+				beltl = /obj/item/quiver/bulletpouch/powderkit/bronzescatter //change to bronze shot if the blunderbuss is changed to accept normal shot
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
 			if("Crossbow")
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
