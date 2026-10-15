@@ -3964,6 +3964,8 @@
 #include "modular_ochrevalley\code\modules\admin\admin_manifest.dm"
 #include "modular_ochrevalley\code\modules\admin\sun_strike_save.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\sprout_flowers.dm"
+#include "modular_ochrevalley\code\modules\static_threat_spawners\threatspawner.dm"
+#include "modular_ochrevalley\code\modules\static_threat_spawners\threatspawner_types.dm"
 #include "modular_causticcove\code\modules\size_scaling\prefs.dm"
 #include "modular_causticcove\code\modules\size_scaling\sizecat_types.dm"
 #include "modular_ochrevalley\code\modules\dcbot\kickplayer.dm"
