@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(towner_posting_descriptors, list(
 	),
 	QUEST_TOWNER_MINER_OREVEIN = list(
 		"label" = "A Miner's Lead",
-		"You found a vein guarded by elementals and mined a good haul before they drove you away. Hire hands to slay the elementals and haul out the crate.",
+		"blurb" = "You found a vein guarded by elementals and mined a good haul before they drove you away. Hire hands to slay the elementals and haul out the crate.", //OV EDIT
 		"rules" = list(
 			"The crate is magickally sealed. Only you can open it.",
 			"You don't need to travel. The holder brings the crate to you.",
@@ -31,6 +31,132 @@ GLOBAL_LIST_INIT(towner_posting_descriptors, list(
 			/datum/advclass/guildmaster,
 		),
 	),
+	//OV EDIT
+	QUEST_TOWNER_CLINIC_CARAVAN = list(
+		"label" = "Lost Medical Supplies",
+		"blurb" = "A caravan of medical supplies has been lost. Hire hands to secure the caravan and bring the supplies to the physician.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/barbersurgeon,
+			/datum/advclass/apothecary,
+			/datum/advclass/physician,
+		),
+	),
+	QUEST_TOWNER_MISSING_RUNNER = list(
+		"label" = "A Missing Runner",
+		"blurb" = "A supply runner has gone missing. Hire hands to track them down and get back what they were carrying.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/bathworker,
+			/datum/advclass/bathworker/harlot,
+			/datum/advclass/bathworker/courtesan,
+			/datum/advclass/bathmaster,
+			/datum/advclass/thug/goon,
+			/datum/advclass/thug/wiseguy,
+			/datum/advclass/thug/bigman,
+			/datum/advclass/minstrel,
+			/datum/advclass/drunkard,
+		),
+	),
+	QUEST_TOWNER_TAILOR_CARAVAN = list(
+		"label" = "Stolen Tailoring Materials",
+		"blurb" = "A caravan of tailoring supplies has been lost. Hire hands to secure the caravan and bring the materials back.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/tailor,
+			/datum/advclass/seamstress,
+			/datum/advclass/guildmaster,
+		),
+	),
+	QUEST_TOWNER_CLAY_DEPOSIT = list(
+		"label" = "Pottery Material Deposit",
+		"blurb" = "A valuable clay deposit has been discovered, alongside plentiful glass and coal. Hire hands to secure the site and recover the materials.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/potter,
+			/datum/advclass/guildmaster
+		),
+	),
+	QUEST_TOWNER_FOOD_CARAVAN = list(
+		"label" = "Lost Food Supplies",
+		"blurb" = "A caravan of food supplies has been lost. Hire hands to secure the caravan and bring the materials back.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/peasant,
+			/datum/advclass/innkeeper,
+			/datum/advclass/tapster,
+			/datum/advclass/cook,
+			/datum/advclass/trader/brewer,
+			/datum/advclass/soilson,
+		),
+	),
+	QUEST_TOWNER_CHEESEMAKER_CARAVAN = list(
+		"label" = "Cheesed Off",
+		"blurb" = "Beasts have hounded a cheesemaker's caravan. Hire hands to secure the caravan and bring them home.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/cheesemaker,
+		),
+	),
+	QUEST_TOWNER_BUILDING_SUPPLIES = list(
+		"label" = "A Stash of Building Supplies",
+		"blurb" = "We have discovered a stash of building supplies, in a dangerous area. Hire hands to secure the site and recover the materials.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/guildmaster,
+			/datum/advclass/woodworker,
+			/datum/advclass/homesteader,
+		),
+	),
+	QUEST_TOWNER_VALUABLES = list(
+		"label" = "The Personal Valuables",
+		"blurb" = "Your valuables have been lost, taken by brigands! Hire hands to get your revenge, and your belongings back.",
+		"rules" = list(
+			"The crate is magickally sealed. Only you can open it.",
+			"You don't need to travel. The holder brings the crate to you.",
+		),
+		"postable_advclasses" = list(
+			/datum/advclass/councillor/herald,
+			/datum/advclass/councillor/huntmaster,
+			/datum/advclass/councillor/cofferer,
+			/datum/advclass/councillor/castellan,
+			/datum/advclass/councillor/advisor,
+			/datum/advclass/heir/daring,
+			/datum/advclass/heir/bookworm,
+			/datum/advclass/heir/aristocrat,
+			/datum/advclass/heir/inbred,
+			/datum/advclass/heir/scamp,
+			/datum/advclass/lord/warrior,
+			/datum/advclass/lord/merchant,
+			/datum/advclass/lord/mage,
+			/datum/advclass/lord/inbred,
+			/datum/advclass/suitor/envoy,
+			/datum/advclass/suitor/gallant,
+			/datum/advclass/suitor/schemer,
+		),
+	),
+	//OV EDIT END
 ))
 
 /proc/get_user_advclass_path(mob/user)
@@ -98,6 +224,24 @@ GLOBAL_LIST_INIT(towner_posting_descriptors, list(
 			return GLOB.towner_smith_caravan_varieties
 		if(QUEST_TOWNER_MINER_OREVEIN)
 			return GLOB.towner_orevein_varieties
+		//OV EDIT
+		if(QUEST_TOWNER_CLINIC_CARAVAN)
+			return GLOB.towner_clinic_caravan_varieties
+		if(QUEST_TOWNER_MISSING_RUNNER)
+			return GLOB.towner_missing_runner_varieties
+		if(QUEST_TOWNER_TAILOR_CARAVAN)
+			return GLOB.towner_tailor_caravan_varieties
+		if(QUEST_TOWNER_CLAY_DEPOSIT)
+			return GLOB.towner_clay_deposit_varieties
+		if(QUEST_TOWNER_FOOD_CARAVAN)
+			return GLOB.towner_food_caravan_varieties
+		if(QUEST_TOWNER_CHEESEMAKER_CARAVAN)
+			return GLOB.towner_cheesemaker_caravan_varieties
+		if(QUEST_TOWNER_BUILDING_SUPPLIES)
+			return GLOB.towner_building_supplies_varieties
+		if(QUEST_TOWNER_VALUABLES)
+			return GLOB.towner_noble_trinket_varieties
+		//OV EDIT END
 	return null
 
 /proc/towner_default_variety(posting_type)
