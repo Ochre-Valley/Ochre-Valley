@@ -28,6 +28,7 @@
 	job_subclasses = list(
 		/datum/advclass/soilson
 	)
+	has_subprefs = FALSE // only one subclass
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/soilson
@@ -72,7 +73,6 @@
 	beltr = /obj/item/storage/keyring/soilson
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(
-		/obj/item/recipe_book/survival = 1,
 		/obj/item/flashlight/flare/torch = 1,
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/flint = 1,
@@ -93,6 +93,7 @@
 			"Rocknut seeds" = /obj/item/storage/roguebag/farmer_rocknut,
 			"Exotic fruit seeds" = /obj/item/storage/roguebag/farmer_fruits,
 			"Some extra smokes" = /obj/item/storage/roguebag/farmer_smokes,
+			"Seeds from Naledi" = /obj/item/storage/roguebag/farmer_naledi,
 		)
 		var/seedbag_names = list()
 		for (var/name in seeds)
@@ -141,4 +142,14 @@
 		/obj/item/seeds/swampweed,
 		/obj/item/seeds/pipeweed,
 		/obj/item/seeds/pipeweed,
+	)
+
+/obj/item/storage/roguebag/farmer_naledi
+	populate_contents = list(
+		/obj/item/seeds/lentils,
+		/obj/item/seeds/lentils,
+		/obj/item/seeds/lentils,
+		/obj/item/seeds/beans,
+		/obj/item/seeds/beans,
+		/obj/item/seeds/beans,
 	)

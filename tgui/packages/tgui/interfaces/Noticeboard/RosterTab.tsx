@@ -13,7 +13,7 @@ import {
   subtitleStyle,
   titleStyle,
 } from '../common/parchment';
-import { type MercenaryEntry, type TabProps } from './types';
+import type { MercenaryEntry, TabProps } from './types';
 
 export const RosterTab = ({ data }: TabProps) => {
   const roster = data.mercenary_roster;
@@ -34,7 +34,7 @@ export const RosterTab = ({ data }: TabProps) => {
         Mercenary Roster
       </div>
       <div style={subtitleStyle}>
-        The names and detailings of those registered to the Mercenary Guild
+        Names and details of everyone registered with the Mercenary's Guild
       </div>
       <hr style={rulerStyle} />
 
@@ -106,9 +106,7 @@ const SummaryLine = ({
       Contracted: {roster.contracted_count}
     </span>
     <span style={{ color: INK_FAINT }}> &middot; </span>
-    <span style={{ color: SEAL_RED }}>
-      DND: {roster.dnd_count}
-    </span>
+    <span style={{ color: SEAL_RED }}>DND: {roster.dnd_count}</span>
   </div>
 );
 

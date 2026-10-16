@@ -1,4 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - bugfix: "Characters with the Bottomless vice can now be fed infinitely by other characters."

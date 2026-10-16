@@ -1,6 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - rscadd: "Werewolves may now optionally resist un-transforming when the sun rises - as SCENE TOOL."
-  - rscadd: "Werewolves resisting un-transformation will be force-transformed back if they walk into the open sunlight."
-  - rscadd: "Werewolves resisting un-transformation will suffer a massive stat penalty to ensure it's used in good faith."

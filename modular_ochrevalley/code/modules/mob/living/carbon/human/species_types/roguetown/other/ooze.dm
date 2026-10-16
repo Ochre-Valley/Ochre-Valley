@@ -35,6 +35,16 @@
 		H.restore()
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/ooze/Shapeshift(mob/living/caster)
+	if(ishuman(caster)) //Need to prevent this being used on injured players as it becomes glitchy and abusable
+		var/mob/living/carbon/human/human_caster = caster
+		var/list/our_wounds = human_caster.get_wounds()
+		if(our_wounds.len)
+			to_chat(human_caster, span_warning("You're too hurt to transform!"))
+			return
+		if(human_caster.oxyloss > 10)
+			to_chat(human_caster, span_warning("You're too hurt to transform!"))
+			return
+
 	var/obj/shapeshift_holder/H = locate() in caster
 	if(H)
 		to_chat(caster, span_warning("You're already shapeshifted!"))
@@ -101,7 +111,7 @@
 	if(original_turf)
 		temp.forceMove(original_turf)
 		hard_reset_spatial(temp)
-	
+
 	if(isbelly(shape.loc))
 		var/obj/belly/B = shape.loc
 		temp.forceMove(B)
@@ -121,7 +131,7 @@
 	temp.Stun(200)
 	temp.apply_status_effect(/datum/status_effect/debuff/revived)
 	temp.adjust_fire_stacks(2)
-	
+
 	temp.mob_belly_transfer(shape)
 	VORE_PREF_TRANSFER(temp, shape)
 

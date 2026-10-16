@@ -1,0 +1,2520 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"av" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/fermentation_keg/sandpot/water,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"bL" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/transparent/openspace,
+/area/rogue/indoors/remote_sanctuary)
+"cL" = (
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"cO" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/item/cushion/desert1,
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"dY" = (
+/obj/structure/closet/crate/roguecloset/inn,
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"ew" = (
+/obj/structure/table/wood/poor,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"ey" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"eE" = (
+/obj/item/reagent_containers/glass/bucket{
+	pixel_x = 9;
+	pixel_y = 8
+	},
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"eG" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/structure/fluff/walldeco/church/line,
+/obj/machinery/light/rogue/candle/floorcandle/alt/pink{
+	pixel_y = -12
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"fc" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/fluff/walldeco/wallshield{
+	pixel_y = 32
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"fn" = (
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"fv" = (
+/obj/effect/decal/duneedge,
+/obj/structure/flora/roguegrass/desertgrass,
+/turf/open/floor/rogue/citybrick/citybrick1,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"fB" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/machinery/light/rogue/candle,
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"fF" = (
+/obj/machinery/light/rogue/hearth,
+/obj/machinery/light/rogue/oven/west,
+/obj/item/cooking/pan,
+/turf/open/floor/rogue/citybrick,
+/area/rogue/indoors/remote_sanctuary)
+"fP" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/table/wood/long_table,
+/obj/item/candle/candlestick/gold/single/lit{
+	pixel_y = 16;
+	pixel_x = -4
+	},
+/obj/item/book/rogue/bibble/psy{
+	pixel_y = 4;
+	pixel_x = 17
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"fU" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/machinery/light/rogue/candle/floorcandle/pink{
+	pixel_y = -13;
+	pixel_x = -4
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"ga" = (
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"gb" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/obj/item/reagent_containers/food/snacks/grown/wheat,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"gq" = (
+/obj/machinery/light/rogue/candle/l,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"gt" = (
+/obj/structure/fluff/railing/border/west,
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"gx" = (
+/obj/machinery/light/rogue/campfire/fireplace/desert{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"gK" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/machinery/light/rogue/candle,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"gV" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/table/wood/poor/alt_alt,
+/obj/item/cooking/platter/gold{
+	pixel_y = 9;
+	pixel_x = 5
+	},
+/obj/item/cooking/platter/gold{
+	pixel_x = -6
+	},
+/obj/item/soap/bath{
+	pixel_y = 14;
+	pixel_x = 7
+	},
+/obj/item/soap/bath{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"id" = (
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick1,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"iv" = (
+/obj/item/cushion/desert1,
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"iZ" = (
+/obj/structure/fluff/walldeco/rpainting/crown{
+	pixel_y = 32
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"jd" = (
+/obj/structure/flora/junglebush,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"jj" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/obj/structure/mineral_door/wood/fancywood,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"jQ" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"kf" = (
+/obj/structure/table/wood/long_table/east,
+/obj/machinery/light/rogue/candle/weak/r,
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"kh" = (
+/obj/item/cushion/desert2,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/remote_sanctuary)
+"kp" = (
+/turf/closed/mineral/rogue/bedrock/sandstone,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"kB" = (
+/obj/effect/decal/edge_corner/desert_gray{
+	dir = 4
+	},
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"kG" = (
+/obj/effect/decal/edge/desert_gray{
+	dir = 4
+	},
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"ld" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/lightpath,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"lm" = (
+/obj/structure/vase,
+/obj/structure/flora/roguegrass/herb/rosa{
+	pixel_y = 16;
+	pixel_x = -1
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"lJ" = (
+/obj/structure/fermentation_keg/sandpot/wine{
+	icon_state = "sandpot2";
+	name = "sweet smelling sand pot"
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"lQ" = (
+/obj/structure/vase{
+	icon_state = "fancypot2"
+	},
+/obj/structure/flora/roguegrass/herb/manabloom{
+	pixel_y = 21;
+	pixel_x = -3
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"mm" = (
+/turf/closed/mineral/rogue/bedrock/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"mx" = (
+/obj/machinery/light/rogue/campfire/fireplace/desert{
+	pixel_y = 0;
+	pixel_x = -32
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"mE" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"mQ" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"nd" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"nz" = (
+/obj/effect/decal/edge_corner/desert_gray{
+	dir = 1
+	},
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"nE" = (
+/obj/effect/decal/edge_corner/desert_gray,
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"nY" = (
+/obj/structure/table/wood/long_table,
+/obj/machinery/light/rogue/candle/l,
+/obj/item/reagent_containers/glass/cup/golden{
+	pixel_y = 19;
+	pixel_x = -11
+	},
+/obj/item/reagent_containers/glass/cup/golden{
+	pixel_y = 14;
+	pixel_x = -11
+	},
+/obj/item/reagent_containers/glass/cup/golden{
+	pixel_y = 7;
+	pixel_x = -11
+	},
+/obj/item/reagent_containers/glass/cup/golden/small{
+	pixel_y = 20;
+	pixel_x = 2
+	},
+/obj/item/reagent_containers/glass/cup/golden/small{
+	pixel_y = 14;
+	pixel_x = 2
+	},
+/obj/item/reagent_containers/glass/cup/golden/small{
+	pixel_y = 8;
+	pixel_x = 2
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"of" = (
+/obj/effect/decal/edge/desert_gray{
+	dir = 8
+	},
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"oB" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/herbseed/artemisia,
+/obj/item/herbseed/atropa,
+/obj/item/herbseed/benedictus,
+/obj/item/herbseed/boastersnare,
+/obj/item/herbseed/calendula,
+/obj/item/herbseed/euphrasia,
+/obj/item/herbseed/faestool,
+/obj/item/herbseed/fyritius,
+/obj/item/herbseed/hypericum,
+/obj/item/herbseed/manabloom,
+/obj/item/herbseed/matricaria,
+/obj/item/herbseed/mentha,
+/obj/item/herbseed/paris,
+/obj/item/herbseed/rosa,
+/obj/item/herbseed/salvia,
+/obj/item/herbseed/symphitum,
+/obj/item/herbseed/taraxacum,
+/obj/item/herbseed/urtica,
+/obj/item/herbseed/valeriana,
+/obj/item/herbseed/wyldweed,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"oX" = (
+/obj/structure/table/wood/large_table/south_east,
+/obj/item/clothing/mask/rogue/lordmask/naledi/lesser{
+	pixel_x = -13;
+	pixel_y = 5
+	},
+/obj/item/clothing/mask/rogue/lordmask/naledi/lesser{
+	pixel_x = -1
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"pf" = (
+/obj/machinery/light/rogue/hearth,
+/obj/machinery/light/rogue/oven/west,
+/obj/item/reagent_containers/glass/bucket/pot,
+/turf/open/floor/rogue/citybrick,
+/area/rogue/indoors/remote_sanctuary)
+"pi" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = -12
+	},
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = -7
+	},
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = -2
+	},
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = 3
+	},
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = 8
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = -6;
+	pixel_y = 17
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = -6;
+	pixel_y = 12
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = -6;
+	pixel_y = 7
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/item/kitchen/fork/gold{
+	pixel_y = 37;
+	pixel_x = 13
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"pu" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/table/wood/long_table/right,
+/obj/structure/fluff/walldeco/painting{
+	pixel_y = 32;
+	pixel_x = -16
+	},
+/obj/item/clothing/neck/roguetown/psicross/naledi{
+	pixel_y = 8;
+	pixel_x = 7
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"pO" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/rogueweapon/pitchfork,
+/obj/item/rogueweapon/shovel,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"qG" = (
+/obj/structure/flora/roguegrass/bush/desert,
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"rk" = (
+/obj/machinery/light/rogue/candle/l,
+/obj/structure/table/wood/poor,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"rp" = (
+/obj/structure/closet/crate/drawer/random,
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"rx" = (
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"rz" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 33;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 36;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 39;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 33;
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 36;
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/bowl/gold{
+	pixel_y = 39;
+	pixel_x = 6
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"rD" = (
+/obj/structure/composter/halffull,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"se" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"sB" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"sD" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/rack/rogue/shelf,
+/obj/item/kitchen/spoon/gold{
+	pixel_y = 37;
+	pixel_x = -12
+	},
+/obj/item/kitchen/spoon/gold{
+	pixel_y = 37;
+	pixel_x = -6
+	},
+/obj/item/kitchen/spoon/gold{
+	pixel_y = 37
+	},
+/obj/item/kitchen/spoon/gold{
+	pixel_y = 37;
+	pixel_x = 6
+	},
+/obj/item/kitchen/spoon/gold{
+	pixel_y = 37;
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = 8;
+	pixel_y = 17
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = 8;
+	pixel_y = 12
+	},
+/obj/item/reagent_containers/glass/cup/ceramic/fancy{
+	pixel_x = 8;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/glass/bucket/pot/teapot/fancy{
+	pixel_y = 13;
+	pixel_x = -14
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"sX" = (
+/obj/structure/roguemachine/withdraw{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/fluff/walldeco/church/line,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"tg" = (
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"tF" = (
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"tQ" = (
+/turf/closed/wall/mineral/rogue/sandbrick{
+	max_integrity = 9999999;
+	damage_deflection = 100000
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"tV" = (
+/obj/effect/decal/edge_corner/desert_gray{
+	dir = 8
+	},
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"uk" = (
+/obj/structure/fluff/railing/corner,
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"uK" = (
+/obj/effect/decal/carpet/kover_darkred{
+	pixel_y = -11
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"uY" = (
+/obj/structure/closet/crate/drawer/random,
+/obj/machinery/light/rogue/candle/weak/r,
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/remote_sanctuary)
+"vk" = (
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"vs" = (
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"vQ" = (
+/obj/structure/bookcase,
+/obj/item/book/rogue/cooking,
+/obj/item/book/rogue/yeoldecookingmanual,
+/obj/item/book/rogue/bibble/psy,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"vW" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"wu" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"wz" = (
+/obj/structure/table/wood/large_table/north_east,
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"wE" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"xu" = (
+/obj/structure/flora/roguegrass/bush/desert,
+/obj/structure/flora/roguegrass,
+/obj/structure/flora/roguegrass/herb/random{
+	pixel_y = 8
+	},
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"xz" = (
+/obj/structure/fluff/railing/corner/north_east,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"xD" = (
+/obj/structure/table/wood/long_table/north_east,
+/obj/item/candle/candlestick/gold/single/lit{
+	pixel_y = 18;
+	pixel_x = -4
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/machinery/light/rogue/candle/weak/r,
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"xI" = (
+/obj/structure/flora/roguegrass/herb/taraxacum,
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yb" = (
+/obj/structure/globe,
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"yd" = (
+/turf/open/water/cleanshallow,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yg" = (
+/obj/structure/flora/roguegrass/desertgrass,
+/turf/open/floor/rogue/citybrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yp" = (
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yq" = (
+/obj/structure/vase{
+	icon_state = "fancypot3"
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/flora/roguegrass/herb/taraxacum{
+	pixel_y = 20;
+	pixel_x = -1
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"yt" = (
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yz" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"yB" = (
+/turf/open/floor/rogue/dirt/road/desert,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"yC" = (
+/obj/effect/decal/edge/desert_gray{
+	dir = 8
+	},
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/remote_sanctuary)
+"yS" = (
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"yZ" = (
+/turf/open/floor/rogue/lightpath,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"zx" = (
+/obj/structure/table/wood/poor,
+/obj/item/candle/gold/lit{
+	pixel_y = 15;
+	pixel_x = -6
+	},
+/obj/item/storage/pill_bottle/dice{
+	pixel_x = -5
+	},
+/obj/item/storage/pill_bottle/dice/farkle{
+	pixel_y = 2;
+	pixel_x = 9
+	},
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"Ab" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/rogueweapon/hoe,
+/obj/item/rogueweapon/sickle,
+/obj/item/rogueweapon/thresher,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"Am" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ay" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"AQ" = (
+/obj/effect/decal/duneedge{
+	dir = 1
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"AR" = (
+/obj/item/cushion/desert2,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/remote_sanctuary)
+"Bb" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"Bd" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"BJ" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/table/wood/poor,
+/obj/item/perfume/random{
+	pixel_y = 6
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"BU" = (
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilewhitebluespecial"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Cp" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/chair/bench/couchamagenta,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Cz" = (
+/turf/open/floor/rogue/citybrick/citybrick4,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"CO" = (
+/obj/machinery/light/rogue/candle/r,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/table/wood/poor,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Do" = (
+/turf/closed/wall/mineral/rogue/sandbrick{
+	max_integrity = 9999999;
+	damage_deflection = 100000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"DE" = (
+/obj/effect/decal/duneedge,
+/obj/machinery/light/rogue/firebowl,
+/turf/open/floor/rogue/citybrick/citybrick5,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"DM" = (
+/obj/structure/flora/junglebush/b,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Ec" = (
+/obj/structure/closet/crate/roguecloset/inn,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Eq" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Et" = (
+/obj/structure/table/wood/long_table/mid,
+/obj/item/paper/scroll,
+/obj/item/natural/feather{
+	pixel_y = 16
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"Ey" = (
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"EA" = (
+/obj/structure/fluff/railing/wood,
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"EE" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"FB" = (
+/obj/machinery/light/rogue/campfire/fireplace/desert,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Ga" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/lightpath,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Gb" = (
+/obj/structure/bed/rogue/inn/wooldouble,
+/obj/item/bedsheet/rogue/double_pelt,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/remote_sanctuary)
+"Gs" = (
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"GI" = (
+/obj/machinery/light/rogue/candle/r,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"GL" = (
+/obj/structure/fluff/railing/corner/north_east,
+/turf/open/floor/rogue/lightpath,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Hb" = (
+/obj/structure/bed/rogue/inn/wooldouble,
+/obj/item/bedsheet/rogue/fabric_double,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"Hw" = (
+/obj/structure/bookcase,
+/obj/item/book/rogue/naledi1,
+/obj/item/book/rogue/naledi2,
+/obj/item/book/rogue/naledi3,
+/obj/item/book/rogue/naledi4,
+/obj/item/book/rogue/arcyne,
+/obj/item/book/rogue/cardgame,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"HD" = (
+/turf/open/water/bath,
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Ie" = (
+/obj/structure/mineral_door/wood/deadbolt{
+	dir = 4
+	},
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"IQ" = (
+/obj/structure/table/wood/large_table/south_west,
+/obj/item/clothing/mask/rogue/lordmask/naledi/lesser{
+	pixel_x = -1;
+	pixel_y = 5
+	},
+/obj/item/clothing/mask/rogue/lordmask/naledi/lesser{
+	pixel_x = 8
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"Ja" = (
+/obj/structure/fluff/railing/corner/south_east,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Js" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"JN" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/structure/closet/crate/roguecloset/inn,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"JP" = (
+/obj/machinery/light/rogue/candle/weak/r,
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/remote_sanctuary)
+"JU" = (
+/obj/structure/fluff/railing/border/north,
+/obj/effect/decal/edge/desert_gray{
+	dir = 8
+	},
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"JW" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/seeds/wheat,
+/obj/item/seeds/onion,
+/obj/item/seeds/coffee,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"Kd" = (
+/turf/open/floor/rogue/citybrick/citybrick1,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Kx" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"KC" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"KE" = (
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"KZ" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Li" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Ll" = (
+/obj/item/cushion/desert2,
+/turf/open/floor/carpet/red,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Lm" = (
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"LC" = (
+/obj/structure/mineral_door/wood/deadbolt{
+	dir = 4
+	},
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"LP" = (
+/obj/structure/fluff/walldeco/church/line,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"LY" = (
+/obj/structure/mineral_door/wood/fancywood,
+/obj/effect/decal/duneedge{
+	dir = 1
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Mf" = (
+/obj/structure/fluff/railing/border/east,
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Ms" = (
+/obj/effect/decal/cleanable/roguerune/god/psydon,
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"MH" = (
+/obj/machinery/light/rogue/firebowl,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"MZ" = (
+/obj/structure/fluff/railing/border/east,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Nd" = (
+/obj/machinery/light/rogue/candle/l,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/structure/table/wood/poor,
+/obj/structure/roguemachine/musicbox/tavern{
+	pixel_y = 14
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Ni" = (
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/obj/effect/decal/duneedge{
+	dir = 1
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Nt" = (
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilewhitebluespecial"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Nu" = (
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
+"NH" = (
+/turf/open/transparent/openspace,
+/area/rogue/indoors/remote_sanctuary)
+"NU" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/structure/chair/bench/couchamagenta/r,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Oe" = (
+/obj/machinery/light/rogue/firebowl,
+/turf/open/floor/rogue/citybrick/citybrick3,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"OJ" = (
+/obj/structure/chair/wood/rogue{
+	dir = 4
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"Po" = (
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick6,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Qj" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Qo" = (
+/obj/structure/flora/grass/jungle,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Qr" = (
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"QK" = (
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/obj/effect/decal/duneedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"QM" = (
+/obj/effect/decal/duneedge{
+	dir = 1
+	},
+/turf/open/floor/rogue/lightpath,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Rv" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"RA" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"RG" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"RR" = (
+/obj/structure/roguemachine/goldface/public/toys,
+/turf/closed/wall/mineral/rogue/sandbrick{
+	max_integrity = 9999999;
+	damage_deflection = 100000
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"RZ" = (
+/obj/structure/telescope,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Sb" = (
+/turf/open/floor/rogue/citybrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Sd" = (
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilewhitebluespecial"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Tb" = (
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Tm" = (
+/obj/structure/far_travel,
+/turf/closed/basic,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"TX" = (
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/remote_sanctuary)
+"Ux" = (
+/obj/structure/fluff/railing/border/north,
+/turf/open/floor/rogue/dunes,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"UU" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"UV" = (
+/obj/structure/table/wood/long_table/right,
+/obj/structure/rack/rogue/shelf,
+/obj/item/cooking/platter/gold{
+	pixel_y = 31;
+	pixel_x = -5
+	},
+/obj/item/cooking/platter/gold{
+	pixel_y = 34;
+	pixel_x = -5
+	},
+/obj/item/cooking/platter/gold{
+	pixel_y = 38;
+	pixel_x = -5
+	},
+/obj/item/cooking/platter/gold{
+	pixel_y = 31;
+	pixel_x = 4
+	},
+/obj/item/cooking/platter/gold{
+	pixel_y = 34;
+	pixel_x = 4
+	},
+/obj/item/cooking/platter/gold{
+	pixel_y = 38;
+	pixel_x = 4
+	},
+/obj/item/rogueweapon/huntingknife/chefknife{
+	pixel_x = -21
+	},
+/obj/item/millstone{
+	pixel_y = 19;
+	pixel_x = 12
+	},
+/obj/item/kitchen/rollingpin{
+	pixel_x = -6
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/turf/open/floor/rogue/tile/brownbrick/browner,
+/area/rogue/indoors/remote_sanctuary)
+"UX" = (
+/obj/structure/fluff/clock,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"UY" = (
+/obj/structure/flora/junglebush/large,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"Vu" = (
+/obj/structure/fluff/railing/corner/north_east,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Vv" = (
+/obj/structure/fluff/walldeco/stone/bronze,
+/turf/closed/wall/mineral/rogue/sandbrick{
+	max_integrity = 9999999;
+	damage_deflection = 100000
+	},
+/area/rogue/indoors/remote_sanctuary)
+"VA" = (
+/obj/structure/flora/roguetree/palm,
+/turf/open/floor/rogue/desert_grass,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"VG" = (
+/obj/machinery/light/rogue/chand,
+/turf/open/transparent/openspace,
+/area/rogue/indoors/remote_sanctuary)
+"VV" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Wb" = (
+/obj/item/cushion/desert2,
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/remote_sanctuary)
+"Wf" = (
+/obj/structure/drape/desert,
+/obj/structure/roguewindow/harem3,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Wm" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8;
+	icon_state = "borderfall";
+	pixel_x = -9
+	},
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreeny"
+	},
+/area/rogue/indoors/remote_sanctuary/running_water_sounds)
+"Xp" = (
+/obj/structure/mineral_door/wood/deadbolt,
+/obj/structure/curtain/purple,
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreywhite"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"XI" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"Yy" = (
+/obj/structure/table/wood/large_table/north_west,
+/obj/item/candle/candlestick/gold/lit{
+	pixel_y = 17;
+	pixel_x = 16
+	},
+/obj/item/toy/cards/deck{
+	pixel_y = -3
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
+"YF" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/machinery/light/rogue/candle/weak/r,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"YG" = (
+/obj/machinery/light/rogue/candle/r,
+/obj/effect/decal/cobbleedge{
+	dir = 4;
+	icon_state = "borderfall";
+	pixel_x = 9
+	},
+/obj/item/roguebin/trash,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"YH" = (
+/obj/structure/fluff/psycross/psycrucifix/naledi,
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/obj/effect/decal/duneedge,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"YO" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/sandbrick,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"YP" = (
+/obj/structure/fluff/railing/border/east,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/remote_sanctuary)
+"YV" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/remote_sanctuary)
+"Zb" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall";
+	pixel_y = 9
+	},
+/turf/open/floor/rogue/deserttile{
+	icon_state = "tilegreyblu"
+	},
+/area/rogue/indoors/remote_sanctuary)
+"Zn" = (
+/obj/effect/decal/duneedge{
+	dir = 8
+	},
+/obj/item/roguemachine/keymaster_exit,
+/turf/open/floor/rogue/concrete,
+/area/rogue/outdoors/remote_sanctuary/mountains)
+"ZA" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/transparent/openspace,
+/area/rogue/indoors/remote_sanctuary)
+
+(1,1,1) = {"
+Do
+Do
+Do
+Do
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+"}
+(2,1,1) = {"
+Do
+Ab
+pO
+Do
+rD
+yB
+Ey
+DM
+Ey
+Li
+yZ
+yZ
+DE
+tg
+tg
+tg
+tg
+tg
+Oe
+mm
+"}
+(3,1,1) = {"
+Do
+YV
+cL
+jj
+yZ
+ga
+Ey
+Ey
+yB
+Li
+Ey
+ga
+id
+Ey
+Ey
+VA
+yB
+Ey
+yg
+mm
+"}
+(4,1,1) = {"
+Do
+eE
+cL
+Do
+ld
+Ey
+Ey
+yB
+Ey
+Li
+yB
+ga
+fv
+Ey
+yd
+yd
+yd
+Ey
+Sb
+mm
+"}
+(5,1,1) = {"
+Do
+oB
+JW
+Do
+yB
+Ey
+Ey
+Ey
+jd
+EA
+ga
+ga
+id
+yB
+yd
+yd
+yd
+UY
+Sb
+mm
+"}
+(6,1,1) = {"
+Do
+Do
+Do
+Do
+jj
+Wf
+Wf
+Do
+Do
+Vv
+ga
+yZ
+id
+Ey
+yd
+yd
+yd
+Ey
+Kd
+mm
+"}
+(7,1,1) = {"
+Do
+yq
+gq
+UU
+Lm
+UU
+UU
+Nd
+UX
+Do
+ga
+ga
+id
+DM
+yd
+yd
+yd
+yB
+Kd
+mm
+"}
+(8,1,1) = {"
+Do
+fP
+Lm
+BU
+AR
+iv
+BU
+Lm
+iv
+Wf
+ga
+ga
+id
+VA
+yd
+yd
+yd
+Ey
+Kd
+mm
+"}
+(9,1,1) = {"
+Do
+pu
+Lm
+BU
+Yy
+IQ
+BU
+Lm
+zx
+Wf
+yZ
+ga
+id
+yB
+yB
+Qo
+Ey
+Ey
+Kd
+mm
+"}
+(10,1,1) = {"
+Do
+Do
+FB
+BU
+wz
+oX
+BU
+Lm
+iv
+Wf
+yZ
+ga
+Po
+fn
+fn
+tg
+tg
+tg
+Cz
+mm
+"}
+(11,1,1) = {"
+Do
+Do
+Vu
+BU
+iv
+AR
+BU
+Lm
+Lm
+Do
+Bd
+vW
+AQ
+Gs
+yt
+tF
+fn
+tg
+tg
+Tm
+"}
+(12,1,1) = {"
+Do
+XI
+EE
+Lm
+Lm
+Lm
+Lm
+Lm
+Lm
+LY
+KC
+tg
+tg
+Ni
+Gs
+QM
+Gs
+vk
+tg
+Tm
+"}
+(13,1,1) = {"
+Do
+Kx
+Lm
+Lm
+Lm
+GI
+sB
+jQ
+YG
+Do
+YH
+fn
+fn
+fn
+QK
+QK
+Eq
+fn
+Zn
+mm
+"}
+(14,1,1) = {"
+Do
+yz
+sB
+jQ
+lQ
+Do
+Do
+Nt
+Do
+Do
+Do
+Do
+yZ
+yZ
+yZ
+yZ
+yZ
+ga
+MH
+mm
+"}
+(15,1,1) = {"
+tQ
+tQ
+tQ
+Sd
+RR
+Do
+nY
+wE
+gb
+lJ
+av
+Do
+Mf
+GL
+ga
+ga
+yZ
+ga
+yZ
+mm
+"}
+(16,1,1) = {"
+tQ
+Cp
+Wm
+Am
+rx
+Do
+sD
+Rv
+KZ
+KZ
+KZ
+Wf
+xu
+Ga
+ga
+yZ
+ga
+ga
+yZ
+mm
+"}
+(17,1,1) = {"
+tQ
+NU
+rx
+RA
+fU
+Do
+pi
+Qr
+Qr
+Qr
+Qr
+Wf
+xI
+Ga
+yZ
+yZ
+ga
+yZ
+yZ
+mm
+"}
+(18,1,1) = {"
+tQ
+gV
+LP
+HD
+HD
+Do
+rz
+Qr
+Qr
+ey
+ey
+Wf
+qG
+Ux
+yZ
+ga
+ga
+mm
+mm
+mm
+"}
+(19,1,1) = {"
+tQ
+JN
+eG
+HD
+HD
+Do
+UV
+Bb
+sX
+fF
+pf
+Do
+gt
+uk
+ga
+ga
+MH
+mm
+Ms
+mm
+"}
+(20,1,1) = {"
+tQ
+tQ
+tQ
+tQ
+tQ
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+mm
+"}
+
+(1,1,2) = {"
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+"}
+(2,1,2) = {"
+kp
+Gs
+Gs
+Gs
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(3,1,2) = {"
+kp
+Gs
+yZ
+Gs
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(4,1,2) = {"
+kp
+Gs
+yZ
+Gs
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(5,1,2) = {"
+kp
+Gs
+Gs
+Gs
+yp
+yp
+Ja
+MZ
+MZ
+MZ
+xz
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(6,1,2) = {"
+Do
+Do
+Wf
+Wf
+Wf
+Do
+Do
+YO
+Gs
+RZ
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(7,1,2) = {"
+Do
+lm
+cO
+BJ
+cO
+UU
+Wf
+yZ
+yZ
+Gs
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(8,1,2) = {"
+Do
+Kx
+tV
+yC
+nE
+Lm
+LY
+yZ
+yZ
+Ll
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(9,1,2) = {"
+Do
+fc
+nz
+kG
+kB
+YF
+Do
+yZ
+yZ
+ew
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(10,1,2) = {"
+Do
+mE
+YP
+Vu
+Lm
+Do
+Do
+yZ
+yZ
+Ll
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(11,1,2) = {"
+Do
+ZA
+bL
+JU
+of
+Do
+vs
+Gs
+RG
+Gs
+nd
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(12,1,2) = {"
+Do
+NH
+bL
+se
+Tb
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(13,1,2) = {"
+Do
+VG
+NH
+se
+Tb
+Qj
+VV
+Do
+dY
+mx
+kh
+Wf
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(14,1,2) = {"
+Do
+NH
+NH
+se
+mQ
+uK
+Tb
+Xp
+Tb
+Nu
+Nu
+Wf
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(15,1,2) = {"
+Do
+Do
+Do
+Ie
+Do
+gK
+Tb
+Do
+CO
+Hb
+rp
+Do
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(16,1,2) = {"
+Do
+yb
+Ay
+Lm
+Do
+Do
+LC
+Do
+Do
+Do
+Do
+Do
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(17,1,2) = {"
+Do
+fB
+KE
+KE
+Hw
+Do
+wu
+Js
+Js
+Wb
+rk
+Wf
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+kp
+"}
+(18,1,2) = {"
+Do
+iZ
+OJ
+KE
+vQ
+Do
+Zb
+yS
+TX
+TX
+TX
+Wf
+yp
+yp
+yp
+yp
+yp
+kp
+kp
+kp
+"}
+(19,1,2) = {"
+Do
+xD
+Et
+kf
+Do
+Do
+Ec
+gx
+JP
+Gb
+uY
+Do
+yp
+yp
+yp
+yp
+yp
+kp
+kp
+kp
+"}
+(20,1,2) = {"
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+Do
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+kp
+"}

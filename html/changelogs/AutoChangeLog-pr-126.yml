@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - admin: "Ported over my player effects panel from virgo, made all the smites that are useful here work through it, plus added a few extras!"

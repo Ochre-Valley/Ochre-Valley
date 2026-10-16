@@ -13,7 +13,7 @@ export const VorePanelExport = () => {
   );
 };
 
-const VorePanelExportContent = (props) => {
+const VorePanelExportContent = (props: any) => {
   return (
     <Section title="Vore Export Panel">
       <Section title="Export">

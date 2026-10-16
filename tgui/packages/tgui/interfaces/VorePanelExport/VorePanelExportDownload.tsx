@@ -19,7 +19,7 @@ export const downloadPrefs = (extension: string) => {
   const datesegment = getCurrentTimestamp();
 
   const filename = mob_name + datesegment + extension;
-  let blob;
+  let blob: Blob | undefined;
 
   if (extension === '.html') {
     const style = '<style>' + '</style>';
@@ -50,7 +50,7 @@ export const downloadPrefs = (extension: string) => {
       },
     );
     validBellies.forEach((belly, i) => {
-      blob = new Blob([blob, generateBellyString(belly, i)], {
+      blob = new Blob([blob as Blob, generateBellyString(belly, i)], {
         type: 'text/html',
       });
     });
@@ -85,5 +85,7 @@ export const downloadPrefs = (extension: string) => {
     });
   }
 
-  Byond.saveBlob(blob, filename, extension);
+  if (blob) {
+    Byond.saveBlob(blob, filename, extension);
+  }
 };

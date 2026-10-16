@@ -47,7 +47,7 @@
 	var/secret = TRUE
 	if(isnull(expiry))
 		if(alert(usr, "Set an expiry time? Expired messages are hidden like deleted ones.", "Expiry time?", "Yes", "No", "Cancel") == "Yes")
-			var/expire_time = input("Set expiry time for [type] as format YYYY-MM-DD HH:MM:SS. All times in server time. HH:MM:SS is optional and 24-hour. Must be later than current time for obvious reasons.", "Set expiry time", SQLtime()) as null|text
+			var/expire_time = input(usr, "Set expiry time for [type] as format YYYY-MM-DD HH:MM:SS. All times in server time. HH:MM:SS is optional and 24-hour. Must be later than current time for obvious reasons.", "Set expiry time", SQLtime()) as null|text
 			if(!expire_time)
 				return
 			var/datum/DBQuery/query_validate_expire_time = SSdbcore.NewQuery(
@@ -66,11 +66,11 @@
 				expiry = query_validate_expire_time.item[1]
 			qdel(query_validate_expire_time)
 	if(type == "note" && isnull(note_severity))
-		note_severity = input("Set the severity of the note.", "Severity", null, null) as null|anything in list("high", "medium", "minor", "none")
+		note_severity = input(usr, "Set the severity of the note.", "Severity", null) as null|anything in list("high", "medium", "minor", "none")
 		if(!note_severity)
 			return
 	if(type == "note" && !isnull(note_severity))
-		note_severity = lowertext("[note_severity]")
+		note_severity = LOWER_TEXT("[note_severity]")
 		//OV Edit: Ochrebot relay
 		if(CONFIG_GET(flag/amia_enabled))
 			amia_relaynote(target_ckey, admin_ckey, text, note_severity)
@@ -186,7 +186,7 @@
 		var/target_key = query_find_edit_message.item[2]
 		var/admin_key = query_find_edit_message.item[3]
 		var/old_text = query_find_edit_message.item[4]
-		var/new_text = input("Input new [type]", "New [type]", "[old_text]") as null|message
+		var/new_text = input(usr, "Input new [type]", "New [type]", "[old_text]") as null|message
 		if(!new_text)
 			qdel(query_find_edit_message)
 			return
@@ -237,7 +237,7 @@
 		var/admin_key = query_find_edit_expiry_message.item[3]
 		var/old_expiry = query_find_edit_expiry_message.item[4]
 		var/new_expiry
-		var/expire_time = input("Set expiry time for [type] as format YYYY-MM-DD HH:MM:SS. All times in server time. HH:MM:SS is optional and 24-hour. Must be later than current time for obvious reasons. Enter -1 to remove expiry time.", "Set expiry time", old_expiry) as null|text
+		var/expire_time = input(usr, "Set expiry time for [type] as format YYYY-MM-DD HH:MM:SS. All times in server time. HH:MM:SS is optional and 24-hour. Must be later than current time for obvious reasons. Enter -1 to remove expiry time.", "Set expiry time", old_expiry) as null|text
 		if(!expire_time)
 			qdel(query_find_edit_expiry_message)
 			return
@@ -309,7 +309,7 @@
 			old_severity = "NA"
 		var/editor_key = usr.key
 		var/editor_ckey = usr.ckey
-		var/new_severity = input("Set the severity of the note.", "Severity", null, null) as null|anything in list("high", "medium", "minor", "none") //lowercase for edit log consistency
+		var/new_severity = input(usr, "Set the severity of the note.", "Severity", null) as null|anything in list("high", "medium", "minor", "none") //lowercase for edit log consistency
 		if(!new_severity)
 			qdel(query_find_edit_note_severity)
 			return
@@ -494,7 +494,7 @@
 			var/expire_timestamp = query_get_messages.item[11]
 			var/severity = query_get_messages.item[12]
 			if(severity)
-				severity = lowertext("[severity]")
+				severity = LOWER_TEXT("[severity]")
 			var/alphatext = ""
 			var/nsd = CONFIG_GET(number/note_stale_days)
 			var/nfd = CONFIG_GET(number/note_fresh_days)
@@ -713,7 +713,7 @@
 /*alternatively this proc can be run once to pass through every note and attempt to convert it before deleting the file, if done then AUTOCONVERT_NOTES should be turned off
 this proc can take several minutes to execute fully if converting and cause DD to hang if converting a lot of notes; it's not advised to do so while a server is live
 /proc/mass_convert_notes()
-	to_chat(world, "Beginning mass note conversion")
+	to_world("Beginning mass note conversion")
 	var/savefile/notesfile = new(NOTESFILE)
 	if(!notesfile)
 		log_game("Error: Cannot access [NOTESFILE]")
@@ -721,7 +721,7 @@ this proc can take several minutes to execute fully if converting and cause DD t
 	notesfile.cd = "/"
 	for(var/ckey in notesfile.dir)
 		convert_notes_sql(ckey)
-	to_chat(world, "Deleting NOTESFILE")
+	to_world("Deleting NOTESFILE")
 	fdel(NOTESFILE)
-	to_chat(world, "Finished mass note conversion, remember to turn off AUTOCONVERT_NOTES")*/
+	to_world("Finished mass note conversion, remember to turn off AUTOCONVERT_NOTES")*/
 #undef NOTESFILE

@@ -413,7 +413,7 @@
 	name = "silver-reinforced quarterstaff"
 	display_category = ITEM_CAT_WEAPONS_POLEARMS
 	category = "Tools"
-	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/silver)
+	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/steel/silver)
 	reqs = list(
 		/obj/item/rogueweapon/woodstaff/quarterstaff = 1,
 		/obj/item/ingot/silver = 1,
@@ -425,7 +425,7 @@
 	name = "psydonic silver-reinforced quarterstaff"
 	display_category = ITEM_CAT_WEAPONS_POLEARMS
 	category = "Tools"
-	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/psy)
+	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/steel/silver/psy)
 	reqs = list(
 		/obj/item/rogueweapon/woodstaff/quarterstaff = 1,
 		/obj/item/ingot/silverblessed = 1,
@@ -434,9 +434,9 @@
 	craftdiff = 5
 
 /datum/crafting_recipe/roguetown/survival/quarterstaff_psydonic/bullion
-	name = "psydonic silver-reinforced quarterstaff"
+	name = "psydonic silver-reinforced quarterstaff (bullion)"
 	category = "Tools"
-	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/psy)
+	result = list(/obj/item/rogueweapon/woodstaff/quarterstaff/steel/silver/psy)
 	reqs = list(
 		/obj/item/rogueweapon/woodstaff/quarterstaff = 1,
 		/obj/item/ingot/silverblessed/bullion = 1,
@@ -474,7 +474,7 @@
 /datum/crafting_recipe/roguetown/survival/sharpenedstake
 	name = "stake, sharpened"
 	display_category = ITEM_CAT_WEAPONS_DAGGERS
-	category = "Tools" 
+	category = "Tools"
 	result = list(/obj/item/rogueweapon/huntingknife/idagger/stake)
 	reqs = list(
 		/obj/item/grown/log/tree/stake = 1,
@@ -523,7 +523,6 @@
 	skillcraft = /datum/skill/craft/carpentry
 
 /obj/item/rogueweapon/shield/heater/crafted
-	sellprice = 6
 
 
 /datum/crafting_recipe/roguetown/survival/bonespear
@@ -573,7 +572,6 @@
 		)
 
 /obj/item/fishingrod/crafted
-	sellprice = 8
 
 /datum/crafting_recipe/roguetown/survival/rodblacksteel
 	name = "fishing rod, blacksteel"
@@ -585,19 +583,6 @@
 		/obj/item/natural/fibers = 2,
 		/obj/item/ingot/blacksteel = 1,
 		)
-
-/datum/crafting_recipe/roguetown/survival/bow
-	name = "bow"
-	display_category = ITEM_CAT_WEAPONS_AMMO
-	category = "Tools"
-	result = list(/obj/item/gun/ballistic/revolver/grenadelauncher/bow/classic)
-	reqs = list(
-		/obj/item/grown/log/tree = 1,
-		/obj/item/natural/cloth = 1,
-		/obj/item/natural/fibers = 3,
-		)
-	skillcraft = /datum/skill/craft/crafting
-	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/fishingcage
 	name = "fishing cage"
@@ -615,13 +600,13 @@
 	display_category = ITEM_CAT_TOOLS_SUNDRIES
 	category = "Tools"
 	result = list(/obj/item/construction/repairkit/structure,
-				  /obj/item/construction/repairkit/structure,
-				  /obj/item/construction/repairkit/structure)
+					/obj/item/construction/repairkit/structure,
+					/obj/item/construction/repairkit/structure)
 	reqs = list(/obj/item/construction/nail = 6,
 				/obj/item/natural/wood/plank = 3,
 				/obj/item/natural/stoneblock = 3)
 	skillcraft = /datum/skill/craft/carpentry
-	craftdiff = 5
+	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/mortar
 	name = "alchemical mortar"

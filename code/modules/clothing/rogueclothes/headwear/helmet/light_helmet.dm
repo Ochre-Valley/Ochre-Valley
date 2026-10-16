@@ -17,9 +17,9 @@
 	salvage_result = /obj/item/natural/fibers
 	salvage_amount = 2 // Major materials loss
 
-/obj/item/clothing/head/roguetown/armingcap/padded/ComponentInitialize()
+/obj/item/clothing/head/roguetown/armingcap/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
-	AddComponent(/datum/component/armour_filtering/positive, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 
 /obj/item/clothing/head/roguetown/armingcap/padded
 	name = "padded arming cap"
@@ -28,6 +28,10 @@
 	item_state = "paddedarmingcap"
 	armor = ARMOR_PADDED
 	max_integrity = ARMOR_INT_HELMET_CLOTH + 60
+
+/obj/item/clothing/head/roguetown/armingcap/padded/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 
 /obj/item/clothing/head/roguetown/helmet/leather
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
@@ -81,20 +85,8 @@
 	if(!istype(loc, /mob/living/carbon))
 		return
 	var/mob/living/carbon/H = user
-	if(icon_state == "[initial(icon_state)]_snout")
-		icon_state = initial(icon_state)
+	if(toggle_snout())
 		H.update_inv_head()
-		update_icon()
-		return
-
-	var/icon/J = new('icons/roguetown/clothing/onmob/head.dmi')
-	var/list/istates = J.IconStates()
-	for(var/icon_s in istates)
-		if(findtext(icon_s, "[icon_state]_snout"))
-			icon_state += "_snout"
-			H.update_inv_head()
-			update_icon()
-			return
 
 /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
@@ -119,6 +111,11 @@
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
+
+/obj/item/clothing/head/roguetown/helmet/leather/saiga/druid //armored skull for drip. haha, no.
+	name = "worn saiga skull"
+	desc = "The skull of a once-fearsome saiga. Looks like its sustained some damage and won't protect your skull."
+	armor = ARMOR_CLOTHING //no armor
 
 /obj/item/clothing/head/roguetown/helmet/leather/advanced
 	name = "hardened leather helmet"
@@ -182,21 +179,32 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
 
+/obj/item/clothing/head/roguetown/grenzelhofthat/Initialize(mapload)
+	. = ..()
+	update_icon()
+
 /obj/item/clothing/head/roguetown/grenzelhofthat/update_icon()
 	cut_overlays()
 	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[get_detail_state(icon_state)][detail_tag]"))
 		pic.appearance_flags = RESET_COLOR
 		if(get_detail_color())
 			pic.color = get_detail_color()
 		add_overlay(pic)
 
 	if(get_altdetail_tag())
-		var/mutable_appearance/pic2 = mutable_appearance(icon(icon, "[icon_state][altdetail_tag]"))
+		var/mutable_appearance/pic2 = mutable_appearance(icon(icon, "[get_detail_state(icon_state)][altdetail_tag]"))
 		pic2.appearance_flags = RESET_COLOR
 		if(get_altdetail_color())
 			pic2.color = get_altdetail_color()
 		add_overlay(pic2)
+
+/obj/item/clothing/head/roguetown/grenzelhofthat/loadout
+	name = "aesthetic grenzelhoft plume hat"
+
+/obj/item/clothing/head/roguetown/grenzelhofthat/loadout/Initialize(mapload)
+	. = ..()
+	loadoutize()
 
 //................ Briar Thorns ............... //	- Dendor Briar
 /obj/item/clothing/head/roguetown/briarthorns
@@ -231,3 +239,24 @@
 /obj/item/clothing/head/roguetown/mentorhat/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_HONORBOUND)
+
+/obj/item/clothing/head/roguetown/mentorhat/loadout
+	name = "aesthetic worn bamboo hat"
+
+/obj/item/clothing/head/roguetown/mentorhat/loadout/Initialize(mapload)
+	. = ..()
+	loadoutize()
+
+/obj/item/clothing/head/roguetown/inqhat/lamplighter
+	name = "lampwicker's hat"
+	desc = "A seared and stained tricorn hat."
+	icon = 'icons/roguetown/clothing/special/lamplighter.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/lamplighter.dmi'
+	icon_state = "lamphat1"
+
+/obj/item/clothing/head/roguetown/inqhat/lamplighter/warden
+	name = "lampwarden's hat"
+	desc = "A seared and stained widebrim hat."
+	icon = 'icons/roguetown/clothing/special/lamplighter.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/lamplighter.dmi'
+	icon_state = "lamphat2"

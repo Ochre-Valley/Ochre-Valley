@@ -5,7 +5,7 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	blade_dulling = FALSE
 	max_integrity = 200
-	integrity_failure = ARMOR_INTEG_FAILURE
+	integrity_failure = GENERIC_INTEG_FAILURE
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	has_item_quality = TRUE
 	///What level of bright light protection item has.
@@ -15,6 +15,9 @@
 	var/visor_flags = 0			//flags that are added/removed when an item is adjusted up/down
 	var/visor_flags_inv = 0		//same as visor_flags, but for flags_inv
 	var/visor_flags_cover = 0	//same as above, but for flags_cover
+	var/adjusted_inv_mask = NONE
+	var/adjusted_inv_value = NONE
+	var/snouted = FALSE
 //what to toggle when toggled with weldingvisortoggle()
 	var/visor_vars_to_toggle = VISOR_FLASHPROTECT | VISOR_TINT | VISOR_VISIONFLAGS | VISOR_DARKNESSVIEW | VISOR_INVISVIEW
 	lefthand_file = 'icons/mob/inhands/clothing_lefthand.dmi'
@@ -60,6 +63,8 @@
 	var/chunkcolor = "#5e5e5e"
 	var/material_category = ARMOR_MAT_LEATHER
 	var/throw_on_break = FALSE
+	/// Whitelist of armour that can be worn underneath something despite restrictions. Should be a small list, only.
+	var/list/underlayers
 
 /obj/item
 	var/blocking_behavior
@@ -69,20 +74,27 @@
 	var/altdetail_tag
 	var/detail_color
 	var/altdetail_color
+	var/mutable_appearance/detail_overlay
 	var/boobed_detail = TRUE
 	var/sleeved_detail = TRUE
 	var/malumblessed_c = FALSE
-	var/list/worn_offsets = null  // in case it needs an extra offset to fit in a 32x32 .dmi file. Originally made by Sigma.
+	var/list/worn_offsets = null	// in case it needs an extra offset to fit in a 32x32 .dmi file. Originally made by Sigma.
 	var/list/original_armor //For restoring broken armor
 
 /obj/item/clothing/New()
 	..()
 
-/obj/item/clothing/Initialize()
+/obj/item/clothing/Initialize(mapload)
 	. = ..()
-	if(max_integrity && integrity_failure && integrity_failure == ARMOR_INTEG_FAILURE)
-		max_integrity += (max_integrity * 0.11142857143)	// don't ask
-		obj_integrity = max_integrity
+	if(!length(materia))
+		if(anvilrepair) // metal, cloth, and leather/fur items... approximately
+			materia = list(/datum/materia_aspect/defense)
+		else if (salvage_result == /obj/item/natural/cloth || salvage_result == /obj/item/natural/fibers)
+			materia = list(/datum/materia_aspect/plant)
+		else
+			materia = list(/datum/materia_aspect/animal)
+		if(smeltresult == /obj/item/ingot/aaslag && findtext(name, "ancient"))
+			materia += /datum/materia_aspect/aalloy
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
@@ -97,6 +109,41 @@
 	if(heat_protection)
 		. += span_info("It looks like it will protect me from the <b>heat</b>.")
 
+/obj/item/clothing/proc/persist_inv_flags(flag)
+	adjusted_inv_mask |= flag
+	adjusted_inv_value &= ~flag
+	adjusted_inv_value |= (flags_inv & flag)
+
+/obj/item/clothing/proc/adjust_inv_flags(base)
+	if(!adjusted_inv_mask)
+		return base
+	return (base & ~adjusted_inv_mask) | (adjusted_inv_value & adjusted_inv_mask)
+
+/obj/item/clothing/proc/is_snoutable()
+	if(!mob_overlay_icon)
+		return FALSE
+	var/icon/worn = new(mob_overlay_icon)
+	return ("[initial(icon_state)]_snout" in worn.IconStates())
+
+/obj/item/clothing/proc/toggle_snout()
+	if(snouted)
+		snouted = FALSE
+		icon_state = initial(icon_state)
+	else
+		if(!is_snoutable())
+			return FALSE
+		snouted = TRUE
+		icon_state = "[initial(icon_state)]_snout"
+	update_icon()
+	return TRUE
+
+/obj/item/clothing/proc/restore_snout()
+	if(snouted)
+		icon_state = "[initial(icon_state)]_snout"
+
+/obj/item/proc/get_detail_state(base_state)
+	return base_state
+
 /obj/item/proc/get_detail_tag() //this is for extra layers on clothes
 	return detail_tag
 
@@ -108,6 +155,22 @@
 
 /obj/item/proc/get_altdetail_color() //this is for extra layers on clothes
 	return altdetail_color
+
+/obj/item/proc/refresh_detail_overlay()
+	if(detail_overlay)
+		cut_overlay(detail_overlay)
+		detail_overlay = null
+	if(!get_detail_tag())
+		return
+	var/detail_state = "[icon_state][detail_tag]"
+	if(!icon_exists(icon, detail_state))
+		detail_state = "[initial(icon_state)][detail_tag]"
+	var/mutable_appearance/pic = mutable_appearance(icon(icon, detail_state))
+	pic.appearance_flags = RESET_COLOR
+	if(get_detail_color())
+		pic.color = get_detail_color()
+	add_overlay(pic)
+	detail_overlay = pic
 
 /obj/item/clothing/get_mechanics_examine(mob/user)
 	. = ..()
@@ -237,7 +300,7 @@
 			return TRUE
 		return FALSE
 
-/obj/item/clothing/Initialize()
+/obj/item/clothing/Initialize(mapload)
 	if(CHECK_BITFIELD(clothing_flags, VOICEBOX_TOGGLABLE))
 		actions_types += /datum/action/item_action/toggle_voice_box
 	. = ..()
@@ -420,20 +483,20 @@
 	armor = original_armor
 
 /*
-SEE_SELF  // can see self, no matter what
-SEE_MOBS  // can see all mobs, no matter what
-SEE_OBJS  // can see all objs, no matter what
+SEE_SELF	// can see self, no matter what
+SEE_MOBS	// can see all mobs, no matter what
+SEE_OBJS	// can see all objs, no matter what
 SEE_TURFS // can see all turfs (and areas), no matter what
 SEE_PIXELS// if an object is located on an unlit area, but some of its pixels are
-          // in a lit area (via pixel_x,y or smooth movement), can see those pixels
-BLIND     // can't see anything
+			// in a lit area (via pixel_x,y or smooth movement), can see those pixels
+BLIND		// can't see anything
 */
 
 /proc/generate_female_clothing(index,t_color,icon,type)
 	var/icon/female_clothing_icon	= icon("icon"=icon, "icon_state"=t_color)
 	var/icon/female_s				= icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="[(type == FEMALE_UNIFORM_FULL) ? "female_full" : "female_top"]")
 	female_clothing_icon.Blend(female_s, ICON_MULTIPLY)
-	female_clothing_icon 			= fcopy_rsc(female_clothing_icon)
+	female_clothing_icon			= fcopy_rsc(female_clothing_icon)
 	GLOB.female_clothing_icons[index] = female_clothing_icon
 
 /proc/generate_dismembered_clothing(index, t_color, icon, sleeveindex, sleevetype)
@@ -450,7 +513,7 @@ BLIND     // can't see anything
 				dismembered.Blend(l_mask, ICON_MULTIPLY)
 			if(3)
 				dismembered.Blend(r_mask, ICON_MULTIPLY)
-		dismembered 			= fcopy_rsc(dismembered)
+		dismembered			= fcopy_rsc(dismembered)
 
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
@@ -476,7 +539,7 @@ BLIND     // can't see anything
 		return 0
 
 	var/list/modes = list("Off", "Binary vitals", "Exact vitals", "Tracking beacon")
-	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
+	var/switchMode = input(usr, "Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
 	if(get_dist(usr, src) > 1)
 		to_chat(usr, span_warning("I have moved too far away!"))
 		return
@@ -682,14 +745,8 @@ BLIND     // can't see anything
 	str += "[colorgrade_rating("🪓 SLASH", armor.slash, elaborate = TRUE)] | "
 	str += "[colorgrade_rating("🗡️ STAB", armor.stab, elaborate = TRUE)] | "
 	str += "[colorgrade_rating("🏹 PIERCE", armor.piercing, elaborate = TRUE)]"
-	if(armor.fire > NONE || armor.acid > NONE)
-		str += "<br><b>RESIST:</b> "
-		var/list/resists = list()
-		if(armor.fire > NONE)
-			resists += colorgrade_rating("🔥 FIRE", armor.fire, elaborate = TRUE)
-		if(armor.acid > NONE)
-			resists += colorgrade_rating("🧪 ACID", armor.acid, elaborate = TRUE)
-		str += resists.Join(" | ")
+	if(armor.fire > NONE)
+		str += "<br><b>RESIST:</b> [colorgrade_rating("🔥 FIRE", armor.fire, elaborate = TRUE)]"
 
 	if(examine_highlight_status)
 		var/heresy_desc = get_examine_highlight_description(examine_highlight_status)
@@ -716,3 +773,21 @@ BLIND     // can't see anything
 			return VISMSG_ARMOR_INT_STAGETWO
 		if(0 to 0.24)
 			return VISMSG_ARMOR_INT_STAGETHREE
+
+
+/// Pardon the goofy name, but this proc in essence turns the item into an aesthetic-only loadout variant.
+/// Please do NOT use this with medium or heavy AC armor if you can, glamour plate armor is not an intuitive good thing.
+/obj/item/clothing/proc/loadoutize()
+	armor_class = ARMOR_CLASS_NONE
+	if(armor)
+		qdel(armor)
+		armor = new /datum/armor()
+	max_integrity = ARMOR_INT_CHEST_CIVILIAN
+	obj_integrity = max_integrity
+	blocksound = null
+	if(slot_flags & (ITEM_SLOT_ARMOR | ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK))
+		slot_flags |= ITEM_SLOT_ARMOR | ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK
+	if((grid_width > 64 ) || (grid_height > 64))	// We're an item that's 2+ tiles across / tall.
+		// We make it fit into generic 2x2 aesthetic storage. Warning. May cause weirdness if we start loadoutizing everything all willy-nilly.
+		grid_width = 64
+		grid_height = 64

@@ -12,16 +12,16 @@
 /datum/sprite_accessory/belly/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
-/datum/sprite_accessory/belly
+/datum/sprite_accessory/belly/plain
 	icon_state = "pair"
-	name = "Belly"
+	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR)
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTER_LAYER)
+	relevant_layers = list(BODY_BEHIND_LAYER, BELLY_LAYER) //OV EDIT - Genitals Adjustments src. Caustic - Replace BODY_FRONTER_LAYER
 
 /datum/sprite_accessory/butt
-	icon = 'modular_causticcove/icons/mob/merp_organs/butt.dmi'
+	icon = 'modular_causticcove/icons/mob/merp_organs/buttplainnothigh.dmi' //OV EDIT
 	color_key_name = "Butt"
-	relevant_layers = list(BODY_ADJ_LAYER)
+	relevant_layers = list(ASS_LAYER, BODY_BEHIND_LAYER) //OV EDIT - Genitals Adjustments src. Caustic - Replaces BODY_ADJ_LAYER
 
 /datum/sprite_accessory/butt/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	if(!isdwarf(owner) && !isgoblinp(owner) && !iskobold(owner) && !isvermin(owner))
@@ -30,7 +30,7 @@
 		generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BUTT, OFFSET_BUTT)
 /datum/sprite_accessory/butt/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
-	return "butt_[icon_state]_[buttie.organ_size]"
+	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
@@ -40,7 +40,8 @@
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain (No Thighs)"
 	icon_state = "pair"
+	preview_states = list("butt_pair_2_BEHIND")
 	color_key_defaults = list(KEY_SKIN_COLOR)

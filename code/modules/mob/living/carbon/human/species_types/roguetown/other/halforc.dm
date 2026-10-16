@@ -25,8 +25,6 @@
 	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
-	disliked_food = NONE
-	liked_food = NONE
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt_muscular.dmi'
@@ -58,6 +56,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
 		//ORGAN_SLOT_PENIS = /obj/item/organ/penis,
 		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
@@ -92,6 +91,8 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		/datum/customizer/organ/horns/tusks,
 		/datum/customizer/organ/ears/halforc,
 		//Caustic edit
@@ -104,17 +105,9 @@
 		/datum/language/orcish
 	)
 
-/datum/species/halforc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-
 /datum/species/halforc/after_creation(mob/living/carbon/C)
 	..()
 	to_chat(C, "<span class='info'>I can speak Orcish with ,o before my speech.</span>")
-
-/datum/species/halforc/on_species_loss(mob/living/carbon/C)
-	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 
 /datum/species/halforc/qualifies_for_rank(rank, list/features)
 	return TRUE
@@ -130,9 +123,12 @@
 		"Murkwalker" = SKIN_COLOR_MURKWALKER,
 		"Shatterhorn" = SKIN_COLOR_SHATTERHORN,
 		"Spirit Crusher" = SKIN_COLOR_SPIRITCRUSHER,
+		"Iron Splinter" = SKIN_COLOR_IRON_SPLINTER,
+		"Glass Crag" = SKIN_COLOR_GLASS_CRAG,
+		"Daemonscar" = SKIN_COLOR_DAEMONSCAR,
 		//Caustic edit
 		"Avalanche" = SKIN_COLOR_AVALANCHE,
-		"Grove-Ward" = SKIN_COLUR_GROVE_WARD
+		"Grove-Ward" = SKIN_COLUR_GROVE_WARD,
 		//Caustic edit end
 	)
 

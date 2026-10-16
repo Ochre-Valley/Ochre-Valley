@@ -4,14 +4,14 @@
 	desc = "Anyone can cook. You know that better than everybody. Why should you settle for the blandness of rations and other chaff when you can prepare the good stuff yourself? You may even fancy making a brew or two."
 	added_stashed_items = list("Mess Kit" = /obj/item/storage/gadget/messkit)
 	added_skills = list(list(/datum/skill/craft/crafting, 2, 2),
-                        list(/datum/skill/craft/cooking, 2, 2),
+                        list(/datum/skill/craft/cooking, 3, 3),
 						list(/datum/skill/labor/butchering, 2, 2))
 
-/datum/virtue/utility/beauty
+/*/datum/virtue/utility/beauty //OV EDIT 9.12.26 - Removed and replaced by SOCIALITE from upstream
 	name = "Beauty (Beautiful Single-Pick)"
 	added_traits = list(TRAIT_BEAUTIFUL, TRAIT_GOODLOVER)
 	desc = "(THIS IS A SINGLE PICK FOR CLASSES LOCKED OUT OF THE WELL-OFF VIRTUE) Just looking at me relieves some of the hardships of the world, and I'm quite good in bed."
-	added_stashed_items = list("Hand Mirror" = /obj/item/handmirror)
+	added_stashed_items = list("Hand Mirror" = /obj/item/handmirror)*/
 
 
 #define SPARK_CHILLFOOD "Chill Food"
@@ -28,6 +28,7 @@
 #define SPARK_TRANSCRIBE "Transcribe"
 #define SPARK_OMEN "Read Omen"
 #define SPARK_FRIDGE "Fridigitation"
+#define SPARK_SELF_TF "Self Transmutation"
 
 /datum/virtue/utility/spark
 	name = "Spark of Magick"
@@ -37,7 +38,6 @@
 	extra_choices = list(
 		SPARK_CHILLFOOD,
 		SPARK_CAMPFIRE,
-		SPARK_CLEANING,
 		SPARK_FETCH,
 		SPARK_REPEL,
 		SPARK_LIGHT,
@@ -49,11 +49,11 @@
 		SPARK_TRANSCRIBE,
 		SPARK_OMEN,
 		SPARK_FRIDGE,
+		SPARK_SELF_TF,
 	)
 	choice_tooltips = list(
 		SPARK_CHILLFOOD = "Chill a piece of food with a touch of frost without affecting its quality, extending its freshness by a half of a dae (15 MINUTES OOC).",
 		SPARK_CAMPFIRE = "Creates a magical campfire to cook on. 3 tiles range. Lasts for 10 minutes.",
-		SPARK_CLEANING = "Unleash a wave of kinetic force that scours a nearby area clean of grime and debris.",
 		SPARK_FETCH = "Shoot out a magical bolt that draws in a freestanding item towards the caster. Doesn't work on living targets.",
 		SPARK_REPEL = "Shoot out a magical bolt that pushes away a freestanding item from the caster. Doesn't work on large or living targets. Instead of repelling a target, it will throw an object in your hand if cast while in throw mode.",
 		SPARK_LIGHT = "Summons a condensed orb of light.",
@@ -65,6 +65,7 @@
 		SPARK_TRANSCRIBE = "Conjure a parchment and a magical quill to write for you. This magical parchment will listen for up to ten minutes and transcribe what it has heard onto itself. (use in your hand, and then use again to stop the recording).",
 		SPARK_OMEN = "Casting this spell, you draw upon the leylines themselves to reveal secrets of fate itself. (Casting it gives you a vague explanation of who the current storyteller is, if they are your patron the explanation is less vague.)",
 		SPARK_FRIDGE = "An advanced version of Chill Food. Greatly prolongs shelf life by entirely freezing it solid. (OOC Note: it does not work on produce, only foods, removes rot timer entirely.).",
+		SPARK_SELF_TF = "A modification of the ritual of lux consolidation, allowing one to seal themselves inside an object.",
 	)
 
 /datum/virtue/utility/spark/apply_to_human(mob/living/carbon/human/recipient)
@@ -81,15 +82,12 @@
 			if(SPARK_CAMPFIRE)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/create_campfire))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/create_campfire)
-			if(SPARK_CLEANING)
-				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/greater_cleaning))
-					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/greater_cleaning)
 			if(SPARK_FETCH)
-				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/projectile/lesser_fetch))
-					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/lesser_fetch)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/projectile/fetch))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/fetch)
 			if(SPARK_REPEL)
-				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/projectile/lesser_repel))
-					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/lesser_repel)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/projectile/repel))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/repel)
 			if(SPARK_LIGHT)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/light))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/light)
@@ -117,10 +115,11 @@
 			if(SPARK_FRIDGE)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/fridigitation))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/fridigitation)
-
+			if(SPARK_SELF_TF)
+				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/self_tf))
+					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/self_tf)
 #undef SPARK_CHILLFOOD
 #undef SPARK_CAMPFIRE
-#undef SPARK_CLEANING
 #undef SPARK_FETCH
 #undef SPARK_REPEL
 #undef SPARK_LIGHT
@@ -132,9 +131,14 @@
 #undef SPARK_TRANSCRIBE
 #undef SPARK_OMEN
 #undef SPARK_FRIDGE
+#undef SPARK_SELF_TF
 
 /datum/virtue/utility/mountable
 	name = "Mountable"
 	desc = "You have trained and become fit enough to function as a suitable mount. People may ride you as they would a saiga."
 	added_traits = list(TRAIT_MOUNTABLE)
 
+/datum/virtue/utility/niteyes
+	name = "Nite Eyes"
+	desc = "I don't need a light source when I'm travelling through darkened areas - my eyes are well used to the gloom of nite."
+	added_traits = list(TRAIT_NITEVISION)

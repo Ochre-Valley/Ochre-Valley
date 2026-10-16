@@ -27,6 +27,7 @@
 		/datum/sprite_accessory/face_detail/burneye_r,
 		/datum/sprite_accessory/face_detail/burneye_l,
 		/datum/sprite_accessory/face_detail/scarhead,
+		/datum/sprite_accessory/face_detail/eyebags,
 		/datum/sprite_accessory/face_detail/monstermaw, /// CAUSTIC EDIT
 		)
 
@@ -43,13 +44,21 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/accessory/earrings,
 		/datum/sprite_accessory/accessory/earrings/sil,
-		/datum/sprite_accessory/accessory/earrings/em,
+		/datum/sprite_accessory/accessory/earrings/hoop,
+		/datum/sprite_accessory/accessory/earrings/hoop/sil,
 		/datum/sprite_accessory/accessory/eyepierce,
 		/datum/sprite_accessory/accessory/eyepierce/alt,
 		/datum/sprite_accessory/accessory/choker,
 		/datum/sprite_accessory/accessory/chokere,
 		/datum/sprite_accessory/accessory/harlequin,
 		/datum/sprite_accessory/accessory/warpaint,
+		/datum/sprite_accessory/accessory/warpaint_stripes,
+		//OV ADD START
+		/datum/sprite_accessory/accessory/ochre/earrings,
+		/datum/sprite_accessory/accessory/ochre/earrings/sil,
+		/datum/sprite_accessory/accessory/ochre/earrings/hoop,
+		/datum/sprite_accessory/accessory/ochre/earrings/hoop/sil,
+		//OV ADD END
 		)
 
 /datum/customizer/bodypart_feature/accessory
@@ -68,13 +77,14 @@
 	name = "Underwear"
 	feature_type = /datum/bodypart_feature/underwear
 	sprite_accessories = list(
-		/datum/sprite_accessory/underwear/briefs,
-		/datum/sprite_accessory/underwear/briefs/eoran,
-		/datum/sprite_accessory/underwear/panties,
-		/datum/sprite_accessory/underwear/bikini,
-		/datum/sprite_accessory/underwear/leotard,
 		/datum/sprite_accessory/underwear/athletic_leotard,
-		/datum/sprite_accessory/underwear/braies
+		/datum/sprite_accessory/underwear/leotard,
+		/datum/sprite_accessory/underwear/bandages,
+		/datum/sprite_accessory/underwear/bikini,
+		/datum/sprite_accessory/underwear/panties,
+		/datum/sprite_accessory/underwear/braies,
+		/datum/sprite_accessory/underwear/briefs,
+		/datum/sprite_accessory/underwear/briefs/eoran
 		)
 
 /datum/customizer/bodypart_feature/legwear

@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - bugfix: "Fixes prosthetics having the totally wrong icon states making them invisible."

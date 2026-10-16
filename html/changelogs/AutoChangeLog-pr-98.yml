@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - balance: "Mindlink should actually be silent now, although it still makes a magical sound on casting. This also reverts the cost and tier reduction that came with the change, as it's now is more powerful."

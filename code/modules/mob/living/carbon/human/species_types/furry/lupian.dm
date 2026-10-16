@@ -31,12 +31,13 @@
 		/obj/item/bodypart/taur/goat, //OV Add
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
+		/obj/item/bodypart/taur/saiga, //OV ADD
 	)
 	///Caustic edit end
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	use_skintones = TRUE
 	attack_verb = "slash"
-	liked_food = GROSS | MEAT | FRIED
+
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 	possible_ages = ALL_AGES_LIST
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mta.dmi'
@@ -45,21 +46,9 @@
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
 	soundpack_m = /datum/voicepack/male
 	soundpack_f = /datum/voicepack/female
-	offset_features = list(
-		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
-		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
-		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
-		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
-		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
-		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
-		OFFSET_FACE_F = list(0,-1), OFFSET_BELT_F = list(0,-1), OFFSET_BACK_F = list(0,-1), \
-		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
-		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
-		//Caustic Edit
-		OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0), \
-		//Caustic End
-		)
+	allowed_body_builds = ALL_BODY_BUILDS_ANTHRO //OV EDIT
+	default_body_build_m = BODY_BUILD_BULKY_ANTHRO //OV EDIT
+	default_body_build_f = BODY_BUILD_SLIM_ANTHRO //OV EDIT
 	race_bonus = list(STAT_INTELLIGENCE = 1, STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
 	organs = list(
@@ -72,6 +61,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 		//ORGAN_SLOT_TAIL = /obj/item/organ/tail/lupian,  //caustic remove the customizer already gives the organ
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/lupian
 		)
@@ -96,6 +86,8 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/vagina/animal,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		//Caustic edit
 		/datum/customizer/organ/belly/animal,
 		/datum/customizer/organ/butt/animal,
@@ -155,14 +147,6 @@
 
 /datum/species/lupian/qualifies_for_rank(rank, list/features)
 	return TRUE
-
-/datum/species/lupian/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	. = ..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-
-/datum/species/lupian/on_species_loss(mob/living/carbon/C)
-	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 
 /datum/species/lupian/get_skin_list()		//This is completely, utterly deprecated as far as I know.
 	return list(

@@ -13,7 +13,7 @@
 	outfit = /datum/outfit/job/roguetown/druid
 	tutorial = "You have always been drawn to the wild, and the wild drawn to you. When your calling came, it was from Dendor. Your patron claims dominion over all nature--promising bounties to those who act in his name to bring balance to His domain. The forest is the most comfortable place for you, toiling alongside soilsons and soilbrides...although sometimes what lies beyond the gates fills your soul with a feral yearning."
 
-	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/divineblast)
+	spells = list(/datum/action/cooldown/spell/projectile/divine_blast)
 
 	display_order = JDO_DRUID
 	give_bank_account = TRUE
@@ -24,12 +24,14 @@
 
 	//You're.. not REALLY a full-on church member, but being a druid implies you became a clergy-man of some sort; even if it's non-organized. So, still shouldn't be noble.
 	virtue_restrictions = list(/datum/virtue/utility/noble)
+	quirk_restrictions = list(/datum/quirk/noble)
 	job_traits = list(TRAIT_SEEDKNOW, TRAIT_OUTDOORSMAN, TRAIT_RITUALIST, TRAIT_HOMESTEAD_EXPERT, TRAIT_WOODWALKER, TRAIT_EXPERT_HUNTER)
 
 	advclass_cat_rolls = list(CTAG_DRUID = 2)
 	job_subclasses = list(
 		/datum/advclass/druid
 	)
+	has_subprefs = FALSE // only one subclass
 
 /datum/advclass/druid
 	name = "Druid"
@@ -55,7 +57,7 @@
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
+		/datum/skill/magic/holy = SKILL_LEVEL_MASTER, //You're the peak of Dendorite Miracle-Casting.
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/labor/farming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_NOVICE,
@@ -64,9 +66,9 @@
 		/datum/skill/magic/druidic = SKILL_LEVEL_JOURNEYMAN, //Shapeshifting.
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT, //Druids know the forest and when it has been disturbed
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/whipsflails = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/polearms = SKILL_LEVEL_NOVICE, //To help them defend themselves with parrying
-		/datum/skill/combat/staves = SKILL_LEVEL_NOVICE, //This, too.
+		/datum/skill/combat/whipsflails = SKILL_LEVEL_APPRENTICE, //Enough to bypass some of the parries of trash-mobs
+		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE, //Uniquely gets this too
+		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN, //On par w/ missionary, because they explore more
 		/datum/skill/labor/butchering = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 		/datum/skill/labor/fishing = SKILL_LEVEL_NOVICE,
@@ -88,17 +90,29 @@
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	beltl = /obj/item/rogueweapon/whip //The whip itself is not often associated to many jobs. Druids feel like a thematic choice to have a self-defense whip
 	backl = /obj/item/storage/backpack/rogue/satchel
-	head = /obj/item/clothing/head/roguetown/dendormask
+	backr = /obj/item/rogueweapon/woodstaff
+	mask = /obj/item/flowercrown/briar
 	wrists = /obj/item/clothing/neck/roguetown/psicross/dendor
+	armor = /obj/item/clothing/suit/roguetown/armor/leather/druid
 	shirt = /obj/item/clothing/suit/roguetown/shirt/robe/dendor
-	backpack_contents = list(/obj/item/ritechalk, /obj/item/storage/keyring/acolyte)
+	shoes = /obj/item/clothing/shoes/roguetown/sandals
+
+	var/helms = list("Briar Mask (Classic)","Saiga Skull","Antler Hood")
+	var/helm_choice = input(H, "Choose your HEADWEAR.", "DENDOR. FATHER. SPIRIT-GUIDE.") as anything in helms
+	switch(helm_choice)
+		if("Briar Mask (Classic)")
+			head = /obj/item/clothing/head/roguetown/dendormask
+		if("Saiga Skull")
+			head = /obj/item/clothing/head/roguetown/helmet/leather/saiga/druid
+		if("Antler Hood")
+			head = /obj/item/clothing/head/roguetown/antlerhood
+
+	backpack_contents = list(/obj/item/ritechalk, /obj/item/storage/keyring/acolyte, /obj/item/needle/thorn)
+
 	H.ambushable = FALSE
+
 	H.AddComponent(/datum/component/wise_tree_alert)
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	C.grant_miracles(H, cleric_tier = CLERIC_T4, passive_gain = CLERIC_REGEN_MAJOR, start_maxed = TRUE)	//Starts off maxed out.
 	if(H.mind)
 		SStreasury.give_money_account(ECONOMIC_DESTITUTE, H, "Church Funding.")
-
-/datum/outfit/job/roguetown/druid/basic/choose_loadout(mob/living/carbon/human/H)
-	. = ..()
-	H.put_in_hands(new /obj/item/rogueweapon/woodstaff(H)) //To encourage them to wander the forests and to help defend themselves

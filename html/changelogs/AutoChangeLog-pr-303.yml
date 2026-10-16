@@ -1,4 +1,0 @@
-author: "Obengrad"
-delete-after: True
-changes:
-  - qol: "made the advanced spellbook sprites require novice arcane magic skill, instead of expert."

@@ -8,6 +8,9 @@
 	accessory_type = /datum/sprite_accessory/belly
 	var/belly_size = DEFAULT_BELLY_SIZE
 
+/obj/item/organ/belly/get_cache_key()
+	return "[..()]-[belly_size]"
+
 /datum/organ_dna/belly
 	var/belly_size = DEFAULT_BELLY_SIZE
 
@@ -17,16 +20,17 @@
 	belly_organ.belly_size = belly_size
 
 GLOBAL_LIST_INIT(named_belly_sizes, list(
-	"flat" = 0,
-	"small" = 1,
-	"medium" = 2,
-	"large" = 3,
-	"enormous" = 5,
-	"towering" = 6,
-	"gigantic" = 7,
-	"gargantuan" = 8,
-	"colossal" = 9,
-	"ungodly big" = 10,
+	"Flat" = 0,
+	"Small" = 1,
+	"Medium" = 2,
+	"Large" = 3,
+	"Enormous" = 4,
+	"Towering" = 5,
+	"Gigantic" = 6,
+	"Gargantuan" = 7,
+	"Colossal" = 8,
+	"Ungodly big" = 9,
+	"Baothan" = 10,
 ))
 
 /datum/sprite_accessory/belly
@@ -43,8 +47,9 @@ GLOBAL_LIST_INIT(named_belly_sizes, list(
 /datum/sprite_accessory/belly/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
 
-/datum/sprite_accessory/belly
+/datum/sprite_accessory/belly/plain
 	icon_state = "pair"
-	name = "Belly"
+	preview_states = list("belly_pair_2_FRONT")
+	name = "Plain"
 	color_key_defaults = list(KEY_CHEST_COLOR)
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTER_LAYER)
+	relevant_layers = list(BODY_BEHIND_LAYER, BELLY_LAYER) //OV EDIT - Genitals Adjustments src. Caustic - Replace BODY_FRONTER_LAYER

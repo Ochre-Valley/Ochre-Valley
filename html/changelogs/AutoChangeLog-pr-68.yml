@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - admin: "Added a check for the cancel vote button that it's an intentional click."

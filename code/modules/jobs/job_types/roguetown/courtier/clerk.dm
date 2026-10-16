@@ -17,16 +17,17 @@
 	outfit = /datum/outfit/job/roguetown/clerk
 	display_order = JDO_CLERK
 	give_bank_account = TRUE
-	min_pq = null //-10
+	min_pq = 5 //-10 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
 	advclass_cat_rolls = list(CTAG_CLERK = 2)
 
-	job_traits = list(TRAIT_SEEPRICES)
-	virtue_restrictions = list(/datum/virtue/utility/skilled, /datum/virtue/utility/apprentice) //Commerce role, not a craftsman.
+	job_traits = list(TRAIT_SEEPRICES, TRAIT_ROYAL_SUBSIDY)
+	virtue_restrictions = list(/datum/virtue/utility/skilled, /datum/virtue/utility/apprentice, /datum/virtue/utility/homesteader, /datum/virtue/utility/granary) //Commerce role, not a craftsman.
 	job_subclasses = list(
 		/datum/advclass/clerk
 	)
+	has_subprefs = FALSE // only one subclass
 
 
 /datum/advclass/clerk

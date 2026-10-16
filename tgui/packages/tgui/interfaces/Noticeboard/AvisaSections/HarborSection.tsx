@@ -10,7 +10,7 @@ import {
   SEAL_BLUE,
   SERIF,
 } from '../../common/parchment';
-import { type HarborDemand, type NoticeboardData } from '../types';
+import type { HarborDemand, NoticeboardData } from '../types';
 
 const orderGridStyle: React.CSSProperties = {
   display: 'grid',
@@ -35,7 +35,11 @@ const formatDuration = (totalSeconds: number) => {
 const HarborDemandCard = ({ demand }: { demand: HarborDemand }) => (
   <div style={{ ...cardStyle, marginBottom: 0 }}>
     <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap' }}>
-      <span style={badgeStyle(SEAL_BLUE)}>SHIP IN PORT</span>
+      {demand.departing ? (
+        <span style={badgeStyle(SEAL_AMBER)}>DEPARTING</span>
+      ) : (
+        <span style={badgeStyle(SEAL_BLUE)}>SHIP IN PORT</span>
+      )}
     </div>
     <div
       style={{
@@ -133,8 +137,8 @@ const HarborDemandCard = ({ demand }: { demand: HarborDemand }) => (
         fontSize: FONT_BODY,
       }}
     >
-      Deposit goods at the Fulfillment Crate to settle the vessel&apos;s
-      bulk demands.
+      Deposit goods at the Fulfillment Crate to settle the vessel&apos;s bulk
+      demands.
     </div>
   </div>
 );

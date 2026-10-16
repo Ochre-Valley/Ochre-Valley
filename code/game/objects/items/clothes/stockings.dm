@@ -9,7 +9,7 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	blade_dulling = DULLING_CUT
 	max_integrity = 200
-	integrity_failure = ARMOR_INTEG_FAILURE
+	integrity_failure = GENERIC_INTEG_FAILURE
 	throw_speed = 0.5
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	var/gendered
@@ -23,6 +23,8 @@
 /obj/item/legwears/attack(mob/M, mob/user, def_zone)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
+		if(NO_UNDERWEAR in H.dna.species.species_traits)
+			return
 		if(!H.legwear_socks)
 			if(!get_location_accessible(H, BODY_ZONE_PRECISE_L_FOOT))
 				return
@@ -46,7 +48,7 @@
 	legwears_feature = null
 	return ..()
 
-/obj/item/legwears/random/Initialize()
+/obj/item/legwears/random/Initialize(mapload)
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
 
@@ -72,7 +74,7 @@
 	desc = "A legwear made just for the pure aesthetics. Made out of thin silk. Popular among nobles."
 	icon_state = "silk"
 
-/obj/item/legwears/silk/random/Initialize()
+/obj/item/legwears/silk/random/Initialize(mapload)
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
 
@@ -98,7 +100,7 @@
 	desc = "A legwear popular among wenches."
 	icon_state = "fishnet"
 
-/obj/item/legwears/fishnet/random/Initialize()
+/obj/item/legwears/fishnet/random/Initialize(mapload)
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
 
@@ -124,7 +126,7 @@
 	desc = "A legwear popular among those who plan to venture into colder climates."
 	icon_state = "thigh"
 
-/obj/item/legwears/thigh_high/random/Initialize()
+/obj/item/legwears/thigh_high/random/Initialize(mapload)
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
 
@@ -146,7 +148,7 @@
 	desc = "A legwear popular among those who enjoy taller boots."
 	icon_state = "knee"
 
-/obj/item/legwears/knee_high/random/Initialize()
+/obj/item/legwears/knee_high/random/Initialize(mapload)
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
 

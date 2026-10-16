@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "The default is now being able to see OOC Notes and flavortext of masked individuals."

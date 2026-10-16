@@ -1,4 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - bugfix: "Fixed wildshape not accounting for the Bottomless vice so you don't get your nutrition reset to the normal cap when transforming!"

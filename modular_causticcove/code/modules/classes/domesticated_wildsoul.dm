@@ -36,7 +36,8 @@
 	H.adjust_blindness(-3)
 	shoes = /obj/item/clothing/shoes/roguetown/boots/furlinedanklets
 	beltr = /obj/item/rogueweapon/huntingknife/stoneknife //OV Edit - Warden Sync
-	armor = /obj/item/clothing/suit/roguetown/armor/regenerating/skin/wildsoul/warden //OV EDIT
+	armor = /obj/item/clothing/suit/roguetown/armor/manual/resting/ochre/overskin/fullbody/wildsoul/tame //OV EDIT
+	shirt = /obj/item/clothing/suit/roguetown/armor/manual/resting/ochre/chestskin/wildsoul/tame //OV EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/knuckles //OV Edit added steel knuckles
 	//OV Add Start
 	backpack_contents = list(
@@ -68,19 +69,6 @@
 		var/hoodchoice = input(H, "Choose your Shroud.", "HOOD SELECTION") as anything in hoods
 		if(helmchoice != "None")
 			mask = hoods[hoodchoice]
-
-	var/techniques = list("Dropkick - Pushback + Extra Damage", "Chokeslam - Stamina Damage", "Stunner - Dazed Debuff", "Headbutt - Vulnerable Debuff") // cool wrestling moves
-	var/technique_choice = input(H,"Choose your TECHNIQUE.", "TOSS THEM.") as anything in techniques
-	switch(technique_choice)
-		if("Dropkick - Pushback + Extra Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/dropkick)
-		if("Chokeslam - Stamina Damage")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/chokeslam)
-		if("Stunner - Dazed Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/stunner)
-		if("Headbutt - Vulnerable Debuff")
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/headbutt)
-
 
 /datum/outfit/job/roguetown/warden/wildsoul/proc/give_feral_eyes(mob/living/carbon/human/man)
 	var/obj/item/organ/eyes/eyes = man.getorganslot(ORGAN_SLOT_EYES)

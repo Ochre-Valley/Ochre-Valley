@@ -1,4 +1,5 @@
-GLOBAL_VAR_INIT(admin_notice, "") // Admin notice that all clients see when joining the server
+GLOBAL_VAR_INIT(admin_notice, load_persistent_admin_notice()) // Admin notice that all clients see when joining the server
+GLOBAL_VAR_INIT(persistent_admin_notice, load_persistent_admin_notice())
 
 GLOBAL_VAR_INIT(timezoneOffset, 0) // The difference betwen midnight (of the host computer) and 0 world.ticks.
 
@@ -8,7 +9,7 @@ GLOBAL_VAR_INIT(fileaccess_timer, 0)
 
 GLOBAL_DATUM_INIT(data_core, /datum/datacore, new)
 
-GLOBAL_VAR_INIT(CELLRATE, 0.002)  // conversion ratio between a watt-tick and kilojoule
+GLOBAL_VAR_INIT(CELLRATE, 0.002)	// conversion ratio between a watt-tick and kilojoule
 GLOBAL_VAR_INIT(CHARGELEVEL, 0.001) // Cap for how fast cells charge, as a percentage-per-tick (.001 means cellcharge is capped to 1% per second)
 
 GLOBAL_LIST_EMPTY(powernets)

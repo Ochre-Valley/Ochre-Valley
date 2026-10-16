@@ -17,6 +17,8 @@
 /obj/item/holder/micro/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null) //Might not be needed at all? Just, whenever we figure how to render worn players...
 	var/mob/living/carbon/human/H = held_mob
 	. = ..()*/
+/obj/item/holder/can_be_package_wrapped()
+	return 0
 
 /obj/item/holder/examine(mob/user)
 	SHOULD_CALL_PARENT(FALSE)

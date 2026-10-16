@@ -1,0 +1,213 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/item/roguemachine/keymaster,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"b" = (
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/mossy{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"f" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"g" = (
+/obj/structure/fluff/railing/corner/south_west,
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"i" = (
+/obj/effect/decal/mossy{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"k" = (
+/obj/structure/fluff/railing/corner/south_east,
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 6
+	},
+/obj/structure/flora/hotspring_rocks/small{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"l" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"o" = (
+/obj/structure/fluff/railing/border/west,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"v" = (
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"w" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"z" = (
+/obj/effect/decal/mossy,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"B" = (
+/obj/effect/decal/mossy{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"C" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/obj/machinery/light/rogue/torchholder/hotspring{
+	pixel_x = -2
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"D" = (
+/obj/structure/fluff/railing/wood/east,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"E" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood/west{
+	pixel_x = -4
+	},
+/obj/effect/decal/mossy,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"I" = (
+/obj/effect/decal/mossy{
+	dir = 4
+	},
+/obj/structure/fluff/railing/wood/east,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"L" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/structure/flora/roguegrass{
+	pixel_y = -5
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"N" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood/east,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"O" = (
+/obj/effect/decal/mossy{
+	dir = 4
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"P" = (
+/obj/effect/decal/mossy{
+	dir = 8
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"R" = (
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"S" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+"V" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/exposed/town/keep)
+"X" = (
+/obj/structure/flora/hotspring_rocks/small{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/exposed/town/keep)
+
+(1,1,1) = {"
+g
+o
+E
+C
+f
+"}
+(2,1,1) = {"
+O
+X
+z
+R
+w
+"}
+(3,1,1) = {"
+V
+B
+a
+i
+P
+"}
+(4,1,1) = {"
+L
+v
+S
+S
+l
+"}
+(5,1,1) = {"
+N
+D
+b
+I
+k
+"}

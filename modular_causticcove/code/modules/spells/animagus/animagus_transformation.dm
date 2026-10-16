@@ -85,17 +85,14 @@
 	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_SOURCE_ANIMAGUS)
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_SOURCE_ANIMAGUS)
 	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_SOURCE_ANIMAGUS)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_ANIMAGUS)	
+	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_ANIMAGUS)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_SOURCE_ANIMAGUS)
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_SOURCE_ANIMAGUS)
 	ADD_TRAIT(src, TRAIT_PACIFISM, TRAIT_SOURCE_ANIMAGUS) // just an extra layer of protection in case something will go wrong
 	src.status_flags |= GODMODE // so they won't die by any means
 	invisibility = oldinv
 
-	// OV Edit Start
 	W.gain_inherent_skills()
-	W.update_sight()
-	// OV Edit End
 
 /mob/living/carbon/human/proc/animagus_untransform(dead,gibbed)
 	if(!stored_mob)
@@ -173,10 +170,7 @@
 			if(wildspell != originspell)
 				W.RemoveSpell(wildspell)
 
-	// OV Edit Start
 	W.regenerate_icons()
-	W.update_sight()
-	// OV Edit End
 	to_chat(W, span_userdanger("I return to my old form."))
 
 	qdel(src)

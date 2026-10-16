@@ -42,7 +42,7 @@ import {
 } from './constants';
 import type { Data } from './types';
 
-export const AppearanceChanger = (props) => {
+export const AppearanceChanger = (props: any) => {
   const { act, config, data } = useBackend<Data>();
 
   const {
@@ -404,6 +404,6 @@ export const AppearanceChanger = (props) => {
   );
 };
 
-export const AppearanceChangerDefaultError = (props) => {
+export const AppearanceChangerDefaultError = (props: any) => {
   return <Box textColor="red">Disabled</Box>;
 };

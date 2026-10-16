@@ -31,13 +31,13 @@
 
 //Taur markings
 /datum/sprite_accessory/tail_feature/taur
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
+	relevant_layers = list(BODY_BEHIND_LAYER, TAURFEATURE_LAYER)
 
 /datum/sprite_accessory/tail_feature/taur/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
-    generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_TAUR, OFFSET_TAUR_F)
+	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_TAUR, OFFSET_TAUR_F)
 
 /datum/sprite_accessory/tail_feature/taur/lamia
-	name = "Lamia Taur Markings"	
+	name = "Lamia Taur Markings"
 	icon = 'modular_causticcove/icons/mob/taurs/naga_markings.dmi'
 	icon_state = "naga_markings"
 
@@ -121,11 +121,6 @@
 	name = "Deer Taur Belly Markings"
 	icon = 'modular_causticcove/icons/mob/taurs/taurdeer_belly.dmi'
 	icon_state = "taurdeer_belly_s"
-
-
-/datum/sprite_accessory/tail_feature/large_snake
-	icon = 'modular_causticcove/icons/mob/taurs/large_snake_markings.dmi'
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
 
 /datum/sprite_accessory/tail_feature/taur/biglegs
 	name = "Big Legs Marking"

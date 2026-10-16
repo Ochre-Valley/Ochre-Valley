@@ -1,4 +1,0 @@
-author: "Tenryumi"
-delete-after: True
-changes:
-  - bugfix: "Fixed the Grazer virtue incorrectly dealing with the old stomach taken out of you on spawn. No more phantom stomachs on spawn!"

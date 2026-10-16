@@ -13,14 +13,15 @@
 	var/overarmor
 	throw_on_break = TRUE
 
+/obj/item/clothing/wrists/roguetown/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Middle-clicking adjusts its layer, so it can be worn either above-or-below any armor and gloves.")
+
 /obj/item/clothing/wrists/roguetown/MiddleClick(mob/user, params)
 	. = ..()
 	overarmor = !overarmor
 	to_chat(user, span_info("I [overarmor ? "wear \the [src] over my armor" : "wear \the [src] under my armor"]."))
-	if(overarmor)
-		alternate_worn_layer = WRISTS_LAYER
-	else
-		alternate_worn_layer = UNDER_ARMOR_LAYER
+	alternate_worn_layer = overarmor ? OVER_ARMOR_LAYER : initial(alternate_worn_layer)
 	user.update_inv_wrists()
 	user.update_inv_gloves()
 	user.update_inv_armor()
@@ -50,6 +51,7 @@
 /obj/item/clothing/wrists/roguetown/bracers/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/gold
 	name = "golden bracers"
@@ -57,7 +59,7 @@
 	icon_state = "goldbracers"
 	item_state = "goldbracers"
 	body_parts_covered = ARMS | HANDS //Experimental, but should compliment the cost. Let all handhitters fear your presence.. for exactly five strikes.
-	armor_class = ARMOR_CLASS_HEAVY //Ceremonial. Heavy is the head that bares the burden.
+	armor_class = ARMOR_CLASS_HEAVY //Ceremonial. Heavy is the head that bears the burden.
 	armor = ARMOR_INDESTRUCTIBLE //Renders its wearer completely invulnerable to damage. The caveat is, however..
 	max_integrity = ARMOR_INT_SIDE_GOLD // ..is that it's extraordinarily fragile. To note, this is lower than even Decrepit-tier armor.
 	anvilrepair = null
@@ -65,7 +67,6 @@
 	smelt_bar_num = 1
 	grid_height = 96
 	grid_width = 96
-	sellprice = 200
 	unenchantable = TRUE
 
 /obj/item/clothing/wrists/roguetown/bracers/gold/king
@@ -119,7 +120,7 @@
 
 /obj/item/clothing/wrists/roguetown/bracers/aalloy
 	name = "decrepit bracers"
-	desc = "Frayed bronze cuffings, bound across the wrists. Don't bother counting the tallies left behind by their former legionnaires; none of them ever returned from the battlefields."
+	desc = "Rotted metal cuffings, bound across the wrists. Don't bother counting the tallies left behind by their former legionnaires; none of them ever returned from the battlefields."
 	max_integrity = ARMOR_INT_SIDE_DECREPIT
 	icon_state = "ancientbracers"
 	color = "#bb9696"
@@ -151,6 +152,8 @@
 	armor = ARMOR_PADDED
 	max_integrity = ARMOR_INT_SIDE_HARDLEATHER
 	blocksound = SOFTHIT
+	pickup_sound = 'sound/foley/equip/equip_armor.ogg'
+	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
@@ -164,6 +167,7 @@
 /obj/item/clothing/wrists/roguetown/bracers/leather/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
 	name = "hardened leather bracers"
@@ -171,7 +175,6 @@
 	icon_state = "albracers"
 	armor = ARMOR_LEATHER
 	max_integrity = ARMOR_INT_SIDE_STEEL
-	sellprice = 10
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	color = "#7f829d"
@@ -221,6 +224,10 @@
 	blocksound = SOFTHIT
 	anvilrepair = null
 	sewrepair = TRUE
+	pickup_sound = 'sound/foley/equip/equip_armor.ogg'
+	equip_sound = 'sound/foley/equip/equip_armor.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 
 /obj/item/clothing/wrists/roguetown/bracers/cloth/monk
 	name = "padded wrappings"
@@ -265,7 +272,7 @@
 		var/mob/living/carbon/human/H = loc
 		H.update_inv_wrists()
 
-/obj/item/clothing/wrists/roguetown/royalsleeves/Initialize()
+/obj/item/clothing/wrists/roguetown/royalsleeves/Initialize(mapload)
 	. = ..()
 	GLOB.lordcolor += src
 	if(GLOB.lordprimary)
@@ -293,6 +300,7 @@
 /obj/item/clothing/wrists/roguetown/bracers/brigandine/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/splint
 	name = "splint bracers"
@@ -308,6 +316,11 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = FIRE_PROOF
 	sewrepair = FALSE
+
+/obj/item/clothing/wrists/roguetown/bracers/splint/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/iron
 	name = "iron bracers"
@@ -335,10 +348,22 @@
 /obj/item/clothing/wrists/roguetown/bracers/jackchain/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
+
+/obj/item/clothing/wrists/roguetown/bracers/jackchain/alloyed
+	name = "alloyed jack chains"
+	desc = "Thin strips of darkened, dirty steel riveted to thin shoulder and elbow plates, with a thin strip of gold running through them."
+	max_integrity = ARMOR_INT_SIDE_STEEL
+	armor = ARMOR_MAILLE
+
+/obj/item/clothing/wrists/roguetown/bracers/jackchain/alloyed/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_MATTHIOS_GRINNING)
+
 
 /obj/item/clothing/wrists/roguetown/gem
 	name = "gem bracelet base"
 	desc = "You shouldn't be seeing this."
+	body_parts_covered = ARMS
 	slot_flags = ITEM_SLOT_WRISTS
 	armor = ARMOR_PLATE
 	max_integrity = ARMOR_INT_SIDE_CLOTH
@@ -391,7 +416,7 @@
 
 /obj/item/clothing/wrists/roguetown/bracers/aalloy/chain
 	name = "decrepit chain sleeves"
-	desc = "Coverings of frayed bronze maille, fashioned from hundreds of interlinked rings. An aura of decaying harlotry eminates from these sleeves. \
+	desc = "Coverings of rotted metal maille, fashioned from hundreds of interlinked rings. An aura of decaying harlotry eminates from these sleeves. \
 	</br>I can adjust these sleeves to hang further down, rather than simply hugging my wrists."
 	icon_state = "ancientchainsleevesalt"
 	item_state = "ancientchainsleevesalt"
@@ -423,6 +448,11 @@
 		user.update_inv_shirt()
 		playsound(user, 'sound/foley/equip/chain_equip.ogg', 50, TRUE)
 		wrapped = FALSE
+
+/obj/item/clothing/wrists/roguetown/bracers/aalloy/chain/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/paalloy/chain
 	name = "ancient chain sleeves"
@@ -459,6 +489,11 @@
 		playsound(user, 'sound/foley/equip/chain_equip.ogg', 50, TRUE)
 		wrapped = FALSE
 
+/obj/item/clothing/wrists/roguetown/bracers/paalloy/chain/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
+
 /obj/item/clothing/wrists/roguetown/bracers/iron/chain
 	name = "iron chain sleeves"
 	desc = "Coverings of iron maille, fashioned from hundreds of interlinked rings. An aura of traditional harlotry eminates from these sleeves. \
@@ -493,6 +528,11 @@
 		user.update_inv_shirt()
 		playsound(user, 'sound/foley/equip/chain_equip.ogg', 50, TRUE)
 		wrapped = FALSE
+
+/obj/item/clothing/wrists/roguetown/bracers/iron/chain/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
 
 /obj/item/clothing/wrists/roguetown/bracers/bronze/chain
 	name = "bronze chain sleeves"
@@ -529,7 +569,12 @@
 		user.update_inv_shirt()
 		playsound(user, 'sound/foley/equip/chain_equip.ogg', 50, TRUE)
 		wrapped = FALSE
-	
+
+/obj/item/clothing/wrists/roguetown/bracers/bronze/chain/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
+
 /obj/item/clothing/wrists/roguetown/bracers/chain
 	name = "chain sleeves"
 	desc = "Coverings of steel maille, fashioned from hundreds of interlinked rings. An aura of inexplicable harlotry eminates from these sleeves. \
@@ -565,6 +610,11 @@
 		playsound(user, 'sound/foley/equip/chain_equip.ogg', 50, TRUE)
 		wrapped = FALSE
 
+/obj/item/clothing/wrists/roguetown/bracers/chain/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FREEBLADEDEXTERITY)
+
 //
 
 /obj/item/clothing/wrists/roguetown/bracers/matthios
@@ -575,7 +625,7 @@
 	smeltresult = /obj/item/ingot/component/matthios
 	unenchantable = TRUE
 
-/obj/item/clothing/wrists/roguetown/bracers/matthios/Initialize()
+/obj/item/clothing/wrists/roguetown/bracers/matthios/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_FREEMAN, "ARMOR")
 	/*add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#fff385", "alpha" = 120, "size" = 1)) //IS THIS TRVE?
@@ -598,28 +648,12 @@
 	smeltresult = /obj/item/ingot/component/zizo
 	unenchantable = TRUE
 
-/obj/item/clothing/wrists/roguetown/bracers/zizo/Initialize()
+/obj/item/clothing/wrists/roguetown/bracers/zizo/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
 	/*add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#5f1515", "alpha" = 120, "size" = 1)) //Cursed look.
 */ // Combine with #c1b18d to make an easier, do-it-yourself version of Avantyne items without the need for exotic sprites.
 
-/obj/item/clothing/wrists/roguetown/bracers/zizo/get_examine_highlight_status()
-	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_ZIZO_ARMOR)
-
-/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy
-	name = "fused avantyne bracers"
-	desc = "Clasped yet practical, these avantyne wristguards are bound to the wearer forever. Once you have plunged deep into knowledge forbidden, there is no going back.."
-
-/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy/Initialize()
-	. = ..()
-	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV Edit - Armor Removal
-
-/*/obj/item/clothing/wrists/roguetown/bracers/zizo/heavy/dropped(mob/living/carbon/human/user) //OV Edit Start - Armor Removal
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)*/ //OV Edit End
 //
 
 /obj/item/clothing/wrists/roguetown/bracers/graggar
@@ -630,7 +664,7 @@
 	smeltresult = /obj/item/ingot/component/graggar
 	unenchantable = TRUE
 
-/obj/item/clothing/wrists/roguetown/bracers/graggar/Initialize()
+/obj/item/clothing/wrists/roguetown/bracers/graggar/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 	/*add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#1a146e", "alpha" = 120, "size" = 1)) //Cursed look.
@@ -650,7 +684,7 @@
 	color = null
 	smeltresult = /obj/item/ingot/component/graggar
 
-/*/obj/item/clothing/wrists/roguetown/bracers/graggar/heavy/Initialize() //OV Edit Start - Armor Remove Maint
+/*/obj/item/clothing/wrists/roguetown/bracers/graggar/heavy/Initialize(mapload) //OV Edit Start - Armor Remove Maint
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
 
@@ -661,14 +695,14 @@
 	qdel(src)*/ //OV Edit End
 
 //OV Add Start - Armor Labels
-/obj/item/clothing/wrists/roguetown/bracers/graggar/Initialize()
+/obj/item/clothing/wrists/roguetown/bracers/graggar/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
 //OV Add End
 
 /obj/item/clothing/wrists/roguetown/bracers/leather/baotha
 	name = "saccharine cuffs"
-	desc = "A betrayal without compare, and a sin without redemption; or so, She believed.."
+	desc = "The priestess, desperate to relieve the pain of her sickly congregation, attempted to take more than Eora's grace would give; but she was discovered, and the Eleven were incensed."
 	icon_state = "baothabracers"
 	chunkcolor = "#6d1c87"
 	armor = ARMOR_PADDED
@@ -676,16 +710,16 @@
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 150
 	smeltresult = /obj/item/ingot/component/baotha
 
-/obj/item/clothing/wrists/roguetown/bracers/leather/baotha/Initialize()
+/obj/item/clothing/wrists/roguetown/bracers/leather/baotha/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cursed_item, TRAIT_DEPRAVED, "BRACERS")
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	//ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT) //OV EDIT - Removable
 
-/obj/item/clothing/wrists/roguetown/bracers/leather/baotha/dropped(mob/living/carbon/human/user)
+/*/obj/item/clothing/wrists/roguetown/bracers/leather/baotha/dropped(mob/living/carbon/human/user) //OV EDIT - Armor Removal
 	. = ..()
 	if(QDELETED(src))
 		return
-	qdel(src)
+	qdel(src)*/
 
 /obj/item/clothing/wrists/roguetown/bracers/leather/baotha/get_examine_highlight_status()
 	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_ALARMING, HERESYDESC_BAOTHA_ARMOR)
@@ -702,4 +736,4 @@
 
 /obj/item/clothing/wrists/roguetown/bracers/hand/ComponentInitialize()
 	. = ..()
-	AddComponent(/datum/component/holster, /obj/item/rogueweapon/huntingknife, null, list(/obj/item/rogueweapon/huntingknife/idagger/stake, /obj/item/rogueweapon/huntingknife/idagger/silver/stake))
+	AddComponent(/datum/component/holster, /obj/item/rogueweapon/huntingknife, null, list(/obj/item/rogueweapon/huntingknife/idagger/stake, /obj/item/rogueweapon/huntingknife/idagger/steel/silver/stake))

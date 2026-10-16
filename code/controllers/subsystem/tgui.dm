@@ -40,7 +40,6 @@ SUBSYSTEM_DEF(tgui)
 
 	basehtml = replacetextEx(basehtml, "<!-- tgui:nt-copyright -->", "")
 
-// OV Add Start: Storage CDN/Iframe
 /datum/controller/subsystem/tgui/OnConfigLoad()
 	var/storage_iframe = CONFIG_GET(string/storage_cdn_iframe)
 
@@ -59,7 +58,6 @@ SUBSYSTEM_DEF(tgui)
 		return
 
 	basehtml = replacetextEx(basehtml, "\[tgui:storagecdn]", storage_iframe)
-// OV Add End
 
 /datum/controller/subsystem/tgui/Shutdown()
 	close_all_uis()

@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Removes return statement causing unexpected behavior in the well-off virtue"

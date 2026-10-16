@@ -10,7 +10,7 @@
 	//forbidden_races = list(RACES_DESPISED) //OV Edit - allow all
 	allowed_patrons = ALL_DIVINE_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
-	min_pq = 3 //OV EDIT
+	min_pq = 5 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
 	total_positions = 4
@@ -23,11 +23,14 @@
 
 	//No nobility for you, being a member of the clergy means you gave UP your nobility. It says this in many of the church tutorial texts.
 	virtue_restrictions = list(/datum/virtue/utility/noble)
+	quirk_restrictions = list(/datum/quirk/noble)
+	vice_restrictions = list(/datum/charflaw/silverweakness)
 	job_subclasses = list(
 		/datum/advclass/templar/monk,
 		/datum/advclass/templar/crusader,
 		/datum/advclass/templar/noc_spellblade,
-		/datum/advclass/templar/guardian
+		/datum/advclass/templar/guardian,
+		/datum/advclass/templar/maris
 	)
 
 /datum/outfit/job/roguetown/templar
@@ -75,16 +78,17 @@
 	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/holysee
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/holysee
-	wrists = /obj/item/clothing/neck/roguetown/psicross/astrata
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/jackchain
 	gloves = /obj/item/clothing/gloves/roguetown/chain
-	belt = /obj/item/storage/belt/rogue/leather/black
+	belt = /obj/item/storage/belt/rogue/leather/steel
 	pants = /obj/item/clothing/under/roguetown/chainlegs
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/iron
-	id = /obj/item/clothing/ring/silver
+	id = /obj/item/clothing/ring/silver/cleric
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/tower/holysee
 	backpack_contents = list(
 		/obj/item/ritechalk = 1,
+		/obj/item/rope/chain = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/mid = 1,
 		/obj/item/storage/keyring/acolyte = 1
@@ -92,7 +96,7 @@
 	H.cmode_music = 'sound/music/cmode/church/combat_reckoning.ogg' // this is probably awful implementation. too bad!
 	switch(H.patron?.type)
 		if(/datum/patron/divine/undivided)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/undivided
+			beltr = /obj/item/clothing/neck/roguetown/psicross/undivided
 			if(H.mind)
 				var/cloaks = list("Cloak", "Tabard")
 				var/cloakchoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in cloaks
@@ -109,33 +113,35 @@
 					if("Barbute")
 						head = /obj/item/clothing/head/roguetown/helmet/heavy/holyseebarbute
 		if(/datum/patron/divine/astrata)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/astrata
+			beltr = /obj/item/clothing/neck/roguetown/psicross/astrata
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratan
 			cloak = /obj/item/clothing/cloak/templar/astratan
 		if(/datum/patron/divine/abyssor)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/abyssor
+			beltr = /obj/item/clothing/neck/roguetown/psicross/abyssor
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/abyssorgreathelm
 			cloak = /obj/item/clothing/cloak/tabard/abyssorite
 		if(/datum/patron/divine/xylix)
+			beltr = /obj/item/clothing/neck/roguetown/psicross/xylix
 			cloak = /obj/item/clothing/cloak/templar/xylixian
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/xylixhelm
 			H.cmode_music = 'sound/music/combat_jester.ogg'
 		if(/datum/patron/divine/dendor)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/dendor
+			beltr = /obj/item/clothing/neck/roguetown/psicross/dendor
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
 			cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
 			H.cmode_music = 'sound/music/cmode/garrison/combat_warden.ogg'
 		if(/datum/patron/divine/necra)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/necra
+			beltr = /obj/item/clothing/neck/roguetown/psicross/necra
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/necran
 			cloak = /obj/item/clothing/cloak/templar/necran
 		if(/datum/patron/divine/pestra)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/pestra
+			beltr = /obj/item/clothing/neck/roguetown/psicross/pestra
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/pestran
 			cloak = /obj/item/clothing/cloak/templar/pestran
 		if(/datum/patron/divine/eora) //Eora content from stonekeep
-			wrists = /obj/item/clothing/neck/roguetown/psicross/eora
-			cloak = /obj/item/clothing/cloak/templar/eoran //caustic edit start
+			beltr = /obj/item/clothing/neck/roguetown/psicross/eora
+			//OV EDIT START
+			cloak = /obj/item/clothing/cloak/templar/eoran
 			if(H.mind)
 				var/helmets = list("Sallet", "Heavy")
 				var/helmetchoice = input(H,"Choose your helmet", "TAKE UP YOUR HELM") as anything in helmets
@@ -143,22 +149,23 @@
 					if("Heavy")
 						head = /obj/item/clothing/head/roguetown/helmet/heavy/eoran
 					if("Sallet") //
-						head = /obj/item/clothing/head/roguetown/helmet/sallet/eoran //caustic edit end
+						head = /obj/item/clothing/head/roguetown/helmet/sallet/eoran
+			//OV EDIT END
 		if(/datum/patron/divine/noc)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/noc
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+			beltr = /obj/item/clothing/neck/roguetown/psicross/noc
+			head = snouthelm_pick(H, /obj/item/clothing/head/roguetown/helmet/heavy/nochelm, /obj/item/clothing/head/roguetown/helmet/heavy/nochelm/snouted)
 			cloak = /obj/item/clothing/cloak/tabard/devotee/noc
 		if(/datum/patron/divine/ravox)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/ravox
+			beltr = /obj/item/clothing/neck/roguetown/psicross/ravox
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm
 			cloak = /obj/item/clothing/cloak/templar/ravox
 			mask = /obj/item/clothing/head/roguetown/roguehood/ravoxgorget
 		if(/datum/patron/divine/malum)
-			wrists = /obj/item/clothing/neck/roguetown/psicross/malum
+			beltr = /obj/item/clothing/neck/roguetown/psicross/malum
 			cloak = /obj/item/clothing/cloak/templar/malumite
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/malum
 		if(/datum/patron/old_god)
-			wrists = /obj/item/clothing/neck/roguetown/psicross
+			beltr = /obj/item/clothing/neck/roguetown/psicross
 			cloak = /obj/item/clothing/cloak/tabard/crusader/psydon
 	// Patron dagger in satchel
 	var/patron_dagger = get_templar_patron_dagger(H)
@@ -173,13 +180,14 @@
 
 /datum/outfit/job/roguetown/templar/crusader/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
-	var/weapons = list("Longsword","Flail","Mace","Battle Axe","Spear")
+	var/weapons = list("Arming Sword","Longsword","Flail","Mace","Battle Axe","Spear")
 	switch(H.patron?.type)
 		if(/datum/patron/divine/astrata) //Unique patron weapons, more can be added here if wanted.
 			weapons += "Solar Judgement"
 			weapons += "Absolutio"
 			weapons += "Sunburst"
 		if(/datum/patron/divine/undivided)
+			weapons += "Decaritterschwerte"
 			weapons += "Decablade"
 		if(/datum/patron/divine/noc)
 			weapons += "Moonlight Khopesh"
@@ -206,6 +214,10 @@
 			weapons += "Tidecleaver"
 	var/weapon_choice = input(H,"Choose your WEAPON.", "TAKE UP YOUR GOD'S ARMS") as anything in weapons
 	switch(weapon_choice)
+		if("Arming Sword")
+			H.put_in_hands(new /obj/item/rogueweapon/sword/church(H))
+			H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_NOVICE, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_L, TRUE)
 		if("Longsword")
 			H.put_in_hands(new /obj/item/rogueweapon/sword/long/church(H))
 			H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_NOVICE, TRUE)
@@ -223,6 +235,10 @@
 		if("Battle Axe")
 			H.put_in_hands(new /obj/item/rogueweapon/stoneaxe/battle/holyseeaxe(H))
 			H.adjust_skillrank(/datum/skill/combat/axes, SKILL_LEVEL_NOVICE, TRUE)
+		if("Decaritterschwerte")
+			H.put_in_hands(new /obj/item/rogueweapon/sword/undivided(H))
+			H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_NOVICE, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_L, TRUE)
 		if("Decablade")
 			H.put_in_hands(new /obj/item/rogueweapon/sword/long/undivided(H))
 			H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_NOVICE, TRUE)
@@ -256,6 +272,7 @@
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_L, TRUE)
 		if("Forgefiend")
 			H.put_in_hands(new /obj/item/rogueweapon/greatsword/grenz/flamberge/malum(H))
+			H.put_in_hands(new /obj/item/rogueweapon/scabbard/gwstrap(H), FALSE)
 			H.adjust_skillrank(/datum/skill/combat/swords, SKILL_LEVEL_NOVICE, TRUE)
 		if("Kargrund Maul")
 			H.put_in_hands(new /obj/item/rogueweapon/mace/maul/grand/malum(H), TRUE)

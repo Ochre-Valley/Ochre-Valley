@@ -5,7 +5,7 @@ import { Button, Image, Section, Stack, Table } from 'tgui-core/components';
 
 import { SortButton } from './CharacterDirectorySortButton';
 import { getTagColor } from './constants';
-import type { mobEntry } from './types';
+import type { mobEntry, mobEntrySortableKey } from './types';
 
 export const CharacterDirectoryList = (props: {
   directory: mobEntry[];
@@ -15,7 +15,7 @@ export const CharacterDirectoryList = (props: {
 
   const { directory, onOpenAd } = props;
 
-  const [sortId, setSortId] = useState<string>('name');
+  const [sortId, setSortId] = useState<mobEntrySortableKey>('name');
   const [sortOrder, setSortOrder] = useState<boolean>(true);
   const [hoveredAction, setHoveredAction] = useState<string | null>(null);
 
@@ -114,7 +114,11 @@ export const CharacterDirectoryList = (props: {
             const viewActionId = `${character.ckey}-view`;
 
             return (
-              <Table.Row key={i} backgroundColor={getTagColor(character.tag)} textColor="black">
+              <Table.Row
+                key={i}
+                backgroundColor={getTagColor(character.tag)}
+                textColor="black"
+              >
                 <Table.Cell verticalAlign="middle" textAlign="center">
                   {character.photo ? (
                     <Stack
@@ -157,49 +161,74 @@ export const CharacterDirectoryList = (props: {
                 <Table.Cell verticalAlign="middle" textAlign="center">
                   {character.pvptag}
                 </Table.Cell>
-                <Table.Cell verticalAlign="middle" collapsing textAlign="center">
+                <Table.Cell
+                  verticalAlign="middle"
+                  collapsing
+                  textAlign="center"
+                >
                   <Button
-                    onClick={() => onOpenAd(character.name, character.character_ad)}
+                    onClick={() =>
+                      onOpenAd(character.name, character.character_ad)
+                    }
                     onMouseEnter={() => setHoveredAction(adActionId)}
-                    onMouseLeave={() => setHoveredAction((current) => current === adActionId ? null : current)}
+                    onMouseLeave={() =>
+                      setHoveredAction((current) =>
+                        current === adActionId ? null : current,
+                      )
+                    }
                     color="transparent"
                     textColor="black"
                     icon="scroll"
-                    tooltip={hasCharacterAd ? 'View advertisement' : 'No advertisement set'}
+                    tooltip={
+                      hasCharacterAd
+                        ? 'View advertisement'
+                        : 'No advertisement set'
+                    }
                     disabled={!hasCharacterAd}
                     style={{
-                      backgroundColor: hoveredAction === adActionId
-                        ? 'rgba(255, 255, 255, 0.16)'
-                        : 'transparent',
+                      backgroundColor:
+                        hoveredAction === adActionId
+                          ? 'rgba(255, 255, 255, 0.16)'
+                          : 'transparent',
                       borderRadius: '3px',
-                      ...(!hasCharacterAd ? {
-                        opacity: 0.55,
-                        filter: 'brightness(1.15)',
-                      } : undefined),
+                      ...(!hasCharacterAd
+                        ? {
+                            opacity: 0.55,
+                            filter: 'brightness(1.15)',
+                          }
+                        : undefined),
                     }}
                   />
                 </Table.Cell>
-                <Table.Cell verticalAlign="middle" collapsing textAlign="center">
+                <Table.Cell
+                  verticalAlign="middle"
+                  collapsing
+                  textAlign="center"
+                >
                   <Button
                     onClick={() => act('openExamine', { ckey: character.ckey })}
                     onMouseEnter={() => setHoveredAction(viewActionId)}
-                    onMouseLeave={() => setHoveredAction((current) => current === viewActionId ? null : current)}
+                    onMouseLeave={() =>
+                      setHoveredAction((current) =>
+                        current === viewActionId ? null : current,
+                      )
+                    }
                     color="transparent"
                     textColor="black"
                     icon="eye"
                     tooltip="View character profile"
                     style={{
-                      backgroundColor: hoveredAction === viewActionId
-                        ? 'rgba(255, 255, 255, 0.16)'
-                        : 'transparent',
+                      backgroundColor:
+                        hoveredAction === viewActionId
+                          ? 'rgba(255, 255, 255, 0.16)'
+                          : 'transparent',
                       borderRadius: '3px',
                     }}
                   />
                 </Table.Cell>
               </Table.Row>
             );
-          })
-        }
+          })}
       </Table>
     </Section>
   );

@@ -33,3 +33,10 @@
 /datum/anvil_recipe/armor/steel/sgorget/collar/bell/cow
 	name = "Armored Cow Bell Collar, Steel"
 	created_item = /obj/item/clothing/neck/roguetown/gorget/steel/collar/bell/cow
+
+/datum/anvil_recipe/armor/steel/volfplate
+	name = "Volfskulle Bascinet, Steel (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/volfplate/light
+	display_category = ITEM_CAT_ARMOR_HELMETS

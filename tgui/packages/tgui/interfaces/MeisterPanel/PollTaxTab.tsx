@@ -11,7 +11,7 @@ import {
   inkInputStyle,
   sectionHeaderStyle,
 } from '../common/parchment';
-import { type TabProps } from './types';
+import type { TabProps } from './types';
 
 export const PollTaxTab = ({ data, act }: TabProps) => {
   const [days, setDays] = useState<string>('');
@@ -23,16 +23,18 @@ export const PollTaxTab = ({ data, act }: TabProps) => {
   const effectiveRate = tax.rate > 0 ? tax.rate : taxStatic.fallback_rate;
   const presumed = tax.rate <= 0;
   const capRemaining = taxStatic.max_advance_days - tax.advance_days_held;
-  const affordable = Math.floor(data.account_balance / Math.max(1, effectiveRate));
+  const affordable = Math.floor(
+    data.account_balance / Math.max(1, effectiveRate),
+  );
   const maxDays = Math.min(capRemaining, affordable);
 
   let rateLine = `${tax.rate}m per day`;
   if (tax.exempt) {
-    rateLine = 'Exempt by decree';
+    rateLine = 'Exempt by Charter';
   } else if (tax.rate < 0) {
-    rateLine = `Crown subsidises ${-tax.rate}m per day`;
+    rateLine = `The Crown pays you ${-tax.rate}m per day`;
   } else if (tax.rate === 0) {
-    rateLine = `None levied (advance at presumed ${taxStatic.fallback_rate}m/day)`;
+    rateLine = `None (paying ahead costs ${taxStatic.fallback_rate}m per day)`;
   }
 
   const advanceBlocked =
@@ -61,13 +63,14 @@ export const PollTaxTab = ({ data, act }: TabProps) => {
         <div style={fieldLabelStyle}>Held in advance</div>
         <div style={fieldValueStyle}>
           {tax.advance_days_held} day
-          {tax.advance_days_held === 1 ? '' : 's'} (cap {taxStatic.max_advance_days})
+          {tax.advance_days_held === 1 ? '' : 's'} (cap{' '}
+          {taxStatic.max_advance_days})
         </div>
       </div>
 
       {!!tax.exempt && (
         <div style={{ color: INK_SOFT, marginTop: 8 }}>
-          You owe nothing. There is nothing to advance.
+          You owe no poll tax. There is nothing to pay ahead.
         </div>
       )}
 
@@ -101,7 +104,7 @@ export const PollTaxTab = ({ data, act }: TabProps) => {
                 setDays('');
               }}
             >
-              Pay Forward
+              Pay Ahead
             </button>
           </div>
         </>

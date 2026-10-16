@@ -17,6 +17,9 @@
 		return //No ghosts or incapacitated folk allowed to do this.
 	if(!ishuman(dropping))
 		return //Only humans have job slots to be freed.
+	if(HAS_TRAIT(dropping, TRAIT_CONJURED_SUMMON))
+		to_chat(user, "<span class='warning'>This is not your true body, why are you leaving?</span>")
+		return
 	if(in_use) // Someone's already going in.
 		return
 	var/mob/living/carbon/human/departing_mob = dropping
@@ -24,7 +27,7 @@
 	if(departing_mob != user && departing_mob.client)
 		to_chat(user, "<span class='warning'>This one retains their free will. It's their choice if they want to leave the round or not.</span>")
 		return
-	if(alert("Are you sure you want to [departing_mob == user ? "depart the round for good (you" : "send this person away (they"] will be removed from the current round, and their role's slot will reopen for another to take)?", "Departing", "Confirm", "Cancel") != "Confirm")
+	if(alert(user, "Are you sure you want to [departing_mob == user ? "depart the round for good (you" : "send this person away (they"] will be removed from the current round, and their role's slot will reopen for another to take)?", "Departing", "Confirm", "Cancel") != "Confirm")
 		return
 	//OV Edit Start: Prompt commend when leaving round
 	if(departing_mob == user)
@@ -49,6 +52,20 @@
 			var/datum/advclass/target_job = departing_mob.get_advclass_datum()
 			if(target_job)
 				SSrole_class_handler.adjust_class_amount(target_job, -1)
+			if(istype(mob_job, /datum/job/roguetown/adventurer/courtagent))
+				GLOB.court_agents -= departing_mob.real_name
+				if(length(GLOB.court_spymaster))
+					for(var/name in GLOB.court_spymaster)
+						var/mob/living/carbon/human/hand = GLOB.court_spymaster[name]
+						if(hand)
+							to_chat(hand, span_notice("[departing_mob.real_name] has left the vicinity of [SSticker.realm_name]."))
+			if(istype(mob_job, /datum/job/roguetown/hand))
+				GLOB.court_spymaster -= departing_mob.real_name
+				if(length(GLOB.court_agents))
+					for(var/name in GLOB.court_agents)
+						var/mob/living/carbon/human/agent = GLOB.court_agents[name]
+						if(agent)
+							to_chat(agent, span_notice("[departing_mob.real_name] has left the vicinity of [SSticker.realm_name]."))
 	if(!length(departing_mob.contents))
 		dat += " none."
 		dat_log += " none."
@@ -64,6 +81,12 @@
 			if(istype(content, /obj/item/holder/micro))
 				departing_mob.dropItemToGround(content, TRUE, TRUE)
 			//Caustic Edit End
+			//OV Edit: Recursively remove contents.
+			if(istype(content, /obj/belly))
+				for(var/mob/living/L in content.contents)
+					if(L.client) //Let's not make every mob proc this.
+						safe_round_remove(L)
+			//OV Edit End
 		dat_log += "."
 	if(departing_mob.mind)
 		departing_mob.mind.unknow_all_people()
@@ -72,13 +95,14 @@
 		for(var/datum/bounty/removing_bounty in GLOB.head_bounties)
 			if(removing_bounty.target == departing_mob.real_name)
 				GLOB.head_bounties -= removing_bounty
+	GLOB.dominant_faith_tracker.handle_removal(departing_mob)
 	if(SSticker.rulermob == departing_mob)
 		SSticker.rulermob = null
 	if(SSticker.regentmob == departing_mob)
 		SSticker.regentmob = null
 	GLOB.chosen_names -= departing_mob.real_name
 	LAZYREMOVE(GLOB.actors_list, departing_mob.mobid)
-	LAZYREMOVE(GLOB.roleplay_ads, departing_mob.mobid)
+	LAZYREMOVE(GLOB.roleplay_ads, departing_mob.mobid) //OV ADD - Roleplay Ad Maint
 	// Keep insiders' bank balance forfeits to the Crown's Purse on far-travel (silent OOC).
 	// Day 0 is a grace window so roundstart bailouts don't accidentally hand the Crown a
 	// windfall from a player who never had time to act in role. Loose mammon is tallied

@@ -23,6 +23,7 @@
 	ADD_TRAIT(L, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(L, TRAIT_ARCYNE, TRAIT_GENERIC)
 	ADD_TRAIT(L, TRAIT_SHATTER_KILL, TRAIT_GENERIC)
+	ADD_TRAIT(L, TRAIT_SKELETAL_GIB_ON_DEATH, TRAIT_GENERIC)
 
 /datum/antagonist/unbound_spellblade/proc/equip_spellblade()
 	owner.unknow_all_people()
@@ -116,6 +117,8 @@
 /datum/outfit/job/roguetown/unbound_spellblade/pre_equip(mob/living/carbon/human/H)
 	..()
 
+	change_origin(H, /datum/virtue/origin/unselectable/skeleton, "Legion")
+
 	H.change_stat(STATKEY_STR, -2)
 	H.change_stat(STATKEY_SPD, -3)
 	H.change_stat(STATKEY_CON, -5)
@@ -144,7 +147,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 
 	H.ambushable = FALSE
-
+	//we allow swift intent, solo full antag undead
 	// Chant selection — uses undead faction for "MEMORIES" UI
 	to_chat(H, span_warning("You start with Bind Weapon. Remember to Bind your weapon so you can use your abilities and build up Arcyne Momentum."))
 
@@ -171,7 +174,7 @@
 				H.mind.AddSpell(new /datum/action/cooldown/spell/caedo)
 				H.mind.AddSpell(new /datum/action/cooldown/spell/air_strike)
 				H.mind.AddSpell(new /datum/action/cooldown/spell/leyline_anchor)
-				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/blade_storm)
+				H.mind.AddSpell(new /datum/action/cooldown/spell/blade_storm)
 			if("phalangite")
 				H.mind.AddSpell(new /datum/action/cooldown/spell/azurean_phalanx)
 				H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/azurean_pilum)
@@ -258,7 +261,7 @@
 	H.set_blindness(0)
 
 	var/tabards = list("Black Tabard", "Black Jupon")
-	var/tabard_choice = input(H, "Choose your CLOAK.", "BARE YOUR HERALDRY.") as anything in tabards
+	var/tabard_choice = input(H, "Choose your CLOAK.", "BEAR YOUR HERALDRY.") as anything in tabards
 	switch(tabard_choice)
 		if("Black Jupon")
 			cloak = /obj/item/clothing/cloak/tabard/stabard/surcoat/lich

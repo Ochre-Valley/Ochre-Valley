@@ -19,22 +19,10 @@ import type { Data, Order } from './types';
 
 const PAIR_ACCENT = '#7a5a2f';
 
-const QUALITY_TIER_TOOLTIP = [
-  'Quality multipliers vs. canonical price:',
-  '  scavenged 25%',
-  '  ruined 20%',
-  '  awful 35%',
-  '  crude 65%',
-  '  rough 85%',
-  '  (standard) 100%',
-  '  fine 110%',
-  '  flawless 120%',
-  '  masterwork 135%',
-].join('\n');
-
 export const OrdersView = (props: { data: Data }) => {
   const { act } = useBackend<Data>();
-  const { active_orders, order_pool_cap, good_catalog, region_catalog } = props.data;
+  const { active_orders, order_pool_cap, good_catalog, region_catalog } =
+    props.data;
   const count = active_orders.length;
 
   const onFulfill = (ref: string) => act('fulfill_order', { ref });
@@ -98,7 +86,19 @@ type CardProps = {
 };
 
 const OrderCard = (props: CardProps) => {
+  const { data } = useBackend<Data>();
   const o = props.order;
+  const payouts = data.quality_payouts || [];
+  const qualityTooltip = [
+    'Payout by quality:',
+    ...payouts.map((q) => `  ${q.label} ${q.pct}%`),
+  ].join('\n');
+  const lowestPayout = payouts.length
+    ? Math.min(...payouts.map((q) => q.pct))
+    : 100;
+  const highestPayout = payouts.length
+    ? Math.max(...payouts.map((q) => q.pct))
+    : 100;
   const isUrgent = o.days_left <= 1;
   const pureWarehouse = !!o.has_warehouse && !o.has_stockpile;
   const barColor = o.region_blockaded
@@ -123,7 +123,9 @@ const OrderCard = (props: CardProps) => {
   return (
     <div style={style}>
       <div style={{ marginBottom: '4px' }}>
-        <span style={{ fontWeight: 'bold', fontSize: FONT_BODY }}>{o.name}</span>
+        <span style={{ fontWeight: 'bold', fontSize: FONT_BODY }}>
+          {o.name}
+        </span>
         {!!o.region_blockaded && (
           <span style={badgeStyle(SEAL_RED)}>BLOCKADED</span>
         )}
@@ -157,6 +159,15 @@ const OrderCard = (props: CardProps) => {
         <span style={{ color: SEAL_AMBER, fontWeight: 'bold' }}>
           {o.payout}m
         </span>
+        {o.scarcity_bonus_pct > 0 && (
+          <span
+            style={{ color: INK_FAINT, cursor: 'help' }}
+            title="Scarcity bonus: boosts the Crown's payout as active population drops, recalculated daily. Never affects the goods required to fulfill the order."
+          >
+            {' '}
+            ({o.base_payout}m + {o.scarcity_bonus_pct}% scarcity bonus)
+          </span>
+        )}
       </div>
       <div style={{ marginTop: '4px' }}>
         <span style={{ color: INK_FAINT, fontSize: FONT_BODY }}>Items: </span>
@@ -190,16 +201,14 @@ const OrderCard = (props: CardProps) => {
             fontSize: FONT_BODY,
             cursor: 'help',
           }}
-          title={QUALITY_TIER_TOOLTIP}
+          title={qualityTooltip}
         >
-          Warehouse goods pay -80% to +35% based on the quality of submitted items.
+          Warehouse goods pay {lowestPayout - 100}% to +{highestPayout - 100}%
+          based on the quality of submitted items.
         </div>
       )}
       <div style={{ marginTop: '8px' }}>
-        <FulfillButton
-          order={o}
-          onFulfill={() => props.onFulfill(o.ref)}
-        />
+        <FulfillButton order={o} onFulfill={() => props.onFulfill(o.ref)} />
       </div>
     </div>
   );
@@ -247,10 +256,7 @@ const PairGroup = (props: {
   );
 };
 
-const FulfillButton = (props: {
-  order: Order;
-  onFulfill: () => void;
-}) => {
+const FulfillButton = (props: { order: Order; onFulfill: () => void }) => {
   const o = props.order;
   if (o.region_blockaded) {
     return (
@@ -259,7 +265,7 @@ const FulfillButton = (props: {
         disabled
         style={inkButtonStyle({ color: SEAL_RED, disabled: true })}
       >
-        Fulfill &mdash; road blockaded
+        Fulfill - road blockaded
       </button>
     );
   }
@@ -292,10 +298,10 @@ const FulfillButton = (props: {
       <button
         type="button"
         onClick={props.onFulfill}
-        title={`Settle short - ${o.partial_pct}% of value covered, paid at 85% of the delivered share. Missing: ${o.shortfall_text}`}
+        title={`You have ${o.partial_pct}% of the goods. Sending them now pays ${o.partial_payout_pct}% of their value. Missing: ${o.shortfall_text}`}
         style={inkButtonStyle({ color: SEAL_AMBER })}
       >
-        Fulfill Partial &mdash; {o.partial_pct}% ({o.partial_payout_preview}m)
+        Fulfill Partial - {o.partial_pct}% ({o.partial_payout_preview}m)
       </button>
     );
   }
@@ -306,7 +312,7 @@ const FulfillButton = (props: {
       title={o.shortfall_text}
       style={inkButtonStyle({ disabled: true })}
     >
-      Fulfill &mdash; {o.shortfall_text || 'insufficient stock'}
+      Fulfill - {o.shortfall_text || 'insufficient stock'}
     </button>
   );
 };

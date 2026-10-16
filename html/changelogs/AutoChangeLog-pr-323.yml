@@ -1,4 +1,0 @@
-author: "Ldip999"
-delete-after: True
-changes:
-  - bugfix: "Looking down no longer checks for your current turf's vision"

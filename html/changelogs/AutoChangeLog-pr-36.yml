@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - bugfix: "Fixed micros riding at about tail height, moving them up to around the shoulder."

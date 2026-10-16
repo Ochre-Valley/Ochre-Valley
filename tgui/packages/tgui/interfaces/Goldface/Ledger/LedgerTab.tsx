@@ -4,13 +4,13 @@ import {
   INK,
   INK_FAINT,
   INK_SOFT,
-  pageStyle,
   PARCHMENT_SHADOW,
+  pageStyle,
   SEAL_AMBER,
   SEAL_GREEN,
   SEAL_RED,
-  sectionHeaderStyle,
   SERIF,
+  sectionHeaderStyle,
 } from '../../common/parchment';
 import type { FundLogEntry, HarborData } from '../types';
 
@@ -127,8 +127,19 @@ export const LedgerTab = (props: { harbor?: HarborData }) => {
     <div style={pageStyle}>
       <BalanceCard balance={ledger.merchant_fund_balance} />
 
-      <div style={{ ...cardStyle, marginTop: '0', marginBottom: '6px', padding: '6px 12px' }}>
-        <div style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}>Week Audit</div>
+      <div
+        style={{
+          ...cardStyle,
+          marginTop: '0',
+          marginBottom: '6px',
+          padding: '6px 12px',
+        }}
+      >
+        <div
+          style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}
+        >
+          Week Audit
+        </div>
         <div
           style={{
             display: 'grid',
@@ -155,14 +166,25 @@ export const LedgerTab = (props: { harbor?: HarborData }) => {
           />
         </div>
         <div style={{ ...noteStyle, marginTop: '6px' }}>
-          All credits deposit into the Merchant Fund at your Jawbank. The Crown
-          taxes the levy at the prevailing export duty rate; the gnome margin is
-          captured at the listed Silverface rate.
+          All of this goes into the Merchant Fund at your Jawbank. The Crown
+          taxes the levy at the export duty rate. The gnome margin is taken at
+          the Silverface rate you set.
         </div>
       </div>
 
-      <div style={{ ...cardStyle, marginTop: '0', marginBottom: '6px', padding: '6px 12px' }}>
-        <div style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}>Recent Fund Movements</div>
+      <div
+        style={{
+          ...cardStyle,
+          marginTop: '0',
+          marginBottom: '6px',
+          padding: '6px 12px',
+        }}
+      >
+        <div
+          style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}
+        >
+          Recent Fund Movements
+        </div>
         {ledger.fund_log.length === 0 ? (
           <div style={{ ...noteStyle, padding: '4px 0' }}>
             No movements recorded yet this week.
@@ -174,25 +196,52 @@ export const LedgerTab = (props: { harbor?: HarborData }) => {
         )}
         {ledger.fund_log.length > 0 && (
           <div style={{ ...noteStyle, marginTop: '6px' }}>
-            Most recent first. Older entries roll off after twelve.
+            Most recent first. Only the last {ledger.fund_log_max} movements are
+            kept.
           </div>
         )}
       </div>
 
-      <div style={{ ...cardStyle, marginTop: '0', marginBottom: '6px', padding: '6px 12px' }}>
-        <div style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}>Silverface Margin</div>
+      <div
+        style={{
+          ...cardStyle,
+          marginTop: '0',
+          marginBottom: '6px',
+          padding: '6px 12px',
+        }}
+      >
+        <div
+          style={{ ...sectionHeaderStyle, marginTop: 0, marginBottom: '4px' }}
+        >
+          Silverface Margin
+        </div>
         {harbor.favor.gnome_unlocked ? (
           <>
             <div style={{ ...noteStyle, marginBottom: '4px' }}>
-              By writ of the Azurean Guild of Gnomes Porters, the public stalls now run under their hand. They take their cost in labour and remit the margin of <b>+{ledger.silverface_margin_percent}%</b> on every sale unto the Merchant Fund. Adjust the rate from the Management tab as you see fit.
+              By writ of the Azurian Guild of Porters and Stevedores, the public
+              stalls now run under their hand. They take their cost in labour
+              and pay the margin of <b>+{ledger.silverface_margin_percent}%</b>
+              on every sale into the Merchant Fund. You can change the rate in
+              the Management tab.
             </div>
-            <div style={{ color: INK_FAINT, fontSize: FONT_BODY, fontStyle: 'italic' }}>
-              A heavier margin fattens the Fund per sale; a lighter one draws more buyers to the stalls.
+            <div
+              style={{
+                color: INK_FAINT,
+                fontSize: FONT_BODY,
+                fontStyle: 'italic',
+              }}
+            >
+              A heavier margin fattens the Fund per sale; a lighter one draws
+              more buyers to the stalls.
             </div>
           </>
         ) : (
           <div style={noteStyle}>
-            By standing pact, the Azurean Guild of Porters and Stevedores hold the margin upon a fixed measure of trade each week. Should you push enough goods through the Company&apos;s books, your standing shall earn the right to call in their Gnomes - who will take their wage in labour alone and remit the margin to your Fund.
+            Until you call in the Company Gnomes, the Azurian Guild of Porters
+            and Stevedores keeps a fixed margin on every stall sale. Earn enough
+            favor with the ATC and you can call in their Gnomes from the
+            Management tab. The Gnomes take their wage in labour alone and pay
+            the margin into your Fund.
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import type { PreferenceDropdown } from './types';
+import type { IntentData, PreferenceDropdown } from './types';
 
 export const stats = [undefined, 'average', 'bad'] as const;
 
@@ -8,7 +8,7 @@ export const vorespawnAbsorbedColor = [undefined, 'green', 'orange'] as const;
 
 export const selectiveBellyOptions = ['Digest', 'Absorb'];
 
-export const digestModeToColor = {
+export const digestModeToColor: Record<string, string | undefined> = {
   Default: undefined,
   Hold: undefined,
   Digest: 'red',
@@ -25,7 +25,7 @@ export const digestModeToColor = {
   'Digest (Dispersed Damage)': 'red',
 } as const;
 
-export const reagentToColor = {
+export const reagentToColor: Record<string, string | undefined> = {
   Water: undefined,
   Milk: undefined,
   Cream: undefined,
@@ -70,7 +70,7 @@ export const stripModeModel: PreferenceDropdown = {
   },
 };
 
-export const digestModeToPreyMode = {
+export const digestModeToPreyMode: Record<string, string | undefined> = {
   Hold: 'being held.',
   Digest: 'being digested.',
   Absorb: 'being absorbed.',
@@ -86,7 +86,7 @@ export const digestModeToPreyMode = {
 
 export const SYNTAX_REGEX =
   /%belly|%pred|%prey|%countpreytotal|%countpreyabsorbed|%countprey|%countghosts|%count|%digestedprey|%ghost|%item|%dest|%goo|%happybelly|%fat|%grip|%cozy|%angry|%acid|%snack|%hot|%snake/g;
-export const SYNTAX_COLOR = {
+export const SYNTAX_COLOR: Record<string, string> = {
   '%belly': 'average',
   '%pred': 'bad',
   '%prey': 'good',
@@ -152,7 +152,7 @@ export const messageTabLabel = [
   'Liquid Fullness',
 ] as const;
 
-export const eatingMessagePrivacy = {
+export const eatingMessagePrivacy: Record<string, string | undefined> = {
   default: undefined,
   subtle: 'green',
   loud: 'red',
@@ -162,7 +162,7 @@ export const robotBellyOptions = ['Sleeper', 'Vorebelly', 'Both'];
 
 export const noSelectionName = { displayText: 'None - Remove', value: '' };
 
-export const nutriTimeToText = {
+export const nutriTimeToText: Record<number, string> = {
   0: '10 minutes',
   2: '30 minutes',
   5: '1 hour',
@@ -172,14 +172,17 @@ export const nutriTimeToText = {
   143: '24 hours',
 } as const;
 
-export const aestehticTabsToIcons = {
+export const aestehticTabsToIcons: Record<string, string> = {
   'Set Taste': 'grin-tongue',
   'Set Smell': 'wind',
   'Set Nutrition Examine': 'flask',
   'Set Weight Examine': 'weight-hanging',
 } as const;
 
-export const preyAbilityToData = {
+export const preyAbilityToData: Record<
+  string,
+  { displayName: string; desc: string; color: string }
+> = {
   devour_as_absorbed: {
     displayName: 'Devour Nearby',
     desc: 'Allows you to devour nearby prey after having been absorbed.',
@@ -187,7 +190,15 @@ export const preyAbilityToData = {
   },
 } as const;
 
-export const intentMappings = [
+export type IntentMapping = {
+  key: keyof IntentData;
+  label: string;
+  color: string;
+  description: string;
+  tooltip: (active: boolean) => string;
+};
+
+export const intentMappings: IntentMapping[] = [
   {
     key: 'help',
     label: 'Help',

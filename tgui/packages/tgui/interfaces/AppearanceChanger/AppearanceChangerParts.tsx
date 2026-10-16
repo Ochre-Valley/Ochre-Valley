@@ -89,7 +89,7 @@ export const AppearanceChangerHair = (props: {
   const [searchText, setSearchText] = useState<string>('');
 
   const selectableStyles = possibleStyles.map((styles: bodyStyle[]) => {
-    const searcher = createSearch(searchText, (style: styles) => {
+    const searcher = createSearch(searchText, (style: bodyStyle) => {
       return style.name;
     });
 

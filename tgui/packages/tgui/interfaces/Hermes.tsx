@@ -19,7 +19,13 @@ type Data = {
   free_send_ready: 0 | 1;
   free_send_remaining_ds: number;
   has_tube?: boolean;
+  ghost_mode?: boolean;
+  delay_min?: number;
+  delay_max?: number;
+  letter_count?: number;
 };
+
+const dsToMinutes = (ds: number) => Math.round(ds / 600);
 
 const dsToClock = (ds: number) => {
   if (ds <= 0) return '0s';
@@ -40,6 +46,10 @@ export const Hermes = (props: any, context: any) => {
     free_send_ready,
     free_send_remaining_ds,
     has_tube,
+    ghost_mode,
+    delay_min,
+    delay_max,
+    letter_count,
   } = data;
 
   const [recipient, setRecipient] = useState('');
@@ -47,11 +57,98 @@ export const Hermes = (props: any, context: any) => {
   const [letterContent, setLetterContent] = useState('');
 
   const isFree = !!free_send_ready;
-  const canSendLetter = recipient.length > 0 && (isFree || balance >= letter_cost);
+  const canSendLetter =
+    recipient.length > 0 && (isFree || balance >= letter_cost);
   const canBuyPaper = balance >= paper_cost;
   const canBuyQuill = balance >= quill_cost;
   const canSendTube = letterContent.length > 0;
-// OV Edit Start: Add Missive send button
+
+  if (ghost_mode) {
+    const canPost = recipient.length > 0 && letterContent.length > 0;
+    const delayLabel =
+      delay_min && delay_max
+        ? `${dsToMinutes(delay_min)}-${dsToMinutes(delay_max)} minutes`
+        : 'some time';
+
+    return (
+      <Window title="HERMES" width={400} height={440}>
+        <Window.Content>
+          <Stack vertical fill>
+            <Stack.Item>
+              <Box italic color="label">
+                A letter posted from beyond takes {delayLabel} to arrive.
+              </Box>
+            </Stack.Item>
+            {!!letter_count && (
+              <Stack.Item>
+                <Button
+                  fluid
+                  icon="envelope-open-text"
+                  onClick={() => act('read_letters')}
+                >
+                  Read My Letters ({letter_count})
+                </Button>
+              </Stack.Item>
+            )}
+            <Stack.Item grow>
+              <Section title="Post a Letter" fill>
+                <Stack vertical fill>
+                  <Stack.Item>
+                    <Stack>
+                      <Stack.Item grow>
+                        <Input
+                          fluid
+                          placeholder="To: Name or #number"
+                          value={recipient}
+                          onChange={(value) => setRecipient(value)}
+                        />
+                      </Stack.Item>
+                      <Stack.Item grow>
+                        <Input
+                          fluid
+                          placeholder="From: Anonymous"
+                          value={sender}
+                          onChange={(value) => setSender(value)}
+                        />
+                      </Stack.Item>
+                    </Stack>
+                  </Stack.Item>
+                  <Stack.Item grow>
+                    <TextArea
+                      fluid
+                      height="100%"
+                      placeholder="Write your letter here..."
+                      value={letterContent}
+                      maxLength={2000}
+                      onChange={(value) => setLetterContent(value)}
+                    />
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Button
+                      fluid
+                      icon="paper-plane"
+                      color="good"
+                      disabled={!canPost}
+                      onClick={() =>
+                        act('send_letter', {
+                          recipient: recipient,
+                          sender: sender || 'Anonymous',
+                          content: letterContent,
+                        })
+                      }
+                    >
+                      Post Letter
+                    </Button>
+                  </Stack.Item>
+                </Stack>
+              </Section>
+            </Stack.Item>
+          </Stack>
+        </Window.Content>
+      </Window>
+    );
+  }
+  // OV Edit Start: Add Missive send button
   return (
     <Window title="HERMES" width={400} height={480}>
       <Window.Content>
@@ -99,11 +196,7 @@ export const Hermes = (props: any, context: any) => {
                 </Button>
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  compact
-                  icon="scroll"
-                  onClick={() => act('missive')}
-                >
+                <Button compact icon="scroll" onClick={() => act('missive')}>
                   Send Missive
                 </Button>
               </Stack.Item>

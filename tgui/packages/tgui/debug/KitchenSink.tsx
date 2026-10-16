@@ -6,7 +6,6 @@
 import { useState } from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Divider, NoticeBox, Section, Stack, Tabs } from 'tgui-core/components';
-
 import { useBackend } from '../backend';
 import { tgui16 } from '../constants/theme';
 import { Pane, Window } from '../layouts';
@@ -94,7 +93,7 @@ type TreeProps = {
 function TreePage(props: TreeProps) {
   const { tab } = props;
 
-  const backend = useBackend();
+  const backend = useBackend() as any;
   const inView = backend[tab];
 
   return (

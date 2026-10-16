@@ -2,8 +2,8 @@
 	name = "Minstrel"
 	tutorial = "Unlike those so-called 'bards' who traipse around in fancy cloth and swordfight in the woods, you follow the calling of a true musician. You've simply... yet to find a receptive audience."
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_DESPISED)
-	
+	//forbidden_races = list(RACES_DESPISED) //OV EDIT - Races allowed
+
 	outfit = /datum/outfit/job/roguetown/adventurer/minstrel
 
 	category_tags = list(CTAG_TOWNER)

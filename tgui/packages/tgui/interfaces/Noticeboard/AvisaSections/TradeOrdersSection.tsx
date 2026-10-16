@@ -15,7 +15,7 @@ import {
   SEAL_RED,
   SERIF,
 } from '../../common/parchment';
-import { type NoticeboardData, type TradeOrder } from '../types';
+import type { NoticeboardData, TradeOrder } from '../types';
 
 const PETITION_PURPLE = '#7a3aa6';
 
@@ -62,14 +62,16 @@ export const TradeOrdersSection = ({ data }: { data: NoticeboardData }) => {
         >
           {helpOpen ? 'Hide About Trade Orders' : 'About Trade Orders'}
         </button>
-        {helpOpen && <HelpPanel />}
+        {helpOpen && <HelpPanel data={data} />}
       </div>
 
       {orders.length === 0 ? (
         <EmptyMessage text="No standing orders posted. Check back later." />
       ) : (
         <div style={orderGridStyle}>
-          {orders.map((o, i) => <OrderCard key={i} order={o} />)}
+          {orders.map((o, i) => (
+            <OrderCard key={i} order={o} />
+          ))}
         </div>
       )}
     </>
@@ -79,10 +81,10 @@ export const TradeOrdersSection = ({ data }: { data: NoticeboardData }) => {
 const OrderCard = ({ order }: { order: TradeOrder }) => {
   return (
     <div style={{ ...cardStyle, marginBottom: 0, minHeight: 280 }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap' }}>
-        {!!order.urgent && (
-          <span style={badgeStyle(SEAL_RED)}>URGENT</span>
-        )}
+      <div
+        style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap' }}
+      >
+        {!!order.urgent && <span style={badgeStyle(SEAL_RED)}>URGENT</span>}
         {!!order.blockaded && (
           <span style={badgeStyle(SEAL_RED)}>BLOCKADED</span>
         )}
@@ -93,7 +95,9 @@ const OrderCard = ({ order }: { order: TradeOrder }) => {
           <span style={badgeStyle(SEAL_GREEN)}>STOCKPILE</span>
         )}
         {!!order.petitioned && (
-          <span style={badgeStyle(PETITION_PURPLE)}>STEWARD&apos;S PETITION</span>
+          <span style={badgeStyle(PETITION_PURPLE)}>
+            STEWARD&apos;S PETITION
+          </span>
         )}
       </div>
 
@@ -139,9 +143,7 @@ const OrderCard = ({ order }: { order: TradeOrder }) => {
               - nothing on record -
             </span>
           ) : (
-            order.requirements
-              .map((r) => `${r.quantity} ${r.label}`)
-              .join(', ')
+            order.requirements.map((r) => `${r.quantity} ${r.label}`).join(', ')
           )}
         </div>
       </div>
@@ -154,9 +156,7 @@ const OrderCard = ({ order }: { order: TradeOrder }) => {
           gap: 8,
         }}
       >
-        <span style={fieldLabelStyle}>
-          Payout
-        </span>
+        <span style={fieldLabelStyle}>Payout</span>
         <span
           style={{
             color: SEAL_AMBER,
@@ -188,7 +188,7 @@ const EmptyMessage = ({ text }: { text: string }) => (
   </div>
 );
 
-const HelpPanel = () => (
+const HelpPanel = ({ data }: { data: NoticeboardData }) => (
   <div
     style={{
       marginTop: 8,
@@ -207,17 +207,18 @@ const HelpPanel = () => (
     </p>
     <p style={{ margin: '0 0 6px 0' }}>
       <b>WAREHOUSE</b>-tagged orders require finished goods to be left at the
-      export machine for collection. Goods that belongs in the stockpile should
+      export machine for collection. Goods that belong in the stockpile should
       still be delivered to the stockpile.
     </p>
     <p style={{ margin: '0 0 6px 0' }}>
-      Orders may be settled short once at least 50% by value is on hand, paid
-      at 85% of the delivered share - the rest is forfeit.
+      Once you have at least {data.partial_threshold_pct}% of an order's goods
+      by value, you can send them early. They pay {data.partial_payout_pct}% of
+      their value.
     </p>
     <p style={{ margin: 0 }}>
       <b>BLOCKADED</b> regions cannot be reached by trade caravans until the
-      blockade is lifted; <b>STEWARD&apos;S PETITION</b> orders were directly
-      requested by the Steward and pay out at a reduced rate.
+      blockade is lifted. <b>STEWARD&apos;S PETITION</b> orders were requested
+      by the Steward and pay less.
     </p>
   </div>
 );

@@ -1,5 +1,0 @@
-author: "SpadesNeil"
-delete-after: True
-changes:
-  - balance: "Pistols now need 2 seconds to draw out of item inventories."
-  - bugfix: "Pistols draw time from hip slots now uses seconds like it was always supposed to."

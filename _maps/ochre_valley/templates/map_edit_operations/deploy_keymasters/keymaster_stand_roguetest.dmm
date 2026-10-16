@@ -1,0 +1,182 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"d" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"e" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/obj/item/roguecoin/gold/aspirantpile,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"i" = (
+/turf/closed/wall/mineral/rogue/stone,
+/area/rogue/outdoors)
+"l" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"n" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"r" = (
+/obj/effect/decal/cobbleedge{
+	dir = 6
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"s" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"z" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"B" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"E" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 10
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"F" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 9
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"H" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"J" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"K" = (
+/obj/effect/decal/edge_corner{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"M" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"P" = (
+/obj/item/roguemachine/keymaster,
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors)
+"S" = (
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"X" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+"Z" = (
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 6
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
+
+(1,1,1) = {"
+i
+s
+l
+l
+z
+"}
+(2,1,1) = {"
+B
+F
+r
+E
+X
+"}
+(3,1,1) = {"
+H
+d
+P
+S
+X
+"}
+(4,1,1) = {"
+H
+S
+e
+Z
+X
+"}
+(5,1,1) = {"
+a
+M
+n
+J
+K
+"}

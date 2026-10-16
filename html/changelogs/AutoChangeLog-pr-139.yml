@@ -1,4 +1,0 @@
-author: "SpadesNeil"
-delete-after: True
-changes:
-  - refactor: "OV edit consistency to avoid future headaches."

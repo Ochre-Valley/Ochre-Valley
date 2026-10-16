@@ -61,7 +61,7 @@
 
 	return 0
 
-/mob/living/carbon/human/get_alt_name(var/force = FALSE)
+/mob/living/carbon/human/get_alt_name(force = FALSE)
 	if(absorbed && isbelly(loc))
 		var/obj/belly/B = loc
 		if(B.absorbedrename_enabled)

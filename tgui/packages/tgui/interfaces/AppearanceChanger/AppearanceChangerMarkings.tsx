@@ -15,7 +15,7 @@ import { createSearch } from 'tgui-core/string';
 import { MARKINGS_PER_PAGE } from './constants';
 import type { bodyStyle, Data } from './types';
 
-export const AppearanceChangerMarkings = (props) => {
+export const AppearanceChangerMarkings = (props: any) => {
   const { act, data } = useBackend<Data>();
 
   const { markings, marking_styles } = data;

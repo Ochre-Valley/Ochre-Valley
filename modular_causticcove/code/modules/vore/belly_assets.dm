@@ -1,27 +1,5 @@
 /datum/belly_overlays
 	var/belly_icon
-/*
-/datum/belly_overlays/vbo_belly1
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly1.dmi'
-
-/datum/belly_overlays/vbo_belly2
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly2.dmi'
-
-/datum/belly_overlays/vbo_belly3
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly3.dmi'
-
-/datum/belly_overlays/vbo_belly4
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly4.dmi'
-
-/datum/belly_overlays/vbo_belly5
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly5.dmi'
-
-/datum/belly_overlays/vbo_belly6
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly6.dmi'
-
-/datum/belly_overlays/vbo_belly7
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly7.dmi'
-*/
 /datum/belly_overlays/vbo_belly8
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_belly8.dmi'
 
@@ -57,77 +35,13 @@
 
 /datum/belly_overlays/vbo_gematically_angular
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_gematically_angular.dmi'
-//OV Edit
-/*
-/datum/belly_overlays/vbo_intestines1
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines1.dmi'
 
-/datum/belly_overlays/vbo_intestines2
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines2.dmi'
-
-/datum/belly_overlays/vbo_intestines3
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines3.dmi'
-
-/datum/belly_overlays/vbo_intestines4
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines4.dmi'
-
-/datum/belly_overlays/vbo_intestines5
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines5.dmi'
-
-/datum/belly_overlays/vbo_intestines6
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines6.dmi'
-
-/datum/belly_overlays/vbo_intestines7
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines7.dmi'
-
-/datum/belly_overlays/vbo_intestines8
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines8.dmi'
-*/
-//OV Edit End
 /datum/belly_overlays/vbo_intestines9
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines9.dmi'
 
 /datum/belly_overlays/vbo_intestines9_fluidless
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_intestines9_fluidless.dmi'
-//OV Edit
-/*
-/datum/belly_overlays/vbo_maw1
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw1.dmi'
 
-/datum/belly_overlays/vbo_maw2
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw2.dmi'
-
-/datum/belly_overlays/vbo_maw3
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw3.dmi'
-
-/datum/belly_overlays/vbo_maw4
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw4.dmi'
-
-/datum/belly_overlays/vbo_maw5
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw5.dmi'
-
-/datum/belly_overlays/vbo_maw6
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw6.dmi'
-
-/datum/belly_overlays/vbo_maw7
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw7.dmi'
-
-/datum/belly_overlays/vbo_maw8
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw8.dmi'
-
-/datum/belly_overlays/vbo_maw9
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw9.dmi'
-
-/datum/belly_overlays/vbo_maw10
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw10.dmi'
-
-/datum/belly_overlays/vbo_maw11
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw11.dmi'
-
-/datum/belly_overlays/vbo_maw12
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw12.dmi'
-*/
-//OV Edit End
 /datum/belly_overlays/vbo_maw13
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_maw13.dmi'
 
@@ -181,15 +95,7 @@
 
 /datum/belly_overlays/vbo_synth1
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_synth1.dmi'
-//OV Edit
-/*
-/datum/belly_overlays/vbo_synth2
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_synth2.dmi'
 
-/datum/belly_overlays/vbo_trash
-	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_trash.dmi'
-*/
-//OV Edit End
 /datum/belly_overlays/vbo_vines
 	belly_icon = 'modular_causticcove/icons/mob/vore_fullscreens/VBO_vines.dmi'
 

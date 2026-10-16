@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - bugfix: "Fixed spontaneous vore prefs only checking the prefs of one character."

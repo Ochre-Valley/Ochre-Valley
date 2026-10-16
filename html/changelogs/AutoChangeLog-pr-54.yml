@@ -1,4 +1,0 @@
-author: "granodd"
-delete-after: True
-changes:
-  - code_imp: "changed Towner Levy slots from 3 to 20."

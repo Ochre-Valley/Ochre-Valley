@@ -45,23 +45,23 @@
 
 	body += "<script>"
 	body += "function toggleSection(section) {"
-	body += "    localStorage.setItem('activeSection', section);"
-	body += "    document.getElementById('skills-section').style.display = (section === 'skills') ? 'block' : 'none';"
-	body += "    document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
-	body += "	 document.getElementById('stats-section').style.display = (section === 'stats') ? 'block' : 'none';"
-	body += "    document.getElementById('patron-section').style.display = (section === 'patron') ? 'block' : 'none';"
+	body += "	localStorage.setItem('activeSection', section);"
+	body += "	document.getElementById('skills-section').style.display = (section === 'skills') ? 'block' : 'none';"
+	body += "	document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
+	body += "		document.getElementById('stats-section').style.display = (section === 'stats') ? 'block' : 'none';"
+	body += "	document.getElementById('patron-section').style.display = (section === 'patron') ? 'block' : 'none';"
 	body += "}"
 
 	body += "function refreshAndKeepSection(section) {"
-	body += "    localStorage.setItem('activeSection', section);"
-	body += "    location.reload();"
+	body += "	localStorage.setItem('activeSection', section);"
+	body += "	location.reload();"
 	body += "}"
 
 	body += "window.onload = function() {"
-	body += "    var activeSection = \"[clicked_flag]\";"
-	body += "    if (activeSection !== \"0\" && activeSection !== \"\") {"
-	body += "        toggleSection(activeSection);"
-	body += "    }"
+	body += "	var activeSection = \"[clicked_flag]\";"
+	body += "	if (activeSection !== \"0\" && activeSection !== \"\") {"
+	body += "		toggleSection(activeSection);"
+	body += "	}"
 	body += "}"
 	body += "</script>"
 
@@ -91,9 +91,11 @@
 		//OV edit
 		if(!same_user || !M.client.prefs.hide_pq) //If you are looking at yourself and don't want to see PQ, hide this
 			body += "<br><br>Player Quality: [pq] ([pq_num])"
+			//body += "<br>Roll Tokens: [M.client.prefs.roll_tokens]/[MAX_ROLL_TOKENS]"
 			body += "<br><a href='?_src_=holder;[HrefToken()];editpq=add;mob=[REF(M)]'>\[Modify PQ\]</a> "
 			body += "<a href='?_src_=holder;[HrefToken()];showpq=add;mob=[REF(M)]'>\[Check PQ\]</a> "
 		//OV edit end
+		body += "<br>Roll Tokens: [M.client.prefs.roll_tokens]/[MAX_ROLL_TOKENS]" //OV EDIT - Moved down here to avoid false checks
 		body += "<br><a href='?_src_=holder;[HrefToken()];edittriumphs=add;mob=[REF(M)]'>\[Modify Triumphs\]</a> "
 		body += "<br>"
 		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
@@ -249,7 +251,7 @@
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=fortune'>-</a></li>"
 		body += "</ul>"
 		body += "</div>"
-		
+
 		// Patron Section
 		body += "<div id='patron-section'>"
 		body += "<h3>Patron</h3>"
@@ -266,7 +268,7 @@
 			body += "<li>[initial(P.name)] "
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];set_patron=[REF(M)];patron=[patron_type]'>Set</a></li>"
 		body += "</ul></div>"
-		
+
 
 		body += "</div>"
 		body += "</div>"
@@ -275,13 +277,13 @@
 		body += "<br>"
 		body += "</body></html>"
 
-	usr << browse(body, "window=adminplayeropts-[REF(M)];size=800x600")
+	usr << browse(body, "window=adminplayeropts-[REF(M)];size=1000x800")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
 	set name = "Mob - Heal"
 	set desc = "Heal a mob to full health"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -294,7 +296,7 @@
 	log_admin("[key_name(usr)] healed [key_name(M)].")
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -309,7 +311,7 @@
 /datum/admins/proc/admin_revive(mob/living/M in GLOB.mob_list)
 	set name = "Mob - Revive"
 	set desc = "Resuscitate a mob"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -338,7 +340,7 @@
 /datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
 	set name = "Toggle Sleeping"
 	set desc = "Toggle a mob's sleeping state"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 
 	if(!check_rights())
 		return
@@ -364,7 +366,7 @@
 
 	var/list/allowed_modes = list("End Round", "Storyteller", "Custom")
 
-	var/type = input("What kind of vote?") as null|anything in allowed_modes
+	var/type = input(usr, "What kind of vote?") as null|anything in allowed_modes
 	switch(type)
 		//if("Gamemode")
 			//type = "gamemode"
@@ -383,13 +385,13 @@
 
 	if(!check_rights())
 		return
-	
+
 	if(!M.ckey)
 		to_chat(src, span_warning("There is no ckey attached to this mob."))
 		return
 
-	var/ckey = lowertext(M.ckey)
-	var/admin = lowertext(usr.key)
+	var/ckey = LOWER_TEXT(M.ckey)
+	var/admin = LOWER_TEXT(usr.key)
 
 	/*if(ckey == admin)
 		to_chat(src, span_boldwarning("That's you!"))
@@ -398,10 +400,10 @@
 	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
 		to_chat(src, span_boldwarning("User does not exist."))
 		return
-	var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
+	var/amt2change = input(usr, "How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
 	if(!check_rights(R_ADMIN,0))
 		amt2change = CLAMP(amt2change, -20, 20)
-	var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
+	var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", "", null)
 	if((!isnull(amt2change) && amt2change != 0) && !raisin)
 		return
 	adjust_playerquality(amt2change, ckey, admin, raisin)
@@ -464,13 +466,13 @@
 				if("Regular Restart")
 					SSticker.Reboot(init_by, "admin reboot - by Admin", 10)
 				if("Hard Restart (No Delay, No Feeback Reason)")
-					to_chat(world, "World reboot - [init_by]")
+					to_world("World reboot - [init_by]")
 					world.Reboot()
 				if("Hardest Restart (No actions, just reboot)")
-					to_chat(world, "Hard world reboot - [init_by]")
+					to_world("Hard world reboot - [init_by]")
 					world.Reboot(fast_track = TRUE)
 				if("Server Restart (Kill and restart DD)")
-					to_chat(world, "Server restart - [init_by]")
+					to_world("Server restart - [init_by]")
 					world.TgsEndProcess()
 
 /datum/admins/proc/end_round()
@@ -480,7 +482,7 @@
 
 	if (!usr.client.holder)
 		return
-	var/confirm = alert("End the round and restart the game world?", "End Round", "Yes", "Cancel")
+	var/confirm = alert(usr, "End the round and restart the game world?", "End Round", "Yes", "Cancel")
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
@@ -495,11 +497,12 @@
 	if(!check_rights(0))
 		return
 
-	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
+	var/message = input(usr, "Global message to send:", "Admin Announce", null)	as message
 	if(message)
 		if(!check_rights(R_SERVER,0))
 			message = adminscrub(message,500)
-		to_chat(world, "<span class='adminnotice'><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b></span>\n \t [message]")
+		message = parse_admin_spans(message)
+		to_world("<span class='adminnotice'><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b></span>\n \t [message]")
 		log_admin("Announce: [key_name(usr)] : [message]")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Announce") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -521,10 +524,52 @@
 	else
 		message_admins("[key_name(usr)] set the admin notice.")
 		log_admin("[key_name(usr)] set the admin notice:\n[new_admin_notice]")
-		to_chat(world, span_adminnotice("<b>Admin Notice:</b>\n \t [new_admin_notice]"))
+		to_world(span_adminnotice("<b>Admin Notice:</b>\n \t [new_admin_notice]"))
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Admin Notice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	GLOB.admin_notice = new_admin_notice
 	return
+
+#define PERSISTENT_ADMIN_NOTICE_FILE "data/persistent_admin_notice.txt"
+
+/proc/load_persistent_admin_notice()
+	if(!fexists(PERSISTENT_ADMIN_NOTICE_FILE))
+		return ""
+	return file2text(PERSISTENT_ADMIN_NOTICE_FILE)
+
+/proc/save_persistent_admin_notice(text)
+	fdel(PERSISTENT_ADMIN_NOTICE_FILE)
+	if(text)
+		text2file(text, PERSISTENT_ADMIN_NOTICE_FILE)
+
+#undef PERSISTENT_ADMIN_NOTICE_FILE
+
+/datum/admins/proc/set_persistent_admin_notice()
+	set category = "Server"
+	set name = "Set Persistent Admin Notice"
+	set desc = "Set an announcement that appears to everyone who joins the server, every round, until cleared."
+	if(!check_rights(0))
+		return
+
+	var/old_notice = GLOB.persistent_admin_notice
+	var/new_notice = input(src, "Set a public notice that persists across rounds. Everyone who joins the server will see it until it is cleared.\n(Leaving it blank will delete the current persistent notice):", "Set Persistent Notice", old_notice) as message|null
+	if(new_notice == null)
+		return
+	if(new_notice == old_notice)
+		return
+
+	GLOB.persistent_admin_notice = new_notice
+	save_persistent_admin_notice(new_notice)
+	if(new_notice == "")
+		if(GLOB.admin_notice == old_notice)
+			GLOB.admin_notice = ""
+		message_admins("[key_name(usr)] removed the persistent admin notice.")
+		log_admin("[key_name(usr)] removed the persistent admin notice:\n[old_notice]")
+	else
+		GLOB.admin_notice = new_notice
+		message_admins("[key_name(usr)] set the persistent admin notice.")
+		log_admin("[key_name(usr)] set the persistent admin notice:\n[new_notice]")
+		to_world(span_adminnotice("<b>Admin Notice:</b>\n \t [new_notice]"))
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Persistent Admin Notice")
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
@@ -550,6 +595,11 @@
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(SSticker.current_state == GAME_STATE_PREGAME || SSticker.current_state == GAME_STATE_STARTUP)
+		var/player_count = length(GLOB.clients)
+		// Idiot proof for accidental click due to focus hijack / testing server
+		if(player_count > 1)
+			if(alert(usr, "There are [player_count] players connected. Are you sure you want to start the round RIGHT NOW?", "Start Now", "Yes", "No") != "Yes")
+				return 0
 		SSticker.start_immediately = TRUE
 		log_admin("[usr.key] has started the game.")
 		var/msg = ""
@@ -571,9 +621,9 @@
 	set name="Toggle Entering"
 	GLOB.enter_allowed = !( GLOB.enter_allowed )
 	if (!( GLOB.enter_allowed ))
-		to_chat(world, "<B>New players may no longer enter the game.</B>")
+		to_world("<B>New players may no longer enter the game.</B>")
 	else
-		to_chat(world, "<B>New players may now enter the game.</B>")
+		to_world("<B>New players may now enter the game.</B>")
 	log_admin("[key_name(usr)] toggled new player game entering.")
 	message_admins(span_adminnotice("[key_name_admin(usr)] toggled new player game entering."))
 	world.update_status()
@@ -586,9 +636,9 @@
 	var/alai = CONFIG_GET(flag/allow_ai)
 	CONFIG_SET(flag/allow_ai, !alai)
 	if (alai)
-		to_chat(world, "<B>The AI job is no longer chooseable.</B>")
+		to_world("<B>The AI job is no longer chooseable.</B>")
 	else
-		to_chat(world, "<B>The AI job is chooseable now.</B>")
+		to_world("<B>The AI job is chooseable now.</B>")
 	log_admin("[key_name(usr)] toggled AI allowed.")
 	world.update_status()
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle AI", "[!alai ? "Disabled" : "Enabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -600,9 +650,9 @@
 	var/new_nores = !CONFIG_GET(flag/norespawn)
 	CONFIG_SET(flag/norespawn, new_nores)
 	if (!new_nores)
-		to_chat(world, "<B>I may now respawn.</B>")
+		to_world("<B>I may now respawn.</B>")
 	else
-		to_chat(world, "<B>I may no longer respawn :(</B>")
+		to_world("<B>I may no longer respawn :(</B>")
 	message_admins(span_adminnotice("[key_name_admin(usr)] toggled respawn to [!new_nores ? "On" : "Off"]."))
 	log_admin("[key_name(usr)] toggled respawn to [!new_nores ? "On" : "Off"].")
 	world.update_status()
@@ -613,17 +663,17 @@
 	set desc="Delay the game start"
 	set name="Delay pre-game"
 
-	var/newtime = input("Set a new time in seconds. Set -1 for indefinite delay.","Set Delay",round(SSticker.GetTimeLeft()/10)) as num|null
+	var/newtime = input(usr, "Set a new time in seconds. Set -1 for indefinite delay.","Set Delay",round(SSticker.GetTimeLeft()/10)) as num|null
 	if(SSticker.current_state > GAME_STATE_PREGAME)
-		return alert("Too late... The game has already started!")
+		return alert(usr, "Too late... The game has already started!")
 	if(newtime)
 		newtime = newtime*10
 		SSticker.SetTimeLeft(newtime)
 		if(newtime < 0)
-			to_chat(world, "<b>The game start has been delayed.</b>")
+			to_world("<b>The game start has been delayed.</b>")
 			log_admin("[key_name(usr)] delayed the round start.")
 		else
-			to_chat(world, "<b>The game will start in [DisplayTimeText(newtime)].</b>")
+			to_world("<b>The game will start in [DisplayTimeText(newtime)].</b>")
 			SEND_SOUND(world, sound('sound/blank.ogg'))
 			log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(newtime)].")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delay Game Start") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -636,13 +686,13 @@
 		message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]")
 		log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
 	else
-		alert("[M.name] is not prisoned.")
+		alert(usr, "[M.name] is not prisoned.")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unprison") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set desc = ""
 	set name = "Spawn..."
 
@@ -735,9 +785,9 @@
 	set name="Toggle tinted welding helmes"
 	GLOB.tinted_weldhelh = !( GLOB.tinted_weldhelh )
 	if (GLOB.tinted_weldhelh)
-		to_chat(world, "<B>The tinted_weldhelh has been enabled!</B>")
+		to_world("<B>The tinted_weldhelh has been enabled!</B>")
 	else
-		to_chat(world, "<B>The tinted_weldhelh has been disabled!</B>")
+		to_world("<B>The tinted_weldhelh has been disabled!</B>")
 	log_admin("[key_name(usr)] toggled tinted_weldhelh.")
 	message_admins("[key_name_admin(usr)] toggled tinted_weldhelh.")
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Tinted Welding Helmets", "[GLOB.tinted_weldhelh ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -749,9 +799,9 @@
 	var/new_guest_ban = !CONFIG_GET(flag/guest_ban)
 	CONFIG_SET(flag/guest_ban, new_guest_ban)
 	if (new_guest_ban)
-		to_chat(world, "<B>Guests may no longer enter the game.</B>")
+		to_world("<B>Guests may no longer enter the game.</B>")
 	else
-		to_chat(world, "<B>Guests may now enter the game.</B>")
+		to_world("<B>Guests may now enter the game.</B>")
 	log_admin("[key_name(usr)] toggled guests game entering [!new_guest_ban ? "" : "dis"]allowed.")
 	message_admins(span_adminnotice("[key_name_admin(usr)] toggled guests game entering [!new_guest_ban ? "" : "dis"]allowed."))
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Guests", "[!new_guest_ban ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -876,38 +926,57 @@
 	set name = "Back to Lobby"
 
 	var/mob/living/carbon/human/H = mob
-	var/datum/job/mob_job
-	var/datum/advclass/target_job = H.get_advclass_datum()
+	H.admin_send_back_to_lobby(usr)
 
-	if(H.mind)
-		mob_job = SSjob.GetJob(H.mind.assigned_role)
+
+/mob/living/carbon/human/proc/admin_send_back_to_lobby(mob/admin, delete_character = FALSE)
+	var/datum/job/mob_job
+	var/target_job = SSrole_class_handler.get_advclass_by_name(advjob)
+	var/player_key = key ? key : mind?.key
+	if(mind)
+		mob_job = SSjob.GetJob(mind.assigned_role)
 		if(mob_job)
 			mob_job.current_positions = max(0, mob_job.current_positions - 1)
 		if(target_job)
 			SSrole_class_handler.adjust_class_amount(target_job, -1)
-		H.mind.unknow_all_people()
+		mind.unknow_all_people()
 		for(var/datum/mind/MF in get_minds())
-			H.mind.become_unknown_to(MF)
+			mind.become_unknown_to(MF)
 		for(var/datum/bounty/removing_bounty in GLOB.head_bounties)
-			if(removing_bounty.target == H.real_name)
+			if(removing_bounty.target == real_name)
 				GLOB.head_bounties -= removing_bounty
+	else if(admin)
+		to_chat(admin, span_warning("Target has no mind!"))
+	GLOB.chosen_names -= real_name
+	if(!mob_job)
+		LAZYREMOVE(GLOB.actors_list[SSjob.bitflag_to_department(WANDERERS, FALSE)], mobid)
 	else
-		alert(usr, "Target has no mind!") // Optional Error check that may or may not be neccessary
-	GLOB.chosen_names -= H.real_name
-	LAZYREMOVE(GLOB.actors_list, H.mobid)
-	LAZYREMOVE(GLOB.roleplay_ads, H.mobid)
-	H.returntolobby()
+		LAZYREMOVE(GLOB.actors_list[SSjob.bitflag_to_department(mob_job.department_flag, mob_job.obfuscated_job)], mobid)
+	if(client)
+		SSdroning.kill_droning(client)
+		SSdroning.kill_loop(client)
+		SSdroning.kill_rain(client)
+	if(player_key)
+		var/mob/dead/new_player/NP = new()
+		NP.key = player_key
+	else if(admin)
+		to_chat(admin, span_warning("[src] has no key to return to the lobby."))
+	if(delete_character)
+		qdel(src)
+	LAZYREMOVE(GLOB.roleplay_ads, mobid) //OV ADD - Roleplay Ad Maint
+	return TRUE
+
 
 
 /datum/admins/proc/sleep_view()
 	set name = "inview Sleep"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set hidden = FALSE
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	if(alert("This will sleep ALL mobs within your view range. Are you sure?",,"Yes","Cancel") == "Cancel")
+	if(alert(usr, "This will sleep ALL mobs within your view range. Are you sure?",,"Yes","Cancel") == "Cancel")
 		return
 	for(var/mob/living/M in view(usr.client))
 		M.SetSleeping(999999)
@@ -916,13 +985,13 @@
 
 /datum/admins/proc/wake_view()
 	set name = "inview Wake"
-	set category = "Game Master"
+	set category = "Game Master.Misc"
 	set hidden = FALSE
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	if(alert("This wake ALL mobs within your view range. Are you sure?",,"Yes","Cancel") == "Cancel")
+	if(alert(usr, "This wake ALL mobs within your view range. Are you sure?",,"Yes","Cancel") == "Cancel")
 		return
 	for(var/mob/living/M in view(usr.client))
 		var/S = M.IsSleeping()
@@ -942,7 +1011,7 @@ GLOBAL_VAR_INIT(extend_round_timestamp, 0)
 	if(!check_rights(R_ADMIN))
 		return
 
-	if(alert("Prolong the end of the round by 30 minutes. This delays the vote, or delays the end after the vote is successful. Are you sure?",,"Yes","Cancel") == "Cancel")
+	if(alert(usr, "Prolong the end of the round by 30 minutes. This delays the vote, or delays the end after the vote is successful. Are you sure?",,"Yes","Cancel") == "Cancel")
 		return
 
 	if(world.time < GLOB.extend_round_timestamp + (1 MINUTES))

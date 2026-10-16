@@ -101,8 +101,20 @@
 		for(var/datum/bounty/removing_bounty in GLOB.head_bounties)
 			if(removing_bounty.target == M.real_name)
 				GLOB.head_bounties -= removing_bounty
-	for(var/obj/item/holder/micro/micro in M)
-		M.dropItemToGround(micro, TRUE, TRUE)
+	var/dat = "[ADMIN_LOOKUPFLW(M)] has been despawned, job [M.job], at [AREACOORD(M)].\n<details><summary>Contents despawned along:</summary>"
+	var/dat_log = "[key_name(M)] has despawned, job [M.job], at [AREACOORD(M)]. Contents despawned along:"
+	for(var/obj/item in M.contents)
+		dat += " - [item.name]\n"
+		dat_log += "[item.name], "
+		if(istype(item, /obj/item/holder/micro))
+			M.dropItemToGround(item, TRUE, TRUE)
+		if(istype(item, /obj/belly))
+			for(var/mob/living/L in item.contents)
+				if(L.client) //Let's not make every mob proc this.
+					safe_round_remove(L)
+	dat += "</details>"
+	message_admins(dat)
+	log_admin(copytext(dat_log, 1, -2))
 	if(SSticker.rulermob == M)
 		SSticker.rulermob = null
 	if(SSticker.regentmob == M)

@@ -1,5 +1,0 @@
-author: "SpadesNeil"
-delete-after: True
-changes:
-  - code_imp: "Arquebus ammo drop shrink reduced."
-  - code_imp: "Drop shrink added to arquebus and pistol."

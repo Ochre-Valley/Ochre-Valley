@@ -108,7 +108,8 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 #define isharpy(A) (is_species(A, /datum/species/harpy)) // OV Add
 #define isooze(A) (is_species(A, /datum/species/ooze)) //OV ADD
 #define isgnoll(A) (is_species(A, /datum/species/gnoll))
-
+#define iswerewolf(A) (is_species(A, /datum/species/werewolf))
+#define isfamiliar(A) (istype(A, /mob/living/carbon/human/species/familiar))
 
 //Simple animals
 #define isanimal(A) (istype(A, /mob/living/simple_animal))
@@ -211,3 +212,17 @@ GLOBAL_VAR_INIT(magic_appearance_detecting_image, new /image) // appearances are
 #define isappearance(thing) (!isimage(thing) && !ispath(thing) && istype(GLOB.magic_appearance_detecting_image, thing))
 #define isappearance_or_image(thing) (isimage(thing) || (!ispath(thing) && istype(GLOB.magic_appearance_detecting_image, thing)))
 #define is_ooze_wound(A) (istype(A, /datum/wound/fracture) || istype(A, /datum/wound/dislocation)) //Defines what kinds of wounds cause ooze limbs to melt.
+
+#define is_zizo_amulet(amulet_type) (amulet_type in GLOB.zizo_amulet_types)
+#define is_baotha_amulet(amulet_type) (amulet_type in typesof(/obj/item/clothing/neck/roguetown/psicross/inhumen/baotha))
+#define is_matthios_amulet(amulet_type) (amulet_type in typesof(/obj/item/clothing/neck/roguetown/psicross/inhumen/matthios))
+#define is_graggar_amulet(amulet_type) (amulet_type in typesof(/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar))
+#define is_gronn_amulet(amulet_type) (amulet_type in GLOB.gronn_amulet_types)
+
+// The filters list has the same ref type id as a filter, but isnt one and also isnt a list, so we have to check if the thing has Cut() instead
+GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
+#define isfilter(thing) (!hascall(thing, "Cut") && TYPEID(thing) == GLOB.refid_filter)
+
+#define isgenerator(A) (istype(A, /generator))
+
+#define isalist(A) (istype(A, /alist))

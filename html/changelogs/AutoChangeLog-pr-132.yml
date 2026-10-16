@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - rscadd: "Added PvP Opt-in to character directory, the options are \"No PvP\", \"Ask First\" and \"Open to PvP\". Default is \"No PvP\" as we are opt-in."

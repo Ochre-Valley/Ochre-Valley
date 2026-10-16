@@ -104,7 +104,11 @@ const AreaMapper = (props: {
     return [...entry, ...new Array(maxEntries - entry.length).fill('')];
   }, [entry, maxEntries]);
 
-  function performAction(value: string, index: number) {
+  function performAction(value: string | string[], index?: number) {
+    if (typeof value !== 'string' || index === undefined) {
+      return;
+    }
+
     const newEntry = [...filledArray];
     newEntry[index] = value;
     if (exactLength) {

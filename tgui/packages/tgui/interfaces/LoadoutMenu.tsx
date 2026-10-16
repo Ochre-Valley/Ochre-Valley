@@ -28,7 +28,9 @@ type SelectedItem = {
   detail_color: string | null;
   altdetail_color: string | null;
   custom_name: string | null;
+  custom_name_parsed: string | null;
   custom_desc: string | null;
+  custom_desc_parsed: string | null;
 };
 
 type Data = {
@@ -45,6 +47,7 @@ type Data = {
   total_triumph_cost: number;
   effective_triumph_cost: number;
   player_triumphs: number;
+  preview: boolean;
 };
 
 export const LoadoutMenu = () => {
@@ -151,7 +154,8 @@ const TweakRow = (props: {
   colorChannels: string[];
 }) => {
   const { itemName, meta, colorChannels } = props;
-  const { act } = useBackend<Data>();
+  const { act, data } = useBackend<Data>();
+  const { preview } = data;
 
   const [localName, setLocalName] = useState(meta?.custom_name || '');
   const [localDesc, setLocalDesc] = useState(meta?.custom_desc || '');
@@ -207,15 +211,29 @@ const TweakRow = (props: {
               <Box inline color="label" mr={0.5}>
                 Name:
               </Box>
-              <Input
-                width="200px"
-                maxLength={42}
-                placeholder="Custom name..."
-                value={localName}
-                onChange={(val) => setLocalName(val)}
-                onEnter={(val) => commitName(val)}
-                onBlur={(val) => commitName(val)}
-              />
+              {preview ? (
+                <Box
+                  as="span"
+                  style={{
+                    backgroundColor: 'var(--color-base-end)',
+                    border: '2px solid var(--section-separator-color)',
+                  }}
+                  dangerouslySetInnerHTML={{
+                    // yes yes i know. this is output from the markdown processor and is presanitized
+                    __html: meta?.custom_name_parsed,
+                  }}
+                />
+              ) : (
+                <Input
+                  width="200px"
+                  maxLength={64}
+                  placeholder="Custom name..."
+                  value={localName}
+                  onChange={(val) => setLocalName(val)}
+                  onEnter={(val) => commitName(val)}
+                  onBlur={(val) => commitName(val)}
+                />
+              )}
             </Box>
           </Box>
           {/* Line 3: Custom desc (full width textarea) */}
@@ -223,16 +241,31 @@ const TweakRow = (props: {
             <Box color="label" mb={0.3}>
               Description (max 1024 chars):
             </Box>
-            <TextArea
-              fluid
-              maxLength={1024}
-              height="60px"
-              placeholder="Custom description..."
-              value={localDesc}
-              onChange={(val) => setLocalDesc(val)}
-              onBlur={(val) => commitDesc(val)}
-              dontUseTabForIndent
-            />
+            {preview ? (
+              <Box
+                style={{
+                  backgroundColor: 'var(--color-base-end)',
+                  border: '2px solid var(--section-separator-color)',
+                }}
+                overflowY="scroll"
+                height="60px"
+                dangerouslySetInnerHTML={{
+                  // yes yes i know. this is output from the markdown processor and is presanitizeda
+                  __html: meta?.custom_desc_parsed,
+                }}
+              />
+            ) : (
+              <TextArea
+                fluid
+                maxLength={1024}
+                height="60px"
+                placeholder="Custom description..."
+                value={localDesc}
+                onChange={(val) => setLocalDesc(val)}
+                onBlur={(val) => commitDesc(val)}
+                dontUseTabForIndent
+              />
+            )}
           </Box>
         </Box>
       </Table.Cell>
@@ -307,6 +340,7 @@ const LoadoutDisplay = () => {
     is_donator,
     triumph_discount,
     donator_bonus,
+    preview,
   } = data;
 
   const currentCategory = activeCategory || categories[0] || '';
@@ -352,14 +386,23 @@ const LoadoutDisplay = () => {
           })}
         </Tabs>
       </Stack.Item>
-      {/* Search bar */}
+      {/* Search bar, preview toggle */}
       <Stack.Item>
-        <Input
-          fluid
-          placeholder="Search items..."
-          value={search}
-          onChange={(val) => setSearch(val)}
-        />
+        <Stack fill>
+          <Stack.Item grow>
+            <Input
+              fluid
+              placeholder="Search items..."
+              value={search}
+              onChange={(val) => setSearch(val)}
+            />
+          </Stack.Item>
+          <Stack.Item>
+            <Button color="good" fontSize={1.1} onClick={() => act('preview')}>
+              {preview ? '\u2713' : '\u25CB'} Toggle Preview
+            </Button>
+          </Stack.Item>
+        </Stack>
       </Stack.Item>
 
       {/* Items table */}
@@ -373,7 +416,9 @@ const LoadoutDisplay = () => {
             <Table>
               <Table.Row header>
                 <Table.Cell pl={2.5}>Name</Table.Cell>
-                <Table.Cell collapsing textAlign="center">Cost</Table.Cell>
+                <Table.Cell collapsing textAlign="center">
+                  Cost
+                </Table.Cell>
                 <Table.Cell>Description</Table.Cell>
               </Table.Row>
               {filteredItems.map((item) => {
@@ -438,12 +483,10 @@ const LoadoutDisplay = () => {
                   </Table.Row>,
                   isSelected && (
                     <TweakRow
-                      key={item.name + '_tweak'}
+                      key={`${item.name}_tweak`}
                       itemName={item.name}
                       meta={meta}
-                      colorChannels={
-                        channelsMap.get(item.name) || ['primary']
-                      }
+                      colorChannels={channelsMap.get(item.name) || ['primary']}
                     />
                   ),
                 ];
@@ -461,12 +504,28 @@ const LoadoutDisplay = () => {
               <ClearAllButton selectedCount={selected.length} />
             </Stack.Item>
             <Stack.Item grow>
-              <Box inline bold fontSize={0.95} color={total_cost >= max_points ? 'bad' : undefined} mr={1.5}>
+              <Box
+                inline
+                bold
+                fontSize={0.95}
+                color={total_cost >= max_points ? 'bad' : undefined}
+                mr={1.5}
+              >
                 Budget: {total_cost}/{max_points}
               </Box>
-              <Box inline bold fontSize={0.95} color={effective_triumph_cost > player_triumphs ? 'bad' : 'gold'} mr={1.5}>
+              <Box
+                inline
+                bold
+                fontSize={0.95}
+                color={
+                  effective_triumph_cost > player_triumphs ? 'bad' : 'gold'
+                }
+                mr={1.5}
+              >
                 Triumphs:{' '}
-                {is_donator && triumph_discount > 0 && total_triumph_cost > 0 ? (
+                {is_donator &&
+                triumph_discount > 0 &&
+                total_triumph_cost > 0 ? (
                   <>
                     {total_triumph_cost}
                     <Box inline color="green" ml={0.5}>
@@ -483,12 +542,15 @@ const LoadoutDisplay = () => {
               </Box>
               {!!is_donator && (
                 <Box inline bold fontSize={0.85} color="gold" mr={1.5}>
-                  <Box inline mr={0.5}>&#9733;</Box>
+                  <Box inline mr={0.5}>
+                    &#9733;
+                  </Box>
                   Donator - +{donator_bonus} budget, {triumph_discount} TRI free
                 </Box>
               )}
               <Box inline color="label" fontSize={0.85}>
-                Free loadout items cannot be sold, smelted, or salvaged. Triumph items are exempt.
+                Free loadout items cannot be sold, smelted, or salvaged. Triumph
+                items are exempt.
               </Box>
             </Stack.Item>
             <Stack.Item>

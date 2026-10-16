@@ -1,4 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - bugfix: "Interacting with a psycross to pray now correctly sates the Devout Follower vice."

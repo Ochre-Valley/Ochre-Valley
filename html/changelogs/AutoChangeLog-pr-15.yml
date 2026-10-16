@@ -1,5 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - bugfix: "Fixed muffling belly add on not working."
-  - bugfix: "Fixed whispers not working in a belly."

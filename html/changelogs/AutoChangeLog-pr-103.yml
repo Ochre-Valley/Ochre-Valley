@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - rscadd: "New version of Mirror Transform, you're now given the mirror, and it opens a TGUI window instead of nested lists of options."

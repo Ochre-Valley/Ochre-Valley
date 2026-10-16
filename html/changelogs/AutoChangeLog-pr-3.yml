@@ -1,5 +1,0 @@
-author: "Very-Soft"
-delete-after: True
-changes:
-  - rscadd: "Added OOC Escape"
-  - bugfix: "Fixed predators retaining their grab on their prey after eating them if they did not move."

@@ -10,9 +10,9 @@
 	is_carved = TRUE
 	was_crafted = TRUE
 
-//.....................Shell......................//
+//...........................................//
 
-/obj/item/carvedgem/shell
+/obj/item/carvedgem/
 	name = "shell base"
 	desc = "if you encountered this, it's a bug!"
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
@@ -24,7 +24,6 @@
 	icon_state = "oyster_open"
 	grid_height = 32
 	grid_width = 32
-	sellprice = 10
 
 /obj/item/carvedgem/shell/rawshell
 	name = "clamshell"
@@ -32,7 +31,6 @@
 	icon_state = "raw_shell"
 	grid_height = 32
 	grid_width = 32
-	sellprice = SELLPRICE_CLAMSHELL
 
 /obj/item/carvedgem/shell/cameo
 	name = "shell cameo"
@@ -136,11 +134,10 @@
 
 /obj/item/carvedgem/rose/rawrose
 	name = "rosestone"
-	desc = "Pink and lustrous, these pearls produced by fossilized clamshells are valued by Eorans; and are usually gifted to expecting mothers and newlyweds."
+	desc = "Pink and lustrous, these pearls produced by fossilized clams are valued by Eorans; and are usually gifted to expecting mothers and newlyweds."
 	icon_state = "raw_rose"
 	grid_height = 32
 	grid_width = 32
-	sellprice = SELLPRICE_ROSESTONE
 
 /obj/item/carvedgem/rose/cameo
 	name = "rosestone cameo"
@@ -258,7 +255,7 @@
 
 /obj/item/carvedgem/jade
 	name = "jade base"
-	desc =  "if you are seeing this, it's a bug, report it to coders!"
+	desc =	"if you are seeing this, it's a bug, report it to coders!"
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "cutgem_jade"
 	grid_height = 32

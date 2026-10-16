@@ -16,6 +16,11 @@
 	cost = 35 // 4 cloth + 4 fiber, added 10 for SF pricing
 	contains = list(/obj/item/clothing/head/roguetown/headband/monk)
 
+/datum/supply_pack/rogue/light_armor/padded_wrappings
+	name = "Arm Wrappings, Padded"
+	cost = 35 // 4 cloth + 4 fiber, same recipe cost as the padded headband
+	contains = list(/obj/item/clothing/wrists/roguetown/bracers/cloth/monk)
+
 /datum/supply_pack/rogue/light_armor/arming_cap
 	name = "Arming Cap"
 	cost = 20 // 1 cloth + 3 fiber, ditto
@@ -83,18 +88,23 @@
 
 /datum/supply_pack/rogue/light_armor/hide_armor
 	name = "Hide Armor"
-	cost = 35 // Base sellprice of 20
+	cost = 30 // Base sellprice of 20
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/hide)
 
 /datum/supply_pack/rogue/light_armor/heavy_leather_armor
 	name = "Hardened Leather Armor"
-	cost = 40 // Base sellprice of 20
+	cost = 45 // Base sellprice of 20
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/heavy)
 
 /datum/supply_pack/rogue/light_armor/studded_leather_armor
 	name = "Studded Leather Armor"
-	cost = 45 // I added 5 to the base sellprice of 25 because it cost 1 ingot
+	cost = 35 // I added 5 to the base sellprice of 25 because it cost 1 ingot
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/studded)
+
+/datum/supply_pack/rogue/light_armor/studded_leather_hood
+	name = "Studded Leather Hood"
+	cost = 35
+	contains = list(/obj/item/clothing/head/roguetown/roguehood/studded)
 
 /datum/supply_pack/rogue/light_armor/studded_leather_cuirass
 	name = "Studded Leather Cuirass, 'Cuir-Bouilli'-Style"
@@ -103,12 +113,12 @@
 
 /datum/supply_pack/rogue/light_armor/heavy_leather_coat
 	name = "Hardened Leather Coat"
-	cost = 40 // Base sellprice of 25
+	cost = 55 // Base sellprice of 25
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/heavy/coat)
 
 /datum/supply_pack/rogue/light_armor/heavy_leather_jacket
 	name = "Hardened Leather Jacket"
-	cost = 40 // Base sellprice of 25
+	cost = 55 // Base sellprice of 25
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/heavy/jacket)
 
 /datum/supply_pack/rogue/light_armor/heavy_leather_gloves
@@ -145,6 +155,16 @@
 	name = "Mittens, Padded"
 	cost = 15
 	contains = list(/obj/item/clothing/gloves/roguetown/cloth)
+
+/datum/supply_pack/rogue/light_armor/paddedfootwraps
+	name = "Footwraps, Padded"
+	cost = 15 // 2 cloth + 1 fiber, same recipe cost as the padded mittens
+	contains = list(/obj/item/clothing/shoes/roguetown/footwraps/padded)
+
+/datum/supply_pack/rogue/light_armor/hleatherfootwraps
+	name = "Footwraps, Hardened Leather"
+	cost = 20 //same as hardened leather boots
+	contains = list(/obj/item/clothing/shoes/roguetown/footwraps/hleather)
 
 /datum/supply_pack/rogue/light_armor/lightgambesonskirt
 	name = "Gambesoned Kilt, Light"

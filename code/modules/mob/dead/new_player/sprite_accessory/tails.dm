@@ -223,7 +223,7 @@
 /datum/sprite_accessory/tail/large_tails/small_shadekin
 	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
 	name = "Umbrakin, Short"
-	icon_state = "short_shadekin"
+	icon_state = "small_shadekin"
 	color_keys = 2
 	color_key_names = list("Tail", "Tailtip")
 
@@ -236,6 +236,15 @@
 /datum/sprite_accessory/tail/murid
 	name = "Murid"
 	icon_state = "murid"
+
+/datum/sprite_accessory/tail/murid_alt
+	name = "Murid (Alternative, Wags)"
+	icon_state = "murid2"
+	can_wag = TRUE
+
+/datum/sprite_accessory/tail/murid_dormouse
+	name = "Murid (Dormouse)"
+	icon_state = "murid3"
 
 /datum/sprite_accessory/tail/orca
 	name = "Orca"
@@ -440,19 +449,17 @@
 	color_key_defaults = list(KEY_SKIN_COLOR)
 	can_wag = TRUE
 
-/datum/sprite_accessory/tail/dullahan
-	name = "Revenant"
+/datum/sprite_accessory/tail/tiefling/drake
+	name = "Drake"
 	icon = 'icons/mob/sprite_accessory/tails/tiefling.dmi'
-	icon_state = "tiebtail"
+	icon_state = "draketail"
 	color_key_defaults = list(KEY_SKIN_COLOR)
-	can_wag = TRUE
 
-/datum/sprite_accessory/tail/dullahan/heart
-	name = "Succubus"
+/datum/sprite_accessory/tail/tiefling/spear
+	name = "Spear"
 	icon = 'icons/mob/sprite_accessory/tails/tiefling.dmi'
-	icon_state = "hearttail"
+	icon_state = "speartail"
 	color_key_defaults = list(KEY_SKIN_COLOR)
-	can_wag = TRUE
 
 /datum/sprite_accessory/tail/rattlesnake
 	name = "Rattlesnake"
@@ -488,6 +495,25 @@
 	icon_state = "zorgoia"
 	color_keys = 3
 	color_key_names = list("Tail", "Tail Fluff", "Tail Barb")
+
+/datum/sprite_accessory/tail/goblin1
+	name = "Goblin"
+	icon_state = "goblintail"
+
+/datum/sprite_accessory/tail/goblin2
+	name = "Goblin (Impaler)"
+	icon_state = "impgob"
+
+/datum/sprite_accessory/tail/goblin3
+	name = "Goblin (Tiefling)"
+	icon_state = "tiefgob"
+
+/datum/sprite_accessory/tail/goblin4
+	name = "Goblin (Fluffy)"
+	icon_state = "fluffgob"
+	color_keys = 2
+	color_key_names = list("Tail", "Tail Fluff")
+
 
 //From Caustic Cove
 /datum/sprite_accessory/tail/large_snake

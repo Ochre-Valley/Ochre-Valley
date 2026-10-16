@@ -14,8 +14,8 @@ import {
   pageStyle,
   rulerStyle,
   SEAL_RED,
-  sectionHeaderStyle,
   SERIF,
+  sectionHeaderStyle,
   subtitleStyle,
   titleStyle,
 } from './common/parchment';
@@ -86,17 +86,29 @@ export const Zadcage = () => {
           <div style={subtitleStyle}>
             {data.bonded
               ? `${data.cote_name} - Slot ${data.slot_index}: ${data.slot_label}`
-              : 'Unbonded - strike against a zadcote to bond.'}
+              : 'Not bonded. Strike this cage against a zadcote to bond it.'}
           </div>
           <hr style={rulerStyle} />
           {!!data.severed && (
-            <div style={bannerStyle(SEAL_RED)}>The zadlink has been severed.</div>
-          )}
-          {!data.occupied && data.bonded && !data.severed && data.stored_payload.length === 0 && (
-            <div style={{ color: INK_SOFT, fontStyle: 'italic', textAlign: 'center', margin: '14px 0' }}>
-              No zad in the cage. Wait for one to arrive.
+            <div style={bannerStyle(SEAL_RED)}>
+              The zadlink has been severed.
             </div>
           )}
+          {!data.occupied &&
+            data.bonded &&
+            !data.severed &&
+            data.stored_payload.length === 0 && (
+              <div
+                style={{
+                  color: INK_SOFT,
+                  fontStyle: 'italic',
+                  textAlign: 'center',
+                  margin: '14px 0',
+                }}
+              >
+                No zad in the cage. Wait for one to arrive.
+              </div>
+            )}
           <SummonPanel />
           {data.stored_payload.length > 0 && <StoredPanel />}
           {!!data.occupied && <OccupancyPanel />}
@@ -111,16 +123,19 @@ const SummonPanel = () => {
   const pending = !!data.pending_flight;
   const [zads, setZads] = useState(1);
 
-  const may_summon = !data.occupied && data.bonded && !data.severed && data.allow_summons;
+  const may_summon =
+    !data.occupied && data.bonded && !data.severed && data.allow_summons;
 
-  if(!may_summon) return null;
+  if (!may_summon) return null;
 
   return (
     <div style={cardStyle}>
       <div style={{ fontWeight: 'bold', color: INK, marginBottom: '4px' }}>
         Summon a flight
       </div>
-      <div style={{ color: INK_SOFT, fontSize: FONT_BODY, marginBottom: '6px' }}>
+      <div
+        style={{ color: INK_SOFT, fontSize: FONT_BODY, marginBottom: '6px' }}
+      >
         {pending
           ? 'A flight is already on the way.'
           : `Call a flight from ${data.cote_name || 'the zadcote'}. It will arrive in about a minute. Load any package onto it once it lands.`}
@@ -167,7 +182,7 @@ const SummonPanel = () => {
             {zads === 1
               ? '1 zad: tiny or small return parcel.'
               : zads === 2
-                ? '2 zads: pouch, helmet, or normal-sized return.'
+                ? '2 zads: pouch, helmet, or a return of normal size.'
                 : '3 zads: bulky return parcel or large container.'}
           </div>
         </div>
@@ -200,7 +215,11 @@ const StoredPanel = () => {
         </div>
       ))}
       <div style={{ marginTop: '8px', textAlign: 'center' }}>
-        <button type="button" style={inkButtonStyle()} onClick={() => act('retrieve')}>
+        <button
+          type="button"
+          style={inkButtonStyle()}
+          onClick={() => act('retrieve')}
+        >
           Retrieve
         </button>
       </div>
@@ -232,7 +251,13 @@ const OccupancyPanel = () => {
   return (
     <div>
       <div style={cardStyle}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <div>
             <div style={{ fontWeight: 'bold', color: INK }}>
               A flight waits in the cage
@@ -253,8 +278,11 @@ const OccupancyPanel = () => {
           </div>
         </div>
         {warning && (
-          <div style={{ color: SEAL_RED, fontSize: FONT_BODY, marginTop: '4px' }}>
-            Auto-depart imminent. Auto-depart will NOT carry your reply or package.
+          <div
+            style={{ color: SEAL_RED, fontSize: FONT_BODY, marginTop: '4px' }}
+          >
+            The zad is about to leave on its own. If it does, it won't carry
+            your reply or package.
           </div>
         )}
       </div>
@@ -280,17 +308,21 @@ const OccupancyPanel = () => {
         </button>
       </div>
       <div style={sectionHeaderStyle}>Return Package</div>
-      <div style={{ color: INK_FAINT, fontSize: FONT_BODY, marginBottom: '6px' }}>
+      <div
+        style={{ color: INK_FAINT, fontSize: FONT_BODY, marginBottom: '6px' }}
+      >
         Hold a parcel in your active hand to send it back.
         {capacity === 1
           ? ' This return can carry a tiny or small item.'
           : capacity === 2
-            ? ' This return can carry up to a normal-sized item (helmet, pouch).'
+            ? ' This return can carry one item up to normal size (helmet, pouch).'
             : ' This return can carry a bulky parcel or large container.'}
       </div>
       {data.payload_in_hand.length === 0 ? (
-        <div style={{ color: INK_FAINT, fontStyle: 'italic', fontSize: FONT_BODY }}>
-          Empty-handed - hold something to offer it as the return parcel.
+        <div
+          style={{ color: INK_FAINT, fontStyle: 'italic', fontSize: FONT_BODY }}
+        >
+          Your hands are empty. Hold something to send it as the return parcel.
         </div>
       ) : (
         <div>
@@ -316,9 +348,7 @@ const OccupancyPanel = () => {
                   type="checkbox"
                   checked={checked}
                   disabled={tooHeavy}
-                  onChange={() =>
-                    setSelectedRef(checked ? null : item.ref)
-                  }
+                  onChange={() => setSelectedRef(checked ? null : item.ref)}
                 />
                 <span>{item.name}</span>
                 <span

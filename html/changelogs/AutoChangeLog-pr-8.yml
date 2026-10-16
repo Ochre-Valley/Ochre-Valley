@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - bugfix: "Fixed natural armor not working as intended, where it should ignore all other armor even if broken."

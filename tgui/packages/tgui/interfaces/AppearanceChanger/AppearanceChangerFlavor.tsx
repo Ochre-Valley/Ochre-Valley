@@ -4,14 +4,14 @@ import { capitalize } from 'tgui-core/string';
 
 import type { Data } from './types';
 
-export const AppearanceChangerFlavor = (props) => {
+export const AppearanceChangerFlavor = (props: any) => {
   const { act, data } = useBackend<Data>();
   const { flavor_text } = data;
 
   return (
     <Section title="Flavor Text" fill scrollable>
       <LabeledList>
-        {Object.keys(flavor_text).map((key) => (
+        {Object.entries(flavor_text).map(([key, value]) => (
           <LabeledList.Item key={key} label={capitalize(key)}>
             <Button
               icon="pen"
@@ -25,7 +25,7 @@ export const AppearanceChangerFlavor = (props) => {
             </Button>
             <br />
             <Box preserveWhitespace style={{ wordBreak: 'break-all' }}>
-              {flavor_text[key]}
+              {value}
             </Box>
           </LabeledList.Item>
         ))}

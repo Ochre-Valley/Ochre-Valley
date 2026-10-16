@@ -1,3 +1,4 @@
+/* Made redundant by becoming consistent with bows, moving them into trained and ready
 /datum/virtue/combat/musketeer
 	name = "Musketeer"
 	desc = "The thunderous crack of powder and shot is the future of war, and I've practiced with these weapons before most even knew they existed."
@@ -11,3 +12,4 @@
 		recipient.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_APPRENTICE, silent = TRUE)
 	else
 		added_skills = list(list(/datum/skill/combat/firearms, 1, 6))
+*/

@@ -1,4 +1,0 @@
-author: "TimePurradox"
-delete-after: True
-changes:
-  - rscadd: "Added consensual petrification with configurable material presets, colours, permanence, sensitivity, and custom flavour text."

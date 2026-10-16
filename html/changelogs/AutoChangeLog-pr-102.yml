@@ -1,4 +1,0 @@
-author: "Obengrad"
-delete-after: True
-changes:
-  - bugfix: "Fixed Arquebus not being able to be strapped."

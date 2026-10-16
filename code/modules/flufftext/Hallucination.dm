@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	var/halpick = pickweight(GLOB.hallucination_list)
 	new halpick(src, FALSE)
 
-	next_hallucination = world.time + rand(300, 1800) //Longer waits, more believable hallucinations.
+	next_hallucination = world.time + rand(300, 1800) //Longer waits, more believable hallucinations. //OV EDIT
 
 /mob/living/carbon/proc/set_screwyhud(hud_type)
 	hal_screwyhud = hud_type
@@ -239,6 +239,103 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 	qdel(src)
 
+/*/datum/hallucination/items_other
+
+/datum/hallucination/items_other/New(mob/living/carbon/C, forced = TRUE, item_type)
+	set waitfor = FALSE
+	..()
+	var/item
+	if(!item_type)
+		item = pick(list("esword","taser","ebow","baton","dual_esword","clockspear","ttv","flash","armblade"))
+	else
+		item = item_type
+	feedback_details += "Item: [item]"
+	var/side
+	var/image_file
+	var/image/A = null
+	var/list/mob_pool = list()
+
+	for(var/mob/living/carbon/human/M in view(7,target))
+		if(M != target)
+			mob_pool += M
+	if(!mob_pool.len)
+		return
+
+	var/mob/living/carbon/human/H = pick(mob_pool)
+	feedback_details += " Mob: [H.real_name]"
+
+	var/free_hand = H.get_empty_held_index_for_side(LEFT_HANDS)
+	if(free_hand)
+		side = "left"
+	else
+		free_hand = H.get_empty_held_index_for_side(RIGHT_HANDS)
+		if(free_hand)
+			side = "right"
+
+	if(side)
+		switch(item)
+			if("esword")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+				A = image(image_file,H,"swordred", layer=ABOVE_MOB_LAYER)
+			if("dual_esword")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+				A = image(image_file,H,"dualsabrered1", layer=ABOVE_MOB_LAYER)
+			if("taser")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+				A = image(image_file,H,"advtaserstun4", layer=ABOVE_MOB_LAYER)
+			if("ebow")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+				A = image(image_file,H,"crossbow", layer=ABOVE_MOB_LAYER)
+			if("baton")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
+				target.playsound_local(H, "sparks",75,1,-1)
+				A = image(image_file,H,"baton", layer=ABOVE_MOB_LAYER)
+			if("ttv")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/weapons/bombs_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/weapons/bombs_lefthand.dmi'
+				A = image(image_file,H,"ttv", layer=ABOVE_MOB_LAYER)
+			if("flash")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
+				A = image(image_file,H,"flashtool", layer=ABOVE_MOB_LAYER)
+			if("armblade")
+				if(side == "right")
+					image_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
+				else
+					image_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
+				target.playsound_local(H, 'sound/blank.ogg',30,1)
+				A = image(image_file,H,"arm_blade", layer=ABOVE_MOB_LAYER)
+		if(target.client)
+			target.client.images |= A
+			sleep(rand(150,250))
+			if(item == "esword" || item == "dual_esword")
+				target.playsound_local(H, 'sound/blank.ogg',35,1)
+			if(item == "armblade")
+				target.playsound_local(H, 'sound/blank.ogg',30,1)
+			target.client.images.Remove(A)
+	qdel(src)
+*/
 /datum/hallucination/delusion
 	var/list/image/delusions = list()
 
@@ -274,8 +371,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			if("ww")//ww
 				A = image('icons/roguetown/mob/monster/werewolf.dmi',H,"wwolf_m")
 				A.name = "Moon Howler"
-				target.playsound_local(H, pick('sound/combat/gib (1).ogg'), 60, 1)
-				target.playsound_local(H, pick('sound/vo/mobs/wwolf/roar.ogg'), 60, 1)
+				target.playsound_local(H, pick('sound/combat/gib (1).ogg'), 60, 1) //OV EDIT
+				target.playsound_local(H, pick('sound/vo/mobs/wwolf/roar.ogg'), 60, 1) //OV EDIT
 			if("spider")//Spider
 				A = image('icons/roguetown/mob/monster/spider.dmi',H,"skallax")
 				A.name = "Ambush spider"
@@ -425,7 +522,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		else
 			if(get_dist(target,H)<get_dist(target,person))
 				person = H
-	if(person) //Basic talk
+	if(person) //Basic talk //OV EDIT
 		var/chosen = specific_message
 		if(!chosen)
 			chosen = capitalize(pick(speak_messages))
@@ -433,22 +530,22 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		var/image/speech_overlay = image('icons/mob/talk.dmi', person, "default0a", layer = ABOVE_MOB_LAYER)
 		var/message = target.compose_message(person,understood_language,chosen,null,list(person.speech_span),face_name = TRUE)
 		feedback_details += "Type: Talk, Source: [person.real_name], Message: [message]"
+		//to_chat(target, message) //OV EDIT
 		if(target.client)
 			target.client.images |= speech_overlay
+			//OV ADD START
 			sleep(rand(8,15)) //Simulate human delay.
-			if(target.client?.prefs)
-				if(!target.client?.prefs.chat_on_map) //Only if they don't have chat_on_map prefs enabled send this message
-					to_chat(target, message)
+			to_chat(target, message)
+			//OV ADD END
 			sleep(30)
 			target.client.images.Remove(speech_overlay)
 		var/spans = list(person.speech_span)
-		if(target.client?.prefs)
-			if(target.client?.prefs.chat_on_map)
-				sleep(rand(8,15))
-				to_chat(target, message)
-				target.create_chat_message(person, understood_language, chosen, spans, 0)
-				spawn(1)
-					target.playsound_local(get_turf(person), 'sound/misc/talk.ogg', 100, FALSE, -1)
+		if(target.client)
+			sleep(rand(8,15))
+			to_chat(target, message)
+			target.create_chat_message(person, understood_language, chosen, spans, 0)
+			spawn(1)
+				target.playsound_local(get_turf(person), 'sound/misc/talk.ogg', 100, FALSE, -1)
 	if(!person)
 		//If we can't find anyone nearby, reduce the next hallucination tick to 10-30 seconds.
 		target.next_hallucination = world.time + rand(100, 300)
@@ -514,7 +611,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	..()
 	var/turf/source = random_far_turf()
 	if(!sound_type)
-		sound_type = pick("door","healing","deaddite","paincollapse","door hit","creepy","magic","far explosion","glass","alarm","lockpick","skele","door pick")
+		sound_type = pick("door","healing","deaddite","paincollapse","door hit","creepy","magic","far explosion","glass","alarm","lockpick","skele","door pick") //OV EDIT
 	feedback_details += "Type: [sound_type]"
 	//Strange audio
 	switch(sound_type)
@@ -532,9 +629,9 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			else
 				target.playsound_local(source, 'sound/magic/lightning.ogg', 80, 1)
 		if("far explosion")
-			target.playsound_local(source, 'sound/misc/explode/explosionclose (2).ogg', 75, 1)
+			target.playsound_local(source, 'sound/misc/explode/explosionclose (2).ogg', 75, 1) //OV EDIT
 		if("glass")
-			target.playsound_local(source, pick('sound/combat/hits/onglass/glassbreak (1).ogg','sound/combat/hits/onglass/glassbreak (2).ogg'), 66, 1)
+			target.playsound_local(source, pick('sound/combat/hits/onglass/glassbreak (1).ogg','sound/combat/hits/onglass/glassbreak (2).ogg'), 66, 1) //OV EDIT
 		if("alarm")
 			target.playsound_local(source, 'sound/misc/gold_license.ogg', 100, 0)
 		if("lockpick")
@@ -551,6 +648,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			target.playsound_local(source, 'sound/items/pickbad.ogg', 100, 1)
 			sleep(rand(40,80))
 			target.playsound_local(source, 'sound/items/pickgood2.ogg', 100, 1)
+		//OV ADD START
 		//Getting healed after a fight
 		if("healing")
 			target.playsound_local(source, 'sound/magic/heal.ogg', 100, 1)
@@ -579,18 +677,28 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			target.playsound_local(source,'sound/combat/hits/onwood/destroywalldoor.ogg', 75, 1)
 			sleep(rand(CLICK_CD_MELEE, CLICK_CD_MELEE + 6))
 			target.playsound_local(source, pick('sound/vo/mobs/zombie/f/firescream (1).ogg','sound/vo/mobs/zombie/f/firescream (2).ogg','sound/vo/mobs/zombie/f/firescream (3).ogg'), 100, 1)
-	QDEL_IN(src, 20) //Garuntee sounds finish.
+		//OV ADD END
+	QDEL_IN(src, 20) //Garuntee sounds finish. //OV EDIT
 
 /datum/hallucination/weird_sounds
 
 /datum/hallucination/weird_sounds/New(mob/living/carbon/C, forced = TRUE, sound_type)
 	set waitfor = FALSE
 	..()
+	//var/turf/source = random_far_turf() //OV EDIT
 	if(!sound_type)
-		sound_type = pick("whispers","whispers2","zizo","evil","creepy")
+		sound_type = pick("whispers","whispers2","zizo","evil","creepy") //OV EDIT
 	feedback_details += "Type: [sound_type]"
 	//Strange audio
 	switch(sound_type)
+		/*if("bleed") //OV EDIT START
+			target.playsound_local(target, 'sound/misc/bleed (1).ogg', 80)
+			sleep(25)
+			target.playsound_local(target, 'sound/misc/bleed (2).ogg', 85)
+			sleep(25)
+			target.playsound_local(target, 'sound/misc/bleed (3).ogg', 90)
+			sleep(25)
+			target.playsound_local(target, 'sound/misc/bleed (1).ogg', 100)*/ //OV EDIT END
 		if("whispers")
 			target.playsound_local(target, 'sound/misc/carriage1.ogg', 90)
 			sleep(25)
@@ -600,9 +708,16 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			sleep(25)
 			target.playsound_local(target, 'sound/misc/carriage4.ogg', 100)
 		if("zizo")
-			target.playsound_local(target, 'sound/misc/zizo.ogg', 50)
+			target.playsound_local(target, 'sound/misc/zizo.ogg', 50) //OV EDIT
 		if("evil")
 			target.playsound_local(target, 'sound/misc/evilevent.ogg', 70)
+		/*if("drill") //OV EDIT START
+			target.playsound_local(source, 'sound/misc/TheDrill.ogg', 90)
+		if("laughter")
+			if(prob(50))
+				target.playsound_local(source, 'sound/misc/HL (1).ogg', 60, 1)
+			else
+				target.playsound_local(source, pick('sound/misc/HL (2).ogg','sound/misc/HL (3).ogg','sound/misc/HL (5).ogg'), 60, 1)*/ //OV EDIT END
 		if("creepy")
 			target.playsound_local(target, pick('sound/misc/sting1.ogg','sound/misc/sting2.ogg','sound/misc/obey.ogg','sound/villain/hall_appear1.ogg',\
 			'sound/villain/hall_appear2.ogg','sound/villain/hall_appear3.ogg'), 80, 1)
@@ -610,7 +725,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			target.playsound_local(target, pick('sound/misc/sting1.ogg','sound/misc/sting2.ogg','sound/misc/obey.ogg','sound/villain/hall_appear1.ogg',\
 			'sound/villain/hall_appear2.ogg','sound/villain/hall_appear3.ogg'), 80, 1)
 
-	QDEL_IN(src, 20) //Garuntee sounds finish.
+	QDEL_IN(src, 20) //OV EDIT //Garuntee sounds finish.
 
 /datum/hallucination/townannouncement
 
@@ -618,7 +733,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	set waitfor = FALSE
 	..()
 	if(!message)
-		message = pick("heretic","outlaw","duke dead","priest dead","lich","ww","weird","atonce","return","purged")
+		message = pick("heretic","outlaw","duke dead","priest dead","lich","ww","weird","atonce","return","purged") //OV EDIT
 	feedback_details += "Type: [message]"
 	switch(message)
 		if("heretic")
@@ -633,7 +748,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			to_chat(target, "<h1 class='alert'>Bad Omen</h1>")
 			to_chat(target, "<br><br><span class='alert'>The [SSticker.rulertype] is dead! We need a new ruler.</span><br><br>")
 			SEND_SOUND(target, 'sound/misc/evilevent.ogg')
-		if("priest dead") 
+		if("priest dead")
 			to_chat(target, "<h1 class='alert'>Bad Omen</h1>")
 			to_chat(target, "<br><br><span class='alert'>The High Priest is dead!</span><br><br>")
 			SEND_SOUND(target, 'sound/misc/evilevent.ogg')
@@ -641,11 +756,13 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			to_chat(target, "<h1 class='alert'>The Lich Decrees</h1>")
 			to_chat(target, "<br><br><span class='alert'>The throne is mine! Bring me [target.first_name()], immediately!</span><br><br>")
 			SEND_SOUND(target, 'sound/misc/royal_decree.ogg')
+			SEND_SOUND(target, 'sound/misc/zizo.ogg')
 		if("ww")
 			to_chat(target, "<h1 class='alert'>The Werewolf Decrees</h1>")
 			to_chat(target, "<br><br><span class='alert'>AWOOOOOOOOOO!!! RRrrrRRrRRRRRrrrRRR RRrrrRRRrrrRRRRRrr [target.first_name()] RRrrRRRRRRRRRrrrRRR</span><br><br>")
 			SEND_SOUND(target, 'sound/misc/royal_decree.ogg')
 			SEND_SOUND(target, 'sound/vo/mobs/wwolf/howldist (1).ogg')
+		//OV ADD START
 		if("weird")
 			to_chat(target, "<h1 class='alert'>[target.client.key]?</h1>")
 			to_chat(target, "<br><br><span class='alert'>Are you sure you want to do this?</span><br><br>")
@@ -663,6 +780,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			to_chat(target, "<h1 class='alert'>LAWS PURGED</h1>")
 			to_chat(target, "<br><br><span class='alert'>All laws of the land have been purged!</span><br><br>")
 			SEND_SOUND(target, 'sound/misc/lawspurged.ogg')
+		//OV ADD END
 
 /datum/hallucination/fake_alert
 
@@ -701,6 +819,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	target.clear_alert(alert_type, clear_override = TRUE)
 	qdel(src)
 
+//OV EDIT START
 //Just so we don't have this taking up a fuck ton of space.
 /datum/hallucination/fake_alert/proc/bleed_sounds()
 	target.playsound_local(target, pick('sound/misc/bleed (1).ogg','sound/misc/bleed (2).ogg','sound/misc/bleed (3).ogg'), 80)
@@ -712,6 +831,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	target.playsound_local(target, pick('sound/misc/bleed (1).ogg','sound/misc/bleed (2).ogg','sound/misc/bleed (3).ogg'), 80)
 	sleep(rand(5,15))
 	target.playsound_local(target, pick('sound/misc/bleed (1).ogg','sound/misc/bleed (2).ogg','sound/misc/bleed (3).ogg'), 80)
+//OV EDIT END
 
 /datum/hallucination/dangerflash
 
@@ -789,18 +909,22 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 /obj/effect/hallucination/danger/anomaly
 	name = "him."
 
-/obj/effect/hallucination/danger/anomaly/Initialize()
+/obj/effect/hallucination/danger/anomaly/Initialize(mapload)
 	. = ..()
+	//OV ADD START
 	//When examining, scare others around you...
 	name = pick("wall..", "floor..", "ground..", "others..", "... the what?..", "man..", "woman..", "..")
+	//OV ADD END
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/hallucination/danger/anomaly/process()
+	//OV EDIT START
 	//~35% or so chance to move slowly towards you.
 	if(prob(25))
 		step(src,pick(GLOB.alldirs))
 	else if(prob(50))
 		step(src,get_dir(target, src))
+	//OV EDIT END
 
 /obj/effect/hallucination/danger/anomaly/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -840,7 +964,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		if(fakemob)
 			sleep(rand(20, 50))
 			to_chat(target, "<span class='deadsay'><b>DEAD: [fakemob.name]</b> says, \"[pick("rip","F in chat","lol","lmao","Anybody else just randomly die?","anyone else just die?","wtf!","why did i just drop dead?","hey [target.first_name()]","lol poison?","you too?","was that a crossbow?",\
-			"i[prob(50)?" fucking":""] hate [pick("the ww","the lich","rogues","this round","this","myself","squires","you","macros","micros","the admins...")]")]\"</span>")
+			"i[prob(50)?" fucking":""] hate [pick("the ww","the lich","rogues","this round","this","myself","squires","you","macros","micros","the admins...")]")]\"</span>") //OV EDIT
 	sleep(rand(70,90))
 	target.set_screwyhud(SCREWYHUD_NONE)
 	target.SetParalyzed(0)
@@ -855,11 +979,11 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 /datum/hallucination/fire/New(mob/living/carbon/C, forced = TRUE)
 	set waitfor = FALSE
 	..()
-	fire_overlay = image('icons/mob/OnFire.dmi', target, "Standing", -FIRE_LAYER)
+	fire_overlay = image('icons/mob/OnFire.dmi', target, "Standing", -FIRE_LAYER) //OV EDIT
 	if(target.client)
 		target.client.images += fire_overlay
 	to_chat(target, "<span class='danger'>You're set on fire!</span>")
-	target.playsound_local(target, 'sound/misc/enflame.ogg', 100, 1)
+	target.playsound_local(target, 'sound/misc/enflame.ogg', 100, 1) //OV ADD
 	target.throw_alert("fire", /atom/movable/screen/alert/fire, override = TRUE)
 	sleep(20)
 	for(var/i in 1 to 3)
@@ -910,7 +1034,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		target.client.images |= shock_image
 		target.client.images |= electrocution_skeleton_anim
 	addtimer(CALLBACK(src, PROC_REF(reset_shock_animation)), 40)
-	target.playsound_local(get_turf(src), pick('sound/misc/elec (1).ogg', 'sound/misc/elec (2).ogg', 'sound/misc/elec (3).ogg'), 100, 1)
+	target.playsound_local(get_turf(src), pick('sound/misc/elec (1).ogg', 'sound/misc/elec (2).ogg', 'sound/misc/elec (3).ogg'), 100, 1) //OV EDIT
 	target.staminaloss += 50
 	target.Stun(40)
 	target.jitteriness += 1000
@@ -975,6 +1099,41 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			QDEL_NULL(target.halbody)
 	qdel(src)
 
+/*/datum/hallucination/voices //OV EDIT START
+	var/static/list/messages = list(
+		"YOUR FATE IS SEALED IN BLOOD AND ASHES!",
+		"SHE CALLS YOUR NAME, FOOL!",
+		"THE GODS SPIT ON YOUR WORTHLESS SOUL!",
+		"YOUR HEART BEATS FOR THEIR ASCENSION!",
+		"CLAWS TEAR AT YOUR MIND FROM WITHIN!",
+		"NO ONE WILL MOURN YOUR BROKEN CORPSE!",
+		"THEIR EYES WATCH FROM EVERY WOUND!",
+		"THE SWAMP WILL SWALLOW YOUR HOPE!",
+		"PAIN IS YOUR ONLY TRUE COMPANION!",
+		"THE CHAINS OF FATE BIND YOUR BONES!",
+		"THEY LAUGH AS YOUR MIND CRUMBLES!",
+		"THE STARS MOCK YOUR FUTILE STRUGGLE!",
+		"THE GROUND WEEPS BLOOD WHERE YOU TREAD!",
+		"THEIR WHISPERS CARVE YOUR FLESH TO DUST!",
+		"THE BEASTS SMELL YOUR FEAR AND HUNGER!",
+		"YOUR VEINS PULSE WITH THEIR MALICE!",
+		"DEATH IS TOO MERCIFUL FOR YOUR SINS!",
+		"THE BOG CLAIMS YOUR HOPELESS BONES!",
+		"THE GODS HAVE MARKED YOU FOR TORMENT!",
+		"YOUR CRIES ECHO IN AN EMPTY ABYSS!",
+		"THE SHADOWS BIND YOUR WRETCHED FATE!",
+		"YOUR MIND IS A PRISON OF THEIR DESIGN!",
+		"THE FLAMES OF YOUR GUILT CONSUME YOU!",
+		"YOUR HEART IS A TROPHY FOR HER GLORY!",
+		"THE STORM SINGS OF YOUR DOOMED PATH!",
+		"THEIR CLAWS SCRATCH YOUR NAME IN STONE!",
+		"YOUR BREATH FEEDS HIS ENDLESS HUNGER!",
+		"THE GODS LAUGH AT YOUR BROKEN DREAMS!",
+		"YOUR SHADOW BETRAYS YOU TO THE DARK!",
+		"THE SWAMP WHISPERS YOUR FINAL MOMENTS!",
+		"YOUR FLESH IS A CANVAS FOR HIS WRATH!",
+	) */ //OV EDIT END
+
 /datum/hallucination/voices/New(mob/living/carbon/carbon, forced = TRUE)
 	set waitfor = FALSE
 	..()
@@ -983,7 +1142,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 	for(var/obj/obj in oview(3, carbon))
 		objs += obj
-	
+
 	var/obj/obj = safepick(objs)
 
 	if(!obj)
@@ -991,17 +1150,18 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		return
 
 	var/lang = carbon.get_default_language()
-	var/picked_message = pick_list(HAL_LINES_FILE, "voices")
-	var/composed = obj.compose_message(obj, carbon.get_default_language(), picked_message)
+	var/picked_message = pick_list(HAL_LINES_FILE, "voices") //OV EDIT
+	var/composed = obj.compose_message(obj, carbon.get_default_language(), picked_message, , list(SPAN_GEN)) //OV EDIT
 
 	carbon.Hear(composed, obj, lang, picked_message)
 	spawn(1)
-		target.playsound_local(get_turf(obj), 'sound/misc/talk.ogg', 100, FALSE, -1)
+		carbon.playsound_local(get_turf(obj), 'sound/misc/talk.ogg', 100, FALSE, -1) //OV EDIT
 
 	if(prob(20))
+		//OV EDIT START
 		var/emote_number
 		emote_number = pick(1,5)
-		switch(emote_number) 
+		switch(emote_number)
 			if(1)
 				carbon.emote("whimper", forced = TRUE)
 			if(2)
@@ -1012,6 +1172,126 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 				carbon.emote("lip_c", forced = TRUE)
 			if(5)
 				carbon.emote("tremble", forced = TRUE) //This one really got to you.
+		//OV EDIT END
+
+	qdel(src)
+
+/datum/hallucination/chasing_mob
+	var/image/hallucinated_image
+
+/datum/hallucination/chasing_mob/New(mob/living/carbon/victim, forced = TRUE)
+	set waitfor = FALSE
+	..()
+
+	var/message = pick("It's mom!", "I have to HURRY UP!", "They are CLOSE!", "They are NEAR!")
+	var/icon_state = pick("M3", "deepone", "mom")
+
+	var/turf/start_turf = pick(RANGE_TURFS(7, victim) - RANGE_TURFS(3, victim))
+	if(!start_turf)
+		qdel(src)
+		return
+
+	hallucinated_image = image('icons/roguetown/maniac/dreamer_mobs.dmi', start_turf, icon_state, FLOAT_LAYER, get_dir(start_turf, victim))
+	hallucinated_image.plane = GAME_PLANE_UPPER
+	victim.client.images += hallucinated_image
+
+	to_chat(victim, span_userdanger("<span class='big'>[message]</span>"))
+	addtimer(CALLBACK(src, PROC_REF(begin_chase), victim), 5)
+
+/datum/hallucination/chasing_mob/proc/begin_chase(mob/living/carbon/victim)
+	if(!victim.client || QDELETED(hallucinated_image))
+		qdel(src)
+		return
+
+	var/static/list/attack_sounds = list(
+		'sound/villain/hall_attack1.ogg',
+		'sound/villain/hall_attack2.ogg',
+		'sound/villain/hall_attack3.ogg',
+		'sound/villain/hall_attack4.ogg'
+	)
+	victim.playsound_local(victim, pick(attack_sounds), 100)
+
+	chase_step(victim, get_turf(hallucinated_image), 7, rand(4, 6))
+
+/datum/hallucination/chasing_mob/proc/chase_step(mob/living/carbon/victim, turf/current_turf, tiles_remaining, delay_time)
+	if(!victim.client || QDELETED(src) || QDELETED(hallucinated_image))
+		qdel(src)
+		return
+
+	if(tiles_remaining <= 0)
+		qdel(src)
+		return
+
+	var/direction = get_dir(current_turf, victim)
+	var/turf/next_turf = get_step(current_turf, direction)
+	if(!next_turf)
+		qdel(src)
+		return
+
+	hallucinated_image.dir = direction
+	hallucinated_image.loc = next_turf
+
+	if(next_turf == get_turf(victim))
+		victim.Stun(rand(2 SECONDS, 4 SECONDS))
+		to_chat(victim, span_userdanger(pick("NO!", "THEY GOT ME!", "AGH!")))
+		qdel(src)
+		return
+
+	addtimer(CALLBACK(src, PROC_REF(chase_step), victim, next_turf, tiles_remaining - 1, delay_time), delay_time)
+
+/datum/hallucination/chasing_mob/Destroy()
+	if(target.client && hallucinated_image)
+		target.client.images -= hallucinated_image
+
+	QDEL_NULL(hallucinated_image)
+
+	return ..()
+
+/datum/hallucination/floor_shift
+
+/datum/hallucination/floor_shift/New(mob/living/carbon/dreamer, forced = TRUE)
+	set waitfor = FALSE
+	..()
+	for(var/turf/open/floor/floor in view(dreamer))
+		if(prob(40))
+			continue
+
+		var/mutable_appearance/appearance = image(floor.icon, floor, floor.icon_state, floor.layer + 0.01)
+		dreamer.client.images += appearance
+		var/offset = pick(-3, -2, -1, 1, 2, 3)
+		var/raise_duration = rand(1 SECONDS, 3 SECONDS) * abs(offset)
+		var/lower_duration = rand(1 SECONDS, 3 SECONDS) * abs(offset)
+		animate(appearance, pixel_y = offset, time = raise_duration, flags = ANIMATION_RELATIVE)
+		addtimer(CALLBACK(src, PROC_REF(floor_back), dreamer, appearance, offset, lower_duration), raise_duration)
+
+	to_chat(dreamer, span_userdanger(pick("WOAH!", "WHERE IS THE FLOOR?", "MOVE!", "HOW!?")))
+	dreamer.adjustStaminaLoss(10)
+
+	qdel(src)
+
+/datum/hallucination/floor_shift/proc/floor_back(mob/living/carbon/dreamer, mutable_appearance/appearance, offset, lower_duration)
+	animate(appearance, pixel_y = -offset, time = lower_duration, flags = ANIMATION_RELATIVE)
+	addtimer(CALLBACK(src, PROC_REF(floor_remove), dreamer, appearance), lower_duration)
+
+/datum/hallucination/floor_shift/proc/floor_remove(mob/living/carbon/dreamer, mutable_appearance/appearance)
+	if(dreamer?.client)
+		dreamer.client.images -= appearance
+
+	qdel(appearance)
+
+/datum/hallucination/fake_heartattack
+
+/datum/hallucination/fake_heartattack/New(mob/living/carbon/victim, forced = TRUE)
+	set waitfor = FALSE
+	..()
+
+	to_chat(victim, span_userdanger(pick("MY HEART STOPS BEATING!", "I CAN'T FEEL MY HEART!", "WHERE IS MY HEART?")))
+
+	victim.freakout_hud_skew()
+	victim.emote("scream", forced = TRUE)
+	victim.flash_fullscreen("stressflash")
+	victim.Jitter(10)
+	victim.energy_add(-2)
 
 	qdel(src)
 

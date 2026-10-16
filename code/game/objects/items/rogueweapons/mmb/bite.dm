@@ -54,6 +54,10 @@
 			. = ..()
 			return
 	user.changeNext_move(clickcd)
+	if(ismob(target))
+		SEND_SIGNAL(user, COMSIG_MOB_ATTACK_HAND, user)
+		if(SEND_SIGNAL(target, COMSIG_MOB_ATTACKED_BY_BITE, user) & COMPONENT_HAND_NO_ATTACK)
+			return
 	target.onbite(user)
 	. = ..()
 	return
@@ -160,6 +164,11 @@
 				else
 					recoil_mult = 0.05
 
+			// if armor broke, your toof dont broke, ya git
+			var/obj/item/clothing/armor = src.get_item_by_slot(def_zone)
+			if(armor?.obj_broken)
+				recoil_mult = 0.05
+
 			var/recoil = round(dam2do * recoil_mult)
 			user.apply_damage(recoil, BRUTE, BODY_ZONE_PRECISE_MOUTH)// cleaner, basically! this will recoil 25% damage to your mouth if you bite flesh, and 50% if you bite armor
 		if(prob(25)) // 1/4 of the time you'll overextend and be exposed, giving your opponent a room to strike back hard
@@ -167,7 +176,7 @@
 		if(!apply_damage(dam2do, BRUTE, def_zone, armor_block, user))
 			nodmg = TRUE
 			next_attack_msg += VISMSG_ARMOR_BLOCKED
-		else if(!nodmg && (HAS_TRAIT(user, TRAIT_VAMPBITE)))
+		else if(!nodmg && (HAS_TRAIT(user, TRAIT_VAMPBITE)) && !(src.dna?.species?.species_traits && (NOSTOMACH in src.dna?.species?.species_traits)))
 			var/ramount = 15
 			var/rid = /datum/reagent/vampsolution
 			reagents.add_reagent(rid, ramount)
@@ -193,9 +202,14 @@
 				if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 					to_chat(user, span_warning("BLEH! [bite_victim] tastes of SILVER! My gift cannot take hold."))
 				else
-					caused_wound?.werewolf_infect_attempt()
-					if(prob(50))
-						user.werewolf_feed(bite_victim, 10)
+					if(user.mind.has_antag_datum(/datum/antagonist/werewolf/noinfect)) //they can't infect anyone
+						to_chat(user, span_warning("My curse is not strong enough to infect [bite_victim]."))
+						if(prob(50))
+							user.werewolf_feed(bite_victim, 10)
+					else
+						caused_wound?.werewolf_infect_attempt()
+						if(prob(50))
+							user.werewolf_feed(bite_victim, 10)
 			if(istype(user.dna.species, /datum/species/gnoll))
 				if(prob(30))
 					user.gnoll_feed(bite_victim, 10)
@@ -205,7 +219,7 @@
 			var/datum/antagonist/zombie/zombie_antag = user.mind.has_antag_datum(/datum/antagonist/zombie)
 			if(zombie_antag && zombie_antag.has_turned)
 				zombie_antag.last_bite = world.time
-				if(bite_victim.zombie_infect_attempt())   // infect_attempt on bite
+				if(bite_victim.zombie_infect_attempt())	// infect_attempt on bite
 					to_chat(user, span_danger("You feel your gift trickling from your mouth into [bite_victim]'s wound..."))
 	var/obj/item/grabbing/bite/B = new()
 	user.equip_to_slot_or_del(B, SLOT_MOUTH)
@@ -223,7 +237,7 @@
 		if(mind)
 			mind.attackedme[user.real_name] = world.time
 		log_combat(user, src, "bit")
-	
+
 	return TRUE
 
 // Checking if the unit can bite
@@ -329,7 +343,7 @@
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	var/armor_block = C.run_armor_check(sublimb_grabbed, d_type, armor_penetration = PEN_NONE, damage = damage)
-		
+
 	var/vamp = user.mind?.has_antag_datum(/datum/antagonist/vampire)
 	var/wolf = user.mind?.has_antag_datum(/datum/antagonist/werewolf)
 
@@ -349,11 +363,16 @@
 			else
 				recoil_mult = 0.05
 
+		// if armor broke, your toof dont broke, ya git
+		var/obj/item/clothing/armor = C.get_item_by_slot(sublimb_grabbed)
+		if(armor?.obj_broken)
+			recoil_mult = 0.05
+
 		var/recoil = round(damage * recoil_mult)
 		user.apply_damage(recoil, BRUTE, BODY_ZONE_PRECISE_MOUTH) // cleaner, basically! this will recoil 25% damage to your mouth if you bite flesh, and 50% if you bite armor
 	if(prob(50)) // half the time you'll overextend and be exposed, giving your opponent a room to strike back hard
 		user.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
-	
+
 	C.next_attack_msg.Cut()
 	user.do_attack_animation_simple(C, ATTACK_EFFECT_BITE)
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
@@ -373,7 +392,7 @@
 			var/datum/antagonist/zombie/zombie_antag = user.mind.has_antag_datum(/datum/antagonist/zombie)
 			if(zombie_antag && zombie_antag.has_turned)
 				var/datum/antagonist/zombie/existing_zombie = C.mind?.has_antag_datum(/datum/antagonist/zombie) //If the bite target is a zombie
-				if(!existing_zombie && caused_wound?.zombie_infect_attempt(user))   // infect_attempt on wound
+				if(!existing_zombie && caused_wound?.zombie_infect_attempt(user))	// infect_attempt on wound
 					to_chat(user, span_danger("You feel your gift trickling into [C]'s wound...")) //message to the zombie they infected the target
 /*
 	Code below is for a zombie smashing the brains of unit. The code expects the brain to be part of the head which is not the case with AP. Kept for posterity in case it's used in an overhaul.
@@ -400,7 +419,9 @@
 					span_userdanger("[user] bites my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), span_hear("I hear a sickening sound of chewing!"), COMBAT_MESSAGE_RANGE, user)
 	to_chat(user, span_danger("I bite [C]'s [parse_zone(sublimb_grabbed)].[C.next_attack_msg.Join()]"))
 	C.next_attack_msg.Cut()
-
+	//ov edit- taste them
+	to_chat(user, span_danger("They taste of [C.get_taste_message()]"))
+	//ov edit end
 	log_combat(user, C, "limb chewed [sublimb_grabbed] ")
 
 /obj/item/grabbing/bite/proc/drinklimb(mob/living/user)
@@ -417,19 +438,23 @@
 	sippy = TRUE
 	to_chat(user, span_warning("You tighten your lips and attempt to drink blood!"))
 
+
 	while(src && user && grabbed && sippy)
 		var/mob/living/carbon/C = grabbed
 		if(QDELETED(src) || !user || !grabbed || !sippy)
 			break
+
+		//ov edit- taste them
+		to_chat(user, span_danger("[C] tastes of [C.get_taste_message()]"))
+		//ov edit end
+
 		if(C.blood_volume <= 0)
 			to_chat(user, span_warning("--But there's no blood left to drink."))
 			break
-		//OV edit start. This proc is for hemovores- we check if the user has TRAIT_LYFE_DRINK, if the target location is unarmored, and if the target is not in combat mode. If so, drink, and apply drugs, without checking for bleeding
-		if(check_hemovore(user))
-			return
-		//OV edit end. if this returns false, the target is either actively fighting, or protected- check normally
 
-		if(!limb_grabbed.get_bleed_rate())
+		//OV edit start- adds Check_hemovore. This allows hemovores to penetrate armor and inject drugs, if the target isn't actively in combat mode
+		if(!limb_grabbed.get_bleed_rate() && !check_hemovore(user))
+		//OV edit end
 			to_chat(user, span_warning("--But they're not bleeding, I should chew."))
 			break
 		if(!user.Adjacent(grabbed))

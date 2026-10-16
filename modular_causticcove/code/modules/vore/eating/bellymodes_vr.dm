@@ -220,7 +220,7 @@
 
 				//Worn items flag
 				if(mode_flags & DM_FLAG_AFFECTWORN && H.contaminate_pref)
-					
+
 					for(var/Iuncast in H.get_equipped_items(include_pockets = TRUE))
 						var/obj/item/I = Iuncast
 						if(I)
@@ -296,7 +296,7 @@
 		if(IM_DIGEST,IM_DIGEST_PARALLEL)
 			did_an_item = digest_item(I, touchable_amount)
 		if(IM_SMELTING)
-			if(I.smeltresult && I.smeltresult != /obj/item/rogueore/coal/charcoal && !istype(I, /obj/item/ingot) && I.smeltresult != /obj/item/rogueore/coal)
+			if(I.smeltresult && I.smeltresult != /obj/item/rogueore/coal/charcoal && !istype(I, /obj/item/ingot) && I.smeltresult != /obj/item/rogueore/coal && !(I.item_quality == ITEM_QUALITY_LOOTED)) //OV EDIT - No looted items
 				var/obj/item/newingot = new I.smeltresult(src)
 				if(istype(newingot, /obj/item/ingot))
 					var/obj/item/ingot/newdefinietlyingot = newingot
@@ -308,6 +308,9 @@
 	// OV Edit Start
 	if(M?.IsPetrified())
 		instant = TRUE
+	var/is_player = FALSE
+	if(M.mind)
+		is_player = TRUE
 	// OV Edit End
 	if(!instant && slow_digestion) // Gradual corpse digestion
 		if(!M.digestion_in_progress)
@@ -340,7 +343,7 @@
 
 	if((mode_flags & DM_FLAG_LEAVEREMAINS) && M.digest_leave_remains)
 		handle_remains_leaving(M)
-	
+
 	//OV edit
 	if((mode_flags & DM_FLAG_SPARELIMB) && M.digest_leave_remains && ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -352,14 +355,15 @@
 			limb.drop_limb()
 		for(var/obj/item/bodypart/r_leg/prosthetic/limb in H.bodyparts)
 			limb.drop_limb()
-	//OV edit end
 
 	digestion_death(M)
-	if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && reagents.total_volume < reagents.maximum_volume) // digestion producing reagents
-		owner_adjust_nutrition((nutrition_percent / 100) * compensation * 3 * personal_nutrition_modifier)
-		GenerateBellyReagents_digested()
-	else
-		owner_adjust_nutrition((nutrition_percent / 100) * compensation * 4.5 * personal_nutrition_modifier * pred_digestion_efficiency)
+	if(is_player)
+		if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDIGEST && reagents.total_volume < reagents.maximum_volume) // digestion producing reagents
+			owner_adjust_nutrition((nutrition_percent / 100) * compensation * 3 * personal_nutrition_modifier)
+			GenerateBellyReagents_digested()
+		else
+			owner_adjust_nutrition((nutrition_percent / 100) * compensation * 4.5 * personal_nutrition_modifier * pred_digestion_efficiency)
+	//OV edit end
 
 /obj/belly/proc/steal_nutrition(mob/living/L)
 	if(L.nutrition <= 110)
@@ -376,7 +380,7 @@
 			if(L.weight > 70)
 				L.weight -= (0.01 * L.weight_loss)
 				owner.weight += (0.01 * L.weight_loss) //intentionally dependant on the prey's weight loss ratio rather than the preds weight gain to keep them in pace with one another.
-	if(L.nutrition >= 100)
+	if((L.nutrition >= 100) && L.mind) //OV EDIT
 		var/oldnutrition = (L.nutrition * 0.05)
 		L.nutrition = (L.nutrition * 0.95)
 		if(show_liquids && reagent_mode_flags & DM_FLAG_REAGENTSDRAIN && reagents.total_volume < reagents.maximum_volume)   // draining reagent production //Added to this proc now since it's used for draining

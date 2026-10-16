@@ -111,12 +111,12 @@
 	grid_width = 32
 	grid_height = 64
 
-	resistance_flags = FLAMMABLE
+	resistance_flags = FIRE_PROOF | UNACIDABLE
 
 /obj/item/bodypart/proc/operator""()
 	return "\proper"+name
 
-/obj/item/bodypart/proc/adjust_marking_overlays(var/list/appearance_list)
+/obj/item/bodypart/proc/adjust_marking_overlays(list/appearance_list)
 	return
 
 /obj/item/bodypart/proc/get_specific_markings_overlays(list/specific_markings, aux = FALSE, mob/living/carbon/human/human_owner, override_color)
@@ -124,16 +124,23 @@
 //	var/specific_layer = aux ? aux_layer : BODYPARTS_LAYER
 	var/specific_layer = aux_layer ? aux_layer : BODYPARTS_LAYER
 	var/specific_render_zone = aux ? aux_zone : body_zone
+
 	for(var/key in specific_markings)
 		var/color = specific_markings[key]
 		var/datum/body_marking/BM = GLOB.body_markings[key]
 
 		var/render_limb_string = specific_render_zone
+		var/pixel_y_offset = 0
 		if(BM.gendered && (!BM.gender_only_chest || specific_render_zone == BODY_ZONE_CHEST))
-			var/gendaar = (human_owner.gender == FEMALE) ? "f" : "m"
+			var/gendaar = human_owner.is_bulky_body() ? "m" : "f"
 			render_limb_string = "[render_limb_string]_[gendaar]"
+			// Only gendered markings need this: one drawn as a single shared sprite was never drawn against her
+			// body to begin with. The per-zone amounts live on the build, as marking_offsets.
+			if(gendaar == "f" && human_owner.gender == MALE)
+				pixel_y_offset = human_owner.get_marking_offset(specific_render_zone)
 
 		var/mutable_appearance/accessory_overlay = mutable_appearance(BM.icon, "[BM.icon_state]_[render_limb_string]", -specific_layer)
+		accessory_overlay.pixel_y += pixel_y_offset
 		if(override_color)
 			accessory_overlay.color = "#[override_color]"
 		else
@@ -186,6 +193,8 @@
 	if(embedded_objects && length(embedded_objects))
 		for(var/obj/item/embedded as anything in embedded_objects)
 			embedded_objects -= embedded
+			embedded.is_embedded = FALSE
+			embedded.embedded_host = null
 			if(!QDELETED(embedded))
 				qdel(embedded)
 		embedded_objects = null
@@ -263,8 +272,8 @@
 				return
 	return ..()
 
+// OV EDIT START - Petri Head Smash
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
-	// OV Edit Start
 	var/mob/living/original_living = original_owner
 	if(!owner && original_living?.IsPetrified() && original_living.stat != DEAD && I.force && !I.get_sharpness())
 		user.visible_message(span_danger("[user] begins smashing [src] apart with [I]."), span_warning("I begin smashing [src] apart with [I]."))
@@ -274,18 +283,7 @@
 				user.visible_message(span_danger("[user] smashes [src] apart!"), span_warning("I smash [src] apart."))
 				qdel(src)
 		return TRUE
-	// OV Edit End
-	if(length(contents) && I.get_sharpness() && !user.cmode)
-		add_fingerprint(user)
-		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
-		user.visible_message(span_warning("[user] begins to cut open [src]."),\
-			span_notice("You begin to cut open [src]..."))
-		if(do_after(user, 5 SECONDS, target = src))
-			drop_organs(user)
-			user.visible_message(span_danger("[user] cuts [src] open!"),\
-				span_notice("You finish cutting [src] open."))
-		return
-	return ..()
+//OV EDIT END
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
@@ -344,7 +342,7 @@
 		heal_damage(0, 0, INFINITY, null, FALSE)
 		. |= BODYPART_LIFE_UPDATE_HEALTH
 
-/obj/item/bodypart/Initialize()
+/obj/item/bodypart/Initialize(mapload)
 	. = ..()
 	update_HP()
 
@@ -380,14 +378,13 @@
 
 	if(!brute && !burn && !stamina)
 		return FALSE
-
 	//cap at maxdamage
 	if(brute_dam + brute > max_damage)
-		brute_dam = max_damage
+		brute_dam = max(brute_dam, max_damage)
 	else
 		brute_dam += brute
 	if(burn_dam + burn > max_damage)
-		burn_dam = max_damage
+		burn_dam = max(burn_dam, max_damage)
 	else
 		burn_dam += burn
 
@@ -556,10 +553,7 @@
 		return
 	var/datum/species/S = H.dna.species
 	species_id = S.limbs_id
-	if(H.gender == MALE)
-		species_icon = S.limbs_icon_m
-	else
-		species_icon = S.limbs_icon_f
+	species_icon = S.get_limbs_icon(H)
 	species_flags_list = H.dna.species.species_traits
 
 
@@ -733,7 +727,7 @@
 		limb.icon_state = "[prosthetic_prefix]_[body_zone]"
 		if(aux_zone)
 			if(!hideaux)
-				aux = image(limb.icon, "pr_[aux_zone]", -aux_layer, image_dir)
+				aux = image(limb.icon, "[prosthetic_prefix]_[aux_zone]", -aux_layer, image_dir)
 				. += aux
 
 
@@ -833,7 +827,7 @@
 	name = BODY_ZONE_CHEST
 	desc = ""
 	icon_state = "default_human_chest"
-	max_damage = 300
+	max_damage = BODYPART_MAX_DAMAGE_CHEST
 	body_zone = BODY_ZONE_CHEST
 	body_part = CHEST
 	px_x = 0
@@ -874,7 +868,7 @@
 	desc = ""
 	icon_state = "default_human_l_arm"
 	attack_verb = list("slapped", "punched")
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	max_stamina_damage = 50
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
@@ -919,7 +913,7 @@
 	desc = ""
 	icon_state = "default_human_r_arm"
 	attack_verb = list("slapped", "punched")
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
@@ -964,7 +958,7 @@
 	desc = ""
 	icon_state = "default_human_l_leg"
 	attack_verb = list("kicked", "stomped")
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
 	body_damage_coeff = 1
@@ -1003,7 +997,7 @@
 	// alternative spellings of 'pokey' are availible
 	icon_state = "default_human_r_leg"
 	attack_verb = list("kicked", "stomped")
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
 	body_damage_coeff = 1

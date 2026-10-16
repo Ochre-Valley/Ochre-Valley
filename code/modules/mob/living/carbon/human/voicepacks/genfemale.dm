@@ -66,6 +66,8 @@
 				used = list('sound/vo/female/gen/haltyell (1).ogg','sound/vo/female/gen/haltyell (2).ogg')
 			if("hic","hiccup") // OV Add
 				used = list('modular_ochrevalley/sounds/vo/vore/hiccups/hic.ogg','modular_ochrevalley/sounds/vo/vore/hiccups/hiccup.ogg') // OV Add
+			if("hackle") // OV Add
+				used = list('sound/vo/mobs/hyena/cackle.ogg') //OV ADD
 			if("hmm")
 				used = 'sound/vo/female/gen/hmm.ogg'
 			if("huh")
@@ -124,6 +126,8 @@
 				used = list('sound/vo/female/gen/se/sex (1).ogg','sound/vo/female/gen/se/sex (2).ogg','sound/vo/female/gen/se/sex (3).ogg','sound/vo/female/gen/se/sex (4).ogg','sound/vo/female/gen/se/sex (5).ogg','sound/vo/female/gen/se/sex (6).ogg','sound/vo/female/gen/se/sex (7).ogg','sound/vo/female/gen/se/sex (8).ogg')
 			if("meow")
 				used = list('sound/vo/mobs/cat/cat_meow1.ogg', 'sound/vo/mobs/cat/cat_meow2.ogg', 'sound/vo/mobs/cat/cat_meow3.ogg', 'sound/vo/mobs/cat/cat_meow4.ogg')
+			if("mreow")
+				used = list('sound/vo/mobs/cat/cat_meow4.ogg')
 			if("mrrp")
 				used = list('sound/vo/mobs/cat/mrrp.ogg')
 			if("caw")

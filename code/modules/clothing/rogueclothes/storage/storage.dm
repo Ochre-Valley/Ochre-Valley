@@ -25,6 +25,18 @@
 		return TRUE
 	..()
 
+/obj/item/storage/belt/rogue/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Middle-clicking a belt adjusts its layer..")
+
+/obj/item/storage/belt/rogue/MiddleClick(mob/user)
+	if(!ishuman(user))
+		return
+	var/under_tabard = (alternate_worn_layer != UNDER_TABARD_LAYER)
+	alternate_worn_layer = under_tabard ? UNDER_TABARD_LAYER : initial(alternate_worn_layer)
+	to_chat(user, span_info("I wear [src] [under_tabard ? "under" : "over"] my tabard."))
+	user.update_inv_belt()
+
 /obj/item/storage/belt/rogue/leather
 	name = "belt"
 	desc = "A fine leather strap notched with holes for a buckle to secure itself."
@@ -32,7 +44,6 @@
 	item_state = "leather"
 	equip_sound = 'sound/blank.ogg'
 	sewrepair = TRUE
-	sellprice = 10
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/belt/rogue/leather/plaquegold
@@ -51,7 +62,6 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	item_state = "blackbelt"
-	sellprice = 10
 
 /obj/item/storage/belt/rogue/leather/double
 	name = "pair of belts"
@@ -126,6 +136,22 @@
 
 /obj/item/storage/belt/rogue/leather/battleskirt/breechcloth/red
 	color = CLOTHING_RED
+
+/obj/item/storage/belt/rogue/leather/battleskirt/loincloth
+	name = "cloth loincloth"
+	desc = "A fine leather strap with a crude cloth covering, notched above the loincloth."
+	icon_state = "loincloth"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
+
+/obj/item/storage/belt/rogue/leather/battleskirt/loincloth/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
 
 /obj/item/storage/belt/rogue/leather/steel
 	name = "steel belt"
@@ -251,7 +277,6 @@
 	name = "black satchel"
 	icon_state = "bsatchel"
 	item_state = "bsatchel"
-	sellprice = 10
 
 /obj/item/storage/backpack/rogue/attack_right(mob/user)
 	var/datum/component/storage/CP = GetComponent(/datum/component/storage)
@@ -308,7 +333,7 @@
 	component_type = /datum/component/storage/concrete/roguetown/backpack
 
 /obj/item/storage/backpack/rogue/artibackpack
-	name = "Cooling backpack"
+	name = "cooling backpack"
 	desc = "A leather backpack with complex pipework coursing through it. It hums and vibrates constantly."
 	icon_state = "artibackpack"
 	item_state = "artibackpack"
@@ -320,6 +345,7 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	sewrepair = FALSE
+	anvilrepair = /datum/skill/craft/engineering
 	component_type = /datum/component/storage/concrete/roguetown/backpack
 
 /obj/item/storage/backpack/rogue/backpack/bagpack
@@ -363,7 +389,7 @@
 	else
 		icon_state = "rucksack_untied"
 
-/obj/item/storage/belt/rogue/leather/plaquegold/steward
+/obj/item/storage/belt/rogue/leather/plaquegold/noble
 	name = "fancy gold belt"
 	desc = "A dark belt with real gold making up the buckle and highlights. How bougie."
 	icon_state = "stewardbelt"
@@ -375,8 +401,8 @@
 	desc = "A five-slotted belt meant for tossblades. Little room left over."
 	icon_state = "knife"
 	item_state = "knife"
-	strip_delay = 20
-	var/max_storage = 5			//Javelin bag is 4 and they can't hold items. So, more fair having it like this since these are pretty decent weapons.
+	strip_delay = STRIP_DELAY_FAST
+	var/max_storage = 5		//Javelin bag is 4 and they can't hold items. So, more fair having it like this since these are pretty decent weapons.
 	var/list/knives = list()
 	sewrepair = TRUE
 	component_type = /datum/component/storage/concrete/roguetown/belt/knife_belt
@@ -441,7 +467,7 @@
 		return TRUE
 	return FALSE
 
-/obj/item/storage/belt/rogue/leather/knifebelt/iron/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/iron/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/rogueweapon/huntingknife/throwingknife/K = new()
@@ -452,49 +478,49 @@
 	icon_state = "blackknife"
 	item_state = "blackknife"
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/iron/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/iron/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/rogueweapon/huntingknife/throwingknife/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/steel/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/steel/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/rogueweapon/huntingknife/throwingknife/steel/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/silver/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/silver/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/rogueweapon/huntingknife/throwingknife/silver/K = new()
+		var/obj/item/rogueweapon/huntingknife/throwingknife/steel/silver/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/silver_blessed/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/silver/preblessed/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/rogueweapon/huntingknife/throwingknife/silver/preblessed/K = new()
+		var/obj/item/rogueweapon/huntingknife/throwingknife/steel/silver/preblessed/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/psydon/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/silver/psy/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/rogueweapon/huntingknife/throwingknife/psydon/K = new()
+		var/obj/item/rogueweapon/huntingknife/throwingknife/steel/silver/psy/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/psydon_blessed/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/silver/psy/preblessed/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/rogueweapon/huntingknife/throwingknife/psydon/preblessed/K = new()
+		var/obj/item/rogueweapon/huntingknife/throwingknife/steel/silver/psy/preblessed/K = new()
 		knives += K
 	update_icon()
 
-/obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun/Initialize()
+/obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun/Initialize(mapload)
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/rogueweapon/huntingknife/throwingknife/kazengun/K = new()
@@ -581,14 +607,14 @@
 	openspace.zFall(user) // slop?
 
 /obj/item/clothing/wall_grab/intercept_zImpact(atom/movable/AM, levels = 1) // with this shit it doesn't generate "X falls through open space". thank u guppyluxx
-    . = ..()
-    . |= FALL_NO_MESSAGE
+	. = ..()
+	. |= FALL_NO_MESSAGE
 
 /obj/item/rogueweapon/huntingknife/idagger/harpy_talons // OV Add Start
 	name = "talons"
 	desc = "Harpy talons. Birds of prey and all..."
 	experimental_inhand = FALSE
-	icon = 'icons/roguetown/weapons/misc32.dmi'
+	icon = 'modular_ochrevalley/icons/roguetown/weapons/misc32.dmi'
 	icon_state = "harpy_talon" // coder kitbash 5 minute sprite ugh
 	drop_sound = 'sound/blank.ogg'
 	gripped_intents = list(/datum/intent/wing/cut, /datum/intent/wing/shred, /datum/intent/wing/pick) // /datum/intent/wing/grab - temporarily removed until a fix for the INFINITE FLOAT bug is figured out.
@@ -617,7 +643,7 @@
 		return
 
 /obj/item/rogueweapon/huntingknife/idagger/harpy_talons/process()
-	if(obj_integrity >= max_integrity) 
+	if(obj_integrity >= max_integrity)
 		STOP_PROCESSING(SSobj, src)
 		src.visible_message(span_notice("[src] are in a much better shape now, enough resting!"), vision_distance = 1)
 		return
@@ -765,7 +791,7 @@
 	//mob_overlay_icon = 'icons/roguetown/clothing/onmob/belts.dmi'
 	icon_state = "rucksack"
 	item_state = "rucksack"
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK 
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_NORMAL
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'
@@ -876,7 +902,7 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
-	strip_delay = 20
+	strip_delay = STRIP_DELAY_FAST
 	component_type = /datum/component/storage/concrete/roguetown/zig_bandolier
 
 /obj/item/storage/belt/rogue/leather/suspenders
@@ -890,3 +916,16 @@
 	desc = "This belt has been sewn out of cloth, as opposed to tied. Which makes it superior. Obviously."
 	icon_state = "clothsash"
 	salvage_result = /obj/item/natural/cloth
+
+/obj/item/storage/belt/rogue/leather/belthooks
+	name = "belt hooks"
+	desc = "Etruscan-designed leather-wrapped hooks with an actuating hinge. To clip things to other things."
+	icon_state = "belthooks"
+	// belt + empty onmob sprite = welcome to fashion 💀
+
+/obj/item/storage/backpack/rogue/satchel/tailchel
+	name = "tail satchel"
+	desc = "Modest, really easy on the shoulders since is tied to your tail, preferred by many to have freedom of movement while holds a respectable amount."
+	icon_state = "tailchel"
+	item_state = "tailchel"
+	icon = 'icons/roguetown/clothing/storage.dmi'

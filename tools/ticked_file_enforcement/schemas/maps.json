@@ -4,6 +4,8 @@
 	"subdirectories": true,
 	"excluded_files": [],
 	"forbidden_includes": [
+		"_maps/jagged_jaw.dm",
+		"_maps/ovdun_world.dm",
 		"_maps/cove_world.dm",
 		"_maps/dun_world.dm",
 		"_maps/roguetest.dm",

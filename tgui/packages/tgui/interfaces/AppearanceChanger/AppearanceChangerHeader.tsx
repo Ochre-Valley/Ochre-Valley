@@ -3,7 +3,7 @@ import { Button, Section } from 'tgui-core/components';
 
 import type { Data } from './types';
 
-export const AppearanceChangerHeader = (props) => {
+export const AppearanceChangerHeader = (props: any) => {
   const { act, data } = useBackend<Data>();
   const { disk, selected_a_record } = data;
   return (

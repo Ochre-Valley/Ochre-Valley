@@ -12,7 +12,7 @@ import { ControlMedical } from './PlayerEffectsTabs/ControlMedical';
 import { ControlSmites } from './PlayerEffectsTabs/ControlSmites';
 import type { Data } from './types';
 
-export const PlayerEffects = (props) => {
+export const PlayerEffects = (props: any) => {
   const { data } = useBackend<Data>();
 
   const { real_name, player_ckey } = data;

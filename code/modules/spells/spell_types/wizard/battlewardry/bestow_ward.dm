@@ -1,4 +1,5 @@
 /datum/action/cooldown/spell/bestow_ward
+	source_aspect = /datum/magic_aspect/battlewardry
 	name = "Bestow Ward"
 	desc = "Channel arcyne energy to wrap an ally in a protective ward. The ward covers their entire body with light armor, \
 	layering coverage over any real armor they wear. The ward lasts for 3 minutes or until destroyed. \
@@ -34,8 +35,15 @@
 
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
 
+	supports_fellowship_snap = TRUE
+
 	var/ward_type = /obj/item/clothing/suit/roguetown/armor/manual/arcyne_ward/bestowed
 	var/ward_duration = 3 MINUTES
+
+/datum/action/cooldown/spell/bestow_ward/get_spell_statistics(mob/living/user)
+	var/list/stats = ..()
+	stats += span_info("Fellowship Mode (toggle with Shift+G): An off-target cast snaps the ward to your nearest fellowship member in range.")
+	return stats
 
 /datum/action/cooldown/spell/bestow_ward/cast(atom/cast_on)
 	. = ..()

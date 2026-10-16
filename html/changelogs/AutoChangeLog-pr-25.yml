@@ -1,5 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - rscadd: "Added belly examine messages to the examines in the text window, just like virgo."
-  - rscadd: "Added a toggle in the vore panel on a per-belly basis for whether that belly examine is visible with clothes covering the torso."

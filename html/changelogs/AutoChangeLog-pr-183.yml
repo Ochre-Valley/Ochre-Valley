@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - server: "Infrastructure for relaying ahelp handling."

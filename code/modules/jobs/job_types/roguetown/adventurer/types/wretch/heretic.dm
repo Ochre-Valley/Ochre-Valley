@@ -2,7 +2,7 @@
 	name = "Heretic"
 	tutorial = "You father your unholy cause through the most time-tested of ways: hard, heavy steel in both arms and armor."
 	allowed_sexes = list(MALE, FEMALE)
-	
+
 	outfit = /datum/outfit/job/roguetown/wretch/heretic
 	class_select_category = CLASS_CAT_CLERIC
 	category_tags = list(CTAG_WRETCH)
@@ -31,11 +31,24 @@
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 	)
 	subclass_stashed_items = list(
-        "Armor Plates" =  /obj/item/repair_kit/metal,
-    )
+		"Armor Plates" =	/obj/item/repair_kit/metal,
+		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
+	)
 
-	extra_context = "This subclass gain the Wound Heal miracle and the Convert Heretic spell."
+	extra_context = "This subclass gains the Wound Heal miracle."
 	tempo_capable = FALSE
+
+/datum/advclass/wretch/heretic/get_vice_limits(mob/living/carbon/human/H)
+	. = ..()
+	if(istype(H.patron, /datum/patron/old_god) || HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
+		if(!(/datum/charflaw/silverweakness in .))
+			. += /datum/charflaw/silverweakness
+
+/datum/advclass/wretch/heretic/get_prefs_vice_limits(client/player)
+	. = ..()
+	if(istype(player?.prefs?.selected_patron, /datum/patron/old_god))
+		if(!(/datum/charflaw/silverweakness in .))
+			. += /datum/charflaw/silverweakness
 
 /datum/outfit/job/roguetown/wretch/heretic
 	has_loadout = TRUE
@@ -45,29 +58,36 @@
 	to_chat(H, span_warning("You father your unholy cause through the most time-tested of ways: hard, heavy steel in both arms and armor."))
 	H.set_blindness(0)
 	if(H.mind)
-		var/weapons = list("Longsword", "Mace", "Flail", "Battle Axe", "Billhook")
+		var/weapons = list("Arming Sword", "Longsword", "Mace", "Flail", "Battle Axe", "Billhook")
 		if(!HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT)) //Remove Regular Axe BEFORE choice, is picked (so we don't mislead)
 			weapons += "Steel Axe"
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		switch(weapon_choice)
+			if("Arming Sword")
+				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
+				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
+					r_hand = /obj/item/rogueweapon/sword/silver/psy
+				else
+					r_hand = /obj/item/rogueweapon/sword
+				beltr = /obj/item/rogueweapon/scabbard/sword
 			if("Longsword")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
 				beltr = /obj/item/rogueweapon/scabbard/sword
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					r_hand = /obj/item/rogueweapon/sword/long/psysword
+					r_hand = /obj/item/rogueweapon/sword/long/silver/psy
 				else
 					r_hand = /obj/item/rogueweapon/sword/long
 			if("Mace")
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					r_hand = /obj/item/rogueweapon/mace/goden/psymace
+					r_hand = /obj/item/rogueweapon/mace/goden/psy
 					l_hand = /obj/item/rogueweapon/scabbard/gwstrap
 				else
 					beltr = /obj/item/rogueweapon/mace/steel
 			if("Flail")
 				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					beltr = /obj/item/rogueweapon/flail/sflail/psyflail
+					beltr = /obj/item/rogueweapon/flail/sflail/silver/psy
 				else
 					beltr = /obj/item/rogueweapon/flail/sflail
 			if("Steel Axe")
@@ -76,28 +96,26 @@
 			if("Battle Axe")
 				H.adjust_skillrank_up_to(/datum/skill/combat/axes, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					beltr = /obj/item/rogueweapon/stoneaxe/battle/psyaxe
+					beltr = /obj/item/rogueweapon/stoneaxe/battle/silver/psy
 				else
 					beltr = /obj/item/rogueweapon/stoneaxe/battle
 			if("Billhook")
 				l_hand = /obj/item/rogueweapon/scabbard/gwstrap
 				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					r_hand = /obj/item/rogueweapon/spear/psyspear
+					r_hand = /obj/item/rogueweapon/spear/silver/psy
 				else
 					r_hand = /obj/item/rogueweapon/spear/billhook
 		var/datum/devotion/C = new /datum/devotion(H, H.patron)
-		C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, start_maxed = TRUE)	//Minor regen, starts maxed out.
+		if(istype(H.patron, /datum/patron/divine))
+			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_2)	//Capped to T2 miracles. Templar equivalent.
+		else
+			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, start_maxed = TRUE)	//Minor regen, starts maxed out.
 		wretch_select_bounty(H)
 
-	// You can convert those the church has shunned.
-	H.mind?.AddSpell(new /datum/action/cooldown/spell/convert_heretic)
-	H.mind?.AddSpell(new /datum/action/cooldown/spell/miracle/intervention)
 	if (istype (H.patron, /datum/patron/inhumen/zizo))
 		if(H.mind)
-			H.mind.AddSpell(new /datum/action/cooldown/spell/minion_order)
 			add_verb(H, /mob/living/carbon/human/proc/revelations)
-			H.mind.AddSpell(new /datum/action/cooldown/spell/gravemark)
 			H.mind?.current.faction += "[H.name]_faction"
 		ADD_TRAIT(H, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
@@ -121,13 +139,15 @@
 		// This list exists here so it can be overwritten later. This is really stupid and should probably
 		// be done in the pre-equip. Too bad!
 	var/helmets = list(
-			"Pigface Bascinet" 	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
+			"Pigface Bascinet"	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
 			"Guard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
 			"Barred Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/sheriff,
 			"Bucket Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket,
 			"Knight Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight,
 			"Visored Sallet"	= /obj/item/clothing/head/roguetown/helmet/sallet/visored,
+			"Snouted Visored Sallet"	= /obj/item/clothing/head/roguetown/helmet/sallet/visored/snouted,
 			"Armet"				= /obj/item/clothing/head/roguetown/helmet/heavy/knight/armet,
+			"Snouted Armet"				= /obj/item/clothing/head/roguetown/helmet/heavy/knight/armet/snouted,
 			"Sugarloaf Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket/crusader,
 			"Knight's Armet"	= /obj/item/clothing/head/roguetown/helmet/heavy/knight,
 			"Knight's Helmet"	= /obj/item/clothing/head/roguetown/helmet/heavy/knight/old,
@@ -137,17 +157,21 @@
 			"Slitted Kettle" = /obj/item/clothing/head/roguetown/helmet/heavy/knight/skettle,
 			"Visored Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/barbute/visor,
 			"Great Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/barbute/great,
+			"Snouted Burgonet" = /obj/item/clothing/head/roguetown/helmet/heavy/burgonet,
 			"Volfskulle Bascinet" = /obj/item/clothing/head/roguetown/helmet/heavy/volfplate,
+			"Roundface Bascinet"	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface,
+			"Snouted Roundface Bascinet"	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/roundface/snouted,
 			"None"
 		)
 
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/zizo)
 			H.cmode_music = 'sound/music/combat_heretic.ogg'
-			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy, SLOT_RING, TRUE)
-			H.change_stat(STATKEY_CON, 1)
-			H.change_stat(STATKEY_STR, 1)
+			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/inhumen/iron, SLOT_RING, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/book/rogue/bibble/zizo,SLOT_IN_BACKPACK, TRUE)
+			H.change_stat(STATKEY_INT, 1)
 			H.change_stat(STATKEY_PER, 1)
+			H.change_stat(STATKEY_WIL, 1)
 		if(/datum/patron/inhumen/matthios)
 			H.cmode_music = 'sound/music/combat_matthios.ogg'
 			helmets += list("Decorated Bucket Helmet" = /obj/item/clothing/head/roguetown/helmet/heavy/bucket/gold/cleric,) // This is so stupid. - Just a little, but it does look cool!
@@ -166,11 +190,21 @@
 			H.change_stat(STATKEY_WIL, 1)
 		if(/datum/patron/divine/astrata)
 			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/astrata, SLOT_RING, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/astratan, SLOT_CLOAK, TRUE)
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
 			H.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-			helmets += list("Old Astratan Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm)
+			helmets += list(
+				"Old Astratan Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm,
+				"Astratan Plumed Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm/cleric
+				)
+			if(H.mind)
+				var/cloaks = list("Tabard", "Cloak")
+				var/cloakchoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in cloaks
+				switch(cloakchoice)
+					if("Tabard")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/astratan, SLOT_CLOAK, TRUE)
+					if("Cloak")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/tabard/devotee/astrata, SLOT_CLOAK, TRUE)
 		if(/datum/patron/divine/abyssor)
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
@@ -200,10 +234,17 @@
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
 			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/necra, SLOT_RING, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/necran, SLOT_CLOAK, TRUE)
 			ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
 			ADD_TRAIT(H, TRAIT_SOUL_EXAMINE, TRAIT_GENERIC)
 			helmets += list("Old Necran Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm)
+			if(H.mind)
+				var/cloaks = list("Tabard", "Cloak")
+				var/cloakchoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in cloaks
+				switch(cloakchoice)
+					if("Tabard")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/necran, SLOT_CLOAK, TRUE)
+					if("Cloak")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/tabard/devotee/necra, SLOT_CLOAK, TRUE)
 		if(/datum/patron/divine/pestra)
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
@@ -235,9 +276,17 @@
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
 			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/ravox, SLOT_RING, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/ravox, SLOT_CLOAK, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
+			helmets += list("Ravox Helmet" = /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm/cleric)
+			if(H.mind)
+				var/cloaks = list("Tabard", "Cloak")
+				var/cloakchoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in cloaks
+				switch(cloakchoice)
+					if("Tabard")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/templar/ravox, SLOT_CLOAK, TRUE)
+					if("Cloak")
+						H.equip_to_slot_or_del(new /obj/item/clothing/cloak/tabard/devotee/ravox, SLOT_CLOAK, TRUE)
 		if(/datum/patron/divine/malum)
 			H.change_stat(STATKEY_INT, 2)
 			H.change_stat(STATKEY_PER, 2)
@@ -271,10 +320,12 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/cloak/tabard/psydontabard/black, SLOT_CLOAK, TRUE)
 			H.change_stat(STATKEY_WIL, 2)
 			H.change_stat(STATKEY_CON, 2)
-			helmets += list("Psydonic Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/psydonbarbute,
-				"Psydonic Sallet" = /obj/item/clothing/head/roguetown/helmet/heavy/psysallet,
-				"Psydonic Armet" = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm,
-				"Psydonic Bucket Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/psybucket)
+			H.cmode_music = 'sound/music/cmode/antag/combat_adonai.ogg'
+			helmets += list("Psydonic Barbute" = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/barbute,
+				"Psydonic Sallet" = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/sallet,
+				"Psydonic Armet" = /obj/item/clothing/head/roguetown/helmet/heavy/ornate,
+				"Psydonic Volfskulle Bascinet" = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/volfhelm,
+				"Psydonic Bucket Helm" = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/bucket)
 	if(H.mind)
 		var/helmchoice = input(H, "Choose your Helm.", "TAKE UP HELMS") as anything in helmets
 		if(helmchoice != "None")
@@ -316,8 +367,9 @@
 		/datum/skill/craft/traps = SKILL_LEVEL_JOURNEYMAN,
 	)
 	subclass_stashed_items = list(
-        "Sewing Kit" =  /obj/item/repair_kit,
-    )
+		"Sewing Kit" =	/obj/item/repair_kit,
+		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
+	)
 	extra_context = "This subclass gain the Wound Heal miracle and the Convert Heretic spell."
 	tempo_capable = FALSE
 
@@ -332,7 +384,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/clothing/neck/roguetown/gorget
-	mask =  HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT)?/obj/item/clothing/mask/rogue/facemask/steel/confessor : /obj/item/clothing/mask/rogue/ragmask/black
+	mask =	HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT)?/obj/item/clothing/mask/rogue/facemask/steel/confessor : /obj/item/clothing/mask/rogue/ragmask/black
 	backpack_contents = list(
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
 		/obj/item/lockpickring/mundane = 1,
@@ -351,9 +403,15 @@
 			if("Daggers")
 				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy
 				else if(istype(H.patron, /datum/patron/inhumen/zizo))
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/zizo
+				else if(istype(H.patron, /datum/patron/inhumen/baotha))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/baotha
+				else if(istype(H.patron, /datum/patron/inhumen/graggar))
+					l_hand = /obj/item/rogueweapon/huntingknife/combat/graggar
+				else if(istype(H.patron, /datum/patron/inhumen/matthios))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/matthios
 				else
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/rondel
 				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
@@ -362,7 +420,7 @@
 			if("Rapier")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					l_hand = /obj/item/rogueweapon/sword/rapier/psy //Fuck you it's aura
+					l_hand = /obj/item/rogueweapon/sword/rapier/silver/psy //Fuck you it's aura
 				else
 					l_hand = /obj/item/rogueweapon/sword/rapier
 				beltl = /obj/item/rogueweapon/scabbard/sword
@@ -373,13 +431,19 @@
 			if("Bow")
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_JOURNEYMAN, TRUE)
 				beltr = /obj/item/quiver/arrows
-				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
+				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 				beltl = /obj/item/rogueweapon/scabbard/sheath
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy
 				else if(istype(H.patron, /datum/patron/inhumen/zizo))
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/zizo
+				else if(istype(H.patron, /datum/patron/inhumen/baotha))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/baotha
+				else if(istype(H.patron, /datum/patron/inhumen/graggar))
+					l_hand = /obj/item/rogueweapon/huntingknife/combat/graggar
+				else if(istype(H.patron, /datum/patron/inhumen/matthios))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/matthios
 				else
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 			if("Crossbow")
@@ -389,9 +453,15 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 				beltl = /obj/item/rogueweapon/scabbard/sheath
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy
 				else if(istype(H.patron, /datum/patron/inhumen/zizo))
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/zizo
+				else if(istype(H.patron, /datum/patron/inhumen/baotha))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/baotha
+				else if(istype(H.patron, /datum/patron/inhumen/graggar))
+					l_hand = /obj/item/rogueweapon/huntingknife/combat/graggar
+				else if(istype(H.patron, /datum/patron/inhumen/matthios))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/matthios
 				else
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 			if("Slurbow")
@@ -401,30 +471,36 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 				beltl = /obj/item/rogueweapon/scabbard/sheath
 				if(HAS_TRAIT(H, TRAIT_PSYDONIAN_GRIT))
-					l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy
 				else if(istype(H.patron, /datum/patron/inhumen/zizo))
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/zizo
+				else if(istype(H.patron, /datum/patron/inhumen/baotha))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/baotha
+				else if(istype(H.patron, /datum/patron/inhumen/graggar))
+					l_hand = /obj/item/rogueweapon/huntingknife/combat/graggar
+				else if(istype(H.patron, /datum/patron/inhumen/matthios))
+					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/matthios
 				else
 					l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 		var/datum/devotion/C = new /datum/devotion(H, H.patron)
-		C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, start_maxed = TRUE)	//Minor regen, starts maxed out.
+		if(istype(H.patron, /datum/patron/divine))
+			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_2)	//Capped to T2 miracles. Templar equivalent.
+		else
+			C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, start_maxed = TRUE)	//Minor regen, starts maxed out.
 		wretch_select_bounty(H)
 
 	if (istype (H.patron, /datum/patron/inhumen/zizo))
 		if(H.mind)
-			H.mind.AddSpell(new /datum/action/cooldown/spell/minion_order)
-			H.mind.AddSpell(new /datum/action/cooldown/spell/gravemark)
 			H.mind?.current.faction += "[H.name]_faction"
 		ADD_TRAIT(H, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
-	H.mind?.AddSpell(new /datum/action/cooldown/spell/convert_heretic)
-	H.mind?.AddSpell(new /datum/action/cooldown/spell/miracle/intervention)
 
 /datum/outfit/job/roguetown/wretch/hereticspy/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/zizo)
 			H.cmode_music = 'sound/music/combat_heretic.ogg'
-			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy, SLOT_RING, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/inhumen/iron, SLOT_RING, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/book/rogue/bibble/zizo,SLOT_IN_BACKPACK, TRUE)
 		if(/datum/patron/inhumen/matthios)
 			H.cmode_music = 'sound/music/combat_matthios.ogg'
 			H.equip_to_slot_or_del(new /obj/item/clothing/neck/roguetown/psicross/inhumen/matthios, SLOT_RING, TRUE)
@@ -493,6 +569,7 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/gloves/roguetown/otavan/psygloves, SLOT_GLOVES, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/roguetown/boots/psydonboots, SLOT_SHOES, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/roguetown/heavy_leather_pants/otavan, SLOT_PANTS, TRUE)
+			H.cmode_music = 'sound/music/cmode/antag/combat_adonai.ogg'
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/roguetown/heavy_leather_pants, SLOT_PANTS, TRUE)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat, SLOT_ARMOR, TRUE)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/roguetown/armor/gambeson, SLOT_SHIRT, TRUE)
@@ -517,8 +594,8 @@
 	if (!H.restrained())
 		to_chat(src, span_warning ("My victim needs to be restrained in order to do this!"))
 		return
-	if(!istype(S, /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy))
-		to_chat(src, span_warning("I need to be holding a zcross to extract this divination!"))
+	if(!istype(S, /obj/item/clothing/neck/roguetown/psicross/inhumen))
+		to_chat(src, span_warning("I need to be holding a cross of the ascendants to extract this divination!"))
 		return
 	for(var/obj/structure/fluff/psycross/zizocross/N in oview(5, src))
 		found = N
@@ -535,7 +612,6 @@
 		src.visible_message(span_warning("[src] shoves the decrepit zcross into [H]'s lux!"))
 		say(pick(faith_lines), spans = list("torture"))
 		H.emote("agony", forced = TRUE)
-
 		if(!(do_mob(src, H, 10 SECONDS)))
 			return
 		H.confess_sins("patron")

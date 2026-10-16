@@ -13,7 +13,7 @@ import {
   tabBarStyle,
   tabStyle,
 } from '../../common/parchment';
-import { type FundEntry, type TabProps } from '../types';
+import type { FundEntry, TabProps } from '../types';
 
 type LoanTier = 'personal' | 'indenture';
 
@@ -51,7 +51,7 @@ export const IssueLoanSection = ({
       <div style={sectionHeaderStyle}>Draft a Loan</div>
       {pastWindow && (
         <div style={{ color: INK_FAINT, marginBottom: 8 }}>
-          New loans may not be drawn after day {data.max_issuance_day}.
+          You can't issue new loans after day {data.max_issuance_day}.
         </div>
       )}
       <div style={tabBarStyle}>
@@ -78,8 +78,8 @@ export const IssueLoanSection = ({
               marginBottom: 10,
             }}
           >
-            Indentures are publicly proclaimed upon acceptance and upon default.
-            The whole realm will hear.
+            The whole realm hears when an indenture is accepted and if it
+            defaults.
           </div>
           <div style={fieldRowStyle}>
             <div style={fieldLabelStyle}>Target</div>
@@ -94,9 +94,7 @@ export const IssueLoanSection = ({
                       marginRight: 4,
                       fontWeight: target === t.id ? 'bold' : 'normal',
                       background:
-                        target === t.id
-                          ? 'var(--p-tab-active-bg)'
-                          : BUTTON_BG,
+                        target === t.id ? 'var(--p-tab-active-bg)' : BUTTON_BG,
                     }}
                     onClick={() => setTarget(t.id)}
                   >
@@ -140,10 +138,7 @@ export const IssueLoanSection = ({
                 ...inkButtonStyle({}),
                 marginRight: 4,
                 fontWeight: term === t ? 'bold' : 'normal',
-                background:
-                  term === t
-                    ? 'var(--p-tab-active-bg)'
-                    : BUTTON_BG,
+                background: term === t ? 'var(--p-tab-active-bg)' : BUTTON_BG,
               }}
               onClick={() => setTerm(t)}
             >
@@ -163,10 +158,7 @@ export const IssueLoanSection = ({
                 ...inkButtonStyle({}),
                 marginRight: 4,
                 fontWeight: rate === r ? 'bold' : 'normal',
-                background:
-                  rate === r
-                    ? 'var(--p-tab-active-bg)'
-                    : BUTTON_BG,
+                background: rate === r ? 'var(--p-tab-active-bg)' : BUTTON_BG,
               }}
               onClick={() => setRate(r)}
             >

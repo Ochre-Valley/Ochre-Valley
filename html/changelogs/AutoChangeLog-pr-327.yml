@@ -1,4 +1,0 @@
-author: "Ldip999"
-delete-after: True
-changes:
-  - bugfix: "Voice preview no longer crashes you"

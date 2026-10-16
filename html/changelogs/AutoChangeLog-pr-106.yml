@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Vore deaths now prevent you from reentering your corpse without the respawn portal or reform gem."

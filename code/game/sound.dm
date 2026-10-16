@@ -97,7 +97,7 @@
 					continue
 
 			var/is_muffled = (M in muffled_listeners)
-			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled))
+			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel, pressure_affected, S, repeat, is_muffled, pref_toggle)) //OV EDIT
 				. += M
 
 
@@ -108,7 +108,7 @@
 	I.pixel_y = 6
 	I.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	I.appearance_flags = RESET_COLOR
-	flick_overlay(I, GLOB.clients, 6)
+	flick_overlay_view(I, A, 6)
 
 /proc/ping_sound_through_walls(turf/T)
 	new /obj/effect/temp_visual/soundping(T)
@@ -256,6 +256,7 @@
 						update_sound_volume(DS, S.volume)
 						if(client.played_loops[D]["MUTESTATUS"]) //we have sound so turn this off
 							client.played_loops[D]["MUTESTATUS"] = null
+			return TRUE
 		else
 			D.thingshearing += our_ref
 			client.played_loops[D] = list()
@@ -438,10 +439,20 @@
 				soundin = pick('sound/combat/hits/bladed/genslash (1).ogg','sound/combat/hits/bladed/genslash (2).ogg','sound/combat/hits/bladed/genslash (3).ogg')
 			if("bladewooshsmall")
 				soundin = pick('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
+			if("bladewooshmed")
+				soundin = pick(BLADEWOOSH_MED)
+			if("bladewooshlarge")
+				soundin = pick(BLADEWOOSH_LARGE)
+			if("bladewooshhuge")
+				soundin = pick(BLADEWOOSH_HUGE)
 			if("bluntwooshmed")
 				soundin = pick('sound/combat/wooshes/blunt/wooshmed (1).ogg','sound/combat/wooshes/blunt/wooshmed (2).ogg','sound/combat/wooshes/blunt/wooshmed (3).ogg')
 			if("bluntwooshlarge")
 				soundin = pick('sound/combat/wooshes/blunt/wooshlarge (1).ogg','sound/combat/wooshes/blunt/wooshlarge (2).ogg','sound/combat/wooshes/blunt/wooshlarge (3).ogg')
+			if("bluntwooshhuge")
+				soundin = pick(BLUNTWOOSH_HUGE)
+			if("whipwoosh")
+				soundin = pick(WHIPWOOSH)
 			if("punchwoosh")
 				soundin = pick('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
 			if(SFX_CHAIN_STEP)
@@ -474,6 +485,24 @@
 							'sound/foley/footsteps/armor/woodarmor (1).ogg',
 							'sound/foley/footsteps/armor/woodarmor (2).ogg',
 							'sound/foley/footsteps/armor/woodarmor (3).ogg',
+							)
+			if(SFX_HEELS)
+				soundin = pick(
+							'sound/foley/footsteps/highheel1.ogg',
+							'sound/foley/footsteps/highheel2.ogg',
+							'sound/foley/footsteps/highheel3.ogg',
+							'sound/foley/footsteps/highheel4.ogg',
+							)
+			if(SFX_TRICK)
+				soundin = pick(
+							'sound/misc/trick/trick1.ogg',
+							'sound/misc/trick/trick2.ogg',
+							'sound/misc/trick/trick3.ogg',
+							'sound/misc/trick/trick4.ogg',
+							'sound/misc/trick/trick5.ogg',
+							'sound/misc/trick/trick6.ogg',
+							'sound/misc/trick/trick7.ogg',
+							'sound/misc/trick/trick8.ogg',
 							)
 	//START OF CIT CHANGES - adds random vore sounds
 			if ("hunger_sounds") soundin = pick('modular_causticcove/sound/cvore/vore/growl1.ogg','modular_causticcove/sound/cvore/vore/growl2.ogg','modular_causticcove/sound/cvore/vore/growl3.ogg','modular_causticcove/sound/cvore/vore/growl4.ogg','modular_causticcove/sound/cvore/vore/growl5.ogg')

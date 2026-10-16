@@ -166,10 +166,9 @@ export const badgeStyle = (color: string): CSSProperties => ({
   verticalAlign: 'middle',
 });
 
-export const inkButtonStyle = (opts: {
-  color?: string;
-  disabled?: boolean;
-} = {}): CSSProperties => {
+export const inkButtonStyle = (
+  opts: { color?: string; disabled?: boolean } = {},
+): CSSProperties => {
   const col = opts.color || INK;
   return {
     fontFamily: SERIF,
@@ -178,9 +177,7 @@ export const inkButtonStyle = (opts: {
     padding: '2px 10px',
     color: col,
     background: opts.disabled ? 'transparent' : BUTTON_BG,
-    border: opts.disabled
-      ? `1px dashed ${INK_FAINT}`
-      : `1px solid ${col}`,
+    border: opts.disabled ? `1px dashed ${INK_FAINT}` : `1px solid ${col}`,
     borderRadius: '2px',
     cursor: opts.disabled ? 'default' : 'pointer',
     opacity: opts.disabled ? 0.7 : 1,
@@ -219,10 +216,11 @@ export const fieldValueStyle: CSSProperties = {
   fontSize: FONT_BODY,
 };
 
-export const bannerStyle = (color: string, soft: boolean = false): CSSProperties => ({
-  background: soft
-    ? 'var(--p-banner-bg-soft)'
-    : 'var(--p-banner-bg)',
+export const bannerStyle = (
+  color: string,
+  soft: boolean = false,
+): CSSProperties => ({
+  background: soft ? 'var(--p-banner-bg-soft)' : 'var(--p-banner-bg)',
   border: `1px solid ${color}`,
   color: color,
   padding: '6px 12px',
@@ -249,10 +247,9 @@ export const ellipsisCellStyle: CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
-export const compactButtonStyle = (opts: {
-  color?: string;
-  disabled?: boolean;
-} = {}): CSSProperties => ({
+export const compactButtonStyle = (
+  opts: { color?: string; disabled?: boolean } = {},
+): CSSProperties => ({
   ...inkButtonStyle(opts),
   padding: '1px 7px',
   fontSize: FONT_LEAD,
@@ -261,12 +258,14 @@ export const compactButtonStyle = (opts: {
 export const PriceTag = (props: {
   price: number;
   tariff?: number;
+  surcharge?: number;
   cantAfford?: boolean;
   title?: string;
   strikethrough?: number;
 }) => {
-  const { price, tariff, cantAfford, title, strikethrough } = props;
+  const { price, tariff, surcharge, cantAfford, title, strikethrough } = props;
   const hasTariff = !!tariff && tariff > 0;
+  const hasSurcharge = !!surcharge && surcharge > 0;
   const hasStrike = !!strikethrough && strikethrough > price;
   return (
     <div
@@ -291,18 +290,26 @@ export const PriceTag = (props: {
         </span>
       )}
       <span style={{ color: hasStrike ? SEAL_GREEN : 'inherit' }}>{price}</span>
-      {hasTariff && (
+      <span style={{ color: INK_SOFT, fontSize: FONT_SMALL }}>m</span>
+      {(hasSurcharge || hasTariff) && (
         <span
-          style={{
-            color: SEAL_AMBER,
-            fontSize: FONT_BODY,
-            marginLeft: '2px',
-          }}
+          style={{ color: INK_SOFT, fontSize: FONT_SMALL, marginLeft: '3px' }}
         >
-          +{tariff}
+          (incl.
+          {hasSurcharge && (
+            <span style={{ color: SEAL_RED, marginLeft: '2px' }}>
+              {surcharge}
+            </span>
+          )}
+          {hasSurcharge && hasTariff && ' +'}
+          {hasTariff && (
+            <span style={{ color: SEAL_AMBER, marginLeft: '2px' }}>
+              {tariff}
+            </span>
+          )}
+          )
         </span>
       )}
-      <span style={{ color: INK_SOFT, fontSize: FONT_SMALL }}>m</span>
     </div>
   );
 };

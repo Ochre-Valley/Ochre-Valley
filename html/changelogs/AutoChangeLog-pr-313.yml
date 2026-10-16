@@ -1,5 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - bugfix: "Fixed the character load list not showing all slots if any slots show the same name."
-  - qol: "The character load menu now lists character slots by NICKNAME instead of their REAL NAME. This way, if you have two different slots for a character with the same name, you can use nickname to differentiate them in the menu!"

@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Order: Repair no longer breaks armor values"

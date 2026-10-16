@@ -461,7 +461,7 @@
 		if(tasted.skin_reagent && ishuman(src) && (tasted != src))
 			var/mob/living/carbon/human/us_but_human = src
 			us_but_human.reagents.add_reagent(tasted.skin_reagent, 5)
-		
+
 		visible_message(span_warning("[src] licks [tasted]!"),span_notice("You lick [tasted]. They taste rather like [tasted.get_taste_message()]."),span_info(span_bold("Slurp!")))
 		//balloon_alert_visible("licks [tasted]!", "tastes like [tasted.get_taste_message()]")
 	/* //Caustic - Maybe we add this in sometime?
@@ -555,7 +555,7 @@
 		log_and_message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(B.owner)] ([B.owner ? "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservecoodjump=1;X=[B.owner.x];Y=[B.owner.y];Z=[B.owner.z]'>JMP</a>" : "null"])", src)
 
 		B.owner.handle_belly_update() //This is run whenever a belly's contents are changed.
-	
+
 	//You've been turned into an item!
 	/*else if(tf_mob_holder && isvoice(src) && istype(src.loc, /obj/item)) //Commented out the TF stuff for now to get the rest working.
 		var/obj/item/item_to_destroy = src.loc //If so, let's destroy the item they just TF'd out of.
@@ -823,10 +823,19 @@
 	if(!I)
 		to_chat(src, span_notice("You are not holding anything."))
 		return
-	
+
 	//OV edit
+	if(istype(I, /obj/item/storage/roguebag))
+		to_chat(src, span_notice("You don't want to eat this sack."))
+		return
+
 	if(I.mob_possession)
 		if(!I.mob_possession.devourable)
+			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
+			return
+	if(istype(I, /obj/item/soulgem))
+		var/obj/item/soulgem/S = I
+		if(S.trapped && !S.trapped.devourable)
 			to_chat(src, span_notice("Their preferences do not allow them to be eaten."))
 			return
 	//OV edit end
@@ -1594,6 +1603,19 @@
 		to_chat(src, span_notice("You are now marked as AFK."))
 		away_from_keyboard = TRUE
 		manual_afk = TRUE
+
+/mob/living/verb/toggle_scening()
+	set name = "Toggle Scene Privacy"
+	set category = "IC"
+	set desc = "Mark yourself as in a scene, to prevent scrying!"
+	if(do_not_disturb)
+		to_chat(src, span_notice("You are no longer marked as private."))
+		do_not_disturb = FALSE
+		log_game("[key_name(src)] has disabled scene privacy at [loc_name(src)].")
+	else
+		to_chat(src, span_notice("You are now marked as private and can no longer be scried."))
+		do_not_disturb = TRUE // OV Add End
+		log_game("[key_name(src)] has enabled scene privacy at [loc_name(src)].")
 
 /mob/living/proc/absorb_langs()		//This should be called on the predator in the exchange
 	if(!mind || !mind.language_holder)

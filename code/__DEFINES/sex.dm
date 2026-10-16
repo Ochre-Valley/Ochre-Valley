@@ -7,13 +7,14 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 
 #define SEX_ACTION(sex_action_type) GLOB.sex_actions[sex_action_type]
 
-#define COMSIG_SEX_ADJUST_AROUSAL "sex_adjust_arousal"                  // (amount) - Adjust arousal level
-#define COMSIG_SEX_SET_AROUSAL "sex_set_arousal"                        // (amount) - Set arousal to specific value
+#define COMSIG_SEX_ADJUST_AROUSAL "sex_adjust_arousal"					// (amount) - Adjust arousal level
+#define COMSIG_SEX_SET_AROUSAL "sex_set_arousal"						// (amount) - Set arousal to specific value
 #define COMSIG_SEX_AROUSAL_CHANGED "sex_arosual_change"					// fires to the parent about a change
-#define COMSIG_SEX_FREEZE_AROUSAL "sex_freeze_arousal"                  // (freeze_state) - Toggle arousal freeze
-#define COMSIG_SEX_GET_AROUSAL "sex_get_arousal"                        // () - Get current arousal info
-#define COMSIG_SEX_CLIMAX "sex_climax"                                  // (type, target) - Handle climax event
-#define COMSIG_SEX_RECEIVE_ACTION "sex_receive_action"                  // (arousal_amt, pain_amt, giving, force, speed) - Receive action effects
+#define COMSIG_SEX_FREEZE_AROUSAL "sex_freeze_arousal"					// (freeze_state) - Toggle arousal freeze
+#define COMSIG_SEX_GET_AROUSAL "sex_get_arousal"						// () - Get current arousal info
+#define COMSIG_SEX_CLIMAX "sex_climax"									// (type, target) - Handle climax event
+#define COMSIG_SEX_RECEIVE_ACTION "sex_receive_action"					// (arousal_amt, pain_amt, giving, force, speed) - Receive action effects
+#define COMSIG_ERP_LOCATION_ACCESSIBLE "erp_location_accessible"		// (source, user, target, location, grabs, skipundies) - Used for revenant heads
 
 // Knotting Component Signals
 /// Attempts to knot a target. Args: (target, force_level)
@@ -88,47 +89,85 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 #define SMALL_PENIS_SIZE 1
 #define NORMAL_PENIS_SIZE 2
 #define LARGE_PENIS_SIZE 3
-#define MASSIVE_PENIS_SIZE 4
-#define ENORMOUS_PENIS_SIZE 5
+#define EXTRA_LARGE_PENIS_SIZE 4
+#define MASSIVE_PENIS_SIZE 5
+#define ENORMOUS_PENIS_SIZE 6
+#define HUGE_PENIS_SIZE 7
+
 #define SMALL_TESTICLES_SIZE 1
 #define NORMAL_TESTICLES_SIZE 2
 #define LARGE_TESTICLES_SIZE 3
-#define MASSIVE_TESTICLES_SIZE 4
-#define ENORMOUS_TESTICLES_SIZE 5
+#define EXTRA_LARGE_TESTICLES_SIZE 4
+#define MASSIVE_TESTICLES_SIZE 5
+#define ENORMOUS_TESTICLES_SIZE 6
+#define HUGE_TESTICLES_SIZE 7
+#define GARGANTUAN_TESTICLES_SIZE 8
 
 #define PENIS_SIZES list(\
 	SMALL_PENIS_SIZE,\
 	NORMAL_PENIS_SIZE,\
 	LARGE_PENIS_SIZE,\
+	EXTRA_LARGE_PENIS_SIZE,\
 	MASSIVE_PENIS_SIZE,\
 	ENORMOUS_PENIS_SIZE,\
+	HUGE_PENIS_SIZE,\
 	)
 
 #define PENIS_SIZES_BY_NAME list(\
-	"Small" = MIN_PENIS_SIZE,\
-	"Average" = DEFAULT_PENIS_SIZE,\
+	"Small" = SMALL_PENIS_SIZE,\
+	"Average" = NORMAL_PENIS_SIZE,\
 	"Large" = LARGE_PENIS_SIZE,\
+	"Extra-Large" = EXTRA_LARGE_PENIS_SIZE,\
 	"Massive" = MASSIVE_PENIS_SIZE,\
 	"Enormous" = ENORMOUS_PENIS_SIZE,\
+	"Baothan" = HUGE_PENIS_SIZE,\
+	)
+
+#define SHEATH_TYPES_BY_NAME list(\
+	"No Sheath" = SHEATH_TYPE_NONE,\
+	"Sheath" = SHEATH_TYPE_NORMAL,\
+	"Slit" = SHEATH_TYPE_SLIT,\
 	)
 
 #define EARS_NORMAL 0
 #define EARS_SENSITIVE 1 //Should this be used for ANYTHING else - move it. / Also only works on ANTHROS for some reason
 
+#define ERECT_STATE_NONE 0
+#define ERECT_STATE_PARTIAL 1
+#define ERECT_STATE_STIFF 2 //OV EDIT
+#define ERECT_STATE_HARD 3 //OV EDIT
+
+#define ERECT_STATES_BY_NAME list(\
+	"Unaroused" = ERECT_STATE_NONE,\
+	"Half-Aroused" = ERECT_STATE_PARTIAL,\
+	"Stiff" = ERECT_STATE_STIFF,\
+	"Aroused" = ERECT_STATE_HARD,\
+	)
+
+#define MIN_TESTICLES_SIZE 1
+#define DEFAULT_TESTICLES_SIZE 2
+#define MAX_TESTICLES_SIZE 8 //OV EDIT
+
 #define TESTICLE_SIZES list(\
 	SMALL_TESTICLES_SIZE,\
 	NORMAL_TESTICLES_SIZE,\
 	LARGE_TESTICLES_SIZE,\
+	EXTRA_LARGE_TESTICLES_SIZE,\
 	MASSIVE_TESTICLES_SIZE,\
 	ENORMOUS_TESTICLES_SIZE,\
+	HUGE_TESTICLES_SIZE,\
+	GARGANTUAN_TESTICLES_SIZE,\
 	)
 
 #define TESTICLE_SIZES_BY_NAME list(\
 	"Small" = SMALL_TESTICLES_SIZE,\
 	"Average" = NORMAL_TESTICLES_SIZE,\
 	"Large" = LARGE_TESTICLES_SIZE,\
+	"Extra Large" = EXTRA_LARGE_TESTICLES_SIZE,\
 	"Massive" = MASSIVE_TESTICLES_SIZE,\
 	"Enormous" = ENORMOUS_TESTICLES_SIZE,\
+	"Huge" = HUGE_TESTICLES_SIZE,\
+	"Baothan" = GARGANTUAN_TESTICLES_SIZE,\
 	)
 
 #define ORGAN_SLOT_PENIS "penis"
@@ -154,6 +193,9 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 #define BREAST_SIZE_OVERENDOWED 14
 #define BREAST_SIZE_UNHOLY 15
 #define BREAST_SIZE_BAOTHAN 16
+#define BREAST_SIZE_EXTRA_BAOTHAN 17
+#define BREAST_SIZE_OVER_BAOTHAN 18
+#define BREAST_SIZE_DOWNRIGHTINCREDIBLE 19
 
 #define BREAST_SIZES list(\
 	BREAST_SIZE_FLAT,\
@@ -173,6 +215,9 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 	BREAST_SIZE_OVERENDOWED,\
 	BREAST_SIZE_UNHOLY,\
 	BREAST_SIZE_BAOTHAN,\
+	BREAST_SIZE_EXTRA_BAOTHAN,\
+	BREAST_SIZE_OVER_BAOTHAN,\
+	BREAST_SIZE_DOWNRIGHTINCREDIBLE,\
 	)
 
 #define BREAST_SIZES_BY_NAME list(\
@@ -193,6 +238,9 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 	"Over-endowed" = BREAST_SIZE_OVERENDOWED,\
 	"Unholy" = BREAST_SIZE_UNHOLY,\
 	"Baothan" = BREAST_SIZE_BAOTHAN,\
+	"Extra Baothan" = BREAST_SIZE_EXTRA_BAOTHAN,\
+	"Over-Baothan" = BREAST_SIZE_OVER_BAOTHAN,\
+	"Downright Incredible" = BREAST_SIZE_DOWNRIGHTINCREDIBLE,\
 	)
 //Caustic End
 

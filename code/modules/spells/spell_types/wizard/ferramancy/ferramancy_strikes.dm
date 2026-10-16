@@ -1,5 +1,6 @@
 /datum/action/cooldown/spell/ferramancy_strike
 	parent_type = /datum/action/cooldown/spell/telegraphed_strike
+	expose_caster_on_deflect = FALSE
 	button_icon = 'icons/mob/actions/mage_ferramancy.dmi'
 	sound = 'sound/magic/scrapeblade.ogg'
 	spell_color = GLOW_COLOR_METAL
@@ -11,14 +12,15 @@
 
 	cooldown_time = 15 SECONDS
 	shared_cooldown = "ferramancy_strike"
-	charging_slowdown = 1
+	shared_cooldown_mult = 0.5
+	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 
-	telegraph_type = /obj/effect/temp_visual/trap/ferramancy
+	telegraph_type = /obj/effect/temp_visual/telegraph/ferramancy
 
 /datum/action/cooldown/spell/ferramancy_strike/falling_crescent
 	name = "Falling Crescent"
@@ -35,7 +37,7 @@
 /datum/action/cooldown/spell/ferramancy_strike/falling_crescent/get_sweep_bands()
 	return list(
 		list(list(1, 0), list(1, 1), list(1, 2)),
-		list(list(0, 1), list(0, 2)),
+		list(list(0, 1), list(0, 2), list(0, 3)),
 		list(list(-1, 0), list(-1, 1), list(-1, 2)),
 	)
 
@@ -53,7 +55,7 @@
 	invocations = list("Hasta Perforans!")
 	blade_class = BCLASS_STAB
 	strike_armor_pen = PEN_HEAVY
-	windup_time = TELEGRAPH_AREA_DENIAL
+	windup_time = 8
 	stop_at_dense = TRUE
 	damage = 35
 	var/line_length = 5
@@ -189,15 +191,7 @@
 	vis_holder = null
 	return ..()
 
-/obj/effect/temp_visual/trap
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "trap"
-	light_outer_range = 2
-	duration = 12
-	layer = MASSIVE_OBJ_LAYER
-
-/obj/effect/temp_visual/trap/ferramancy
-	color = GLOW_COLOR_METAL
+/obj/effect/temp_visual/telegraph/ferramancy
 	light_color = GLOW_COLOR_METAL
 	duration = 3 SECONDS
 

@@ -8,7 +8,7 @@ type Data = {
   buttons: Record<string, string>;
 };
 
-export const LockdownButton = (props) => {
+export const LockdownButton = (props: any) => {
   const { act, data } = useBackend<Data>();
   const { unlocked, buttons } = data;
 

@@ -1,6 +1,0 @@
-author: "Umbree"
-delete-after: True
-changes:
-  - qol: "Conjured tools and weapons can now be manually unconjured instead of needing to be dropped or discarded randomly."
-  - bugfix: "Fixed formatting issues in conjure messages that caused incorrect \"The the item\" text to appear."
-  - rscadd: "Conjured items now automatically fade and delete themselves if their owner leaves the round or is deleted."

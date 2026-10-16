@@ -9,9 +9,9 @@ SUBSYSTEM_DEF(nightshift)
 
 	var/nightshift_active = FALSE
 	var/nightshift_start_time = 576000	//4pm	//702000=7:30 PM, station time
-	var/nightshift_dawn_start = 288000		//198000=    530am
-	var/nightshift_day_start = 360000		//270000=    730am
-	var/nightshift_dusk_start = 504000		//630000=    530pm
+	var/nightshift_dawn_start = 288000		//198000=	530am
+	var/nightshift_day_start = 360000		//270000=	730am
+	var/nightshift_dusk_start = 504000		//630000=	530pm
 
 	/* Default STONEKEEP config.
 	var/nightshift_start_time = 756000	//9:00 PM - 2100 hrs
@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(nightshift)
 
 	var/high_security_mode = FALSE
 
-/datum/controller/subsystem/nightshift/Initialize()
+/datum/controller/subsystem/nightshift/Initialize(mapload)
 	if(!CONFIG_GET(flag/enable_night_shifts))
 		can_fire = FALSE
 	current_tod = settod()
@@ -78,12 +78,14 @@ SUBSYSTEM_DEF(nightshift)
 		return
 	if(!SSticker.sunscorch_burn_warning_sent)
 		SSticker.sunscorch_burn_warning_sent = TRUE
-		to_chat(world, span_userdanger("THE WORM CONSUMES THE SUN. Deadly radiance falls on Azuria. Those outside will be unmade. The back of my amygdala itches."))
+		to_world(span_userdanger("THE WORM CONSUMES THE SUN. Deadly radiance falls on Azuria. Those outside will be unmade. The back of my amygdala itches."))
 	for(var/mob/living/M as anything in GLOB.mob_living_list)
 		if(M.stat == DEAD || !isturf(M.loc))
 			continue
 		var/turf/current_turf = M.loc
 		if(!current_turf.can_see_sky())
+			continue
+		if(HAS_TRAIT(M, TRAIT_UNFORGIVABLE)) //Doesn't affect cultists of Vheslyn
 			continue
 		M.fire_act(1, 5)
 		CHECK_TICK
@@ -107,7 +109,7 @@ SUBSYSTEM_DEF(nightshift)
 			if(HAS_TRAIT(src, TRAIT_VAMP_DREAMS))
 				apply_status_effect(/datum/status_effect/debuff/vamp_dreams)
 				handle_sleep_triumphs() //CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
-			if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
+			if(HAS_TRAIT(src, TRAIT_NIGHT_OWL) || HAS_TRAIT(src, TRAIT_NIGHT_OWL_LESSER))
 				apply_status_effect(/datum/status_effect/debuff/sleepytime)
 				handle_sleep_triumphs()//CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
 			if(HAS_TRAIT(src, TRAIT_INFINITE_STAMINA))
@@ -120,7 +122,7 @@ SUBSYSTEM_DEF(nightshift)
 				return ..()
 			if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 				add_stress(/datum/stressevent/night_owl)
-			else
+			else if (!HAS_TRAIT(src, TRAIT_NIGHT_OWL_LESSER))
 				handle_sleep_triumphs()//CC Edit: Moving triumphs to whenever the character becomes eepy sleepies
 				apply_status_effect(/datum/status_effect/debuff/sleepytime)
 				add_stress(/datum/stressevent/sleepytime)
@@ -140,9 +142,9 @@ SUBSYSTEM_DEF(nightshift)
 	if(triumphs_to_add)
 		adjust_triumphs(triumphs_to_add)
 	to_chat(src, span_notice("An another dae passes in Azuria...\nDays Survived: \Roman[allmig_reward]. \n"))
-	
+
 	var/int = mind.current.STAINT
-	
+
 	if(int < 10)
 		to_chat(src, span_boldwarning("I'm trying my best to learn, even if it is a little difficult..."))
 	else
@@ -158,6 +160,6 @@ SUBSYSTEM_DEF(nightshift)
 		if(!stat)
 			to_chat(src, span_warning("Staying alive in these uncertain times is it's own achievement. With the spark of my mind intact, and the embers of my heart and soul burning bright, at least at the moment, I feel slightly better about todae."))
 			mind.sleep_adv.retained_dust += 100	//Free skillpoint for you <3
-	
+
 
 

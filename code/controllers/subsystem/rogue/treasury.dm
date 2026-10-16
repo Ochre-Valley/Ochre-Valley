@@ -27,10 +27,11 @@ SUBSYSTEM_DEF(treasury)
 		TAX_CATEGORY_HEADEATER_LEVY = 0.15,
 		TAX_CATEGORY_IMPORT_TARIFF = 0.15,
 		TAX_CATEGORY_EXPORT_DUTY = 0.15,
+		TAX_CATEGORY_RECOVERED_SPOILS = 0.50,
 		TAX_CATEGORY_FINE = 1.0,
 	)
 	var/trade_spread = 0.10
-	var/autoexport_percentage = 0.6
+	var/autoexport_percentage = AUTOEXPORT_DEFAULT_PERCENTAGE
 	var/list/bank_accounts = list()
 	var/datum/fund/discretionary_fund
 	var/datum/fund/burgher_pledge_fund
@@ -47,6 +48,21 @@ SUBSYSTEM_DEF(treasury)
 	var/list/merchant_agents = list()
 	var/list/bathhouse_agents = list()
 	var/list/church_agents = list()
+
+	/// Per-day mammon cap on Agents of the Bathhouse (writ holders) drawing from the bathhouse fund. Set by the Bathmaster.
+	var/bathhouse_agent_daily_withdraw_limit = BATHHOUSE_AGENT_DAILY_WITHDRAW_DEFAULT
+	/// Per-day mammon cap on bathhouse workers (attendants) drawing from the bathhouse fund. Set by the Bathmaster.
+	var/bathhouse_worker_daily_withdraw_limit = BATHHOUSE_WORKER_DAILY_WITHDRAW_DEFAULT
+	/// When TRUE, the Bathmaster has suspended all agent withdrawals from the bathhouse fund.
+	var/bathhouse_agent_withdrawals_suspended = FALSE
+	/// When TRUE, the Bathmaster has suspended all worker withdrawals from the bathhouse fund.
+	var/bathhouse_worker_withdrawals_suspended = FALSE
+	/// Amount each worker or agent has already drawn today, keyed by real_name. One shared
+	/// tally so someone who is somehow both worker and agent cannot double-dip.
+	var/list/bathhouse_withdrawals = list()
+	/// The in-game day bathhouse_withdrawals last reset on.
+	var/bathhouse_withdrawals_day = -1
+
 	var/banditry_debt = 0
 	var/treasury_state = TREASURY_NORMAL
 	var/treasury_debt = 0
@@ -104,8 +120,8 @@ SUBSYSTEM_DEF(treasury)
 	/// Steward-settable floor. Stockpile refuses purchases when Crown's Purse would drop below this.
 	var/stockpile_purchase_floor = STOCKPILE_CROWN_PURCHASE_FLOOR_DEFAULT
 	/// A feature for the Steward to unlock once the Crown's trade volume reaches 10k
-	/// Basically help automate the import, fitting in line with my idea of active trade 
-	/// Converting to passive convenience later. Later on I might gate it through a 
+	/// Basically help automate the import, fitting in line with my idea of active trade
+	/// Converting to passive convenience later. Later on I might gate it through a
 	/// Total trade volumes converting into multiple chooseable upgrades but for now
 	/// It just automatically unlock an upgrade with no real choice
 	var/royal_custom_unlocked = FALSE
@@ -125,11 +141,11 @@ SUBSYSTEM_DEF(treasury)
 	var/list/fined_today_names = list()
 	var/fined_today_day = -1
 
-/datum/controller/subsystem/treasury/Initialize()
+/datum/controller/subsystem/treasury/Initialize(mapload)
 	var/roundstart_pop = get_active_player_count()
 	var/seed = STOCKPILE_CROWN_PURCHASE_FLOOR_DEFAULT + rand(500, 1500) + (roundstart_pop * CROWN_PURSE_SEED_PER_PLAYER)
 	royal_custom_threshold = ROYAL_CUSTOM_VOLUME_BASE + (roundstart_pop * ROYAL_CUSTOM_VOLUME_PER_POP)
-	discretionary_fund = new("Crown's Purse", null, seed, CURRENCY_MAMMON)
+	discretionary_fund = new("Treasury", null, seed, CURRENCY_MAMMON)
 	burgher_pledge_fund = new("Burgher Pledge", null, BURGHER_PLEDGE_BASE_REFILL * BURGHER_PLEDGE_ROUNDSTART_MULTIPLIER, CURRENCY_BURGHER_PLEDGE)
 	church_fund = new("Church Fund", null, CHURCH_FUND_SEED, CURRENCY_MAMMON)
 	merchant_fund = new("Merchant Fund", null, MERCHANT_FUND_SEED, CURRENCY_MAMMON)
@@ -185,12 +201,25 @@ SUBSYSTEM_DEF(treasury)
 	if(!discretionary_fund)
 		return
 	var/rural_tax_amount = get_rural_tax_amount()
-	mint(discretionary_fund, rural_tax_amount, "Rural Tax Collection")
+	if(rural_tax_amount <= 0)
+		return
+	mint(discretionary_fund, rural_tax_amount, "Rural Subsidy")
 	record_round_statistic(STATS_RURAL_TAXES_COLLECTED, rural_tax_amount)
 	total_rural_tax += rural_tax_amount
 
+/datum/controller/subsystem/treasury/proc/get_active_producer_count()
+	var/count = 0
+	for(var/mob/living/owner as anything in bank_accounts)
+		if(!owner || !owner.client)
+			continue
+		if(is_producer_job(owner.job))
+			count++
+	return count
+
 /datum/controller/subsystem/treasury/proc/get_rural_tax_amount()
-	return RURAL_TAX
+	var/producers = get_active_producer_count()
+	var/taper = clamp(1.0 - (producers / RURAL_SUBSIDY_REFERENCE_PRODUCERS), 0.0, 1.0)
+	return RURAL_SUBSIDY_FLOOR + round((RURAL_SUBSIDY_BASE - RURAL_SUBSIDY_FLOOR) * taper)
 
 // Mark the cached stewardry market / region / arbitrage
 // View as needing rebuild on next read.
@@ -319,7 +348,7 @@ SUBSYSTEM_DEF(treasury)
 		return FALSE
 	return mint(account, amt, "Savings")
 
-/datum/controller/subsystem/treasury/proc/give_money_account(amt, target, source, mint_new = FALSE, mint_label)
+/datum/controller/subsystem/treasury/proc/give_money_account(amt, target, source, mint_new = FALSE, mint_label, is_salary = FALSE)
 	if(!amt)
 		return
 	if(!target)
@@ -332,7 +361,6 @@ SUBSYSTEM_DEF(treasury)
 	var/datum/fund/account = get_account(target)
 	if(!account)
 		return FALSE
-
 	if(amt > 0)
 		if(mint_new)
 			if(!mint(account, amt, source, mint_label))
@@ -341,6 +369,8 @@ SUBSYSTEM_DEF(treasury)
 			if(!transfer(discretionary_fund, account, amt, source))
 				return FALSE
 		record_round_statistic(STATS_DIRECT_TREASURY_TRANSFERS, amt)
+		if(!mint_new)
+			record_treasury_payout(usr, istype(target, /mob/living) ? target : null, amt, is_salary)
 		send_ooc_note(source ? "<b>MEISTER:</b> You received [amt]m. ([source])" : "<b>MEISTER:</b> You received [amt]m.", name = target_name)
 		log_game("CROWN GRANT: [usr ? key_name(usr) : "system"] granted [amt]m to [istype(target, /mob/living) ? key_name(target) : target_name] via [source || "unknown"]")
 	else
@@ -348,9 +378,13 @@ SUBSYSTEM_DEF(treasury)
 			send_ooc_note("<b>MEISTER:</b> Error: The round is ending. No further fines may be levied.", name = target_name)
 			return FALSE
 		var/mob/living/fine_owner = istype(target, /mob/living) ? target : null
+		if(fine_owner && usr && fine_owner == usr)
+			send_ooc_note("<b>MEISTER:</b> Error: You can't fine yourself.", name = target_name)
+			log_game("FINE REFUSED: [key_name(usr)] attempted to fine themselves [abs(amt)]m via [source || "unknown"]")
+			return FALSE
 		if(fine_owner && is_tax_exempt(fine_owner, TAX_CATEGORY_FINE))
 			record_tax_exemption(TAX_CATEGORY_FINE, abs(amt))
-			send_ooc_note("<b>MEISTER:</b> Error: By decree, they cannot be fined.", name = target_name)
+			send_ooc_note("<b>MEISTER:</b> Error: A Charter exempts them from fines.", name = target_name)
 			log_game("FINE REFUSED: [usr ? key_name(usr) : "system"] attempted to fine [key_name(fine_owner)] [abs(amt)]m but they were Charter-exempt")
 			return FALSE
 		var/fine_amt = abs(amt)
@@ -365,10 +399,10 @@ SUBSYSTEM_DEF(treasury)
 			if(fine_owner && has_been_fined_today(fine_owner))
 				send_ooc_note("<b>MEISTER:</b> Error: They have already been fined today.", name = target_name)
 			else
-				send_ooc_note("<b>MEISTER:</b> Error: No fineable amount remains.", name = target_name)
+				send_ooc_note("<b>MEISTER:</b> Error: There is nothing left to fine them.", name = target_name)
 			return FALSE
 		if(!transfer(account, discretionary_fund, fine_amt, "[TAX_CATEGORY_FINE] ([source])"))
-			send_ooc_note("<b>MEISTER:</b> Error: Insufficient funds in the account to complete the fine.", name = target_name)
+			send_ooc_note("<b>MEISTER:</b> Error: They don't have enough in their account to pay the fine.", name = target_name)
 			return FALSE
 		record_round_statistic(STATS_FINES_INCOME, fine_amt)
 		send_ooc_note(source ? "<b>MEISTER:</b> You were fined [fine_amt]m. ([source])" : "<b>MEISTER:</b> You were fined [fine_amt]m.", name = target_name)
@@ -400,9 +434,9 @@ SUBSYSTEM_DEF(treasury)
 	if(!account)
 		return
 	if(account.balance < amt)
-		send_ooc_note("<b>MEISTER:</b> Error: Insufficient funds in the account to complete the withdrawal.", name = target_name)
+		send_ooc_note("<b>MEISTER:</b> Error: You don't have enough in your account for that withdrawal.", name = target_name)
 		return
-	if(!burn(account, amt, "Meister withdraw by [target_name]"))
+	if(!burn(account, amt, "Meister withdrawal by [target_name]"))
 		return
 	return TRUE
 
@@ -473,7 +507,7 @@ SUBSYSTEM_DEF(treasury)
 		var/datum/fund/account = bank_accounts[owner]
 		if(!account || account.wages_suspended)
 			continue
-		if(give_money_account(payment_amount, owner, "Daily Wage"))
+		if(give_money_account(payment_amount, owner, "Daily Wage", is_salary = TRUE))
 			record_round_statistic(STATS_WAGES_PAID, payment_amount)
 
 	if(SSeconomy)
@@ -512,11 +546,12 @@ SUBSYSTEM_DEF(treasury)
 		mint(burgher_pledge_fund, guild_bonus, "Guild of Arms tribute (Charter of Arms)")
 	record_round_statistic(STATS_PLEDGE_GENERATED, refill + guild_bonus)
 
-/datum/controller/subsystem/treasury/proc/do_export(var/datum/roguestock/D, silent = FALSE)
+/datum/controller/subsystem/treasury/proc/do_export(datum/roguestock/D, silent = FALSE)
 	if(D.stockpile_amount < D.importexport_amt)
 		return FALSE
 	var/amt = D.get_export_price()
 	D.stockpile_amount -= D.importexport_amt
+	record_material_flow(MATERIAL_FLOW_OUT, MATERIAL_SOURCE_LOCAL_EXPORT, D.item_type, D.importexport_amt, amt)
 	dirty_market_view()
 
 	mint(discretionary_fund, amt, "exported [D.name]")
@@ -532,6 +567,8 @@ SUBSYSTEM_DEF(treasury)
 	for(var/datum/roguestock/D in stockpile_datums)
 		if(!D.importexport_amt || D.trade_good_id)
 			continue
+		if(D.autoexport_disabled)
+			continue
 		if((autoexport_percentage * D.stockpile_limit) >= D.stockpile_amount)
 			continue
 		if(D.get_export_price() <= (D.payout_price * D.importexport_amt))
@@ -541,14 +578,6 @@ SUBSYSTEM_DEF(treasury)
 	var/list/surplus_result = mass_export_surplus(silent = TRUE)
 	total_value_exported += surplus_result["revenue"]
 
-/// Walks every auto-priced trade-good stockpile entry and exports stock above the
-/// daily auto-export floor (limit * autoexport_percentage) to its best-paying region,
-/// capped at that region's remaining demand for the day. The Crown's daily sweep
-/// fires this with silent=TRUE; the Steward's "Export Surplus" button fires it with
-/// silent=FALSE for a per-good chat breakdown.
-///
-/// Returns: list("revenue" = total mammon, "units" = total units exported,
-/// "lines" = list of "[qty] [name] -> [region] for [revenue]m" strings).
 /datum/controller/subsystem/treasury/proc/mass_export_surplus(silent = FALSE)
 	var/total_revenue = 0
 	var/total_units = 0
@@ -557,6 +586,8 @@ SUBSYSTEM_DEF(treasury)
 		if(!D.trade_good_id)
 			continue
 		if(!D.automatic_price)
+			continue
+		if(D.autoexport_disabled)
 			continue
 		if(!D.importexport_amt)
 			continue
@@ -581,6 +612,7 @@ SUBSYSTEM_DEF(treasury)
 			continue
 		total_revenue += revenue
 		total_units += export_qty
+		record_material_flow(MATERIAL_FLOW_OUT, MATERIAL_SOURCE_LOCAL_EXPORT, D.item_type, export_qty, revenue)
 		if(!silent)
 			lines += "[export_qty] [D.name] to [region.name] for [revenue]m"
 	return list("revenue" = total_revenue, "units" = total_units, "lines" = lines)
@@ -596,7 +628,7 @@ SUBSYSTEM_DEF(treasury)
 
 /datum/controller/subsystem/treasury/proc/apply_rate_adjustments(list/adjustments, good_announcement_text, bad_announcement_text)
 	if(GLOB.dayspassed <= levy_rates_changed_day)
-		to_chat(usr, span_warning("Crown levies have already been adjusted today - come back tomorrow."))
+		to_chat(usr, span_warning("You already changed the levies today. Try again tomorrow."))
 		return
 	var/datum/decree/concordat = get_decree(DECREE_ZENITSTADT_CONCORDAT)
 	var/concordat_active = concordat?.active ? TRUE : FALSE
@@ -626,7 +658,7 @@ SUBSYSTEM_DEF(treasury)
 		lines += "[pretty] [verb] from [old_pct]% to [new_pct]%."
 
 	if(rejected_concordat)
-		to_chat(usr, span_warning("The Concordat of Zenitstadt forbids any levy below [round(CONCORDAT_TITHE_RATE * 100)]% while in force - the Church's tithe must be honoured."))
+		to_chat(usr, span_warning("While the Concordat of Zenitstadt is in force, no levy can go below [round(CONCORDAT_TITHE_RATE * 100)]%."))
 
 	if(!length(lines))
 		return
@@ -634,7 +666,7 @@ SUBSYSTEM_DEF(treasury)
 	levy_rates_changed_day = GLOB.dayspassed
 	var/final_text = jointext(lines, "<br>")
 	if(concordat_active)
-		final_text += "<br><i>By the Concordat of Zenitstadt, [round(CONCORDAT_TITHE_RATE * 100)]% of every taxed transaction is tithed to the Church of Azuria, drawn from the Crown's share.</i>"
+		final_text += "<br><i>Under the Concordat of Zenitstadt, the Church of Azuria takes [round(CONCORDAT_TITHE_RATE * 100)]% of every taxed payment out of the Crown's share.</i>"
 	var/final_announcement_text = bad_guy ? bad_announcement_text : good_announcement_text
 	priority_announce(final_text, final_announcement_text, pick('sound/misc/royal_decree.ogg', 'sound/misc/royal_decree2.ogg'), "Captain", strip_html = FALSE)
 	log_game("TAX RATES: [usr ? key_name(usr) : "system"] changed levy rates - [jointext(lines, " | ")]")
@@ -658,7 +690,7 @@ SUBSYSTEM_DEF(treasury)
 
 /datum/controller/subsystem/treasury/proc/apply_poll_rate_adjustments(list/adjustments, good_announcement_text, bad_announcement_text)
 	if(GLOB.dayspassed <= poll_rates_changed_day)
-		to_chat(usr, span_warning("Poll tax rates have already been adjusted today - come back tomorrow."))
+		to_chat(usr, span_warning("Poll tax rates have already been adjusted today. Come back tomorrow."))
 		return
 	if(!islist(adjustments))
 		return
@@ -703,6 +735,8 @@ SUBSYSTEM_DEF(treasury)
 			return "Import Tariff"
 		if(TAX_CATEGORY_EXPORT_DUTY)
 			return "Export Duty"
+		if(TAX_CATEGORY_RECOVERED_SPOILS)
+			return "Recovered Spoils"
 		if(TAX_CATEGORY_FINE)
 			return "Fine"
 	return capitalize(category)
@@ -710,12 +744,15 @@ SUBSYSTEM_DEF(treasury)
 /datum/controller/subsystem/treasury/proc/withdraw_money_treasury(amt, target)
 	if(!amt)
 		return FALSE
-	return burn(discretionary_fund, amt, "withdrawn by [target]")
+	if(!burn(discretionary_fund, amt, "withdrawn by [target]"))
+		return FALSE
+	record_treasury_expense(TREASURY_FLOW_WITHDRAWAL, ismob(target) ? treasury_role_of(target) : "Unknown", amt)
+	return TRUE
 
 /datum/controller/subsystem/treasury/proc/get_poll_tax_category(mob/living/H)
 	if(!H)
 		return null
-	if(HAS_TRAIT(H, TRAIT_OUTLAW))
+	if(HAS_TRAIT(H, TRAIT_OUTLAW) || HAS_TRAIT(H, TRAIT_ROYAL_SUBSIDY))
 		return null
 	if(HAS_TRAIT(H, TRAIT_NOBLE) || (H.job in GLOB.noble_positions))
 		return POLL_TAX_CAT_NOBLE
@@ -723,7 +760,7 @@ SUBSYSTEM_DEF(treasury)
 		return POLL_TAX_CAT_INQUISITION
 	if((H.job in GLOB.church_positions) || HAS_TRAIT(H, TRAIT_AGENT_CHURCH))
 		return POLL_TAX_CAT_CLERGY
-	if(H.job in GLOB.courtier_positions)
+	if((H.job in GLOB.courtier_positions) || H.job == "Court Agent")
 		return POLL_TAX_CAT_COURTIER
 	if((H.job in GLOB.garrison_positions) || H.job == "Squire")
 		return POLL_TAX_CAT_GARRISON
@@ -872,7 +909,7 @@ SUBSYSTEM_DEF(treasury)
 			income += per_tick_flow
 		else if(rate < 0)
 			// Subsidies reach every eligible subject, including charter-protected ones.
-			per_tick_flow = rate * total   // negative total = subsidy out of Purse
+			per_tick_flow = rate * total	// negative total = subsidy out of Purse
 			subsidy += -per_tick_flow
 		by_category += list(list(
 			"category" = category,
@@ -915,7 +952,7 @@ SUBSYSTEM_DEF(treasury)
 	if(!H || days <= 0)
 		return FALSE
 	if(SSticker?.round_start_time && (world.time - SSticker.round_start_time) < POLL_TAX_ADVANCE_LOCKOUT)
-		to_chat(H, span_warning("The Crown's ledgers have not yet opened for the day. Try again later."))
+		to_chat(H, span_warning("It's too early to pay the poll tax ahead. Try again in [DisplayTimeText(POLL_TAX_ADVANCE_LOCKOUT - (world.time - SSticker.round_start_time))]."))
 		return FALSE
 	var/datum/fund/account = get_account(H)
 	if(!account)
@@ -925,30 +962,30 @@ SUBSYSTEM_DEF(treasury)
 		to_chat(H, span_warning("The Crown does not tax your class."))
 		return FALSE
 	if(is_poll_tax_charter_exempt(H, category))
-		to_chat(H, span_warning("Your class is exempt from poll tax by decree."))
+		to_chat(H, span_warning("A Charter exempts your class from the poll tax."))
 		return FALSE
 	var/rate = get_poll_tax_rate_for(H, category)
 	if(rate < 0)
-		to_chat(H, span_warning("Your class currently receives a Crown subsidy - there is nothing to advance."))
+		to_chat(H, span_warning("Your class receives a Crown subsidy, so there is no tax to pay ahead."))
 		return FALSE
 	if(rate == 0)
 		rate = POLL_TAX_ADVANCE_FALLBACK_RATE
 	var/existing_advance = poll_tax_advance_days[H] || 0
 	var/room = POLL_TAX_MAX_ADVANCE_DAYS - existing_advance
 	if(room <= 0)
-		to_chat(H, span_warning("You already hold the maximum of [POLL_TAX_MAX_ADVANCE_DAYS] days of Poll Tax advance."))
+		to_chat(H, span_warning("You can't pay more than [POLL_TAX_MAX_ADVANCE_DAYS] days of poll tax ahead."))
 		return FALSE
 	if(days > room)
 		days = room
 	var/total_cost = rate * days
 	if(account.balance < total_cost)
-		to_chat(H, span_warning("Insufficient balance. Need [total_cost]m for [days] days."))
+		to_chat(H, span_warning("You need [total_cost]m to pay [days] days ahead."))
 		return FALSE
-	if(!transfer(account, discretionary_fund, total_cost, "Poll Tax advance ([days] days)"))
+	if(!transfer(account, discretionary_fund, total_cost, "Poll tax advance ([days] days)"))
 		return FALSE
 	record_poll_tax_by_category(category, total_cost)
 	poll_tax_advance_days[H] = existing_advance + days
-	to_chat(H, span_notice("You have advanced [days] day[days == 1 ? "" : "s"] of Poll Tax ([total_cost]m total). Advance held: [poll_tax_advance_days[H]] day[poll_tax_advance_days[H] == 1 ? "" : "s"]."))
+	to_chat(H, span_notice("You paid [days] day[days == 1 ? "" : "s"] of poll tax ahead ([total_cost]m). You are now paid up for [poll_tax_advance_days[H]] day[poll_tax_advance_days[H] == 1 ? "" : "s"]."))
 	log_game("POLL TAX ADVANCE: [key_name(H)] prepaid [days] days ([total_cost]m) of poll tax as [category]")
 	return TRUE
 
@@ -992,8 +1029,9 @@ SUBSYSTEM_DEF(treasury)
 			var/subsidy = -rate
 			if(discretionary_fund.balance < subsidy)
 				continue
-			if(!transfer(discretionary_fund, account, subsidy, "Poll Subsidy ([category])"))
+			if(!transfer(discretionary_fund, account, subsidy, "Poll subsidy ([category])"))
 				continue
+			record_treasury_expense(TREASURY_FLOW_SUBSIDY, get_poll_tax_category_pretty_name(category), subsidy)
 			// Record as a negative against the category - the breakdown shows net Crown intake.
 			record_poll_tax_by_category(category, -subsidy)
 			to_chat(owner, span_notice("<b>POLL SUBSIDY:</b> [subsidy]m granted by the Crown."))
@@ -1006,19 +1044,19 @@ SUBSYSTEM_DEF(treasury)
 				poll_tax_advance_days -= owner
 			else
 				poll_tax_advance_days[owner] = advance
-			to_chat(owner, span_notice("<b>POLL TAX:</b> Covered by advance. [advance] day[advance == 1 ? "" : "s"] remaining."))
+			to_chat(owner, span_notice("<b>POLL TAX:</b> Paid from your advance. [advance] day[advance == 1 ? "" : "s"] remaining."))
 			continue
 
 		var/owed_this_tick = rate + (poll_tax_owed[owner] || 0)
 
 		var/paid = 0
 		if(account.balance >= owed_this_tick)
-			if(transfer(account, discretionary_fund, owed_this_tick, "Poll Tax ([category])"))
+			if(transfer(account, discretionary_fund, owed_this_tick, "Poll tax ([category])"))
 				paid = owed_this_tick
 				owed_this_tick = 0
 		else
 			var/partial = account.balance
-			if(partial > 0 && transfer(account, discretionary_fund, partial, "Poll Tax ([category])"))
+			if(partial > 0 && transfer(account, discretionary_fund, partial, "Poll tax ([category])"))
 				paid = partial
 				owed_this_tick -= partial
 

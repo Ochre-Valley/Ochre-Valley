@@ -4,8 +4,8 @@
 	name = "Master Fisher"
 	tutorial = "You are a Master Fisher, you cast your rod with might, and are able to pull fish larger than Eoras Bosom."
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_DESPISED)
-	
+	//forbidden_races = list(RACES_DESPISED) //OV EDIT - Races allowed
+
 	outfit = /datum/outfit/job/roguetown/adventurer/fishermaster
 	traits_applied = list(TRAIT_CAUTIOUS_FISHER, TRAIT_HOMESTEAD_EXPERT)
 

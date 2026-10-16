@@ -83,7 +83,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 	GLOB.schizohelps += src
 	if(timeout)
 		QDEL_IN(src, timeout)
-	
+
 /datum/schizohelp/Destroy(force)
 	. = ..()
 	owner = null

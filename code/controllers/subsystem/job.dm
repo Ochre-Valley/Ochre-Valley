@@ -7,13 +7,15 @@ SUBSYSTEM_DEF(job)
 	var/list/datum/job/name_occupations = list()	//Dict of all jobs, keys are titles
 	var/list/type_occupations = list()	//Dict of all jobs, keys are types
 	var/list/unassigned = list()		//Players who need jobs
-	var/initial_players_to_assign = 0 	//used for checking against population caps
+	var/initial_players_to_assign = 0	//used for checking against population caps
 
 	var/list/prioritized_jobs = list()
 	var/list/latejoin_trackers = list()	//Don't read this list, use GetLateJoinTurfs() instead
 
 	var/overflow_role = "Fuckyou"
 	var/list/level_order = list(JP_HIGH,JP_MEDIUM,JP_LOW)
+
+	var/list/roll_outcomes = list()
 
 /datum/controller/subsystem/job/Initialize(timeofday)
 	SSmapping.HACK_LoadMapConfig()
@@ -62,7 +64,7 @@ SUBSYSTEM_DEF(job)
 	occupations = list()
 	var/list/all_jobs = subtypesof(/datum/job/roguetown)
 	if(!all_jobs.len)
-		to_chat(world, span_boldannounce("Error setting up jobs, no job datums found"))
+		to_world(span_boldannounce("Error setting up jobs, no job datums found"))
 		return 0
 
 	for(var/J in all_jobs)
@@ -115,17 +117,6 @@ SUBSYSTEM_DEF(job)
 		player.mind.assigned_role = rank
 		unassigned -= player
 		job.current_positions++
-		if(!latejoin)
-			if(player.client)
-				if(job.bypass_lastclass)
-					player.client.prefs.lastclass = null
-				else
-					player.client.prefs.lastclass = job.title
-				player.client.prefs.save_preferences()
-		else
-			if(player.client)
-				player.client.prefs.lastclass = null
-				player.client.prefs.save_preferences()
 		GLOB.round_join_times[player.ckey] = world.time
 		addtimer(CALLBACK(player.client, TYPE_PROC_REF(/client, job_greet), job), 5 SECONDS)
 		return TRUE
@@ -158,18 +149,24 @@ SUBSYSTEM_DEF(job)
 		if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron?.type in job.allowed_patrons))
 			JobDebug("FOC incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
-		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions)))
-			JobDebug("FOC incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name]")
+		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions))) //OV EDIT - Extra Virtue
+			JobDebug("FOC incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name], Virtue 2: [player.client.prefs.virtuetwo?.name], Virtue 3: [player.client.prefs.extravirtue?.name]") //OV EDIT - Extra Virtue
+			continue
+		if(length(job.quirk_restrictions) && ((player.client.prefs.quirklesser?.type in job.quirk_restrictions) || (player.client.prefs.quirkgreater?.type in job.quirk_restrictions)))
+			JobDebug("FOC incompatible with quirks, Player: [player], Job: [job.title], Quirk 1: [player.client.prefs.quirklesser?.name], Quirk 2: [player.client.prefs.quirkgreater?.name]")
 			continue
 		if(length(job.vice_restrictions))
 			var/has_restricted_vice = FALSE
-			for(var/datum/charflaw/cf in player.client.prefs.charflaws)
-				if(cf.type in job.vice_restrictions)
-					JobDebug("FOC incompatible with vices, Player: [player], Job: [job.title], Vice: [cf.name]")
+			for(var/flaw_type in player.client.prefs.charflaws)
+				if(flaw_type in job.vice_restrictions)
+					JobDebug("FOC incompatible with vices, Player: [player], Job: [job.title], Vice: [flaw_type]")
 					has_restricted_vice = TRUE
 					break
 			if(has_restricted_vice)
 				continue
+		if(job.prefs_all_subclasses_restricted(player.client))
+			JobDebug("FOC incompatible with advclass virtues/vices, Player: [player], Job: [job.title]")
+			continue
 		if(job.plevel_req > player.client.patreonlevel())
 			JobDebug("FOC incompatible with PATREON LEVEL, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
@@ -184,12 +181,6 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 			JobDebug("FOC incompatible with age, Player: [player], Job: [job.title], Age: [player.client.prefs.age]")
-			continue
-		if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
-			JobDebug("FOC incompatible with blacklist, Player: [player], Job: [job.title]")
-			continue
-		if((player.client.prefs.lastclass == job.title) && !job.bypass_lastclass)
-			JobDebug("FOC incompatible with lastclass, Player: [player], Job: [job.title]")
 			continue
 		if(!job.special_job_check(player))
 			JobDebug("FOC player did not pass special check, Player: [player], Job:[job.title]")
@@ -246,19 +237,26 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions)))
-			JobDebug("GRJ incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name]")
+		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions))) //OV Edit - Extra Virtue
+			JobDebug("GRJ incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name], Virtue 2: [player.client.prefs.virtuetwo?.name], Virtue 3: [player.client.prefs.extravirtue?.name]") //OV EDIT - Extra Virtue
+			continue
+
+		if(length(job.quirk_restrictions) && ((player.client.prefs.quirklesser?.type in job.quirk_restrictions) || (player.client.prefs.quirkgreater?.type in job.quirk_restrictions)))
+			JobDebug("GRJ incompatible with quirks, Player: [player], Job: [job.title], Quirk 1: [player.client.prefs.quirklesser?.name], Quirk 2: [player.client.prefs.quirkgreater?.name]")
 			continue
 
 		if(length(job.vice_restrictions))
 			var/has_restricted_vice = FALSE
-			for(var/datum/charflaw/cf in player.client.prefs.charflaws)
-				if(cf.type in job.vice_restrictions)
-					JobDebug("GRJ incompatible with vices, Player: [player], Job: [job.title], Vice: [cf.name]")
+			for(var/flaw_type in player.client.prefs.charflaws)
+				if(flaw_type in job.vice_restrictions)
+					JobDebug("GRJ incompatible with vices, Player: [player], Job: [job.title], Vice: [flaw_type]")
 					has_restricted_vice = TRUE
 					break
 			if(has_restricted_vice)
 				continue
+		if(job.prefs_all_subclasses_restricted(player.client))
+			JobDebug("GRJ incompatible with advclass virtues/vices, Player: [player], Job: [job.title]")
+			continue
 
 		if(job.plevel_req > player.client.patreonlevel())
 			JobDebug("GRJ incompatible with PATREON LEVEL, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
@@ -282,10 +280,6 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with maxPQ, Player: [player], Job: [job.title]")
 			continue
 
-		if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
-			JobDebug("GRJ incompatible with blacklist, Player: [player], Job: [job.title]")
-			continue
-
 		if(!job.special_job_check(player))
 			JobDebug("GRJ player did not pass special check, Player: [player], Job:[job.title]")
 			continue
@@ -293,10 +287,6 @@ SUBSYSTEM_DEF(job)
 		if(CONFIG_GET(flag/usewhitelist))
 			if(job.whitelist_req && (!player.client.whitelisted()))
 				continue
-
-//		if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
-//			JobDebug("GRJ incompatible with lastclass, Player: [player], Job: [job.title]")
-//			continue
 
 		if(job.spawn_positions)
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -316,6 +306,41 @@ SUBSYSTEM_DEF(job)
 	SetupOccupations()
 	unassigned = list()
 	return
+
+/datum/controller/subsystem/job/proc/pick_roll_winners(list/candidates, slots)
+	if(slots <= 0)
+		return list()
+	if(length(candidates) <= slots)
+		return candidates
+	var/list/weights = ROLL_TOKEN_WEIGHTS
+	var/list/pool = list()
+	for(var/mob/M as anything in candidates)
+		pool[M] = weights[clamp(M.client.prefs.roll_tokens, 0, MAX_ROLL_TOKENS) + 1]
+	var/list/winners = list()
+	for(var/i in 1 to slots)
+		var/mob/winner = pickweight(pool)
+		pool -= winner
+		winners += winner
+		roll_outcomes[winner.ckey] |= ROLL_OUTCOME_WON
+	for(var/mob/loser as anything in pool)
+		roll_outcomes[loser.ckey] |= ROLL_OUTCOME_LOST
+	return winners
+
+/datum/controller/subsystem/job/proc/settle_roll_tokens()
+	for(var/ckey in roll_outcomes)
+		var/outcome = roll_outcomes[ckey]
+		var/datum/preferences/prefs = GLOB.preferences_datums[ckey]
+		if(!prefs)
+			continue
+		if(outcome & ROLL_OUTCOME_LOST)
+			if(prefs.roll_tokens < MAX_ROLL_TOKENS)
+				prefs.roll_tokens++
+				prefs.save_preferences()
+				to_chat(prefs.parent, span_notice("I lost a roll against another. I now hold [prefs.roll_tokens] roll token\s."))
+		else if((outcome & ROLL_OUTCOME_WON) && prefs.roll_tokens)
+			prefs.roll_tokens = 0
+			prefs.save_preferences()
+			to_chat(prefs.parent, span_notice("My roll tokens were spent winning my roll."))
 
 
 //This proc is called before the level loop of DivideOccupations() and will try to select a head, ignoring ALL non-head preferences for every level until
@@ -387,12 +412,13 @@ SUBSYSTEM_DEF(job)
 	return newlist
 
 /** Proc DivideOccupations
- *  fills var "assigned_role" for all ready players.
- *  This proc must not have any side effect besides of modifying "assigned_role".
+ *	fills var "assigned_role" for all ready players.
+ *	This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/job/proc/DivideOccupations(list/required_jobs)
 	//Setup new player list and get the jobs list
 	JobDebug("Running DO")
+	roll_outcomes = list()
 
 	//Get the players who are ready
 	for(var/i in GLOB.new_player_list)
@@ -452,8 +478,20 @@ SUBSYSTEM_DEF(job)
 	// This will cause lots of more loops, but since it's only done once it shouldn't really matter much at all.
 	// Hopefully this will add more randomness and fairness to job giving.
 
-	// Loop through all levels from high to low
 	var/list/shuffledoccupations = shuffle(occupations)
+
+	for(var/datum/job/job in shuffledoccupations)
+		if(PopcapReached())
+			break
+		var/list/candidates = list()
+		for(var/mob/dead/new_player/player in unassigned)
+			if(!QDELETED(player) && player.client.prefs.job_preferences[job.title] == JP_HIGH && can_roll_job(player, job))
+				candidates += player
+		var/open_slots = job.spawn_positions == -1 ? length(candidates) : job.spawn_positions - job.current_positions
+		for(var/mob/dead/new_player/winner as anything in pick_roll_winners(candidates, open_slots))
+			AssignRole(winner, job.title)
+
+	// Loop through all levels from high to low
 	for(var/level in level_order)
 		//Check the head jobs first each level
 //		CheckHeadPositions(level)
@@ -468,79 +506,11 @@ SUBSYSTEM_DEF(job)
 				if(!job)
 					continue
 
-				if(is_banned_from(player.ckey, job.title))
-					JobDebug("DO isbanned failed, Player: [player], Job:[job.title]")
-					continue
-
 				if(QDELETED(player))
-					JobDebug("DO player deleted during job ban check")
+					JobDebug("DO player deleted during job check")
 					break
 
-				if(!job.player_old_enough(player.client))
-					JobDebug("DO player not old enough, Player: [player], Job:[job.title]")
-					continue
-
-				if(job.required_playtime_remaining(player.client))
-					JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
-					continue
-
-				if(player.mind && (job.title in player.mind.restricted_roles))
-					JobDebug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
-					continue
-
-				if(length(job.forbidden_races) && (player.client.prefs.pref_species.type in job.forbidden_races))
-					JobDebug("DO incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
-					continue
-
-				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron?.type in job.allowed_patrons))
-					JobDebug("DO incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
-					continue
-
-				if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions)))
-					JobDebug("DO incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name]")
-					continue
-
-				if(length(job.vice_restrictions))
-					var/has_restricted_vice = FALSE
-					for(var/datum/charflaw/cf in player.client.prefs.charflaws)
-						if(cf.type in job.vice_restrictions)
-							JobDebug("DO incompatible with vices, Player: [player], Job: [job.title], Vice: [cf.name]")
-							has_restricted_vice = TRUE
-							break
-					if(has_restricted_vice)
-						continue
-
-				#ifdef USES_PQ
-				if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
-					continue
-				#endif
-
-				#ifdef USES_PQ
-				if(!isnull(job.max_pq) && (get_playerquality(player.ckey) > job.max_pq))
-					continue
-				#endif
-
-				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
-					continue
-
-				if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
-					JobDebug("DO incompatible with blacklist, Player: [player], Job: [job.title]")
-					continue
-
-				if(CONFIG_GET(flag/usewhitelist))
-					if(job.whitelist_req && (!player.client.whitelisted()))
-						continue
-
-				if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
-					JobDebug("DO incompatible with age, Player: [player], Job: [job.title]")
-					continue
-
-				if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
-					JobDebug("DO incompatible with gender preference, Player: [player], Job: [job.title]")
-					continue
-
-				if(!job.special_job_check(player))
-					JobDebug("DO player did not pass special check, Player: [player], Job:[job.title]")
+				if(!can_roll_job(player, job))
 					continue
 
 				// If the player wants that job on this level, then try give it to him.
@@ -569,6 +539,71 @@ SUBSYSTEM_DEF(job)
 
 	return validate_required_jobs(required_jobs)
 
+/datum/controller/subsystem/job/proc/can_roll_job(mob/dead/new_player/player, datum/job/job)
+	if(is_banned_from(player.ckey, job.title))
+		JobDebug("DO isbanned failed, Player: [player], Job:[job.title]")
+		return FALSE
+
+	if(!job.player_old_enough(player.client))
+		JobDebug("DO player not old enough, Player: [player], Job:[job.title]")
+		return FALSE
+
+	if(job.required_playtime_remaining(player.client))
+		JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
+		return FALSE
+
+	if(player.mind && (job.title in player.mind.restricted_roles))
+		JobDebug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
+		return FALSE
+
+	if(length(job.forbidden_races) && (player.client.prefs.pref_species.type in job.forbidden_races))
+		JobDebug("DO incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
+		return FALSE
+
+	if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron?.type in job.allowed_patrons))
+		JobDebug("DO incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
+		return FALSE
+
+	if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions)))
+		JobDebug("DO incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue?.name]")
+		return FALSE
+
+	if(length(job.vice_restrictions))
+		for(var/flaw_type in player.client.prefs.charflaws)
+			if(flaw_type in job.vice_restrictions)
+				JobDebug("DO incompatible with vices, Player: [player], Job: [job.title], Vice: [flaw_type]")
+				return FALSE
+
+	if(job.prefs_all_subclasses_restricted(player.client))
+		JobDebug("DO incompatible with advclass virtues/vices, Player: [player], Job: [job.title]")
+		return FALSE
+
+	#ifdef USES_PQ
+	if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
+		return FALSE
+
+	if(!isnull(job.max_pq) && (get_playerquality(player.ckey) > job.max_pq))
+		return FALSE
+	#endif
+
+	if(CONFIG_GET(flag/usewhitelist))
+		if(job.whitelist_req && (!player.client.whitelisted()))
+			return FALSE
+
+	if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+		JobDebug("DO incompatible with age, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+		JobDebug("DO incompatible with gender preference, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(!job.special_job_check(player))
+		JobDebug("DO player did not pass special check, Player: [player], Job:[job.title]")
+		return FALSE
+
+	return TRUE
+
 
 /datum/controller/subsystem/job/proc/do_required_jobs()
 	var/amt_picked = 0
@@ -578,6 +613,9 @@ SUBSYSTEM_DEF(job)
 			require += job
 	for(var/datum/job/job in require)
 		for(var/level in level_order)
+			if(job.current_positions >= 1)
+				break
+			var/list/candidates = list()
 			for(var/mob/dead/new_player/player in unassigned)
 				if(player.client.prefs.job_preferences[job.title] != level)
 					continue
@@ -599,32 +637,28 @@ SUBSYSTEM_DEF(job)
 
 				if(length(job.forbidden_races) && (player.client.prefs.pref_species.type in job.forbidden_races))
 					continue
-				
+
 				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron?.type in job.allowed_patrons))
 					continue
 
 				if(length(job.virtue_restrictions) && ((player.client.prefs.virtue?.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions) || (player.client.prefs.extravirtue?.type in job.virtue_restrictions) || (player.client.prefs.virtue_origin?.type in job.virtue_restrictions)))
 					continue
-					
+
 				if(length(job.vice_restrictions))
 					var/has_restricted_vice = FALSE
-					for(var/datum/charflaw/cf in player.client.prefs.charflaws)
-						if(cf.type in job.vice_restrictions)
+					for(var/flaw_type in player.client.prefs.charflaws)
+						if(flaw_type in job.vice_restrictions)
 							has_restricted_vice = TRUE
 							break
 					if(has_restricted_vice)
 						continue
+				if(job.prefs_all_subclasses_restricted(player.client))
+					continue
 
 				#ifdef USES_PQ
 				if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq) && level != JP_LOW) //since its required people on low can roll for it
 					continue
 				#endif
-
-				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
-					continue
-
-				if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
-					continue
 
 				if(CONFIG_GET(flag/usewhitelist))
 					if(job.whitelist_req && (!player.client.whitelisted()))
@@ -639,11 +673,14 @@ SUBSYSTEM_DEF(job)
 				if(!job.special_job_check(player))
 					continue
 
-				// We only need 1 person for the required job, the rest can use the normal system
-				if((job.current_positions < 1))
-					AssignRole(player, job.title)
-					unassigned -= player
-					amt_picked++
+				candidates += player
+
+			if(!length(candidates))
+				continue
+			// We only need 1 person for the required job, the rest can use the normal system
+			var/list/winners = level == JP_HIGH ? pick_roll_winners(candidates, 1) : candidates
+			AssignRole(winners[1], job.title)
+			amt_picked++
 	return amt_picked
 
 /datum/controller/subsystem/job/proc/validate_required_jobs(list/required_jobs)
@@ -667,14 +704,7 @@ SUBSYSTEM_DEF(job)
 	if(PopcapReached())
 		RejectPlayer(player)
 	else
-		if(player.client.prefs.joblessrole == BEOVERFLOW)
-			var/allowed_to_be_a_loser = !is_banned_from(player.ckey, SSjob.overflow_role)
-			if(QDELETED(player) || !allowed_to_be_a_loser)
-				RejectPlayer(player)
-			else
-				if(!AssignRole(player, SSjob.overflow_role))
-					RejectPlayer(player)
-		else if(player.client.prefs.joblessrole == BERANDOMJOB)
+		if(player.client.prefs.joblessrole == BERANDOMJOB)
 			if(!GiveRandomJob(player))
 				RejectPlayer(player)
 		else if(player.client.prefs.joblessrole == RETURNTOLOBBY)
@@ -769,7 +799,13 @@ SUBSYSTEM_DEF(job)
 	if(related_policy)
 		to_chat(M,related_policy)
 	if(job && H)
+		if(H.client && H.mind)
+			H.mind.job_subprefs = H.client.prefs?.job_subprefs?.Copy()
 		job.after_spawn(H, M, joined_late) // note: this happens before the mob has a key! M will always have a client, H might not.
+
+	if(ishuman(H))
+		var/mob/living/carbon/human/spawned_human = H
+		spawned_human.flag_gear_as_worn()
 
 	return H
 
@@ -928,7 +964,7 @@ SUBSYSTEM_DEF(job)
 			. |= player.mind
 
 ////////////////////////////////////////
-//Keeps track of all  security members//
+//Keeps track of all	security members//
 ////////////////////////////////////////
 /datum/controller/subsystem/job/proc/get_all_sec()
 	. = list()
@@ -939,3 +975,34 @@ SUBSYSTEM_DEF(job)
 
 /datum/controller/subsystem/job/proc/JobDebug(message)
 	log_job_debug(message)
+
+/datum/controller/subsystem/job/proc/bitflag_to_department(department_flag, obfuscated = FALSE)
+	var/key = "Wanderers"
+	if(obfuscated)
+		return key
+	switch(department_flag) // Omega tier slop.
+		if(NOBLEMEN)
+			key = "Noblemen"
+		if(COURTIERS)
+			key = "Courtiers"
+		if(GARRISON)
+			key = "Garrison"
+		if(RETINUE)
+			key = "Retinue"
+		if(CHURCHMEN)
+			key = "Church"
+		if(INQUISITION)
+			key = "Inquisition"
+		if(BURGHERS)
+			key = "Burghers"
+		if(GUILDSMAN)
+			key = "Guildsmen"
+		if(PEASANTS)
+			key = "Peasants"
+		if(SIDEFOLK)
+			key = "Sidefolk"
+		if(WANDERERS)
+			key = "Wanderers"
+		else
+			key = "Wanderers"
+	return key

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import { formatRatioPct } from '../../common/format';
 import {
   cardStyle,
   dashedFrameStyle,
@@ -15,14 +16,14 @@ import {
   SEAL_RED,
   stickyLeftCellStyle,
 } from '../../common/parchment';
-import {
-  type MarketCategory,
-  type MarketData,
-  type NoticeboardData,
-  type RealmDemandRow,
+import type {
+  MarketCategory,
+  MarketData,
+  NoticeboardData,
+  RealmDemandRow,
 } from '../types';
 
-const FILL_YELLOW = 0.50;
+const FILL_YELLOW = 0.5;
 const FILL_RED = 0.85;
 const DEMAND_WARM = 1.001;
 const TOP_N = 5;
@@ -114,7 +115,6 @@ const demandColor = (mult: number): string => {
 };
 
 const formatMult = (m: number): string => `${m.toFixed(2)}x`;
-const formatPct = (n: number): string => `${Math.round(n * 100)}%`;
 
 const matrixContainerStyle: React.CSSProperties = {
   ...dashedFrameStyle,
@@ -165,12 +165,19 @@ const matrixCellStyle: React.CSSProperties = {
 const RealmDemandMatrix = (props: {
   realms: RealmDemandRow[];
   allBuckets: string[];
+  noShipPct: number;
 }) => {
-  const { realms, allBuckets } = props;
+  const { realms, allBuckets, noShipPct } = props;
   if (realms.length === 0 || allBuckets.length === 0) {
     return (
-      <div style={{ ...matrixContainerStyle, color: INK_FAINT, fontStyle: 'italic' }}>
-        The factors have no realm intelligence to share.
+      <div
+        style={{
+          ...matrixContainerStyle,
+          color: INK_FAINT,
+          fontStyle: 'italic',
+        }}
+      >
+        No realm demand to show yet.
       </div>
     );
   }
@@ -191,14 +198,21 @@ const RealmDemandMatrix = (props: {
           marginBottom: 4,
         }}
       >
-        A summary of what each foreign realm demands. Hail a ship from a realm to raise the demand for its categories at the Navigator. Valuables and Seafood keep their full price even with no ship in port; every other category pays only half until a buyer arrives.
+        What each foreign realm wants. Hail a ship from a realm at the Goldface
+        to raise demand for its categories. With no ship in port, Valuables and
+        Seafood keep their full price and every other category pays {noShipPct}%
+        of its price.
       </div>
       <table style={matrixTableStyle}>
         <thead>
           <tr>
             <th style={matrixCornerStyle}>Category</th>
             {realmDemandSets.map(({ realm }) => (
-              <th key={realm.realm_id} style={matrixRealmHeaderStyle} title={realm.name}>
+              <th
+                key={realm.realm_id}
+                style={matrixRealmHeaderStyle}
+                title={realm.name}
+              >
                 {realm.name}
               </th>
             ))}
@@ -272,7 +286,7 @@ export const MarketView = ({
           padding: '24px 0',
         }}
       >
-        The factors have nothing to report just yet.
+        Nothing to report yet.
       </div>
     );
   }
@@ -342,26 +356,39 @@ export const MarketView = ({
           <RealmDemandMatrix
             realms={market.realm_demand_matrix ?? []}
             allBuckets={market.all_buckets ?? []}
+            noShipPct={market.no_ship_pct}
           />
         )}
         {loreOpen && (
           <div style={{ ...dashedFrameStyle, marginTop: 8 }}>
             <p style={{ margin: '0 0 6px 0' }}>
-              Wares lifted from the Navigator pass into the warehouses of the Azurian Trading Company, sorted by category. Each week the factors weigh which goods are scarce and which lie in glut, and the Navigator&apos;s payouts shift accordingly.
+              Wares sold at the Navigator go into the ATC warehouses, sorted by
+              category. Each week the factors weigh which goods are scarce and
+              which lie in glut. The Navigator&apos;s payouts shift accordingly.
             </p>
             <p style={{ margin: '0 0 6px 0' }}>
-              <b style={{ color: SEAL_GREEN }}>Saturation</b> tracks the warehouse stockpile. While there is room, goods sell at face value. When the warehouse fills, the market refuses further intake.
+              <b style={{ color: SEAL_GREEN }}>Saturation</b> tracks the
+              warehouse stockpile. While there is room, goods sell at face
+              value. When the warehouse fills, the Navigator stops buying that
+              category.
             </p>
             <p style={{ margin: '0 0 6px 0' }}>
-              <b style={{ color: SEAL_AMBER }}>Demand</b> spikes when foreign vessels make port. Their captains pay above market for what they want. When the ship sails, the demand sails with it.
+              <b style={{ color: SEAL_AMBER }}>Demand</b> spikes when foreign
+              vessels make port. Their captains pay above market for what they
+              want, until the ship sails.
             </p>
             <p style={{ margin: '0 0 6px 0' }}>
-              <b>Hailing a ship</b> raises its demand and draws inventory from the warehouse, opening room for more sales while the ship is in port.
+              <b>Hailing a ship</b> raises its demand and draws inventory from
+              the warehouse. That opens room for more sales while the ship is in
+              port.
             </p>
             <p style={{ margin: 0 }}>
-              A <b style={{ color: SEAL_AMBER }}>Black Market</b> runs in the shadows. It holds half the capacity of the legitimate warehouse, takes no demand boost from foreign ships, and its prices are independent of the regular market. Each day, smugglers and small boats quietly drain its stock, opening room over time.
+              A <b style={{ color: SEAL_AMBER }}>Black Market</b> runs in the
+              shadows. It holds {market.bm_pool_pct}% of the capacity of the legitimate warehouse,
+              takes no demand boost from foreign ships, and its prices are
+              independent of the regular market. Each day, smugglers and small
+              boats clear {market.bm_daily_clear_pct}% of its capacity.
             </p>
-
           </div>
         )}
       </div>
@@ -369,7 +396,8 @@ export const MarketView = ({
       <div style={feedGridStyle}>
         <div style={feedColumnStyle}>
           <div style={feedTitleStyle}>
-            <span style={{ color: SEAL_RED }}>Hot</span> - buyers hunger for these
+            <span style={{ color: SEAL_RED }}>Hot</span> - buyers hunger for
+            these
           </div>
           {hot.length === 0 ? (
             <div
@@ -401,7 +429,8 @@ export const MarketView = ({
 
         <div style={feedColumnStyle}>
           <div style={feedTitleStyle}>
-            <span style={{ color: SEAL_BLUE }}>Filling Up</span> - warehouses nearing capacity
+            <span style={{ color: SEAL_BLUE }}>Filling Up</span> - warehouses
+            nearing capacity
           </div>
           {crashed.length === 0 ? (
             <div
@@ -412,7 +441,7 @@ export const MarketView = ({
                 padding: '6px 0',
               }}
             >
-              No warehouse near capacity. Plenty of room to sell.
+              No warehouse is near capacity.
             </div>
           ) : (
             crashed.map((c) => (
@@ -424,7 +453,7 @@ export const MarketView = ({
                     fontWeight: 'bold',
                   }}
                 >
-                  {c.refused ? 'REFUSING' : formatPct(c.fill_ratio)}
+                  {c.refused ? 'REFUSING' : formatRatioPct(c.fill_ratio)}
                 </span>
               </div>
             ))
@@ -451,7 +480,9 @@ export const MarketView = ({
                   : `${c.consumed}/${c.capacity}m`;
                 return (
                   <div key={c.category} style={ledgerRowStyle}>
-                    <span style={ledgerNameStyle} title={c.category}>{c.category}</span>
+                    <span style={ledgerNameStyle} title={c.category}>
+                      {c.category}
+                    </span>
                     <span
                       style={{
                         textAlign: 'right',

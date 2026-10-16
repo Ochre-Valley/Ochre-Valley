@@ -19,6 +19,9 @@
 	var/word
 	var/style = "info"
 	switch(item_quality)
+		if(ITEM_QUALITY_WORN)
+			word = "worn"
+			style = "warning"
 		if(ITEM_QUALITY_LOOTED)
 			word = "scavenged"
 			style = "warning"
@@ -51,7 +54,7 @@
 	. = ..()
 	. += integrity_check()
 
-	var/derived_cat = GLOB.derived_categories ? GLOB.derived_categories[type] : null
+	var/derived_cat = get_derived_category(type)
 	var/display_cat = derived_cat
 	if(derived_cat)
 		var/bucket = get_navigator_bucket_for_item(src, derived_cat)
@@ -62,7 +65,7 @@
 
 	// The price traits gate ONLY the mammon value - category and quality are always shown.
 	var/value_line = "Value: Unknown"
-	if(HAS_TRAIT(user, TRAIT_SEEPRICES) || simpleton_price)
+	if(HAS_TRAIT(user, TRAIT_SEEPRICES) || simpleton_price || isobserver(user))
 		var/appraised_value = appraise_price()
 		if(appraised_value > 0)
 			value_line = "Value: [appraised_value] mammon"
@@ -96,6 +99,9 @@
 		. += span_info("It appears to be crafted by the hand of a local artisan.")
 	else if(is_carved)
 		. += span_info("It is a carved item.")
+	var/datum/component/unsellable/nosell = GetComponent(/datum/component/unsellable)
+	if(nosell)
+		. += span_info("It [nosell.reason]; it is highly unlikely anyone will buy it. [smeltresult ? "Smelting alone is not enough to obfuscate its origin." : ""]")
 
 	var/show_craft = TRUE
 	if(isliving(user))
@@ -181,4 +187,3 @@
 				if(80 to 99)
 					result = span_warning("It's a little damaged.")
 	return result
-	

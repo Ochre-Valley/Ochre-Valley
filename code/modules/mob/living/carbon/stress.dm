@@ -52,6 +52,11 @@
 	if(event.stacks >= event.max_stacks)
 		return event
 	event.stacks++
+
+	if(event.stressadd <= -2)
+		for(var/mob/living/carbon/human/L in viewers(2,src))
+			if(L != src && L.has_flaw(/datum/charflaw/addiction/voyeur))
+				L.sate_addiction(/datum/charflaw/addiction/voyeur)
 	return event
 
 /mob/living/carbon/remove_stress(event_type)
@@ -183,7 +188,7 @@
 			random_stress_message()
 
 	if(new_stress >= 20)
-		if(!HAS_TRAIT(src, TRAIT_EORAN_CALM) && !HAS_TRAIT(src, TRAIT_EORAN_SERENE))
+		if(!HAS_TRAIT(src, TRAIT_EORAN_CALM) && !HAS_TRAIT(src, TRAIT_EORAN_SERENE) && !HAS_TRAIT(src, TRAIT_BAOTHAN_CALM))
 			roll_streak_freakout()
 	*/
 	//Caustic edit end

@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - admin: "Added an (INFO) button to Whom for admins, which brings up player information along with admin PM, player panel, view variable buttons and others."

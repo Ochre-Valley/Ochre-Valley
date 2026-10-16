@@ -10,7 +10,7 @@ import type { Data } from './types';
 const CHARACTER_DIRECTORY_WINDOW_WIDTH = Math.round(816 * 1.15);
 const CHARACTER_DIRECTORY_WINDOW_HEIGHT = Math.round(722 * 1.15);
 
-export const CharacterDirectory = (props) => {
+export const CharacterDirectory = (props: any) => {
   const { act, data } = useBackend<Data>();
 
   const {
@@ -27,9 +27,12 @@ export const CharacterDirectory = (props) => {
   const [overwritePrefs, setOverwritePrefs] = useState<boolean>(false);
   const [directoryAd, setDirectoryAd] = useState<string | null>(null);
   const [directoryAdName, setDirectoryAdName] = useState<string>('');
-  const directoryAdHTML = useMemo(() => ({
-    __html: directoryAd || '',
-  }), [directoryAd]);
+  const directoryAdHTML = useMemo(
+    () => ({
+      __html: directoryAd || '',
+    }),
+    [directoryAd],
+  );
   const closeDirectoryAd = () => {
     setDirectoryAd(null);
     setDirectoryAdName('');
@@ -187,11 +190,7 @@ export const CharacterDirectory = (props) => {
               maxHeight: '36rem',
             }}
             buttons={
-              <Button
-                icon="times"
-                color="red"
-                onClick={closeDirectoryAd}
-              >
+              <Button icon="times" color="red" onClick={closeDirectoryAd}>
                 Close
               </Button>
             }

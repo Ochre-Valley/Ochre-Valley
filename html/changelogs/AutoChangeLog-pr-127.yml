@@ -1,5 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - rscadd: "14 types of herbal tea"
-  - bugfix: "Carved teapots now only hold 90 drams, so they're easier to brew with."

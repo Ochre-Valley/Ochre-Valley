@@ -13,9 +13,13 @@
 	maximum_possible_slots = 2
 	applies_post_equipment = FALSE
 
-//OV Add Start
+	subclass_stashed_items = list(
+		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
+	)
+
+	//OV Add Start
 	vice_limits = list(/datum/charflaw/hemovore)
-//OV Add End
+	//OV Add End
 
 /datum/outfit/job/roguetown/wretch/licker/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -26,6 +30,7 @@
 			possible_classes += CHECKS
 
 		var/datum/advclass/C = input(H.client, "What is my class?", "Adventure") as null|anything in possible_classes
+		H.licker_subclass = C
 		C.equipme(H)
 
 		H.adjust_skillrank_up_to(/datum/skill/magic/blood, 4, TRUE)
@@ -40,13 +45,13 @@
 		to_chat(H, span_danger("You are playing a soft-antagonist role: an outcast, an outlaw, or even possibly a heretic of your faith. You are unwanted by society and likely have a bounty others may try to collect. By choosing to spawn as a Wretch, you are expected to provide texture to the round and setting's story through your actions, friction with other narratives, or possibly outright conflict with other players. This role does not give you the go-ahead to attack others without proper escalation, to bypass server etiquette rules such as rushing PvE content or breaking into undefended areas, or cause major disruptions such as summoning skeletons in the town square. Failure to treat this with appropriate gravitas may result in administrative action. Play these roles to enhance the story for everyone, not to win for yourself.")) //OV Edit
 		//leaving the below in if people want to give lickers outlaw/bounty status again, this will keep it off the trader roles but combat roles will have to choose a bounty
 		/*var/list/traderjobs = list("Aristocrat",
-									"Scholar", 
-								   "Peddler", 
-								   "Jeweler", 
-								   "Harlequin", 
-								   "Doomsayer", 
-								   "Cuisiner", 
-								   "Brewer") 
+									"Scholar",
+									"Peddler",
+									"Jeweler",
+									"Harlequin",
+									"Doomsayer",
+									"Cuisiner",
+									"Brewer")
 		if(H.advjob in traderjobs)
 			REMOVE_TRAIT(H, TRAIT_OUTLAW, JOB_TRAIT) //removing since these are non-combat roles and they need to be able to use the stocks and miesters to blend in
 			to_chat(H, span_danger("You are playing an Antagonist role. By choosing to spawn as a Wretch, you are expected to actively create conflict with other players. Failing to play this role with the appropriate gravitas may result in punishment for Low Roleplay standards.")) //giving this notice, since its part of the bounty system
@@ -67,6 +72,7 @@
 		else
 			M.emote(pick("twitch_s","chuckle"))
 	M.apply_status_effect(/datum/status_effect/debuff/vampbite)
+	M.sate_addiction(/datum/charflaw/addiction/junkie)
 	..()
 
 /atom/movable/screen/fullscreen/vampsolution
@@ -78,6 +84,8 @@
 
 /datum/reagent/vampsolution/on_mob_metabolize(mob/living/M, mob/living/S)
 	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
+	if(!HAS_TRAIT(M, TRAIT_VAMP_BITTEN))
+		ADD_TRAIT(M, TRAIT_VAMP_BITTEN, TRAIT_GENERIC)
 	if(M.client)
 		ADD_TRAIT(M, TRAIT_DRUQK, "based")
 		SSdroning.area_entered(get_area(M), M.client)

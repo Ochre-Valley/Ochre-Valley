@@ -3,6 +3,7 @@
 	var/id = null //The internal ID of a template, so we don't need to use name
 	var/width = 0
 	var/height = 0
+	var/floors = 0 // OV ADD
 	var/mappath = null
 	var/loaded = 0 // Times loaded this round
 	var/datum/parsed_map/cached_map
@@ -28,6 +29,7 @@
 	if(bounds)
 		width = bounds[MAP_MAXX] // Assumes all templates are rectangular, have a single Z level, and begin at 1,1,1
 		height = bounds[MAP_MAXY]
+		floors = bounds[MAP_MAXZ] // OV ADD
 		if(cache)
 			cached_map = parsed
 	return bounds
@@ -38,7 +40,7 @@
 
 	var/list/turfs = block(	locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),
 							locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ]))
-	var/list/border = block(locate(max(bounds[MAP_MINX]-1, 1),			max(bounds[MAP_MINY]-1, 1),			 bounds[MAP_MINZ]),
+	var/list/border = block(locate(max(bounds[MAP_MINX]-1, 1),			max(bounds[MAP_MINY]-1, 1),				bounds[MAP_MINZ]),
 							locate(min(bounds[MAP_MAXX]+1, world.maxx),	min(bounds[MAP_MAXY]+1, world.maxy), bounds[MAP_MAXZ])) - turfs
 	for(var/L in turfs)
 		var/turf/B = L
@@ -88,7 +90,7 @@
 	if(T.y+height > world.maxy)
 		return
 
-	var/list/border = block(locate(max(T.x-1, 1),			max(T.y-1, 1),			 T.z),
+	var/list/border = block(locate(max(T.x-1, 1),			max(T.y-1, 1),				T.z),
 							locate(min(T.x+width+1, world.maxx),	min(T.y+height+1, world.maxy), T.z))
 	for(var/L in border)
 		var/turf/turf_to_disable = L

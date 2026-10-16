@@ -24,7 +24,7 @@
 	advclass_cat_rolls = list(CTAG_COURTPHYS = 2)
 
 	give_bank_account = TRUE
-	min_pq = 2 //OV EDIT
+	min_pq = 5 //OV EDIT
 	max_pq = null
 	round_contrib_points = 5
 
@@ -34,6 +34,7 @@
 	job_subclasses = list(
 		/datum/advclass/physician
 	)
+	has_subprefs = FALSE // only one subclass
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/physician
@@ -104,14 +105,14 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/courtphysician/female
 		gloves = /obj/item/clothing/gloves/roguetown/courtphysician/female
 		pants = /obj/item/clothing/under/roguetown/skirt/courtphysician
-		shoes = /obj/item/clothing/shoes/courtphysician/female
+		shoes = /obj/item/clothing/shoes/roguetown/courtphysician/female
 	else
 		head = /obj/item/clothing/head/roguetown/courtphysician
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/jacket/courtphysician
 		shirt = /obj/item/clothing/suit/roguetown/shirt/courtphysician
 		gloves = /obj/item/clothing/gloves/roguetown/courtphysician
 		pants = /obj/item/clothing/under/roguetown/trou/leather/courtphysician
-		shoes = /obj/item/clothing/shoes/courtphysician
+		shoes = /obj/item/clothing/shoes/roguetown/courtphysician
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 	if(H.mind)

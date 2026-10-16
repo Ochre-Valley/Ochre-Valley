@@ -39,3 +39,17 @@
 
 /datum/emote/living/burp/belch
 	key = "belch"
+
+/datum/emote/living/hackle
+	key = "hackle"
+	key_third_person = "hackle"
+	message = "cackles!"
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	message_muffled = "makes a muffled sound!"
+	vary = TRUE
+	show_runechat = FALSE
+
+/mob/living/carbon/human/verb/emote_hackle()
+	set name = "Hackle"
+	set category = "Emotes.Noises"
+	emote("hackle", intentional = TRUE)

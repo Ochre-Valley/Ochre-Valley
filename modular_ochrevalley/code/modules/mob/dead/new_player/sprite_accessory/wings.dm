@@ -25,3 +25,18 @@
 	name = "large speckled leather wings, tricolor, sparkling"
 	color_keys = 3
 	color_key_names = list("Outline","Membrane","Sparkles")
+
+/datum/sprite_accessory/wings/wide/ochre
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/wings/wings_wide.dmi'
+
+/datum/sprite_accessory/wings/wide/ochre/harpywings_bat_noneckfluff
+	name = "Harpy (Bat) (No Neck Fluff)"
+	icon_state = "harpybat_noneckfluff"
+	can_hide = TRUE
+
+/datum/sprite_accessory/wings/wide/ochre/harpywings_bat_top_noneckfluff // Jesus christ what a name, I am so sorry
+	name = "Harpy (Bat) (Top) (No Neck Fluff)"
+	icon_state = "harpybat_top_noneckfluff"
+	relevant_layers = list(BODY_FRONT_LAYER)
+	can_hide = TRUE
+

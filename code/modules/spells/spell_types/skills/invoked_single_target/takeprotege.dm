@@ -1,11 +1,11 @@
 // A Knight may take a Squire as their protégé for the round.
 //
 // Mechanics:
-//   - While both are alive and within view of each other, each gets a presence buff: an alert icon,
-//     on-apply/on-remove messages, and a recurring mood boost. Neither side gains stats.
-//   - The knight gains the Empath read on their squire.
-//   - When either dies, the survivor takes a mood hit. A 5-minute grace period prevents
-//     a revive-die loop from re-triggering it.
+//	- While both are alive and within view of each other, each gets a presence buff: an alert icon,
+//		on-apply/on-remove messages, and a recurring mood boost. Neither side gains stats.
+//	- The knight gains the Empath read on their squire.
+//	- When either dies, the survivor takes a mood hit. A 5-minute grace period prevents
+//		a revive-die loop from re-triggering it.
 /datum/action/cooldown/spell/takeprotege
 	name = "Take Protégé"
 	desc = "Designate a nearby Squire as your protégé. You will know how they feel, and their \
@@ -25,7 +25,6 @@
 	antimagic_flags = NONE
 	invocation_type = INVOCATION_EMOTE
 	invocations = list("%CASTER takes on a protégé. May their bond be unbreakable.")
-	invocation_self_message = "I take on a protégé. May our bond be unbreakable."
 
 
 /datum/action/cooldown/spell/takeprotege/is_valid_target(atom/cast_on)
@@ -143,6 +142,12 @@
 	SIGNAL_HANDLER
 	if(QDELETED(src))
 		return
+	//OV EDIT
+	if(isbelly(source.loc))
+		return
+	if((source.x == 1) && (source.y == 1) && (source.z == 1))
+		return
+	//OV EDIT END
 	// 5-minute grace period: a revive-die-revive-die loop within 5 min of the last death
 	// counts as continuing trauma, not fresh trauma, so we skip the stack.
 	var/datum/stressevent/existing = get_stress_event(/datum/stressevent/protege_dead)
@@ -156,6 +161,12 @@
 	SIGNAL_HANDLER
 	if(QDELETED(src))
 		return
+	//OV EDIT
+	if(isbelly(source.loc))
+		return
+	if((source.x == 1) && (source.y == 1) && (source.z == 1))
+		return
+	//OV EDIT END
 	var/datum/stressevent/existing = get_stress_event(/datum/stressevent/protege_lord_dead)
 	if(existing && (world.time - existing.time_added) < 5 MINUTES)
 		return

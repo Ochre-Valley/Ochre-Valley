@@ -1,5 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - rscadd: "Added a new type of reformation portal that is permanently in place and can only be seen by ghosts. Once clicked on, if a ghost was created via a vore digestion death, they can instantly revive at the portal. Can NOT be used for non-vore deaths."
-  - bugfix: "Fixed ghosts spawning where their ghost is rather than where the portal is."

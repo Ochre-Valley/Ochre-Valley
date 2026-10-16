@@ -35,7 +35,7 @@
 #define TELEPATHY	/datum/mutation/human/telepathy
 #define FIREBREATH	/datum/mutation/human/firebreath
 #define VOID		/datum/mutation/human/void
-#define STRONG    	/datum/mutation/human/strong
+#define STRONG		/datum/mutation/human/strong
 #define FIRESWEAT	/datum/mutation/human/fire
 #define THERMAL		/datum/mutation/human/thermal
 #define PARANOIA	/datum/mutation/human/paranoia
@@ -58,7 +58,7 @@
 // String identifiers for associative list lookup
 
 //Types of usual mutations
-#define	POSITIVE 			1
+#define	POSITIVE			1
 #define	NEGATIVE			2
 #define	MINOR_NEGATIVE		4
 
@@ -119,7 +119,7 @@
 #define DIGITIGRADE		10
 #define NO_UNDERWEAR	11
 #define NOSTOMACH		12
-#define NO_DNA_COPY     13
+#define NO_DNA_COPY		13
 #define DRINKSBLOOD		14
 /// Use this if you want to change the race's color without the player being able to pick their own color. AKA special color shifting
 #define DYNCOLORS		15
@@ -136,8 +136,8 @@
 #define INVISBLOOD		50 //OV ADD - Ooze Feature to stop blood drips, used only for oozes
 
 //organ defines
-#define STANDARD_ORGAN_THRESHOLD 	100
-#define STANDARD_ORGAN_HEALING 		0.001
+#define STANDARD_ORGAN_THRESHOLD	100
+#define STANDARD_ORGAN_HEALING		0.001
 /// designed to fail organs when left to decay for ~15 minutes
 #define STANDARD_ORGAN_DECAY		0.00222
 
@@ -150,7 +150,7 @@
 #define G_FEMALE 2
 #define G_PLURAL 3
 
-#define MANDATORY_FEATURE_LIST list("mcolor" = "FFF", "mcolor2" = "FFF", "mcolor3" = "FFF", "ethcolor" = "9c3030", "legs" = "Normal Legs", "body_size" = BODY_SIZE_NORMAL)
+#define MANDATORY_FEATURE_LIST list("mcolor" = "FFF", "mcolor2" = "FFF", "mcolor3" = "FFF", "body_size" = BODY_SIZE_NORMAL, "body_build" = null)
 
 #define BODY_SIZE_NORMAL 1.00
 #define BODY_SIZE_MIN 0.25	//OV ADD
@@ -162,7 +162,7 @@
 
 //Caustic Edit
 #define MIN_PENIS_SIZE 1
-#define MAX_PENIS_SIZE 5
+#define MAX_PENIS_SIZE 7 //OV EDIT - Was 5
 #define DEFAULT_PENIS_SIZE 2
 
 #define PENIS_TYPE_PLAIN 1
@@ -174,21 +174,13 @@
 #define PENIS_TYPE_BARBED 7
 #define PENIS_TYPE_BARBED_KNOTTED 8
 #define PENIS_TYPE_TENTACLE 9
+#define PENIS_TYPE_NONDESCRIPT 10
 
 #define SHEATH_TYPE_NONE 0
 #define SHEATH_TYPE_NORMAL 1
 #define SHEATH_TYPE_SLIT 2
 
-#define ERECT_STATE_NONE 0
-#define ERECT_STATE_PARTIAL 1
-#define ERECT_STATE_STIFF 2
-#define ERECT_STATE_HARD 3
-
-#define MIN_TESTICLES_SIZE 1
-#define MAX_TESTICLES_SIZE 5
-#define DEFAULT_TESTICLES_SIZE 2
-
 #define MIN_BREASTS_SIZE 0
-#define MAX_BREASTS_SIZE 16
+#define MAX_BREASTS_SIZE 19 //OV EDIT - Was 16
 #define DEFAULT_BREASTS_SIZE 3
 //Caustic End

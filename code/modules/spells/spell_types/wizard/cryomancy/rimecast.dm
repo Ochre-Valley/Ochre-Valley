@@ -77,9 +77,9 @@
 
 /obj/projectile/magic/ice_lance
 	name = "ice lance"
+	expose_caster_on_deflect = TRUE
 	icon_state = "u_laser"
 	damage = 90
-	npc_simple_damage_mult = 2
 	damage_type = BURN
 	woundclass = BCLASS_BURN
 	flag = "fire"
@@ -92,7 +92,7 @@
 	/// Max mob targets before the lance shatters
 	var/max_hits = 3
 
-/obj/projectile/magic/ice_lance/on_hit(target)
+/obj/projectile/magic/ice_lance/on_hit(target, blocked = FALSE)
 	if(ismob(target))
 		var/mob/M = target
 		if(M.anti_magic_check())
@@ -103,7 +103,7 @@
 	. = ..()
 	if(isliving(target))
 		var/mob/living/L = target
-		if(!out_of_effective_range())
+		if(!out_of_effective_range() && blocked < 100)
 			if(L.on_fire)
 				L.adjust_fire_stacks(-1)
 				L.visible_message(span_warning("The frost dampens the flames on [L]!"))
@@ -128,13 +128,13 @@
 
 /obj/projectile/magic/ice_burst
 	name = "ice burst"
+	expose_caster_on_deflect = TRUE
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "wipe"
 	speed = MAGE_PROJ_VERY_SLOW
 	damage = 90
 	damage_type = BURN
 	woundclass = BCLASS_BURN
-	npc_simple_damage_mult = 2
 	nodamage = FALSE
 	flag = "fire"
 	arcshot = TRUE
@@ -144,7 +144,7 @@
 	/// AOE damage as a fraction of the projectile's base damage
 	var/aoe_damage_ratio = 0.66
 
-/obj/projectile/magic/ice_burst/on_hit(target)
+/obj/projectile/magic/ice_burst/on_hit(target, blocked = FALSE)
 	..()
 	var/mob/living/M = ismob(target) ? target : null
 
@@ -181,16 +181,18 @@
 					continue
 				if(L.anti_magic_check())
 					continue
-				arcyne_strike(caster, L, null, aoe_damage, BODY_ZONE_CHEST, \
+				if(L.guard_deflect_spell("Ice Burst", TRUE, caster, punish_caster = FALSE))
+					continue
+				if(arcyne_strike(caster, L, null, aoe_damage, BODY_ZONE_CHEST, \
 					BCLASS_BURN, spell_name = "Ice Burst (Shatter)", \
 					allow_shield_check = TRUE, damage_type = BURN, \
-					npc_simple_damage_mult = npc_simple_damage_mult, \
-					skip_animation = TRUE)
+					skip_animation = TRUE) == ARCYNE_STRIKE_WARDED)
+					continue
 				apply_frost_stack(L, 1)
 				new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_ICE, SPELL_IMPACT_MEDIUM)
 
 	// Apply frost to direct hit target (AOE loop skips them)
-	if(isliving(target))
+	if(isliving(target) && blocked < 100)
 		var/mob/living/L = target
 		if(L.on_fire)
 			L.adjust_fire_stacks(-1)

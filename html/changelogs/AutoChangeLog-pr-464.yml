@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - server: "Deleted notes and watchlists are now sent to ochrebot"

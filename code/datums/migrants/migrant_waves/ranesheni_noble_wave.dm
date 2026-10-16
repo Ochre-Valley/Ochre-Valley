@@ -11,5 +11,5 @@
 		/datum/migrant_role/ranesheni/janissary = 2,
 		/datum/migrant_role/ranesheni/advisor = 1,
 	)
-	min_optional_fills = 1
+	min_optional_fills = 0 //OV EDIT - Was 1
 	greet_text = "You are far from home on missive from the Ranesheni Empire."

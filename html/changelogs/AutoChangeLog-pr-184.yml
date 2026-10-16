@@ -1,5 +1,0 @@
-author: "ShadowLarkens"
-delete-after: True
-changes:
-  - bugfix: "You can now wash off item contamination from vore bellies"
-  - bugfix: "Subtles now use voice_color"

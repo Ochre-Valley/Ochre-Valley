@@ -1,6 +1,6 @@
 export type Data = {
   directory: playerEntry[];
-}
+};
 
 export type playerEntry = {
   ckey: string;
@@ -11,4 +11,8 @@ export type playerEntry = {
   afk: string;
   state: number;
   antag: string;
-}
+};
+
+export type playerEntrySortableKey = keyof {
+  [K in keyof playerEntry as playerEntry[K] extends string ? K : never]: string;
+};

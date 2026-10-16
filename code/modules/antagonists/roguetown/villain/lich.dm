@@ -51,13 +51,19 @@
 		TRAIT_ARCYNE,
 		TRAIT_SELF_SUSTENANCE,
 		TRAIT_ALCHEMY_EXPERT,
-		TRAIT_SILVER_WEAK
+		TRAIT_SILVER_WEAK,
+		TRAIT_UNCONVERTIBLE,
+		TRAIT_NOWW,
+		TRAIT_BADTRAINER
 		)
 
 /datum/antagonist/lich/get_antag_cap_weight()
 	return 3
 
 /datum/antagonist/lich/on_gain()
+	owner.unknow_all_people() //ancient lich, nobody knows them
+	for(var/datum/mind/MF in get_minds())
+		owner.become_unknown_to(MF)
 	SSmapping.retainer.liches |= owner
 	. = ..()
 	owner.special_role = name
@@ -84,7 +90,6 @@
 	STALUC = owner.current.STALUC
 
 /datum/antagonist/lich/proc/set_stats()
-	// OV Edit Start
 	owner.current.STASTR = src.STASTR
 	owner.current.STAPER = src.STAPER
 	owner.current.STACON = src.STACON
@@ -92,8 +97,6 @@
 	owner.current.STASPD = src.STASPD
 	owner.current.STAWIL = src.STAWIL
 	owner.current.STALUC = src.STALUC
-	owner.current.update_sight()
-	// OV Edit End
 
 /datum/antagonist/lich/proc/skele_look()
 	var/mob/living/carbon/human/L = owner.current
@@ -130,6 +133,7 @@
 
 /datum/outfit/job/roguetown/lich/pre_equip(mob/living/carbon/human/H) //Equipment is located below
 	..()
+
 	//Skilled upto, so we don't have legendary wrestling crit resist fullplate lich or legendary riding lich that nobody can keep up with
 	//Some of these will be replaced by class, but its a much healthier lich balance, all in in.
 
@@ -141,6 +145,7 @@
 	H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE) //Better than Skeles in swords, Zizo armor sets grant a sword.
 	H.adjust_skillrank_up_to(/datum/skill/combat/shields, 4, TRUE) //If they take medium set, they can use the shield, very well.
 	H.adjust_skillrank_up_to(/datum/skill/combat/knives, 6, TRUE) //always gets legendary knives regardless of specialisation.
+	H.adjust_skillrank_up_to(/datum/skill/combat/arcyne, SKILL_LEVEL_MASTER, TRUE)
 
 	//Mobility Nessessities
 	H.adjust_skillrank_up_to(/datum/skill/misc/swimming, 3, TRUE) //Above bandits/wretch, despite infinite stamina.
@@ -180,8 +185,6 @@
 	H.change_stat(STATKEY_WIL, 7) //Only affects your ability to withstand keeling over from pain while sundered. Intended to be disgustingly high, as they're not supposed to easily fall over.
 
 	H.grant_language(/datum/language/undead)
-	// Grant a spellbook so the lich can pick aspects
-	H.equip_to_slot_or_del(new /obj/item/rogueweapon/spellbook/grand,SLOT_IN_BACKPACK, TRUE)
 	// Grant a chalk so the lich can do rituals
 	H.equip_to_slot_or_del(new /obj/item/ritechalk,SLOT_IN_BACKPACK, TRUE)
 
@@ -193,6 +196,7 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/raise_undead)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/remotebomb)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/lich_announce)
+		H.mind.AddSpell(new /datum/action/cooldown/spell/zizo/bestowcant/lich)
 		// Other role required spells.
 		H.mind.AddSpell(new /datum/action/cooldown/spell/raise_undead_formation)
 		H.mind.AddSpell(new /datum/action/cooldown/spell/bonechill)
@@ -203,7 +207,7 @@
 		H.mind.AddSpell(new /datum/action/cooldown/spell/raise_deadite) //Zombifies dead people
 		// Our Utility Spells
 		H.mind.AddSpell(new /datum/action/cooldown/spell/convert_heretic)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular/zizo)
 		// This is probably a bad idea, but let's live a little.
 		H.mind.AddSpell(new /datum/action/cooldown/spell/summon_terrorhog)
 		// Consistancy as they're basically a ruler in the hierarchy above Necromancers
@@ -255,6 +259,7 @@
 ///Called post death to equip new body with armour and stats. Order of equipment matters
 /datum/antagonist/lich/proc/equip_and_traits()
 	var/mob/living/carbon/human/body = owner.current
+	body.unequip_everything_delete() //ensure we get the "fit" by stripping first
 	var/list/equipment_slots = list(
 		SLOT_HEAD,
 		SLOT_PANTS,
@@ -279,12 +284,12 @@
 		/obj/item/clothing/neck/roguetown/chaincoif,
 		/obj/item/clothing/suit/roguetown/shirt/robe/unholy/lich,
 		/obj/item/clothing/suit/roguetown/armor/plate/blacksteel,
-		/obj/item/clothing/suit/roguetown/shirt/tunic/ucolored,
+		/obj/item/clothing/suit/roguetown/armor/gambeson/lord/heavy,
 		/obj/item/clothing/wrists/roguetown/bracers,
 		/obj/item/clothing/gloves/roguetown/chain,
 		/obj/item/storage/belt/rogue/leather/black,
-		/obj/item/reagent_containers/glass/bottle/rogue/manapot,
-		/obj/item/rogueweapon/huntingknife/idagger/steel,
+		/obj/item/rogueweapon/spellbook/grand,
+		/obj/item/rogueweapon/huntingknife/idagger/blacksteel, //major antagonist, fuck it. you get a nice dagger. (I WOULD DO AVANTYNE BUT SOME CLASSES DO FORCE-SET PATRON AFTER LICH ROLLS)
 		/obj/item/rogueweapon/woodstaff/implement/grand,
 		/obj/item/storage/backpack/rogue/satchel/black,
 	)
@@ -320,10 +325,6 @@
 	new_body.mind.grab_ghost(force = TRUE)
 	new_body.ambushable = FALSE
 	new_body.dna.species.soundpack_m = GLOB.voice_packs[/datum/voicepack/other/lich] //evil ass voice stays
-	// Grant a spellbook so the lich can pick aspects
-	new_body.equip_to_slot_or_del(new /obj/item/rogueweapon/spellbook/grand,SLOT_IN_BACKPACK, TRUE)
-	// Grant a chalk so the lich can do rituals
-	new_body.equip_to_slot_or_del(new /obj/item/ritechalk,SLOT_IN_BACKPACK, TRUE)
 
 	for (var/obj/item/bodypart/body_part in new_body.bodyparts)
 		body_part.skeletonize(FALSE)
@@ -332,6 +333,8 @@
 	set_stats()
 	skele_look()
 	equip_and_traits()
+	// Grant a chalk post-equip so the lich can do rituals again
+	new_body.equip_to_slot_or_del(new /obj/item/ritechalk,SLOT_IN_BACKPACK, TRUE)
 	// Delete the old body if it still exists
 	if (!QDELETED(old_body))
 		old_body.visible_message(
@@ -359,9 +362,9 @@
 	var/datum/antagonist/lich/possessor
 	var/datum/mind/mind
 
-/obj/item/phylactery/Initialize()
-  ..()
-  add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = GLOW_COLOR_VAMPIRIC, "alpha" = 255, "size" = 1))
+/obj/item/phylactery/Initialize(mapload)
+	..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = GLOW_COLOR_VAMPIRIC, "alpha" = 255, "size" = 1))
 
 /obj/item/phylactery/examine(mob/user)
 	. = ..()
@@ -391,6 +394,9 @@
 		qdel(src)
 
 /obj/effect/proc_holder/spell/self/lich_announce
+	overlay_icon = 'icons/mob/actions/zizomiracles.dmi'
+	action_icon = 'icons/mob/actions/zizomiracles.dmi'
+	action_icon_state = "lich_command"
 	name = "Command Will"
 	desc = "Bellow a commandment, which will be heard by all undead creechers - irregardless of their location - underneath your command."
 	recharge_time = 20 SECONDS
@@ -399,7 +405,7 @@
 	if(user.stat)
 		return FALSE
 
-	var/calltext = input("Send Your Will To Your Undead", "UNDEAD ANNOUNCE") as text|null
+	var/calltext = sanitize(input(user, "Send Your Will To Your Undead", "UNDEAD ANNOUNCE") as text|null)
 	if(!calltext)
 		return FALSE
 
@@ -418,6 +424,7 @@
 /datum/action/cooldown/spell/summon_terrorhog
 	name = "Summon Terrorhog"
 	desc = "First cast allows you to name your very own, loyal Terrorhog. Second cast lets you summon a Terrorhog. This is a single use spell when uses to summon. Beware, drooling feral hogs do not cease their rampage until they are dead, and cannot be leashed properly."
+	background_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon = 'icons/mob/actions/classuniquespells/lichspells.dmi'
 	button_icon_state = "hog"
 
@@ -455,7 +462,7 @@
 	caster.visible_message(span_danger("[caster] begins chanting a deep, primal incantation as lightning arcs nearby!"))
 	new /obj/structure/terrorhog_summon_rune(target_turf, hog_name)
 
-	addtimer(CALLBACK(src, .proc/self_consume, caster), 1)
+	addtimer(CALLBACK(src, PROC_REF(self_consume), caster), 1)
 	return TRUE
 
 /datum/action/cooldown/spell/summon_terrorhog/proc/self_consume(mob/living/L)
@@ -500,7 +507,7 @@
 	src.icon_state = initial(path_cast.icon_state)
 	src.pixel_x = initial(path_cast.pixel_x)
 	src.pixel_y = initial(path_cast.pixel_y)
-	src.color = "#777777" 
+	src.color = "#777777"
 	animate(src, alpha = 200, time = spawn_delay, easing = EASE_IN)
 	playsound(src, 'sound/misc/jumpscare (4).ogg', 50, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(finalize_spawn_terrorhog)), spawn_delay)

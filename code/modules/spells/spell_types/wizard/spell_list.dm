@@ -8,13 +8,13 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/datum/action/cooldown/spell/create_campfire,
 		/datum/action/cooldown/spell/darkvision,
 		/datum/action/cooldown/spell/fridigitation,
-		/datum/action/cooldown/spell/greater_cleaning,
 		/datum/action/cooldown/spell/lesser_knock,
+		/datum/action/cooldown/spell/levitation,
 		/datum/action/cooldown/spell/light,
 		/datum/action/cooldown/spell/magicians_brick,
 		/datum/action/cooldown/spell/magicians_stone,
 		/datum/action/cooldown/spell/magicians_rock,
-		/datum/action/cooldown/spell/aetherknife, //OV Add
+		/datum/action/cooldown/spell/aetherknife,
 		/datum/action/cooldown/spell/mending,
 		/datum/action/cooldown/spell/message,
 		/datum/action/cooldown/spell/mindlink,
@@ -22,11 +22,13 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/obj/effect/proc_holder/spell/invoked/mirror_transform_ov, //OV Add - OV Specific Mirror Transform, pending adjustments to DATUM system
 		/obj/effect/proc_holder/spell/invoked/mirror_transform/instant, //OV Add - A variant that does not require the magic mirror
 		/datum/action/cooldown/spell/nondetection,
-		/datum/action/cooldown/spell/projectile/lesser_fetch,
-		/datum/action/cooldown/spell/projectile/lesser_repel,
+		/datum/action/cooldown/spell/projectile/fetch,
+		/datum/action/cooldown/spell/projectile/repel,
 		/datum/action/cooldown/spell/projectile/waterbolt,
 		/datum/action/cooldown/spell/readomen,
 		/datum/action/cooldown/spell/touch/rune_ward,
 		/datum/action/cooldown/spell/transcribe,
+		/datum/action/cooldown/spell/sprout_flowers, //OV Add - Cute flower spell
+		/datum/action/cooldown/spell/self_tf, //OV Add - Self item-tf spell
 		)
 ))

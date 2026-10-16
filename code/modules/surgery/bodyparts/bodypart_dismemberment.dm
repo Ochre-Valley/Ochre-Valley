@@ -42,9 +42,9 @@
 /// Returns TRUE if this bodypart is any kind of prosthetic limb
 /obj/item/bodypart/proc/is_prosthetic_limb()
 	return istype(src, /obj/item/bodypart/l_arm/prosthetic) || \
-	       istype(src, /obj/item/bodypart/r_arm/prosthetic) || \
-	       istype(src, /obj/item/bodypart/l_leg/prosthetic) || \
-	       istype(src, /obj/item/bodypart/r_leg/prosthetic)
+			istype(src, /obj/item/bodypart/r_arm/prosthetic) || \
+			istype(src, /obj/item/bodypart/l_leg/prosthetic) || \
+			istype(src, /obj/item/bodypart/r_leg/prosthetic)
 
 /obj/item/bodypart
 	/// Wound we get when surgically reattached
@@ -73,7 +73,7 @@
 			if(zone_precise != BODY_ZONE_PRECISE_NECK)
 				return FALSE
 			if(!HAS_TRAIT(C, TRAIT_CRITICAL_WEAKNESS) && !HAS_TRAIT(C, TRAIT_EASYDISMEMBER))	//People with these traits can be decapped standing, or buckled, or however.
-				var/has_mind = TRUE  // DEBUG: Temporarily forced to TRUE for testing
+				var/has_mind = TRUE	// DEBUG: Temporarily forced to TRUE for testing
 				var/not_buckled = !C.buckled
 
 				// Check if currently standing OR within grace period after being knocked down
@@ -164,7 +164,7 @@
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
 			if(CA != C && !HAS_TRAIT(CA, TRAIT_BLIND))
 				if(stress2give == /datum/stressevent/viewdismember)
-					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
+					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED) || HAS_TRAIT(CA, TRAIT_NIHILIST))
 						continue
 				CA.add_stress(stress2give)
 	// Ensure grabbedby is a list so it can be properly .Cut()'d
@@ -203,7 +203,7 @@
 	if(!C.IsPetrified() && istype(location))
 	// OV Edit End
 		C.add_splatter_floor(location)
-		C.add_splatter_wall(user, location, force = 2, spill_amount = 3) //Garunteed at least 2 tile distance of blood spattering on the walls, and up to 3 walls to splat.
+		C.add_splatter_wall(location, force = 2, spill_amount = 3) //Garunteed at least 2 tile distance of blood spattering on the walls, and up to 3 walls to splat.
 	var/direction = pick(GLOB.cardinals)
 	var/t_range = rand(2,max(throw_range/2, 2))
 	var/turf/target_turf = get_turf(src)
@@ -303,8 +303,18 @@
 		qdel(src)
 		return TRUE
 
+	if(!special && was_owner?.contract_spawned)
+		sellprice = 0
+		addtimer(CALLBACK(src, PROC_REF(dust_contract_limb)), QUEST_HEAD_DUST_DELAY)
+
 	forceMove(drop_location)
 	return TRUE
+
+/obj/item/bodypart/proc/dust_contract_limb()
+	if(QDELETED(src))
+		return
+	dust_animation()
+	QDEL_IN(src, 1.2 SECONDS)
 
 //when a limb is dropped, the internal organs are removed from the mob and put into the limb
 /obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
@@ -350,7 +360,7 @@
 /obj/item/bodypart/r_arm/drop_limb(special)
 	var/mob/living/carbon/C = owner
 	. = ..()
-	if(isooze(C))
+	if(isooze(C) && !is_prosthetic_limb())
 		qdel(src)
 	if(C && !special)
 		if(C.handcuffed)
@@ -371,7 +381,7 @@
 /obj/item/bodypart/l_arm/drop_limb(special)
 	var/mob/living/carbon/C = owner
 	. = ..()
-	if(isooze(C))
+	if(isooze(C) && !is_prosthetic_limb())
 		qdel(src)
 	if(C && !special)
 		if(C.handcuffed)
@@ -391,7 +401,7 @@
 /obj/item/bodypart/r_leg/drop_limb(special)
 	var/mob/living/carbon/C = owner
 	. = ..()
-	if(isooze(C))
+	if(isooze(C) && !is_prosthetic_limb())
 		qdel(src)
 	if(C && !special)
 		if(C.legcuffed)
@@ -407,7 +417,7 @@
 /obj/item/bodypart/l_leg/drop_limb(special) //copypasta
 	var/mob/living/carbon/C = owner
 	. = ..()
-	if(isooze(C))
+	if(isooze(C) && !is_prosthetic_limb())
 		qdel(src)
 	if(C && !special)
 		if(C.legcuffed)
@@ -638,13 +648,13 @@
 
 	if(has_prosthetic && !already_has_spell)
 		H.mind?.AddSpell(new /obj/effect/proc_holder/spell/invoked/overlock)
-		to_chat(H, span_notice("AS the prosthetic attachs I can feel I can push them beyond their limits if I focus."))
+		to_chat(H, span_notice("As the prosthetic attaches, I can feel I can push it beyond its limits if I focus."))
 	else if(!has_prosthetic && already_has_spell)
 		H.mind?.RemoveSpell(new /obj/effect/proc_holder/spell/invoked/overlock)
 		H.remove_status_effect(/datum/status_effect/buff/overclock)
-		to_chat(H, span_warning("Without any prosthetics, I can no longer overclock them."))
+		to_chat(H, span_warning("Without any prosthetics, there is nothing left to overclock."))
 
-	
+
 //adding this in seperate to add the overclock skill if we add an attachment
 /obj/item/bodypart/attach_limb(mob/living/carbon/C, special)
 	. = ..()

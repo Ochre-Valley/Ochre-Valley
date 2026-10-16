@@ -9,7 +9,6 @@
 	close_sound = 'sound/misc/chestclose.ogg'
 	keylock = TRUE
 	locked = FALSE
-	sellprice = 1
 	max_integrity = 200
 	blade_dulling = DULLING_BASHCHOP
 	mob_storage_capacity = 1
@@ -29,7 +28,7 @@
 	name = "otavan chest"
 	desc = "A foreboding red chest with black dye-washed silver embellishments."
 	icon_state = "chestweird2"
-	base_icon_state = "chestweird2"	
+	base_icon_state = "chestweird2"
 
 //obj/structure/closet/crate/chest/Initialize(mapload)
 //	. = ..()
@@ -86,6 +85,10 @@
 	dense_when_open = FALSE
 	mob_storage_capacity = 2
 
+/obj/structure/closet/crate/roguecloset/attack_right(mob/user)
+	handle_special_items_retrieval(user, src)
+	return
+
 /obj/structure/closet/crate/roguecloset/inn/south
 	base_icon_state = "closet3"
 	icon_state = "closet3"
@@ -126,7 +129,8 @@
 		/obj/item/clothing/suit/roguetown/armor/plate/cuirass = 30,
 		/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted = 4,
 		/obj/item/rogueweapon/greatsword/grenz/flamberge/blacksteel = 1,
-		/obj/item/rogueweapon/halberd/glaive = 4
+		/obj/item/rogueweapon/halberd/glaive = 4,
+		/obj/item/heelkit = 11
 	)
 
 /obj/structure/closet/crate/roguecloset/dark/squire/can_open(mob/living/user)
@@ -163,7 +167,6 @@
 	close_sound = 'sound/misc/chestclose.ogg'
 	keylock = FALSE
 	locked = FALSE
-	sellprice = 1
 	max_integrity = 50
 	blade_dulling = DULLING_BASHCHOP
 	mob_storage_capacity = 1
@@ -198,7 +201,7 @@
 	name = "sun-bleached wicker basket"
 	desc = "Fibers interwoven to make a cheap storage bin. This one smells rather funny."
 
-/obj/structure/closet/crate/chest/wicker/bait/Initialize()
+/obj/structure/closet/crate/chest/wicker/bait/Initialize(mapload)
 	. = ..()
 	for(var/i = 1 to 9)
 		new /obj/item/natural/worms(src)
@@ -230,7 +233,7 @@
 	base_icon_state = "drawer1"
 	pixel_y = 8
 
-/obj/structure/closet/crate/drawer/random/Initialize()
+/obj/structure/closet/crate/drawer/random/Initialize(mapload)
 	. = ..()
 	if(icon_state == "drawer1")
 		base_icon_state = "drawer[rand(1,4)]"
@@ -248,7 +251,7 @@
 	/// Set to TRUE after it has spawned the gear.
 	var/has_spawned_gear = FALSE
 
-/obj/structure/closet/crate/roguecloset/lord/duke_preset/Initialize()
+/obj/structure/closet/crate/roguecloset/lord/duke_preset/Initialize(mapload)
 	. = ..()
 	RegisterSignal(SSdcs, COMSIG_TICKER_RULERMOB_SET, PROC_REF(spawn_blacksteel))
 
@@ -323,7 +326,7 @@
 	name = "coffin"
 	desc = "A coffin of some burgher."
 	icon_state = "vcasket" //Fancy casket
-	base_icon_state = "vcasket" 
+	base_icon_state = "vcasket"
 	locked = TRUE
 
 /obj/structure/closet/crate/chest/coffinlootbox_middle/PopulateContents()

@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - rscadd: "Changed \"Change Belly Size\" to now be \"Change Asset Size\", which allows you to pick from all the main ERP assets and resize them at will."

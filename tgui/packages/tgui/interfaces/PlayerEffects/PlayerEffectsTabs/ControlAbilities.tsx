@@ -2,7 +2,7 @@
 import { useBackend } from 'tgui/backend';
 import { Button, Section } from 'tgui-core/components';
 
-export const ControlAbilities = (props) => {
+export const ControlAbilities = (props: any) => {
   const { act } = useBackend();
 
   return (

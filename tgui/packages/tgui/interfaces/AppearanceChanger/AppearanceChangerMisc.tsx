@@ -9,7 +9,7 @@ import {
 
 import type { Data } from './types';
 
-export const AppearanceChangerMisc = (props) => {
+export const AppearanceChangerMisc = (props: any) => {
   const { act, data } = useBackend<Data>();
   const { specimen } = data;
   return (

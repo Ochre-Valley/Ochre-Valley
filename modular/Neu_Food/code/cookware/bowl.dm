@@ -29,7 +29,6 @@
 /obj/item/reagent_containers/glass/bowl/iron
 	name = "iron bowl"
 	icon_state = "bowl_iron"
-	sellprice = 25
 
 /obj/item/reagent_containers/glass/bowl/bronze
 	name = "bronze bowl"
@@ -69,7 +68,6 @@
 	name = "porcelain bowl"
 	desc = "A bowl made out of porcelain."
 	icon_state = "bowl_porcelain"
-	sellprice = 10
 
 /obj/item/reagent_containers/glass/bowl/carved/amber
 	name = "amber bowl"

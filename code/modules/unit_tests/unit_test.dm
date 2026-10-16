@@ -13,7 +13,6 @@ You can use the run_loc_bottom_left and run_loc_top_right to get turfs for testi
 
 GLOBAL_DATUM(current_test, /datum/unit_test)
 GLOBAL_VAR_INIT(failed_any_test, FALSE)
-// GLOBAL_VAR(test_log) // OV Edit: Moved to code/_globalvars/logging.dm
 
 /// The name of the test that is currently focused.
 /// Use the PERFORM_ALL_TESTS macro instead.
@@ -148,7 +147,7 @@ GLOBAL_VAR_INIT(focused_test, focused_test())
 	//Expects a mob to holderize, we have nothing to give
 	ignore += typesof(/obj/item/clothing/head/mob_holder)
 	//Needs cards passed into the initilazation args
-	ignore += typesof(/obj/item/toy/cards/cardhand)
+	ignore += typesof(/obj/item/card_hand)
 	//needs multiple atoms passed
 	ignore += typesof(/obj/effect/buildmode_line)
 	//runtimes without a landmark to spawn on

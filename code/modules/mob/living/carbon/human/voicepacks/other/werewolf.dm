@@ -1,4 +1,4 @@
-/datum/voicepack/werewolf/get_sound(soundin, modifiers)
+/datum/voicepack/male/werewolf/get_sound(soundin, modifiers) //OV EDIT - male addon for emotes
 	var/used
 	switch(soundin)
 		if("aggro")
@@ -28,5 +28,46 @@
 		if("idle")
 			used = pick('sound/vo/mobs/wwolf/idle (1).ogg','sound/vo/mobs/wwolf/idle (2).ogg','sound/vo/mobs/wwolf/sniff.ogg')
 
+//OV ADD START
+	if(!used)
+		used = ..(soundin, modifiers)
+//OV ADD END
+
+	return used
+
+/datum/voicepack/female/werewolf/get_sound(soundin, modifiers) //OV EDIT - female addon for emotes
+	var/used
+	switch(soundin)
+		if("aggro")
+			used = pick('sound/vo/mobs/wwolf/roar.ogg')
+		if("rage")
+			used = pick('sound/vo/mobs/wwolf/roar.ogg')
+		if("deathgurgle")
+			used = pick('sound/vo/mobs/wwolf/death.ogg')
+		if("firescream")
+			used = pick('sound/vo/mobs/wwolf/painscream.ogg')
+		if("painscream")
+			used = pick('sound/vo/mobs/wwolf/painscream.ogg')
+		if("agony")
+			used = pick('sound/vo/mobs/wwolf/painscream.ogg')
+		if("superagony") // to bypass painless override, use responsibly
+			used = pick('sound/vo/mobs/wwolf/painscream.ogg')
+		if("jump")
+			used = pick('sound/vo/mobs/wwolf/jump (1).ogg','sound/vo/mobs/wwolf/jump (3).ogg','sound/vo/mobs/wwolf/jump (2).ogg')
+		if("leap")
+			used = pick('sound/vo/mobs/wwolf/jump (1).ogg','sound/vo/mobs/wwolf/jump (3).ogg','sound/vo/mobs/wwolf/jump (2).ogg')
+		if("pain")
+			used = pick('sound/vo/mobs/wwolf/pain (1).ogg','sound/vo/mobs/wwolf/pain (3).ogg','sound/vo/mobs/wwolf/pain (2).ogg')
+		if("paincrit")
+			used = pick('sound/vo/mobs/wwolf/pain (1).ogg','sound/vo/mobs/wwolf/pain (3).ogg','sound/vo/mobs/wwolf/pain (2).ogg')
+		if("scream")
+			used = pick('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg')
+		if("idle")
+			used = pick('sound/vo/mobs/wwolf/idle (1).ogg','sound/vo/mobs/wwolf/idle (2).ogg','sound/vo/mobs/wwolf/sniff.ogg')
+
+//OV ADD START
+	if(!used)
+		used = ..(soundin, modifiers)
+//OV ADD END
 
 	return used

@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - admin: "Aghosting now behaves similarly to virgo. Aghosted mobs will no longer fall asleep or have the SSD status symbol. Aghosted admins can now receive messages marked (BODY) that happen in range of their body."

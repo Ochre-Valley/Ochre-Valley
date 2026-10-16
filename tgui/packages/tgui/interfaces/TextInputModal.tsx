@@ -18,6 +18,8 @@ type TextInputData = {
   title: string;
   spellcheck: BooleanLike;
   bigmodal?: boolean;
+  width?: number;
+  height?: number;
 };
 
 export const sanitizeMultiline = (toSanitize: string) => {
@@ -28,7 +30,7 @@ export const removeAllSkiplines = (toSanitize: string) => {
   return toSanitize.replace(/[\r\n]+/, '');
 };
 
-export const TextInputModal = (props) => {
+export const TextInputModal = () => {
   const { act, data } = useBackend<TextInputData>();
   const {
     large_buttons,
@@ -40,6 +42,8 @@ export const TextInputModal = (props) => {
     title,
     spellcheck,
     bigmodal,
+    width,
+    height,
   } = data;
 
   const [input, setInput] = useState(placeholder || '');
@@ -56,15 +60,17 @@ export const TextInputModal = (props) => {
 
   const visualMultiline = multiline || input.length >= 30;
   // Dynamically changes the window height based on the message.
-  const dynamicHeight = message.length > 30 ? 
-    (message.length / 40) * 18 : 18;
+  const dynamicHeight = message.length > 30 ? (message.length / 40) * 18 : 18;
 
   let windowHeight =
-    135 + dynamicHeight +
+    135 +
+    dynamicHeight +
     (visualMultiline ? 75 : 0) +
     (message.length && large_buttons ? 5 : 0);
   if (bigmodal) windowHeight = 425; // Override and just make a big modal for FT / OOC Notes
-  const windowWidth = bigmodal ? 530 : 325;
+  let windowWidth = bigmodal ? 530 : 325;
+  if (width) windowWidth = width;
+  if (height) windowHeight = height;
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === KEY.Enter && (!visualMultiline || !event.shiftKey)) {
@@ -98,10 +104,7 @@ export const TextInputModal = (props) => {
               />
             </Stack.Item>
             <Stack.Item>
-              <InputButtons
-                input={input}
-                message={`${input.length}`}
-              />
+              <InputButtons input={input} message={`${input.length}`} />
             </Stack.Item>
           </Stack>
         </Section>

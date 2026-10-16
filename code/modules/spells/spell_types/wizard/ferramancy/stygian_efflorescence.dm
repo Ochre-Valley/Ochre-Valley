@@ -60,6 +60,7 @@
 /obj/projectile/energy/stygian
 	name = "stygian harpe"
 	guard_deflectable = TRUE
+	expose_caster_on_deflect = TRUE
 	range = 7 // Let you pressure a whole screen, in theory
 	icon = 'icons/obj/magic_projectiles.dmi'
 	icon_state = "stygian"
@@ -68,7 +69,6 @@
 	damage_type = BRUTE
 	woundclass = BCLASS_STAB
 	armor_penetration = PEN_LIGHT
-	npc_simple_damage_mult = 1.5
 	speed = MAGE_PROJ_VERY_SLOW
 	flag = "stab"
 	hitsound = 'sound/combat/hits/bladed/genstab (1).ogg'

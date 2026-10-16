@@ -236,7 +236,7 @@
 	var/list/fullness5_messages = list(
 		"%pred's %belly is completely filled to it's limit!"
 		)
-	
+
 	var/tmp/reagent_chosen = REAGENT_WATER				// variable for switch to figure out what to set variables when a certain reagent is selected
 	var/tmp/static/list/reagent_choices = list(		// List of reagents people can chose, maybe one day expand so it covers criterias like dogborgs who can make meds, booze, etc - Jack
 	REAGENT_WATER,
@@ -253,8 +253,8 @@
 	REAGENT_HONEY,
 	REAGENT_PARAPOISON,
 	REAGENT_SPACEDRUGS,
-	REAGENT_POT_MANA,
-	REAGENT_POT_HEALTH,
+//	REAGENT_POT_MANA, //OV REMOVE
+//	REAGENT_POT_HEALTH, //OV REMOVE
 	REAGENT_JUICE_JACKBERRY,
 	REAGENT_JUICE_JACKBERRY_POISON,
 	REAGENT_JUICE_APPLE,
@@ -765,7 +765,7 @@
 /obj/belly/proc/release_specific_contents(atom/movable/M, silent = FALSE)
 	if (!(M in contents))
 		return 0 // They weren't in this belly anyway
-	
+
 	for(var/mob/living/L in M.contents)
 		L.muffled = FALSE
 		L.forced_psay = FALSE
@@ -802,7 +802,7 @@
 					if(P.absorbed)
 						absorbed_count++
 				Pred.reagents.trans_to(Prey, Pred.reagents.total_volume / absorbed_count)
-	
+
 	//Makes it so that if prey are heavily asleep, they will wake up shortly after release
 	if(isliving(M))
 		var/mob/living/ML = M
@@ -821,7 +821,7 @@
 		if("subtle")
 			privacy_range = 1
 			//privacy_volume = 25
-	
+
 	//Print notifications/sound if necessary
 	if(isobserver(M))
 		silent = TRUE
@@ -837,7 +837,7 @@
 			soundfile = GLOB.fancy_release_sounds[release_sound]
 		if(soundfile)
 			playsound(src, soundfile, vol = sound_volume, vary = 1, falloff = VORE_SOUND_FALLOFF, frequency = noise_freq, pref_toggle = "eating_noises")
-	
+
 	if(!owner.ckey && escape_stun)
 		owner.Stun(escape_stun)
 
@@ -986,7 +986,7 @@
 	M.x = 1
 	M.y = 1
 	M.z = 1
-	M.alpha = 0 
+	M.alpha = 0
 	owner.handle_belly_update()
 	playsound(src, sfx, vary = 1, vol = 75, falloff = VORE_SOUND_FALLOFF, frequency = noise_freq, pref_toggle = "digestion_noises")
 	SEND_SIGNAL(M, COMSIG_MOB_DIGESTION_DEATH, src, owner)

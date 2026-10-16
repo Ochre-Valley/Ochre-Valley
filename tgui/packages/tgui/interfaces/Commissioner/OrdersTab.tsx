@@ -42,14 +42,23 @@ const OrderCard = (props: {
   const fulfilled = !!order.is_fulfilled;
   const isCommissioner = !!order.is_commissioner;
   const isSmith = !!order.is_smith;
-  const hasProgress = order.done_count > 0 && order.done_count < order.needed_count;
+  const unbacked = order.status === 'open' && !order.is_backed;
+  const hasProgress =
+    order.done_count > 0 && order.done_count < order.needed_count;
   const [rejectOpen, setRejectOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const canReject =
     (order.status === 'open' && isGuildmaster) ||
     (order.status === 'claimed' && (isSmith || isGuildmaster));
   return (
-    <div style={{ ...cardStyle, padding: '6px 8px', marginBottom: 0 }}>
+    <div
+      style={{
+        ...cardStyle,
+        padding: '6px 8px',
+        marginBottom: 0,
+        opacity: unbacked ? 0.6 : 1,
+      }}
+    >
       <div
         style={{
           display: 'flex',
@@ -61,8 +70,11 @@ const OrderCard = (props: {
         <span style={badgeStyle(STATUS_BADGE_COLOR[order.status] || SEAL_BLUE)}>
           {STATUS_LABEL[order.status] || order.status.toUpperCase()}
         </span>
-        <span style={{ color: SEAL_AMBER, fontWeight: 'bold', fontSize: FONT_BODY }}>
-          {order.deposited}m
+        {unbacked && <span style={badgeStyle(SEAL_RED)}>UNFUNDED</span>}
+        <span
+          style={{ color: SEAL_AMBER, fontWeight: 'bold', fontSize: FONT_BODY }}
+        >
+          {order.price}m
         </span>
         <span
           style={{
@@ -94,9 +106,7 @@ const OrderCard = (props: {
             }}
           >
             <b style={{ color: order.days_left <= 0 ? SEAL_RED : INK }}>
-              {order.days_left <= 0
-                ? 'today'
-                : `${order.days_left}d`}
+              {order.days_left <= 0 ? 'today' : `${order.days_left}d`}
             </b>
           </span>
         )}
@@ -150,9 +160,7 @@ const OrderCard = (props: {
             color: INK_SOFT,
           }}
         >
-          <span style={{ color: SEAL_AMBER }}>
-            needs:{' '}
-          </span>
+          <span style={{ color: SEAL_AMBER }}>needs: </span>
           {order.materials.map((m) => `${m.qty} ${m.name}`).join(' · ')}
         </div>
       )}
@@ -190,7 +198,7 @@ const OrderCard = (props: {
           flexWrap: 'wrap',
         }}
       >
-        {order.status === 'open' && (
+        {order.status === 'open' && !isCommissioner && !unbacked && (
           <button
             type="button"
             style={inkButtonStyle()}
@@ -205,7 +213,7 @@ const OrderCard = (props: {
             style={inkButtonStyle({ color: SEAL_RED })}
             onClick={() => act('cancel_order', { ref: order.ref })}
           >
-            Cancel &amp; Refund
+            Cancel Order
           </button>
         )}
         {order.status === 'claimed' && isSmith && (
@@ -249,24 +257,22 @@ const OrderCard = (props: {
             Collect Items
           </button>
         )}
-        {isGuildmaster &&
-          order.status === 'claimed' &&
-          !isSmith && (
-            <button
-              type="button"
-              style={inkButtonStyle({ color: SEAL_AMBER })}
-              onClick={() => act('force_release_order', { ref: order.ref })}
-              title="Guildmaster override: release this stalled claim"
-            >
-              Force Release
-            </button>
-          )}
+        {isGuildmaster && order.status === 'claimed' && !isSmith && (
+          <button
+            type="button"
+            style={inkButtonStyle({ color: SEAL_AMBER })}
+            onClick={() => act('force_release_order', { ref: order.ref })}
+            title="Guildmaster override: release this stalled claim"
+          >
+            Force Release
+          </button>
+        )}
         {canReject && (
           <button
             type="button"
             style={inkButtonStyle({ color: SEAL_RED })}
             onClick={() => setRejectOpen((v) => !v)}
-            title="Refuse this commission. Deposit returns to the commissioner's deposit pool."
+            title="Refuse this commission. Deposit returns to their account."
           >
             Reject Order
           </button>
@@ -290,8 +296,7 @@ const OrderCard = (props: {
               marginBottom: '4px',
             }}
           >
-            State your reason publicly. The commissioner will be notified and
-            their deposit returned.
+            State your reason publicly. The commissioner will be notified and their deposit returned.
           </div>
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             <Input

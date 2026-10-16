@@ -138,7 +138,7 @@
 
 	//clean the message if it's not sent by a high-rank admin
 	if(!check_rights(R_SERVER|R_DEBUG,0)||irc)//no sending html to the poor bots
-		msg = trim(sanitize(copytext(msg,1,MAX_MESSAGE_LEN)))
+		msg = trim(sanitize(copytext(msg,1,MAX_MESSAGE_LEN), irc ? null : list("\t"="#")))
 		if(!msg)
 			return
 
@@ -226,7 +226,7 @@
 	var/client/C = GLOB.directory[target]
 
 	var/datum/admin_help/ticket = C ? C.current_ticket : GLOB.ahelp_tickets.CKey2ActiveTicket(target)
-	var/compliant_msg = trim(lowertext(msg))
+	var/compliant_msg = trim(LOWER_TEXT(msg))
 	var/irc_tagged = "[sender](IRC)"
 	var/list/splits = splittext(compliant_msg, " ")
 	if(splits.len && splits[1] == "ticket")

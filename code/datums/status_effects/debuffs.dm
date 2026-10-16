@@ -136,13 +136,13 @@
 			carbon_owner.handle_dreams()
 			if(prob(10) && owner.health > owner.crit_threshold)
 				owner.emote("snore")
-	if(isharpy(owner)) // OV Add Start
+	/*if(isharpy(owner)) // OV Add Start //OV EDIT - HARPY SKIN RUNTIME FIX
 		var/obj/item/clothing/suit/roguetown/armor/skin_armor/harpy_skin = human_owner.skin_armor
 		if(harpy_skin.obj_integrity < harpy_skin.max_integrity)
 			harpy_skin.obj_integrity += 10
 			to_chat(human_owner, "I can feel the skin on my feet mend...")
 		else if((harpy_skin.obj_integrity >= harpy_skin.max_integrity) && harpy_skin.obj_broken)
-			harpy_skin.obj_broken = FALSE // OV Add End
+			harpy_skin.obj_broken = FALSE*/ // OV Add End
 
 /atom/movable/screen/alert/status_effect/asleep
 	name = "Asleep"
@@ -191,35 +191,6 @@
 //GOLEM GANG
 
 //OTHER DEBUFFS
-/datum/status_effect/strandling //get it, strand as in durathread strand + strangling = strandling hahahahahahahahahahhahahaha i want to die
-	id = "strandling"
-	status_type = STATUS_EFFECT_UNIQUE
-	alert_type = /atom/movable/screen/alert/status_effect/strandling
-
-/datum/status_effect/strandling/on_apply()
-	ADD_TRAIT(owner, TRAIT_MAGIC_CHOKE, "dumbmoron")
-	return ..()
-
-/datum/status_effect/strandling/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_MAGIC_CHOKE, "dumbmoron")
-	return ..()
-
-/atom/movable/screen/alert/status_effect/strandling
-	name = "Choking strand"
-	desc = ""
-	icon_state = "his_grace"
-	alerttooltipstyle = "hisgrace"
-
-/atom/movable/screen/alert/status_effect/strandling/Click(location, control, params)
-	. = ..()
-	to_chat(mob_viewer, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
-	if(do_after(mob_viewer, 35, null, mob_viewer))
-		if(isliving(mob_viewer))
-			var/mob/living/L = mob_viewer
-			to_chat(mob_viewer, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
-			L.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
-
-
 /datum/status_effect/pacify/on_creation(mob/living/new_owner, set_duration)
 	if(isnum(set_duration))
 		duration = set_duration
@@ -292,24 +263,6 @@
 
 /obj/effect/temp_visual/curse
 	icon_state = "curse"
-
-/datum/status_effect/gonbolaPacify
-	id = "gonbolaPacify"
-	status_type = STATUS_EFFECT_MULTIPLE
-	tick_interval = -1
-	alert_type = null
-
-/datum/status_effect/gonbolaPacify/on_apply()
-	ADD_TRAIT(owner, TRAIT_PACIFISM, "gonbolaPacify")
-	ADD_TRAIT(owner, TRAIT_MUTE, "gonbolaMute")
-	ADD_TRAIT(owner, TRAIT_JOLLY, "gonbolaJolly")
-	to_chat(owner, "<span class='notice'>I suddenly feel at peace and feel no need to make any sudden or rash actions...</span>")
-	return ..()
-
-/datum/status_effect/gonbolaPacify/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, "gonbolaPacify")
-	REMOVE_TRAIT(owner, TRAIT_MUTE, "gonbolaMute")
-	REMOVE_TRAIT(owner, TRAIT_JOLLY, "gonbolaJolly")
 
 /datum/status_effect/trance
 	id = "trance"
@@ -806,7 +759,7 @@
 	if(new_dur)
 		duration = new_dur
 	return ..()
-	
+
 
 /atom/movable/screen/alert/status_effect/debuff/feintcd
 	name = "Feint Cool down"
@@ -874,6 +827,41 @@
 	mob_effect_layer = MOB_EFFECT_LAYER_EXPOSED
 
 /datum/status_effect/debuff/exposed/on_creation(mob/living/new_owner, new_dur)
+	if(new_dur)
+		duration = new_dur
+	return ..()
+
+/datum/status_effect/debuff/exposed/on_apply()
+	. = ..()
+	lock_casting(duration)
+
+/datum/status_effect/debuff/exposed/refresh(mob/living/new_owner, new_dur)
+	. = ..()
+	lock_casting(new_dur || initial(duration))
+
+/datum/status_effect/debuff/exposed/proc/lock_casting(lock_dur)
+	if(!owner)
+		return
+	lock_dur = min(lock_dur, EXPOSED_CAST_LOCKOUT)
+	var/datum/status_effect/debuff/cast_disrupted/existing = owner.has_status_effect(/datum/status_effect/debuff/cast_disrupted)
+	if(existing)
+		existing.duration = max(existing.duration, world.time + lock_dur)
+		return
+	owner.apply_status_effect(/datum/status_effect/debuff/cast_disrupted, lock_dur)
+
+/atom/movable/screen/alert/status_effect/debuff/cast_disrupted
+	name = "Casting Disrupted"
+	desc = "My concentration is broken. I cannot gather magicka until I recover."
+	icon = 'icons/mob/screen_alert_combat.dmi'
+	icon_state = "castdisrupted"
+
+/datum/status_effect/debuff/cast_disrupted
+	id = "cast_disrupted"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/cast_disrupted
+	duration = EXPOSED_CAST_LOCKOUT
+	status_type = STATUS_EFFECT_UNIQUE
+
+/datum/status_effect/debuff/cast_disrupted/on_creation(mob/living/new_owner, new_dur)
 	if(new_dur)
 		duration = new_dur
 	return ..()

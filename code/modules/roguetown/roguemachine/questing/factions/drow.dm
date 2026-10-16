@@ -15,8 +15,7 @@
 		/mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/ambush = 5, //OV ADD
 	)
 	boss_mob_types = list(
-		/mob/living/carbon/human/species/elf/dark/drowraider/sword_test = 60,
-		/mob/living/carbon/human/species/elf/dark/drowraider/spear_test = 40,
+		/mob/living/carbon/human/species/elf/dark/drowraider/scourge = 100,
 	)
 	boss_title_templates = list(
 		"%N the Venomed",

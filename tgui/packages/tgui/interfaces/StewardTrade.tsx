@@ -12,6 +12,7 @@ import {
   subtitleStyle,
   titleStyle,
 } from './common/parchment';
+import { AdvancedView } from './StewardTrade/AdvancedView';
 import { ArrearsBanner } from './StewardTrade/ArrearsBanner';
 import { ATCLoanBanner } from './StewardTrade/ATCLoanBanner';
 import { AutoImportView } from './StewardTrade/AutoImportView';
@@ -48,17 +49,12 @@ export const StewardTrade = () => {
   const warrant = data.alderman_warrant;
 
   return (
-    <Window
-      title="Market Scroll"
-      width={860}
-      height={820}
-      theme="parchment"
-    >
+    <Window title="Market Scroll" width={860} height={820} theme="parchment">
       <Window.Content scrollable>
         <div style={pageStyle}>
           <div style={titleStyle}>Market & Stockpile</div>
           <div style={subtitleStyle}>
-            Day {data.day} &middot; Crown's Purse:{' '}
+            Day {data.day} &middot; Treasury:{' '}
             <span style={{ color: SEAL_AMBER, fontWeight: 'bold' }}>
               {data.treasury}m
             </span>
@@ -75,7 +71,13 @@ export const StewardTrade = () => {
             <span style={{ color: SEAL_AMBER }}>
               +{data.expected_rural_revenue}m
             </span>{' '}
-            rural tax &middot;{' '}
+            <span
+              style={{ cursor: 'help' }}
+              title="A modest stipend from the countryside manors, sent while the Steward's own hand is thin on the ground. It dwindles as the guilds and artisans fill their benches - once enough hands are at the forge, the loom, and the apothecary's counter to sustain trade themselves, the lands keep what they raise."
+            >
+              rural subsidy
+            </span>{' '}
+            &middot;{' '}
             <span style={{ color: SEAL_AMBER }}>
               -{data.expected_wage_outlay}m
             </span>{' '}
@@ -117,7 +119,8 @@ export const StewardTrade = () => {
                 of {warrant.trade_cap}m remaining today
               </div>
               <div style={{ color: INK_FAINT, fontSize: FONT_BODY }}>
-                Trades beyond the warrant are refused. Crown&apos;s Purse still pays the coin.
+                Trades beyond what your warrant allows are refused. The Treasury
+                still pays for each trade.
               </div>
             </div>
           )}
@@ -127,7 +130,10 @@ export const StewardTrade = () => {
           <ATCLoanBanner atc_loan={data.atc_loan} />
           <BlockadeBanner regions={data.blockaded_regions} />
           <BanditryBanner projection={data.banditry_projection} />
-          <EventsBanner events={data.active_events} goodCatalog={data.good_catalog} />
+          <EventsBanner
+            events={data.active_events}
+            goodCatalog={data.good_catalog}
+          />
 
           <TabBar tab={tab} onSwitch={setTab} />
           <hr style={rulerStyle} />
@@ -144,7 +150,7 @@ export const StewardTrade = () => {
           {tab === 'regions' && (
             <SequesteredOverlay
               active={!!data.sequestration?.active}
-              label="Inter-Regional Trade"
+              label="Regional Trade"
             >
               <RegionsView data={data} />
             </SequesteredOverlay>
@@ -160,6 +166,14 @@ export const StewardTrade = () => {
           {tab === 'petition' && <PetitionView data={data} />}
           {tab === 'ledger' && <LedgerView data={data} />}
           {tab === 'royal_custom' && <RoyalCustomPanel />}
+          {tab === 'advanced' && (
+            <SequesteredOverlay
+              active={!!data.sequestration?.active}
+              label="Advanced"
+            >
+              <AdvancedView data={data} />
+            </SequesteredOverlay>
+          )}
         </div>
         <TradeModal
           request={tradeRequest}

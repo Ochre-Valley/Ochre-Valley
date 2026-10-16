@@ -45,7 +45,11 @@ export const BeastWrit = (props: {
         {crimes.map((c, i) => (
           <span key={i}>
             {c}
-            {i < crimes.length - 2 ? ', ' : i === crimes.length - 2 ? ', and ' : ''}
+            {i < crimes.length - 2
+              ? ', '
+              : i === crimes.length - 2
+                ? ', and '
+                : ''}
           </span>
         ))}
         .
@@ -58,8 +62,8 @@ export const BeastWrit = (props: {
       </p>
       {deeds && <p style={writParagraph}>{deeds}</p>}
       <p style={writParagraph}>
-        The writ knows the beast and shall mark itself when the deed is done.
-        Return it then to the Contract Ledger, and the bounty of{' '}
+        This writ shall mark itself when the beast is slain. Return it then to
+        the Contract Ledger, and the sum of{' '}
         <RewardClause
           reward={reward}
           levyRate={levyRate}

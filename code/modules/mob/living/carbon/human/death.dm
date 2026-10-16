@@ -43,6 +43,7 @@
 	dna?.species?.stop_wagging_tail(src)
 
 	//OV edit
+	/*
 	if(isooze(src) && !(HAS_TRAIT(src, TRAIT_ANCIENT_HAG)) && !istype(src, /mob/living/carbon/human/species/human/northern/doppelganger)) //Exception for hags, as turning to ooze would break their gameplay loop
 		var/obj/shapeshift_holder/ooze_death/H = locate() in src
 		if(!H)
@@ -56,12 +57,17 @@
 			shape.mind.RemoveSpell(/obj/effect/proc_holder/spell/targeted/shapeshift/ooze)
 
 			return
+	*/
 	//OV edit end
 
 	if(client)
 		SSdroning.kill_droning(client)
 		SSdroning.kill_loop(client)
 		SSdroning.kill_rain(client)
+
+	if(!gibbed && HAS_TRAIT(src, TRAIT_SKELETAL_GIB_ON_DEATH))
+		playsound(src, pick('sound/vo/mobs/skel/skeleton_death (1).ogg','sound/vo/mobs/skel/skeleton_death (2).ogg','sound/vo/mobs/skel/skeleton_death (3).ogg','sound/vo/mobs/skel/skeleton_death (4).ogg','sound/vo/mobs/skel/skeleton_death (5).ogg'), 60, TRUE)
+		gib(no_brain = TRUE, no_organs = TRUE)
 
 	if(!gibbed && HAS_TRAIT(src, TRAIT_DUSTABLE))
 		if(HAS_TRAIT(src, TRAIT_DUST_LEAVE_HEAD))
@@ -99,7 +105,7 @@
 
 	if(client || mind)
 		record_round_statistic(STATS_DEATHS)
-		var/area_of_death = lowertext(get_area_name(src))
+		var/area_of_death = LOWER_TEXT(get_area_name(src))
 		if(area_of_death == "wilderness")
 			record_round_statistic(STATS_FOREST_DEATHS)
 		if(is_noble())
@@ -212,7 +218,7 @@
 	record_round_statistic(STATS_PEOPLE_GIBBED)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))
 		if(CA != src && !HAS_TRAIT(CA, TRAIT_BLIND))
-			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
+			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED) || HAS_TRAIT(CA, TRAIT_NIHILIST))
 				continue
 			if(CA.marriedto == name) // OV Edit: Fix bug
 				CA.adjust_triumphs(-1)

@@ -15,11 +15,14 @@
 	organ_slot = ORGAN_SLOT_PENIS
 	organ_dna_type = /datum/organ_dna/penis
 	customizer_entry_type = /datum/customizer_entry/organ/penis
+	tgui_template = "FeatureChoicePenis"
 
 /datum/customizer_choice/organ/penis/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
 	var/datum/customizer_entry/organ/penis/penis_entry = entry
 	penis_entry.penis_size = sanitize_integer(penis_entry.penis_size, MIN_PENIS_SIZE, MAX_PENIS_SIZE, DEFAULT_PENIS_SIZE)
+	if(!(penis_entry.sheath_type in list(SHEATH_TYPE_NONE, SHEATH_TYPE_NORMAL, SHEATH_TYPE_SLIT)))
+		penis_entry.sheath_type = SHEATH_TYPE_NONE
 
 /datum/customizer_choice/organ/penis/imprint_organ_dna(datum/organ_dna/organ_dna, datum/customizer_entry/entry, datum/preferences/prefs)
 	..()
@@ -27,29 +30,57 @@
 	var/datum/customizer_entry/organ/penis/penis_entry = entry
 	penis_dna.penis_size = penis_entry.penis_size
 	penis_dna.functional = penis_entry.functional
+	penis_dna.sheath_type = penis_entry.sheath_type
 
-/datum/customizer_choice/organ/penis/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
-	var/datum/customizer_entry/organ/penis/penis_entry = entry
-	dat += "<br>Penis size: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=penis_size''>[find_key_by_value(PENIS_SIZES_BY_NAME, penis_entry.penis_size)]</a>"
-	dat += "<br>Functional: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=functional''>[penis_entry.functional ? "YES" : "NO"]</a>"
+/datum/customizer_choice/organ/penis/tgui_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	var/list/data = ..()
 
-/datum/customizer_choice/organ/penis/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
 	var/datum/customizer_entry/organ/penis/penis_entry = entry
-	switch(href_list["customizer_task"])
+	data["penis_size"] = find_key_by_value(PENIS_SIZES_BY_NAME, penis_entry.penis_size)
+	data["penis_functional"] = penis_entry.functional
+	data["sheath_type"] = find_key_by_value(SHEATH_TYPES_BY_NAME, penis_entry.sheath_type)
+
+	return data
+
+/datum/customizer_choice/organ/penis/handle_tgui_act(list/params, datum/tgui/ui, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	. = ..()
+	if(.)
+		return
+
+	var/mob/user = ui.user
+	var/datum/customizer_entry/organ/penis/penis_entry = entry
+	switch(params["customizer_task"])
 		if("penis_size")
-			var/named_size = input(user, "Choose your penis size:", "Character Preference", find_key_by_value(PENIS_SIZES_BY_NAME, penis_entry.penis_size)) as anything in PENIS_SIZES_BY_NAME
+			var/named_size = tgui_input_list(user, "Choose your penis size:", "Character Preference", PENIS_SIZES_BY_NAME, find_key_by_value(PENIS_SIZES_BY_NAME, penis_entry.penis_size))
 			if(isnull(named_size))
-				return
+				return TRUE
 			var/new_size = PENIS_SIZES_BY_NAME[named_size]
-			penis_entry.penis_size = sanitize_integer(new_size, MIN_PENIS_SIZE, MAX_PENIS_SIZE, DEFAULT_PENIS_SIZE)
+			var/old_size = penis_entry.penis_size
+			for(var/key in PENIS_SIZES_BY_NAME)
+				if(PENIS_SIZES_BY_NAME[key] == old_size)
+					old_size = key
+					break
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" size", old_size, named_size)
+			penis_entry.penis_size = new_size
+			return TRUE
 		if("functional")
 			penis_entry.functional = !penis_entry.functional
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" functionality", !penis_entry.functional ? "Functional" : "Not Functional", penis_entry.functional ? "Functional" : "Not Functional")
+			return TRUE
+		if("sheath_type")
+			var/named_sheath = tgui_input_list(user, "Choose your sheath type:", "Character Preference", SHEATH_TYPES_BY_NAME, find_key_by_value(SHEATH_TYPES_BY_NAME, penis_entry.sheath_type))
+			if(isnull(named_sheath))
+				return TRUE
+			var/new_sheath = SHEATH_TYPES_BY_NAME[named_sheath]
+			var/old_sheath = find_key_by_value(SHEATH_TYPES_BY_NAME, penis_entry.sheath_type)
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" sheath", old_sheath, named_sheath)
+			penis_entry.sheath_type = new_sheath
+			return TRUE
 
 /datum/customizer_entry/organ/penis
 	var/penis_size = DEFAULT_PENIS_SIZE
 	var/functional = TRUE
+	var/sheath_type = SHEATH_TYPE_NONE
 
 /datum/customizer/organ/penis/human
 	customizer_choices = list(/datum/customizer_choice/organ/penis/human)
@@ -98,13 +129,25 @@
 /datum/customizer_choice/organ/penis/human
 	name = "Plain Penis"
 	organ_type = /obj/item/organ/penis
-	sprite_accessories = list(/datum/sprite_accessory/penis/human)
+	sprite_accessories = list(
+		/datum/sprite_accessory/penis/human,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/human,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
+		)
 	allows_accessory_color_customization = FALSE
 
 /datum/customizer_choice/organ/penis/human_anthro
 	name = "Plain Penis"
 	organ_type = /obj/item/organ/penis
-	sprite_accessories = list(/datum/sprite_accessory/penis/human)
+	sprite_accessories = list(
+		/datum/sprite_accessory/penis/human,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/human,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
+		)
 	allows_accessory_color_customization = TRUE
 
 /datum/customizer_choice/organ/penis/knotted
@@ -113,6 +156,11 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/knotted,
 		/datum/sprite_accessory/penis/knotted2,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/knotted,
+		/datum/sprite_accessory/penis/hyper/knotted2,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/equine
@@ -120,6 +168,10 @@
 	organ_type = /obj/item/organ/penis/equine
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/flared,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/flared,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/tapered_mammal
@@ -127,6 +179,10 @@
 	organ_type = /obj/item/organ/penis/tapered_mammal
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/tapered_mammal,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/tapered_mammal,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/tapered
@@ -134,6 +190,10 @@
 	organ_type = /obj/item/organ/penis/tapered
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/tapered,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/tapered,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/tapered_double
@@ -141,6 +201,10 @@
 	organ_type = /obj/item/organ/penis/tapered_double
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/hemi,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/hemi,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/tapered_double_knot
@@ -148,6 +212,10 @@
 	organ_type = /obj/item/organ/penis/tapered_double_knotted
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/hemiknot,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/hemiknot,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/barbed
@@ -155,6 +223,10 @@
 	organ_type = /obj/item/organ/penis/barbed
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/barbknot,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/barbknot,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/barbed_knotted
@@ -162,6 +234,10 @@
 	organ_type = /obj/item/organ/penis/barbed_knotted
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/barbknot,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/barbknot,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 /datum/customizer_choice/organ/penis/tentacle
@@ -169,6 +245,10 @@
 	organ_type = /obj/item/organ/penis/tentacle
 	sprite_accessories = list(
 		/datum/sprite_accessory/penis/tentacle,
+		//OV ADD START
+		/datum/sprite_accessory/penis/hyper/tentacle,
+		/datum/sprite_accessory/penis/hyper/nondescript,
+		//OV ADD END
 		)
 
 //OV edit
@@ -217,6 +297,7 @@
 	organ_dna_type = /datum/organ_dna/testicles
 	customizer_entry_type = /datum/customizer_entry/organ/testicles
 	organ_slot = ORGAN_SLOT_TESTICLES
+	tgui_template = "FeatureChoiceTesticles"
 	var/can_customize_size = TRUE
 
 /datum/customizer_choice/organ/testicles/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
@@ -232,25 +313,41 @@
 		testicles_dna.ball_size = testicles_entry.ball_size
 	testicles_dna.virility = testicles_entry.virility
 
-/datum/customizer_choice/organ/testicles/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
-	var/datum/customizer_entry/organ/testicles/testicles_entry = entry
-	if(can_customize_size)
-		dat += "<br>Ball size: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=ball_size''>[find_key_by_value(TESTICLE_SIZES_BY_NAME, testicles_entry.ball_size)]</a>"
-	dat += "<br>Virile: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=virile''>[testicles_entry.virility ? "Virile" : "Sterile"]</a>"
+/datum/customizer_choice/organ/testicles/tgui_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	var/list/data = ..()
 
-/datum/customizer_choice/organ/testicles/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
 	var/datum/customizer_entry/organ/testicles/testicles_entry = entry
-	switch(href_list["customizer_task"])
+	data["can_customize_size"] = can_customize_size
+	data["ball_size"] = find_key_by_value(TESTICLE_SIZES_BY_NAME, testicles_entry.ball_size)
+	data["virile"] = testicles_entry.virility
+
+	return data
+
+/datum/customizer_choice/organ/testicles/handle_tgui_act(list/params, datum/tgui/ui, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	. = ..()
+	if(.)
+		return
+
+	var/mob/user = ui.user
+	var/datum/customizer_entry/organ/testicles/testicles_entry = entry
+	switch(params["customizer_task"])
 		if("ball_size")
-			var/named_size = input(user, "Choose your ball size:", "Character Preference", find_key_by_value(TESTICLE_SIZES_BY_NAME, testicles_entry.ball_size)) as anything in TESTICLE_SIZES_BY_NAME
+			var/named_size = tgui_input_list(user, "Choose your ball size:", "Ball Size", TESTICLE_SIZES_BY_NAME, find_key_by_value(TESTICLE_SIZES_BY_NAME, testicles_entry.ball_size))
 			if(isnull(named_size))
-				return
+				return TRUE
 			var/new_size = TESTICLE_SIZES_BY_NAME[named_size]
-			testicles_entry.ball_size = sanitize_integer(new_size, MIN_TESTICLES_SIZE, MAX_TESTICLES_SIZE, DEFAULT_TESTICLES_SIZE)
+			var/old_size = testicles_entry.ball_size
+			for(var/key in TESTICLE_SIZES_BY_NAME)
+				if(TESTICLE_SIZES_BY_NAME[key] == old_size)
+					old_size = key
+					break
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" size", old_size, named_size)
+			testicles_entry.ball_size = new_size
+			return TRUE
 		if("virile")
 			testicles_entry.virility = !testicles_entry.virility
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" virility", !testicles_entry.virility ? "Virile" : "Sterile", testicles_entry.virility ? "Virile" : "Sterile")
+			return TRUE
 
 /datum/customizer/organ/testicles/external
 	customizer_choices = list(/datum/customizer_choice/organ/testicles/external)
@@ -269,11 +366,21 @@
 
 /datum/customizer_choice/organ/testicles/external
 	name = "Testicles"
-	sprite_accessories = list(/datum/sprite_accessory/testicles/pair)
+	sprite_accessories = list(
+		/datum/sprite_accessory/testicles/pair,
+		//OV ADD START
+		/datum/sprite_accessory/testicles/sheath,
+		//OV ADD END
+		)
 
 /datum/customizer_choice/organ/testicles/human
 	name = "Testicles"
-	sprite_accessories = list(/datum/sprite_accessory/testicles/pair)
+	sprite_accessories = list(
+		/datum/sprite_accessory/testicles/pair,
+		//OV ADD START
+		/datum/sprite_accessory/testicles/sheath,
+		//OV ADD END
+		)
 	allows_accessory_color_customization = FALSE
 
 /datum/customizer_choice/organ/testicles/internal
@@ -332,6 +439,7 @@
 	organ_type = /obj/item/organ/breasts
 	organ_slot = ORGAN_SLOT_BREASTS
 	organ_dna_type = /datum/organ_dna/breasts
+	tgui_template = "FeatureChoiceBreasts"
 
 /datum/customizer_choice/organ/breasts/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
@@ -343,36 +451,50 @@
 	var/datum/organ_dna/breasts/breasts_dna = organ_dna
 	var/datum/customizer_entry/organ/breasts/breasts_entry = entry
 	breasts_dna.breast_size = breasts_entry.breast_size
-	breasts_dna.lactating = breasts_entry.lactating
 
-/datum/customizer_choice/organ/breasts/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
-	var/datum/customizer_entry/organ/breasts/breasts_entry = entry
-	dat += "<br>Breast size: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=breast_size''>[find_key_by_value(BREAST_SIZES_BY_NAME, breasts_entry.breast_size)]</a>"
-	dat += "<br>Lactation: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=lactating''>[breasts_entry.lactating ? "Enabled" : "Disabled"]</a>"
+/datum/customizer_choice/organ/breasts/tgui_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	var/list/data = ..()
 
-/datum/customizer_choice/organ/breasts/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
 	var/datum/customizer_entry/organ/breasts/breasts_entry = entry
-	switch(href_list["customizer_task"])
+	data["breast_size"] = find_key_by_value(BREAST_SIZES_BY_NAME, breasts_entry.breast_size)
+
+	return data
+
+/datum/customizer_choice/organ/breasts/handle_tgui_act(list/params, datum/tgui/ui, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	. = ..()
+	if(.)
+		return
+
+	var/mob/user = ui.user
+	var/datum/customizer_entry/organ/breasts/breasts_entry = entry
+	switch(params["customizer_task"])
 		if("breast_size")
-			var/named_size = input(user, "Choose your breast size:", "Character Preference", find_key_by_value(BREAST_SIZES_BY_NAME, breasts_entry.breast_size)) as anything in BREAST_SIZES_BY_NAME
+			var/named_size = tgui_input_list(user, "Choose your breast size:", "Breast Size", BREAST_SIZES_BY_NAME, find_key_by_value(BREAST_SIZES_BY_NAME, breasts_entry.breast_size))
 			if(isnull(named_size))
-				return
+				return TRUE
 			var/new_size = BREAST_SIZES_BY_NAME[named_size]
-			breasts_entry.breast_size = sanitize_integer(new_size, MIN_BREASTS_SIZE, MAX_BREASTS_SIZE, DEFAULT_BREASTS_SIZE)
-		if("lactating")
-			breasts_entry.lactating = !breasts_entry.lactating
+			var/old_size = breasts_entry.breast_size
+			for(var/key in BREAST_SIZES_BY_NAME)
+				if(BREAST_SIZES_BY_NAME[key] == old_size)
+					old_size = key
+					break
+			prefs.verbose_pref_log_change(user, "notice", "\"[name]\" size", old_size, named_size)
+			breasts_entry.breast_size = new_size
+			return TRUE
 
 /datum/customizer_entry/organ/breasts
 	var/breast_size = DEFAULT_BREASTS_SIZE
-	var/lactating = FALSE
 
 /datum/customizer/organ/breasts/human
 	customizer_choices = list(/datum/customizer_choice/organ/breasts/human)
 
 /datum/customizer_choice/organ/breasts/human
-	sprite_accessories = list(/datum/sprite_accessory/breasts/pair)
+	sprite_accessories = list(
+		/datum/sprite_accessory/breasts/pair,
+		//OV ADD START
+		/datum/sprite_accessory/breasts/hyper/pair,
+		//OV ADD END
+		)
 	allows_accessory_color_customization = FALSE
 
 /datum/customizer/organ/breasts/animal
@@ -383,6 +505,11 @@
 		/datum/sprite_accessory/breasts/pair,
 		/datum/sprite_accessory/breasts/quad,
 		/datum/sprite_accessory/breasts/sextuple,
+		//OV ADD START
+		/datum/sprite_accessory/breasts/hyper/pair,
+		/datum/sprite_accessory/breasts/hyper/quad,
+		/datum/sprite_accessory/breasts/hyper/sextuple,
+		//OV ADD END
 		)
 
 //OV edit
@@ -431,6 +558,7 @@
 	organ_type = /obj/item/organ/vagina
 	organ_slot = ORGAN_SLOT_VAGINA
 	organ_dna_type = /datum/organ_dna/vagina
+	tgui_template = "FeatureChoiceVagina"
 
 /datum/customizer_entry/organ/vagina
 	var/fertility = TRUE
@@ -441,18 +569,25 @@
 	var/datum/customizer_entry/organ/vagina/vagina_entry = entry
 	vagina_dna.fertility = vagina_entry.fertility
 
-/datum/customizer_choice/organ/vagina/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
-	var/datum/customizer_entry/organ/vagina/vagina_entry = entry
-	dat += "<br>Fertile: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=fertile''>[vagina_entry.fertility ? "Fertile" : "Sterile"]</a>"
+/datum/customizer_choice/organ/vagina/tgui_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	var/list/data = ..()
 
-/datum/customizer_choice/organ/vagina/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
-	..()
 	var/datum/customizer_entry/organ/vagina/vagina_entry = entry
-	switch(href_list["customizer_task"])
+	data["fertility"] = vagina_entry.fertility
+
+	return data
+
+/datum/customizer_choice/organ/vagina/handle_tgui_act(list/params, datum/tgui/ui, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
+	. = ..()
+	if(.)
+		return
+
+	var/datum/customizer_entry/organ/vagina/vagina_entry = entry
+	switch(params["customizer_task"])
 		if("fertile")
 			vagina_entry.fertility = !vagina_entry.fertility
-			
+			prefs.verbose_pref_log_change(ui.user, "notice", "\"[name]\" fertility", !vagina_entry.fertility ? "Fertile" : "Sterile", vagina_entry.fertility ? "Fertile" : "Sterile")
+			return TRUE
 
 /datum/customizer/organ/vagina/human
 	customizer_choices = list(/datum/customizer_choice/organ/vagina/human)

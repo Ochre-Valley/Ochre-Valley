@@ -15,7 +15,7 @@
 
 /datum/config_entry/string/asset_transport
 /datum/config_entry/string/asset_transport/ValidateAndSet(str_val)
-	return (lowertext(str_val) in list("simple", "webroot")) && ..(lowertext(str_val))
+	return (LOWER_TEXT(str_val) in list("simple", "webroot")) && ..(LOWER_TEXT(str_val))
 
 /datum/config_entry/string/asset_cdn_webroot
 	protection = CONFIG_ENTRY_LOCKED
@@ -38,8 +38,7 @@
 		str_var += "/"
 	return ..(str_var)
 
-// OV Add Start: Byond storage iframe
 /datum/config_entry/string/storage_cdn_iframe
 	protection = CONFIG_ENTRY_LOCKED
-	default = "https://vorestation.github.io/byond-client-storage/iframe.html" // Note: We can use vorestation's without overlap so long as we keep storage.ts's KEY_NAME = "ochre"
-// OV Add End
+	// Note: We can use vorestation's without overlap so long as we keep storage.ts's KEY_NAME = "azure"
+	default = "https://vorestation.github.io/byond-client-storage/iframe.html"

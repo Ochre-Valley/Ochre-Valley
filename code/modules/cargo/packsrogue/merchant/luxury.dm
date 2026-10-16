@@ -59,7 +59,7 @@
 /datum/supply_pack/rogue/luxury/silverdagger
 	name = "Silver Dagger"
 	cost = 250 //Note that the Merchant's abode always spawns with a free silver dagger.
-	contains = list(/obj/item/rogueweapon/huntingknife/idagger/silver)
+	contains = list(/obj/item/rogueweapon/huntingknife/idagger/steel/silver)
 
 /datum/supply_pack/rogue/luxury/nomag
 	name = "Ring of Null Magic"
@@ -155,6 +155,13 @@
 	name = "Lump of Blacktallow"
 	cost = 50
 	contains = list(/obj/item/reagent_containers/food/snacks/tallow/black)
+
+/datum/supply_pack/rogue/luxury/heelificators
+	name = "Heel Elixirs"
+	cost = 300
+	contains = list(/obj/item/heelkit,
+					/obj/item/heelkit,
+					/obj/item/heelkit)
 
 //Caustic edit start
 /datum/supply_pack/rogue/luxury/sizescroll

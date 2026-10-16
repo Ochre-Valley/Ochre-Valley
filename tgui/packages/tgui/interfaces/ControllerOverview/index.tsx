@@ -3,13 +3,13 @@ import { Button, Dropdown, Input, Section, Stack } from 'tgui-core/components';
 
 import { Window } from '../../layouts';
 import { SORTING_TYPES } from './contants';
-import { FilterAction, filterReducer, type FilterState } from './filters';
+import { FilterAction, type FilterState, filterReducer } from './filters';
 import { OverviewSection } from './OverviewSection';
 import { SubsystemDialog } from './SubsystemDialog';
 import { SubsystemViews } from './SubsystemViews';
 import { SortType, type SubsystemData } from './types';
 
-export function ControllerOverview(props) {
+export function ControllerOverview() {
   return (
     <Window title="Controller Overview" height={600} width={500}>
       <Window.Content>
@@ -19,7 +19,7 @@ export function ControllerOverview(props) {
   );
 }
 
-export function ControllerContent(props) {
+export function ControllerContent() {
   const [state, dispatch] = useReducer(filterReducer, {
     ascending: true,
     inactive: true,

@@ -2,7 +2,7 @@
 import { useBackend } from 'tgui/backend';
 import { Button, Section } from 'tgui-core/components';
 
-export const ControlSmites = (props) => {
+export const ControlSmites = (props: any) => {
   const { act } = useBackend();
 
   return (

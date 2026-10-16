@@ -1,5 +1,0 @@
-author: "ShadowLarkens"
-delete-after: True
-changes:
-  - bugfix: "Whispers can now be heard by micros and people in tummies, provided the source is within normal whisper range."
-  - bugfix: "Zizo and Matthios' main armor pieces now set non-acolytes on fire."

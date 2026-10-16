@@ -43,6 +43,7 @@
 #define SEEN_LOG_SAY 1
 #define SEEN_LOG_EMOTE 2
 #define SEEN_LOG_ATTACK 3
+#define SEEN_LOG_OFFSCREEN_DIST 7
 
 //Individual logging panel pages
 #define INDIVIDUAL_ATTACK_LOG		(LOG_ATTACK)
@@ -58,8 +59,6 @@
 
 #define LOGSRC_CLIENT "Client"
 #define LOGSRC_MOB "Mob"
-
-// OV Add Start: JSON Logging
 /// The number of entries to store per category, don't make this too large or you'll start to see performance issues
 #define CONFIG_MAX_CACHED_LOG_ENTRIES 1000
 
@@ -138,5 +137,3 @@
 
 // Default log schema version
 #define LOG_CATEGORY_SCHEMA_VERSION_NOT_SET "0.0.1"
-
-// OV Add End

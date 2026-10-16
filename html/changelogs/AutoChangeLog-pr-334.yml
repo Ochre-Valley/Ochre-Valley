@@ -1,5 +1,0 @@
-author: "Ldip999"
-delete-after: True
-changes:
-  - rscadd: "Feedback to revivals to hopefully be less black box-y"
-  - bugfix: "Revivals not possible if the patient had (emphasis on HAD) more than 200 oxyloss"

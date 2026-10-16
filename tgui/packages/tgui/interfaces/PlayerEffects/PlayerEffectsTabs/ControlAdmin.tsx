@@ -2,7 +2,7 @@
 import { useBackend } from 'tgui/backend';
 import { Button, Section } from 'tgui-core/components';
 
-export const ControlAdmin = (props) => {
+export const ControlAdmin = (props: any) => {
   const { act } = useBackend();
 
   return (
@@ -33,6 +33,9 @@ export const ControlAdmin = (props) => {
       </Button>
       <Button fluid onClick={() => act('check_traits')}>
         Check Traits
+      </Button>
+      <Button fluid onClick={() => act('far_travel')}>
+        Safely Far Travel
       </Button>
     </Section>
   );

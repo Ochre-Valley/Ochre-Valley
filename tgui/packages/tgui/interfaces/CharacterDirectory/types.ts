@@ -34,3 +34,7 @@ export type mobEntry = {
   custom_link: string;
   photo: string | null;
 };
+
+export type mobEntrySortableKey = keyof {
+  [K in keyof mobEntry as mobEntry[K] extends string ? K : never]: string;
+};

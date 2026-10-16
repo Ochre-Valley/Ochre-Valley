@@ -2,7 +2,7 @@
 	name = "Outlaw"
 	tutorial = "You are the person folk fear at night - use your cunning and speed to strike fast and get out with your spoils before anyone notices."
 	allowed_sexes = list(MALE, FEMALE)
-	
+
 	outfit = /datum/outfit/job/roguetown/wretch/outlaw
 	cmode_music = 'sound/music/cmode/antag/combat_cutpurse.ogg'
 	class_select_category = CLASS_CAT_ROGUE
@@ -33,8 +33,9 @@
 		/datum/skill/craft/traps = SKILL_LEVEL_MASTER,
 	)
 	subclass_stashed_items = list(
-        "Sewing Kit" =  /obj/item/repair_kit,
-    )
+		"Sewing Kit" =	/obj/item/repair_kit,
+		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
+	)
 
 /datum/outfit/job/roguetown/wretch/outlaw/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -61,7 +62,7 @@
 	if(H.mind)
 		var/weapons = list("Rapier","Parrying Dagger", "Whip")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
-		var/rangedweapons = list("Slurbow", "Crossbow")
+		var/rangedweapons = list("Slurbow", "Crossbow", "Arquebus Pistol") //OV EDIT
 		var/rangedweapon_choice = input(H,"Choose your BOW.", "TAKE AIM.") as anything in rangedweapons
 		var/specialization = list("Fleet-Footed","Marksmanship","Athleticism","Night-Burglar","Master-Tracker","Dualist")
 		var/specialization_choice = input(H, "Choose your talent.", "TAKE UP ARMS") as anything in specialization
@@ -73,7 +74,7 @@
 				l_hand = /obj/item/rogueweapon/sword/rapier
 			if("Parrying Dagger")
 				beltl = /obj/item/rogueweapon/scabbard/sheath
-				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
+				l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying //OV EDIT FOR PISTOL
 			if ("Whip")
 				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_EXPERT, TRUE)
 				l_hand = /obj/item/rogueweapon/whip
@@ -84,12 +85,31 @@
 			if("Crossbow")
 				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 				beltr = /obj/item/quiver/bolt/standard
+			//OV EDIT
+			if("Arquebus Pistol")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				beltr = /obj/item/quiver/bulletpouch/iron
+				backpack_contents = list(
+					/obj/item/lockpickring/mundane = 1,
+					/obj/item/flashlight/flare/torch/lantern/prelit = 1,
+					/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
+					/obj/item/reagent_containers/glass/bottle/alchemical/healthpot = 1,
+					/obj/item/rogueweapon/scabbard/sheath = 1,
+					/obj/item/powderflask = 1, //Backpack needed special rearranging to fit it all.
+					)
+			//OV EDIT END
 		switch(specialization_choice)
 			if("Fleet-Footed")
 				H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, SKILL_LEVEL_LEGENDARY, TRUE)
 				ADD_TRAIT(H, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 			if("Marksmanship")
-				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_LEGENDARY, TRUE)
+				//OV EDIT
+				if(rangedweapon_choice == "Arquebus Pistol")
+					H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_LEGENDARY, TRUE)
+				else
+					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_LEGENDARY, TRUE)
+				//OV EDIT END
 				H.change_stat(STATKEY_PER, 1)
 			if("Athleticism")
 				H.adjust_skillrank_up_to(/datum/skill/misc/athletics, SKILL_LEVEL_MASTER, TRUE)
@@ -99,11 +119,15 @@
 				ADD_TRAIT(H, TRAIT_DARKVISION, TRAIT_GENERIC)
 			if("Master-Tracker")
 				H.adjust_skillrank_up_to(/datum/skill/misc/tracking, SKILL_LEVEL_LEGENDARY, TRUE)
-				ADD_TRAIT(H, TRAIT_SLEUTH, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_PERFECT_TRACKER, TRAIT_GENERIC)
 			if("Dualist")//Yes the typo is intentional
 				ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
-				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+
+				ADD_TRAIT(H, TRAIT_DECEIVING_MEEKNESS, TRAIT_VIRTUE)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_descriptors)
+				add_verb(H, /mob/living/carbon/human/proc/emote_ffsalute)
+				add_verb(H, /mob/living/carbon/human/proc/toggle_guarded)
+
 		wretch_select_bounty(H)
 
 //Keep it as is from now on, this is kind of overbloated as it be but the entire point of this class is catchall no good doer (speed).

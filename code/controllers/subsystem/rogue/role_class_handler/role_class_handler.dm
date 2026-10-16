@@ -47,10 +47,13 @@ SUBSYSTEM_DEF(role_class_handler)
 	/// Assoc list of class registers to keep track of what townies and migrant parties are and message listeners
 	var/list/class_registers = list()
 
+	/// subclass roll losers
+	var/list/roll_losers = list()
+
 /*
 	We init and build the ass lists
 */
-/datum/controller/subsystem/role_class_handler/Initialize()
+/datum/controller/subsystem/role_class_handler/Initialize(mapload)
 	build_category_lists()
 
 	initialized = TRUE
@@ -98,8 +101,10 @@ SUBSYSTEM_DEF(role_class_handler)
 		//XTRA_MEATY.PQ_boost_divider = 10
 	else
 		var/datum/job/roguetown/RT_JOB = SSjob.GetJob(H.job)
-		if(RT_JOB.advclass_cat_rolls.len)
+		if(LAZYLEN(RT_JOB.advclass_cat_rolls))
 			XTRA_MEATY.class_cat_alloc_attempts = RT_JOB.advclass_cat_rolls
+		else // no advclasses here sire
+			return
 
 		//if(RT_JOB.PQ_boost_divider)
 			//XTRA_MEATY.PQ_boost_divider = RT_JOB.PQ_boost_divider
@@ -117,6 +122,26 @@ SUBSYSTEM_DEF(role_class_handler)
 	class_select_handlers[H.client.ckey] = XTRA_MEATY
 
 
+/datum/controller/subsystem/role_class_handler/proc/roll_roundstart_favorites(list/humans)
+	var/list/contenders = list()
+	for(var/mob/living/carbon/human/H in humans)
+		var/datum/job/roguetown/job = SSjob.GetJob(H.job)
+		var/list/subprefs = H.client?.prefs?.job_subprefs
+		if(!job || !subprefs || !subprefs[H.job] || !subprefs[H.job]["favorite_advclass"])
+			continue
+		var/favorite_type = subprefs[H.job]["favorite_advclass"]
+		for(var/ctag in job.advclass_cat_rolls)
+			for(var/datum/advclass/AC as anything in sorted_class_categories[ctag])
+				if(AC.type != favorite_type || AC.maximum_possible_slots == -1 || !AC.check_requirements(H))
+					continue
+				if(!contenders[AC])
+					contenders[AC] = list()
+				contenders[AC] |= H
+	for(var/datum/advclass/AC as anything in contenders)
+		var/list/candidates = contenders[AC]
+		for(var/mob/living/carbon/human/loser as anything in candidates - SSjob.pick_roll_winners(candidates, AC.maximum_possible_slots - AC.total_slots_occupied))
+			roll_losers += loser.ckey
+
 /*
 	Attempt to finish the class handling ordeal, aka they picked something
 	Since this is class handler related, might as well also have the class handler send itself into the params
@@ -130,7 +155,6 @@ SUBSYSTEM_DEF(role_class_handler)
 			return FALSE // Along with stop here as they didn't get it.
 
 
-	H.advsetup = FALSE // This is actually on a lot of shit, so its a ghetto selector protector if u need one
 	if(H.mind)
 		H.mind.picked_advclass = picked_class
 	picked_class.equipme(H)
@@ -168,7 +192,7 @@ SUBSYSTEM_DEF(role_class_handler)
 				var/datum/class_select_handler/found_menu = class_select_handlers[HANDLER]
 
 				if(target_datum in found_menu.rolled_classes) // We found the target datum in one of the classes they rolled aka in the list of options they got visible,
-					found_menu.rolled_class_is_full(target_datum) //  inform the datum of its error.
+					found_menu.rolled_class_is_full(target_datum) //	inform the datum of its error.
 
 /datum/controller/subsystem/role_class_handler/proc/get_advclass_by_name(advclass_name)
 	for(var/category in sorted_class_categories)

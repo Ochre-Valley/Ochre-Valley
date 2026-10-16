@@ -14,7 +14,7 @@
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_WATER)
 			gen_amount = 2
-			gen_cost = 0
+			gen_cost = 1
 			reagentid = REAGENT_WATER
 			reagentcolor = "#0064C877"
 		if(REAGENT_WATER_BATH)
@@ -122,7 +122,7 @@
 			reagentid = REAGENT_SPACEDRUGS
 			reagentcolor = "#60A584"
 		if(REAGENT_POT_MANA)
-			generated_reagents = list(REAGENT_ID_POT_MANA = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT non-exisiting option, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_POT_MANA)
 			gen_amount = 1
@@ -130,7 +130,7 @@
 			reagentid = REAGENT_POT_MANA
 			reagentcolor = "#000042"
 		if(REAGENT_POT_HEALTH)
-			generated_reagents = list(REAGENT_ID_POT_HEALTH = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT non-exisiting option, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_POT_HEALTH)
 			gen_amount = 1

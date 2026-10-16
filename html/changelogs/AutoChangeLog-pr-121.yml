@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - qol: "Prompt players if they'd like to commend someone when far-traveling."

@@ -15,7 +15,7 @@ $include discord.txt
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-SERVERNAME OchreValley
+SERVERNAME Ochre Valley
 
 ## Server tagline: This will appear right below the server's title.
 # SERVERTAGLINE A generic TG-based server
@@ -31,6 +31,17 @@ STATIONNAME Ochre Valley
 
 ## Lobby time: This is the amount of time between rounds that players have to setup their characters and be ready.
 LOBBY_COUNTDOWN 600
+
+## Autostart: Uncomment this to skip the lobby countdown and start the round as soon as the server is ready. For development.
+#AUTOSTART
+
+## Minimum flavor text: How many characters of flavor text a player needs before they can join. 0 disables the requirement.
+## Defaults to 200. Uncomment and set to 0 for development.
+#MINIMUM_FLAVOR_TEXT 200
+
+## Minimum OOC notes: How many characters of OOC notes a player needs before they can join. 0 disables the requirement.
+## Defaults to 5. Uncomment and set to 0 for development.
+#MINIMUM_OOC_NOTES 5
 
 ## Round End Time: This is the amount of time after the round ends that players have to murder death kill each other.
 ROUND_END_COUNTDOWN 180
@@ -57,7 +68,7 @@ ENABLE_LOCALHOST_RANK
 #AGE_PROMPT_SYSTEM
 
 ## Log all timers on timer auto reset
-# LOG_TIMERS_ON_BUCKET_RESET
+#LOG_TIMERS_ON_BUCKET_RESET
 
 ## Uncomment this entry to have certain jobs require your account to be at least a certain number of days old to select. You can configure the exact age requirement for different jobs by editing
 ## the minimal_player_age variable in the files in folder /code/game/jobs/job/.. for the job you want to edit. Set minimal_player_age to 0 to disable age requirement for that job.
@@ -83,17 +94,21 @@ USE_EXP_TRACKING
 ## Allows admins to bypass job playtime requirements.
 #USE_EXP_RESTRICTIONS_ADMIN_BYPASS
 
-## Should we also log entries as human readable
+## Should we log entries as JSON
+LOG_AS_JSON
+
+## Should we also log entries as human readable (yes for now)
 LOG_AS_HUMAN_READABLE
 
 ## log OOC channel
 LOG_OOC
+LOG_LOOC
 
 ## log client Say
 LOG_SAY
 
 ## log NPC Say
-LOG_NPC_SAY
+#LOG_NPC_SAY
 
 ## log admin actions
 LOG_ADMIN
@@ -248,13 +263,13 @@ USEBLACKLIST
 # SERVER ss13.example.com:2506
 
 ## Discod address
-# DISCORDURL https://discord.gg/bx9c7ha5Qk
+# DISCORDURL https://discord.gg/E2ay9BUszE
 
 ## Wiki address
-# WIKIURL https://wiki.moviesfreepremium.xyz/blackstone
+WIKIURL https://ochrevalley.miraheze.org
 
 ## Rules address
-# RULESURL https://wiki.moviesfreepremium.xyz/blackstone/rules
+RULESURL https://ochrevalley.miraheze.org/wiki/Rules
 
 ## Github address
 GITHUBURL https://github.com/Ochre-Valley/Ochre-Valley
@@ -389,12 +404,12 @@ ANNOUNCE_ADMIN_LOGOUT
 
 ## Map rotation
 ## You should edit maps.txt to match your configuration when you enable this.
-MAPROTATION
+#MAPROTATION
 
 ## Map voting
 ## Allows players to vote with their preffered map setting
 ## When it's set to zero, the map will be randomly picked each round
-PREFERENCE_MAP_VOTING 0
+#PREFERENCE_MAP_VOTING 0
 
 ## Map rotate chance delta
 ## This is the chance of map rotation factored to the round length.
@@ -430,10 +445,10 @@ AUTOADMIN_RANK Game Master
 #CLIENT_WARN_VERSION 511
 #CLIENT_WARN_POPUP
 #CLIENT_WARN_MESSAGE Byond released 511 as the stable release. You can set the framerate your client runs at, which makes the game feel very different and cool. Shortly after its release we will end up using 511 client features and you will be forced to update.
-CLIENT_ERROR_VERSION 511
-CLIENT_ERROR_MESSAGE Your version of byond is not supported. Please upgrade.
+#CLIENT_ERROR_VERSION 516
+#CLIENT_ERROR_MESSAGE Your version of byond is not supported. Please upgrade.
 ## The minimum build needed for joining the server, if using 512, a good minimum build would be 1421 as that disables the Middle Mouse Button exploit.
-CLIENT_ERROR_BUILD 1421
+#CLIENT_ERROR_BUILD 1687
 
 ## TOPIC RATE LIMITING
 ## This allows you to limit how many topic calls (clicking on an interface window) the client can do in any given game second and/or game minute.
@@ -519,32 +534,32 @@ RESUME_AFTER_INITIALIZATIONS
 ROUNDS_UNTIL_HARD_RESTART 0
 
 ## Enable automatic profiling - Byond 513.1506 and newer only.
-AUTO_PROFILE
+#AUTO_PROFILE
 
 ## Clear the profile buffer after each dump. Each file then contains only the activity
 ## since the previous dump (window mode), at the cost of not having a single cumulative round file.
 ## Comment out to revert to cumulative-round dumps.
-PROFILE_CLEAR_ON_DUMP
+#PROFILE_CLEAR_ON_DUMP
 
 ## Determines the interval between each saved profiler snapshot (in deciseconds).
 #PROFILER_INTERVAL 3000
 
 ## Threshold (in deciseconds) for real time between ticks before we start dumping profiles
-DRIFT_DUMP_THRESHOLD 40
+#DRIFT_DUMP_THRESHOLD 40
 
 ## How long to wait (in deciseconds) after a profile dump before logging another tickdrift sourced one
-DRIFT_PROFILE_DELAY 150
+#DRIFT_PROFILE_DELAY 150
 
 ## Tick-dilation percentage over the last 1s above which we start the sustained-TD timer.
 ## Measured as (drift growth per real second) × world.tick_lag × 100.
 ## 20 means "game advancing <=80% as fast as wall-clock" — egregious by our standards.
-SUSTAINED_TD_THRESHOLD_PCT 20
+#SUSTAINED_TD_THRESHOLD_PCT 20
 
 ## How long (in deciseconds) TD% must stay above SUSTAINED_TD_THRESHOLD_PCT before we dump a profile.
-SUSTAINED_TD_DURATION 200
+#SUSTAINED_TD_DURATION 200
 
 ## Minimum gap (in deciseconds) between sustained-TD profile dumps. Set long to avoid the dump itself worsening the stall.
-SUSTAINED_TD_DELAY 1200
+#SUSTAINED_TD_DELAY 1200
 
 
 ##Default view size, in tiles.

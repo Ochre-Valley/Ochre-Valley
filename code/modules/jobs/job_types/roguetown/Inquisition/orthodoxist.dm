@@ -5,20 +5,21 @@
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
-	
+
 	allowed_patrons = list(/datum/patron/old_god) //Requires your character's patron to be Psydon. This role is explicitly designed to be played by Psydonites, only, and almost everything they have - down to the equipment and statblock - is rooted in Psydonism. Do NOT make this accessable to other faiths, unless you go through the efforts of redesigning it from the ground up.
 	tutorial = "Praise. Atone. Mourn. A hundred different paths across a hundred different lyves, all ending the same ; with you swearing fealty to Psydon and your admittance into the Word of HIM in the world. Bring light to darkness, protect the innocent and heal the world - whether by kind word or fiery sword." //OV Edit Per Lore Doc
 	selection_color = JCOLOR_INQUISITION
 	outfit = null
 	outfit_female = null
 	display_order = JDO_ORTHODOXIST
-	min_pq = 6 //OV EDIT
+	min_pq = 5 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
 	advclass_cat_rolls = list(CTAG_ORTHODOXIST = 20)
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
 	give_bank_account = 15
+	vice_restrictions = list(/datum/charflaw/silverweakness)
 	job_traits = list(TRAIT_STEELHEARTED, TRAIT_INQUISITION)
 	job_subclasses = list(
 		/datum/advclass/psydoniantemplar,

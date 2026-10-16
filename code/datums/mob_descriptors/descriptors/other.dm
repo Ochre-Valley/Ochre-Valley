@@ -32,7 +32,7 @@
 		return FALSE
 	if(H.underwear)
 		return FALSE
-	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))
+	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, check_cosmetics = TRUE))
 		return FALSE
 	return TRUE
 
@@ -92,7 +92,7 @@
 		return FALSE
 	if(H.underwear)
 		return FALSE
-	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))
+	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, check_cosmetics = TRUE))
 		return FALSE
 	//Caustic Edit - Allow external balls even with a slit if someone likes it!
 	//var/obj/item/organ/penis/penis = H.getorganslot(ORGAN_SLOT_PENIS)
@@ -124,7 +124,7 @@
 		return FALSE
 	if(H.underwear)
 		return FALSE
-	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))
+	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, check_cosmetics = TRUE))
 		return FALSE
 	return TRUE
 
@@ -172,7 +172,7 @@
 		return FALSE
 	if(H.underwear && H.underwear.covers_breasts)
 		return FALSE
-	if(!get_location_accessible(H, BODY_ZONE_CHEST))
+	if(!get_location_accessible(H, BODY_ZONE_CHEST, check_cosmetics = TRUE))
 		return FALSE
 	return TRUE
 

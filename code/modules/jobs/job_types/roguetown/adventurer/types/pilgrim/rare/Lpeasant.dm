@@ -4,8 +4,8 @@
 	You, a simple peasent, through sheer determination have conquered nature \
 	and made it bow before your green thumb."
 	allowed_sexes = list(MALE, FEMALE)
-	forbidden_races = list(RACES_DESPISED)
-	
+	//forbidden_races = list(RACES_DESPISED) //OV EDIT - Races allowed
+
 	outfit = /datum/outfit/job/roguetown/adventurer/farmermaster
 	traits_applied = list(TRAIT_HOMESTEAD_EXPERT, TRAIT_SEEDKNOW)
 
@@ -31,7 +31,7 @@
 		/datum/skill/craft/cooking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 	)
-	
+
 /datum/outfit/job/roguetown/adventurer/farmermaster/pre_equip(mob/living/carbon/human/H)
 	..()
 	belt = /obj/item/storage/belt/rogue/leather/rope/upgraded

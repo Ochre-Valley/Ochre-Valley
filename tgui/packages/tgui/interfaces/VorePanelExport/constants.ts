@@ -1,4 +1,4 @@
-export const ModeSpan = {
+export const ModeSpan: Record<string, string> = {
   Hold: '<span class="badge text-bg-secondary">Hold</span>',
   Digest: '<span class="badge text-bg-danger">Digest</span>',
   Absorb: '<span class="badge text-bg-light">Absorb</span>',
@@ -12,7 +12,7 @@ export const ModeSpan = {
   'Encase In Egg': '<span class="badge text-bg-primary">Encase In Egg</span>',
 };
 
-export const ItemModeSpan = {
+export const ItemModeSpan: Record<string, string> = {
   Hold: '<span class="badge text-bg-secondary">Item: Hold</span>',
   'Digest (Food Only)':
     '<span class="badge text-bg-danger">Item: Digest (Food Only)</span>',
@@ -21,7 +21,7 @@ export const ItemModeSpan = {
     '<span class="badge text-bg-danger">Item: Digest (Dispersed Damage)</span>',
 };
 
-export const AddonIcon = {
+export const AddonIcon: Record<string, string> = {
   Numbing: '',
   Stripping: '',
   Muffles: 'bi-volume-mute',
@@ -30,14 +30,14 @@ export const AddonIcon = {
   'Complete Absorb': '',
 };
 
-export const ReagentAddonIcon = {
+export const ReagentAddonIcon: Record<string, string> = {
   'Produce Liquids': '',
   'Digestion Liquids': '',
   'Absorption Liquids': '',
   'Draining Liquids': '',
 };
 
-export const AutotransferFlagIcon = {
+export const AutotransferFlagIcon: Record<string, string> = {
   Creatures: '',
   Absorbed: '',
   Carbon: '',
@@ -59,7 +59,7 @@ export const AutotransferFlagIcon = {
   Food: '',
 };
 
-export const SoulcatcherSettingsFlag = {
+export const SoulcatcherSettingsFlag: Record<string, string> = {
   '1': 'Catch User',
   '2': 'Catch Prey',
   '4': 'Ext. hearing',

@@ -15,3 +15,9 @@
 	name = "Squirrel (Big)"
 	color_keys = 3
 	color_key_names = list("Tail","Stripe","Underside")
+
+/datum/sprite_accessory/tail/large_tails/ochre/flagtail
+	icon_state = "flagtail"
+	name = "Flagtail"
+	color_keys = 3
+	color_key_names = list("Tail","Floof","Inner Floof")

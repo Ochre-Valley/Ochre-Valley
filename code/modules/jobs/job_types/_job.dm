@@ -20,7 +20,7 @@
 
 	//Bitflags for the job
 	var/flag = NONE //Deprecated
-	var/department_flag = NONE //Deprecated
+	var/department_flag = NONE // affects tgui class selection sorting!
 	var/auto_deadmin_role_flags = NONE
 
 	//Players will be allowed to spawn in as jobs that are set to "Station"
@@ -70,6 +70,7 @@
 	//can be overridden by antag_rep.txt config
 	var/antag_rep = 10
 
+	// WARNING: Only affects jobs within the same department_flag!
 	var/display_order = JOB_DISPLAY_ORDER_DEFAULT
 
 	//allowed sex/race for picking
@@ -89,7 +90,6 @@
 	var/whitelist_req = FALSE
 
 	var/bypass_jobban = FALSE
-	var/bypass_lastclass = TRUE
 
 	var/list/peopleiknow = list()
 	var/list/peopleknowme = list()
@@ -130,8 +130,8 @@
 	/// This job is immune to species-based swapped gender locks
 	var/immune_to_genderswap = FALSE
 
-	/// Jobs that are obsfuscated on actor screen
-	var/obsfuscated_job = FALSE
+	/// Jobs that are obfuscated on actor screen
+	var/obfuscated_job = FALSE
 
 	///Jobs that are hidden from actor screen
 	var/hidden_job = FALSE
@@ -153,6 +153,7 @@
 	var/PQ_boost_divider = 0
 
 	var/list/virtue_restrictions
+	var/list/quirk_restrictions
 	var/list/vice_restrictions
 
 	///The job's stats
@@ -181,6 +182,46 @@
 	///
 	var/quest_claim_barred = FALSE
 
+	///Whether this class has additional preferences specific to it, like bounties for wretch. Make sure to also put handling for it in the job's /Topic! See wretch.dm for an example. Note that this is true-by-default because the default handler handles advclass selection
+	var/has_subprefs = TRUE
+
+	/// Default state of the subprefs; for most roles, this will just be the subclass selection.
+	var/list/default_subprefs = list("favorite_advclass" = null)
+
+///Returns the client's subprefs list for this job, initializing it if it does not exist. Will be null if the client or prefs are null.
+/datum/job/proc/get_roleprefs(client/C)
+	if(!C)
+		return
+	var/datum/preferences/prefs = C.prefs
+	if(!prefs)
+		return
+	if(!prefs.job_subprefs || !islist(prefs.job_subprefs))
+		prefs.job_subprefs = list()
+	if(!prefs.job_subprefs[title])
+		prefs.job_subprefs[title] = default_subprefs.Copy()
+	return prefs.job_subprefs[title]
+
+/datum/job/proc/update_subprefs_window(mob/user)
+	if(!advclass_cat_rolls)
+		return
+	var/client/C = usr.client
+	if(!C || !C.prefs)
+		return
+	var/list/roleprefs = get_roleprefs(C)
+	var/datum/advclass/favorite = roleprefs["favorite_advclass"]
+	var/favorite_name = favorite ? favorite::name : "Choose"
+	var/HTML = {"
+		<i>You can choose a favorite subclass here. You'll automatically select this subclass on roundstart if possible.</i><br/><br/>
+		<b>Selected class:</b> <a href="?src=[REF(src)];class=1">[favorite_name]</a>
+		<center><a href="?src=[REF(src)];subprefsexit=1">EXIT</a>\t\t<a href="?src=[REF(src)];subprefsreset=1">RESET</a></center>
+	"}
+	// the fact that the window width/height will be different each time is the main reason this isn't all done in a parent proc on /datum/job
+	var/datum/browser/popup = new(user, "[JOB_SUBPREFS_WINDOW_ID]", "<div align='center'>[title] Preferences</div>", 500, 250)
+	popup.set_content(HTML)
+	popup.open(FALSE)
+	if(winexists(usr, "[JOB_SUBPREFS_WINDOW_ID]"))
+		winset(usr, "[JOB_SUBPREFS_WINDOW_ID]", "focus=true")
+
 /proc/is_quest_claim_barred(mob/user)
 	if(!user?.mind)
 		return FALSE
@@ -196,6 +237,11 @@
 	var/datum/advclass/AC = user.mind.picked_advclass
 	if(!QDELETED(AC) && AC.townie_contract_gate_exempt)
 		return TRUE
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/datum/migrant_role/role = MIGRANT_ROLE(H.migrant_type)
+		if(role?.townie_contract_gate_exempt)
+			return TRUE
 	return FALSE
 
 
@@ -214,7 +260,7 @@
 		used_name = n_title //OV Add: Gender Neutral Revamp
 	return used_name
 
-/client/proc/job_greet(var/datum/job/greeting_job)
+/client/proc/job_greet(datum/job/greeting_job)
 	if(mob.job == greeting_job.title)
 		greeting_job.greet(mob)
 
@@ -260,6 +306,11 @@
 			if(isnull(H.mind?.special_role) && (MF?.special_role in list(ROLE_VAMPIRE, ROLE_NBEAST, ROLE_BANDIT, ROLE_LICH, ROLE_WRETCH, ROLE_UNBOUND_DEATHKNIGHT)))
 				continue
 			H.mind.i_know_person(MF)
+	if(give_bank_account)
+		for(var/mob/living/carbon/human/MF in GLOB.player_list)
+			if(HAS_TRAIT(MF, TRAIT_WELLKNOWN)) // we have to do this to handle resident virtue and well-known quirk
+				H.mind.person_knows_me(MF)
+				H.mind.i_know_person(MF)
 
 	// Ready up bonus
 	if(H.mind)
@@ -269,7 +320,8 @@
 	if(!H.islatejoin)
 		H.adjust_triumphs(1)
 		H.apply_status_effect(/datum/status_effect/buff/mealbuff)
-		H.hydration = 1000 // Set higher hydration
+		H.hydration = HYDRATION_LEVEL_FULL
+		H.nutrition = NUTRITION_LEVEL_FULL
 
 		if(H.mind)
 			H.mind?.special_items["Pouch of Coins"] = /obj/item/storage/belt/rogue/pouch/coins/readyuppouch
@@ -301,8 +353,8 @@
 			SStreasury.noble_incomes[H] = noble_income
 			SStreasury.grant_estate_income(H, noble_income, TRUE)
 
-	if(show_in_credits)
-		SScrediticons.processing += H
+	if(show_in_credits && H.ckey && isnull(SScrediticons.processing[H.ckey]))
+		SScrediticons.processing[H.ckey] = FALSE
 
 	if(cmode_music)
 		H.cmode_music = cmode_music
@@ -310,7 +362,7 @@
 	if (!hidden_job && announce) //OV Edit: Don't add unannounced players to manifest
 		var/mob_name = H.real_name
 		var/mob_rank
-		if (obsfuscated_job)
+		if (obfuscated_job)
 			mob_rank = "Adventurer"
 		else
 			mob_rank = H.mind.assigned_role
@@ -360,18 +412,18 @@
 	var/datum/job/J = SSjob.GetJob(mind.assigned_role)
 	var/used_title = get_role_title()
 
-	GLOB.credits_icons[thename] = list()
 	var/client/C = client
 	var/datum/preferences/P = C.prefs
 	var/icon/I
 	if(generate_for_adv_class)
-		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH), human_gear_override = src)
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_CREDITS, list(SOUTH), human_gear_override = src)
 	else if (P)
-		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH))
+		I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_CREDITS, list(SOUTH))
 	if(I)
 		var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="credits")
 		I.Blend(female_s, ICON_MULTIPLY)
 		I.Scale(96,96)
+		GLOB.credits_icons[thename] = list()
 		GLOB.credits_icons[thename]["title"] = used_title
 		GLOB.credits_icons[thename]["icon"] = I
 		GLOB.credits_icons[thename]["vc"] = voice_color
@@ -386,7 +438,7 @@
 	return TRUE
 
 /datum/job/proc/GetAntagRep()
-	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
+	. = CONFIG_GET(keyed_list/antag_rep)[LOWER_TEXT(title)]
 	if(. == null)
 		return antag_rep
 
@@ -398,10 +450,6 @@
 /datum/job/proc/equip(mob/living/carbon/human/H, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, datum/outfit/outfit_override = null, client/preference_source)
 	if(!H)
 		return FALSE
-	if(CONFIG_GET(flag/enforce_human_authority) && (title in GLOB.command_positions))
-		if((H.dna.species.id != "human") && (H.dna.species.id != "humen"))
-			H.set_species(/datum/species/human)
-			H.apply_pref_name("human", preference_source)
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
 	H.apply_organ_stuff() // OV Add - apply super special sauce organ stuff when we spawn in, and therefore have MIND
@@ -419,9 +467,6 @@
 			H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly)
 
 	H.dna.species.after_equip_job(src, H, visualsOnly)
-	// OV Edit Start
-	H.update_sight()
-	// OV Edit End
 
 	if(!visualsOnly && announce)
 		announce(H)
@@ -467,32 +512,6 @@
 	name = "Standard Gear"
 
 	var/jobtype = null
-
-/datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
-/*	switch(H.backpack)
-		if(GBACKPACK)
-			back = /obj/item/storage/backpack //Grey backpack
-		if(GSATCHEL)
-			back = /obj/item/storage/backpack/satchel //Grey satchel
-		if(GDUFFELBAG)
-			back = /obj/item/storage/backpack/duffelbag //Grey Duffel bag
-		if(LSATCHEL)
-			back = /obj/item/storage/backpack/satchel/leather //Leather Satchel
-		if(DSATCHEL)
-			back = satchel //Department satchel
-		if(DDUFFELBAG)
-			back = duffelbag //Department duffel bag
-		else
-			back = backpack //Department backpack
-
-	//converts the uniform string into the path we'll wear, whether it's the skirt or regular variant
-	var/holder
-	if(H.jumpsuit_style == PREF_SKIRT)
-		holder = "[uniform]"
-	else
-		holder = "[uniform]"
-	uniform = text2path(holder)*/
 
 /datum/outfit/job/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
@@ -542,7 +561,7 @@
 /proc/should_wear_masc_clothes(mob/living/carbon/human/H)
 	if(!H.mind)
 		return (H.pronouns == HE_HIM || H.pronouns == THEY_THEM || H.pronouns == IT_ITS)
-	else 
+	else
 		return (H.clothes_pref == CLOTHES_M)
 
 /proc/should_wear_femme_clothes(mob/living/carbon/human/H)
@@ -558,160 +577,166 @@
 
 	return display_title || title
 
+/datum/job/proc/show_explain(mob/user)
+	if(!class_setup_examine)
+		to_chat(user, span_danger("[title] does not allow examining it!"))
+		return
+	var/list/dat = list()
+	var/show_job_traits = TRUE
+	var/sclass_count = 0
+	if(length(job_subclasses) && length(job_stats))
+		CRASH("[REF(src)] has definitions for both class and subclass stats. Likely not intended, and they will stack!")
+	if(length(job_subclasses))
+		dat += "This class has the following subclasses: "
+		for(var/sclass in job_subclasses)
+			sclass_count++
+			var/datum/advclass/adv = sclass
+			var/datum/advclass/adv_ref = SSrole_class_handler.get_advclass_by_name(initial(adv.name))
+			dat += "<details><summary><b><font color ='#ece9e9'>[adv_ref.name]</font></b></summary>"
+			dat += "<table align='center'; width='100%'; height='100%';border: 1px solid white;border-collapse: collapse>"
+			dat += "<tr style='vertical-align:top'>"
+			dat += "<td width = 70%><i><font color ='#ece9e9'>[adv_ref.tutorial]</font></i></td>"
+			dat += "<td width = 30%; style='text-align:right'>"
+			if(length(adv_ref.subclass_stats))
+				dat += "<font color ='#7a4d0a'>Stat Bonuses:</font><font color ='#d4b164'>"
+				for(var/stat in adv_ref.subclass_stats)
+					dat += "<br>[capitalize(stat)]: <b>[adv_ref.subclass_stats[stat] < 0 ? "<font color = '#cf2a2a'>" : "<font color = '#91cf68'>"]\Roman[adv_ref.subclass_stats[stat]]</font></b>"
+			dat += "<br></td></tr></table></font>"
+			if(length(adv_ref.adv_stat_ceiling))
+				dat += "["<font color = '#cf2a2a'><b>This subclass has the following stat limits: "]</b></font><br>"
+				dat += " | "
+				for(var/stat in adv_ref.adv_stat_ceiling)
+					dat += "["[capitalize(stat)]: <b>\Roman[adv_ref.adv_stat_ceiling[stat]]</b>"] | "
+				dat += "<i><br>Regardless of your statpacks or race choice, you will not be able to exceed these stats on spawn.</i></font>"
+			if(LAZYLEN(adv_ref.subclass_mage_aspects))
+				var/list/aspect_cfg = adv_ref.subclass_mage_aspects
+				dat += "<font color = '#a3a7e0'><b>Mage Aspects:</b><br>"
+				if(aspect_cfg["mastery"])
+					dat += "Mastery: <b>Unlocked</b><br>"
+				if(aspect_cfg["major"] > 0)
+					dat += "Major Aspects: <b>[aspect_cfg["major"]]</b><br>"
+				if(aspect_cfg["minor"] > 0)
+					dat += "Minor Aspects: <b>[aspect_cfg["minor"]]</b><br>"
+				if(aspect_cfg["utilities"] > 0)
+					dat += "Utility Slots: <b>[aspect_cfg["utilities"]]</b><br>"
+				if(LAZYLEN(aspect_cfg["locked_aspects"]))
+					dat += "Innate: "
+					var/list/locked = aspect_cfg["locked_aspects"]
+					for(var/aspect_path in locked)
+						var/datum/magic_aspect/A = aspect_path
+						dat += "<b>[initial(A.name)]</b> "
+					dat += "<br>"
+				if(islist(aspect_cfg["variants"]))
+					var/list/overrides = aspect_cfg["variants"]
+					for(var/aspect_path in overrides)
+						var/datum/magic_aspect/A = aspect_path
+						dat += "Tradition: <b>[capitalize(overrides[aspect_path])] [initial(A.name)]</b><br>"
+				dat += "</font>"
+			if(length(adv_ref.subclass_languages))
+				dat += "<details><summary><i>Known Languages</i></summary>"
+				for(var/i in 1 to length(adv_ref.subclass_languages))
+					var/datum/language/lang = adv_ref.subclass_languages[i]
+					dat += "<i>[initial(lang.name)][i == length(adv_ref.subclass_languages) ? "" : ", "]</i>"
+				dat += "</details>"
+			dat += "<table align='center'; width='100%'; height='100%';border: 1px solid white;border-collapse: collapse>"
+			dat += "<tr style='vertical-align:top'>"
+			dat += "<td width = 50%>"	//Table for SubClass Traits | Class Skills
+			if(length(adv_ref.traits_applied) || (!length(adv_ref.traits_applied) && length(job_traits)))
+				var/list/traitlist
+				if(length(adv_ref.traits_applied))
+					traitlist = adv_ref.traits_applied
+					dat += "<font color ='#7a4d0a'><b>Sub</b>class Traits:</font> "
+				else if(!length(adv_ref.traits_applied) && length(job_traits))
+					traitlist = job_traits
+					show_job_traits = FALSE
+					dat += "<font color ='#7a4d0a'><b>Class</b> Traits:</font> "
+				for(var/trait in traitlist)
+					dat += "<details><summary><i><font color ='#ccbb82'>[trait]</font></i></summary>"
+					dat += "<i><font color = '#a3ffe0'>[GLOB.roguetraits[trait]]</font></i></details>"
+				dat += "</font>"
+				dat += "<br>"
+			if(length(adv_ref.subclass_stashed_items))
+				dat += "<br><font color ='#7a4d0a'>Stashed Items:</font><font color ='#d4b164'>"
+				for(var/stashed_item in adv_ref.subclass_stashed_items)
+					dat += "<br> - <i>[stashed_item]</i>"
+				dat += "</font>"
+			if(length(adv_ref.subclass_virtues))
+				dat += "<br><font color ='#7a4d0a'>Subclass Virtues:</font><font color ='#d4b164'>"
+				for(var/virtue_type in adv_ref.subclass_virtues)
+					var/datum/virtue/virtue = virtue_type
+					dat += "<br> - <i>[initial(virtue.name)]</i>"
+				dat += "</font>"
+			dat += "</td>"	//Trait Table end
+			if(length(adv_ref.subclass_skills))
+				dat += "<td width = 50%; style='text-align:right'>"
+				var/list/notable_skills = list()
+				for(var/sk in adv_ref.subclass_skills)
+					if(adv_ref.subclass_skills[sk] >= SKILL_LEVEL_JOURNEYMAN)
+						notable_skills[sk] = adv_ref.subclass_skills[sk]
+					else if(ispath(sk, /datum/skill/combat))
+						notable_skills[sk] = adv_ref.subclass_skills[sk]
+				if(!length(notable_skills))	//Nothing above Jman AND no Combat skills.
+					dat += "<i>This subclass has no notable skills.</i>"
+				else
+					notable_skills = sortTim(notable_skills,/proc/cmp_numeric_dsc, TRUE)
+					var/max_skills = 5	//We don't want to print out /all/ of them, as it messes up the formatting.
+					dat += "<font color ='#7a4d0a'>Notable Skills: </font>"
+					for(var/sk in notable_skills)
+						if(max_skills > 0)
+							var/datum/skill/skill = sk
+							dat += "<font color ='#d4b164'><br>[initial(skill.name)] — [SSskills.level_names[notable_skills[sk]]]</font>"
+							max_skills--
+					LAZYCLEARLIST(notable_skills)
+			dat += "</td></tr></table>"//Skill table end
+			if(adv_ref.extra_context)
+				dat += "<font color ='#a06c1e'>[adv_ref.extra_context]"
+				dat += "<br></font>"
+
+			if(istype(adv_ref.age_mod))
+				dat += adv_ref.age_mod.get_preview_string()
+
+			dat += "</details>"
+	dat += "<hr>"
+	if(length(job_stats))
+		dat += "Starting Stats:<font color ='#d4b164'>"
+		for(var/stat in job_stats)
+			dat += "<br>[capitalize(stat)]: <b>[job_stats[stat] < 0 ? "<font color = '#cf2a2a'>" : "<font color = '#91cf68'>"]\Roman[job_stats[stat]]</font></b>"
+		dat += "</font>"	//Ends the stats colors
+		if(length(stat_ceilings))
+			dat += "["<br><font color = '#cf2a2a'><b>This class has the following stat limits:</b> "]<br>"
+			dat += " | "
+			for(var/stat in stat_ceilings)
+				dat += "["[capitalize(stat)]: <b>\Roman[stat_ceilings[stat]]</b>"] | "
+			dat += "<br><i>Regardless of your statpacks or race choice, you will not be able to exceed these stats on spawn.</i></font>"
+			dat += "</font>"	//Ends the stat limit colors
+	if(length(job_traits) && (show_job_traits || sclass_count > 1))
+		dat += "<b>Class</b></font> Traits: "
+		for(var/trait in job_traits)
+			dat += "<details><summary><i><font color ='#ccbb82'>[trait]</font></i></summary>"
+			dat += "<i><font color = '#a3ffe0'>[GLOB.roguetraits[trait]]</font></i></details>"
+		dat += "</font>"
+	dat += "<br><i>This information is not all-encompassing. Many classes have other quirks and skills that define them.</i>"
+	if(istype(src,/datum/job/roguetown/jester))
+		LAZYCLEARLIST(dat)
+		dat = list("<font color = '#d151ab'><center>Come one, come all, where Psydon Lies! <br>Let Xylix roll the dice, <br>unto our untimely demise! <br>Ahahaha!</center>")
+		dat += "<center><b><font size = 4>STR: ???</b><br>"
+		dat += "<b>WIL: ???</b><br>"
+		dat += "<b>CON: ???</b><br>"
+		dat += "<b>PER: ???</b><br>"
+		dat += "<b>INT: ???</b><br>"
+		dat += "<b>FOR: ???</b><br></center></font>"
+	var/height = 550
+	if(sclass_count >= 10)
+		height = 925
+	var/datum/browser/popup = new(user, "classhelp", "<div style='text-align: center'>[title]</div>", nwidth = 475, nheight = height)
+	popup.set_content(dat.Join())
+	popup.open(FALSE)
+	if(winexists(user, "classhelp"))
+		winset(user, "classhelp", "focus=true")
+
 /datum/job/Topic(href, list/href_list)
 	if(href_list["explainjob"])
-		var/list/dat = list()
-		var/show_job_traits = TRUE
-		var/sclass_count = 0
-		if(length(job_subclasses) && length(job_stats))
-			CRASH("[REF(src)] has definitions for both class and subclass stats. Likely not intended, and they will stack!")
-		if(length(job_subclasses))
-			dat += "This class has the following subclasses: "
-			for(var/sclass in job_subclasses)
-				sclass_count++
-				var/datum/advclass/adv = sclass
-				var/datum/advclass/adv_ref = SSrole_class_handler.get_advclass_by_name(initial(adv.name))
-				dat += "<details><summary><b><font color ='#ece9e9'>[adv_ref.name]</font></b></summary>"
-				dat += "<table align='center'; width='100%'; height='100%';border: 1px solid white;border-collapse: collapse>"
-				dat += "<tr style='vertical-align:top'>"
-				dat += "<td width = 70%><i><font color ='#ece9e9'>[adv_ref.tutorial]</font></i></td>"
-				dat += "<td width = 30%; style='text-align:right'>"
-				if(length(adv_ref.subclass_stats))
-					dat += "<font color ='#7a4d0a'>Stat Bonuses:</font><font color ='#d4b164'>"
-					for(var/stat in adv_ref.subclass_stats)
-						dat += "<br>[capitalize(stat)]: <b>[adv_ref.subclass_stats[stat] < 0 ? "<font color = '#cf2a2a'>" : "<font color = '#91cf68'>"]\Roman[adv_ref.subclass_stats[stat]]</font></b>"
-				dat += "<br></td></tr></table></font>"
-				if(length(adv_ref.adv_stat_ceiling))
-					dat += "["<font color = '#cf2a2a'><b>This subclass has the following stat limits: "]</b></font><br>"
-					dat += " | "
-					for(var/stat in adv_ref.adv_stat_ceiling)
-						dat += "["[capitalize(stat)]: <b>\Roman[adv_ref.adv_stat_ceiling[stat]]</b>"] | "
-					dat += "<i><br>Regardless of your statpacks or race choice, you will not be able to exceed these stats on spawn.</i></font>"
-				if(LAZYLEN(adv_ref.subclass_mage_aspects))
-					var/list/aspect_cfg = adv_ref.subclass_mage_aspects
-					dat += "<font color = '#a3a7e0'><b>Mage Aspects:</b><br>"
-					if(aspect_cfg["mastery"])
-						dat += "Mastery: <b>Unlocked</b><br>"
-					if(aspect_cfg["major"] > 0)
-						dat += "Major Aspects: <b>[aspect_cfg["major"]]</b><br>"
-					if(aspect_cfg["minor"] > 0)
-						dat += "Minor Aspects: <b>[aspect_cfg["minor"]]</b><br>"
-					if(aspect_cfg["utilities"] > 0)
-						dat += "Utility Slots: <b>[aspect_cfg["utilities"]]</b><br>"
-					if(LAZYLEN(aspect_cfg["locked_aspects"]))
-						dat += "Innate: "
-						var/list/locked = aspect_cfg["locked_aspects"]
-						for(var/aspect_path in locked)
-							var/datum/magic_aspect/A = aspect_path
-							dat += "<b>[initial(A.name)]</b> "
-						dat += "<br>"
-					if(islist(aspect_cfg["variants"]))
-						var/list/overrides = aspect_cfg["variants"]
-						for(var/aspect_path in overrides)
-							var/datum/magic_aspect/A = aspect_path
-							dat += "Tradition: <b>[capitalize(overrides[aspect_path])] [initial(A.name)]</b><br>"
-					dat += "</font>"
-				if(length(adv_ref.subclass_languages))
-					dat += "<details><summary><i>Known Languages</i></summary>"
-					for(var/i in 1 to length(adv_ref.subclass_languages))
-						var/datum/language/lang = adv_ref.subclass_languages[i]
-						dat += "<i>[initial(lang.name)][i == length(adv_ref.subclass_languages) ? "" : ", "]</i>"
-					dat += "</details>"
-				dat += "<table align='center'; width='100%'; height='100%';border: 1px solid white;border-collapse: collapse>"
-				dat += "<tr style='vertical-align:top'>"
-				dat += "<td width = 50%>"	//Table for SubClass Traits | Class Skills
-				if(length(adv_ref.traits_applied) || (!length(adv_ref.traits_applied) && length(job_traits)))
-					var/list/traitlist
-					if(length(adv_ref.traits_applied))
-						traitlist = adv_ref.traits_applied
-						dat += "<font color ='#7a4d0a'><b>Sub</b>class Traits:</font> "
-					else if(!length(adv_ref.traits_applied) && length(job_traits))
-						traitlist = job_traits
-						show_job_traits = FALSE
-						dat += "<font color ='#7a4d0a'><b>Class</b> Traits:</font> "
-					for(var/trait in traitlist)
-						dat += "<details><summary><i><font color ='#ccbb82'>[trait]</font></i></summary>"
-						dat += "<i><font color = '#a3ffe0'>[GLOB.roguetraits[trait]]</font></i></details>"
-					dat += "</font>"
-					dat += "<br>"
-				if(length(adv_ref.subclass_stashed_items))
-					dat += "<br><font color ='#7a4d0a'>Stashed Items:</font><font color ='#d4b164'>"
-					for(var/stashed_item in adv_ref.subclass_stashed_items)
-						dat += "<br> - <i>[stashed_item]</i>"
-					dat += "</font>"
-				if(length(adv_ref.subclass_virtues))
-					dat += "<br><font color ='#7a4d0a'>Subclass Virtues:</font><font color ='#d4b164'>"
-					for(var/virtue_type in adv_ref.subclass_virtues)
-						var/datum/virtue/virtue = virtue_type
-						dat += "<br> - <i>[initial(virtue.name)]</i>"
-					dat += "</font>"
-				dat += "</td>"	//Trait Table end
-				if(length(adv_ref.subclass_skills))
-					dat += "<td width = 50%; style='text-align:right'>"
-					var/list/notable_skills = list()
-					for(var/sk in adv_ref.subclass_skills)
-						if(adv_ref.subclass_skills[sk] >= SKILL_LEVEL_JOURNEYMAN)
-							notable_skills[sk] = adv_ref.subclass_skills[sk]
-						else if(ispath(sk, /datum/skill/combat))
-							notable_skills[sk] = adv_ref.subclass_skills[sk]
-					if(!length(notable_skills))	//Nothing above Jman AND no Combat skills.
-						dat += "<i>This subclass has no notable skills.</i>"
-					else
-						notable_skills = sortTim(notable_skills,/proc/cmp_numeric_dsc, TRUE)
-						var/max_skills = 5	//We don't want to print out /all/ of them, as it messes up the formatting.
-						dat += "<font color ='#7a4d0a'>Notable Skills: </font>"
-						for(var/sk in notable_skills)
-							if(max_skills > 0)
-								var/datum/skill/skill = sk
-								dat += "<font color ='#d4b164'><br>[initial(skill.name)] — [SSskills.level_names[notable_skills[sk]]]</font>"
-								max_skills--
-						LAZYCLEARLIST(notable_skills)
-				dat += "</td></tr></table>"//Skill table end
-				if(adv_ref.extra_context)
-					dat += "<font color ='#a06c1e'>[adv_ref.extra_context]"
-					dat += "<br></font>"
-
-				if(istype(adv_ref.age_mod))
-					dat += adv_ref.age_mod.get_preview_string()
-
-				dat += "</details>"
-		dat += "<hr>"
-		if(length(job_stats))
-			dat += "Starting Stats:<font color ='#d4b164'>"
-			for(var/stat in job_stats)
-				dat += "<br>[capitalize(stat)]: <b>[job_stats[stat] < 0 ? "<font color = '#cf2a2a'>" : "<font color = '#91cf68'>"]\Roman[job_stats[stat]]</font></b>"
-			dat += "</font>"	//Ends the stats colors
-			if(length(stat_ceilings))
-				dat += "["<br><font color = '#cf2a2a'><b>This class has the following stat limits:</b> "]<br>"
-				dat += " | "
-				for(var/stat in stat_ceilings)
-					dat += "["[capitalize(stat)]: <b>\Roman[stat_ceilings[stat]]</b>"] | "
-				dat += "<br><i>Regardless of your statpacks or race choice, you will not be able to exceed these stats on spawn.</i></font>"
-				dat += "</font>"	//Ends the stat limit colors
-		if(length(job_traits) && (show_job_traits || sclass_count > 1))
-			dat += "<b>Class</b></font> Traits: "
-			for(var/trait in job_traits)
-				dat += "<details><summary><i><font color ='#ccbb82'>[trait]</font></i></summary>"
-				dat += "<i><font color = '#a3ffe0'>[GLOB.roguetraits[trait]]</font></i></details>"
-			dat += "</font>"
-		dat += "<br><i>This information is not all-encompassing. Many classes have other quirks and skills that define them.</i>"
-		if(istype(src,/datum/job/roguetown/jester))
-			LAZYCLEARLIST(dat)
-			dat = list("<font color = '#d151ab'><center>Come one, come all, where Psydon Lies! <br>Let Xylix roll the dice, <br>unto our untimely demise! <br>Ahahaha!</center>")
-			dat += "<center><b><font size = 4>STR: ???</b><br>"
-			dat += "<b>WIL: ???</b><br>"
-			dat += "<b>CON: ???</b><br>"
-			dat += "<b>PER: ???</b><br>"
-			dat += "<b>INT: ???</b><br>"
-			dat += "<b>FOR: ???</b><br></center></font>"
-		var/height = 550
-		if(sclass_count >= 10)
-			height = 925
-		var/datum/browser/popup = new(usr, "classhelp", "<div style='text-align: center'>[title]</div>", nwidth = 475, nheight = height)
-		popup.set_content(dat.Join())
-		popup.open(FALSE)
-		if(winexists(usr, "classhelp"))
-			winset(usr, "classhelp", "focus=true")
+		show_explain(usr)
 	if(href_list["jobsubclassinfo"])
 		var/list/dat = list()
 		for(var/adv in job_subclasses)
@@ -741,29 +766,12 @@
 			var/advdat = ""
 			var/datum/advclass/subclasspath = adv
 			var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
-			var/found_issue = FALSE
-			if(length(subclass.virtue_limits))
-				for(var/virtuetype in subclass.virtue_limits)
-					if(istype(player.prefs.virtue, virtuetype))
-						advdat += "[player.prefs.virtue.name]<br>"
-						found_issue = TRUE
-					if(istype(player.prefs.virtuetwo, virtuetype))
-						advdat += "[player.prefs.virtuetwo.name]<br>"
-						found_issue = TRUE
-					//OV Add - Extra Virtue
-					if(istype(player.prefs.extravirtue, virtuetype))
-						advdat += "[player.prefs.extravirtue.name]<br>"
-						found_issue = TRUE
-					//OV Add Start - Extra Virtue
-
-			if(length(subclass.vice_limits))
-				for(var/vicetype in subclass.vice_limits)
-					for(var/vice in player.prefs.charflaws)
-						var/datum/charflaw/cf = vice
-						if(istype(vice, vicetype))
-							advdat += "[cf.name]<br>"
-							found_issue = TRUE
-			if(found_issue)
+			if(!subclass)
+				continue
+			var/list/restriction_names = subclass.get_prefs_restriction_names(player)
+			if(length(restriction_names))
+				for(var/restriction_name in restriction_names)
+					advdat += "[restriction_name]<br>"
 				dat += "<font color = '#e4e1e1'><b>[subclass::name]</b></font><br>"
 				dat += advdat
 		var/datum/browser/popup = new(usr, "subclassslots", "<div style='text-align: center'>Subclass Incompatibilities</div>", nwidth = 200, nheight = 300)
@@ -771,6 +779,37 @@
 		popup.open(FALSE)
 		if(winexists(usr, "subclassslots"))
 			winset(usr, "subclassslots", "focus=true")
+	if(href_list["subprefs"]) // display the html for the actual input box here
+		update_subprefs_window(usr)
+	if(href_list["subprefsexit"])
+		usr << browse(null, "window=[JOB_SUBPREFS_WINDOW_ID]") // close subprefs window
+	if(!advclass_cat_rolls)
+		return
+	var/client/C = usr.client
+	if(!C)
+		return
+	var/datum/preferences/prefs = C.prefs
+	if(!prefs)
+		return
+	if(!prefs.job_subprefs || !islist(prefs.job_subprefs))
+		prefs.job_subprefs = list()
+	if(!prefs.job_subprefs[title])
+		prefs.job_subprefs[title] = default_subprefs.Copy()
+	var/list/roleprefs = prefs.job_subprefs[title]
+
+	if(href_list["class"])
+		var/list/class_sel = list()
+		for(var/ctag in advclass_cat_rolls)
+			var/list/subsystem_ctag_list = SSrole_class_handler.sorted_class_categories[ctag]
+			for(var/datum/advclass/advdatum in subsystem_ctag_list)
+				class_sel[advdatum.name] = advdatum.type
+		var/input = class_sel[tgui_input_list(usr, "What path do your talents follow?", "Subclass Select", class_sel)]
+		if(input)
+			roleprefs["favorite_advclass"] = input
+		update_subprefs_window(usr)
+	if(href_list["subprefsreset"])
+		prefs.job_subprefs[title] = default_subprefs.Copy()
+		update_subprefs_window(usr)
 	. = ..()
 
 /datum/job/proc/has_limited_subclasses()
@@ -792,13 +831,54 @@
 	for(var/adv in job_subclasses)
 		var/datum/advclass/subclasspath = adv
 		var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
-		if(length(subclass.virtue_limits))
-			for(var/virtuetype in subclass.virtue_limits)
-				if(istype(player.prefs.virtue, virtuetype) || istype(player.prefs.virtuetwo, virtuetype) || istype(player.prefs.extravirtue, virtuetype)) //OV Edit - Extra Virtue
-					return TRUE
+		if(!subclass)
+			continue
+		if(length(subclass.get_prefs_restriction_names(player)))
+			return TRUE
 
-		if(length(subclass.vice_limits))
-			for(var/vicetype in subclass.vice_limits)
-				for(var/vice in player.prefs.charflaws)
-					if(istype(vice, vicetype))
-						return TRUE
+/datum/job/proc/prefs_all_subclasses_restricted(client/player)
+	if(!player?.prefs)
+		return FALSE
+	if(!length(job_subclasses))
+		return FALSE
+	var/checked_subclass = FALSE
+	for(var/adv in job_subclasses)
+		var/datum/advclass/subclasspath = adv
+		var/datum/advclass/subclass = SSrole_class_handler.get_advclass_by_name(initial(subclasspath.name))
+		if(!subclass)
+			continue
+		checked_subclass = TRUE
+		if(!length(subclass.get_prefs_restriction_names(player)))
+			return FALSE
+	return checked_subclass
+
+/// Dynamic UI data for TGUI to display these in the prefs menu
+/datum/job/ui_data(mob/user)
+	var/list/data = ..()
+
+	data["title"] = title
+	data["spawn_positions"] = spawn_positions
+
+	return data
+
+/// Constant UI data for TGUI to display these in the prefs menu
+/datum/job/proc/constant_ui_data()
+	return list(
+		"titles" = list(
+			TITLES_M = display_title || title,
+			TITLES_F = f_title || display_title || title,
+		),
+		"department_flag" = department_flag,
+		"display_order" = display_order,
+		"class_setup_examine" = class_setup_examine,
+		"tutorial" = tutorial,
+		"round_contrib_points" = round_contrib_points,
+		"has_subprefs" = has_subprefs,
+	)
+
+
+// INSTRUCTIONS FOR DOWNSTREAM: put this in your modular folder
+// /datum/job/constant_ui_data()
+// 	var/list/data = ..()
+// 	data["titles"][TITLES_N] = n_title || display_title || title
+// 	return data

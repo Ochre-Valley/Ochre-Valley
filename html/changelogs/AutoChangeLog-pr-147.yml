@@ -1,6 +1,0 @@
-author: "SomeDeviant"
-delete-after: True
-changes:
-  - rscadd: "added n_title variable and Gender Neutral Titles_N"
-  - rscadd: "added specific n_titles for Duke, Prince, Soilson"
-  - rscadd: "added TITLES_N terms for Knight (Knight)"

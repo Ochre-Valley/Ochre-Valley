@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - rscadd: "Can now import/export vorgans from the panel."

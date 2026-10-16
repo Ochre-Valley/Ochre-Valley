@@ -1,6 +1,0 @@
-author: "ShadowLarkens"
-delete-after: True
-changes:
-  - admin: "Logs are now stored in JSON Format as well as the old text-based format"
-  - config: "You can toggle on and off old logs in the config"
-  - code_imp: "Updated TGUI-core to 5.9.0, this may cause UIs to look weird, please report them!"

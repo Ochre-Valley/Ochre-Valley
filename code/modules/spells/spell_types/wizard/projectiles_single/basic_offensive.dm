@@ -2,8 +2,7 @@
 	button_icon = 'icons/mob/actions/mage_shared.dmi'
 	name = "Basic Offensive Magic"
 	desc = "Fundamental attack magyck. Used for centuries. Toggle firing mode (Shift+G) while the spell is active: \
-	Arcyne Bolt strikes a single target, Arced Bolt lobs over obstacles, and Soulshot fires a piercing beam through several foes. \
-	Deals 50% increased damage to simple-minded creechurs."
+	Arcyne Bolt strikes a single target, Arced Bolt lobs over obstacles, and Soulshot fires a piercing beam through several foes."
 	button_icon_state = "greater_arcyne_bolt"
 	sound = 'sound/magic/vlightning.ogg'
 	spell_color = GLOW_COLOR_ARCANE
@@ -41,6 +40,10 @@
 		list("name" = "Arced Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/greater_arcyne_bolt, "arc" = TRUE, "icon" = "greater_arcyne_bolt", "cost" = SPELLCOST_MINOR_PROJECTILE, "cooldown" = 5.5 SECONDS, "charge" = CHARGETIME_POKE, "slowdown" = CHARGING_SLOWDOWN_SMALL, "sound" = 'sound/magic/vlightning.ogg', "invocation" = "Magicae Sagitta!"),
 		list("name" = "Soulshot", "tag" = "BEAM", "proj" = /obj/projectile/magic/soulshot, "arc" = FALSE, "icon" = "soulshot", "cost" = SPELLCOST_MAJOR_PROJECTILE, "cooldown" = 12 SECONDS, "charge" = CHARGETIME_MAJOR, "slowdown" = CHARGING_SLOWDOWN_SMALL, "sound" = 'sound/magic/soulshot.ogg', "invocation" = "Animus Ictus!"),
 	)
+
+/datum/action/cooldown/spell/projectile/basic_offensive/Grant(mob/grant_to)
+	. = ..()
+	apply_mode(current_mode)
 
 /datum/action/cooldown/spell/projectile/basic_offensive/proc/apply_mode(index)
 	var/list/mode = modes[index]

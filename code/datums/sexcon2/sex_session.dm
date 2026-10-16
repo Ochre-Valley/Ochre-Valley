@@ -23,15 +23,18 @@
 	var/just_climaxed = FALSE
 	/// Whether to use knot when fucking (for knotted penis types)
 	var/do_knot_action = FALSE
+	/// Whether we're doing something subtly or visibly.
+	var/doing_subtly = FALSE
 
 	var/static/sex_id = 0
 	var/our_sex_id = 0 //this is so we can have more then 1 sex id open at once
 
 	// Moved here from proc/get_generic_force_adjective to reduce list initialization/destruction
-	var/static/list/low_force_adjectives 		= list("gently", "carefully", "tenderly", "gingerly", "delicately", "lazily")
-	var/static/list/mid_force_adjectives 		= list("firmly", "vigorously", "eagerly", "steadily", "intently")
-	var/static/list/high_force_adjectives 		= list("roughly", "carelessly", "forcefully", "fervently", "fiercely")
-	var/static/list/extreme_force_adjectives 	= list("brutally", "violently", "relentlessly", "savagely", "mercilessly")
+	var/static/list/stealth_force_adjectives 	= list("subtly", "sneakily", "covertly", "stealthily", "quietly")
+	var/static/list/low_force_adjectives		= list("gently", "carefully", "tenderly", "gingerly", "delicately", "lazily")
+	var/static/list/mid_force_adjectives		= list("firmly", "vigorously", "eagerly", "steadily", "intently")
+	var/static/list/high_force_adjectives		= list("roughly", "carelessly", "forcefully", "fervently", "fiercely")
+	var/static/list/extreme_force_adjectives	= list("brutally", "violently", "relentlessly", "savagely", "mercilessly")
 
 /datum/sex_session/New(mob/living/carbon/human/session_user, mob/living/carbon/human/session_target)
 	user = session_user
@@ -120,10 +123,9 @@
 /datum/sex_session/proc/sex_action_loop()
 	var/performed_action_type = current_action
 	var/datum/sex_action/action = SEX_ACTION(current_action)
+	action.on_start(user, target)
 	var/base_speed = -1
 	var/base_force = -1
-	action.on_start(user, target)
-
 	while(TRUE)
 		#ifndef LOCALTEST
 		// DO NOT allow NPC sex except on local, for testing
@@ -136,7 +138,7 @@
 			break
 
 		var/do_time = action.do_time / get_speed_multiplier()
-		if(!do_after(user, do_time, target = target))
+		if(!do_after(user, do_time, progress = !doing_subtly, target = target))
 			break
 
 		if(current_action == null || performed_action_type != current_action)
@@ -148,14 +150,15 @@
 		if(desire_stop)
 			break
 
-		if (speed != base_speed || force != base_force)
+		if(speed != base_speed || force != base_force)
 			base_force = force
 			base_speed = speed
 			action.on_perform_message(user, target)
-
 		action.on_perform(user, target)
 
-		action.show_sex_effects(user)
+
+		if(!doing_subtly)
+			action.show_sex_effects(user)
 
 		if(action.is_finished(user, target))
 			break
@@ -195,21 +198,49 @@
 	//OV Add End
 	if(user.stat != CONSCIOUS)
 		return FALSE
+	var/datum/species/dullahan/D = target.dna?.species
+	var/rev_exemption = FALSE
+	var/sametile_exemption = FALSE
+	var/held_exemption = FALSE
+	if(D && istype(D) && D.headless && (user.Adjacent(D.my_head) || user.is_holding(D.my_head)))
+		rev_exemption = TRUE // headless revs start a sex session from range, since you're technically panelling the mob and not the head. we handle head adjacency checks in check_location_accessible
+		if(user.is_holding(D.my_head))
+			held_exemption = TRUE
+		if(get_turf(D.my_head) == get_turf(user))
+			sametile_exemption = TRUE
+	var/datum/species/dullahan/E = user.dna?.species
+	if(E && istype(E) && E.headless && (target.Adjacent(E.my_head) || target.is_holding(E.my_head)))
+		rev_exemption = TRUE
+		if(target.is_holding(E.my_head))
+			held_exemption = TRUE
+		if(get_turf(E.my_head) == get_turf(target))
+			sametile_exemption = TRUE
+	if(D && E && istype(D) && istype(E) && D.headless && E.headless && (D.my_head.Adjacent(E.my_head))) // so they can make out
+		rev_exemption = TRUE
+		if(get_turf(D.my_head) == get_turf(E.my_head))
+			sametile_exemption = TRUE
 	// OV Edit Start: Belly Sex/Petrified Head
-	if(!user.Adjacent(target) && !action.ranged_action && !held_petrified_head)
+	if(!rev_exemption && !user.Adjacent(target) && !action.ranged_action && !held_petrified_head)
 		if(!isbelly(user.loc) || user.loc != target.loc)
-			return FALSE
+			if(isbelly(user.loc)) //allow ERP actions with your pred
+				var/obj/belly/our_belly = user.loc
+				if(target != our_belly.owner)
+					return FALSE
+			else
+				return FALSE
 	// OV Edit End
+	if(target.freeuse)
+		return TRUE
 	if(action.check_incapacitated && user.incapacitated())
 		return FALSE
-	if(action.check_same_tile)
+	if(action.check_same_tile && !sametile_exemption)
 		var/same_tile = (get_turf(user) == get_turf(target))
 		var/grab_bypass = (action.aggro_grab_instead_same_tile && user.get_highest_grab_state_on(target) == GRAB_AGGRESSIVE)
 		// OV Edit Start
 		if(!same_tile && !grab_bypass && !held_petrified_head)
 			return FALSE
 		// OV Edit End
-	if(action.require_grab)
+	if(action.require_grab && !held_exemption)
 		var/grabstate = user.get_highest_grab_state_on(target)
 		// OV Edit Start
 		if((grabstate == null || grabstate < action.required_grab_state) && !held_petrified_head)
@@ -217,8 +248,22 @@
 		// OV Edit End
 	return TRUE
 
-/datum/sex_session/proc/perform_sex_action(mob/living/carbon/human/action_target, arousal_amt, pain_amt, giving)
+#define CAUSTIC_PAIN_DMG 5
+
+/datum/sex_session/proc/perform_sex_action(mob/living/carbon/human/action_target, arousal_amt, pain_amt, giving, force, speed)
+	if(HAS_TRAIT(user, TRAIT_CAUSTIC))
+		var/datum/component/arousal/comp = target.GetComponent(/datum/component/arousal)
+		if(comp)
+			comp.damage_from_pain(CAUSTIC_PAIN_DMG)
+			comp.try_do_pain_effect(CAUSTIC_PAIN_DMG, giving)
+	if(HAS_TRAIT(action_target, TRAIT_CAUSTIC))
+		var/datum/component/arousal/comp = user.GetComponent(/datum/component/arousal)
+		if(comp)
+			comp.damage_from_pain(CAUSTIC_PAIN_DMG)
+			comp.try_do_pain_effect(CAUSTIC_PAIN_DMG, giving)
 	SEND_SIGNAL(action_target, COMSIG_SEX_RECEIVE_ACTION, arousal_amt, pain_amt, giving, force, speed)
+
+#undef CAUSTIC_PAIN_DMG
 
 /datum/sex_session/proc/handle_passive_ejaculation(mob/living/carbon/human/handler)
 	if(!handler)
@@ -319,7 +364,9 @@
 		if(SEX_MANUAL_AROUSAL_FULL)
 			return "<font color='#d146f5'>FULLY ERECT</font>"
 
-/datum/sex_session/proc/get_generic_force_adjective()
+/datum/sex_session/proc/get_generic_force_adjective(is_stealth = FALSE)
+	if(is_stealth)
+		return pick(stealth_force_adjectives)
 	switch(force)
 		if(SEX_FORCE_LOW)
 			return pick(low_force_adjectives)
@@ -411,6 +458,8 @@
 	var/current_arousal = arousal_data["arousal"] || 0
 	data["arousal"] = min(100, (current_arousal / ACTIVE_EJAC_THRESHOLD) * 100)
 	data["frozen"] = arousal_data["frozen"] || FALSE
+	data["freeuse"] = my_user.freeuse || FALSE
+	data["doing_subtly"] = doing_subtly || FALSE
 
 	// Which actions can be performed
 	var/list/can_perform = list()
@@ -471,6 +520,14 @@
 		if("freeze_arousal")
 			SEND_SIGNAL(user, COMSIG_SEX_FREEZE_AROUSAL)
 			. = TRUE
+		if("toggle_freeuse")
+			user.freeuse = !user.freeuse
+			to_chat(user, span_notice("Positioning and exposure checks are now [user.freeuse ? "disabled" : "enabled"]."))
+			. = TRUE
+		if("toggle_subtle")
+			doing_subtly = !doing_subtly
+			to_chat(user, span_notice("My actions will now be [doing_subtly ? "visible only to those close" : "everyone in range."]."))
+			. = TRUE
 		if("update_session_name")
 			if(collective)
 				collective.collective_display_name = params["name"]
@@ -524,3 +581,16 @@
 
 /datum/sex_session/proc/set_current_force(new_force)
 	force = clamp(new_force, SEX_FORCE_MIN, SEX_FORCE_MAX)
+
+/// Literally just fetches the word "subtly" if we have subtle actions enabled.
+/datum/sex_session/proc/get_subtle_word()
+	if(doing_subtly)
+		return "subtly "
+	else
+		return ""
+/// It's either 1 or 7 depending on state of subtle actions.
+/datum/sex_session/proc/get_subtle_range()
+	if(doing_subtly)
+		return 1
+	else
+		return 7

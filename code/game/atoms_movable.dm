@@ -47,10 +47,10 @@
 	var/jumping = FALSE
 	var/zfalling = FALSE
 	/**
-	 * an associative lazylist of relevant nested contents by "channel", the list is of the form: list(channel = list(important nested contents of that type))
-	 * each channel has a specific purpose and is meant to replace potentially expensive nested contents iteration.
-	 * do NOT add channels to this for little reason as it can add considerable memory usage.
-	 */
+		* an associative lazylist of relevant nested contents by "channel", the list is of the form: list(channel = list(important nested contents of that type))
+		* each channel has a specific purpose and is meant to replace potentially expensive nested contents iteration.
+		* do NOT add channels to this for little reason as it can add considerable memory usage.
+		*/
 	var/list/important_recursive_contents
 
 	/// String representing the spatial grid groups we want to be held in.
@@ -468,6 +468,13 @@
 	if(. && !moving_from_pull && pulled && pulledby == pulled && pulled.cmode && pulled.grab_state < GRAB_AGGRESSIVE) //NICHE case of being in a first tier grab state. //OV Edit
 		if(!pulledby || QDELETED(pulledby))
 			return
+
+		if(HAS_TRAIT(pulled, TRAIT_PACIFISM))
+			to_chat(pulled, span_notice("I don't resist as [src] pulls away."))
+			to_chat(pulledby, span_notice("I brush [src] aside and move off."))
+			pulled.stop_pulling()
+			return
+
 		if(pulledby.anchored)
 			pulledby.stop_pulling()
 		else
@@ -830,15 +837,16 @@
 		return TRUE
 	return ..()
 
-// called when this atom is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
+/// Called when this atom is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
 /atom/movable/proc/on_exit_storage(datum/component/storage/concrete/S)
 	return
 
-// called when this atom is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
-/atom/movable/proc/on_enter_storage(datum/component/storage/concrete/S)
+/// Called when this atom is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
+/// If the mob putting the atom in storage is known, it is passed on as M.
+/atom/movable/proc/on_enter_storage(datum/component/storage/concrete/S, mob/M)
 	return
 
-//called when a mob resists while inside a container that is itself inside something.
+/// Called when a mob resists while inside a container that is itself inside something.
 /atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
 	return
 
@@ -1106,17 +1114,34 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	icon = 'icons/effects/effects.dmi'
 	duration = 3
 
-/atom/movable/proc/do_warning()
-	var/image/I
-	I = image('icons/effects/effects.dmi', src, "mobwarning", src.layer + 0.1)
-	I.pixel_y = 16
-	flick_overlay(I, GLOB.clients, 5)
-
-
 /atom/movable/vv_get_dropdown()
 	. = ..()
-	. += "<option value='?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(src)]'>Follow</option>"
-	. += "<option value='?_src_=holder;[HrefToken()];admingetmovable=[REF(src)]'>Get</option>"
+	VV_DROPDOWN_OPTION("", "--- /movable ---")
+	VV_DROPDOWN_OPTION(VV_HK_OBSERVE_FOLLOW, "Observe Follow")
+	VV_DROPDOWN_OPTION(VV_HK_GET_MOVABLE, "Get Movable")
+	VV_DROPDOWN_OPTION(VV_HK_EDIT_PARTICLES, "Edit Particles")
+
+/atom/movable/vv_do_topic(list/href_list)
+	. = ..()
+
+	if(!.)
+		return
+
+	if(href_list[VV_HK_OBSERVE_FOLLOW])
+		if(!check_rights(R_ADMIN))
+			return
+		usr.client?.admin_follow(src)
+
+	if(href_list[VV_HK_GET_MOVABLE])
+		if(!check_rights(R_ADMIN))
+			return
+		if(QDELETED(src))
+			return
+		forceMove(get_turf(usr))
+
+	if(href_list[VV_HK_EDIT_PARTICLES])
+		var/client/C = usr.client
+		C?.open_particle_editor(src)
 
 /atom/movable/proc/ex_check(ex_id)
 	if(!ex_id)
@@ -1132,19 +1157,14 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 		return
 	if(on && !(movement_type & FLOATING))
 		setMovetype(movement_type | FLOATING)
-		INVOKE_ASYNC(src, PROC_REF(float_bob))
+		float_bob()
 	else if(!on && (movement_type & FLOATING))
 		setMovetype(movement_type & ~FLOATING)
 		animate(src, pixel_y = base_pixel_y, time = 5)
 
-// Oscillates pixel_y between base+2 and base-2 using absolute targets while FLOATING is set.
-// Absolute values prevent drift; the loop survives icon-state changes that cancel animate chains.
 /atom/movable/proc/float_bob()
-	var/bob_up = TRUE
-	while(!QDELETED(src) && (movement_type & FLOATING))
-		animate(src, pixel_y = base_pixel_y + (bob_up ? 2 : -2), time = 10, easing = SINE_EASING)
-		bob_up = !bob_up
-		sleep(10)
+	animate(src, pixel_y = base_pixel_y + 2, time = 10, easing = SINE_EASING, loop = -1)
+	animate(pixel_y = base_pixel_y - 2, time = 10, easing = SINE_EASING)
 
 /* Language procs */
 /atom/movable/proc/get_language_holder(shadow=TRUE)
@@ -1274,12 +1294,12 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 		to_x = -32
 	if(!direction)
 		to_y = 16
-	flick_overlay(I, GLOB.clients, 6)
+	var/atom/movable/flick_visual/pickup = T.flick_overlay_view(I, 6)
 	var/matrix/M = new
 	M.Turn(pick(-30, 30))
-	animate(I, alpha = 175, pixel_x = to_x, pixel_y = to_y, time = 3, transform = M, easing = CUBIC_EASING)
+	animate(pickup, alpha = 175, pixel_x = to_x, pixel_y = to_y, time = 3, transform = M, easing = CUBIC_EASING)
 	sleep(1)
-	animate(I, alpha = 0, transform = matrix(), time = 1)
+	animate(pickup, alpha = 0, transform = matrix(), time = 1)
 
 /atom/movable/Exited(atom/movable/gone, atom/newLoc)
 	. = ..()

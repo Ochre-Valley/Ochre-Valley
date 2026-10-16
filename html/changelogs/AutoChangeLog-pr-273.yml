@@ -1,4 +1,0 @@
-author: "SpadesNeil"
-delete-after: True
-changes:
-  - bugfix: "Fixes vore belly overlays not being selectable"

@@ -8,7 +8,6 @@
 	icon_state = "dhat"
 	item_state = "dhat"
 	armor = ARMOR_PADDED
-	sellprice = 15
 	worn_x_dimension = 64
 	worn_y_dimension = 68
 	sewrepair = TRUE
@@ -23,7 +22,6 @@
 				/obj/item/natural/hide/cured = 2)
 	tools = list(/obj/item/needle)
 	craftdiff = 6
-	sellprice = 15
 
 /obj/item/clothing/head/roguetown/spellcasterhat/wbonnet
 	name = "Witches Bonnet"
@@ -35,7 +33,6 @@
 	icon_state = "witch_bonnet"
 	item_state = "witch_bonnet"
 	armor = ARMOR_PADDED
-	sellprice = 18
 	worn_x_dimension = 64
 	worn_y_dimension = 68
 	sewrepair = TRUE
@@ -50,7 +47,6 @@
 				/obj/item/natural/hide/cured = 2)
 	tools = list(/obj/item/needle)
 	craftdiff = 6
-	sellprice = 18
 
 /obj/item/clothing/head/roguetown/grenzelhofthat/floweredAlc
 	name = "Alchemist Cap"

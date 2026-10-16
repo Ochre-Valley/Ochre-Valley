@@ -235,7 +235,7 @@ And it also helps for the character set panel
 
 /datum/clan/proc/apply_clan_components(mob/living/carbon/human/H)
 	H.AddComponent(/datum/component/sunlight_vulnerability)
-	if (H.job == "Stray")
+	if(H.get_vampire_generation() == GENERATION_THINNERBLOOD)
 		return
 	H.AddComponent(/datum/component/vampire_disguise)
 
@@ -370,7 +370,7 @@ And it also helps for the character set panel
 
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	H.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix_neu)
-	if (H.job == "Stray")
+	if(H.get_vampire_generation() == GENERATION_THINNERBLOOD)
 		return
 	add_verb(H, /mob/living/carbon/human/proc/disguise_verb)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
@@ -569,8 +569,10 @@ And it also helps for the character set panel
 /datum/action/clan_menu
 	name = "Clan Menu"
 	desc = "Open your clan's power management interface"
+	background_icon = 'icons/mob/actions/vampspells.dmi'
 	background_icon_state = "spell"
-	button_icon_state = "coven"
+	button_icon = 'icons/mob/actions/vampspells.dmi'
+	button_icon_state = "clan_menu"
 
 /datum/action/clan_menu/Trigger(trigger_flags)
 	if(!owner || !ishuman(owner))
@@ -591,9 +593,9 @@ And it also helps for the character set panel
 	status_type = STATUS_EFFECT_REFRESH
 
 /atom/movable/screen/alert/status_effect/debuff/blood_disgust
-	name = "Sanguine Curse"
-	desc = "<span class='warning'>This type of blood does not go down well.</span>\n"
-	icon_state = "hunger2"
+	name = "Incompatible Blood"
+	desc = "<span class='artery'>This taste is so REPULSIVE it PHYSICALLY HURTS to drink...</span>\n"
+	icon_state = "vbloodx"
 
 /datum/status_effect/debuff/blood_disgust/on_apply()
 	. = ..()
@@ -606,7 +608,7 @@ And it also helps for the character set panel
 	owner.remove_stress(/datum/stressevent/bad_blood)
 
 /datum/stressevent/bad_blood
-	desc = span_warning("That blood was revolting!")
+	desc = span_artery("That blood was revolting! It churns and burns within me...")
 	stressadd = 3
 	max_stacks = 10
 	stressadd_per_extra_stack = 3

@@ -7,30 +7,36 @@
 	zone = BODY_ZONE_PRECISE_STOMACH
 	slot = ORGAN_SLOT_BUTT
 	organ_dna_type = /datum/organ_dna/butt
-	accessory_type = /datum/sprite_accessory/butt/pair
-	var/organ_size = DEFAULT_BUTT_SIZE
+	accessory_type = /datum/sprite_accessory/butt/plain
+	var/butt_size = DEFAULT_BUTT_SIZE
+
+/obj/item/organ/butt/get_cache_key()
+	return "[..()]-[butt_size]"
 
 /datum/organ_dna/butt
-	var/organ_size = DEFAULT_BUTT_SIZE
+	var/butt_size = DEFAULT_BUTT_SIZE
 
 /datum/organ_dna/butt/imprint_organ(obj/item/organ/organ)
 	..()
 	var/obj/item/organ/butt/butt_organ = organ
-	butt_organ.organ_size = organ_size
+	butt_organ.butt_size = butt_size
 
 GLOBAL_LIST_INIT(named_butt_sizes, list(
 	"flat" = 0,
 	"small" = 1,
 	"medium" = 2,
 	"large" = 3,
-	"massive" = 4,
-	"enormous" = 5,
+	"extra-large" = 4,
+	"massive" = 5,
+	"enormous" = 6,
+	"gigantic" = 7,
+	"gargantuan" = 8,
 ))
 
 /datum/sprite_accessory/butt
-	icon = 'modular_causticcove/icons/mob/merp_organs/butt.dmi'
+	icon = 'modular_causticcove/icons/mob/merp_organs/buttplainnothigh.dmi' //OV EDIT
 	color_key_name = "Butt"
-	relevant_layers = list(BODY_ADJ_LAYER)
+	relevant_layers = list(ASS_LAYER, BODY_BEHIND_LAYER) //OV EDIT - Genitals Adjustments src. Caustic - Replaces BODY_ADJ_LAYER
 
 /datum/sprite_accessory/butt/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	if(!isdwarf(owner) && !isgoblinp(owner) && !iskobold(owner) && !isvermin(owner))
@@ -39,7 +45,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BUTT, OFFSET_BUTT)
 /datum/sprite_accessory/butt/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
-	return "butt_[icon_state]_[buttie.organ_size]"
+	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	var/obj/item/organ/butt/buttie = organ
@@ -49,7 +55,8 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
 
-/datum/sprite_accessory/butt/pair
-	name = "Pair"
+/datum/sprite_accessory/butt/plain
+	name = "Plain (No Thighs)"
 	icon_state = "pair"
+	preview_states = list("butt_pair_2_BEHIND")
 	color_key_defaults = list(KEY_SKIN_COLOR)

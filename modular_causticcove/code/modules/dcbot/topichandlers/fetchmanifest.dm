@@ -5,7 +5,8 @@
 /datum/world_topic/fetchmanifest/Run(list/input)
 	//OVEdit: Get storyteller too!
 	var/datum/storyteller/st = new SSgamemode.selected_storyteller
-	var/dat = ("**Round Time:** [time2text(STATION_TIME_PASSED(), "hh:mm", 0)]\t**Storyteller:** [st ? st.name : "none"]\n") //OV Edit: Add round timer
+	var/datum/map_config/mc = SSmapping.config
+	var/dat = ("**Round Time:** [time2text(STATION_TIME_PASSED(), "hh:mm", 0)]\t**Storyteller:** [st ? st.name : "none"]\n**Current Map:** [mc ? mc.map_name : "Unknown"]\n") //OV Edit: Add round timer
 	//OV Edit End
 	var/list/sortedActors = get_sorted_actors_list()
 	//OVEdit Start: Behind the scenes stuff to fancify fetchmanifest

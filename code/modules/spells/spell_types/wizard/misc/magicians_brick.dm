@@ -70,5 +70,10 @@
 	implement_tier = IMPLEMENT_TIER_LESSER
 	implement_refund = IMPLEMENT_REFUND_LESSER
 	possible_item_intents = list(/datum/intent/mace/strike) // Not giving it smash so it don't become competetive with conjure weapon (as a melee weapon)
-	associated_skill = /datum/skill/magic/arcane // what could go wrong...
+	associated_skill = /datum/skill/combat/arcyne // what could go wrong...
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')
+	twirly = SKILL_LEVEL_JOURNEYMAN
+	twirl_speed = 6
+
+/obj/item/rogueweapon/magicbrick/twirl_fumble(mob/living/user)
+	return twirl_fumble_bonk(user, 'sound/combat/hits/blunt/brick.ogg') // bonk

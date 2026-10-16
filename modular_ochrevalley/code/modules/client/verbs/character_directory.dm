@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(char_directory_pvp, list("No PvP", "Ask First", "Open to PvP", 
 	set desc = "Shows a listing of all active characters, along with their associated OOC notes, flavor text, and more."
 
 	// This is primarily to stop malicious users from trying to lag the server by spamming this verb
-/*	
+/*
 	if(!usr.checkMoveCooldown())
 		to_chat(usr, span_warning("Don't spam character directory refresh."))
 		return

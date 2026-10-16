@@ -50,7 +50,7 @@
 
 /datum/customizer_choice/organ/ears/tajaran
 	name = "Tabaxi Ears"
-	organ_type = /obj/item/organ/ears/tajaran         // Renamed them IN GAME but in-code they're still 'tajaran' because im afraid of breaking shit
+	organ_type = /obj/item/organ/ears/tajaran			// Renamed them IN GAME but in-code they're still 'tajaran' because im afraid of breaking shit
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/cat_big,
 		/datum/sprite_accessory/ears/cat_normal,
@@ -86,7 +86,9 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/elf,
 		/datum/sprite_accessory/ears/elfw,
-		/datum/sprite_accessory/ears/elf_short)
+		/datum/sprite_accessory/ears/elf_short,
+		/datum/sprite_accessory/ears/elf_long,
+		/datum/sprite_accessory/ears/elf_small)
 
 /datum/customizer/organ/ears/elf
 	customizer_choices = list(/datum/customizer_choice/organ/ears/elf)
@@ -100,6 +102,8 @@
 		/datum/sprite_accessory/ears/elf,
 		/datum/sprite_accessory/ears/elfw,
 		/datum/sprite_accessory/ears/elf_short,
+		/datum/sprite_accessory/ears/elf_long,
+		/datum/sprite_accessory/ears/elf_small,
 		/datum/sprite_accessory/ears/wispy,
 		/datum/sprite_accessory/ears/small,
 		//OV Add Start - throwing the wildkin list here too
@@ -162,6 +166,7 @@
 		/datum/sprite_accessory/ears/lynx,
 		/datum/sprite_accessory/ears/zorzor,
 		/datum/sprite_accessory/ears/naja_hood,
+		/datum/sprite_accessory/ears/ochre/shadekin,
 		/datum/sprite_accessory/ears/big/caustic/bunny_large,
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
@@ -262,6 +267,10 @@
 		/datum/sprite_accessory/ears/possum,
 		/datum/sprite_accessory/ears/raccoon,
 		/datum/sprite_accessory/ears/mouse,
+		/datum/sprite_accessory/ears/dormouse,
+		/datum/sprite_accessory/ears/dormouse_skin,
+		/datum/sprite_accessory/ears/dormouse_rings,
+		/datum/sprite_accessory/ears/dormouse_skin_rings,
 		/datum/sprite_accessory/ears/big/acrador_long,
 		/datum/sprite_accessory/ears/big/acrador_short,
 		/datum/sprite_accessory/ears/big/sandfox_large,
@@ -273,6 +282,7 @@
 		/datum/sprite_accessory/ears/big/caustic/bunny_large,
 		//CC End
 		//OV Add Start
+		/datum/sprite_accessory/ears/ochre/shadekin,
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		/datum/sprite_accessory/ears/big/ochre/feather_horns,
@@ -346,6 +356,10 @@
 		/datum/sprite_accessory/ears/possum,
 		/datum/sprite_accessory/ears/raccoon,
 		/datum/sprite_accessory/ears/mouse,
+		/datum/sprite_accessory/ears/dormouse,
+		/datum/sprite_accessory/ears/dormouse_skin,
+		/datum/sprite_accessory/ears/dormouse_rings,
+		/datum/sprite_accessory/ears/dormouse_skin_rings,
 		/datum/sprite_accessory/ears/big/acrador_long,
 		/datum/sprite_accessory/ears/big/acrador_short,
 		/datum/sprite_accessory/ears/big/sandfox_large,
@@ -358,10 +372,16 @@
 		/datum/sprite_accessory/ears/big/caustic/bunny_large,
 		//CC End
 		//OV Add Start
+		/datum/sprite_accessory/ears/ochre/shadekin,
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		/datum/sprite_accessory/ears/big/ochre/feather_horns,
 		/datum/sprite_accessory/ears/big/ochre/party_plume,
+		/datum/sprite_accessory/ears/elf,
+		/datum/sprite_accessory/ears/elfw,
+		/datum/sprite_accessory/ears/elf_short,
+		/datum/sprite_accessory/ears/elf_long,
+		/datum/sprite_accessory/ears/elf_small,
 		//OV Add End
 	)
 
@@ -393,8 +413,9 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/elf,
 		/datum/sprite_accessory/ears/elfw,
-		/datum/sprite_accessory/ears/elf_short
-		)
+		/datum/sprite_accessory/ears/elf_short,
+		/datum/sprite_accessory/ears/elf_long,
+		/datum/sprite_accessory/ears/elf_small)
 
 // ---- Dullahan
 /datum/customizer/organ/ears/dullahan
@@ -454,11 +475,16 @@
 		/datum/sprite_accessory/ears/possum,
 		/datum/sprite_accessory/ears/raccoon,
 		/datum/sprite_accessory/ears/mouse,
+		/datum/sprite_accessory/ears/dormouse,
+		/datum/sprite_accessory/ears/dormouse_skin,
+		/datum/sprite_accessory/ears/dormouse_rings,
+		/datum/sprite_accessory/ears/dormouse_skin_rings,
 		/datum/sprite_accessory/ears/big/acrador_long,
 		/datum/sprite_accessory/ears/big/acrador_short,
 		/datum/sprite_accessory/ears/big/sandfox_large,
 		/datum/sprite_accessory/ears/lynx,
 		//OV Add Start
+		/datum/sprite_accessory/ears/ochre/shadekin,
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
 		/datum/sprite_accessory/ears/big/ochre/feather_horns,
@@ -540,6 +566,7 @@
 		/datum/sprite_accessory/ears/naja_hood,
 		/datum/sprite_accessory/ears/wispy,
 		/datum/sprite_accessory/ears/small,
+		/datum/sprite_accessory/ears/ochre/shadekin,
 		/datum/sprite_accessory/ears/big/caustic/bunny_large,
 		/datum/sprite_accessory/ears/big/ochre/bunny_tall,
 		/datum/sprite_accessory/ears/big/ochre/shadekin_round,
@@ -605,6 +632,10 @@
 		/datum/sprite_accessory/ears/possum,
 		/datum/sprite_accessory/ears/raccoon,
 		/datum/sprite_accessory/ears/mouse,
+		/datum/sprite_accessory/ears/dormouse,
+		/datum/sprite_accessory/ears/dormouse_skin,
+		/datum/sprite_accessory/ears/dormouse_rings,
+		/datum/sprite_accessory/ears/dormouse_skin_rings,
 		/datum/sprite_accessory/ears/big/acrador_long,
 		/datum/sprite_accessory/ears/big/acrador_short,
 		/datum/sprite_accessory/ears/big/sandfox_large,

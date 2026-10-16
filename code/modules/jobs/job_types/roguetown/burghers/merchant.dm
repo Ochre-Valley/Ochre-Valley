@@ -16,7 +16,7 @@ The priests will whisper that you follow the Sun-Thief. Frown, shake your head, 
 	outfit = /datum/outfit/job/roguetown/merchant
 	give_bank_account = TRUE
 	noble_income = 100 // ATC chapter stipend - The sole Money Role outside of the keep, should help them keep pace a bit + pick up if they get completely knocked out of coin.
-	min_pq = 1 //"Yeah...my guy says the best I can do is one PQ, final offer"
+	min_pq = 5 //1 //"Yeah...my guy says the best I can do is one PQ, final offer" //OV EDIT
 	max_pq = null
 	required = TRUE
 	round_contrib_points = 3
@@ -24,12 +24,13 @@ The priests will whisper that you follow the Sun-Thief. Frown, shake your head, 
 	is_quest_giver = TRUE
 
 	job_traits = list(TRAIT_SEEPRICES, TRAIT_CICERONE)
-	virtue_restrictions = list(/datum/virtue/utility/skilled, /datum/virtue/utility/apprentice) //Commerce role, not a craftsman.
+	virtue_restrictions = list(/datum/virtue/utility/skilled, /datum/virtue/utility/apprentice, /datum/virtue/utility/homesteader, /datum/virtue/utility/granary) //Commerce role, not a craftsman.
 
 	advclass_cat_rolls = list(CTAG_MERCH = 2)
 	job_subclasses = list(
 		/datum/advclass/merchant
 	)
+	has_subprefs = FALSE // only one subclass
 
 /datum/job/roguetown/merchant/after_spawn(mob/living/H, mob/M, latejoin)
 	. = ..()

@@ -2,11 +2,11 @@
 import { Button, Icon, Table } from 'tgui-core/components';
 
 export const SortButton = (props: {
-  ourId: string;
+  ourId: any;
   sortId: string;
   sortOrder: boolean;
   onSortOrder: React.Dispatch<React.SetStateAction<boolean>>;
-  onSortId: React.Dispatch<React.SetStateAction<string>>;
+  onSortId: React.Dispatch<React.SetStateAction<any>>;
   children: React.JSX.Element | string;
 }) => {
   const { ourId, sortId, sortOrder, onSortOrder, onSortId, children } = props;

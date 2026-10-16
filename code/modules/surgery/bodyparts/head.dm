@@ -4,7 +4,7 @@
 	icon = 'icons/mob/human_parts.dmi'
 	icon_state = "default_human_head"
 	slot_flags = ITEM_SLOT_HIP
-	max_damage = 200
+	max_damage = BODYPART_MAX_DAMAGE_LIMB
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
 	w_class = WEIGHT_CLASS_NORMAL //Quite a hefty load
@@ -44,15 +44,14 @@
 	subtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	//grabtargets for grabs
 	grabtargets = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
-	resistance_flags = FLAMMABLE
-	
+
 	grid_width = 64
 	grid_height = 64
 
 	/// Brainkill means that this head is considered dead and revival is impossible
 	var/brainkill = FALSE
 
-	/// Set on the heads of contract-spawned mobs. 
+	/// Set on the heads of contract-spawned mobs.
 	var/no_head_bounty = FALSE
 
 	two_stage_death = TRUE // players won't be decapitated instantly (they'll still die immediately, though)
@@ -64,17 +63,6 @@
 	. = ..()
 	if(sellprice && !no_head_bounty)
 		. += span_notice("This head seems to be wanted by the Judiciary of Azuria. It can be turned in at a HEADEATER.")
-
-/obj/item/bodypart/head/drop_limb(special)
-	. = ..()
-	if(. && no_head_bounty && !special)
-		addtimer(CALLBACK(src, PROC_REF(dust_contract_head)), QUEST_HEAD_DUST_DELAY)
-
-/obj/item/bodypart/head/proc/dust_contract_head()
-	if(QDELETED(src))
-		return
-	dust_animation()
-	QDEL_IN(src, 1.2 SECONDS)
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
 	var/used_limb = precise

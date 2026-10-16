@@ -16,18 +16,19 @@
 	selection_color = JCOLOR_BURGHER
 	display_order = JDO_GUILDMASTER
 	give_bank_account = TRUE
-	min_pq = 5 //OV EDIT
+	min_pq = 5 // Higher PQ requirement as it is a leadership role. Not for total newbie.
 	max_pq = null
 	round_contrib_points = 3
 	cmode_music = 'sound/music/cmode/towner/combat_retired.ogg'
 
-	job_traits = list(TRAIT_TRAINED_SMITH, TRAIT_SEEPRICES, TRAIT_SMITHING_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_HOMESTEAD_EXPERT) //CC edit: upped arcyne to t2 //OV Edit AP Merge 4.2.26 - Removed Arcyne pending rework
+	job_traits = list(TRAIT_TRAINED_SMITH, TRAIT_SEEPRICES, TRAIT_SMITHING_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_HOMESTEAD_EXPERT)
 	// Guildmaster get way less gate due to their role
 
 	advclass_cat_rolls = list(CTAG_GUILDSMASTER = 2)
 	job_subclasses = list(
 		/datum/advclass/guildmaster
 	)
+	has_subprefs = FALSE // only one subclass
 	spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
 
 /datum/advclass/guildmaster
@@ -40,7 +41,7 @@
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
-		STATKEY_INT = 1,
+		STATKEY_INT = 1
 	)
 	age_mod = /datum/class_age_mod/guildmaster
 	subclass_skills = list(
@@ -76,7 +77,6 @@
 
 /datum/outfit/job/roguetown/guildmaster/basic/pre_equip(mob/living/carbon/human/H)
 	H.adjust_blindness(-3)
-
 	head = /obj/item/clothing/head/roguetown/chaperon/noble/guildmaster
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	if(H.mind)
@@ -93,12 +93,18 @@
 			/obj/item/rogueweapon/tongs = 1,
 			/obj/item/recipe_book/blacksmithing = 1,
 			/obj/item/clothing/mask/rogue/spectacles/golden = 1,
-			/obj/item/contraption/linker/master = 1,
 			/obj/item/blueprint/mace_mushroom = 1
 			)
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/rich
 		beltr = /obj/item/storage/keyring/guildmaster
+		var/wrenches = list("Compact Golden Wrench", "Massive Golden Wrench")
+		var/wrench_choice = input(H, "Choose your wrench.", "SYMBOL OF OFFICE") as anything in wrenches
+		switch(wrench_choice)
+			if("Compact Golden Wrench")
+				r_hand = /obj/item/rogueweapon/contraption/linker/mace/master
+			if("Massive Golden Wrench")
+				r_hand = /obj/item/rogueweapon/contraption/linker/mace/big/master
 	ADD_TRAIT(H, TRAIT_MASTER_CARPENTER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_MASTER_MASON, TRAIT_GENERIC)
 	if(H.mind)

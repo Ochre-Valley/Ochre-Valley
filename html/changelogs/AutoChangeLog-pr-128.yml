@@ -1,7 +1,0 @@
-author: "SomeDeviant"
-delete-after: True
-changes:
-  - rscadd: "Added new guardian loadout"
-  - rscadd: "Added kote and cloak to guardian"
-  - rscdel: "Removed unused glove outfit from Priest and Guardian"
-  - bugfix: "fixed Priest stats and Sandal pathing for both classes"

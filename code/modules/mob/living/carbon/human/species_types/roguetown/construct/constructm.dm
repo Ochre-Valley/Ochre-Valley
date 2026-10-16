@@ -46,21 +46,19 @@
 		/obj/item/bodypart/taur/satyr, //OV ADD
 		/obj/item/bodypart/taur/sloog, //OV ADD
 		/obj/item/bodypart/taur/noodle, // OV ADD
+		/obj/item/bodypart/taur/saiga, //OV ADD
 	)
 	///Caustic edit end
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
 	possible_ages = ALL_AGES_LIST
 	skinned_type = /obj/item/ingot/steel
-	disliked_food = NONE
-	liked_food = NONE
 	inherent_traits = list(
 		TRAIT_IRONMAN,
 		TRAIT_LIMBATTACHMENT, // this interacts with trait_ironman, making this take a while to reattach
-		TRAIT_NOPAINSTUN, // look into this later, just remembered Ryan merged NoPainSlow (cur. TRAIT_IGNOREDAMAGESLOWDOWN) into NoPainStun, might be good to separate them again for situations where I want my character to collapse from total pain, but not flinch when being hit
 		TRAIT_NOHUNGER,
-		TRAIT_NOBREATH, 
-		TRAIT_TOXIMMUNE, 
+		TRAIT_NOBREATH,
+		TRAIT_TOXIMMUNE,
 		TRAIT_ZOMBIE_IMMUNE,
 		)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
@@ -107,9 +105,12 @@
 		/datum/customizer/bodypart_feature/underwear,
 		/datum/customizer/bodypart_feature/legwear,
 		/datum/customizer/bodypart_feature/piercing,
+		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/bodypart_feature/pubes,
+		/datum/customizer/bodypart_feature/pits,
 		//Caustic edit
 		/datum/customizer/organ/belly/animal,
 		/datum/customizer/organ/butt/animal,
@@ -194,7 +195,7 @@
 
 /datum/species/construct/metal/check_roundstart_eligible()
 	return TRUE
-	
+
 /datum/species/construct/metal/get_skin_list()
 	return list(
 		"BRASS" = "dfbd6c",
@@ -249,7 +250,7 @@
 		if(M == user)
 			if(!do_after(user, 4 SECONDS))
 				return
-		
+
 		if(M.has_status_effect(/datum/status_effect/debuff/integrity_rig))
 			to_chat(user, span_warning("The jury rigged integrity repairs are still holding, for now... If you nail it with a hammer it might fix something?"))
 			return
@@ -346,12 +347,12 @@
 		to_chat(user, span_warning("That material cannot stabilize exposed integrity damage."))
 		return TRUE
 
-	// === INGOT === 
+	// === INGOT ===
 	if(istype(I, /obj/item/ingot))
 		if(M == user)
 			if(!do_after(user, 12 SECONDS, M))
 				return FALSE
-		power = 5 + I.sellprice * 1.5
+		power = 5 + I.get_real_price() * 1.5
 		M.apply_status_effect(/datum/status_effect/buff/ingotmuncher, power)
 		if(user == M)
 			M.visible_message(
@@ -373,7 +374,7 @@
 		if(M == user)
 			if(!do_after(user, 12 SECONDS, M))
 				return FALSE
-		power = I.sellprice * 2
+		power = I.get_real_price() * 2
 		M.apply_status_effect(/datum/status_effect/buff/gemmuncher, power)
 		if(user == M)
 			M.visible_message(
@@ -399,18 +400,18 @@
 		var/obj/item/natural/stone/S = I
 		var/pow = S.magic_power + 2
 		var/brute = M.getBruteLoss()
-		var/fire  = M.getFireLoss()
+		var/fire	= M.getFireLoss()
 		var/MAX_DMG = 200
 		var/MULT = 5
 		// Normalize damage
 		var/brute_ratio = clamp(brute / MAX_DMG, 0, 1)
-		var/fire_ratio  = clamp(fire  / MAX_DMG, 0, 1)
+		var/fire_ratio	= clamp(fire	/ MAX_DMG, 0, 1)
 		// Linear 100% to 0% (min 1) effectiveness ratio
 		var/brute_factor = 1 - brute_ratio
-		var/fire_factor  = 1 - fire_ratio
+		var/fire_factor	= 1 - fire_ratio
 		// Final healing
 		var/brute_heal = max(1, round(pow * MULT * brute_factor))
-		var/fire_heal  = max(1, round(pow * MULT * fire_factor))
+		var/fire_heal	= max(1, round(pow * MULT * fire_factor))
 		M.energy_add(5 + (S.magic_power * 10))
 		M.adjustBruteLoss(-brute_heal)
 		M.adjustFireLoss(-fire_heal)
@@ -431,7 +432,7 @@
 		qdel(I)
 		return TRUE
 
-	// === SCRAP === 
+	// === SCRAP ===
 	if(I.type == /obj/item/scrap)
 		var/obj/item/scrap/L = I
 		if(user == M)
@@ -452,7 +453,7 @@
 		new /obj/item/rogueore/iron(get_turf(user))
 		return TRUE
 
-	// === WOOD === 
+	// === WOOD ===
 	if(I.type == /obj/item/grown/log/tree/small)
 		var/obj/item/grown/log/tree/small/L = I
 		if(user == M)
@@ -477,7 +478,7 @@
 			new /obj/item/ash(get_turf(user))
 		return TRUE
 
-	// === LOG === 
+	// === LOG ===
 	if(I.type == /obj/item/grown/log/tree)
 		var/obj/item/grown/log/tree/L = I
 		if(user == M)
@@ -499,7 +500,7 @@
 		new /obj/effect/decal/cleanable/debris/woody(get_turf(user))
 		return TRUE
 
-	// === ROCK === 
+	// === ROCK ===
 	if(istype(I, /obj/item/natural/rock))
 		var/obj/item/natural/rock/S = I
 		if(user == M)
@@ -520,9 +521,9 @@
 		new /obj/effect/decal/cleanable/debris/stony(get_turf(user))
 		return TRUE
 
-	// === ORE === 
+	// === ORE ===
 	if(istype(I, /obj/item/rogueore))
-		power = 5 + I.sellprice * 1.25
+		power = 5 + I.get_real_price() * 1.25
 		M.apply_status_effect(/datum/status_effect/buff/oremuncher, power)
 		if(user == M)
 			M.visible_message(
@@ -838,7 +839,7 @@
 /datum/status_effect/debuff/integrity_rig/on_apply()
 	owner.add_stress(/datum/stressevent/integrity_rig)
 	. = ..()
-	
+
 /datum/status_effect/debuff/integrity_rig/on_remove()
 	owner.remove_stress(/datum/stressevent/integrity_rig)
 	. = ..()
@@ -849,7 +850,7 @@
 	density = FALSE
 	layer = MOB_LAYER+1
 
-/obj/effect/particle_effect/thick_steam/Initialize()
+/obj/effect/particle_effect/thick_steam/Initialize(mapload)
 	. = ..()
 	QDEL_IN(src, 20)
 

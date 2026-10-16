@@ -11,7 +11,7 @@ import {
 import { SPRITE_ACCESSORY_COLOR_CHANNEL_NAMES } from './constants';
 import type { Data } from './types';
 
-export const AppearanceChangerColors = (props) => {
+export const AppearanceChangerColors = (props: any) => {
   const { act, data } = useBackend<Data>();
 
   const {

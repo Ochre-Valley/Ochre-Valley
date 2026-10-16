@@ -1,4 +1,0 @@
-author: "SatinIsle"
-delete-after: True
-changes:
-  - rscadd: "Added an option to permanently hide PQ values from yourself, removing the PQ button and info from the character setup, and even from the player panel if a staff member with it disabled looks at their own info."

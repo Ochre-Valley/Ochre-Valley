@@ -1,9 +1,6 @@
 import type { ReactNode } from 'react';
 
-import {
-  FONT_BODY,
-  SEAL_RED,
-} from '../common/parchment';
+import { FONT_BODY, SEAL_RED } from '../common/parchment';
 
 export const SequesteredOverlay = (props: {
   active: boolean;
@@ -52,7 +49,7 @@ export const SequesteredOverlay = (props: {
             color: SEAL_RED,
           }}
         >
-          {props.label} held by the Azurian Trading Company
+          {props.label} held by the ATC
         </div>
       </div>
     </div>

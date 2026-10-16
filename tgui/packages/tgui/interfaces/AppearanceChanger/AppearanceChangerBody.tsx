@@ -3,7 +3,7 @@ import { Button, LabeledList, Section } from 'tgui-core/components';
 
 import type { Data, species } from './types';
 
-export const AppearanceChangerSpecies = (props) => {
+export const AppearanceChangerSpecies = (props: any) => {
   const { act, data } = useBackend<Data>();
   const { species, specimen } = data;
 
@@ -41,7 +41,7 @@ export const AppearanceChangerSpecies = (props) => {
   );
 };
 
-export const AppearanceChangerGender = (props) => {
+export const AppearanceChangerGender = (props: any) => {
   const { act, data } = useBackend<Data>();
 
   const { gender, gender_id, genders, id_genders } = data;

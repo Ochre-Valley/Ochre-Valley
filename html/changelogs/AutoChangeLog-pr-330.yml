@@ -1,9 +1,0 @@
-author: "Ldip999"
-delete-after: True
-changes:
-  - bugfix: "fixed belly smelted gems trying to get a bad quality"
-  - bugfix: "fixed trying to querry powder flasks for AC and stepsound"
-  - bugfix: "holder component disappearing and causing a runtime checked for"
-  - bugfix: "path for new tiles disappearing causing a runtime checked for"
-  - bugfix: "Food will no longer try to transfer null to it's rotten counterpart if it didn't even had reagents in the first place"
-  - bugfix: "Gnolls inspected by non humanoids (like ghosts) will no longer cause runtime"

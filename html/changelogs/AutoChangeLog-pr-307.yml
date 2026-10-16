@@ -1,5 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - code_imp: "The objective and alert messages for werewolves have been rewritten in ways that make it more obvious that one does not **have** to fragmax as a werewolf, and that it's even possible to be an unwilling werewolf trying to fight back against the need to feed."
-  - config: "Werewolves have been re-enabled for Caustic Cove!"

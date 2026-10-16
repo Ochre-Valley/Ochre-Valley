@@ -18,7 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/magician
 	whitelist_req = TRUE
 	give_bank_account = TRUE
-	min_pq = 4 //OV EDIT
+	min_pq = 10 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
 	cmode_music = 'sound/music/cmode/nobility/combat_courtmage.ogg'
@@ -31,6 +31,7 @@
 	job_subclasses = list(
 		/datum/advclass/courtmage
 	)
+	has_subprefs = FALSE // only one subclass
 
 /datum/advclass/courtmage
 	name = "Court Magician"
@@ -65,9 +66,8 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE, // more stam for holding spells
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_LEGENDARY,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/alchemy = SKILL_LEVEL_MASTER,
 		/datum/skill/magic/arcane = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 	)
@@ -120,7 +120,7 @@
 		/obj/item/reagent_containers/glass/bottle/rogue/poison,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
 		/obj/item/rogueweapon/spellbook/grand,
-		/obj/item/rogueweapon/huntingknife/idagger/silver/arcyne,
+		/obj/item/rogueweapon/huntingknife/idagger/steel/silver/arcyne,
 		/obj/item/chalk
 	)
 	if(H.mind)

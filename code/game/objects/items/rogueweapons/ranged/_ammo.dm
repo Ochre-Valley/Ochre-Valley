@@ -3,11 +3,39 @@
 	firing_effect_type = null
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	var/ammo_weight = 1 // Weight cost in a quiver. Default 1, heavy ammo costs more.
+	materia = list(/datum/materia_aspect/air, /datum/materia_aspect/weapon)
 
 /obj/item/ammo_casing/caseless/rogue/get_mechanics_examine(mob/user)
 	. = ..()
 	. += span_info("Projectiles have maximum and minimum falloff ranges, with particular falloff factors for damage.")
 	. += span_info("If the target is hit between the maximum and minimum tile range, then the full force is delivered.")
+	. += get_sweetspot_examine()
+
+/// Returns examine lines describing the sweetspot (full-force range) of this casing's projectile, or an empty list if it has none.
+/obj/item/ammo_casing/proc/get_sweetspot_examine(subject = "This projectile")
+	var/sweet_min
+	var/sweet_max
+	var/falloff
+	if(BB)
+		sweet_min = BB.min_range
+		sweet_max = BB.max_range
+		falloff = BB.dam_falloff_factor
+	else if(projectile_type)
+		var/obj/projectile/proj = projectile_type
+		sweet_min = initial(proj.min_range)
+		sweet_max = initial(proj.max_range)
+		falloff = initial(proj.dam_falloff_factor)
+	. = list()
+	if(!sweet_min && !sweet_max)
+		return
+	if(sweet_min && sweet_max)
+		. += span_info("[subject] has a sweetspot between <b>[sweet_min]</b> and <b>[sweet_max]</b> tiles, where it delivers full force.")
+	else if(sweet_max)
+		. += span_info("[subject] has a sweetspot up to <b>[sweet_max]</b> tiles, where it delivers full force.")
+	else
+		. += span_info("[subject] has a sweetspot beyond <b>[sweet_min]</b> tiles, where it delivers full force.")
+	if(falloff != 1)
+		. += span_info("Outside the sweetspot, its damage is reduced to <b>[falloff * 100]%</b>.")
 
 /obj/item/ammo_casing/caseless/rogue/getonmobprop(tag)
 	. = ..()
@@ -20,16 +48,17 @@
 
 //parent variable to projectiles
 /obj/projectile
-  var/is_silver_proj = FALSE //Self-explanatory.
+	var/is_silver_proj = FALSE //Self-explanatory.
+	var/datum/action/cooldown/spell/source_spell
 
 //handles the infliction of special effects upon projectile impact, such as silver-blighting
 /obj/projectile/proc/do_special_projectile_effect(firer, obj/item/bodypart/affecting, mob/living/victim, selzone)
-    SHOULD_CALL_PARENT(TRUE)
-    SEND_SIGNAL(victim, COMSIG_PROJECTILE_ATTACK_EFFECT, firer, affecting, selzone, src)
-    SEND_SIGNAL(src, COMSIG_PROJECTILE_ATTACK_EFFECT_SELF, firer, affecting, victim, selzone)
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(victim, COMSIG_PROJECTILE_ATTACK_EFFECT, firer, affecting, selzone, src)
+	SEND_SIGNAL(src, COMSIG_PROJECTILE_ATTACK_EFFECT_SELF, firer, affecting, victim, selzone)
 
-    if(is_silver_proj && HAS_TRAIT(victim, TRAIT_SILVER_WEAK))
-        SEND_SIGNAL(victim, COMSIG_FORCE_UNDISGUISE)
-        to_chat(victim, span_danger("Silver rebukes my presence! My vitae smolders, and my powers wane!"))
-        victim.adjust_fire_stacks(1, /datum/status_effect/fire_handler/fire_stacks/sunder) // Ammunition can't be blessed.
-        victim.ignite_mob()
+	if(is_silver_proj && HAS_TRAIT(victim, TRAIT_SILVER_WEAK))
+		SEND_SIGNAL(victim, COMSIG_FORCE_UNDISGUISE)
+		to_chat(victim, span_silver("Silver rebukes my presence! My vitae smolders, and my powers wane!"))
+		victim.adjust_fire_stacks(1, /datum/status_effect/fire_handler/fire_stacks/sunder) // Ammunition can't be blessed.
+		victim.ignite_mob()

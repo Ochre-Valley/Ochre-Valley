@@ -140,6 +140,10 @@
 	default_disabled = TRUE
 	customizer_choices = list(/datum/customizer_choice/organ/snout/anthro/slime)
 
+/datum/customizer/organ/snout/moth
+	allows_disabling = TRUE
+	default_disabled = TRUE
+	customizer_choices = list(/datum/customizer_choice/organ/snout/moth)
 
 /datum/customizer_choice/organ/snout/anthro
 	name = "Wild-Kin Snout"
@@ -234,6 +238,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		//Caustic edit
 		/datum/sprite_accessory/snout/caustic/extra_magus,
 		//Caustic edit end
@@ -329,6 +334,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		//Caustic edit
 		/datum/sprite_accessory/snout/caustic/extra_magus,
 		//Caustic edit end
@@ -425,6 +431,7 @@
 		/datum/sprite_accessory/snout/shortnosed,
 		/datum/sprite_accessory/snout/stubby,
 		/datum/sprite_accessory/snout/stubbyalt,
+		/datum/sprite_accessory/snout/vskunk,
 		)
 
 /datum/customizer/organ/snout/akula
@@ -456,7 +463,7 @@
 	name = "Tabaxian Snout"
 	organ_type = /obj/item/organ/snout/cat
 	sprite_accessories = list(
-	    /datum/sprite_accessory/snout/cat,
+		/datum/sprite_accessory/snout/cat,
 		/datum/sprite_accessory/snout/scanid,
 		/datum/sprite_accessory/snout/scanidalt,
 		/datum/sprite_accessory/snout/scanidalt2,
@@ -474,18 +481,30 @@
 		/datum/sprite_accessory/snout/stubbyalt,
 		)
 
+/datum/customizer_choice/organ/snout/moth
+	name = "Fluvian Snout"
+	organ_type = /obj/item/organ/snout/moth
+	sprite_accessories = list(
+		/datum/sprite_accessory/snout/bug,
+		/datum/sprite_accessory/snout/bugna,
+		/datum/sprite_accessory/snout/pede,
+		/datum/sprite_accessory/snout/front/bug,
+		/datum/sprite_accessory/snout/front/bugna,
+		/datum/sprite_accessory/snout/front/pede,
+		)
+
 // --- Aasimar Only
 /datum/customizer/organ/snout/wings
 	customizer_choices = list(/datum/customizer_choice/organ/snout/wings)
 	name = "Veil"
 	allows_disabling = TRUE
-	default_disabled =  TRUE
+	default_disabled =	TRUE
 
 /datum/customizer_choice/organ/snout/wings
 	name = "Veil"
 	organ_type = /obj/item/organ/snout/anthro
 	sprite_accessories = list(
-	    /datum/sprite_accessory/snout/masked,
+		/datum/sprite_accessory/snout/masked,
 		)
 
 /datum/customizer/organ/snout/harpy // OV Add Start

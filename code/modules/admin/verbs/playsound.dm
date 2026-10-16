@@ -1,5 +1,5 @@
 /client/proc/play_sound(S as sound)
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Global"
 	if(!check_rights(R_SOUND))
 		return
@@ -23,7 +23,7 @@
 	var/res = alert(usr, "Show the title of this song to the players?",, "Yes","No", "Cancel")
 	switch(res)
 		if("Yes")
-			to_chat(world, span_boldannounce("An admin played: [S]"))
+			to_world(span_boldannounce("An admin played: [S]"))
 		if("Cancel")
 			return
 
@@ -40,19 +40,10 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/change_music_vol()
-	set category = "Preferences.Options"
+	set category = "Preferences.Audio"
 	set name = "ChangeMusicPower"
 
 	if(prefs)
-/*		if(blacklisted() == 1)
-			var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
-			vol = 100
-			prefs.musicvol = vol
-			prefs.save_preferences()
-			mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
-		else*/
 		var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
 		if(!vol)
 			if(vol != 0)
@@ -79,7 +70,7 @@
 			to_chat(src, "ShowRolls Disabled")
 
 /client/verb/change_master_vol()
-	set category = "Preferences.Options"
+	set category = "Preferences.Audio"
 	set name = "ChangeVolPower"
 
 	if(prefs)
@@ -92,7 +83,7 @@
 		prefs.save_preferences()
 
 /client/verb/change_ambience_vol()
-	set category = "Preferences.Options"
+	set category = "Preferences.Audio"
 	set name = "ChangeAmbiencePower"
 
 	if(prefs)
@@ -109,7 +100,7 @@
 		mob.update_channel_volume(CHANNEL_RAIN, prefs.ambiencevol)
 
 /client/verb/change_lobby_music_vol()
-	set category = "Preferences.Options"
+	set category = "Preferences.Audio"
 	set name = "ChangeLobbyMusicPower"
 
 	if(prefs)
@@ -138,7 +129,7 @@
 */
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Local"
 	if(!check_rights(R_SOUND))
 		return
@@ -149,7 +140,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_local_sound_variable(S as sound)
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Variable Dist"
 	if(!check_rights(R_SOUND))
 		return
@@ -165,7 +156,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Internet"
 	if(!check_rights(R_SOUND))
 		return
@@ -175,7 +166,7 @@
 		to_chat(src, span_boldwarning("Youtube-dl was not configured, action unavailable")) //Check config.txt for the INVOKE_YOUTUBEDL value
 		return
 
-	var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
+	var/web_sound_input = input(usr, "Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 	if(istext(web_sound_input))
 		var/web_sound_url = ""
 		var/stop_web_sounds = FALSE
@@ -213,7 +204,7 @@
 					var/res = alert(usr, "Show the title of and link to this song to the players?\n[title]",, "No", "Yes", "Cancel")
 					switch(res)
 						if("Yes")
-							to_chat(world, span_boldannounce("An admin played: [webpage_url]"))
+							to_world(span_boldannounce("An admin played: [webpage_url]"))
 						if("Cancel")
 							return
 
@@ -250,7 +241,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Round End"
 	if(!check_rights(R_SOUND))
 		return
@@ -262,7 +253,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Game Master"
+	set category = "Game Master.Narration"
 	set name = "Sound - Stop All Playing"
 	if(!src.holder)
 		return

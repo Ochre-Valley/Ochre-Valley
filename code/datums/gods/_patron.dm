@@ -30,12 +30,21 @@ GLOBAL_LIST_EMPTY(prayers)
 	/// Assoc list of miracles it grants. Type = Cleric_Tier
 	var/list/miracles = list()
 	/// List of words that this god considers profane. (Master for all faiths. Inhumen have their own list.)
-	var/list/profane_words = list("zizo","matthios","graggar","baotha","cock","dick","fuck","shit","pussy","cuck","cunt","asshole","pintle")
+	var/list/profane_words = list("zizo","matthios","graggar","baotha","cock","dick","fuck","shit","pussy","cuck","cunt","asshole","pintle","vheslyn")
 
 	/// List of traits associated with rank. Trait = Cleric_Tier
 	var/list/traits_tier = list()
 
 	var/datum/storyteller/storyteller
+
+/datum/patron/proc/constant_ui_data()
+	return list(
+		"name" = name,
+		"domain" = domain,
+		"desc" = desc,
+		"worshippers" = worshippers,
+		"associated_faith" = associated_faith,
+	)
 
 /datum/patron/proc/on_gain(mob/living/pious)
 	for(var/trait in mob_traits)
@@ -83,38 +92,37 @@ GLOBAL_LIST_EMPTY(prayers)
 
 /// Called when a patron's follower prays to them.
 /// Returns TRUE if their prayer was heard and the patron was not insulted
-/datum/patron/proc/hear_prayer(mob/living/follower, message)
-    if(!follower || !message)
-        return FALSE
-    if(length(message) < 15)
-        to_chat(follower, span_warning("Your prayer is too weak to be considered!"))
-        return FALSE
-    var/prayer = sanitize_hear_message(message)
-    for(var/profanity in profane_words)
-        var/regex/cussjar = regex("([profanity])", "im")
-        if(cussjar.Find(prayer))
-            punish_prayer(follower)
-            return FALSE
+/datum/patron/proc/hear_prayer(mob/living/follower, prayer)
+	if(!follower || !prayer)
+		return FALSE
+	if(length(prayer) < 15)
+		to_chat(follower, span_warning("Your prayer is too weak to be considered!"))
+		return FALSE
+	for(var/profanity in profane_words)
+		var/regex/cussjar = regex("([profanity])", "im")
+		if(cussjar.Find(prayer))
+			punish_prayer(follower)
+			return FALSE
 
-    var/patron_name = follower?.patron.name
-    if(!patron_name)
-        CRASH("check_prayer called with null patron")
+	var/patron_name = follower?.patron.name
+	if(!patron_name)
+		CRASH("check_prayer called with null patron")
 
-    if(follower.mob_timers[MT_PSYPRAY])
-        if(world.time < follower.mob_timers[MT_PSYPRAY] + 1 MINUTES)
-            follower.mob_timers[MT_PSYPRAY] = world.time
-            return FALSE
-    else
-        follower.mob_timers[MT_PSYPRAY] = world.time
+	if(follower.mob_timers[MT_PSYPRAY])
+		if(world.time < follower.mob_timers[MT_PSYPRAY] + 1 MINUTES)
+			follower.mob_timers[MT_PSYPRAY] = world.time
+			return FALSE
+	else
+		follower.mob_timers[MT_PSYPRAY] = world.time
 
-    . = TRUE //the prayer has succeeded by this point forward
-    GLOB.prayers |= prayer
-    record_round_statistic(STATS_PRAYERS_MADE)
+	. = TRUE //the prayer has succeeded by this point forward
+	GLOB.prayers |= prayer
+	record_round_statistic(STATS_PRAYERS_MADE)
 
-    for(var/title in (follower.patron.titles + patron_name))
-        if(findtext(prayer, title))
-            reward_prayer(follower)
-            return . 
+	for(var/title in (follower.patron.titles + patron_name))
+		if(findtext(prayer, title))
+			reward_prayer(follower)
+			return .
 
 /// The follower has somehow offended the patron and is now being punished.
 /datum/patron/proc/punish_prayer(mob/living/follower)

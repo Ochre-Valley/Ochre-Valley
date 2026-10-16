@@ -1,9 +1,9 @@
 /datum/sprite_accessory/penis
-	icon = 'icons/mob/sprite_accessory/genitals/pintle.dmi'
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/genitals/pintle.dmi'
 	color_keys = 2
 	color_key_names = list("Member", "Skin")
 //Caustic Edit, adds dynamic state changes
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER) //Vrell - Yes I know this is hacky but it works for now
+	relevant_layers = list(/*BODY_BEHIND_LAYER,*/ CROTCH_LAYER) //Vrell - Yes I know this is hacky but it works for now //OV EDIT - Genital adjustments src. Caustic replaced BODY_FRONT_LAYER
 
 /datum/sprite_accessory/penis/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BELT, OFFSET_BELT_F)
@@ -24,15 +24,15 @@
 					return "slit_2"
 
 	if(pp.erect_state == ERECT_STATE_HARD)
-		return "[icon_state]_[max(1, min(5, pp.penis_size))]_1"
+		return "[icon_state]_[max(1, min(MAX_PENIS_SIZE, pp.penis_size))]_1"
 	if(pp.erect_state == ERECT_STATE_STIFF)
-		return "[icon_state]_[max(1, min(5, pp.penis_size))]_0"
+		return "[icon_state]_[max(1, min(MAX_PENIS_SIZE, pp.penis_size))]_0"
 	if(pp.erect_state == ERECT_STATE_PARTIAL) // Not revealed if they have a sheath, see above.
-		return "[icon_state]_[max(1, min(5, pp.penis_size-1))]_0"
+		return "[icon_state]_[max(1, min(MAX_PENIS_SIZE, pp.penis_size-1))]_0"
 
 	//Normal penis check for those without a sheath, just hang flaccid with -1 size.
 	else if(pp.sheath_type == SHEATH_TYPE_NONE && pp.erect_state == ERECT_STATE_NONE)
-		return "[icon_state]_[max(1, min(5, pp.penis_size-1))]_0"
+		return "[icon_state]_[max(1, min(MAX_PENIS_SIZE, pp.penis_size-1))]_0"
 
 	//Penis should no longer be aroused, and is hidden, transitions with sheath states as well.
 	else
@@ -46,62 +46,72 @@
 
 /datum/sprite_accessory/penis/human
 	icon_state = "human"
+	preview_states = list("human_2_1_FRONT_1")
 	name = "Plain"
-	color_key_defaults = list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
 
 /datum/sprite_accessory/penis/knotted
 	icon_state = "knotted"
+	preview_states = list("knotted_2_1_FRONT_1")
 	name = "Knotted"
-	color_key_defaults = list(null, KEY_CHEST_COLOR)
-	default_colors = list("C52828", null)
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(null, KEY_CHEST_COLOR)
+	default_colors = list("C52828") //OV EDIT - list("C52828", null)
 
 /datum/sprite_accessory/penis/knotted2
 	name = "Knotted 2"
 	icon_state = "knotted2"
-	color_key_defaults = list(null, KEY_CHEST_COLOR)
-	default_colors = list("C52828", null)
+	preview_states = list("knotted2_2_1_FRONT_1")
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(null, KEY_CHEST_COLOR)
+	default_colors = list("C52828") //OV EDIT - list("C52828", null)
 
 /datum/sprite_accessory/penis/flared
 	icon_state = "flared"
+	preview_states = list("flared_2_1_FRONT_1")
 	name = "Flared"
-	color_key_defaults = list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(KEY_CHEST_COLOR, KEY_CHEST_COLOR)
 
 /datum/sprite_accessory/penis/barbknot
 	icon_state = "barbknot"
+	preview_states = list("barbknot_2_1_FRONT_1")
 	name = "Barbed, Knotted"
-	color_key_defaults = list(null, KEY_CHEST_COLOR)
-	default_colors = list("C52828", null)
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(null, KEY_CHEST_COLOR)
+	default_colors = list("C52828") //OV EDIT - list("C52828", null)
 
 /datum/sprite_accessory/penis/tapered
 	icon_state = "tapered"
+	preview_states = list("tapered_2_1_FRONT_1")
 	name = "Tapered"
-	default_colors = list("C52828", "C52828")
+	default_colors = list("C52828") //OV EDIT - list("C52828", "C52828")
 
 /datum/sprite_accessory/penis/tapered_mammal
 	icon_state = "tapered"
+	preview_states = list("tapered_2_1_FRONT_1")
 	name = "Tapered"
-	color_key_defaults = list(null, KEY_CHEST_COLOR)
-	default_colors = list("C52828", null)
+	color_key_defaults = list(KEY_CHEST_COLOR) //OV EDIT - list(null, KEY_CHEST_COLOR)
+	default_colors = list("C52828") //OV EDIT - list("C52828", null)
 
 /datum/sprite_accessory/penis/tentacle
 	icon_state = "tentacle"
+	preview_states = list("tentacle_2_1_FRONT_1")
 	name = "Tentacled"
-	default_colors = list("C52828", "C52828")
+	default_colors = list("C52828") //OV EDIT - list("C52828", "C52828")
 
 /datum/sprite_accessory/penis/hemi
 	icon_state = "hemi"
+	preview_states = list("hemi_2_1_FRONT_1")
 	name = "Hemi"
-	default_colors = list("C52828", "C52828")
+	default_colors = list("C52828") //OV EDIT - list("C52828", "C52828")
 
 /datum/sprite_accessory/penis/hemiknot
 	icon_state = "hemiknot"
+	preview_states = list("hemiknot_2_1_FRONT_1")
 	name = "Knotted Hemi"
-	default_colors = list("C52828", "C52828")
+	default_colors = list("C52828") //OV EDIT - list("C52828", "C52828")
 
 /datum/sprite_accessory/testicles
-	icon = 'icons/mob/sprite_accessory/genitals/gonads.dmi'
+	icon = 'modular_ochrevalley/icons/mob/sprite_accessory/genitals/gonads_cc.dmi' //OV EDIT
 	color_key_name = "Sack"
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
+	relevant_layers = list(BODY_BEHIND_LAYER, TESTICLES_LAYER) //OV EDIT - Genitals Adjustments src. Caustic - Replaces BODY_FRONT_LAYER
 
 /datum/sprite_accessory/testicles/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BELT, OFFSET_BELT_F)
@@ -123,13 +133,22 @@
 /datum/sprite_accessory/testicles/pair
 	name = "Pair"
 	icon_state = "pair"
+	preview_states = list("pair_2_FRONT") //OV EDIT
 	color_key_defaults = list(KEY_SKIN_COLOR)
+
+//OV ADD START
+/datum/sprite_accessory/testicles/sheath
+	name = "Sheath"
+	icon_state = "sheath"
+	preview_states = list("sheath_2_FRONT")
+	color_key_defaults = list(KEY_SKIN_COLOR)
+//OV ADD END
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/mob/sprite_accessory/genitals/breasts.dmi'
 	color_key_name = "Breasts"
 	//Caustic Edit, our chests run off different layers than default
-	relevant_layers = list(BODY_BEHIND_LAYER, BODY_FRONTEST_LAYER)
+	relevant_layers = list(BODY_BEHIND_LAYER, BREASTS_LAYER) //OV EDIT - Genitals adjustments src. Caustic - Replace BODY_FRONTEST_LAYER
 	//Caustic Edit end
 
 /datum/sprite_accessory/breasts/get_icon_state(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
@@ -146,23 +165,26 @@
 
 /datum/sprite_accessory/breasts/pair
 	icon_state = "pair"
+	preview_states = list("pair_2_FRONT") // OV EDIT - Layering Fix
 	name = "Pair"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 
 /datum/sprite_accessory/breasts/quad
 	icon_state = "quad"
+	preview_states = list("quad_2_FRONT") // OV EDIT - Layering Fix
 	name = "Quad"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 
 /datum/sprite_accessory/breasts/sextuple
 	icon_state = "sextuple"
+	preview_states = list("sextuple_2_FRONT") // OV EDIT - Layering Fix
 	name = "Sextuple"
 	color_key_defaults = list(KEY_CHEST_COLOR)
 
 /datum/sprite_accessory/vagina
 	icon = 'icons/mob/sprite_accessory/genitals/nethers.dmi'
 	color_key_name = "Nethers"
-	relevant_layers = list(BODY_FRONT_LAYER)
+	relevant_layers = list(CROTCH_LAYER) //OV EDIT - Genital adjustments src. Caustic - Replace BODY_FRONT_LAYER
 
 /datum/sprite_accessory/vagina/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BELT, OFFSET_BELT_F)

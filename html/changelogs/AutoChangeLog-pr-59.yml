@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Bug with artificed half-plate not applying the correct buffs."
