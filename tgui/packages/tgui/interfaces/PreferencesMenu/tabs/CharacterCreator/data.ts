@@ -325,6 +325,8 @@ export type CharFlaw = {
   name: string;
   type: Path;
   warning: BooleanLike;
+  max_choices: number;
+  picked_choices: { index: number; choice: string }[];
 };
 
 // --------------- VillainData ---------------

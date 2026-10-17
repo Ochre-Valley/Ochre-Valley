@@ -8,8 +8,8 @@
 		food_inserted_micros -= M
 	//if(isdisposalpacket(loc)) //Causitc - I believe this is for the Disposals Piping System.
 	//	M.forceMove(loc)
-	else
-		M.forceMove(get_turf(src))
+	//else
+	M.forceMove(get_turf(src))
 	to_chat(M, span_warning("You climb out of \the [src]."))
 
 //I ended up not having the patience to bother with this mess. Uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh. Don't cook micros pls! I am not responsible when it inevitably happens :P -- Jon
