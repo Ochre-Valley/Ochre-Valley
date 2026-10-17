@@ -3808,6 +3808,7 @@
 #include "modular\Neu_Food\code\others\dried_fruits.dm"
 #include "modular\Neu_Food\code\others\fat.dm"
 #include "modular\Neu_Food\code\others\honey.dm"
+#include "modular_ochrevalley\code\datums\quirk\lesser.dm"
 #include "modular\Neu_Food\code\others\preserved_meat.dm"
 #include "modular\Neu_Food\code\others\sweet.dm"
 #include "modular_deserttown\desertfloor.dm"
