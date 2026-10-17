@@ -16,6 +16,17 @@
 #define QUEST_TOWNER_MINER_OREVEIN "Ore Vein"
 #define QUEST_NOTORIOUS_BOUNTY "Notorious Bounty"
 
+//OV EDIT
+#define QUEST_TOWNER_CLINIC_CARAVAN "Clinic Caravan"
+#define QUEST_TOWNER_MISSING_RUNNER "Missing Runner"
+#define QUEST_TOWNER_TAILOR_CARAVAN "Tailor Caravan"
+#define QUEST_TOWNER_CLAY_DEPOSIT "Clay Deposit"
+#define QUEST_TOWNER_FOOD_CARAVAN "Food Caravan"
+#define QUEST_TOWNER_CHEESEMAKER_CARAVAN "Cheesemaker Caravan"
+#define QUEST_TOWNER_BUILDING_SUPPLIES "Building Supplies"
+#define QUEST_TOWNER_VALUABLES "Valuables"
+//OV EDIT END
+
 #define QUEST_TURNIN_SELF 1
 #define QUEST_TURNIN_FELLOWSHIP 2
 #define QUEST_TURNIN_OFFICIAL 3
@@ -49,6 +60,32 @@
 #define CARAVAN_VARIETY_IRON "iron"
 #define CARAVAN_VARIETY_BRONZE "bronze"
 #define CARAVAN_VARIETY_BULLION "bullion"
+
+//OV EDIT
+#define CARAVAN_VARIETY_POTIONS "potions"
+#define CARAVAN_VARIETY_INGREDIENTS "ingredients"
+
+#define CARAVAN_VARIETY_DRUGS "drugs"
+#define CARAVAN_VARIETY_BOOZE "booze"
+
+#define CARAVAN_VARIETY_LEATHERS "leathers"
+#define CARAVAN_VARIETY_SILKS "silks"
+
+#define CARAVAN_VARIETY_FOOD "food"
+#define CARAVAN_VARIETY_SEEDS_FRUIT "fruit seeds"
+#define CARAVAN_VARIETY_SEEDS_VEGETABLE "vegetable seeds"
+
+#define CARAVAN_VARIETY_CHEESEMAKER "cheesemaker"
+
+#define DEPOSIT_VARIETY_CLAY "clay"
+
+#define CARAVAN_VARIETY_BUILDING_SUPPLIES "building supplies"
+
+#define CARAVAN_VARIETY_HEIRLOOM "heirloom"
+#define CARAVAN_VARIETY_GEMS "gems"
+#define CARAVAN_VARIETY_COIN "coin"
+#define CARAVAN_VARIETY_EVIDENCE "evidence"
+//OV EDIT END
 
 // Recovery is intentionally omitted - the Steward cannot directly commission recoveries.
 // Those spawn from the pool (SSquestpool.regen_kill_targets) and from Innkeeper rumors only.
