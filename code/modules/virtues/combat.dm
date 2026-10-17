@@ -123,7 +123,7 @@
 		"Stashed Quiver" = list(/obj/item/quiver/arrows), // pls insert 1 more dosh
 		"Stashed Crossbow" = list(/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/iron), // the weaker one!
 		"Stashed Bolts" = list(/obj/item/quiver/bolt/standard), // pls insert 1 more dosh
-		"Stashed Bullets and Powder" = list(/obj/item/powderflask, /obj/item/quiver/bulletpouch/iron), //OV ADD
+		"Stashed Powder-and-Shot Kit" = list(/obj/item/quiver/bulletpouch/powderkit/iron), //OV ADD
 	)
 
 /datum/virtue/combat/combat_virtue/apply_to_human(mob/living/carbon/human/recipient)
