@@ -54,7 +54,7 @@
 	for(var/mob/living/L in ghostless)
 		if(L.stat != DEAD && L != src) // to those living only - slightly more expensive but subtle is not spammed
 			mobsinview += L
-			if(!L.rogue_sneaking && L.name != "Unknown") // do not let hidden/unknown targets be added to list
+			if(!L.rogue_sneaking && L.name != "Unknown" && (L.ckey || L.aghosted)) //OV Edit: Why would we need to subtle to ckeyless mobs? do not let hidden/unknown targets be added to list
 				mobspickable += L
 	var/choice = input(src, "Pick a target?", "Subtle Emote") in mobspickable
 	to_chat(src, "<i>[message]</i>")
