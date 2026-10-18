@@ -305,12 +305,12 @@
 /datum/outfit/job/roguetown/conjured_servant/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	//Low stats save speed, they are either a packmule or for scenes.
-	H.STASTR = 8
+	H.STASTR = 4
 	H.STASPD = 11 // To prevent NPC following problem
 	H.STACON = 8
 	H.STAWIL = 8
 	H.STAPER = 10
-	H.STAINT = 10
+	H.STAINT = 6
 	H.STALUC = 10
 	pants = /obj/item/clothing/under/roguetown/tights
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
