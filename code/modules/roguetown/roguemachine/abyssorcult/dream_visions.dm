@@ -73,13 +73,46 @@
 		return FALSE
 	// I'm- not sure how else to prevent abyssorites from seeing emotional roleplay too often.
 	// So we'll assume anyone wearing three items or less is doing emotional roleplay.
-	if(target.contents && target.contents.len < 4)
+	//OV EDIT - Expand contents check to exclude bellies
+	if(target.contents)
+		var/non_belly = 0
+		for(var/obj/content_obj in target.contents)
+			if(!isbelly(content_obj))
+				non_belly++
+			else
+				var/obj/belly/our_belly = content_obj
+				if(our_belly.contents) //If we have any human prey in our bellies, exclude us
+					for(var/mob/living/carbon/human/our_prey in our_belly.contents)
+						return FALSE
+		if(non_belly < 4)
+			return FALSE
+	//OV EDIT END
+
+	//OV EDIT - Make sure they aren't in a scene using checks specific to our server
+	if(isbelly(target.loc)) //Exclude prey in bellies
 		return FALSE
+
+	if(target.do_not_disturb) //Exclude people who have toggled scene privacy
+		return FALSE
+
+	for(var/datum/sex_session/session as anything in GLOB.sex_sessions) //Check if they are currently in an active sex session
+		if(session.user == target)
+			return FALSE
+		if(session.target == target)
+			return FALSE
+	//OV EDIT END
+
+	if(istype(get_area(target), /area/rogue/indoors/town/bath))
+		return FALSE // no more bathhouse jumpscares, even if they're not naked that's awkward as hell
+
 	if(length(valid_roles))
 		if(target.mind.assigned_role in valid_roles)
 			return TRUE
 		return FALSE
 	return TRUE
+
+/datum/vision_quest/proc/on_complete(datum/component/vision_quest_tracker/VCT)
+	return // executed on completion of a specific quest. for adding additional effects.
 
 /datum/component/vision_quest_tracker
 	var/datum/vision_quest/quest
@@ -179,6 +212,8 @@
 	cleaned = replacetext(cleaned, "&apos;", "'")
 	cleaned = replacetext(cleaned, "’", "'")
 	cleaned = replacetext(cleaned, "‘", "'")
+	cleaned = replacetext(cleaned, ",", "")
+	cleaned = replacetext(cleaned, ".", "")
 	return cleaned
 
 /datum/component/vision_quest_tracker/proc/complete_quest()
@@ -193,6 +228,7 @@
 				for(var/i in 1 to 2)
 					new bonus_reward_path(T)
 			to_chat(seeker, span_green("The vision solidifies! Your rewards appear at the ritual rune."))
+			quest?.on_complete(src)
 		else
 			to_chat(seeker, span_warning("The ritual rune is gone! Your rewards are lost."))
 	else

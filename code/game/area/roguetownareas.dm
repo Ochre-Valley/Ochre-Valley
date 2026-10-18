@@ -18,7 +18,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 	var/keep_area = FALSE
 	var/tavern_area = FALSE
 	var/warden_area = FALSE
-	var/holy_area = FALSE
 	var/cell_area = FALSE
 	var/drow_area = FALSE
 	var/necra_area = FALSE
@@ -48,8 +47,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(list(/area/rogue/indoors
 		guy.apply_status_effect(/datum/status_effect/buff/wardenbuff)
 	if((src.drow_area == TRUE) && HAS_TRAIT(guy, TRAIT_ANTHRAXI) && !guy.has_status_effect(/datum/status_effect/buff/anthraxbuff)) // Drow Mercenaries
 		guy.apply_status_effect(/datum/status_effect/buff/anthraxbuff)
-	if((src.holy_area == TRUE) && HAS_TRAIT(guy, TRAIT_UNDIVIDED)) // get a long-lingering mood buff so long as we visit the church daily as Undivided.
-		guy.add_stress(/datum/stressevent/seeblessed)
 	//Caustic edit
 	//OV edit
 	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_FERAL) && !guy.has_status_effect(/datum/status_effect/buff/feraldebuff)) //feral creatures don't do well in town

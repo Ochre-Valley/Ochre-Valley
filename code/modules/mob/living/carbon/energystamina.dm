@@ -205,6 +205,8 @@
 /mob/living/carbon/proc/heart_attack()
 	if(HAS_TRAIT(src, TRAIT_INFINITE_STAMINA))
 		return
+	if(HAS_TRAIT(src, TRAIT_RALLIED))
+		return
 	if(!heart_attacking)
 		heart_attacking = TRUE
 		shake_camera(src, 1, 3)
@@ -223,6 +225,8 @@
 			flash_fullscreen("stressflash")
 			return
 	if(HAS_TRAIT(src, TRAIT_NOMOOD))
+		return
+	if(HAS_TRAIT(src, TRAIT_RALLIED))
 		return
 	mob_timers["freakout"] = world.time
 	shake_camera(src, 1, 3)
@@ -247,6 +251,8 @@
 			flash_fullscreen("stressflash")
 			return
 	if(HAS_TRAIT(src, TRAIT_NOMOOD))
+		return
+	if(HAS_TRAIT(src, TRAIT_RALLIED))
 		return
 	mob_timers["freakout"] = world.time
 	shake_camera(src, 1, 3)

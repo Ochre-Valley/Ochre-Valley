@@ -411,14 +411,14 @@ GLOBAL_LIST_INIT(searaider_aggro, world.file2list("strings/rt/searaideraggroline
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/full/fluted/ornate
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/inq
 	pants = /obj/item/clothing/under/roguetown/platelegs/blacksteel
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/absolver/unblessed
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/absolver/unblessed
 	neck = /obj/item/clothing/neck/roguetown/gorget/steel
 	cloak = /obj/item/clothing/neck/roguetown/psicross/weeping
 	gloves = /obj/item/clothing/gloves/roguetown/chain/psydon
 	if(prob(50))
-		r_hand = /obj/item/rogueweapon/greatsword/bsword/psy/unforgotten
+		r_hand = /obj/item/rogueweapon/sword/long/broadsword/silver/psy/forgotten/unforgotten
 	else
-		r_hand =  /obj/item/rogueweapon/mace/goden/psymace
+		r_hand =  /obj/item/rogueweapon/mace/goden/psy
 		l_hand = /obj/item/rogueweapon/shield/tower/metal/psy
 
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/blacksteel
