@@ -31,7 +31,7 @@
 	craftdiff = 4
 	display_category = ITEM_CAT_WEAPONS_AMMO
 
-/datum/anvil_recipe/engineering/bronze/mech_shotkit
+/datum/anvil_recipe/engineering/bronze/mech_shotkit/pistol
 	name = "Mechanized Shot Kit, Hip-Slung (Only holds pistols) (+1 Gear, +1 Powder-and-Shot Kit))"
 	created_item = /obj/item/quiver/mechanized/shotkit/hip
 

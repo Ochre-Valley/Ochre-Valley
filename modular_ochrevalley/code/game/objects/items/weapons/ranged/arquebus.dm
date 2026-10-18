@@ -633,7 +633,7 @@
 	desc = "A mechanical bag with a pouch of shot and a flask of powder. Will suck up bullets from the ground,"
 	icon = 'modular_ochrevalley/icons/roguetown/weapons/ammo.dmi'
 	icon_state = "mechpowderkit0"
-	item_state = "mechpowderkit0"
+	item_state = "mechpowderkit"
 	max_storage = 18
 	powderkit = TRUE
 	allowed_ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
