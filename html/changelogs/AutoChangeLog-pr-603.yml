@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - rscadd: "New vice: Dormancy, which causes a character to become an inanimate item when they run out of energy"

@@ -1,6 +1,0 @@
-author: "SomeDeviant"
-delete-after: True
-changes:
-  - rscadd: "Added AP Sync 10.14.26 to 10.18.26"
-  - bugfix: "Reverted 'Werewolves can't panel' for Ochre cause You Know Why"
-  - bugfix: "Reverted 'Saiga armor' as Ochre has its own taur armor system (also cause overlay bugs)"

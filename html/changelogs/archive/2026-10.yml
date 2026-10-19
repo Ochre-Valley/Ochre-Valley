@@ -825,14 +825,6 @@
     - rscadd: wrenches can be twirled with expert Engineering
     - rscdel: Removes demlish from wrench and bogbark clubs, again
 2026-10-15:
-  Obengrad:
-    - bugfix:
-        Changed the TGUI color for non-vore people to grey, hopefully making it
-        more visible.
-  Ryumi:
-    - rscadd: Most private key PEDDLERs now sell reform gems.
-  SomeDeviant:
-    - rscadd: Added weekly AP Sync 10.6.26 to 10.13.26
   BobProductive:
     - bugfix: (hopefully) fixes the ckey
   BurpleBineapple:
@@ -855,9 +847,17 @@
     - rscadd: Added Trait DES_RIDER_FORTITUDE.
     - balance: Desert Rider's Capstone momentum is much better.
     - bugfix: Returns Desert Rider to pre-fortitude changes.
+  Obengrad:
+    - bugfix:
+        Changed the TGUI color for non-vore people to grey, hopefully making it
+        more visible.
   Ryan180602:
     - bugfix: clinging onto walls once again has a stam drain.
     - rscadd: add ckeys to certain donor items
+  Ryumi:
+    - rscadd: Most private key PEDDLERs now sell reform gems.
+  SomeDeviant:
+    - rscadd: Added weekly AP Sync 10.6.26 to 10.13.26
   Sutures:
     - code_imp: Made soap code less duplicate-y
   WeNeedMorePhoron:
@@ -887,8 +887,6 @@
         "Xylix's dice box: further improves stat rolling via a new UI. You can
         also roll in chat e.g. *5d20+STR+67/DC100"
 2026-10-17:
-  zeskorion:
-    - code_imp: remove deprecated wrench demolition code
   KatTheFox:
     - bugfix: Transformed werewolves can no longer use the panel
   Quinalion:
@@ -914,6 +912,8 @@
     - qol:
         Ledger tab has been moved further up the Trade & Stockpile tab list; Trade
         Orders has been made the default tab on the Avisa page of the noticeboards.
+  zeskorion:
+    - code_imp: remove deprecated wrench demolition code
 2026-10-18:
   Blacklist897:
     - rscadd: More cosmetic options for the nobility virtue
@@ -1000,6 +1000,27 @@
   twinklover22:
     - balance: buffed Endure.
 2026-10-19:
+  SomeDeviant:
+    - rscadd: Added AP Sync 10.14.26 to 10.18.26
+    - bugfix: Reverted 'Werewolves can't panel' for Ochre cause You Know Why
+    - bugfix:
+        Reverted 'Saiga armor' as Ochre has its own taur armor system (also cause
+        overlay bugs)
+  TankTheBirb:
+    - bugfix:
+        veiled whispers not showing due to the zombie antag datum being added
+        first
+  NickBelmont:
+    - qol: Custom loadout books can now look like tomes
+    - bugfix: Juicing fruit no longer adds its nutriment to the mortar
+    - rscadd:
+        "New vice: Dormancy, which causes a character to become an inanimate item
+        when they run out of energy"
+  zeskorion:
+    - rscadd: darkness adapted quirk
+    - rscadd:
+        Hemovores can now ping as a vampire when an inquisitor's indexer makes
+        a mistake
   OMEGATHERION:
     - bugfix: Masc vaqueros spawn with a saiga
   Ollanius:

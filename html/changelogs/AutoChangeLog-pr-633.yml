@@ -1,4 +1,0 @@
-author: "TankTheBirb"
-delete-after: True
-changes:
-  - bugfix: "veiled whispers not showing due to the zombie antag datum being added first"

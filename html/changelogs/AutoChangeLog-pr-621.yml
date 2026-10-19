@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Juicing fruit no longer adds its nutriment to the mortar"
