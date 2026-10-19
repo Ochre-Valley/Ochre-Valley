@@ -312,6 +312,7 @@
 	H.STAPER = 10
 	H.STAINT = 6
 	H.STALUC = 10
+	H.adjust_skillrank_up_to(/datum/skill/misc/reading, SKILL_EXP_NOVICE, TRUE)
 	pants = /obj/item/clothing/under/roguetown/tights
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
