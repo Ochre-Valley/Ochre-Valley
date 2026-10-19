@@ -143,7 +143,7 @@
 /mob/living/simple_animal/hostile/retaliate/rogue/bull
 	icon = 'icons/roguetown/mob/monster/cow.dmi'
 	name = "bull"
-	mob_size = MOB_SIZE_LARGE
+	mob_size = MOB_LARGE //OV EDIT
 	desc = "Cattle are a staple of animal husbandry across the world, both for their milk and for their meat."
 	icon_state = "bull"
 	icon_living = "bull"
@@ -295,8 +295,8 @@
 	if(check_health != total_loss)
 		say("Ouch, that dealt [check_health - total_loss] damage!")
 		total_loss = check_health
-	
+
 /mob/living/simple_animal/hostile/retaliate/rogue/cow/target_practice/death(gibbed)
 	say(pick("I can't believe you've done this...", "Will I be a good burger?", "I'm dead?"))
-	. = ..()	
+	. = ..()
 //OV edit end

@@ -96,7 +96,7 @@
 	if(dry || !isliving(O) || istype(src, /obj/effect/decal/cleanable/blood/footprints) || istype(src, /obj/effect/decal/cleanable/blood/bigprint))
 		return
 	var/mob/living/L = O
-	if(L.mob_size < MOB_SIZE_LARGE || (L.movement_type & FLYING))
+	if(L.mob_size < MOB_LARGE || (L.movement_type & FLYING)) //OV EDIT
 		return
 	L.bloodsteps = BIGPRINT_STEPS
 	L.stepcolour = blood_color

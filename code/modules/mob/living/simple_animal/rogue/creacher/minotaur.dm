@@ -3,7 +3,7 @@
 	anatomy_type = /datum/anatomy/biped/tough
 	icon = 'icons/mob/newminotaur.dmi'
 	name = "Minotaur"
-	mob_size = MOB_SIZE_LARGE
+	mob_size = MOB_LARGE //OV EDIT
 	desc = "An unusually giant relative of the more familiar manners of Wild-Kin. This one looks aggressive."
 	icon_state = "MinotaurMale"
 	icon_living = "MinotaurMale"

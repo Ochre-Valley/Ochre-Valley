@@ -822,7 +822,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		new /obj/effect/temp_visual/gib_animation/animal(loc, icon_gib)
 
 /mob/living/simple_animal/spawn_gibs()
-	if(mob_size < MOB_SIZE_LARGE)
+	if(mob_size < MOB_LARGE) //OV EDIT
 		return ..()
 	new /obj/effect/gibspawner/beast(drop_location(), src)
 
