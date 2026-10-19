@@ -60,6 +60,7 @@
 	icon_state = "scatter_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/scatter
 	armor_penetration = PEN_MEDIUM
+	woundclass = BCLASS_PIERCE
 	damage = 10
 	ricochets_max = 0
 	ricochet_chance = 0
@@ -73,6 +74,7 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	embedchance = 100
+	no_crit = FALSE
 
 /obj/projectile/bullet/scatter/on_hit(atom/target) // EXP for shooting live targets only.
     ..()
@@ -109,6 +111,7 @@
 	max_range = MAX_OVBULLET_RANGE
 	damage = 70
 	flag = BCLASS_PICK //essentially, "old" bullet damage style, but you're not hitting the same level of damage, nor penetration
+	woundclass = BCLASS_PICK
 
 /obj/projectile/bullet/reusable/bullet/bronze/ricochet
 	name = "shimmering bullet"
@@ -233,6 +236,7 @@
 	projectile_type = /obj/projectile/bullet/scatter
 	pellets = 9
 	variance = 30
+
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
 	name = "shot cartridge"
