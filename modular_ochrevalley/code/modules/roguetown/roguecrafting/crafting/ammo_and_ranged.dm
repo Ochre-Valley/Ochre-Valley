@@ -49,9 +49,8 @@
 		/obj/item/natural/cloth = 1
 	)
 	tools = list(/obj/item/rogueweapon/hammer)
-	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 3
+	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/engineering/glassscatter
 	name = "improvised scattershot (x3)"
@@ -67,7 +66,7 @@
 		/obj/item/natural/cloth = 1
 	)
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 1
+	craftdiff = 0
 
 /*/datum/crafting_recipe/roguetown/engineering/burnscatter
 	name = "infernal scattershot (x3)"
