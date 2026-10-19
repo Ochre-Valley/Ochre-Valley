@@ -49,17 +49,17 @@
 	craftdiff = 4
 
 /datum/anvil_recipe/engineering/leadbullets/bronze
-	name = "Runed Firearm Bullets (x12)"
+	name = "Bronze Firearm Bullets (x12)"
 	req_bar = /obj/item/ingot/bronze
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/bronze
 	createditem_num = 12
-	craftdiff = 4
+	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/scatter
 	name = "Firearm Scattershot (x6) (+1 Cloth)"
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
 	additional_items = list(/obj/item/natural/cloth)
-	craftdiff = 3
+	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/steel
 	name = "Firearm Bullets (x18)"
