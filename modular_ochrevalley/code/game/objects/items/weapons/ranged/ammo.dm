@@ -232,7 +232,7 @@
 	icon_state = "bronzescatter"
 	projectile_type = /obj/projectile/bullet/scatter
 	pellets = 9
-	variance = 50
+	variance = 30
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
 	name = "shot cartridge"
@@ -240,7 +240,7 @@
 	icon_state = "ironscatter"
 	projectile_type = /obj/projectile/bullet/scatter/iron
 	pellets = 6
-	variance = 30
+	variance = 20
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/glass
 	name = "improvised scattershot packet"
@@ -248,7 +248,7 @@
 	icon_state = "glassscatter"
 	projectile_type = /obj/projectile/bullet/scatter/glass
 	pellets = 15
-	variance = 70
+	variance = 50
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/dragonsbreath
 	name = "infernal scattershot cartridge"
