@@ -20,7 +20,6 @@
 			return
 	if(user.has_status_effect(/datum/status_effect/debuff/specialcd))
 		return
-
 	user.face_atom(target)
 
 	var/obj/item/rogueweapon/W = user.get_active_held_item()
