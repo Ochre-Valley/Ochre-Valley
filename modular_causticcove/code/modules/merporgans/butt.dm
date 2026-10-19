@@ -53,7 +53,7 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 		return FALSE
 	if(!buttie.visible_organ)
 		return FALSE
-	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDEBUTT)
+	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDECROTCH)
 
 /datum/sprite_accessory/butt/plain
 	name = "Plain (No Thighs)"
