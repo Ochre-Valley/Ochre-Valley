@@ -95,7 +95,7 @@
 				backpack_contents += /obj/item/folding_alchcauldron_stored
 				backpack_contents += /obj/item/folding_alchstation_stored
 		if(!mage)
-			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 7, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
+			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 8, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
 			var/weapons = list("Pistol", "Slurbow", "Arcyne Silver Dagger")
 			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
 			switch(weapon_choice)
@@ -110,10 +110,10 @@
 					beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 				if("Arcyne Silver Dagger")
 					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
-					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
+					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/steel/silver/arcyne
 					beltl = /obj/item/rogueweapon/scabbard/sheath
 		else
-			l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
+			l_hand =  /obj/item/rogueweapon/huntingknife/idagger/steel/silver/arcyne
 			beltl = /obj/item/rogueweapon/scabbard/sheath
 		wretch_select_bounty(H)
 

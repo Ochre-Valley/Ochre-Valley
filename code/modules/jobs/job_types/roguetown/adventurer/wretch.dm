@@ -54,7 +54,7 @@
 		/datum/advclass/wretch/ancient_deathknight,
 		/datum/advclass/wretch/slasher,
 		/datum/advclass/wretch/maestro,
-		/datum/advclass/wretch/freeblade
+		/datum/advclass/wretch/freeblade,
 		//ov edit
 		/datum/advclass/wretch/madtinkerer
 		//ov edit end
