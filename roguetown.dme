@@ -3933,7 +3933,6 @@
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\voicepacks\female\harpy.dm"
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\voicepacks\male\harpy.dm"
 #include "modular_causticcove\code\modules\merporgans\belly.dm"
-#include "modular_ochrevalley\code\modules\spells\spell_types\lux\lux_organ_spells.dm"
 #include "modular_ochrevalley\code\modules\dcbot\add_donator.dm"
 #include "modular_causticcove\code\modules\merporgans\butt.dm"
 #include "modular_ochrevalley\code\modules\roguetown\roguecrafting\leather\leather_armor_recipes.dm"

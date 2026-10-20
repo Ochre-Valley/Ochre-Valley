@@ -5,7 +5,7 @@
 	cmode_music = 'sound/music/combat_dwarf.ogg'
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT, TRAIT_JACKOFALLTRADES) //gains jackofalltrades in place of forgeblessed, such that you don't have to be a malumite to effectively level crafting skills
+	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT, TRAIT_FORGEBLESSED) //these are meant to be crafters, but I want them to be secular, so I'm giving them inherent forgeblessed for now. Might bring a weaker trait down the pipe from upstream
 	subclass_stats = list(
 		STATKEY_INT = 4,
 		STATKEY_PER = 2,
@@ -19,11 +19,11 @@
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE, //crossbows, firearms, and a big wrench
 		/datum/skill/combat/firearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/maces = SKILL_LEVEL_EXPERT, //downgrade them to apprentice if secondary weapon skills get in, forcing them to stick to da wrench
 		/datum/skill/combat/arcyne = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
@@ -31,12 +31,11 @@
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/blacksmithing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/engineering = SKILL_LEVEL_MASTER,
+		/datum/skill/craft/engineering = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/labor/mining = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/smelting = SKILL_LEVEL_JOURNEYMAN, //similar skill list to munitioneer, but their skills start a touch lower, with the exception of Engineering
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/magic/arcane = SKILL_LEVEL_JOURNEYMAN
@@ -44,8 +43,8 @@
 
 /datum/outfit/job/roguetown/wretch/madtinkerer/pre_equip(mob/living/carbon/human/H)
 	to_chat(H, span_warning("Your prowess in your craft would be called madness, to the close-minded folks of 'proper society'. They might even say your ambition will lead to ruin. You know better."))
-	mask = /obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer
-	cloak = /obj/item/clothing/suit/roguetown/shirt/robe/physician/tinkerer
+	mask = /obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer
+	cloak = /obj/item/clothing/cloak/bandolier
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced/labboots
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
@@ -76,7 +75,7 @@
 		switch(fixation_choice)
 			if("Of Arcyne Laws and Convolutions") //you get better magic than the other tinkerers, but still on the lower end of magic users who get a major aspect.
 				to_chat(H, span_warning("Within the secrets of the Arcyne lie the fundament, the true underpinnings of reality, dream, and divinity. Through Arcyne mastery, the world might be brought to heel. No pursuit is greater"))
-				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 6, "allowed_majors" = list(/datum/magic_aspect/pyromancy, /datum/magic_aspect/ferramancy, /datum/magic_aspect/cryomancy, /datum/magic_aspect/kinesis, /datum/magic_aspect/battlewardry), "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
+				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 8, "allowed_majors" = list(/datum/magic_aspect/pyromancy, /datum/magic_aspect/ferramancy, /datum/magic_aspect/cryomancy, /datum/magic_aspect/kinesis), "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
 				mage = TRUE
 				backr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded/implement //worse damage, but works as an arcane focus
 			if("Of Lux, Metal, and Flesh")//get medical ability, and a special prosthetic of your choice, as well as relevant crafting recipes
@@ -88,15 +87,15 @@
 			if("Of Cog-song and Alchymical Truimph")//this one's an experiment. You get transmutation!
 				to_chat(H, span_warning("The dance of the cosmos is the stage of the divine, yet measurable all the same in teeth of a simple bronze cog. With the correct reagents and medicines, under the correct sky, the work of humen hands might shape the tapestry of the world. No pursuit is greater"))
 				H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, SKILL_LEVEL_EXPERT, TRUE)
-				cloak = /obj/item/twstrap/bombstrap/bomb_and_fire
+				ADD_TRAIT(H, TRAIT_BOMBER_EXPERT, TRAIT_GENERIC)
+				r_hand = /obj/item/twstrap/bombstrap/bomb_and_fire
 				backpack_contents += /obj/item/alch/catalyst/aeneic
 				backpack_contents += /obj/item/alch/catalyst/chrysopoeia
 				backpack_contents += /obj/item/trans_table_upgrade
 				backpack_contents += /obj/item/folding_alchcauldron_stored
 				backpack_contents += /obj/item/folding_alchstation_stored
 		if(!mage)
-			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 5, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
-			H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
+			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 7, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
 			var/weapons = list("Pistol", "Slurbow", "Arcyne Silver Dagger")
 			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
 			switch(weapon_choice)
@@ -114,46 +113,33 @@
 					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
 					beltl = /obj/item/rogueweapon/scabbard/sheath
 		else
-			var/weapons = list("Slurbow", "Arcyne Silver Dagger")
-			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
-			switch(weapon_choice)
-				if("Slurbow")
-					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_JOURNEYMAN, TRUE)
-					beltl = /obj/item/quiver/bolt/light
-					beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
-				if("Arcyne Silver Dagger")
-					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_JOURNEYMAN, TRUE)
-					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
-					beltl = /obj/item/rogueweapon/scabbard/sheath
+			l_hand =  /obj/item/rogueweapon/huntingknife/idagger/silver/arcyne
+			beltl = /obj/item/rogueweapon/scabbard/sheath
 		wretch_select_bounty(H)
 
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer
-	name = "strange mask"
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer //the original tinkerer mask was integrated into the game by BB's pyro PR, so I'm hitching off that instead
+	name = "treated breath-mask"
 	desc = "A product of strange artifice, painstakingly replicated from ancient design. Protects the wearer from noxious fumes and shrapnel to the eyes. You can taste copper whenever you draw breath."
 	icon_state = "tinkerermask"
 	icon = 'modular_ochrevalley/icons/roguetown/clothing/masks.dmi'
 	mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/masks.dmi'
-	max_integrity = ARMOR_INT_MASK_IRON
-	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	armor = ARMOR_LABWEAR
-	smeltresult = /obj/item/ingot/bronze
-	block2add = FOV_DEFAULT //similar to the malpractitioner's mask, you get full vision for the sake of drip. You do not, however, gain the full integrity of the confessor's mask
-
-/obj/item/clothing/mask/rogue/facemask/steel/confessor/tinkerer/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/clothing/mask/rogue/spectacles/inq))
-		to_chat(user, span_info("The lenses won't fit your mask."))
-	else
-		return(..())
 
 /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/labcoat
 	name = "treated leather coat"
-	desc = "A heavy coat of hide, reinforced with copper threads and bleached white by a potent alchemical treatment. Capable of withstanding extreme heat, and protecting the wearer, somewhat, from lightning."
-	armor = ARMOR_LABWEAR
+	desc = "A heavy coat of hide, reinforced with copper plates and insulated by a potent alchemical treatment. Capable of withstanding extreme heat, and protecting the wearer, somewhat, from lightning."
+	armor = ARMOR_INSULATED_BRIGANDINE
+	icon_state = "physcoat"
+	item_state = "physcoat"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	boobed = TRUE
+	color = null
+	flags_inv = HIDEBOOB|HIDETAIL
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	body_parts_covered = COVERAGE_ALL_BUT_HANDLEGS
+	smeltresult = /obj/item/ingot/copper
+	anvilrepair = /datum/skill/craft/armorsmithing
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	color = "#feead7"
-
-/obj/item/clothing/suit/roguetown/armor/gambeson/heavy/white
-	color = "#feead7"
 
 /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/labcoat/equipped(mob/user, slot)
 	..()
@@ -169,17 +155,20 @@
 		REMOVE_TRAIT(user, TRAIT_SHOCKIMMUNE, "labcoat")
 		return
 
+/obj/item/clothing/suit/roguetown/armor/gambeson/heavy/white
+	color = "#feead7"
+
 /obj/item/clothing/gloves/roguetown/angle/labgloves
 	name = "treated leather gloves"
 	desc = "A pair of heavy leather gloves, treated for extreme resistance to heat and foul liquid alike."
-	armor = ARMOR_LABWEAR
+	armor = ARMOR_INSULATED_LEATHER
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	color = "#3d3d3e"
 
 /obj/item/clothing/shoes/roguetown/boots/leather/reinforced/labboots
 	name = "treated leather boots"
 	desc = "A pair of heavy leather boots, alchemically treated to resist both flame and acid."
-	armor = ARMOR_LABWEAR
+	armor = ARMOR_INSULATED_LEATHER
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/item/rogueweapon/contraption/linker/mace/big/preloaded/implement
@@ -188,6 +177,3 @@
 	implement_tier = IMPLEMENT_TIER_LESSER
 	implement_refund = IMPLEMENT_REFUND_LESSER
 
-/obj/item/clothing/suit/roguetown/shirt/robe/physician/tinkerer
-	name = "natural philosopher's coat"
-	desc = "A smart-looking coat for a smart individual."
