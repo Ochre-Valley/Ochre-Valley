@@ -53,7 +53,7 @@
 	desc = "I feel at home in the water. Sleeping beneath the waves is almost as comfortable as a bed to me."
 	mechdesc = "Does not come with water breathing."
 	added_traits = list(TRAIT_WATERSLEEP)
-	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk) // same as amphibious basically
+	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/ooze, /datum/species/akula) // same as amphibious except with races that already can breathe water
 	ui_fa_icon = "water"
 
 /datum/quirk/caustic

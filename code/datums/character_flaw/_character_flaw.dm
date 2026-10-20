@@ -518,6 +518,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	var/last_passed_check = 0
 	var/first_tick = FALSE
 	var/extra_increment_value = 0
+	var/satisfied = FALSE
 
 /datum/charflaw/greedy/on_mob_creation(mob/user)
 	next_mammon_increase = world.time + rand(15 MINUTES, 25 MINUTES)
@@ -561,14 +562,18 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	var/do_update_msg = TRUE
 	if(new_mammon_amount >= required_mammons)
 		// Feel better
-		if(user.has_stress_event(/datum/stressevent/vice))
-			to_chat(user, span_blue("[new_mammon_amount] mammons... That's more like it.."))
-		user.remove_stress(/datum/stressevent/vice)
-		user.remove_status_effect(/datum/status_effect/debuff/addiction)
 		last_passed_check = world.time
+		if(!satisfied)
+			satisfied = TRUE
+			if(user.has_stress_event(/datum/stressevent/vice))
+				to_chat(user, span_blue("[new_mammon_amount] mammons... That's more like it.."))
+				if(!has_other_unsated_vice(user))
+					user.remove_stress(/datum/stressevent/vice)
+			user.remove_status_effect(/datum/status_effect/debuff/addiction)
 		do_update_msg = FALSE
 	else
 		// Feel bad
+		satisfied = FALSE
 		user.add_stress(/datum/stressevent/vice)
 		user.apply_status_effect(/datum/status_effect/debuff/addiction)
 
@@ -582,6 +587,15 @@ GLOBAL_LIST_INIT(averse_factions, list(
 			to_chat(user, span_boldwarning("No! My precious mammons..."))
 
 	last_checked_mammons = new_mammon_amount
+
+/datum/charflaw/greedy/proc/has_other_unsated_vice(mob/living/carbon/human/user)
+	for(var/datum/charflaw/cf in user.charflaws)
+		if(cf == src || !istype(cf, /datum/charflaw/addiction))
+			continue
+		var/datum/charflaw/addiction/other = cf
+		if(!other.sated)
+			return TRUE
+	return FALSE
 
 /datum/charflaw/narcoleptic
 	name = "Narcoleptic"
