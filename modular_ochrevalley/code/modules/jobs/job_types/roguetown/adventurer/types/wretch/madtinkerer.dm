@@ -68,6 +68,7 @@
 		/obj/item/storage/hip/orestore/bronze = 1
 		)
 	if(H.mind)
+		H.adjust_skillrank_up_to(/datum/skill/craft/engineering, SKILL_LEVEL_LEGENDARY, TRUE)//To make goggles have analyze on-equip
 		H.AddComponent(/datum/component/ore_sight)
 		var/fixations = list("Of Arcyne Laws and Convolutions", "Of Lux, Metal, and Flesh", "Of Cog-song and Alchymical Truimph")
 		var/fixation_choice = input(H, "What is your pursuit?", "THEY CALLED ME MAD!") as anything in fixations
@@ -119,10 +120,42 @@
 
 /obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer //the original tinkerer mask was integrated into the game by BB's pyro PR, so I'm hitching off that instead
 	name = "treated breath-mask"
-	desc = "A product of strange artifice, painstakingly replicated from ancient design. Protects the wearer from noxious fumes and shrapnel to the eyes. You can taste copper whenever you draw breath."
+	desc = "A product of strange artifice, painstakingly replicated from ancient design. Protects the wearer from noxious fumes and shrapnel to the eyes, whilst offering the analytical capabilities of golden spectacles. You can taste copper whenever you draw breath."
 	icon_state = "tinkerermask"
 	icon = 'modular_ochrevalley/icons/roguetown/clothing/masks.dmi'
 	mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/masks.dmi'
+	var/active_item
+
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer/equipped(mob/user, slot)
+	..()
+	if(active_item)
+		return
+	else if(slot == SLOT_WEAR_MASK || slot == SLOT_HEAD)
+		if (user.get_skill_level(/datum/skill/craft/engineering) >= 2)
+			ADD_TRAIT(user, TRAIT_ENGINEERING_GOGGLES, "[type]")
+			user.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/engineeranalyze)
+			to_chat(user, span_green("Time to get to work."))
+			active_item = TRUE
+			return
+		else
+			to_chat(user, span_notice("I can't make sense of the words and numbers before my eyes."))
+			return
+	else
+		return
+
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Wear this on your face to activate it.")
+	. += span_info("With Apprentice Engineering or higher, it grants Analyze and engineering goggles, letting you inspect a structure's integrity and linked machinery details.")
+	. += span_info("Removing it disables the effect.")
+
+/obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer/dropped(mob/user, slot)
+	..()
+	if(active_item)
+		active_item = FALSE
+		REMOVE_TRAIT(user, TRAIT_ENGINEERING_GOGGLES, "[type]")
+		user.mind.RemoveSpell(new /obj/effect/proc_holder/spell/invoked/engineeranalyze)
+		to_chat(user, span_warning("Time to stop working."))
 
 /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/labcoat
 	name = "treated leather coat"
