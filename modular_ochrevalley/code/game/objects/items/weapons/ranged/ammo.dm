@@ -65,7 +65,7 @@
 	ricochets_max = 0
 	ricochet_chance = 0
 	min_range = 1
-	max_range = 7
+	max_range = MAX_OVBULLET_RANGE
 	range = 12
 	dam_falloff_factor = DAM_FALLOFF_OVBULLET
 	speed = 0.1
@@ -100,7 +100,7 @@
 	icon_state = "glassscatter_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/scatter/glass
 	armor_penetration = PEN_LIGHT
-	max_range = 3
+	max_range = 5
 	damage = 5
 
 /obj/projectile/bullet/scatter/hollowpoint
@@ -235,7 +235,7 @@
 	icon_state = "bronzescatter"
 	projectile_type = /obj/projectile/bullet/scatter
 	pellets = 9
-	variance = 30
+	variance = 40
 
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
@@ -244,7 +244,7 @@
 	icon_state = "ironscatter"
 	projectile_type = /obj/projectile/bullet/scatter/iron
 	pellets = 6
-	variance = 20
+	variance = 30
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/glass
 	name = "improvised scattershot packet"
@@ -252,7 +252,7 @@
 	icon_state = "glassscatter"
 	projectile_type = /obj/projectile/bullet/scatter/glass
 	pellets = 15
-	variance = 50
+	variance = 60
 
 /obj/item/ammo_casing/caseless/rogue/bullet/scatter/dragonsbreath
 	name = "infernal scattershot cartridge"

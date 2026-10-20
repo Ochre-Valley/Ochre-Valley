@@ -13,7 +13,7 @@
 /datum/crafting_recipe/roguetown/engineering/shotkitcraft
 	name = "powder-and-shot kit"
 	category = "Ranged"
-	result = /obj/item/quiver/bulletpouch
+	result = /obj/item/quiver/bulletpouch/powderkit
 	skillcraft = /datum/skill/craft/engineering
 	reqs = list(
 		/obj/item/quiver/bulletpouch = 1,
