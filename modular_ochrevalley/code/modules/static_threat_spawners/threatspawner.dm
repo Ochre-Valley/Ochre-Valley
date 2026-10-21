@@ -215,11 +215,17 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 /obj/effect/landmark/threatspawner/proc/start_cooldown()
 	next_spawn_time = world.time + rand(GLOB.threatspawner_cd_min, GLOB.threatspawner_cd_max)
 
+// Subtype of threat spawner with a longer initial cooldown,
+// intended for places that will probably take a while before being cleared / lit.
 /obj/effect/landmark/threatspawner/longinit
 	inital_cooldown = 45 MINUTES
 
+// Subtype of threat spawner with a short initial cooldown,
+// intended for places that will be cleared out / lit pretty early on in the round.
 /obj/effect/landmark/threatspawner/shortinit
 	inital_cooldown = 15 MINUTES
 
+// Subtype of threat spawner that instantly starts attempting
+// to spawn its threats at the start of the round.
 /obj/effect/landmark/threatspawner/instant
 	inital_cooldown = 1 SECONDS
