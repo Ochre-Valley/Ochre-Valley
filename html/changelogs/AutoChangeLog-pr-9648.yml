@@ -1,0 +1,6 @@
+author: "Ollanius"
+delete-after: True
+changes:
+  - bugfix: "A couple polearm sprites have been adjusted to be properly in-line with the rest. In combination with some altered inhand code, this should fix most cases of polearms (especially halberd- and polehammer-forked ones) mysteriously floating below the wielder's grasp."
+  - rscadd: "Bardiches now use a steel-bladed sprite, to accomadate them being classified as steel weapons."
+  - code_imp: "Slightly touches up the organization of blunt32.dmi, blunt64.dmi, and polearms64.dmi."

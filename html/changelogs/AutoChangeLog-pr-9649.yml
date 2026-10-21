@@ -1,0 +1,4 @@
+author: "mumblemancer"
+delete-after: True
+changes:
+  - rscdel: "trolls wont hide on losing their target, anymore. this will also make them not hide when they die."
