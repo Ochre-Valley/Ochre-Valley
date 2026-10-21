@@ -205,6 +205,9 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 
 /obj/effect/landmark/threatspawner/proc/on_our_mobs_death(mob/living/source)
 	our_living_mobs.Remove(source)
+	// If that was our last guy, start a cooldown before we make more
+	if(our_living_mobs.len < 1)
+		start_cooldown()
 
 /// Returns the type of the mob that the spawner will create
 /obj/effect/landmark/threatspawner/proc/get_mob_spawn_type(area/AR, datum/threat_region/TR)
