@@ -17,7 +17,6 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/pestoplate_slice

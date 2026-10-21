@@ -1,4 +1,5 @@
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw
+	dish_type = DISH_BREAD|DISH_VEGETABLE
 	name = "uncooked pestoplate"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "pizza_pesto_base"
@@ -6,9 +7,9 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate
-	foodtype = GRAIN | VEGETABLES
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_cheese
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "uncooked pestoplate with cheese"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "pizza_pesto_uncooked"
@@ -17,11 +18,11 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/pestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_sausage
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "uncooked pestoplate with sausages"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "sausage_pizza_pesto_uncooked"
@@ -30,9 +31,9 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate_meat
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/meatpestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_fish
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "uncooked pestoplate with fishes"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "fish_pizza_pesto_uncooked"
@@ -41,9 +42,9 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate_fish
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fishpestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_truffles
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "uncooked pestoplate with truffles"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "truffle_pizza_pesto_uncooked"
@@ -52,9 +53,9 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate_truffle
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/trufflepestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_poisontruffles
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "uncooked pestoplate with truffles"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "truffle_pizza_pesto_uncooked"
@@ -64,9 +65,9 @@
 	list_reagents = list(/datum/reagent/berrypoison = 5)
 	cooked_smell = /datum/pollutant/food/pestoplate_truffle
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/poisontrufflepestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_onion
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "uncooked pestoplate with onions"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "onion_pizza_pesto_uncooked"
@@ -75,9 +76,9 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate_onion
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/onionpestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY
 
 /obj/item/reagent_containers/food/snacks/rogue/foodbase/pestoplate_raw_pear
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "uncooked pestoplate with pears"
 	icon = 'modular_ochrevalley/icons/raw/pestoplates.dmi'
 	icon_state = "pear_pizza_pesto_uncooked"
@@ -86,4 +87,3 @@
 	eat_effect = null
 	cooked_smell = /datum/pollutant/food/pestoplate_pear
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/pearpestoplate
-	foodtype = GRAIN | VEGETABLES | DAIRY
