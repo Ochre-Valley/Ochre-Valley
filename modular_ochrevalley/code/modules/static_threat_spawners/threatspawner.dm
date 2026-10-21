@@ -49,21 +49,37 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 
 /obj/effect/landmark/threatspawner/process()
 	if(world.time > next_spawn_time)
-		if(consider_spawning())
-			spawn_threats()
+		consider_spawning()
 
 /obj/effect/landmark/threatspawner/proc/consider_spawning()
 	var/turf/T = get_turf(src)
 	if(!T)
 		next_spawn_time = world.time + INFINITY
 		CRASH("A threat spawner doesn't have a valid turf... SOMEHOW!")
+
+	var/area/AR = get_area(src)
+	if(!AR)
+		return FALSE
+
+	var/datum/threat_region/TR = null
+	if(AR.threat_region)
+		TR = SSregionthreat.get_region(AR.threat_region)
+
+	if(!length(AR.ambush_mobs) && isnull(AR.ambush_factions))
+		return FALSE
+	// Check our threat region, and if it has anything for us to spawn
+	if(TR)
+		if(TR.get_danger_level() == DANGER_LEVEL_SAFE)
+			return FALSE
+
 	// If we have spawned mobs that are still alive, wait a while longer.
-	if(our_living_mobs.len > 0)
+	// We allow ONE straggler to be around before we spawn more.
+	if(our_living_mobs.len > 1)
 		next_spawn_time = world.time + 1 MINUTES
 		return FALSE
-	// Make sure nobody is able to see us or anything we might spawn!
+	// Make sure no living player is able to see us or anything we might spawn!
 	for(var/mob/living/carbon/human/L in range(src, spawn_range + 7))
-		if(L.ckey)
+		if(L.mind)
 			// If there are viewers, we'll just wait a bit and then try again.
 			next_spawn_time = world.time + 1 MINUTES
 			return FALSE
@@ -85,9 +101,9 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		// If there are, well, guess we'll wait a good while before checking again.
 		start_cooldown()
 		return FALSE
-	return TRUE
+	return spawn_threats(AR, TR)
 
-/obj/effect/landmark/threatspawner/proc/spawn_threats()
+/obj/effect/landmark/threatspawner/proc/spawn_threats(area/AR, datum/threat_region/TR)
 	var/list/possible_targets = list()
 	for(var/obj/structure/flora/F in range(src, spawn_range))
 		if(isturf(F.loc))
@@ -95,27 +111,113 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	// If we find no valid flora to spawn them on, then um... uh... I guess we wait a while??
 	if(!possible_targets.len)
 		start_cooldown()
-		return
-	// First determine the minimum and maximum possible quantity of dudes we'll spawn
+		return FALSE
+	// SHAMELESSLY stealing MOST OF THIS from ambush code,
+	// since we should be using very similar logic as it for choosing what mobs we spawn!
+
+	// ——— BUDGET PREPARATION ———
+	var/latent_pool = 50 // Fallback if no region
+	var/budget_pct = AMBUSH_BUDGET_PCT_REGULAR
+
+	// Budget is randomized but is most likely to be low to keep mob spawns reasonable for a static spawner
+	// While we're drawing from the ambush pool, We aren't spawning ambushes everywhere.
+	// Think of these as "mini-mini ambushes".
+	// However, in VERY rare circumstances, we'll spawn a whole-ass regular ambush.
+	var/alist/static_spawner_mults = alist(
+		0.25 = 50, // Most likely going to be cutting our budget to 25%
+		0.35 = 20, // 35%
+		0.5 = 10, // 50%
+		1 = 1, // 100% of our budget retained. VERY rare outcome that we'll be mean as fuck
+	)
+	var/chosen_mult = pickweight(static_spawner_mults)
+	if(TR)
+		latent_pool = TR.latent_ambush
+		budget_pct = TR.ambush_budget_pct
+	var/budget = chosen_mult * latent_pool * budget_pct
+	budget = max(budget, 10) // Floor: always afford at least one trash mob
+
+	// ——— MOB SPAWN POOL PREPARATION / PURCHASE LOOP ———
+	var/list/mobs_to_spawn = list() // flat list of mob type paths to spawn
+	var/total_tp_spent = 0
+
+	var/list/group_pools = list()
+	var/list/group_weights = list()
+	var/list/all_candidates = build_ambush_pool(AR, TR, group_pools, group_weights)
+	if(!length(all_candidates))
+		return FALSE
+
+	var/list/solvent = list()
+	for(var/key in group_weights)
+		if(length(affordable_ambush_entries(group_pools[key], budget)))
+			solvent[key] = group_weights[key]
+	var/anchor_faction = length(solvent) ? pickweight(solvent) : pickweight(group_weights)
+	var/list/faction_candidates = group_pools[anchor_faction]
+
+	var/list/affordable = affordable_ambush_entries(faction_candidates, budget)
+	var/first_pick = length(affordable) ? pickweight(affordable) : cheapest_ambush_entry(faction_candidates)
+	if(!first_pick)
+		return FALSE
+	var/first_tp = max(get_threat_point(first_pick), 1) // Floor 1 TP to prevent infinite loops
+	add_ambush_purchase(first_pick, mobs_to_spawn)
+	budget -= first_tp
+	total_tp_spent += first_tp
+
+	// Determine the minimum and maximum possible quantity of dudes we'll spawn
 	var/list/minmax = pickweight(GLOB.threatspawner_quantities)
-	var/amt2spawn = rand(minmax[1], minmax[2])
+	var/max_num_mobs = rand(minmax[1], minmax[2])
+
+	// Continue purchasing while we have budget
+	// Safety cap: never spawn more than our random cap of mobs even if TP values are misconfigured
+	while(budget > 0 && mobs_to_spawn.len < max_num_mobs)
+		var/picked
+		if(faction_candidates.len)
+			picked = pickweight(faction_candidates)
+		else // Nothing left to pick from at all — bail out
+			break
+
+		var/pick_tp = max(get_threat_point(picked), 1) // Floor 1 TP to prevent infinite loops from unconfigured mobs
+
+		// If this pick would overshoot the budget, stop — don't blow the budget
+		if(pick_tp > budget)
+			break
+
+		add_ambush_purchase(picked, mobs_to_spawn)
+		budget -= pick_tp
+		total_tp_spent += pick_tp
+
+	// ——— SPAWNING PHASE ———
 	// Now we actually spawn the dudes!!
-	var/area/AR = get_area(src)
-	var/spawnedtype = get_mob_spawn_type(AR)
-	for(var/i in 1 to amt2spawn)
+	var/spawnedtype
+	if(mobs_to_spawn.len)
+		var/mob_index = rand(1, mobs_to_spawn.len)
+		spawnedtype = mobs_to_spawn[mob_index]
+		mobs_to_spawn.Cut(mob_index, mob_index + 1)
+	else
+		return FALSE
+	for(var/i in 1 to max_num_mobs)
 		var/spawnloc = pick(possible_targets)
 		if(spawnloc)
 			var/mob/living/spawnedmob = new spawnedtype(spawnloc)
 			RegisterSignal(spawnedmob, COMSIG_MOB_DEATH, PROC_REF(on_our_mobs_death))
 			our_living_mobs.Add(spawnedmob)
 	start_cooldown()
+	return TRUE
 
 /obj/effect/landmark/threatspawner/proc/on_our_mobs_death(mob/living/source)
 	our_living_mobs.Remove(source)
 
 /// Returns the type of the mob that the spawner will create
-/obj/effect/landmark/threatspawner/proc/get_mob_spawn_type(area/AR)
+/obj/effect/landmark/threatspawner/proc/get_mob_spawn_type(area/AR, datum/threat_region/TR)
 	return pickweight(AR.ambush_mobs)
 
 /obj/effect/landmark/threatspawner/proc/start_cooldown()
 	next_spawn_time = world.time + rand(GLOB.threatspawner_cd_min, GLOB.threatspawner_cd_max)
+
+/obj/effect/landmark/threatspawner/longinit
+	inital_cooldown = 45 MINUTES
+
+/obj/effect/landmark/threatspawner/shortinit
+	inital_cooldown = 15 MINUTES
+
+/obj/effect/landmark/threatspawner/instant
+	inital_cooldown = 1 SECONDS
