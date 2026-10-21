@@ -1,5 +1,6 @@
 /*	.................   Pestoplate  ................... */
 /obj/item/reagent_containers/food/snacks/rogue/pestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "pestoplate"
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket; all it's missing is a cold pint of \
@@ -20,6 +21,7 @@
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/pestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "slice of pestoplate"
 	desc = "The ultimate definition of being 'more than the sum of its parts'."
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -31,12 +33,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/meatpestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "sausaged pestoplate"
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and crispy sasuages; all it's missing \
@@ -53,10 +55,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/meatpestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "slice of sausaged pestoplate"
 	desc = "What do you mean this is a Baothan's favorite kind of slice?"
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -68,12 +70,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/fishpestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "fished pestoplate"
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and oily fishes; all it's missing \
@@ -90,10 +92,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/fishpestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY|DISH_MEAT
 	name = "slice of fished pestoplate"
 	desc = "Excuse me, sire, but I specifically asked for no anchovies or zardines!"
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -105,12 +107,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY | MEAT
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/onionpestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "onioned pestoplate"
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and crunchy onions; all it's missing \
@@ -127,10 +129,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/onionpestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "slice of onioned pestoplate"
 	desc = "Excuse me, sire, but I specifically asked for no anchovies or zardines!"
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -142,12 +144,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/trufflepestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "truffled pestoplate"
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and decadant truffles; all it's missing \
@@ -164,10 +166,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/trufflepestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "slice of truffled pestoplate"
 	desc = "A slice that's fit for a king! ..so long as that trufflepig didn't accidentally pick a poisoned patch of truffles, of course."
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -179,12 +181,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/poisontrufflepestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "truffled pestoplate" //Like jackberried treats, this is a poisoned variant! For those who don't properly source their truffles.. or simply want to poison others!
 	desc = "A culinary delight from Azuria's shores, purported to've originated from an inflow of Etruscean refugees from long ago. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and decadant truffles; all it's missing \
@@ -201,10 +203,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/poisontrufflepestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "slice of truffled pestoplate" //Ditto.
 	desc = "A slice that's fit for a king! ..so long as that trufflepig didn't accidentally pick a poisoned patch of truffles, of course."
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -216,12 +218,12 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 //
 
 /obj/item/reagent_containers/food/snacks/rogue/pearpestoplate
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "pearacotta pestoplate"
 	desc = "A curious spin on an Azurian classic, attributed to the hands of Vanderlin's most esteemed culinarians. The \
 	richness of the flatbread's pesto sauce is perfectly complemented by its cheesey blanket and sweet pears; a melody of flavors \
@@ -238,10 +240,10 @@
 	slice_batch = TRUE
 	slice_sound = TRUE
 	rotprocess = SHELFLIFE_EXTREME
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/pearpestoplate_slice
+	dish_type = DISH_BREAD|DISH_VEGETABLE|DISH_DAIRY
 	name = "slice of pearacotta pestoplate"
 	desc = "You'd never imagine that such contrasting ingredients could meld together so wonderfully; and yet, they do! Such is the joy of creation.."
 	icon = 'modular_ochrevalley/icons/cooked/pestoplates_cooked.dmi'
@@ -253,5 +255,4 @@
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
-	foodtype = GRAIN | VEGETABLES | DAIRY
 	eat_effect = /datum/status_effect/buff/snackbuff
