@@ -4138,4 +4138,6 @@
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\squirm_in_belly.dm"
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\submit.dm"
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\kiss_inside_belly.dm"
+#include "modular_ochrevalley\code\game\objects\items\donator_modkit.dm"
+#include "modular_ochrevalley\code\datums\loadout\loadout_donators.dm"
 // END_INCLUDE
