@@ -1099,3 +1099,34 @@
     - rscadd:
         the courier and recovery system's rewards have been expanded by a fair
         amount! keep an eye on any packages coming in for FRESH LOOT DROPS!
+2026-10-21:
+  KatTheFox:
+    - rscadd: Axians and Murklings may now take the Aquaphile quirk.
+  Ollanius:
+    - bugfix:
+        Improved the formatting of roughly twenty-or-so intent sprites, which
+        should hopefully make them a little easier to read.
+    - rscadd:
+        Unifies the 'thrust' intent on forks and spoons to be 'gouges' / 'shallow
+        thrusts'. Same functionality as before.
+    - balance: Spoons now deal 5 > 0 damage.
+    - bugfix:
+        Gothic Sallets and Psydonic Cuirasses now properly transform in all circumstances,
+        when hit with elixirs.
+    - rscadd:
+        Gothic Psydonic Cuirasses should now be applicable for the "Gothic Plate-And-Maille"
+        recipe.
+    - code_imp:
+        The "exact_type" variable on morphing elixirs seems to sometimes give
+        a false positive, if the 'target_item' listing isn't properly spaced out (when
+        used with the 'result_item = null' method.) Good to keep this in mind, in case
+        any transforming errors come up in the future.
+  Quinalion:
+    - bugfix: Fixed the padded coif.
+    - refactor: Removed unnecessary components from coifs with two opening stages.
+  azurexautyr-arch:
+    - rscadd: donor item for GuiMontag
+  changelingonberry:
+    - rscadd: custom descriptors now support multiple uppercase words
+  zRainbowcat:
+    - bugfix: Greedy message spam
