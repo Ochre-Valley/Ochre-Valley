@@ -914,35 +914,12 @@
 	force_wielded = 35
 	max_blade_int = 400
 	wdefense = 5
-	var/used = FALSE
-	var/list/selection = list(
+	special_picks = list(
 		/datum/special_intent/polearm_backstep,
 		/datum/special_intent/quarterstaff_sweep,
 		/datum/special_intent/axe_swing,
-		/datum/special_intent/vicious_swipe,
+		/datum/special_intent/wave_swing/vicious,
 		)
-
-/obj/item/rogueweapon/halberd/blacksteel/examine(mob/user)
-	. = ..()
-	if(!used)
-		. += span_notice("The Special Manoeuvre of this weapon can be changed. Right-click it with a free hand to select one. This can only be done once.")
-
-/obj/item/rogueweapon/halberd/blacksteel/attack_right(mob/user)
-	. = ..()
-	if(used)
-		return
-
-	var/list/special_options = list()
-	for(var/intent in selection)
-		var/datum/special_intent/S = intent // Hate this DM quirk.
-		special_options[S::name] = S
-
-	var/choice = input(user, "Choose the Manoeuvre", "MANOEUVRE") as anything in special_options
-	if(choice)
-		qdel(special)
-		var/datum/special_intent/S = special_options[choice]
-		special = new S()
-		used = TRUE
 
 /obj/item/rogueweapon/halberd/blacksteel/attackby(obj/item/W, mob/living/user, params)
 	..()
@@ -1116,35 +1093,12 @@
 	force_wielded = 35
 	wdefense_wbonus = 4 //+1 over the eagle beak, once wielded.
 	max_integrity = 350 //Basic idea - blacksteel blunt weapons get more integrity, blacksteel edged weapons get more sharpness. Minimal overlap?
-	var/used = FALSE
-	var/list/selection = list(
+	special_picks = list(
 		/datum/special_intent/polearm_backstep,
 		/datum/special_intent/flail_sweep,
 		/datum/special_intent/quarterstaff_sweep,
 		/datum/special_intent/ground_smash
 		)
-
-/obj/item/rogueweapon/eaglebeak/blacksteel/examine(mob/user)
-	. = ..()
-	if(!used)
-		. += span_notice("The Special Manoeuvre of this weapon can be changed. Right-click it with a free hand to select one. This can only be done once.")
-
-/obj/item/rogueweapon/eaglebeak/blacksteel/attack_right(mob/user)
-	. = ..()
-	if(used)
-		return
-
-	var/list/special_options = list()
-	for(var/intent in selection)
-		var/datum/special_intent/S = intent // Hate this DM quirk.
-		special_options[S::name] = S
-
-	var/choice = input(user, "Choose the Manoeuvre", "MANOEUVRE") as anything in special_options
-	if(choice)
-		qdel(special)
-		var/datum/special_intent/S = special_options[choice]
-		special = new S()
-		used = TRUE
 
 /obj/item/rogueweapon/eaglebeak/blacksteel/attackby(obj/item/W, mob/living/user, params)
 	..()

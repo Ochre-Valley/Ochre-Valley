@@ -1,0 +1,5 @@
+author: "changelingonberry"
+delete-after: True
+changes:
+  - rscadd: "honey as a favorite dish type"
+  - bugfix: "a lot of food now has the proper dish type set for the purposes of liked foods"

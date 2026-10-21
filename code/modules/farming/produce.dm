@@ -82,6 +82,7 @@
 	return TRUE
 
 /obj/item/reagent_containers/food/snacks/grown/wheat
+	dish_type = DISH_VEGETABLE
 	seed = /obj/item/seeds/wheat
 	name = "wheat grain"
 	desc = "Wheat grains, ready to be milled into powder."
@@ -90,7 +91,6 @@
 	gender = PLURAL
 	filling_color = "#F0E68C"
 	bitesize_mod = 2
-	foodtype = GRAIN
 	tastes = list("wheat" = 1)
 	grind_results = list(/datum/reagent/floure = 10)
 	mill_result = /obj/item/reagent_containers/powder/flour
@@ -98,6 +98,7 @@
 	slices_num = 1
 
 /obj/item/reagent_containers/food/snacks/grown/oat
+	dish_type = DISH_VEGETABLE
 	seed = /obj/item/seeds/wheat/oat
 	name = "oat grain"
 	desc = "Oat grains, ready to be milled and boiled."
@@ -106,7 +107,6 @@
 	gender = PLURAL
 	filling_color = "#556B2F"
 	bitesize_mod = 2
-	foodtype = GRAIN
 	tastes = list("oat" = 1)
 	grind_results = list(/datum/reagent/floure = 10)
 	mill_result = /obj/item/reagent_containers/powder/flour
@@ -120,12 +120,12 @@
 	gender = PLURAL
 	filling_color = "#f0f0f0"
 	bitesize_mod = 2
-	foodtype = GRAIN
 	tastes = list("rice" = 1)
 	grind_results = list(/datum/reagent/floure = 10)
 	mill_result = /obj/item/reagent_containers/powder/flour
 
 /obj/item/reagent_containers/food/snacks/grown/maize
+	dish_type = DISH_VEGETABLE
 	seed = /obj/item/seeds/maize
 	name = "maize"
 	desc = "A cob of maize. Mill it into cornmeal, or roast it whole."
@@ -133,7 +133,6 @@
 	icon_state = "maize"
 	filling_color = "#F0E68C"
 	bitesize_mod = 2
-	foodtype = GRAIN | VEGETABLES
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
 	tastes = list("corn" = 1)
 	grind_results = list(/datum/reagent/floure = 10)
@@ -151,7 +150,6 @@
 	icon_state = "apple"
 	filling_color = "#FF4500"
 	bitesize = 3
-	foodtype = FRUIT
 	tastes = list("apple" = 1)
 	trash = /obj/item/trash/applecore
 	faretype = FARE_POOR
@@ -221,7 +219,6 @@
 	desc = "Uh oh, this shouldn't be here."
 	bitesize = 2
 	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
-	foodtype = FRUIT
 	faretype = FARE_POOR
 	rotprocess = SHELFLIFE_DECENT
 	chopping_sound = TRUE
@@ -486,6 +483,7 @@
 // Caustic Edit End
 
 /obj/item/reagent_containers/food/snacks/grown/nut
+	dish_type = DISH_FRUIT
 	name = "rocknut"
 	desc = "A fragrant nut with stimulating properties, oft-delighted with herbal sugar. Its powder is valuable for fashioning zigs and allspices."
 	seed = /obj/item/seeds/nut
@@ -493,14 +491,13 @@
 	tastes = list("nutty" = 1)
 	filling_color = "#6b4d18"
 	bitesize = 1
-	foodtype = FRUIT
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/acorn_powder = 4, /datum/reagent/drug/westleach = 1)
 	grind_results = list(/datum/reagent/consumable/acorn_powder = 4)
 	mill_result = /obj/item/reagent_containers/powder/rocknut
 
 /obj/item/reagent_containers/food/snacks/grown/nut_sugared
 	cuisine = CUISINE_RANESHENI
-	dish_type = DISH_SWEET
+	dish_type = DISH_SWEET|DISH_FRUIT
 	name = "smothered rocknut"
 	desc = "Sugary rocknuts, smothered in herbal sweetness and awaiting a baptism in boiling fat."
 	icon_state = "rocknutssugar"
@@ -548,7 +545,6 @@
 	properties, though it'll still need to be milled down before it can be used for culinary matters."
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "pepperseed"
-	foodtype = GRAIN
 	tastes = list("spiciness" = 1, "slightly less bitterness" = 1)
 	grind_results = list(/datum/reagent/consumable/blackpepper = 1)
 	mill_result = /obj/item/reagent_containers/food/snacks/pepper
@@ -563,6 +559,7 @@
 	grind_results = list(/datum/reagent/consumable/allspice = 1)
 
 /obj/item/reagent_containers/food/snacks/grown/vegetable/turnip
+	dish_type = DISH_VEGETABLE
 	name = "turnip"
 	desc = "A shield against hunger, naught else."
 	seed = /obj/item/seeds/turnip
@@ -571,7 +568,6 @@
 	bitesize = 1
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
-	foodtype = VEGETABLES
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	chopping_sound = TRUE
 	dropshrink = 0.9
@@ -701,7 +697,6 @@
 	icon_state = "swampweed"
 	filling_color = "#008000"
 	bitesize_mod = 1
-	foodtype = VEGETABLES
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 5)
 	tastes = list("sweet" = 1,"bitterness" = 1)
 	eat_effect = /datum/status_effect/debuff/badmeal
@@ -714,7 +709,6 @@
 	icon_state = "westleach"
 	filling_color = "#008000"
 	bitesize_mod = 1
-	foodtype = VEGETABLES
 	tastes = list("sweet" = 1,"bitterness" = 1)
 	list_reagents = list(/datum/reagent/drug/westleach = 2, /datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 5)
 	grind_results = list(/datum/reagent/drug/westleach = 5)
@@ -779,6 +773,7 @@
 		)
 
 /obj/item/reagent_containers/food/snacks/grown/onion/rogue
+	dish_type = DISH_VEGETABLE
 	name = "onion"
 	desc = "A wonderful vegetable with many layers and broad flavor profile."
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/veg/onion_sliced
@@ -793,6 +788,7 @@
 	seed = /obj/item/seeds/onion
 
 /obj/item/reagent_containers/food/snacks/grown/cabbage/rogue
+	dish_type = DISH_VEGETABLE
 	name = "cabbage"
 	desc = "A dense leafed vegetable, crunchy and ripe. A symbol of prosperity for elves."
 	icon_state = "cabbage"
@@ -806,6 +802,7 @@
 	seed = /obj/item/seeds/cabbage
 
 /obj/item/reagent_containers/food/snacks/grown/potato/rogue
+	dish_type = DISH_VEGETABLE
 	name = "potato"
 	desc = "A spud, dwarven icon of growth. Can be eaten raw."
 	icon_state = "potato"
@@ -821,6 +818,7 @@
 	seed = /obj/item/seeds/potato
 
 /obj/item/reagent_containers/food/snacks/grown/garlick/rogue
+	dish_type = DISH_VEGETABLE
 	name = "garlick bulb"
 	desc = "Hated by the foule vampyres that lurk in the dark - garlick!"
 	icon_state = "garlick"
@@ -908,6 +906,7 @@
 	sellprice = 23
 
 /obj/item/reagent_containers/food/snacks/grown/skysugarslab
+	dish_type = DISH_MEAT
 	name = "skysugar slab"
 	desc = "A crystalline brick that radiates with an almost-ethereal hue, yet to be broken up at an alchemical lab. They call \
 	it 'luchtblauw' in Old Azurian; alchemically purified starsugar, to a ninth-of-a-hundreth dram. Born of a Pestran heresy, this \
@@ -965,6 +964,7 @@
 
 /*	..................	Naledi plants	................... */
 /obj/item/reagent_containers/food/snacks/grown/beans
+	dish_type = DISH_VEGETABLE
 	seed = /obj/item/seeds/beans
 	name = "beans"
 	desc = "A staple in distant lands. Said to induce gassiness within some individuals."
@@ -972,11 +972,11 @@
 	icon_state = "beans"
 	filling_color = "#471b1b"
 	bitesize_mod = 2
-	foodtype = VEGETABLES
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
 	tastes = list("beans" = 1)
 
 /obj/item/reagent_containers/food/snacks/grown/lentils
+	dish_type = DISH_VEGETABLE
 	seed = /obj/item/seeds/lentils
 	name = "lentils"
 	desc = "Multicolored seeds that taste ever so slightly different, despite originating from the same plant. A delight from faraway lands."
@@ -984,18 +984,17 @@
 	icon_state = "lentils"
 	filling_color = "#803f3f"
 	bitesize_mod = 2
-	foodtype = VEGETABLES
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
 	tastes = list("lentils" = 1)
 
 /obj/item/reagent_containers/food/snacks/rogue/bulgur_raw
+	dish_type = DISH_VEGETABLE
 	name = "raw bulgur"
 	desc = "Chopped and ground kernels of foreign cuisine, waiting to bloom in heat and steam… Add water first."
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "bulgur"
 	gender = PLURAL
 	filling_color = "#a79d48"
-	foodtype = GRAIN
 	tastes = list("chalk" = 1)
 	var/water_added
 
