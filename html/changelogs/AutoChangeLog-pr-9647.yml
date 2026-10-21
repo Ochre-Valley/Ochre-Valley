@@ -1,0 +1,5 @@
+author: "Quinalion"
+delete-after: True
+changes:
+  - bugfix: "Fixed the padded coif."
+  - refactor: "Removed unnecessary components from coifs with two opening stages."

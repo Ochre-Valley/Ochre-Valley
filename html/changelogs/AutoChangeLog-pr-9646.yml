@@ -1,0 +1,6 @@
+author: "Ollanius"
+delete-after: True
+changes:
+  - bugfix: "Improved the formatting of roughly twenty-or-so intent sprites, which should hopefully make them a little easier to read."
+  - rscadd: "Unifies the 'thrust' intent on forks and spoons to be 'gouges' / 'shallow thrusts'. Same functionality as before."
+  - balance: "Spoons now deal 5 > 0 damage."

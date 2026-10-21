@@ -1,0 +1,6 @@
+author: "Ollanius"
+delete-after: True
+changes:
+  - bugfix: "Gothic Sallets and Psydonic Cuirasses now properly transform in all circumstances, when hit with elixirs."
+  - rscadd: "Gothic Psydonic Cuirasses should now be applicable for the \"Gothic Plate-And-Maille\" recipe."
+  - code_imp: "The \"exact_type\" variable on morphing elixirs seems to sometimes give a false positive, if the 'target_item' listing isn't properly spaced out (when used with the 'result_item = null' method.) Good to keep this in mind, in case any transforming errors come up in the future."

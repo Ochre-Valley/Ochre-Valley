@@ -636,13 +636,22 @@
 //
 
 /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/ornate/donator_ornate
-	name = "gothic cuirass"
+	name = "silvered gothic cuirass"
 	desc = "A magnificent ornate cuirass, assembled by an Azurian mastersmith. The intricate fluting and interlocked plates are clear \
 	signs of its Grenzelhoftian heritage; expensive, but second-to-none when it comes to what truly matters in life."
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
-	item_state = "gcuirass"
-	icon_state = "gcuirass"
+	item_state = "gflutedcuirass"
+	icon_state = "gflutedcuirass"
+
+/datum/crafting_recipe/roguetown/survival/ornatemailledhauberk
+	name = "layer a silvered gothic cuirass atop hauberk"
+	result = list(/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/heavy/donator_gothic)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/ornate/donator_ornate = 1,
+				/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk = 1)
+	craftdiff = 0
+	req_table = TRUE
+	bypass_dupe_test = TRUE
 
 //
 
