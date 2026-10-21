@@ -18,7 +18,7 @@
 	reqs = list(
 		/obj/item/quiver/bulletpouch = 1,
 		/obj/item/natural/hide/cured = 1,
-		/obj/item/powderflask
+		/obj/item/powderflask = 1
 		)
 	craftdiff = 2
 
