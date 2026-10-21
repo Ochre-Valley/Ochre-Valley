@@ -56,6 +56,10 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	if(!T)
 		next_spawn_time = world.time + INFINITY
 		CRASH("A threat spawner doesn't have a valid turf... SOMEHOW!")
+	// If we have spawned mobs that are still alive, wait a while longer.
+	if(our_living_mobs.len > 0)
+		next_spawn_time = world.time + 1 MINUTES
+		return FALSE
 
 	var/area/AR = get_area(src)
 	if(!AR)
@@ -72,10 +76,6 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		if(TR.get_danger_level() == DANGER_LEVEL_SAFE)
 			return FALSE
 
-	// If we have spawned mobs that are still alive, wait a while longer.
-	if(our_living_mobs.len > 0)
-		next_spawn_time = world.time + 1 MINUTES
-		return FALSE
 	// Make sure no living player is able to see us or anything we might spawn!
 	for(var/mob/living/carbon/human/L in range(src, spawn_range + 7))
 		if(L.mind)
