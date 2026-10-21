@@ -3841,6 +3841,7 @@
 #include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\chest_to_gobbos.dm"
 #include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\deploy_dirtyface_plus_purity.dm"
 #include "modular\Neu_Food\code\recipes\egg_recipes.dm"
+#include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\place_threat_spawners.dm"
 #include "modular\Neu_Food\code\recipes\fish_recipes.dm"
 #include "modular\Neu_Food\code\recipes\meat_meal_recipes.dm"
 #include "modular\Neu_Food\code\recipes\meat_recipes.dm"
