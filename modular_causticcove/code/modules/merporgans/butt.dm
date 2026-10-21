@@ -48,6 +48,10 @@ GLOBAL_LIST_INIT(named_butt_sizes, list(
 	return "butt_[icon_state]_[buttie.butt_size]"
 
 /datum/sprite_accessory/butt/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
+	//OV EDIT START - Based on Caustic Cove Reveal Organ Work
+	if(organ.visible_organ && organ.always_show)
+		return TRUE
+	//OV EDIT END
 	var/obj/item/organ/butt/buttie = organ
 	if(owner.underwear)
 		return FALSE
