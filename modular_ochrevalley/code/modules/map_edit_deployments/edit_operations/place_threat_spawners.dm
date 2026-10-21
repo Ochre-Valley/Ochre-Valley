@@ -353,5 +353,11 @@
 				"y" = 223,
 				"z" = 5,
 			),
+			list(
+				"type" = /obj/effect/landmark/threatspawner/shortinit,
+				"x" = 273,
+				"y" = 244,
+				"z" = 2,
+			),
 		),
 	)
