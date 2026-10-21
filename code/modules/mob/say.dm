@@ -124,6 +124,9 @@
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)
 	if(copytext_char(message, 1, 2) == "*")
+		// `*2d10+STR/DC15` is a roll, and has to be caught here: an emote's key can't carry parameters.
+		if(!forced && try_dice_emote(copytext_char(message, 2)))
+			return 1
 		//OV edit
 		if(isitem(loc) && (copytext_char(message, 1, 2) == "*"))
 			var/obj/item/the_item = loc

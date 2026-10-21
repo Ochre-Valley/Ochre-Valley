@@ -538,11 +538,7 @@ const FavorCard = (props: {
           act={act}
         />
       ) : (
-        <AutoHailerToggle
-          on={!!favor.auto_hailer_on}
-          favor={favor}
-          act={act}
-        />
+        <AutoHailerToggle on={!!favor.auto_hailer_on} favor={favor} act={act} />
       )}
       {/* TODO: flavor - charter button label + flavor (catalog.desc from DM, origin note inline) */}
       {catalogs.map((catalog) => (
@@ -606,8 +602,10 @@ const AutoHailerToggle = (props: {
       <div style={{ ...noteStyle, marginBottom: '6px' }}>
         While the crew works, they spend your daily hails and send each ship off
         once she meets her target or has sat in port a full day.{' '}
-        <b>A ship sent off below {favor.sendoff_partial_pct}% of her target
-        costs you favor. Your favor can go below zero.</b>
+        <b>
+          A ship sent off below {favor.sendoff_partial_pct}% of her target costs
+          you favor. Your favor can go below zero.
+        </b>
       </div>
       <button
         type="button"

@@ -1,4 +1,0 @@
-author: "Obengrad"
-delete-after: True
-changes:
-  - bugfix: "Changed the TGUI color for non-vore people to grey, hopefully making it more visible."

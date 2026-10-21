@@ -194,7 +194,7 @@ GLOBAL_LIST_EMPTY(last_words)
 			if(belly_owner && belly_owner.client) //Just verify that it cast properly and then check for a client present, then it was likely a death in a scene.
 				return
 		//OV ADD END
-		if (!gibbed && !(src.mind.has_antag_datum(/datum/antagonist/zombie)) && !(src.mind.has_antag_datum(/datum/antagonist/skeleton))) //OV EDIT - REMOVED || HAS_TRAIT(src, TRAIT_SECONDLIFE) || HAS_TRAIT(src, TRAIT_UNFORGIVABLE) )) // because I hate being jumpscared by "OOH SOMEONE DIED IN THE CHURCH" when they're just killing a deadite with burn rot to rez them
+		if (!gibbed && !(src.mind.has_antag_datum(/datum/antagonist/skeleton))) //OV EDIT - REMOVED  && !(src.mind.has_antag_datum(/datum/antagonist/zombie)) || HAS_TRAIT(src, TRAIT_SECONDLIFE) || HAS_TRAIT(src, TRAIT_UNFORGIVABLE) )) // because I hate being jumpscared by "OOH SOMEONE DIED IN THE CHURCH" when they're just killing a deadite with burn rot to rez them
 			for (var/mob/living/player in GLOB.player_list)
 				if (player.stat == DEAD || isbrain(player))
 					continue

@@ -93,9 +93,7 @@ export const BathhouseWithdrawalSection = ({
             <button
               type="button"
               style={inkButtonStyle({})}
-              onClick={() =>
-                act('toggle_bathhouse_withdrawals', { group })
-              }
+              onClick={() => act('toggle_bathhouse_withdrawals', { group })}
             >
               {suspended ? 'Resume' : 'Suspend'}
             </button>

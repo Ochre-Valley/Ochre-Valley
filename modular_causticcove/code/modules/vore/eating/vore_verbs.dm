@@ -212,7 +212,7 @@
 		clear_fullscreen("belly")
 	if(!hud_used.hud_shown)
 		toggle_hud_vis()
-	
+
 	to_chat(src, span_notice("You [show_vore_fx ? "will now" : "will no longer"] see vore belly overlays. NOTE: This preferences has NOT been saved, to save please use the vore panel."))
 
 /mob/verb/toggle_spont_pred()

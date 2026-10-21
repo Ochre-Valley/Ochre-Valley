@@ -12,12 +12,9 @@
 	var/chosen_buff
 
 	var/list/spell_buffs = list(
-		"Hawk Eyes" = /datum/status_effect/buff/attune_hawk,
 		"Dragon Eyes" = /datum/status_effect/buff/dragonhide,
 		"Haste" = /datum/status_effect/buff/attune_haste,
 		"Guidance" = /datum/status_effect/buff/guidance,
-		"Giants Strength" = /datum/status_effect/buff/attune_giant,
-		"Fortitude" = /datum/status_effect/buff/fortitude,
 		"Arcyne Momentum" = /datum/status_effect/buff/arcyne_momentum,
 	)
 

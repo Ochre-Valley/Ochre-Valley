@@ -468,7 +468,7 @@
 				mark_free_send(user)
 				to_chat(user, span_notice("Your free letter has been sent. Another may be sent in [HERMES_FREE_COOLDOWN / 600] minute\s."))
 			else
-				SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income")
+				SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income", null, LEDGER_CROWN_REV_MAIL)
 				record_round_statistic(STATS_TAXES_COLLECTED, 1)
 				coin_loaded -= 1
 				if(coin_loaded <= 0)
@@ -785,7 +785,7 @@
 								GLOB.cursedsamples += ", [I.paired.subject.mind]"
 							else
 								GLOB.cursedsamples += "[I.paired.subject.mind]"
-					else if (second_fp_chance && prob(mistake/((HAS_TRAIT(I.paired.subject, TRAIT_VAMP_BITTEN) || HAS_TRAIT(I.paired.subject, TRAIT_PALLID)) ? 2 : 4)))
+					else if (second_fp_chance && prob(mistake/((HAS_TRAIT(I.paired.subject, TRAIT_VAMP_BITTEN) || HAS_TRAIT(I.paired.subject, TRAIT_PALLID) || HAS_TRAIT(I.paired.subject, TRAIT_LYFE_DRINK)) ? 2 : 4))) //OV EDIT- add hemovores to mistake chance
 						if(HAS_TRAIT(I.paired.subject.mind, TRAIT_CBLOOD))
 							stopfarming = TRUE
 						if(!stopfarming)

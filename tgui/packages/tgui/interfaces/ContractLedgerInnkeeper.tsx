@@ -2,12 +2,12 @@ import { type ReactNode, useState } from 'react';
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
-import { formatRatioPct } from './common/format';
 import {
   type IssuedContract,
   IssuedContractsView,
   issueStatusSuffix,
 } from './ContractLedgerIssued';
+import { formatRatioPct } from './common/format';
 
 type RumorLogEntry = {
   title: string;

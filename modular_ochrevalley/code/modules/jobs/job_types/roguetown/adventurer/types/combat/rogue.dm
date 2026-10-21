@@ -36,7 +36,7 @@
 		STATKEY_PER = 2,
 		STATKEY_SPD = 1,
 	)
-	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 3, "locked_aspects" = list(/datum/magic_aspect/artifice))
+	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 5, "locked_aspects" = list(/datum/magic_aspect/artifice))
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
