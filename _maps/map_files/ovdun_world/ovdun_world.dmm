@@ -106656,10 +106656,6 @@
 	},
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
-"sdJ" = (
-/obj/effect/landmark/chest_or_mimic/loot_chest,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "sdQ" = (
 /obj/machinery/light/rogue/firebowl/church,
 /turf/open/floor/rogue/carpet/lord/right,
@@ -173039,9 +173035,9 @@ eJs
 toJ
 toJ
 qHj
-toJ
-toJ
-toJ
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
@@ -173491,9 +173487,9 @@ toJ
 toJ
 toJ
 ukB
-toJ
-sdJ
-toJ
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
@@ -173943,9 +173939,9 @@ toJ
 ckW
 toJ
 qHj
-toJ
-toJ
-toJ
+qHj
+qHj
+qHj
 qHj
 qHj
 qHj
