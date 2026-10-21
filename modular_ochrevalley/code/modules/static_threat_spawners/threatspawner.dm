@@ -73,8 +73,7 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 			return FALSE
 
 	// If we have spawned mobs that are still alive, wait a while longer.
-	// We allow ONE straggler to be around before we spawn more.
-	if(our_living_mobs.len > 1)
+	if(our_living_mobs.len > 0)
 		next_spawn_time = world.time + 1 MINUTES
 		return FALSE
 	// Make sure no living player is able to see us or anything we might spawn!
