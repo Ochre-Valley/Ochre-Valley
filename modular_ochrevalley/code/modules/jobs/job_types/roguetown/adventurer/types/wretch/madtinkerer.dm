@@ -5,7 +5,7 @@
 	cmode_music = 'sound/music/combat_dwarf.ogg'
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT, TRAIT_FORGEBLESSED) //these are meant to be crafters, but I want them to be secular, so I'm giving them inherent forgeblessed for now. Might bring a weaker trait down the pipe from upstream
+	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 4,
 		STATKEY_PER = 2,
