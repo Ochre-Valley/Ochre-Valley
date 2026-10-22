@@ -168,8 +168,6 @@ SUBSYSTEM_DEF(questpool)
 	for(var/datum/quest/Q as anything in pool)
 		if(!Q.lapses || Q.get_lapse_time() >= world.time)
 			continue
-		if(Q.quest_difficulty == "Special") //OV ADD - GM quests are not removed
-			continue //OV ADD
 		stale += Q
 		if(Q.pool_kind == QUEST_POOL_KILL)
 			kill_replacements_needed++

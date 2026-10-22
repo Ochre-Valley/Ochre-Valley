@@ -982,12 +982,6 @@
 			var/atom/movable/X = ui.user.client.holder.marked_datum
 			X.orbit(target)
 
-		if("make_quest_item")
-			var/mob/living/Tar = target
-			if(!istype(Tar))
-				return
-			Tar.mob_gm_quest(ui.user)
-
 		if("check_traits")
 			var/ht
 			var/mob/living/L = target

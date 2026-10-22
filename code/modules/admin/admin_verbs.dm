@@ -126,7 +126,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_set_ic_date, /* Set custom IC date for events */
 	/client/proc/log_viewer_new, //OV ADD
 	/client/proc/reenable_pq, //OV ADD
-	/client/proc/item_gm_quest, //OV ADD
 	/client/proc/spawn_player, //OV ADD
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(
@@ -171,8 +170,6 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/show_tip,
 	/client/proc/smite,
 	/client/proc/player_effects, //OV ADD
-	/client/proc/generate_quest_kill, //OV ADD
-	/client/proc/generate_quest_recover, //OV ADD
 	))
 GLOBAL_PROTECT(admin_verbs_fun)
 GLOBAL_LIST_INIT(admin_verbs_spawn, list(/datum/admins/proc/spawn_atom, /datum/admins/proc/podspawn_atom, /client/proc/respawn_character, /datum/admins/proc/beaker_panel))
