@@ -5,7 +5,7 @@
 	cmode_music = 'sound/music/combat_dwarf.ogg'
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_INTELLECTUAL, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT)
+	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 4,
 		STATKEY_PER = 2,
@@ -30,7 +30,7 @@
 		/datum/skill/craft/traps = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/blacksmithing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/blacksmithing = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/engineering = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/labor/mining = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/smelting = SKILL_LEVEL_JOURNEYMAN, //similar skill list to munitioneer, but their skills start a touch lower, with the exception of Engineering
