@@ -104,10 +104,19 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 
 /obj/effect/landmark/threatspawner/proc/spawn_threats(area/AR, datum/threat_region/TR)
 	var/list/possible_targets = list()
-	for(var/obj/structure/flora/F in range(src, spawn_range))
-		if(isturf(F.loc))
-			possible_targets += F.loc
-	// If we find no valid flora to spawn them on, then um... uh... I guess we wait a while??
+	// Look for turfs that are unobscured and have nothing in the way!
+	var/list/turf/turfs_around = RANGE_TURFS(spawn_range, loc)
+	for(var/turf/T in turfs_around)
+		if(!istype(T, /turf/open/floor))
+			continue
+		var/has_dense_stuff = FALSE
+		for(var/atom/movable/AM in T.contents)
+			if(AM.density)
+				has_dense_stuff = TRUE
+				break
+		if(!has_dense_stuff)
+			possible_targets.Add(T)
+	// sanity check. We shouldn't ever have this happen but uuhhhhh??????
 	if(!possible_targets.len)
 		start_cooldown()
 		return FALSE
