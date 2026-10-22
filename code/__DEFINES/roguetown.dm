@@ -517,7 +517,7 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_MENATARMS		"CAT_MENATARMS"		// Men-at-Arms class - Handles Men-at-Arms class selector
 #define CTAG_SERGEANT		"CAT_SERGEANT"		// Sergeant class - Handles Sergeant class selector (weapons selection)
 #define CTAG_ROYALGUARD		"CAT_ROYALGUARD"	// Royal Guard class - Handles Royal Guard class selector
-#define CTAG_CONSORT		"CAT_CONSORT"		// Consort/Suitor subclasses
+#define CTAG_SUITOR		"CAT_SUITOR"		// Suitor subclasses
 //caustic edit
 #define CTAG_WILDSOUL 		"CAT_WILDSOUL" 		//Caustic class - handles Wild Soul classes
 //caustic edit end
@@ -559,6 +559,8 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_STEWARD		"CAT_STEWARD"
 #define CTAG_CLERK			"CAT_CLERK"
 #define CTAG_COUNCILLOR		"CAT_COUNCIL"
+#define CTAG_CONSORT		"CAT_CONSORT"
+#define CTAG_JESTER		"CAT_JESTER"
 
 #define CTAG_COURTMAGE		"CAT_COURTMAGE"
 

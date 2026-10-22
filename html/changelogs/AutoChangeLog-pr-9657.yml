@@ -1,4 +1,4 @@
 author: "azurexautyr-arch"
 delete-after: True
 changes:
-  - bugfix: "fixed a donor item"
+  - rscadd: "donor item for SeraphLemonade"

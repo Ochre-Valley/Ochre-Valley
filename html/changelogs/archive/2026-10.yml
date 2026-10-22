@@ -1130,3 +1130,29 @@
     - rscadd: custom descriptors now support multiple uppercase words
   zRainbowcat:
     - bugfix: Greedy message spam
+2026-10-22:
+  Ollanius:
+    - bugfix:
+        A couple polearm sprites have been adjusted to be properly in-line with
+        the rest. In combination with some altered inhand code, this should fix most
+        cases of polearms (especially halberd- and polehammer-forked ones) mysteriously
+        floating below the wielder's grasp.
+    - rscadd:
+        Bardiches now use a steel-bladed sprite, to accomadate them being classified
+        as steel weapons.
+    - code_imp:
+        Slightly touches up the organization of blunt32.dmi, blunt64.dmi, and
+        polearms64.dmi.
+  Ryan180602:
+    - refactor: cleans up weapon special calcs
+  azurexautyr-arch:
+    - bugfix: fixed a donor item
+  changelingonberry:
+    - rscadd: honey as a favorite dish type
+    - bugfix:
+        a lot of food now has the proper dish type set for the purposes of liked
+        foods
+  mumblemancer:
+    - rscdel:
+        trolls wont hide on losing their target, anymore. this will also make
+        them not hide when they die.
