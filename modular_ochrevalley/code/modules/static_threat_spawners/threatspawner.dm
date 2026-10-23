@@ -81,6 +81,8 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	// Check our threat region, and if it has anything for us to spawn
 	if(TR)
 		if(TR.get_danger_level() == DANGER_LEVEL_SAFE)
+			// If it's safe then I guess we won't be active anytime soon
+			start_cooldown()
 			return FALSE
 
 	// Make sure no living player is able to see us or anything we might spawn!
