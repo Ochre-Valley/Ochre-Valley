@@ -29,6 +29,7 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	name = "static threat spawner"
 	icon = 'modular_ochrevalley/icons/effects/threat_spawners.dmi'
 	icon_state = "threatspawner"
+	invisibility = INVISIBILITY_OBSERVER
 	/// How long we wait at round start before becoming active
 	var/inital_cooldown = 30 MINUTES
 	/// Max range around us to search for spots to spawn mobs
@@ -243,13 +244,16 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 // intended for places that will probably take a while before being cleared / lit.
 /obj/effect/landmark/threatspawner/longinit
 	inital_cooldown = 45 MINUTES
+	icon_state = "threatspawner-longinit"
 
 // Subtype of threat spawner with a short initial cooldown,
 // intended for places that will be cleared out / lit pretty early on in the round.
 /obj/effect/landmark/threatspawner/shortinit
 	inital_cooldown = 15 MINUTES
+	icon_state = "threatspawner-shortinit"
 
 // Subtype of threat spawner that instantly starts attempting
 // to spawn its threats at the start of the round.
 /obj/effect/landmark/threatspawner/instant
 	inital_cooldown = 1 SECONDS
+	icon_state = "threatspawner-instant"
