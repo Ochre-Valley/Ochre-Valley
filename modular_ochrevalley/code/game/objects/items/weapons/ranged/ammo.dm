@@ -75,19 +75,23 @@
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	embedchance = 100
 	no_crit = FALSE
+	var/shrapnelprob = 50
+	var/shrapneltype = /obj/item/bomb_shrapnel
 
 /obj/projectile/bullet/scatter/on_hit(atom/target) // EXP for shooting live targets only.
-    ..()
-    var/mob/living/L = firer
-    if(!L?.mind)
-        return
-    var/skill_multiplier = 0
-    if(isliving(target))
-        var/mob/living/T = target
-        if(T.stat != DEAD)
-            skill_multiplier = 1
-    if(skill_multiplier && can_train_combat_skill(L, /datum/skill/combat/firearms, SKILL_LEVEL_EXPERT))
-        L.mind.add_sleep_experience(/datum/skill/combat/firearms, L.STAINT * skill_multiplier)
+	..()
+	var/mob/living/L = firer
+	if(!L?.mind)
+		return
+	var/skill_multiplier = 0
+	if(isliving(target))
+		var/mob/living/T = target
+		if(T.stat != DEAD)
+			skill_multiplier = 1
+		if(prob(shrapnelprob))
+			embed_bomb_shrapnel(target, shrapneltype, 1)
+	if(skill_multiplier && can_train_combat_skill(L, /datum/skill/combat/firearms, SKILL_LEVEL_EXPERT))
+		L.mind.add_sleep_experience(/datum/skill/combat/firearms, L.STAINT * skill_multiplier)
 
 /obj/projectile/bullet/scatter/iron
 	name = "iron shot"
@@ -102,6 +106,8 @@
 	armor_penetration = PEN_LIGHT
 	max_range = 5
 	damage = 5
+	shrapnelprob = 30
+	shrapneltype = /obj/item/natural/glass_shard/shrapnel
 
 /obj/projectile/bullet/scatter/hollowpoint
 	name = "shattering bronze bullet"
