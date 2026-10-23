@@ -86,8 +86,8 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 			var/blackblood = FALSE
 			if(HAS_TRAIT(victim, TRAIT_SEA_DRINKER))
 				salt = TRUE
-			if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
-				blackblood = TRUE
+			//if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
+				//blackblood = TRUE
 			if(salt && blackblood) //awful code incoming
 				if(HAS_TRAIT(src, TRAIT_SEA_DRINKER) && HAS_TRAIT(src, TRAIT_NASTY_EATER))//you're a fucking freak
 					gained_food *= 1.5
@@ -126,14 +126,14 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 			else
 				to_chat(src, span_warning("[victim]'s form is unlike any blood, but satisfying nonetheless"))
 		else
-			if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
+			/*if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
 				if(HAS_TRAIT(src, TRAIT_NASTY_EATER))
 					to_chat(src, span_warning("[victim]'s blood has an exceedingly complex flavor "))
 				else
 					meal = FALSE
 					gained_food *= 0.5
 					nausea = 50
-					to_chat(src, span_warning("[victim]'s blood is replete with a vile, caustic bitterness!"))
+					to_chat(src, span_warning("[victim]'s blood is replete with a vile, caustic bitterness!"))*/
 			if(HAS_TRAIT(victim, TRAIT_DEATHLESS))
 				meal = FALSE
 				gained_food *= 0.75

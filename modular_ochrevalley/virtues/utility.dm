@@ -46,7 +46,6 @@
 		SPARK_INSTRUMENT,
 		SPARK_TRANSCRIBE,
 		SPARK_OMEN,
-		SPARK_FRIDGE,
 		SPARK_SELF_TF,
 	)
 	choice_tooltips = list(
@@ -61,7 +60,6 @@
 		SPARK_INSTRUMENT = "Conjure a Instrument of your choice in your hand. The instrument will be unsummoned should you conjure a new one or unbind the spell.",
 		SPARK_TRANSCRIBE = "Conjure a parchment and a magical quill to write for you. This magical parchment will listen for up to ten minutes and transcribe what it has heard onto itself. (use in your hand, and then use again to stop the recording).",
 		SPARK_OMEN = "Casting this spell, you draw upon the leylines themselves to reveal secrets of fate itself. (Casting it gives you a vague explanation of who the current storyteller is, if they are your patron the explanation is less vague.)",
-		SPARK_FRIDGE = "An advanced version of Chill Food. Greatly prolongs shelf life by entirely freezing it solid. (OOC Note: it does not work on produce, only foods, removes rot timer entirely.).",
 		SPARK_SELF_TF = "A modification of the ritual of lux consolidation, allowing one to seal themselves inside an object.",
 	)
 
@@ -106,9 +104,6 @@
 			if(SPARK_OMEN)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/readomen))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/readomen)
-			if(SPARK_FRIDGE)
-				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/fridigitation))
-					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/fridigitation)
 			if(SPARK_SELF_TF)
 				if(!recipient.mind?.has_spell(/datum/action/cooldown/spell/self_tf))
 					recipient.mind?.AddSpell(new /datum/action/cooldown/spell/self_tf)
@@ -123,7 +118,6 @@
 #undef SPARK_INSTRUMENT
 #undef SPARK_TRANSCRIBE
 #undef SPARK_OMEN
-#undef SPARK_FRIDGE
 #undef SPARK_SELF_TF
 
 /datum/virtue/utility/mountable

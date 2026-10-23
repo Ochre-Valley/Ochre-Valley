@@ -28,9 +28,6 @@ export const ControlAdmin = (props: any) => {
       <Button fluid onClick={() => act('orbit')}>
         Make Marked Datum Orbit
       </Button>
-      <Button fluid onClick={() => act('make_quest_item')}>
-        Turn Into Quest Target
-      </Button>
       <Button fluid onClick={() => act('check_traits')}>
         Check Traits
       </Button>
