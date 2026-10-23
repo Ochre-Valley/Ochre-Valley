@@ -56,9 +56,16 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	if(!T)
 		next_spawn_time = world.time + INFINITY
 		CRASH("A threat spawner doesn't have a valid turf... SOMEHOW!")
+	// If we're an outdoors spawner and it's not nighttime, we'll wait a bit and check again
+	// This way spawners in places like the Underdark are effectively active 24/7
+	// Dangers that rely on the dark thrive where it is always dark
+	if(GLOB.tod != "night" && T.can_see_sky())
+		next_spawn_time = world.time + 1 MINUTES
+		return FALSE
 	// If we have spawned mobs that are still alive, wait a while longer.
 	if(our_living_mobs.len > 0)
-		next_spawn_time = world.time + 1 MINUTES
+		#warn DO NOT COMMIT THIS LINE
+		next_spawn_time = 1 SECONDS
 		return FALSE
 
 	var/area/AR = get_area(src)
