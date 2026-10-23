@@ -116,14 +116,21 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 	// Look for turfs that are unobscured and have nothing in the way!
 	var/list/turf/turfs_around = RANGE_TURFS(spawn_range, loc)
 	for(var/turf/T in turfs_around)
-		if(!istype(T, /turf/open/floor))
+		// Must be on a valid, standable floor that is not indoors
+		// (This still allows them to spawn in the underdark as underdark areas are in /area/rogue/under)
+		if(!istype(T, /turf/open/floor) || istype(AR, /area/rogue/indoors))
 			continue
-		var/has_dense_stuff = FALSE
+		var/valid_turf = TRUE
 		for(var/atom/movable/AM in T.contents)
-			if(AM.density)
-				has_dense_stuff = TRUE
+			// Don't spawn them on top of the thing that kills you
+			if(istype(AM, /obj/structure/flora/roguegrass/maneater/real))
+				valid_turf = FALSE
 				break
-		if(!has_dense_stuff)
+			// Don't spawn them on obstructed turfs, either
+			if(AM.density)
+				valid_turf = FALSE
+				break
+		if(valid_turf)
 			possible_targets.Add(T)
 	// sanity check. We shouldn't ever have this happen but uuhhhhh??????
 	if(!possible_targets.len)
