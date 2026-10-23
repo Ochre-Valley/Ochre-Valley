@@ -359,5 +359,23 @@
 				"y" = 244,
 				"z" = 2,
 			),
+			list(
+				"type" = /obj/effect/landmark/threatspawner,
+				"x" = 22,
+				"y" = 274,
+				"z" = 2,
+			),
+			list(
+				"type" = /obj/effect/landmark/threatspawner,
+				"x" = 100,
+				"y" = 214,
+				"z" = 2,
+			),
+			list(
+				"type" = /obj/effect/landmark/threatspawner/longinit,
+				"x" = 274,
+				"y" = 358,
+				"z" = 1,
+			),
 		),
 	)
