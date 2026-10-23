@@ -64,8 +64,7 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		return FALSE
 	// If we have spawned mobs that are still alive, wait a while longer.
 	if(our_living_mobs.len > 0)
-		#warn DO NOT COMMIT THIS LINE
-		next_spawn_time = 1 SECONDS
+		next_spawn_time = world.time + 1 MINUTES
 		return FALSE
 
 	var/area/AR = get_area(src)
