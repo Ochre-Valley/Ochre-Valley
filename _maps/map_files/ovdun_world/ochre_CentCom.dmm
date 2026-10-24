@@ -1036,7 +1036,7 @@
 	dir = 4
 	},
 /obj/machinery/light/rogue/candle/blue/l,
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start)
 "ij" = (
@@ -1092,7 +1092,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/indoors/lich_start/lich_lair)
 "iR" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cobbleedge{
 	dir = 6;
 	pixel_y = -8
@@ -1170,7 +1170,7 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start)
 "kh" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start/lich_lair)
 "km" = (
@@ -1256,7 +1256,7 @@
 /area/rogue/indoors/lich_start/lich_lair)
 "lW" = (
 /obj/effect/decal/remains/human,
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 8
@@ -1418,7 +1418,7 @@
 /turf/open/floor/rogue/underworld/road,
 /area/rogue/indoors/deathsedge)
 "oS" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/carpet/lord/left,
 /area/rogue/indoors/lich_start)
 "oX" = (
@@ -1551,7 +1551,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/shelter/bog_hag)
 "qI" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 4
@@ -1907,7 +1907,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/lich_start/lich_lair)
 "xh" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 8
@@ -2046,7 +2046,7 @@
 /turf/closed/wall/mineral/rogue/decostone/mossy/red/long,
 /area/rogue/indoors/lich_start/lich_lair)
 "Ap" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/lich_start/lich_lair)
 "Aq" = (
@@ -2341,7 +2341,7 @@
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/eventarea)
 "Gz" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start)
 "GI" = (
@@ -2458,7 +2458,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/shelter/bog_hag)
 "Jf" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
 	dir = 4
@@ -2758,7 +2758,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/underworld/dream)
 "NZ" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/lich_start)
 "Of" = (
@@ -2841,7 +2841,7 @@
 /area/rogue/underworld/dream)
 "Qo" = (
 /obj/effect/decal/remains/human,
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start)
 "Qq" = (
@@ -3022,7 +3022,7 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start/lich_lair)
 "UZ" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/carpet/lord/right,
 /area/rogue/indoors/lich_start)
 "Vh" = (
@@ -3291,7 +3291,7 @@
 /area/rogue/indoors/lich_start/lich_lair)
 "Zz" = (
 /obj/structure/fluff/railing/border/north,
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/lich_start)
 "ZB" = (

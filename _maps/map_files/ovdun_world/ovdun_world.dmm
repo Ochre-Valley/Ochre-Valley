@@ -3680,7 +3680,7 @@
 "aJj" = (
 /obj/structure/table/wood,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/spawner/lootdrop/valuable_tableware_spawner,
 /turf/open/floor/rogue/tile/masonic,
 /area/rogue/under/cave/dukecourt)
@@ -5258,12 +5258,12 @@
 	desc = "A tarnished monument of bronze, devoted to Astrata. Its surface is pockmarked with scratches, divots, and burns; it has overseen bright and terrible things.";
 	dir = 2
 	},
-/obj/item/ash,
-/obj/item/ash{
+/obj/item/natural/ash,
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = -6
 	},
-/obj/item/ash{
+/obj/item/natural/ash{
 	pixel_y = -5;
 	pixel_x = 11
 	},
