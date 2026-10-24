@@ -11163,8 +11163,8 @@
 /area/rogue/indoors/town/bath)
 "bVV" = (
 /obj/machinery/light/rogue/oven/west,
-/obj/item/ash,
-/obj/item/ash{
+/obj/item/natural/ash,
+/obj/item/natural/ash{
 	pixel_y = -5;
 	pixel_x = 11
 	},
@@ -25752,7 +25752,7 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/town/roofs)
 "exN" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/machinery/light/rogue/oven/north{
 	name = "ancient intake"
 	},
@@ -32203,11 +32203,9 @@
 /area/rogue/outdoors/mountains)
 "fBL" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/ash,
-/obj/item/ash,
-/obj/item/ash,
-/obj/item/ash,
-/obj/item/ash,
+/obj/item/natural/ash{
+	amount = 5
+	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/magician)
 "fBP" = (
@@ -43959,7 +43957,7 @@
 /area/rogue/outdoors/exposed/church)
 "hFL" = (
 /obj/structure/table/wood/long_table/right,
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot{
 	pixel_x = -18;
@@ -44932,7 +44930,7 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
 	},
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/item/reagent_containers/glass/cup/steel{
 	pixel_x = 9
 	},
@@ -45198,7 +45196,7 @@
 /area/rogue/indoors/town/church/chapel)
 "hQz" = (
 /obj/machinery/light/rogue/oven/north,
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/metal{
 	icon_state = "plating2"
 	},
@@ -57326,19 +57324,19 @@
 	pixel_x = 15;
 	pixel_y = 5
 	},
-/obj/item/ash{
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = 18
 	},
-/obj/item/ash{
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = 14
 	},
-/obj/item/ash{
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = 10
 	},
-/obj/item/ash{
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = 7
 	},
@@ -73417,7 +73415,7 @@
 	desc = "...?";
 	name = "ancient intake"
 	},
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/churchmarble,
 /area/rogue/indoors/shelter)
 "mxE" = (
@@ -78114,7 +78112,7 @@
 /turf/open/floor/rogue/herringbone,
 /area/rogue/under/cave/dungeon1/gethsmane/inner)
 "nqd" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/carpet/lord/right,
 /area/rogue/under/cave/dukecourt)
@@ -81512,7 +81510,7 @@
 	},
 /area/rogue/under/town/sewer)
 "nUZ" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/carpet/lord/left,
 /area/rogue/under/cave/dukecourt)
@@ -87343,7 +87341,7 @@
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/inq/basement)
 "oRx" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/church,
 /area/rogue/indoors/shelter)
 "oRz" = (
@@ -94278,7 +94276,7 @@
 /obj/structure/stairs/fancy/l{
 	dir = 1
 	},
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/carpet/lord{
 	icon_state = "carpet_l"
@@ -99979,7 +99977,7 @@
 "qXL" = (
 /obj/machinery/light/rogue/oven/east,
 /obj/machinery/light/rogue/oven/south,
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/shelter)
 "qXR" = (
@@ -102523,7 +102521,7 @@
 "rva" = (
 /obj/structure/chair/wood/rogue/throne,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/remains/human,
 /obj/structure/fluff/walldeco/chains,
 /mob/living/carbon/human/species/skeleton/npc/fallenduke,
@@ -105431,7 +105429,7 @@
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/shelter)
 "rTu" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/tile/masonic{
 	dir = 1
@@ -107460,7 +107458,7 @@
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/rtfield)
 "slp" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/wood,
 /area/rogue/under/cave/dukecourt)
@@ -109809,8 +109807,8 @@
 "sEY" = (
 /obj/machinery/light/rogue/oven/east,
 /obj/machinery/light/rogue/oven/north,
-/obj/item/ash,
-/obj/item/ash{
+/obj/item/natural/ash,
+/obj/item/natural/ash{
 	pixel_x = -9;
 	pixel_y = -6
 	},
@@ -126359,7 +126357,7 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "vuL" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/under/cave/dukecourt)
@@ -130805,7 +130803,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/his_vault)
 "wjq" = (
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/beach/central)
 "wjv" = (
@@ -138911,7 +138909,7 @@
 	icon_state = "hearth0";
 	status = 3
 	},
-/obj/item/ash,
+/obj/item/natural/ash,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/beach/forest/hamlet)
 "xEh" = (
