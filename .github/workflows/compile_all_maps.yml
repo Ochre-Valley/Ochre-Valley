@@ -23,10 +23,7 @@ jobs:
         uses: ./.github/actions/restore_or_install_byond
 
       - name: Install BYOND dependencies
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libcurl4-openssl-dev:i386
+        uses: ./.github/actions/install_byond_deps
 
       - name: Compile All Maps
         run: |
@@ -54,10 +51,7 @@ jobs:
         uses: ./.github/actions/restore_or_install_byond
 
       - name: Install BYOND dependencies
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libcurl4-openssl-dev:i386
+        uses: ./.github/actions/install_byond_deps
 
       - name: Compile All Templates
         run: |
