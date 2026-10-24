@@ -162,7 +162,10 @@ export const SexSession = () => {
                       color="transparent"
                       onClick={() => act('toggle_freeuse')}
                     >
-                      {data.freeuse ? 'FREEUSE ON' : 'FREEUSE OFF'}
+                      {data.freeuse
+                        ? 'UNRESTRICTED ERP: ON'
+                        : 'UNRESTRICTED ERP: OFF'}
+                      {/*OV edit*/}
                     </Button>
                     {!!data.has_knotted_penis && (
                       <>
