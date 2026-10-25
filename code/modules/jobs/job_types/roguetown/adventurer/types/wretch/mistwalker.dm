@@ -4,6 +4,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	forbidden_races = list(RACES_CONSTRUCT RACES_OOZE) //I did in fact regret letting them be revs
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
+	min_pq = 15 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/mistwalker
 	class_select_category = CLASS_CAT_WARRIOR
 	category_tags = list(CTAG_WRETCH)
