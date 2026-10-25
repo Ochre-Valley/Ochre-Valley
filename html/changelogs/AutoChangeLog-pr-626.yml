@@ -1,5 +1,0 @@
-author: "Voidastra"
-delete-after: True
-changes:
-  - rscadd: "structure for future players to do the same in the form of \"donator_modkit_ochre.dm\", \"loadout_donators_ochre.dm\", and \"ochre_modular_custom_weapons_64.dmi\" all within the modular_ochrevalley folder while following structure of normal folder structure"
-  - rscadd: "Lirvas firestaff"

@@ -1344,6 +1344,14 @@
     - rscadd: new time change tips (lore)
     - bugfix: smoking ozium should work again
 2026-10-25:
+  SomeDeviant:
+    - rscadd: Added Organ Reveal Mechanic
+  Voidastra:
+    - rscadd:
+        structure for future players to do the same in the form of "donator_modkit_ochre.dm",
+        "loadout_donators_ochre.dm", and "ochre_modular_custom_weapons_64.dmi" all within
+        the modular_ochrevalley folder while following structure of normal folder structure
+    - rscadd: Lirvas firestaff
   KatTheFox:
     - bugfix: The antagonist filter for the well-known quirk works properly now.
   Ketrai:
