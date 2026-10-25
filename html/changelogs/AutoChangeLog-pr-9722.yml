@@ -1,4 +1,0 @@
-author: "KatTheFox"
-delete-after: True
-changes:
-  - bugfix: "The antagonist filter for the well-known quirk works properly now."
