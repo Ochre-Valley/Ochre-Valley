@@ -48970,6 +48970,7 @@
 /obj/item/roguemachine/zadcote/merchant{
 	pixel_y = -32
 	},
+/obj/structure/roguemachine/contractledger,
 /turf/open/floor/rogue/carpet,
 /area/rogue/indoors/town/shop)
 "iwb" = (
