@@ -1,0 +1,4 @@
+author: "Zeno"
+delete-after: True
+changes:
+  - rscadd: "Allow Constructs, Dullahans, and Ooze's to take Unlanded Nobility greater quirk"
