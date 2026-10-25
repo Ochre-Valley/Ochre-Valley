@@ -222,15 +222,40 @@ GLOBAL_LIST_INIT(threatspawner_quantities, list(
 		var/spawnloc = pick(possible_targets)
 		if(spawnloc)
 			var/mob/living/spawnedmob = new spawnedtype(spawnloc)
+			// Make sure we're properly tracking the spawned mob
 			RegisterSignal(spawnedmob, COMSIG_MOB_DEATH, PROC_REF(on_our_mobs_death))
 			our_living_mobs.Add(spawnedmob)
+			// Also, make it so their organs dust on drop to stop wild animals eating corpses from turning roads into walkways of gore
+			if(iscarbon(spawnedmob))
+				var/mob/living/carbon/C = spawnedmob
+				for(var/obj/item/organ in C.internal_organs)
+					organ.AddComponent(/datum/component/item_on_drop/dust)
 	start_cooldown()
 	return TRUE
 
 /obj/effect/landmark/threatspawner/proc/on_our_mobs_death(mob/living/source)
 	our_living_mobs.Remove(source)
-	// If that was our last guy, start a cooldown before we make more
+	// If that was our last mob...
 	if(our_living_mobs.len < 1)
+		var/area/AR = get_area(loc)
+		var/datum/threat_region/TR = null
+		if(AR.threat_region)
+			TR = SSregionthreat.get_region(AR.threat_region)
+		if(TR)
+			// Remove one band of threat from the region.
+			TR.reduce_latent_ambush(THREAT_POINTS_PER_BAND)
+			// Also notify everyone in sight of the dying mob AND whoever last attacked them
+			// We get the last hitter as a separate mob from everyone in view of it in case they aren't actually in view (i.e. sniping from afar)
+			var/list/mobs_to_message = list()
+			var/mob/living/last_hitter = source.lastattacker_weakref?.resolve()
+			if(isliving(last_hitter) && last_hitter.mind)
+				mobs_to_message.Add(last_hitter)
+			for(var/mob/living/L in view(7, src))
+				if(L.mind && L != last_hitter)
+					mobs_to_message.Add(L)
+			for(var/mob/living/L in mobs_to_message)
+				to_chat(L, span_notice("<b>The road is safer.</b> This last slain stalker of the road drove 1 band of threat out of the region. However, leaving a light here would prevent more stalkers from turning up around here."), MESSAGE_TYPE_INFO)
+		// Also start a cooldown before we make more mobs!
 		start_cooldown()
 
 /// Returns the type of the mob that the spawner will create
