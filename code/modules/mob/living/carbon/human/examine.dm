@@ -890,8 +890,8 @@
 			if((bath_viewer.job in GLOB.bathhouse_positions) || HAS_TRAIT(bath_viewer, TRAIT_AGENT_BATHHOUSE))
 				. += span_notice("[m1] an agent of the Bathhouse.")
 
-		//if(HAS_TRAIT(src, TRAIT_ARMOR_BREAK)) //OV EDIT
-		//	. += span_phobia("[capitalize(m2)] armor hangs on by a thread...") //OV EDIT
+		if(HAS_TRAIT(src, TRAIT_ARMOR_BREAK))
+			. += span_phobia("[capitalize(m2)] armor hangs on by a thread...")
 
 		if(src.job in GLOB.church_positions)
 			if(!HAS_TRAIT(user, TRAIT_CLERGY))
