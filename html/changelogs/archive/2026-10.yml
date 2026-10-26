@@ -1412,3 +1412,7 @@
     - rscadd:
         Allow Constructs, Dullahans, and Ooze's to take Unlanded Nobility greater
         quirk
+  Ketrai:
+    - bugfix: Fix certain enchanting kit donor sprites when wielding.
+  zydras:
+    - image: Updated Headeater and Treasure Seeker sprites.
