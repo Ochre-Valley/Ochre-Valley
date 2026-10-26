@@ -1,6 +1,6 @@
 
 ///UNIVERSAL DONORS///
-/datum/loadout_item/donator/drowparasol
+/datum/loadout_item/donator/universal/drowparasol
 	name = "Donator Item - Pale Cap Parasol"
 	path = /obj/item/rogueweapon/mace/donator_flybrokenwings_parasol/ochre
 
