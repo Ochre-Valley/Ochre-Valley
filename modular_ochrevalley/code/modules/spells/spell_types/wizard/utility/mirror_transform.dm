@@ -1,26 +1,31 @@
-/obj/effect/proc_holder/spell/invoked/mirror_transform_ov
+/datum/action/cooldown/spell/mirror_transform_ov
 	name = "Mirror Transform"
-	desc = "Gives you a arcyne hand mirror that allows one to change their appearance at will."
-	clothes_req = FALSE
-	charge_type = "recharge"
-	associated_skill = /datum/skill/magic/arcane
-	cost = 1 // Trash spell
-	xp_gain = TRUE
-	// Fix invoked spell variables
-	releasedrain = 35
-	chargedrain = 1  // Fixed from chargeddrain to chargedrain
-	chargetime = 10
-	recharge_time = 60 SECONDS
-	warnie = "spellwarning"
-	no_early_release = TRUE
-	movement_interrupt = FALSE
-	spell_tier = 1
+	desc = "Temporarily grants you the ability to use mirrors to change your appearance."
+	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
+	button_icon_state = "mirror"
+	sound = 'sound/magic/whiteflame.ogg'
+
+	click_to_activate = TRUE
+	self_cast_possible = TRUE
+
+	primary_resource_type = SPELL_COST_STAMINA
+	primary_resource_cost = SPELLCOST_CANTRIP
+
 	invocations = list("Effingo")
-	invocation_type = "whisper"
-	hide_charge_effect = TRUE
-	charging_slowdown = 3
-	chargedloop = /datum/looping_sound/wind
-	overlay_state = "mirror"
+	invocation_type = INVOCATION_WHISPER
+
+	charge_required = TRUE
+	charge_time = 1 SECONDS
+	hold_drain = 1
+	charge_slowdown = 3
+	charge_sound = null
+	cooldown_time = 300 SECONDS
+
+	associated_skill = /datum/skill/magic/arcane
+	point_cost = 0
+	spell_tier = 1
+	spell_impact_intensity = SPELL_IMPACT_NONE
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
 	var/obj/item/conjured_tool = null
 
 /obj/item/handmirror/magic
@@ -60,11 +65,12 @@
 		qdel(src)
 	..()
 
-/obj/effect/proc_holder/spell/invoked/mirror_transform_ov/cast(list/targets, mob/living/user = usr)
+/datum/action/cooldown/spell/mirror_transform_ov/cast(list/targets, mob/living/user = usr)
+	. = ..()
 	if(src.conjured_tool)
 		qdel(src.conjured_tool)
 		src.conjured_tool = null
-	
+
 	var/obj/item/R = new /obj/item/handmirror/magic
 	R.filters += filter(type = "drop_shadow", x=0, y=0, size=1, offset = 2, color = GLOW_COLOR_ARCANE)
 	R.smeltresult = null
@@ -76,7 +82,7 @@
 /obj/item/handmirror/magic/attack_self(mob/user)
 	if(!ishuman(user))
 		return
-	
+
 	var/mob/living/carbon/human/H = user
 	M = new(H)
 	to_chat(H, span_info("You tilt your jaw from side to side, concentrating on the glamoring magicks limning your form..."))
