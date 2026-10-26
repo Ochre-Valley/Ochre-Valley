@@ -1407,3 +1407,8 @@
     - bugfix:
         less checks for critical dazing since most weren't working anyway. - You
         shouldn't really notice much difference ingame anyway.
+2026-10-26:
+  Zeno:
+    - rscadd:
+        Allow Constructs, Dullahans, and Ooze's to take Unlanded Nobility greater
+        quirk
