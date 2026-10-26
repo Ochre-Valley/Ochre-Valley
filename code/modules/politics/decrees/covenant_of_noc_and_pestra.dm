@@ -18,8 +18,8 @@
 		"Court Magician" = 40,
 		"Archivist" = 20,
 		"Magicians Associate" = 10,
-		"Head Physician" = 80,
-		"Apothecary" = 40,
+		"Head Physician" = 40, //OV edit - 80 -> 40
+		"Apothecary" = 20, //OV edit - 40 -> 20
 	)
 	flavor_text = {"This Covenant of Noc & Pestra, sworne under the watchful eye of Noc and the merciful hand of Pestra, witnesseth that the scholars of the University and the healers of the Apothecary shall bear no greater levy than the lightest measure upon their heads, and shall be paid from the Crown's purse an honest minimum of their due whilst this Covenant standeth.
 
