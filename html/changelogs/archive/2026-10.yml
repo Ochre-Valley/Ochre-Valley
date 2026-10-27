@@ -1417,6 +1417,8 @@
   zydras:
     - image: Updated Headeater and Treasure Seeker sprites.
 2026-10-27:
+  NickBelmont:
+    - refactor: Change OV's Mirror Transform to a datum instead of the old spell system.
   BurpleBineapple:
     - rscadd: Donator kits for DasFox
   Etheo:
