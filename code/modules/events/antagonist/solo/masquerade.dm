@@ -15,10 +15,10 @@
 
 	weight = 8
 
-	denominator = 80
+	denominator = 20
 
-	base_antags = 2
-	maximum_antags = 2
+	base_antags = 0
+	maximum_antags = 6
 
 	max_occurrences = 0 //OV Edit: Disabled. Was not listed
 
