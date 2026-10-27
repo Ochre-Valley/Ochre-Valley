@@ -246,6 +246,74 @@
 					S.AOE_flash(target, range = 8)
 				new /obj/effect/temp_visual/firewave/sunstrike/primary(target_turf)
 
+		if("drop_object")
+			if(!ishuman(target))
+				to_chat(usr,span_warning("Target must be human!"))
+				return
+
+			var/mob/living/carbon/human/humie = target
+			var/obj/item/bodypart/affecting = humie.get_bodypart(BODY_ZONE_HEAD)
+			if(!affecting)
+				to_chat(usr,span_warning("Target must have a head!"))
+				return
+
+			var/list/objects_to_drop = list(
+				"Chandelier" = /obj/machinery/light/rogue/chand,
+				"Frying Pan" = /obj/item/cooking/pan,
+				"Anvil" = /obj/machinery/anvil,
+				"Boulder" = /obj/item/natural/rock,
+				"Shell Duck" = /obj/item/carvedgem/shell/duck,
+				"The Verses and Acts of the Ten" = /obj/item/book/rogue/bibble,
+				"The Book" = /obj/item/book/rogue/bibble/psy,
+				"Tome of Justice" = /obj/item/book/rogue/law,
+				"Cauldron"= /obj/machinery/light/rogue/cauldron,
+				"Snowball" = /obj/item/natural/snowball,
+				"Skull" = /obj/item/skull,
+				"Space Piano" = /obj/structure/piano,
+				"Statue" = /obj/structure/fluff/statue,
+				"Astrata Statue" = /obj/structure/fluff/statue/astrata/gold,
+				"Abyssor Statue" = /obj/structure/fluff/statue/abyssor,
+				"Knightly Statue"= /obj/structure/fluff/statue/knightalt,
+				"Zizo Statue" = /obj/structure/fluff/statue/femalestatue/zizo,
+				"Psy Statue" = /obj/structure/fluff/statue/psy,
+				"Bloody Psy Statue" = /obj/structure/fluff/statue/psybloody,
+				"Training Dummy" = /obj/structure/fluff/statue/tdummy,
+				"Handcart" = /obj/structure/handcart,
+				"Chest" = /obj/structure/closet/crate/chest,
+				"Closet" = /obj/structure/closet/crate/roguecloset,
+				"Water Barrel" = /obj/structure/fermentation_keg/random/water,
+				"Wise Tree" = /obj/structure/flora/roguetree/wise,
+			)
+			var/user_choice = tgui_input_list(ui.user, "Select the object to drop on [humie]:", "Object Drop Choice", objects_to_drop)
+			if(!user_choice)
+				return
+
+			var/path_to_drop = objects_to_drop[user_choice]
+
+			var/obj/thing_to_drop = new path_to_drop(get_turf(humie))
+			thing_to_drop.layer = ABOVE_MOB_LAYER
+			playsound(get_turf(humie), 'sound/combat/hits/blunt/frying_pan(4).ogg', 100, FALSE)
+			affecting.add_wound(/datum/wound/fracture/head)
+			humie.visible_message(span_userdanger("There is a sickening CRUNCH as a [user_choice] crashes down onto [humie]!"))
+
+		if("annoying_voice")
+			if(!ishuman(target))
+				to_chat(usr,span_warning("Target must be human!"))
+				return
+			var/mob/living/carbon/human/humie = target
+			var/datum/component/annoying_voice/prev_voice = humie.GetComponent(/datum/component/annoying_voice)
+			if(prev_voice)
+				qdel(prev_voice)
+				message_admins("[humie] has been freed from their annoying voice!")
+				return
+			humie.AddComponent(/datum/component/annoying_voice)
+			var/sans_or_papyrus = tgui_alert(ui.user, "Annoying Voice Type", "Select the type of annoying voice to give [humie]:", list("Sans", "Papyrus"))
+			var/datum/component/annoying_voice/new_voice = humie.GetComponent(/datum/component/annoying_voice)
+			if(sans_or_papyrus == "Sans")
+				new_voice.sans_or_papyrus = 0
+			else if(sans_or_papyrus == "Papyrus")
+				new_voice.sans_or_papyrus = 1
+			message_admins("[humie] has been given an annoying voice!")
 
 		/*
 		if("break_legs")
