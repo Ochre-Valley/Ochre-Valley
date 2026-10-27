@@ -251,7 +251,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	if(total_count_reset <= world.time)
 		total_message_count = 0
-		total_count_reset = world.time + (5 SECONDS)
+		total_count_reset = world.time + (2 SECONDS) //OV EDIT - was 5 SECONDS
 
 	//If they're really going crazy, mute them
 	if(cache >= SPAM_TRIGGER_AUTOMUTE * 2)
