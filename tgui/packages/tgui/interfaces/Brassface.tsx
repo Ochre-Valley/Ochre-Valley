@@ -15,13 +15,13 @@ import {
   INK,
   INK_FAINT,
   INK_SOFT,
-  pageStyle,
   PARCHMENT_SHADOW,
+  pageStyle,
   rulerStyle,
   SEAL_AMBER,
   SEAL_GREEN,
-  sectionHeaderStyle,
   SERIF,
+  sectionHeaderStyle,
   subTabBarStyle,
   subTabStyle,
   tabBarStyle,
@@ -34,11 +34,7 @@ const HoardRow = (props: { entry: HoardEntry }) => {
   const isPayout = entry.kind === 'payout';
   const isPolicy = entry.kind === 'policy';
   const color = isPolicy ? INK_FAINT : isPayout ? SEAL_GREEN : SEAL_AMBER;
-  const whoLabel = isPolicy
-    ? 'by'
-    : isPayout
-      ? 'by'
-      : 'by';
+  const whoLabel = isPolicy ? 'by' : isPayout ? 'by' : 'by';
 
   return (
     <div

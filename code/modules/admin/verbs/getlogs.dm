@@ -1,4 +1,4 @@
-//This proc allows download of past server logs saved within the data/logs/ folder.
+//This proc allows download of past server logs saved within the data/logs/ folder. //OV EDIT - Reverted Upstream Log Viewer
 /client/proc/getserverlogs()
 	set name = "Get Server Logs"
 	set desc = ""

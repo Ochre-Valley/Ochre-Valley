@@ -256,8 +256,6 @@
 //	REAGENT_POT_MANA, //OV REMOVE
 //	REAGENT_POT_HEALTH, //OV REMOVE
 	REAGENT_JUICE_JACKBERRY,
-	REAGENT_JUICE_JACKBERRY_POISON,
-	REAGENT_JUICE_APPLE,
 	REAGENT_JUICE_TOMATO,
 	REAGENT_JUICE_STRAWBERRY,
 	REAGENT_JUICE_BLACKBERRY,
@@ -265,9 +263,7 @@
 	REAGENT_JUICE_PEAR,
 	REAGENT_JUICE_LEMON,
 	REAGENT_JUICE_LIME,
-	REAGENT_JUICE_TANGERINE,
 	REAGENT_JUICE_PLUM,
-	REAGENT_JUICE_CARROT,
 	REAGENT_ALCOHOL_BEER,
 	REAGENT_ALCOHOL_RUM,
 	REAGENT_ALCOHOL_CIDER_APPLE,
@@ -697,10 +693,13 @@
 		if(count_items_for_sprite) // If this is enabled also update fullness for non-living things
 			owner.handle_belly_update() // This is run whenever a belly's contents are changed.
 		var/obj/item/I = thing
-		if(I.gurgled)
-			I.cut_overlay(GLOB.gurgled_overlays[I.gurgled_color]) //No double-overlay for worn items.
-			I.add_overlay(GLOB.gurgled_overlays[I.gurgled_color])
-		if(I.d_mult < 1)
+		if(contaminates)
+			wash_obj(I, CLEAN_MEDIUM)
+			I.gurgle_contaminate(src, contamination_flavor, contamination_color)
+		//if(I.gurgled)
+			//I.cut_overlay(GLOB.gurgled_overlays[I.gurgled_color]) //No double-overlay for worn items.
+			//I.add_overlay(GLOB.gurgled_overlays[I.gurgled_color])
+		/*if(I.d_mult < 1)
 			if(I.d_stage_overlay)
 				I.cut_overlay(I.d_stage_overlay)
 			var/image/temp = new /image(GLOB.gurgled_overlays[I.gurgled_color ? I.gurgled_color : "green"])
@@ -708,7 +707,7 @@
 			I.d_stage_overlay = temp
 			for(var/count in I.d_mult to 1 step 0.25)
 				// Note, this should be refactored to drop priority overlays
-				I.add_overlay(I.d_stage_overlay, TRUE)
+				I.add_overlay(I.d_stage_overlay, TRUE)*/
 
 // Release all contents of this belly into the owning mob's location.
 // If that location is another mob, contents are transferred into whichever of its bellies the owning mob is in.

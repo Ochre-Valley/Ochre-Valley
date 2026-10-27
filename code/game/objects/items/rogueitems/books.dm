@@ -673,8 +673,12 @@
 		for(var/icon_s in istates)
 			if(icon_s == icon_state)
 				continue
+			//OV Remove: Let tomes be the skin for custom books
+			/*
 			if(!findtext(icon_s, "book", 1, 5))
 				continue
+			*/
+			//OV Remove End
 			if(findtext(icon_s, "_1"))
 				continue
 			icon_choice += list(

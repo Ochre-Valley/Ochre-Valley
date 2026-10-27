@@ -21,9 +21,7 @@ export const ChartersSection = ({ data }: { data: NoticeboardData }) => {
     return a.name.localeCompare(b.name);
   });
   if (charters.length === 0) {
-    return (
-      <EmptyMessage text="No Charters have been sealed yet." />
-    );
+    return <EmptyMessage text="No Charters have been sealed yet." />;
   }
   return (
     <>

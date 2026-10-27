@@ -223,7 +223,9 @@ const Sidebar = () => {
               </Stack>
             </Stack.Item>
             <Stack.Item>
-              <p style={{margin:0, border:0, padding: 0}}>Headshot artist credit: </p>
+              <p style={{ margin: 0, border: 0, padding: 0 }}>
+                Headshot artist credit:{' '}
+              </p>
               <Button
                 ellipsis
                 fluid
@@ -234,7 +236,9 @@ const Sidebar = () => {
               </Button>
             </Stack.Item>
             <Stack.Item>
-              <p style={{margin:0, border:0, padding: 0}}>Headshot artist link: </p>
+              <p style={{ margin: 0, border: 0, padding: 0 }}>
+                Headshot artist link:{' '}
+              </p>
               <Button
                 ellipsis
                 fluid

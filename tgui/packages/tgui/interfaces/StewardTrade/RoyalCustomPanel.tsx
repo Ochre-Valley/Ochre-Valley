@@ -45,8 +45,7 @@ export const RoyalCustomPanel = () => {
         </span>
         {!unlocked ? (
           <span style={{ color: INK_SOFT }}>
-            Locked:{' '}
-            <b style={{ color: INK }}>{data.royal_custom_volume}m</b> of{' '}
+            Locked: <b style={{ color: INK }}>{data.royal_custom_volume}m</b> of{' '}
             <b style={{ color: INK }}>{data.royal_custom_threshold}m</b> trade
             volume
           </span>

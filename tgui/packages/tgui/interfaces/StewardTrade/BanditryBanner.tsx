@@ -16,9 +16,7 @@ export const BanditryBanner = (props: { projection: BanditryProjection }) => {
   }
   return (
     <div style={bannerStyle(SEAL_RED_SOFT, true)}>
-      {hasDebt && (
-        <div>Brigand Debt: {p.debt}m, skimmed from all inflow</div>
-      )}
+      {hasDebt && <div>Brigand Debt: {p.debt}m, skimmed from all inflow</div>}
       {hasProjection && (
         <div>Projected Losses to Brigands: -{p.total}m next dawn</div>
       )}

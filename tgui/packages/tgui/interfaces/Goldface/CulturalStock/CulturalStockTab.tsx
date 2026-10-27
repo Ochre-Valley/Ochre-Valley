@@ -484,8 +484,8 @@ export const CulturalStockTab = (props: Props) => {
             Agent Kinship: {c.home_realm_name}
           </span>
           <span style={{ color: INK_SOFT }}>
-            As kin, the {c.name} is open to you. Its wares cost{' '}
-            {c.discount_pct}% less.
+            As kin, the {c.name} is open to you. Its wares cost {c.discount_pct}
+            % less.
           </span>
         </KinshipBanner>
       ))}

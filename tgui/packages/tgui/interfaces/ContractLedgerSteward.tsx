@@ -1,12 +1,12 @@
 import { type ReactNode, useState } from 'react';
 
 import { useBackend } from '../backend';
-import { formatRatioPct } from './common/format';
 import {
   type IssuedContract,
   IssuedContractsView,
   issueStatusSuffix,
 } from './ContractLedgerIssued';
+import { formatRatioPct } from './common/format';
 
 type DefenseLogEntry = {
   title: string;
@@ -322,10 +322,10 @@ const ComposeView = () => {
       : topupActive && data.crown_purse_balance < pledgeShortfall
         ? `The Treasury can't cover the shortfall (need ${coin(pledgeShortfall)}, have ${coin(data.crown_purse_balance)}).`
         : funding === 'crown' && data.crown_purse_balance < scaledCost
-        ? `The Treasury can't afford this (need ${coin(scaledCost)}, have ${coin(data.crown_purse_balance)}).`
-        : funding === 'directive' && directivesRemaining <= 0
-          ? "You've used all of today's Requests."
-          : undefined;
+          ? `The Treasury can't afford this (need ${coin(scaledCost)}, have ${coin(data.crown_purse_balance)}).`
+          : funding === 'directive' && directivesRemaining <= 0
+            ? "You've used all of today's Requests."
+            : undefined;
 
   const disabledReason = inflight
     ? 'Drafting...'
@@ -529,8 +529,8 @@ const ComposeView = () => {
               checked={crownTopup}
               onChange={(e) => setCrownTopup(e.target.checked)}
             />
-            &nbsp;Cover the {coin(pledgeShortfall)} shortfall from the
-            Treasury ({coin(data.crown_purse_balance)})
+            &nbsp;Cover the {coin(pledgeShortfall)} shortfall from the Treasury
+            ({coin(data.crown_purse_balance)})
           </label>
         </FormRow>
       )}
@@ -538,8 +538,8 @@ const ComposeView = () => {
       {funding === 'directive' && (
         <div className="ContractLedger__InnkeeperFlavor">
           A Request asks someone to do the work out of duty. No coin changes
-          hands. The scroll goes to your hand for you to give to whoever will take
-          it on.
+          hands. The scroll goes to your hand for you to give to whoever will
+          take it on.
         </div>
       )}
 

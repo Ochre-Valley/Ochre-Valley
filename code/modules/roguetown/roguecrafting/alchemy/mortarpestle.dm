@@ -61,9 +61,13 @@
 		to_grind.on_juice()
 		reagents.add_reagent_list(to_grind.juice_results)
 		to_chat(user, span_notice("I juice [to_grind] into a fine liquid."))
+		//OV Remove Start: Death to nutriment!
+		/*
 		if(to_grind.reagents) //food and pills
 			to_grind.reagents.trans_to(src, to_grind.reagents.total_volume, transfered_by = user)
 			onfill(to_grind, user, silent = FALSE)
+		*/
+		//OV Edit End
 		QDEL_NULL(to_grind)
 		return
 	if(to_grind.grind_results.len) // grind, if there's a grind result

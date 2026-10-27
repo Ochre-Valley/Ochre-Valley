@@ -634,7 +634,9 @@ export const ShipRow = (props: Props) => {
                   fontStyle: 'italic',
                 }}
               >
-                {ship.departing ? 'Departing. No longer selling.' : 'Nothing on offer.'}
+                {ship.departing
+                  ? 'Departing. No longer selling.'
+                  : 'Nothing on offer.'}
               </div>
             )}
           </div>

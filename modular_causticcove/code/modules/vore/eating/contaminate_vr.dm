@@ -1,19 +1,19 @@
 GLOBAL_LIST_INIT(gurgled_overlays, list(
-								"green" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "green"),
-								"white" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "white"),
-								"black" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "black"),
-								"grey" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "grey"),
-								"yellow" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "yellow"),
-								"red" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "red"),
-								"blue" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "blue"),
-								"orange" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "orange"),
-								"purple" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "purple"),
-								"lime" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "lime"),
-								"brown" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "brown"),
-								"darkred" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "darkred"),
-								"cyan" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "cyan"),
-								"beige" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "beige"),
-								"pink" = image('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "pink")
+								"green" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "green"),
+								"white" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "white"),
+								"black" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "black"),
+								"grey" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "grey"),
+								"yellow" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "yellow"),
+								"red" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "red"),
+								"blue" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "blue"),
+								"orange" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "orange"),
+								"purple" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "purple"),
+								"lime" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "lime"),
+								"brown" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "brown"),
+								"darkred" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "darkred"),
+								"cyan" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "cyan"),
+								"beige" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "beige"),
+								"pink" = icon('modular_causticcove/icons/effects/sludgeoverlay_vr.dmi', icon_state = "pink")
 								))
 
 /obj/item/proc/gurgle_contaminate(atom/movable/item_storage = null, contamination_flavor = "Generic", contamination_color = "green")
@@ -26,14 +26,18 @@ GLOBAL_LIST_INIT(gurgled_overlays, list(
 	if(!gurgled)
 		gurgled = TRUE
 		gurgled_color = contamination_color
-		if(!isbelly(src.loc)) //Moved non-worn overlay stuff to belly_obj_vr.dm Exited proc. No need to add overlays to things that won't make it out.
-			add_overlay(GLOB.gurgled_overlays[gurgled_color]) //Caustic TODO - Change this from an Overlay to a Decal like Blood is. /datum/component/decal/blood This might be why it doesn't work?
 		var/list/pickfrom = GLOB.contamination_flavors[contamination_flavor]
 		var/gurgleflavor = pick(pickfrom)
-		cleanname = src.name
-		cleandesc = src.desc
-		name = "[gurgleflavor] [cleanname]"
-		desc = "[cleandesc] It seems to be covered in ominously foul residue and needs a wash."
+
+		if(!isbelly(src.loc)) //Moved non-worn overlay stuff to belly_obj_vr.dm Exited proc. No need to add overlays to things that won't make it out.
+			src.LoadComponent(/datum/component/decal/contamination, _color=gurgleflavor, _flavor=contamination_flavor)
+
+		//add_overlay(GLOB.gurgled_overlays[gurgled_color]) //Caustic TODO - Change this from an Overlay to a Decal like Blood is. /datum/component/decal/blood This might be why it doesn't work?
+
+		//cleanname = src.name
+		//cleandesc = src.desc
+		//name = "[gurgleflavor] [cleanname]"
+		//desc = "[cleandesc] It seems to be covered in ominously foul residue and needs a wash."
 //		for(var/obj/item/O in contents)			//Yeah, no. This contaminates stuff that should never be contaminated in places that should not be reached. Handle it for specific cases instead.
 //			O.gurgle_contaminate(item_storage, contamination_flavor, contamination_color)
 		return TRUE
@@ -109,7 +113,7 @@ GLOBAL_LIST_INIT(gurgled_overlays, list(
 	..()
 
 // OV Add Start: Add washing off gurgles
-/obj/item/wash_act(clean = CLEAN_WEAK)
+/*/obj/item/wash_act(clean = CLEAN_WEAK)
 	. = ..()
 	if(cleanname)
 		name = cleanname
@@ -117,5 +121,5 @@ GLOBAL_LIST_INIT(gurgled_overlays, list(
 		desc = cleandesc
 	if(gurgled)
 		gurgled = FALSE
-		cut_overlay(GLOB.gurgled_overlays[gurgled_color])
+		cut_overlay(GLOB.gurgled_overlays[gurgled_color])*/
 // OV Add End

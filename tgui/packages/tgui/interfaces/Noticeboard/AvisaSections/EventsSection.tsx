@@ -22,9 +22,7 @@ const eventGridStyle: React.CSSProperties = {
 export const EventsSection = ({ data }: { data: NoticeboardData }) => {
   const events = data.economic_events ?? [];
   if (events.length === 0) {
-    return (
-      <EmptyMessage text="No events are affecting the markets." />
-    );
+    return <EmptyMessage text="No events are affecting the markets." />;
   }
   return (
     <div style={eventGridStyle}>

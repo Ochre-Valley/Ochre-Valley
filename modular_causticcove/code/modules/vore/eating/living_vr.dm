@@ -535,9 +535,9 @@
 //
 // OOC Escape code for pref-breaking or AFK preds
 //
-/mob/living/proc/escapeOOC()
+/mob/living/verb/escapeOOC()
 	set name = "OOC Escape"
-	set category = "OOC.Vore"
+	set category = "Vore.Preferences"
 
 	//You're in a belly!
 	if(isbelly(loc))
@@ -862,9 +862,9 @@
 	return
 
 /* //Caustic - Do we enable this?
-/mob/living/proc/toggle_trash_catching() //Ported from chompstation
+/mob/living/verb/toggle_trash_catching() //Ported from chompstation
 	set name = "Toggle Trash Catching"
-	set category = "Vore" //OV EDIT
+	set category = "Vore.Preferences" //OV EDIT
 	set desc = "Toggle Trash Eater throw vore abilities."
 	trash_catching = !trash_catching
 	to_chat(src, span_warning("Trash catching [trash_catching ? "enabled" : "disabled"]."))*/
@@ -1128,9 +1128,9 @@
 	icon = 'modular_causticcove/icons/mob/vore_fullscreens/screen_full_vore.dmi'
 	icon_state = ""
 
-/mob/living/proc/vorebelly_printout() //Spew the vorepanel belly messages into chat window for copypasting.
+/mob/living/verb/vorebelly_printout() //Spew the vorepanel belly messages into chat window for copypasting.
 	set name = "X-Print Vorebelly Settings"
-	set category = "Preferences.Vore"
+	set category = "Vore.Preferences"
 	set desc = "Print out your vorebelly messages into chat for copypasting."
 
 	var/result = tgui_alert(src, "Would you rather open the export panel?", "Selected Belly Export", list("Open Panel", "Print to Chat"))

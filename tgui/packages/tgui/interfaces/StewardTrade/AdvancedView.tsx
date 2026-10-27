@@ -69,11 +69,7 @@ export const AdvancedView = (props: { data: Data }) => {
           })}
           disabled={aldermanActing || barred <= 0}
           onClick={() => act('allow_autoexport_all')}
-          title={
-            aldermanActing
-              ? blockTitle
-              : 'Clear every autoexport bar.'
-          }
+          title={aldermanActing ? blockTitle : 'Clear every autoexport bar.'}
         >
           Allow Autoexport On All
         </button>
@@ -84,9 +80,9 @@ export const AdvancedView = (props: { data: Data }) => {
       <div style={sectionHeaderStyle}>Policies Import & Export</div>
       <div style={{ color: INK_SOFT, marginBottom: '8px' }}>
         Save your custom settings locally as text and paste them into Import
-        Policy in later rounds, including: Handset limits, autoexport /
-        withdraw bars, unaccepted goods, autoimport list, essential opt-outs,
-        surplus threshold and purse floor. Autolimits or prices are not stored.
+        Policy in later rounds, including: Handset limits, autoexport / withdraw
+        bars, unaccepted goods, autoimport list, essential opt-outs, surplus
+        threshold and purse floor. Autolimits or prices are not stored.
       </div>
       <div
         style={{

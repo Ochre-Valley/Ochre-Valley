@@ -40,7 +40,8 @@ export const Commissioner = () => {
         <div style={pageStyle}>
           <div style={titleStyle}>The Commissioner</div>
           <div style={subtitleStyle}>
-            Commission goods from guild smiths and tailors. Orders are backed by your MEISTER account.
+            Commission goods from guild smiths and tailors. Orders are backed by
+            your MEISTER account.
           </div>
           <div style={rulerStyle} />
 

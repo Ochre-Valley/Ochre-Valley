@@ -1,6 +1,6 @@
 // OV FILE
 export type SanctuaryData = {
-	name: string;
+  name: string;
   id: string;
   description: string;
   subtitle: string;
@@ -18,4 +18,4 @@ export type Data = {
   already_owns_sanctuary: boolean;
   is_generating_for_us: boolean;
   is_showing_confirm_option: boolean;
-}
+};

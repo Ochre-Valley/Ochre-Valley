@@ -44,10 +44,6 @@
 // Juices!
 #define REAGENT_JUICE_JACKBERRY "Jackberry juice"
 #define REAGENT_ID_JUICE_JACKBERRY /datum/reagent/consumable/juice/jackberry
-#define REAGENT_JUICE_JACKBERRY_POISON "Poisonous Jackberry juice"
-#define REAGENT_ID_JUICE_JACKBERRY_POISON /datum/reagent/consumable/juice/jackberry/poisonous
-#define REAGENT_JUICE_APPLE "Apple juice"
-#define REAGENT_ID_JUICE_APPLE /datum/reagent/consumeable/juice/apple
 #define REAGENT_JUICE_TOMATO "Tomato juice"
 #define REAGENT_ID_JUICE_TOMATO /datum/reagent/consumable/juice/tomato
 #define REAGENT_JUICE_STRAWBERRY "Strawberry juice"
@@ -62,12 +58,8 @@
 #define REAGENT_ID_JUICE_LEMON /datum/reagent/consumable/juice/lemon
 #define REAGENT_JUICE_LIME "Lime juice"
 #define REAGENT_ID_JUICE_LIME /datum/reagent/consumable/juice/lime
-#define REAGENT_JUICE_TANGERINE "Tangerine juice"
-#define REAGENT_ID_JUICE_TANGERINE /datum/reagent/consumable/juice/tangerine
 #define REAGENT_JUICE_PLUM "Plum juice"
 #define REAGENT_ID_JUICE_PLUM /datum/reagent/consumable/juice/plum
-#define REAGENT_JUICE_CARROT "Carrot juice"
-#define REAGENT_ID_JUICE_CARROT /datum/reagent/consumable/juice/carrot
 
 // Alcohols! Mostly just the craftable ones for now. There's a lot... rt_alcohol_reagends.dm
 #define REAGENT_ALCOHOL_BEER "Beer"

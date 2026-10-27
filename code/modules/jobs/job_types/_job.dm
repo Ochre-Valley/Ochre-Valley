@@ -592,7 +592,12 @@
 			sclass_count++
 			var/datum/advclass/adv = sclass
 			var/datum/advclass/adv_ref = SSrole_class_handler.get_advclass_by_name(initial(adv.name))
-			dat += "<details><summary><b><font color ='#ece9e9'>[adv_ref.name]</font></b></summary>"
+			//OV add: if player doesn't meet PQ, flag it accordingly so they understand why they can't play it
+			if(!isnull(adv.min_pq) && get_playerquality(usr.ckey) < adv.min_pq)
+				dat += "<details><summary><b><font color ='#ff0000'>[adv_ref.name] (PQ REQ: [adv.min_pq])</font></b></summary>"
+			else
+				dat += "<details><summary><b><font color ='#ece9e9'>[adv_ref.name]</font></b></summary>"
+			//OV end
 			dat += "<table align='center'; width='100%'; height='100%';border: 1px solid white;border-collapse: collapse>"
 			dat += "<tr style='vertical-align:top'>"
 			dat += "<td width = 70%><i><font color ='#ece9e9'>[adv_ref.tutorial]</font></i></td>"
@@ -623,6 +628,13 @@
 					dat += "Innate: "
 					var/list/locked = aspect_cfg["locked_aspects"]
 					for(var/aspect_path in locked)
+						var/datum/magic_aspect/A = aspect_path
+						dat += "<b>[initial(A.name)]</b> "
+					dat += "<br>"
+				if(LAZYLEN(aspect_cfg["unlocked_aspects"]))
+					dat += "Unlocked: "
+					var/list/unlocked = aspect_cfg["unlocked_aspects"]
+					for(var/aspect_path in unlocked)
 						var/datum/magic_aspect/A = aspect_path
 						dat += "<b>[initial(A.name)]</b> "
 					dat += "<br>"
@@ -801,8 +813,14 @@
 		var/list/class_sel = list()
 		for(var/ctag in advclass_cat_rolls)
 			var/list/subsystem_ctag_list = SSrole_class_handler.sorted_class_categories[ctag]
-			for(var/datum/advclass/advdatum in subsystem_ctag_list)
-				class_sel[advdatum.name] = advdatum.type
+			for(var/datum/advclass/advdatum in subsystem_ctag_list) //OV edit - organize this so we eliminate subclasses the player can't pick. PQ only for now.
+			{
+				if(!isnull(advdatum.min_pq) && (get_playerquality(usr.ckey) < advdatum.min_pq))
+					continue
+				else
+					class_sel[advdatum.name] = advdatum.type
+			}
+			//OV end
 		var/input = class_sel[tgui_input_list(usr, "What path do your talents follow?", "Subclass Select", class_sel)]
 		if(input)
 			roleprefs["favorite_advclass"] = input

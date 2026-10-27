@@ -126,9 +126,7 @@ export const BathhouseOrdinanceSection = ({
               }
             </p>
             <p style={{ margin: 0, color: INK_FAINT }}>
-              {
-                `The Bishop and the Bathmaster each hold the seal. Either can break or restore the Ordinance. After that, it can't be changed again for ${data.bathhouse_ordinance_cooldown_minutes} minutes.`
-              }
+              {`The Bishop and the Bathmaster each hold the seal. Either can break or restore the Ordinance. After that, it can't be changed again for ${data.bathhouse_ordinance_cooldown_minutes} minutes.`}
             </p>
           </div>
         )}
