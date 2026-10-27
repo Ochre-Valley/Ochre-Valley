@@ -101,8 +101,7 @@ const PollLevyPanel = (props: {
   const payload = levy.classes
     .filter((c) => !c.exempt_charter && (amounts[c.category] || 0) > 0)
     .map((c) => ({ category: c.category, amount: amounts[c.category] }));
-  const canSubmit =
-    !blocked && payload.length > 0 && reasonLength >= reasonMin;
+  const canSubmit = !blocked && payload.length > 0 && reasonLength >= reasonMin;
 
   return (
     <>
@@ -117,8 +116,7 @@ const PollLevyPanel = (props: {
       {levy.classes.map((c) => (
         <div key={c.category} style={rowStyle}>
           <span style={labelStyle}>
-            {c.label}{' '}
-            <span style={{ color: INK_FAINT }}>({c.heads})</span>
+            {c.label} <span style={{ color: INK_FAINT }}>({c.heads})</span>
             {c.cap < levyMax && (
               <span
                 title={c.cap_charters.join('\n')}
