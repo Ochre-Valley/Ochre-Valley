@@ -180,7 +180,7 @@
 // Townie cannot sign contract within the first hour
 #define CONTRACT_TOWNIE_GATE_TIME (1 HOURS)
 
-#define QUEST_KILL_FRACTION 0.05
+#define QUEST_KILL_FRACTION 0.10
 #define QUEST_KILL_CEILING_OFFSET 3
 
 // Each tick generates up to this many kill quests across all regions; evergreen quests top up

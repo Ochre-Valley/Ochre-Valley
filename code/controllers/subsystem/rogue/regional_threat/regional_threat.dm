@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(regionthreat)
 			_tp_budget_multiplier = 1.2,
 			_delivery_reward_multiplier = 1.8,
 			_payout_multiplier = 1.3, // Farther away, higher implicit threat of antag
-			_kill_target_floor = 3,
+			_kill_target_floor = 4,
 			_blockade_travel_fee = BLOCKADE_TRAVEL_FEE_COAST
 		),
 		new /datum/threat_region(
@@ -106,7 +106,7 @@ SUBSYSTEM_DEF(regionthreat)
 			_tp_budget_multiplier = 1.5,
 			_delivery_reward_multiplier = 2.0,
 			_payout_multiplier = 1.35,
-			_kill_target_floor = 3,
+			_kill_target_floor = 4,
 			_blockade_travel_fee = BLOCKADE_TRAVEL_FEE_MOUNTAIN
 		),
 		// Underdark cannot be tamed — min_ambush is high, keeping the region permanently dangerous.
