@@ -5,6 +5,7 @@
 	cmode_music = 'sound/music/combat_dwarf.ogg'
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
+	subclass_mage_aspects = list(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 7, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
 	traits_applied = list(TRAIT_PSYCHOSIS, TRAIT_TRAINED_SMITH, TRAIT_ARCYNE, TRAIT_SMITHING_EXPERT, TRAIT_ALCHEMY_EXPERT)
 	subclass_stats = list(
 		STATKEY_INT = 4,
@@ -37,7 +38,7 @@
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/alchemy = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/magic/arcane = SKILL_LEVEL_JOURNEYMAN
 	)
 
@@ -70,15 +71,9 @@
 	if(H.mind)
 		H.adjust_skillrank_up_to(/datum/skill/craft/engineering, SKILL_LEVEL_LEGENDARY, TRUE)//To make goggles have analyze on-equip
 		H.AddComponent(/datum/component/ore_sight)
-		var/fixations = list("Of Arcyne Laws and Convolutions", "Of Lux, Metal, and Flesh", "Of Cog-song and Alchymical Truimph")
+		var/fixations = list("Of Lux, Metal, and Flesh", "Of Cog-song and Alchymical Truimph")
 		var/fixation_choice = input(H, "What is your pursuit?", "THEY CALLED ME MAD!") as anything in fixations
-		var/mage = FALSE
 		switch(fixation_choice)
-			if("Of Arcyne Laws and Convolutions") //you get better magic than the other tinkerers, but still on the lower end of magic users who get a major aspect.
-				to_chat(H, span_warning("Within the secrets of the Arcyne lie the fundament, the true underpinnings of reality, dream, and divinity. Through Arcyne mastery, the world might be brought to heel. No pursuit is greater"))
-				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 2, "utilities" = 8, "allowed_majors" = list(/datum/magic_aspect/pyromancy, /datum/magic_aspect/ferramancy, /datum/magic_aspect/cryomancy, /datum/magic_aspect/kinesis), "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
-				mage = TRUE
-				backr = /obj/item/rogueweapon/contraption/linker/mace/big/preloaded/implement //worse damage, but works as an arcane focus
 			if("Of Lux, Metal, and Flesh")//get medical ability, and a special prosthetic of your choice, as well as relevant crafting recipes
 				to_chat(H, span_warning("The truth of humenity and inhumenity lies within the Lux, the tapestry of control and the mind. The shape of the body is yet flawed, and might be bolstered by masterworks in rivalry to those of the gods. No pursuit is greater"))
 				ADD_TRAIT(H, TRAIT_MEDICINE_EXPERT, TRAIT_GENERIC)
@@ -95,9 +90,7 @@
 				backpack_contents += /obj/item/trans_table_upgrade
 				backpack_contents += /obj/item/folding_alchcauldron_stored
 				backpack_contents += /obj/item/folding_alchstation_stored
-		if(!mage)
-			H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 2, "utilities" = 8, "locked_aspects" = list(/datum/magic_aspect/artifice), "ward" = TRUE))
-			var/weapons = list("Pistol", "Slurbow", "Arcyne Silver Dagger")
+			var/weapons = list("Pistol", "Slurbow")
 			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
 			switch(weapon_choice)
 				if("Pistol")
@@ -109,13 +102,6 @@
 					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_EXPERT, TRUE)
 					beltl = /obj/item/quiver/bolt/light
 					beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
-				if("Arcyne Silver Dagger")
-					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
-					l_hand =  /obj/item/rogueweapon/huntingknife/idagger/steel/silver/arcyne
-					beltl = /obj/item/rogueweapon/scabbard/sheath
-		else
-			l_hand =  /obj/item/rogueweapon/huntingknife/idagger/steel/silver/arcyne
-			beltl = /obj/item/rogueweapon/scabbard/sheath
 		wretch_select_bounty(H)
 
 /obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer //the original tinkerer mask was integrated into the game by BB's pyro PR, so I'm hitching off that instead
