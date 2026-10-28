@@ -90,18 +90,18 @@
 				backpack_contents += /obj/item/trans_table_upgrade
 				backpack_contents += /obj/item/folding_alchcauldron_stored
 				backpack_contents += /obj/item/folding_alchstation_stored
-			var/weapons = list("Pistol", "Slurbow")
-			var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
-			switch(weapon_choice)
-				if("Pistol")
-					H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
-					l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
-					beltl = /obj/item/quiver/bulletpouch/iron
-					beltr = /obj/item/powderflask
-				if("Slurbow")
-					H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_EXPERT, TRUE)
-					beltl = /obj/item/quiver/bolt/light
-					beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+		var/weapons = list("Pistol", "Slurbow")
+		var/weapon_choice = input(H, "Choose your sidearm.", "A COMPELLING ARGUMENT") as anything in weapons
+		switch(weapon_choice)
+			if("Pistol")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_EXPERT, TRUE)
+				l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+				beltl = /obj/item/quiver/bulletpouch/iron
+				beltr = /obj/item/powderflask
+			if("Slurbow")
+				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_EXPERT, TRUE)
+				beltl = /obj/item/quiver/bolt/light
+				beltr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 		wretch_select_bounty(H)
 
 /obj/item/clothing/mask/rogue/facemask/steel/confessor/pyro/tinkerer //the original tinkerer mask was integrated into the game by BB's pyro PR, so I'm hitching off that instead
