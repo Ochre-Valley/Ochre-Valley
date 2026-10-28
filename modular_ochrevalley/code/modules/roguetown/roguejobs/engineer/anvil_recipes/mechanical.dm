@@ -36,40 +36,41 @@
 	created_item = /obj/item/quiver/mechanized/shotkit/hip
 
 /datum/anvil_recipe/engineering/leadbullets
-	name = "Firearm Bullets (x6)"
+	name = "Arquebus Shot (x9)"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet
-	createditem_num = 6
+	createditem_num = 9
 	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/silver
-	name = "Silver Firearm Bullets (x6)"
+	name = "Silver Arquebus Shot (x6)"
 	req_bar = /obj/item/ingot/silver
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/silver
+	createditem_num = 6
 	craftdiff = 4
 
 /datum/anvil_recipe/engineering/leadbullets/bronze
-	name = "Bronze Firearm Bullets (x12)"
+	name = "Bronze Arquebus Shot (x12)"
 	req_bar = /obj/item/ingot/bronze
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/bronze
 	createditem_num = 12
 	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/scatter
-	name = "Firearm Scattershot (x6) (+1 Cloth)"
+	name = "Firearm Scattershot (x9) (+1 Cloth)"
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
 	additional_items = list(/obj/item/natural/cloth)
 	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/steel
-	name = "Firearm Bullets (x18)"
+	name = "Arquebus Shot (x18)"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet
 	createditem_num = 18
 	craftdiff = 2
 
 /datum/anvil_recipe/engineering/leadbullets/steel/scatter
-	name = "Firearm Scattershot (x18) (+3 Cloth)"
+	name = "Firearm Scattershot (x18) (+2 Cloth)"
 	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
-	additional_items = list(/obj/item/natural/cloth, /obj/item/natural/cloth, /obj/item/natural/cloth)
+	additional_items = list(/obj/item/natural/cloth, /obj/item/natural/cloth)
 	craftdiff = 3

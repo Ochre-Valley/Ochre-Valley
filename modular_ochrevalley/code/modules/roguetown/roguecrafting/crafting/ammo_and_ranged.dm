@@ -1,5 +1,5 @@
 /datum/crafting_recipe/roguetown/survival/arquebuspouchcraft
-	name = "arquebus bullet pouch"
+	name = "arquebus shot pouch"
 	category = "Ranged"
 	result = /obj/item/quiver/bulletpouch
 	reqs = list(
@@ -17,7 +17,6 @@
 	skillcraft = /datum/skill/craft/engineering
 	reqs = list(
 		/obj/item/quiver/bulletpouch = 1,
-		/obj/item/natural/hide/cured = 1,
 		/obj/item/powderflask = 1
 		)
 	craftdiff = 2
