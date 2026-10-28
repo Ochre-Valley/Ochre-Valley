@@ -1,9 +1,0 @@
-author: "borneblood"
-delete-after: True
-changes:
-  - bugfix: "Readded a lot, LOT, of missing balance conditionals to Psydonite passive heal."
-  - bugfix: "Endure no longer has adrenalinerush.ogg overlayering its own sfx."
-  - bugfix: "Fixed a softlock involving Deathless sleep-healing fatal wounds."
-  - balance: "Psydonite heal now very minorly heals brute and fire damage while out of combat, and very minorly reduces wound pain."
-  - balance: "Endure heals suffocation a little better now, and grants +3 WIL from +1 WIL, to mirror Graggar's +3 CON. Also very minorly reduces wound pain."
-  - code_imp: "Moved Psydonite passive heal back to life()."
