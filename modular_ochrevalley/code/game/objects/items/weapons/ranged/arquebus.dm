@@ -138,6 +138,7 @@
 	wdefense = 4
 	wdefense_wbonus = 5 //slightly lower than a wooden staff
 	twirly = 3
+	steady_aim = TRUE
 	var/scattershot = FALSE
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/twirl_skill_needed()

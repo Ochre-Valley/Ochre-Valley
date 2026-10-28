@@ -118,6 +118,7 @@
 	damage = 70
 	flag = BCLASS_PICK //essentially, "old" bullet damage style, but you're not hitting the same level of damage, nor penetration
 	woundclass = BCLASS_PICK
+	shrapnelprob = 100
 
 /obj/projectile/bullet/reusable/bullet/bronze/ricochet
 	name = "shimmering bullet"
