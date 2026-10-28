@@ -94861,6 +94861,10 @@
 	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/magician)
+"pTN" = (
+/obj/effect/landmark/quest_spawner/generic,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/woods/southeast)
 "pTO" = (
 /obj/structure/fluff/railing/wood/east{
 	pixel_x = 8
@@ -118189,7 +118193,6 @@
 /area/rogue/outdoors/town)
 "tMw" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	locked = 1;
 	dir = 8
 	},
 /turf/open/floor/rogue/concrete,
@@ -331009,7 +331012,7 @@ gqu
 gsg
 gsg
 jaH
-jaH
+scn
 jaH
 gsg
 gsg
@@ -349082,7 +349085,7 @@ gqu
 gqu
 jaH
 jaH
-scn
+jaH
 jaH
 jaH
 gsg
@@ -356286,7 +356289,7 @@ btD
 jWF
 apU
 rhP
-xYb
+pTN
 xRY
 jWF
 tlX
@@ -360393,7 +360396,7 @@ xRY
 xRY
 xRY
 rhP
-qNR
+xRY
 rhP
 jYX
 jYX
@@ -362211,7 +362214,7 @@ jYX
 jYX
 xRY
 xRY
-qNR
+xRY
 rhP
 rhP
 rhP
@@ -368088,7 +368091,7 @@ xRY
 xRY
 xRY
 xRY
-xRY
+qNR
 xRY
 xRY
 xRY
@@ -368536,7 +368539,7 @@ xRY
 xRY
 xRY
 xRY
-qNR
+xRY
 xRY
 xRY
 xRY
