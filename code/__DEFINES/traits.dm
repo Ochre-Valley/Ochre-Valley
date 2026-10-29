@@ -59,6 +59,7 @@
 #define TRAIT_SWIFTCAST "Spell Acceleration"
 #define TRAIT_FOG_WARDED "Fog Warded"
 #define TRAIT_ARMOR_BREAK "Loose Straps"
+#define TRAIT_GOOD_MASSEUR "Good Masseur" // Makes massages give buffs. Massages without this buff give no mechanical benefit.
 
 //Redundant traits? Probably can shoot these later, future coder.
 #define TRAIT_XENOPHOBIC "Xenophobic"
@@ -550,6 +551,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_PACIFISM = span_info("I cannot harm another living being."),
 	TRAIT_DEFILED_NOBLE = span_blue("I'm of noble blood but... Something feels off!"),
 	TRAIT_EMPATH = span_info("I can notice when people are in pain."),
+	TRAIT_GOOD_MASSEUR = span_info("My massage skills are honed by years of practice. My massages will make my clients feel and perform better."),
 	TRAIT_EXPLOSIVE_SUPPLY = span_info("I have very good friends! I get explosives on my HERMES every day."),
 	TRAIT_DRUG_SUPPLY = span_info("The Guild keeps me supplied. I get a fresh drug delivery from HERMES each day."),
 	TRAIT_BOMBER_EXPERT = span_info("I have trained my whole lyfe in the explosive arts, both in safety and otherwise. I can more readily prepare bombs through jury-rigged crafting, and I can prepare and handle tripwire traps with greater dexterity. My bombs can also sometimes critically strike certain enemies, causing fatal damage."),

@@ -1,0 +1,6 @@
+author: "borneblood"
+delete-after: True
+changes:
+  - rscadd: "Added a quirkier finisher for unarmed dual wielders."
+  - bugfix: "Fixed a few oversights with TRAIT_DUALWIELDER, such as 'when you proc it your next 3 attacks are cancelled' (thats fucked up)."
+  - code_imp: "Cleaned up a little TRAIT_DUALWIELDER's code to make it more legible."

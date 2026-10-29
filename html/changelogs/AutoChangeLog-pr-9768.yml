@@ -1,0 +1,4 @@
+author: "fffelinid"
+delete-after: True
+changes:
+  - rscadd: "Added 'suicide prayer' verb for those with the Hollow virtue."

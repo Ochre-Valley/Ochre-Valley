@@ -137,6 +137,7 @@
 #undef NOTABLE_SHREWD
 
 #define SOCIALITE_BEAUTIFUL "Beautiful Trait"
+#define SOCIALITE_MASSAGE "Massage Ability"
 #define SOCIALITE_NUTCRACKER "Nutcracker Trait"
 #define SOCIALITE_EMPATH "Empath Trait"
 #define SOCIALITE_PERFORMER "Performer Trait"
@@ -150,6 +151,7 @@
 	choice_costs = list(0, 0, 0, 2, 4)
 	extra_choices = list(
 	SOCIALITE_BEAUTIFUL,
+	SOCIALITE_MASSAGE,
 	SOCIALITE_NUTCRACKER,
 	SOCIALITE_EMPATH,
 	SOCIALITE_PERFORMER,
@@ -200,6 +202,9 @@
 				ADD_TRAIT(recipient, TRAIT_EMPATH, TRAIT_VIRTUE)
 			if(SOCIALITE_PERFORMER)
 				recipient.adjust_skillrank_up_to(/datum/skill/misc/music, SKILL_LEVEL_EXPERT, silent = TRUE)
+			if(SOCIALITE_MASSAGE)
+				if(recipient.mind)
+					recipient.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/massage)
 			else
 				recipient.mind.special_items[choice] = extra_choices[choice]
 
@@ -207,6 +212,7 @@
 #undef SOCIALITE_NUTCRACKER
 #undef SOCIALITE_EMPATH
 #undef SOCIALITE_PERFORMER
+#undef SOCIALITE_MASSAGE
 
 /datum/virtue/utility/failed_squire
 	name = "Failed Squire"
@@ -270,8 +276,13 @@
 /datum/virtue/utility/hollow
 	name = "Hollow"
 	desc = "Some fell magick has rendered me inwardly unliving - I do not hunger, and I do not breathe."
+	custom_text = "Grants a unique verb called 'suicide prayer' which allows you to immediately end your feeble lyfe."
 	ui_fa_icon = "lungs"
 	added_traits = list(TRAIT_NOHUNGER, TRAIT_NOBREATH)
+
+/datum/virtue/utility/hollow/apply_to_human(mob/living/carbon/human/recipient)
+	. = ..()
+	add_verb(recipient, /mob/living/carbon/human/proc/praysuicide)
 
 /datum/virtue/utility/deadened
 	name = "Deadened"
