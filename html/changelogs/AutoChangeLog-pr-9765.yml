@@ -1,4 +1,0 @@
-author: "NonQueueingMatt"
-delete-after: True
-changes:
-  - rscadd: "Re-added massage to socialite virtue. This version of massage does not give any mechanical buffs, only a placebo buff."

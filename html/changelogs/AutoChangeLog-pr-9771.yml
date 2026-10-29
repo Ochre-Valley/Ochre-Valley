@@ -1,5 +1,0 @@
-author: "borneblood"
-delete-after: True
-changes:
-  - bugfix: "Nausea will properly decay on some things that were immune to it, such as Rotcured."
-  - bugfix: "Lava/Acid hazards are fatal once more."

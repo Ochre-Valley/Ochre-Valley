@@ -1,4 +1,0 @@
-author: "WeNeedMorePhoron"
-delete-after: True
-changes:
-  - bugfix: "Mirespider lurkers will now melee attack properly on top of shooting gob at you."

@@ -1,6 +1,0 @@
-author: "Ryan180602"
-delete-after: True
-changes:
-  - rscadd: "added a way to add aim mod to projectiles."
-  - balance: "slings are capped to expert effectiveness like xbows/bows."
-  - balance: "heavier sling bullets now have aim malus."
