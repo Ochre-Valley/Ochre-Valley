@@ -20,6 +20,7 @@
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN // OV Edit - staves skill moved to all witch subclasses for parity, moved out of old magick exclusive
 	)
 	maximum_possible_slots = 20 // Should not fill, just a hack to make it shows what types of towners are in round
 
@@ -82,7 +83,6 @@
 			ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
 			H.adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/arcyne, SKILL_LEVEL_JOURNEYMAN, TRUE)
-			H.adjust_skillrank_up_to(/datum/skill/combat/staves, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			if(H.mind)
 				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 1, "utilities" = 8, "ward" = TRUE))
 			backl = /obj/item/storage/backpack/rogue/satchel
@@ -109,6 +109,7 @@
 					H.mind.AddSpell(new /datum/action/cooldown/spell/minion_mark)
 			neck = /obj/item/clothing/neck/roguetown/psicross/wood
 			backl = /obj/item/storage/backpack/rogue/satchel
+			backr = /obj/item/rogueweapon/woodstaff/quarterstaff // OV Edit - godsblood gets a poking stick to go with their new staff skill
 			backpack_contents = list(
 								/obj/item/reagent_containers/glass/mortar = 1,
 								/obj/item/pestle = 1,
@@ -128,6 +129,7 @@
 				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 5))
 			neck = /obj/item/clothing/neck/roguetown/psicross/wood
 			backl = /obj/item/storage/backpack/rogue/satchel
+			backr = choose_implement(H, "lesser") // OV Edit - give mystagogues the choice of a magic staff because the qstaff impairs their magic
 			backpack_contents = list(
 								/obj/item/rogueweapon/spellbook = 1,
 								/obj/item/reagent_containers/glass/mortar = 1,
