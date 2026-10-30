@@ -1901,7 +1901,7 @@
 
 /obj/item/rogueweapon/eirenxiv/eiren_m
 	name = "glintstone longsword"
-	desc = "A glimmering blade, forged from a blue-white ore found rarely within the Greyglint mines, located on the edge of the Ashen Forests of the duchy of Azuria. \
+	desc = "A glimmering blade, forged from a blue-white ore found rarely within the Greyglint mines, located on the edge of the Ashen Forest. \
 			Identical to steel in its properties, the tempering process to preserve the blue sheen is extensive and time consuming. \
 			Failure in performing a single step of the procedure causes the material to shift hue and redden, a process called 'Bleeding', which renders it brittle and unusable. \
 			\n\
@@ -1911,14 +1911,6 @@
 	icon_state = "eiren_m"
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
 	sheathe_icon = "eiren_m"
-	bigboy = TRUE
-
-/obj/item/rogueweapon/eirenxiv/eirensword
-	name = "stygian longsword"
-	desc = "A finely crafted steel longsword, its design perfectly combining elegance and practicality. Quenched in white oil, refined by the dwarves of Hammerhold, the blade holds a darker hue than usual."
-	icon_state = "eirensword"
-	icon = 'icons/obj/items/donor_weapons_64.dmi'
-	sheathe_icon = "eirensword"
 	bigboy = TRUE
 
 /obj/item/clothing/head/roguetown/duelhat/pretzel
