@@ -349,6 +349,10 @@ SUBSYSTEM_DEF(timer)
 	// The buckets are FUBAR
 	reset_buckets()
 
+/datum/controller/subsystem/timer/Destroy()
+	. = ..()
+	stack_trace("HEY LOOK AT ME: SStimer got qdelled!")
+
 /**
  * # Timed Event
  *
