@@ -870,3 +870,9 @@
 2026-10-27:
   NickBelmont:
   - refactor: Change OV's Mirror Transform to a datum instead of the old spell system.
+2026-10-30:
+  TankTheBirb:
+  - balance: adjusted head physician salary to 40 and apothecary salary to 20, stewards
+      can raise it above this as per usual
+  Vorrarkul:
+  - rscadd: Aavnr Shepherds get more patron amulet variety, same as Aavnr Aristocrats.
