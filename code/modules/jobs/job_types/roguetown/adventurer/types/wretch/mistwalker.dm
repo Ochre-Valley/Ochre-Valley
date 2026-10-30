@@ -4,6 +4,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	forbidden_races = list(RACES_CONSTRUCT RACES_OOZE) //I did in fact regret letting them be revs
 	allowed_patrons = ALL_KAZENGUN_PATRONS //guardian of the twelve... and saidon but no undivided
+	min_pq = 15 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/mistwalker
 	class_select_category = CLASS_CAT_WARRIOR
 	category_tags = list(CTAG_WRETCH)
@@ -37,7 +38,7 @@
 		"Sewing Kit" =	/obj/item/repair_kit, //I am sure you'll find a way to repair your bracers
 		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
 	)
-	extra_context = "This subclass gains addition stat points from weapon selection, and is race-limited from: Constructs. It may only be picked by characters originating from: Kazengun, Lingyue. This class is incompatible with the following Virtue: Second Chance."
+	extra_context = "This subclass gains addition stat points from weapon selection, and is race-limited from: Constructs. It may only be picked by characters originating from: Kazengun, Lingyue. This class is incompatible with the following Virtue: Rotcured."
 	adv_stat_ceiling = list(STAT_STRENGTH = 14, STAT_CONSTITUTION = 14, STAT_SPEED = 14) //WIL does basically nothing, so we cap SPD instead
 
 /datum/advclass/wretch/mistwalker/check_requirements(mob/living/carbon/human/H)

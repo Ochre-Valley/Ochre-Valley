@@ -58,7 +58,7 @@
 			reagentid = REAGENT_MILK
 			reagentcolor = "#DFDFDF"
 		if(REAGENT_COFFEE)
-			generated_reagents = list(REAGENT_ID_COFFEE = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT gamer prevention, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_COFFEE)
 			gen_amount = 1
@@ -66,7 +66,7 @@
 			reagentid = REAGENT_COFFEE
 			reagentcolor = "#482000"
 		if(REAGENT_TEA)
-			generated_reagents = list(REAGENT_ID_TEA = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT gamer prevention, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_TEA)
 			gen_amount = 1
@@ -74,7 +74,7 @@
 			reagentid = REAGENT_TEA
 			reagentcolor = "#508141"
 		if(REAGENT_TEA_ROSE)
-			generated_reagents = list(REAGENT_ID_TEA_ROSE = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT gamer prevention, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_TEA_ROSE)
 			gen_amount = 1
@@ -82,7 +82,7 @@
 			reagentid = REAGENT_TEA_ROSE
 			reagentcolor = "#f398b6"
 		if(REAGENT_TEA_CALENDULA)
-			generated_reagents = list(REAGENT_ID_TEA_CALENDULA = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT gamer prevention, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_TEA_CALENDULA)
 			gen_amount = 1
@@ -90,7 +90,7 @@
 			reagentid = REAGENT_TEA_CALENDULA
 			reagentcolor = "#b38e17"
 		if(REAGENT_TEA_VALERIAN)
-			generated_reagents = list(REAGENT_ID_TEA_VALERIAN = 1)
+			generated_reagents = list(REAGENT_ID_WATER = 1) //OV EDIT gamer prevention, just defaults to water
 			if(reagent_name in our_reagents)
 				reagent_name = lowertext(REAGENT_TEA_VALERIAN)
 			gen_amount = 1

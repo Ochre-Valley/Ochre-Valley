@@ -21,7 +21,7 @@
 				unavailable = "Restricted from species \"[pref_species.name]\"."
 		if(length(Q.allowed_species))
 			if(!(pref_species.type in Q.allowed_species))
-				if(!((length(Q.allowed_virtues) && (((virtue.type in Q.allowed_virtues) || (statpack.virtuous && (virtuetwo.type in Q.allowed_virtues)))) || (length(Q.allowed_quirks) && ((quirklesser.type in Q.allowed_quirks) || ((get_quirk_slots(src) == 2) && (quirkgreater.type in Q.allowed_quirks)))))))
+				if(!((length(Q.allowed_virtues) && (((virtue.type in Q.allowed_virtues) || (extravirtue.type in Q.allowed_virtues) || (statpack.virtuous && (virtuetwo.type in Q.allowed_virtues)))) || (length(Q.allowed_quirks) && ((quirklesser.type in Q.allowed_quirks) || ((get_quirk_slots(src) == 2) && (quirkgreater.type in Q.allowed_quirks))))))) //OV EDIT - Extra Virtue AAAAAA
 					var/out = "Only allowed for species: "
 					for(var/datum/species/S as anything in Q.allowed_species)
 						if(ispath(S, /datum/species))
@@ -45,6 +45,10 @@
 				unavailable = "Restricted from virtue \"[virtue.name]\"."
 			if(statpack.virtuous && (virtuetwo.type in Q.restricted_virtues))
 				unavailable = "Restricted from virtue \"[virtuetwo.name]\"."
+			//OV ADD START
+			if(extravirtue.type in Q.restricted_virtues)
+				unavailable = "Restricted from virtue \"[extravirtue.name]\"."
+			//OV ADD END
 		if(length(job_preferences))
 			var/highest_title = null
 			for(var/title in job_preferences)

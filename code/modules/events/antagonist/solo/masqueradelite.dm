@@ -15,11 +15,10 @@
 
 	weight = 8 //OV EDIT - Was 8
 
-	denominator = 80
+	denominator = 20
 
-	base_antags = 2
-	maximum_antags = 2
-	min_players = 15 // OV EDIT - Was 40
+	base_antags = 0
+	maximum_antags = 6
 
 	earliest_start = 0 SECONDS
 

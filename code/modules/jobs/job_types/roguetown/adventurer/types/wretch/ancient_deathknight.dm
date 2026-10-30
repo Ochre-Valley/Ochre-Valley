@@ -3,6 +3,7 @@
 	tutorial = "You were once a Death Knight - a once-champion risen from death through unknown means, without a purpose, nor master to serve. How long you have been dead - you do not remember anymore. Why do you fight? Does it matter? All that you know is to move forward, the ancient mantra of battle woven into your mynd, swerve, parry, riposte and cleave. The world sees you as an abomination. Seek your own path."
 	allowed_sexes = list(MALE, FEMALE)
 
+	min_pq = 15 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/ancient_deathknight
 	class_select_category = CLASS_CAT_ACCURSED
 	category_tags = list(CTAG_WRETCH)

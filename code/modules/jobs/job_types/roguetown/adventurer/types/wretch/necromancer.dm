@@ -3,6 +3,7 @@
 	tutorial = "You have been ostracized and hunted by society for your dark magics and perversion of lyfe; your speciality is gaining power through what you raise."
 	allowed_sexes = list(MALE, FEMALE)
 
+	min_pq = 20 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/necromancer
 	cmode_music = 'sound/music/combat_heretic.ogg'
 	class_select_category = CLASS_CAT_MAGE
@@ -74,7 +75,7 @@
 			beltl = /obj/item/rogueweapon/huntingknife
 		if("Progress (Open Necromancer Robes)") //Good light armored potental, at a price of being super obvious with unique robes.
 			head = /obj/item/clothing/head/roguetown/roguehood/unholy/enchanted
-			neck = /obj/item/clothing/neck/roguetown/leather //Lesser gorget for more armor elsewhere, have to aquire one in the round.
+			neck = /obj/item/clothing/neck/roguetown/leather //Lesser gorget for more armor elsewhere, have to acquire one in the round.
 			belt = /obj/item/storage/belt/rogue/leather/black
 			beltr = /obj/item/reagent_containers/glass/bottle/rogue/manapot //Hacky solution so you don't lose em.
 			beltl = /obj/item/rogueweapon/huntingknife
