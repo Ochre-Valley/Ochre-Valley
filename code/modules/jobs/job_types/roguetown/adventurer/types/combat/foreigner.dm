@@ -372,7 +372,17 @@
 	..()
 	mask = /obj/item/clothing/head/roguetown/armingcap/padded
 	head = /obj/item/clothing/head/roguetown/chaperon/greyscale/shepherd
-	neck = /obj/item/clothing/neck/roguetown/psicross/reform
+	// OV Edit - Copied from Aavnic Aristocrat
+	switch(H.patron?.type) //No Graggarite amulet because you'd get instantly ganked lol.
+		if(/datum/patron/divine/ravox)
+			neck = /obj/item/clothing/neck/roguetown/psicross/ravox/bronze //FOR GLORY AND HONOR!!
+		if(/datum/patron/inhumen/graggar)
+			neck = /obj/item/clothing/neck/roguetown/psicross/inhumen/matthios/gronn/generic //its a tooth amulet, close enough.
+		if(/datum/patron/old_god)
+			neck = /obj/item/clothing/neck/roguetown/psicross/reform //GOD IS DEAD, YET I FOLLOW HIS WORD!!
+		else
+			neck = null //fallback is nothing, heretic
+	// OV Edit End
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/shepherd
 	shirt = /obj/item/clothing/suit/roguetown/shirt/freifechter/shepherd
 	belt = /obj/item/storage/belt/rogue/leather/sash
