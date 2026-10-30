@@ -17,7 +17,7 @@
 	base_antags = 2
 	maximum_antags = 2
 	min_players = 15 //OV EDIT - Was 25
-	weight = 6 //OV EDIT - Was 7
+	weight = 7
 
 	earliest_start = 0 SECONDS
 
