@@ -201,6 +201,12 @@
 				used = list('sound/vo/LizardSqueal.ogg')
 			if("thump")
 				used = list('sound/vo/LizardThump.ogg')
+			if("tick")
+				used = list('sound/misc/clockloop.ogg')
+			if("creak")
+				used = list('sound/foley/trap.ogg')
+			if("spark")
+				used = list('sound/foley/machinebreak.ogg')
 			if("coo") // OV Add: Coo emote
 				used = list('modular_ochrevalley/sounds/vo/mobs/bird/dovecoo.ogg') // OV Add: Coo emote
 			if("stomach_growl") //OV ADD
