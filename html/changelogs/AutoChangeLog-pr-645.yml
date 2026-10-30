@@ -1,0 +1,4 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - balance: "adjusted head physician salary to 40 and apothecary salary to 20, stewards can raise it above this as per usual"
