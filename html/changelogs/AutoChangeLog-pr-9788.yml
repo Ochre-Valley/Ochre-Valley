@@ -1,0 +1,4 @@
+author: "WeNeedMorePhoron"
+delete-after: True
+changes:
+  - balance: "Reverted the 20% damage haircut applied to Spellblades during Mage 3.1"
