@@ -8,6 +8,10 @@
     name = "Scroll of Mirror Transform"
     path = /obj/item/book/granter/spell/bonechill/mirror_transform/loadout
 
+/datum/loadout_item/instant_transform 
+    name = "Scroll of Instant Transform"
+    path = /obj/item/book/granter/spell/bonechill/instant_transform/loadout
+
 /obj/item/clothing/head/roguetown/mentorhat/loadout
 	armor = ARMOR_CLOTHING
 
