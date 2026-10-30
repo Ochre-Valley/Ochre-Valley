@@ -5,7 +5,7 @@
 	icon = 'modular/icons/mob/96x96/ratwood_dragon.dmi'
 	name = "half-drakkyn"
 	mob_size = MOB_LARGE //OV EDIT
-	desc = "Descendent of descendent of descendent of greatness; degenerated to mortality through diluta of power, blood, and wealth."
+	desc = "Descendant of descendant of descendant of greatness; degenerated to mortality through diluta of power, blood, and wealth."
 	icon_state = "dragon"
 	icon_living = "dragon"
 	icon_dead = "dragon_dead"

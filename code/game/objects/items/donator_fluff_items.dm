@@ -918,7 +918,7 @@
 
 /obj/item/clothing/head/roguetown/decoration/featherplume
 	name = "helmet's featherplume"
-	desc = "A resplendant plume, intended to be worn atop a helmet; a touch of flamboyance, indiscriminate of the alloy."
+	desc = "A resplendent plume, intended to be worn atop a helmet; a touch of flamboyance, indiscriminate of the alloy."
 	item_state = "pplume"
 	icon_state = "pplume"
 	icon = 'icons/clothing/donor_clothes.dmi'
@@ -1691,7 +1691,7 @@
 //Plexiant's donator item - rapier
 /obj/item/rogueweapon/sword/rapier/aliseo
 	name = "Rapier di Aliseo"
-	desc = "A rapier of sporting a steel blade and decrotive silver-plating. Elaborately designed in classic intricate yet functional Etrucian style, the pummel appears to be embedded with a cut emerald with a family crest engraved in the fine leather grip of the handle."
+	desc = "A rapier of sporting a steel blade and decorative silver-plating. Elaborately designed in classic intricate yet functional Etrucian style, the pommel appears to be embedded with a cut emerald with a family crest engraved in the fine leather grip of the handle."
 	icon_state = "plex"
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
 
@@ -1962,7 +1962,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/longcoat/wyrd_cloak
 	name = "Cloak of the Wyrd"
-	desc = "Sewn by ways unknown to the land, what may have been garbs fitting for royalty once now lays aged beyond measure. However, it would surely provide much needed warmth for the cold and uncaring bog..."
+	desc = "Sewn by ways unknown to the land, what may have been garbs fitting for royalty once now lays aged beyond measure. However, it would surely provide much-needed warmth for the cold and uncaring bog..."
 	icon_state = "wyrd_cloak"
 	item_state = "wyrd_cloak"
 	icon = 'icons/clothing/donor_clothes.dmi'
@@ -2360,7 +2360,7 @@ As Excaliber."
 //DRD21
 /obj/item/rogueweapon/sword/long/drd
 	name = "ornate basket-hilted longsword"
-	desc = "A longsword, fitten with a basket-hilt. The grip is made out of a fine green-stained leather, with a piece of spiral-cared walnut connecting it to a lion-shaped pommel. A purple glowing rune sits atop the blade."
+	desc = "A longsword, fitted with a basket-hilt. The grip is made out of a fine green-stained leather, with a piece of spiral-cared walnut connecting it to a lion-shaped pommel. A purple glowing rune sits atop the blade."
 	icon_state = "drd_lsword"
 	icon = 'icons/obj/items/donor_weapons_64.dmi'
 
@@ -2382,7 +2382,7 @@ As Excaliber."
 /obj/item/rogueweapon/sword/donator_smallsword/drd_maere
 	name = "'Mære'"
 	desc = "Ivory-gripped, golden-guarded. For a blade that's outlasted generations of wielders, the tip remains impossibly sharp. One can only \
-	wonder if it's courtesy of a dilligent and skillful hand, or if it's a consequence of disuse beyond decorating the waistline."
+	wonder if it's courtesy of a diligent and skillful hand, or if it's a consequence of disuse beyond decorating the waistline."
 	icon_state = "drd_decsmallsword"
 	sheathe_icon = "drd_decsmallsword"
 
@@ -2536,7 +2536,7 @@ As Excaliber."
 //spaz - Armet/Hounskull/Barbute
 /obj/item/clothing/head/roguetown/helmet/heavy/barbute/visor/spaz
 	name = "hound-nosed bascinet"
-	desc = "A sturdy bascinet that seems to have been fitten with a long visor."
+	desc = "A sturdy bascinet that seems to have been fitted with a long visor."
 	icon_state = "spaz_helm"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes64.dmi'
@@ -2546,14 +2546,14 @@ As Excaliber."
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull/spaz
 	name = "hound-nosed bascinet"
-	desc = "A sturdy bascinet that seems to have been fitten with a long visor."
+	desc = "A sturdy bascinet that seems to have been fitted with a long visor."
 	icon_state = "spaz_helm"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
 
 /obj/item/clothing/head/roguetown/helmet/heavy/knight/armet/spaz
 	name = "hound-nosed bascinet"
-	desc = "A sturdy bascinet that seems to have been fitten with a long visor."
+	desc = "A sturdy bascinet that seems to have been fitted with a long visor."
 	icon_state = "spaz_helm"
 	icon = 'icons/clothing/donor_clothes.dmi'
 	mob_overlay_icon = 'icons/clothing/onmob/donor_clothes.dmi'
@@ -2561,7 +2561,7 @@ As Excaliber."
 // LimeTease
 /obj/item/clothing/head/roguetown/helmet/sallet/visored/limetease
 	name = "serpentine bascinet"
-	desc = "A sturdy bascinet that seems to have been fitten with a long visor. Loosely resembles a drakynn or some sort of sea serpent."
+	desc = "A sturdy bascinet that seems to have been fitted with a long visor. Loosely resembles a drakynn or some sort of sea serpent."
 	icon_state = "limehelm"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -2571,7 +2571,7 @@ As Excaliber."
 
 /obj/item/clothing/head/roguetown/helmet/heavy/abyssorgreathelm/limetease
 	name = "serpentine bascinet"
-	desc = "A sturdy bascinet that seems to have been fitten with a long visor. Loosely resembles a drakynn or some sort of sea serpent."
+	desc = "A sturdy bascinet that seems to have been fitted with a long visor. Loosely resembles a drakynn or some sort of sea serpent."
 	icon_state = "limehelm"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -3039,7 +3039,7 @@ As Excaliber."
 
 /obj/item/clothing/head/roguetown/crown/serpcrown/mortosuncrown
 	name = "sun crown"
-	article = null // prevents it becoming the the sun crown.
+	article = null // prevents it becoming the sun crown.
 	desc = "A far too extravagant crown made of gold, sporting a rontz at the center. The metal has been shaped to resemble sunrays."
 	replace_existing_roguemachine_crown = TRUE
 	icon_state = "mortosasye_suncrown"
@@ -4666,7 +4666,7 @@ As Excaliber."
 
 /obj/item/clothing/cloak/templar/ravoxcleric/koruu
 	name = "Sefirot's Cloak"
-	desc = "A tattered red tabard dyed in the bold colors of Ravox. Its striking crimson fabric stands out on the frontlines, signaling unyielding judgment. For a thousand yils, our ancestors have defied the darkness. May their descendents defy the darkness for a thousand more."
+	desc = "A tattered red tabard dyed in the bold colors of Ravox. Its striking crimson fabric stands out on the front lines, signaling unyielding judgment. For a thousand yils, our ancestors have defied the darkness. May their descendants defy the darkness for a thousand more."
 	armor = ARMOR_CLOTHING
 
 /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm/cleric/koruu
