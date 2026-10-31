@@ -98,6 +98,7 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet/scatter/iron
 	armor_penetration = PEN_HEAVY
 	damage = 15
+	shrapnelprob = 100
 
 /obj/projectile/bullet/scatter/glass
 	name = "glass fragment"
