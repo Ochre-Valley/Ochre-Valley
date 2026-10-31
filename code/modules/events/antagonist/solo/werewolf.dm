@@ -9,6 +9,7 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = FALSE //OV EDIT
 	storyteller_rumour_name = "werewolves"
 
 	denominator = 50
@@ -16,7 +17,7 @@
 	base_antags = 2
 	maximum_antags = 2
 	min_players = 15 //OV EDIT - Was 25
-	weight = 6 //OV EDIT - Was 7
+	weight = 7
 
 	earliest_start = 0 SECONDS
 
