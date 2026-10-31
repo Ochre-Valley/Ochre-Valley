@@ -1000,6 +1000,21 @@
   twinklover22:
     - balance: buffed Endure.
 2026-10-19:
+  NickBelmont:
+    - qol: Custom loadout books can now look like tomes
+    - bugfix: Juicing fruit no longer adds its nutriment to the mortar
+    - rscadd:
+        "New vice: Dormancy, which causes a character to become an inanimate item
+        when they run out of energy"
+  OMEGATHERION:
+    - bugfix: Masc vaqueros spawn with a saiga
+  Ollanius:
+    - bugfix:
+        Some Psydonic helmets - chiefly, the Greatplumed variants - should no
+        longer have glitched detail states.
+    - code_imp:
+        Psydonic helmets are now forked off of a neutral tether, the unobtainable
+        'Psydonic Bascinet'.
   SomeDeviant:
     - rscadd: Added AP Sync 10.14.26 to 10.18.26
     - bugfix: Reverted 'Werewolves can't panel' for Ochre cause You Know Why
@@ -1010,26 +1025,6 @@
     - bugfix:
         veiled whispers not showing due to the zombie antag datum being added
         first
-  NickBelmont:
-    - qol: Custom loadout books can now look like tomes
-    - bugfix: Juicing fruit no longer adds its nutriment to the mortar
-    - rscadd:
-        "New vice: Dormancy, which causes a character to become an inanimate item
-        when they run out of energy"
-  zeskorion:
-    - rscadd: darkness adapted quirk
-    - rscadd:
-        Hemovores can now ping as a vampire when an inquisitor's indexer makes
-        a mistake
-  OMEGATHERION:
-    - bugfix: Masc vaqueros spawn with a saiga
-  Ollanius:
-    - bugfix:
-        Some Psydonic helmets - chiefly, the Greatplumed variants - should no
-        longer have glitched detail states.
-    - code_imp:
-        Psydonic helmets are now forked off of a neutral tether, the unobtainable
-        'Psydonic Bascinet'.
   borneblood:
     - bugfix:
         Fixed an oddity with charged intents being able to have their sfx spammed,
@@ -1044,6 +1039,11 @@
     - bugfix: fixed pathing on two specific donator staff pathing
   twinklover22:
     - qol: Couple new weapon options for Routier.
+  zeskorion:
+    - rscadd: darkness adapted quirk
+    - rscadd:
+        Hemovores can now ping as a vampire when an inquisitor's indexer makes
+        a mistake
 2026-10-20:
   BobProductive:
     - bugfix: fixes book kits, people can make books again!
@@ -1344,14 +1344,6 @@
     - rscadd: new time change tips (lore)
     - bugfix: smoking ozium should work again
 2026-10-25:
-  SomeDeviant:
-    - rscadd: Added Organ Reveal Mechanic
-  Voidastra:
-    - rscadd:
-        structure for future players to do the same in the form of "donator_modkit_ochre.dm",
-        "loadout_donators_ochre.dm", and "ochre_modular_custom_weapons_64.dmi" all within
-        the modular_ochrevalley folder while following structure of normal folder structure
-    - rscadd: Lirvas firestaff
   KatTheFox:
     - bugfix: The antagonist filter for the well-known quirk works properly now.
   Ketrai:
@@ -1377,11 +1369,19 @@
     - rscadd: Dominion Cestus elixir works on hardened leather gloves
     - rscadd: Dominion Greatsword elixir works on executioner's swords
     - rscadd: Dominion Shield elixir works on bronze shields, iron shields, and bucklers
+  SomeDeviant:
+    - rscadd: Added Organ Reveal Mechanic
   Stutternov:
     - rscadd:
         Re-adds old Paranoid system; minus the racism, plus a stress event from
         half-heard whispers
     - refactor: Moves the prior Paranoid trait over to a new trait named 'Factionalist'
+  Voidastra:
+    - rscadd:
+        structure for future players to do the same in the form of "donator_modkit_ochre.dm",
+        "loadout_donators_ochre.dm", and "ochre_modular_custom_weapons_64.dmi" all within
+        the modular_ochrevalley folder while following structure of normal folder structure
+    - rscadd: Lirvas firestaff
   WeNeedMorePhoron:
     - bugfix:
         "NPC that uses simple_find_target behavior is no longer treated as having
@@ -1408,17 +1408,15 @@
         less checks for critical dazing since most weren't working anyway. - You
         shouldn't really notice much difference ingame anyway.
 2026-10-26:
+  Ketrai:
+    - bugfix: Fix certain enchanting kit donor sprites when wielding.
   Zeno:
     - rscadd:
         Allow Constructs, Dullahans, and Ooze's to take Unlanded Nobility greater
         quirk
-  Ketrai:
-    - bugfix: Fix certain enchanting kit donor sprites when wielding.
   zydras:
     - image: Updated Headeater and Treasure Seeker sprites.
 2026-10-27:
-  NickBelmont:
-    - refactor: Change OV's Mirror Transform to a datum instead of the old spell system.
   BurpleBineapple:
     - rscadd: Donator kits for DasFox
   Etheo:
@@ -1434,6 +1432,8 @@
     - rscdel: Socialite no longer has the Massage option.
   Guidesu:
     - rscadd: Training dummies do not longer require manual click to train.
+  NickBelmont:
+    - refactor: Change OV's Mirror Transform to a datum instead of the old spell system.
   OrbisAnima:
     - balance:
         Changes the resource consumption of Rhythms to half since during combat
@@ -1607,15 +1607,20 @@
     - balance:
         adjusted head physician salary to 40 and apothecary salary to 20, stewards
         can raise it above this as per usual
-  Vorrarkul:
-    - rscadd: Aavnr Shepherds get more patron amulet variety, same as Aavnr Aristocrats.
   Voidastra:
     - qol: added cackle to the affected emotes to trigger xylix_joy
+  Vorrarkul:
+    - rscadd: Aavnr Shepherds get more patron amulet variety, same as Aavnr Aristocrats.
   WeNeedMorePhoron:
     - rscadd: Shields blocking a projectile will no longer delete it.
     - balance: Reverted the 20% damage haircut applied to Spellblades during Mage 3.1
     - rscdel: Removed ALCHEMY EXPERT trait from heretical fiend NPC
 2026-10-31:
+  SatinIsle:
+    - admin: New smites added to player effects panel.
+  SomeDeviant:
+    - rscadd: Added Weekly AP Sync 10.19.26 - 10.30.26
+    - bugfix: Maintain stockpile ads pending discourse on our branch
   Ryan180602:
     - balance: stone/whetstone smash don't knock people back.
   crekulon:
