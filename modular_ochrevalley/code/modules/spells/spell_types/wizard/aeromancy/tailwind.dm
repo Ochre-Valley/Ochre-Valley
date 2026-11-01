@@ -1,9 +1,7 @@
 #define TAILWIND_DURATION 2 SECONDS
-#define TAILWIND_MODE "tailwind"
-#define SQUALL_MODE "squall"
 /datum/action/cooldown/spell/tailwind
 	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
-	name = "Tailwind"
+	name = "Wind's Wake"
 	desc = "Surge forth like the wind, rushing ahead in a cardinal direction and flowing around those in your path. \
 			In your wake, leave behind turbulence that lightly hampers the movements of pursuers. Shares a cooldown with squall."
 	button_icon_state = "haste"
@@ -16,7 +14,7 @@
 	cast_range = SPELL_RANGE_GROUND
 
 	primary_resource_type = SPELL_COST_STAMINA
-	primary_resource_cost = SPELLCOST_MAJOR_AOE
+	primary_resource_cost = SPELLCOST_STAT_BUFF
 
 	invocations = list("Venti Ducite!")
 	invocation_type = INVOCATION_SHOUT
@@ -55,7 +53,7 @@
 	cast_range = SPELL_RANGE_GROUND
 
 	primary_resource_type = SPELL_COST_STAMINA
-	primary_resource_cost = SPELLCOST_MAJOR_AOE
+	primary_resource_cost = SPELLCOST_STAT_BUFF
 
 	invocations = list("Venti Custodite!")
 	invocation_type = INVOCATION_SHOUT
