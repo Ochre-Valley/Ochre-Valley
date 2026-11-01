@@ -107961,10 +107961,6 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/rogue/grasscold,
 /area/rogue/outdoors/rtfield/abandonedhotsprings)
-"sdJ" = (
-/obj/effect/landmark/chest_or_mimic/loot_chest,
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "sdQ" = (
 /obj/machinery/light/rogue/firebowl/church,
 /turf/open/floor/rogue/carpet/lord/right,
@@ -120972,12 +120968,6 @@
 	},
 /turf/open/floor/rogue/twig,
 /area/rogue/outdoors/rtfield)
-"ukB" = (
-/obj/structure/bars/passage/shutter{
-	redstone_id = "rd3tc1"
-	},
-/turf/open/floor/rogue/naturalstone,
-/area/rogue/under/cave)
 "ukC" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/rogue/grassred,
@@ -174675,11 +174665,11 @@ tum
 toJ
 toJ
 toJ
-ogs
-ogs
-ogs
-ogs
-ogs
+qHj
+qHj
+qHj
+qHj
+qHj
 miF
 miF
 miF
@@ -175127,11 +175117,11 @@ tum
 eJs
 toJ
 toJ
-ogs
-toJ
-toJ
-toJ
-ogs
+qHj
+qHj
+qHj
+qHj
+qHj
 bhJ
 bhJ
 bhJ
@@ -175579,11 +175569,11 @@ tum
 toJ
 toJ
 toJ
-ukB
-toJ
-sdJ
-toJ
-ogs
+qHj
+qHj
+qHj
+qHj
+qHj
 bhJ
 tum
 tum
@@ -176031,11 +176021,11 @@ mbK
 toJ
 ckW
 toJ
-ogs
-toJ
-toJ
-toJ
-ogs
+qHj
+qHj
+qHj
+qHj
+qHj
 bhJ
 tum
 htN
@@ -176483,11 +176473,11 @@ toJ
 toJ
 toJ
 uHQ
-ogs
-ogs
-ogs
-ogs
-ogs
+qHj
+qHj
+qHj
+qHj
+qHj
 bhJ
 htN
 htN
