@@ -43,7 +43,7 @@
 	var/tempest_radius = 1
 	var/static/list/mode_labels = list(TEMPEST_MODE_TWISTER = "TWST", TEMPEST_MODE_DOWNDRAFT = "DRFT")
 	var/blast_delay = 2 SECONDS
-	var/blast_damage = 70
+	var/blast_damage = 60
 
 /datum/action/cooldown/spell/tempest/Grant(mob/grant_to)
 	. = ..()
@@ -115,7 +115,7 @@
 			continue
 		new /obj/effect/temp_visual/tempest(T)
 		for(var/obj/structure/S in T)
-			S.take_damage(damage, BRUTE, "blunt", FALSE)
+			S.take_damage(damage, BRUTE, "slash", FALSE)
 		for(var/mob/living/L in T.contents)
 			if(L.anti_magic_check())
 				L.visible_message(span_warning("The winds dissipates around [L]!"))
@@ -126,7 +126,7 @@
 				continue
 			if(istype(caster) && !QDELETED(caster) && ishuman(L))
 				if(arcyne_strike(caster, L, null, damage, caster.zone_selected, \
-					BCLASS_BLUNT, spell_name = spell_name, \
+					BCLASS_CUT, spell_name = spell_name, \
 					damage_type = BRUTE, \
 					skip_animation = TRUE) == ARCYNE_STRIKE_WARDED)
 					continue
