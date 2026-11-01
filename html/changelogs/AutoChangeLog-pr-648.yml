@@ -1,0 +1,4 @@
+author: "Alvaria-a"
+delete-after: True
+changes:
+  - rscadd: "Militia now have voice lines to reflect that they are in fact not bandits."

@@ -89,3 +89,41 @@
 	if(do_after(H, 3 SECONDS))
 		M.ui_interact(H)
 
+/datum/action/cooldown/spell/instant_transform_ov
+	name = "Instant Transform"
+	desc = "Immediately begin to change your appearance."
+	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
+	button_icon_state = "mirror"
+	sound = 'sound/magic/whiteflame.ogg'
+
+	click_to_activate = TRUE
+	self_cast_possible = TRUE
+
+	primary_resource_type = SPELL_COST_STAMINA
+	primary_resource_cost = SPELLCOST_CANTRIP
+
+	invocations = list("Effingo")
+	invocation_type = INVOCATION_WHISPER
+
+	charge_required = TRUE
+	charge_time = 1 SECONDS
+	hold_drain = 1
+	charge_slowdown = 3
+	charge_sound = null
+	cooldown_time = 3 SECONDS
+
+	associated_skill = /datum/skill/magic/arcane
+	point_cost = 0
+	spell_tier = 1
+	spell_impact_intensity = SPELL_IMPACT_NONE
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
+
+/datum/action/cooldown/spell/instant_transform_ov/cast(list/targets, mob/living/user = usr)
+	. = ..()
+
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	var/datum/appearance_changer/mirror_transform/M
+	M = new(H)
+	M.ui_interact(H)

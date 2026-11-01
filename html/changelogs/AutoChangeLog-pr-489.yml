@@ -1,0 +1,5 @@
+author: "SatinIsle"
+delete-after: True
+changes:
+  - rscadd: "Gives an additional option for an \"instant transform\" spell, which does not use a mirror."
+  - qol: "Instant transform now uses the appearance changer UI"
