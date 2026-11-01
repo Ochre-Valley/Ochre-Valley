@@ -26,6 +26,7 @@
 		/datum/action/cooldown/spell/projectile/windblade_volley,
 		/datum/action/cooldown/spell/tempest,
 		/datum/action/cooldown/spell/tailwind,
+		/datum/action/cooldown/spell/squall,
 		/datum/action/cooldown/spell/levitation,
 		/datum/action/cooldown/spell/featherfall,
 	)

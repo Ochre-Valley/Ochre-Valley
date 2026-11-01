@@ -1,13 +1,14 @@
 #define CYCLONE_DAMAGE 30
-#define CYCLONE_TELEGRAPH 8
-
+#define CYCLONE_TELEGRAPH 5
+#define CYCLONE_DURATION 10 SECONDS
+#define CYCLONE_INTERRUPTS list(COMSIG_MOVABLE_MOVED, COMSIG_MOB_CAST_SPELL, COMSIG_MOB_ITEM_BEING_ATTACKED, COMSIG_MOB_ATTACKED_BY_HAND, COMSIG_ATOM_BULLET_ACT, COMSIG_ATOM_HITBY, COMSIG_ATOM_WAS_ATTACKED)
 /datum/action/cooldown/spell/cyclone
 	button_icon = 'icons/mob/actions/mage_fulgurmancy.dmi'
 	name = "Maelstrom"
-	desc = "Channel to conjure up swirling windstorm of razor-sharp winds, devastating an area over a lengthy duration. \
+	desc = "Channel to conjure up swirling windstorm of razor-sharp winds, devastating an area over a lengthy duration, save for a small zone of safety in the eye of the storm. \
 			While channeling, you cannot move or cast any other spells, and are susceptible to interruptions."
 	button_icon_state = "greater_thunderstrike"
-	sound = 'sound/magic/lightning.ogg'
+	sound = 'sound/combat/wooshes/bladed/wooshlarge (1).ogg'
 	spell_color = GLOW_COLOR_WIND
 	glow_intensity = GLOW_INTENSITY_VERY_HIGH
 	attunement_school = ASPECT_NAME_AEROMANCY
@@ -33,15 +34,16 @@
 	associated_skill = /datum/skill/magic/arcane
 	spell_impact_intensity = SPELL_IMPACT_HIGH
 
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z | SPELL_REQUIRES_NO_MOVE
 
 	displayed_damage = CYCLONE_DAMAGE
 
-	var/tempest_duration = 10 SECONDS
+	var/tempest_duration = CYCLONE_DURATION
 	/// Damage per tick
 	var/tempest_damage = CYCLONE_DAMAGE
 	/// Radius of the damage ring (center tile is safe)
 	var/tempest_radius = 3
+	var/obj/effect/tempest/cyclone/active_zone
 
 /datum/action/cooldown/spell/cyclone/cast(atom/cast_on)
 	. = ..()
@@ -69,11 +71,53 @@
 
 	H.visible_message(span_boldwarning("[H] whips up a fierce gale!"))
 	playsound(centerpoint, 'sound/magic/charging.ogg', 80, TRUE, 6)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(make_cyclone), centerpoint, H, src, "Cyclone"), CYCLONE_TELEGRAPH)
+	RegisterSignal(H, CYCLONE_INTERRUPTS, PROC_REF(end_cyclone))
+	active_zone = new(centerpoint, H, src, "Cyclone")
 	return TRUE
 
-/proc/make_cyclone(turf/centerpoint, mob/living/carbon/human/caster, datum/action/cooldown/spell/guard_source, spell_name = "Cyclone")
-	new /obj/effect/tempest/cyclone(centerpoint, caster, guard_source)
+/datum/action/cooldown/spell/cyclone/proc/end_cyclone()
+	SIGNAL_HANDLER
+	if(owner)
+		UnregisterSignal(owner, CYCLONE_INTERRUPTS)
+		owner.balloon_alert(owner, "Cyclone ended.")
+	if(active_zone && !QDELETED(active_zone))
+		qdel(active_zone)
+	active_zone = null
+
 /obj/effect/tempest/cyclone
 	tick_damage = 30
 	effect_radius = 3
+	var/datum/beam/caster_beam
+
+/obj/effect/tempest/cyclone/Initialize(mapload, mob/living/summoner, datum/action/cooldown/spell/spell_ref)
+	var/turf/center = get_turf(src)
+	for(var/turf/T in range(effect_radius, center))
+		if(!(T in get_hear(effect_radius, center)) || T == center)
+			continue
+		new /obj/effect/temp_visual/telegraph/pillar/fadein(T, CYCLONE_TELEGRAPH)
+	spawn(CYCLONE_TELEGRAPH)
+		. = ..()
+		INVOKE_ASYNC(src, PROC_REF(setup_visuals))
+
+/obj/effect/tempest/cyclone/proc/setup_visuals()
+	// Visible beam from zone center to caster
+	caster_beam = new(src, caster, 'icons/effects/beam.dmi', "b_beam", CYCLONE_DURATION + 1 SECONDS, maxdistance = 20)
+	caster_beam.Start()
+
+/obj/effect/tempest/cyclone/Destroy()
+	if(caster_beam)
+		caster_beam.End()
+		caster_beam = null
+	if(source_spell && istype(source_spell, /datum/action/cooldown/spell/cyclone))
+		var/datum/action/cooldown/spell/cyclone/C = source_spell
+		C.end_cyclone()
+	source_spell = null
+	caster = null
+	QDEL_LIST(daggers)
+	STOP_PROCESSING(SSprocessing, src)
+	return ..()
+
+#undef CYCLONE_DAMAGE
+#undef CYCLONE_TELEGRAPH
+#undef CYCLONE_DURATION
+#undef CYCLONE_INTERRUPTS
