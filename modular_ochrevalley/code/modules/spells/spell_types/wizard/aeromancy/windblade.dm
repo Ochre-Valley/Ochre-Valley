@@ -4,9 +4,9 @@
 /datum/action/cooldown/spell/projectile/windblade_volley
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	name = "Razorwind Volley"
-	desc = "Launch a volley of three spinning blades of wind in a spread. Each blade shreds through up to 3 targets before dissipating. \
-	The blades stop on solid walls. \
-	Targets already struck by another windblade in the same volley take half damage."
+	desc = "Unleash a windstorm honed into a trio of whirling blades that slice right through their victims. \
+			Each blade can pierce through up to three targets.\
+		    Repeated hits on a single target from the same volley do reduced damage."
 	button_icon_state = "cadeo"
 	sound = 'sound/magic/blade_burst.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -20,7 +20,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_PROJECTILE
 
-	invocations = list("Serra Venti!")
+	invocations = list("Venti Caedite!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE

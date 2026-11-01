@@ -2,8 +2,8 @@
 /datum/action/cooldown/spell/projectile/wind_blade
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	name = "Cutting Gale"
-	desc = "Whip up the air into a blade of cutting wind \
-	Toggle arc mode (Shift+G) to lob over obstacles at reduced damage."
+	desc = "Cast forth a gust of wind, bound into the shape of a small blade. Toggle arc mode (Shift+G) while the spell is active to arc it over intervening mobs.\
+			 Arced attacks deal 25% less damage. Capable of piercing through up to three targets."
 	button_icon_state = "air_strike"
 	sound = 'sound/combat/hits/whipgrab.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -16,7 +16,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MINOR_PROJECTILE
 
-	invocations = list("Ventis secare!")
+	invocations = list("Venti Secant!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE

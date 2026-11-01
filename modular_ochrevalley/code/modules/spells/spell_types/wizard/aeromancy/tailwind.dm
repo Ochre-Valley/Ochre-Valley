@@ -1,8 +1,11 @@
 #define TAILWIND_DURATION 2 SECONDS
+#define TAILWIND_MODE "tailwind"
+#define SQUALL_MODE "squall"
 /datum/action/cooldown/spell/tailwind
 	button_icon = 'icons/mob/actions/mage_cryomancy.dmi'
-	name = "Tailwind"
-	desc = "Allows the caster to move freely as the winds, while hindering those in their wake briefly."
+	name = "Prevailing winds"
+	desc = "Surge forth like the wind, rushing ahead in a cardinal direction and flowing around those in your path. \
+			In your wake, leave behind turbulence that lightly hampers the movements of pursuers."
 	button_icon_state = "snap_freeze"
 	sound = 'sound/spellbooks/crystal.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -15,7 +18,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_AOE
 
-	invocations = list("Ventus a Tergo!")
+	invocations = list("Venti Ducite!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE
@@ -33,11 +36,42 @@
 
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
 
+	var/tailwind_mode = TAILWIND_MODE
+	var/static/list/mode_labels = list(TAILWIND_MODE = "TLWD", SQUALL_MODE = "SQL")
 	var/charge_steps = 5
 	var/step_delay = 1
 
+/datum/action/cooldown/spell/tailwind/Grant(mob/grant_to)
+	. = ..()
+	update_mode_maptext()
+
+/datum/action/cooldown/spell/tailwind/toggle_alt_mode(mob/user)
+	tailwind_mode = (tailwind_mode == TAILWIND_MODE) ? SQUALL_MODE : TAILWIND_MODE
+	to_chat(user, span_notice("Prevailing winds set to: [tailwind_mode]."))
+	update_mode_maptext()
+	return TRUE
+
+/datum/action/cooldown/spell/tailwind/proc/update_mode_maptext()
+	var/label = mode_labels[tailwind_mode]
+	for(var/datum/hud/hud as anything in viewers)
+		var/atom/movable/screen/movable/action_button/B = viewers[hud]
+		var/atom/movable/screen/arc_maptext_holder/holder
+		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
+			holder = existing
+			break
+		if(!holder)
+			holder = new(B)
+			B.vis_contents.Add(holder)
+		holder.maptext = MAPTEXT(label)
+		holder.maptext_x = 5
+		holder.color = GLOW_COLOR_WIND
+
 /datum/action/cooldown/spell/tailwind/cast(atom/cast_on)
 	. = ..()
+	if(tailwind_mode == TAILWIND_MODE)
+		return do_tailwind()
+
+/datum/action/cooldown/spell/tailwind/proc/do_tailwind()
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE

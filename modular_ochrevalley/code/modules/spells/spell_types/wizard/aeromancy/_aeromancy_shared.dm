@@ -5,20 +5,21 @@
 /datum/magic_aspect/aeromancy
 	name = "Aeromancy"
 	latin_name = "Maior Aspectus Venti"
-	desc = "Telomancers consider themselves just a sub branch of Kinesis, and similarly deserving of the title 'Origin School'. \ Indeed, shaping Pure Arcana into ball of magick was probably one of the first spell cast in humenity's history. \
-	Compared to Kinesis, which focuses on both shaping mana and the power of force, Telomancers focuses almost entirely on shaping mana into deadly projectiles"
+	desc = "A first-order school focused on wielding the air itself as a weapon. \
+			Utilizing arcyne force, Magi practicing Aeromancy conjure and shape vicious vicious winds to lacerate and devastate their foes. \
+			Historically, Aeromancy has its roots spread far across the eastern reaches of Psydonia, from the deserts of Raneshen to the grass sea of Lingyue — now mainland Kazengun."
 	aspect_type = ASPECT_MAJOR
 	attuned_name = ASPECT_NAME_AEROMANCY
 	school_color = GLOW_COLOR_WIND
 	binding_chants = list(
-		"Invoco telum destinatum!",
-		"I send my purpose toward its mark, let it arrive.",
-		"Telum, in me ligare!",
+		"Invoco aeternos ventos!",
+		"I call upon the winds from on high, descend!",
+		"Aero, in me ligare!"
 	)
 	unbinding_chants = list(
-		"Solvo telum vinctum!",
-		"I release the mark I had chosen, go free.",
-		"Telum, a me discedere!",
+		"Solvo ventos vinctam!",
+		"I release the winds that ravage without, be calm.",
+		"Aero, a me discede!"
 	)
 	fixed_spells = list(
 		/datum/action/cooldown/spell/projectile/wind_blade,

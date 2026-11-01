@@ -3,9 +3,9 @@
 
 /datum/action/cooldown/spell/cyclone
 	button_icon = 'icons/mob/actions/mage_fulgurmancy.dmi'
-	name = "Cyclone"
-	desc = "Call forth a massive tempest that engulfs the entire area at once. \
-	The center remains calm and tranquil, but the surrounding air blows so fiercely as to tear any opposition to ribbons."
+	name = "Maelstrom"
+	desc = "Channel to conjure up swirling windstorm of razor-sharp winds, devastating an area over a lengthy duration. \
+			While channeling, you cannot move or cast any other spells, and are susceptible to interruptions."
 	button_icon_state = "greater_thunderstrike"
 	sound = 'sound/magic/lightning.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -18,7 +18,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_ULTIMATE
 
-	invocations = list("Caelum procellis saeviens!")
+	invocations = list("Ventorum Letalium, Respondete Mihi!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE

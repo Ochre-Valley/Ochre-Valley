@@ -4,9 +4,9 @@
 /datum/action/cooldown/spell/tempest
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	name = "Tempest"
-	desc = "Project an unstable sphere of air, which erupts into a mighty tempest when it hits a target. \
-	The tempest either buffets foes with a powerful gust (Downdraft), or creates a persistent storm that cuts at foes that linger (Twister).\n\n\
-	Targets your aimed zone, with reduced accuracy for precise zones. "
+	desc = "Conjure a swirling storm to lash out at a targeted area. \
+			Twister: Lacerating winds will swirl around the specified location for 10 seconds, leaving a small patch of safety within the storm's eye. \
+			Downburst: Direct a raging gust of air from above to crash down upon a designated location, doing a burst of damage in a 3x3 area after a short delay"
 	button_icon_state = "blade_storm"
 	sound = 'sound/magic/scrapeblade.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -18,7 +18,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_AOE
 
-	invocations = list("Tempestas mordax!")
+	invocations = list("Vortix!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE
@@ -43,11 +43,16 @@
 	var/tempest_radius = 1
 	var/static/list/mode_labels = list(TEMPEST_MODE_TWISTER = "TWST", TEMPEST_MODE_DOWNDRAFT = "DRFT")
 	var/blast_delay = 2 SECONDS
-	var/blast_damage = 60
+	var/blast_damage = 70
+
+/datum/action/cooldown/spell/tempest/Grant(mob/grant_to)
+	. = ..()
+	update_mode_maptext()
 
 /datum/action/cooldown/spell/tempest/toggle_alt_mode(mob/user)
 	tempest_mode = (tempest_mode == TEMPEST_MODE_TWISTER) ? TEMPEST_MODE_DOWNDRAFT : TEMPEST_MODE_TWISTER
 	cooldown_time = (tempest_mode == TEMPEST_MODE_TWISTER) ? 15 SECONDS : 12 SECONDS
+	invocations = (tempest_mode == TEMPEST_MODE_TWISTER) ? list("Vortix!") : list("Venti Conterite!")
 	to_chat(user, span_notice("Tempest set to: [tempest_mode]."))
 	update_mode_maptext()
 	return TRUE
@@ -110,7 +115,7 @@
 			continue
 		new /obj/effect/temp_visual/tempest(T)
 		for(var/obj/structure/S in T)
-			S.take_damage(damage, BRUTE, "slash", FALSE)
+			S.take_damage(damage, BRUTE, "blunt", FALSE)
 		for(var/mob/living/L in T.contents)
 			if(L.anti_magic_check())
 				L.visible_message(span_warning("The winds dissipates around [L]!"))
@@ -121,7 +126,7 @@
 				continue
 			if(istype(caster) && !QDELETED(caster) && ishuman(L))
 				if(arcyne_strike(caster, L, null, damage, caster.zone_selected, \
-					BCLASS_CUT, spell_name = spell_name, \
+					BCLASS_BLUNT, spell_name = spell_name, \
 					damage_type = BRUTE, \
 					skip_animation = TRUE) == ARCYNE_STRIKE_WARDED)
 					continue
