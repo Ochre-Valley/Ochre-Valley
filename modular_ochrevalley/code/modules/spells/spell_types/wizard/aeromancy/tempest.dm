@@ -124,7 +124,7 @@
 			if(guard_source && !QDELETED(guard_source) && guard_source.spell_guard_check(L, TRUE))
 				L.visible_message(span_warning("[L] braces against the blast!"))
 				continue
-			if(istype(caster) && !QDELETED(caster) && ishuman(L))
+			if(isliving(caster) && !QDELETED(caster) && isliving(L))
 				if(arcyne_strike(caster, L, null, damage, caster.zone_selected, \
 					BCLASS_CUT, spell_name = spell_name, \
 					damage_type = BRUTE, \
