@@ -1,0 +1,7 @@
+2026-11-02:
+  Alvaria-a:
+  - rscadd: Militia now have voice lines to reflect that they are in fact not bandits.
+  SatinIsle:
+  - rscadd: Gives an additional option for an "instant transform" spell, which does
+      not use a mirror.
+  - qol: Instant transform now uses the appearance changer UI
