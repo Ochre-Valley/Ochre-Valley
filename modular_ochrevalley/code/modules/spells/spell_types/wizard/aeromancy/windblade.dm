@@ -61,6 +61,7 @@
 	speed = MAGE_PROJ_MEDIUM
 	movement_type = UNSTOPPABLE
 	range = SPELL_RANGE_PROJECTILE
+	spell_damage_scaled = TRUE
 	hitsound = 'sound/combat/newstuck.ogg'
 	var/reduced_damage = SPELL_DMG(22)
 	var/hits = 0

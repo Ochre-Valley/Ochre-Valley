@@ -48,6 +48,7 @@
 	movement_type = UNSTOPPABLE
 	intdamfactor = SPELL_INTDAM(1)
 	nodamage = FALSE
+	spell_damage_scaled = TRUE
 	flag = "slash"
 	color = "#8CDD8C"
 	hitsound = 'sound/combat/hits/bladed/genslash (1).ogg'
