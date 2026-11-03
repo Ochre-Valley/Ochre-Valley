@@ -256,7 +256,7 @@
 			else
 				var/fallback_zone = check_zone(target_zone)
 				var/armor_block = L.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = tick_damage, intdamfactor = SPELL_INTDAM(1), no_debuff = TRUE)
-				L.apply_damage(SPELL_DAM_VS(tick_damage), BRUTE, fallback_zone, armor_block)
+				L.apply_damage(SPELL_DMG_VS(tick_damage), BRUTE, fallback_zone, armor_block)
 			new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_METAL, SPELL_IMPACT_MEDIUM)
 
 // --- Spinning dagger visual effect ---
