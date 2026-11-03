@@ -185,12 +185,15 @@
 	var/tick_damage = SPELL_DMG(20)
 	var/effect_radius = 1
 	var/list/daggers = list()
+	var/targeted_zone = BODY_ZONE_CHEST
 
 /obj/effect/tempest/Initialize(mapload, mob/living/summoner, datum/action/cooldown/spell/spell_ref)
 	. = ..()
 	caster = summoner
 	if(!istype(caster) && isliving(spell_ref.owner)) //Fallback if passed caster isn't right
 		caster = spell_ref.owner
+	if(istype(caster) && caster.zone_selected)
+		targeted_zone = caster.zone_selected
 	source_spell = spell_ref
 
 	// Pull values from the spell if available
@@ -249,12 +252,11 @@
 			if(source_spell?.spell_guard_check(L))
 				ticks_remaining = max(0, ticks_remaining - 1)
 				continue
-			var/target_zone = caster?.zone_selected || BODY_ZONE_CHEST
 			if(istype(caster) && !QDELETED(caster))
-				if(arcyne_strike(caster, L, null, tick_damage, target_zone, BCLASS_CUT, spell_name = "Twister", damage_type = BRUTE, skip_animation = TRUE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
+				if(arcyne_strike(caster, L, null, tick_damage, targeted_zone, BCLASS_CUT, spell_name = "Twister", damage_type = BRUTE, skip_animation = TRUE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
 					continue
 			else
-				var/fallback_zone = check_zone(target_zone)
+				var/fallback_zone = check_zone(targeted_zone)
 				var/armor_block = L.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = tick_damage, intdamfactor = SPELL_INTDAM(1), no_debuff = TRUE)
 				L.apply_damage(SPELL_DMG_VS(L, tick_damage), BRUTE, fallback_zone, armor_block)
 			new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_METAL, SPELL_IMPACT_MEDIUM)
