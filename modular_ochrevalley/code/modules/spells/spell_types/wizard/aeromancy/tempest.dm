@@ -163,7 +163,7 @@
 	if(range <= 0)
 		var/turf/T = get_turf(src)
 		if(T)
-			new /obj/effect/tempest(T, firer, spell_ref)
+			new /obj/effect/tempest(T, spell_ref.owner, spell_ref)
 		qdel(src)
 
 // --- The persistent cloud effect ---
