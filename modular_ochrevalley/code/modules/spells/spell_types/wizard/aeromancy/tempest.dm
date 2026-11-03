@@ -124,12 +124,15 @@
 			if(guard_source && !QDELETED(guard_source) && guard_source.spell_guard_check(L, TRUE))
 				L.visible_message(span_warning("[L] braces against the blast!"))
 				continue
-			if(!QDELETED(caster))
+			if(istype(caster) && !QDELETED(caster) && ishuman(L))
 				if(arcyne_strike(caster, L, null, damage, caster.zone_selected, \
 					BCLASS_CUT, spell_name = spell_name, \
 					damage_type = BRUTE, \
 					skip_animation = TRUE) == ARCYNE_STRIKE_WARDED)
 					continue
+			else
+				L.adjustBruteLoss(damage)
+				SEND_SIGNAL(L, COMSIG_ATOM_WAS_ATTACKED, caster, damage)
 
 // --- Seed projectile — detonates into the cloud on impact ---
 
@@ -238,18 +241,19 @@
 			continue
 		for(var/obj/structure/S in T)
 			S.take_damage(tick_damage, BRUTE, "slash", FALSE)
-		for(var/mob/living/L in T.contents)
+		for(var/mob/living/L in T)
 			if(L.anti_magic_check())
 				continue
 			if(source_spell?.spell_guard_check(L))
 				ticks_remaining = max(0, ticks_remaining - 1)
 				continue
-			var/target_zone = caster.zone_selected || BODY_ZONE_CHEST
-			arcyne_strike(caster, L, null, tick_damage, target_zone, \
-				BCLASS_CUT, spell_name = "Tempest", \
-				damage_type = BRUTE, \
-				skip_animation = TRUE, skip_message = TRUE, \
-				allow_shield_check = TRUE)
+			if(istype(caster) && !QDELETED(caster))
+				if(arcyne_strike(caster, L, null, tick_damage, caster.zone_selected, BCLASS_CUT, spell_name = "Twister", damage_type = BRUTE, skip_animation = TRUE, exact_zone = TRUE) == ARCYNE_STRIKE_WARDED)
+					continue
+			else
+				var/fallback_zone = check_zone(caster.zone_selected)
+				var/armor_block = L.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = tick_damage, no_debuff = TRUE)
+				L.apply_damage(tick_damage, BRUTE, fallback_zone, armor_block)
 			new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_METAL, SPELL_IMPACT_MEDIUM)
 
 // --- Spinning dagger visual effect ---
