@@ -5,7 +5,7 @@
 	pixel_y = 17;
 	pixel_x = 16
 	},
-obj/item/deck/playing_cards{
+/obj/item/deck/playing_cards{
 	pixel_y = -3
 	},
 /turf/open/floor/carpet/stellar,
