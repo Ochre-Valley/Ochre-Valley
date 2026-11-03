@@ -26,7 +26,7 @@
 	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 20 SECONDS
+	cooldown_time = 30 SECONDS
 	shared_cooldown = "aeromancy_util"
 
 	associated_skill = /datum/skill/magic/arcane
@@ -65,7 +65,7 @@
 	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 20 SECONDS
+	cooldown_time = 30 SECONDS
 	shared_cooldown = "aeromancy_util"
 
 	associated_skill = /datum/skill/magic/arcane

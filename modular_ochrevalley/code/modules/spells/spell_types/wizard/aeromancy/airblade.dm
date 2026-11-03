@@ -41,11 +41,12 @@
 	range = 7 // Let you pressure a whole screen, in theory
 	icon_state = "chronobolt"
 	max_range = MAGE_LONG_PROJ_RANGE // Effective range is lower than its maximal range
-	damage = 60
+	damage = SPELL_DMG(60)
 	damage_type = BRUTE
 	woundclass = BCLASS_CUT
 	speed = MAGE_PROJ_FAST
 	movement_type = UNSTOPPABLE
+	intdamfactor = SPELL_INTDAM(1)
 	nodamage = FALSE
 	flag = "slash"
 	color = "#8CDD8C"

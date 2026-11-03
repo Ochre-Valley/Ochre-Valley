@@ -38,12 +38,12 @@
 	/// How long the tempest persists
 	var/tempest_duration = 10 SECONDS
 	/// Damage per tick
-	var/tempest_damage = 20
+	var/tempest_damage = SPELL_DMG(20)
 	/// Radius of the damage ring (center tile is safe)
 	var/tempest_radius = 1
 	var/static/list/mode_labels = list(TEMPEST_MODE_TWISTER = "TWST", TEMPEST_MODE_DOWNDRAFT = "DRFT")
 	var/blast_delay = 2 SECONDS
-	var/blast_damage = 60
+	var/blast_damage = SPELL_DMG(60)
 
 /datum/action/cooldown/spell/tempest/Grant(mob/grant_to)
 	. = ..()
@@ -128,7 +128,7 @@
 				if(arcyne_strike(caster, L, null, damage, caster.zone_selected, \
 					BCLASS_CUT, spell_name = spell_name, \
 					damage_type = BRUTE, \
-					skip_animation = TRUE) == ARCYNE_STRIKE_WARDED)
+					skip_animation = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
 					continue
 			else
 				L.adjustBruteLoss(damage)
@@ -182,7 +182,7 @@
 	var/mob/living/caster
 	var/datum/action/cooldown/spell/source_spell
 	var/ticks_remaining
-	var/tick_damage = 20
+	var/tick_damage = SPELL_DMG(20)
 	var/effect_radius = 1
 	var/list/daggers = list()
 
@@ -251,12 +251,12 @@
 				continue
 			var/target_zone = caster?.zone_selected || BODY_ZONE_CHEST
 			if(istype(caster) && !QDELETED(caster))
-				if(arcyne_strike(caster, L, null, tick_damage, target_zone, BCLASS_CUT, spell_name = "Twister", damage_type = BRUTE, skip_animation = TRUE, exact_zone = TRUE) == ARCYNE_STRIKE_WARDED)
+				if(arcyne_strike(caster, L, null, tick_damage, target_zone, BCLASS_CUT, spell_name = "Twister", damage_type = BRUTE, skip_animation = TRUE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
 					continue
 			else
 				var/fallback_zone = check_zone(target_zone)
-				var/armor_block = L.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = tick_damage, no_debuff = TRUE)
-				L.apply_damage(tick_damage, BRUTE, fallback_zone, armor_block)
+				var/armor_block = L.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = tick_damage, intdamfactor = SPELL_INTDAM(1), no_debuff = TRUE)
+				L.apply_damage(SPELL_DAM_VS(tick_damage), BRUTE, fallback_zone, armor_block)
 			new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_METAL, SPELL_IMPACT_MEDIUM)
 
 // --- Spinning dagger visual effect ---

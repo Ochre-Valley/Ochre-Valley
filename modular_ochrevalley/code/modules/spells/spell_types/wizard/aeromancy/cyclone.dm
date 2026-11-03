@@ -85,7 +85,7 @@
 	active_zone = null
 
 /obj/effect/tempest/cyclone
-	tick_damage = 30
+	tick_damage = SPELL_DMG(30)
 	effect_radius = 3
 	var/datum/beam/caster_beam
 

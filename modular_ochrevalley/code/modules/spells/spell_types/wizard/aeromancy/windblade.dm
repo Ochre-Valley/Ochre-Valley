@@ -35,7 +35,7 @@
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
 
-	displayed_damage = 60
+	displayed_damage = SPELL_DMG(60)
 
 	var/spread_step = 8
 
@@ -52,7 +52,8 @@
 	icon = 'icons/effects/wizard_spell_effects.dmi'
 	icon_state = "grassblade"
 	guard_deflectable = TRUE
-	damage = 45
+	damage = SPELL_DMG(45)
+	intdamfactor = SPELL_INTDAM(1)
 	damage_type = BRUTE
 	woundclass = BCLASS_CUT
 	flag = "slash"
@@ -61,7 +62,7 @@
 	movement_type = UNSTOPPABLE
 	range = SPELL_RANGE_PROJECTILE
 	hitsound = 'sound/combat/newstuck.ogg'
-	var/reduced_damage = 22
+	var/reduced_damage = SPELL_DMG(22)
 	var/hits = 0
 	var/max_hits = 3
 
