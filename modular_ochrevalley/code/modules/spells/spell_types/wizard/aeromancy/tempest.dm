@@ -244,16 +244,12 @@
 			if(source_spell?.spell_guard_check(L))
 				ticks_remaining = max(0, ticks_remaining - 1)
 				continue
-			if(istype(L) && ishuman(caster))
-				var/mob/living/carbon/human/HC = caster
-				var/target_zone = HC.zone_selected || BODY_ZONE_CHEST
-				arcyne_strike(HC, L, null, tick_damage, target_zone, \
-					BCLASS_CUT, spell_name = "Tempest", \
-					damage_type = BRUTE, \
-					skip_animation = TRUE, skip_message = TRUE, \
-					allow_shield_check = TRUE)
-			else
-				L.adjustBruteLoss(tick_damage)
+			var/target_zone = caster.zone_selected || BODY_ZONE_CHEST
+			arcyne_strike(caster, L, null, tick_damage, target_zone, \
+				BCLASS_CUT, spell_name = "Tempest", \
+				damage_type = BRUTE, \
+				skip_animation = TRUE, skip_message = TRUE, \
+				allow_shield_check = TRUE)
 			new /obj/effect/temp_visual/spell_impact(get_turf(L), GLOW_COLOR_METAL, SPELL_IMPACT_MEDIUM)
 
 // --- Spinning dagger visual effect ---

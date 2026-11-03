@@ -7,7 +7,7 @@
 	desc = "Unleash a windstorm honed into a trio of whirling blades that slice right through their victims. \
 			Each blade can pierce through up to three targets.\
 		    Repeated hits on a single target from the same volley do reduced damage."
-	button_icon_state = "cadeo"
+	button_icon_state = "caedo"
 	sound = 'sound/magic/blade_burst.ogg'
 	spell_color = GLOW_COLOR_WIND
 	glow_intensity = GLOW_INTENSITY_MEDIUM
