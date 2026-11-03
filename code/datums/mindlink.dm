@@ -51,9 +51,8 @@ GLOBAL_LIST_EMPTY(mindlinks)
 		var/mob/living/recipient = (speaker == owner ? target : owner)
 
 		to_chat(speaker, span_purple("You project your thoughts to [recipient]: \"[message]\""))
-		speaker.emote("me", 1, "'s eyes briefly glow with an otherworldly light.", TRUE, custom_me = TRUE) //OV ADD - Identifiable Mindlink
 		to_chat(recipient, span_purple("[speaker] projects their thoughts to you: \"[message]\""))
-		//recipient.playsound_local(recipient, 'sound/magic/message.ogg', 100)
+		recipient.playsound_local(recipient, 'sound/magic/message.ogg', 100)
 
 
 		//var/audible_message = "The voice of [speaker] echoes, \"<i>[capitalize(message)]</i>\"."
