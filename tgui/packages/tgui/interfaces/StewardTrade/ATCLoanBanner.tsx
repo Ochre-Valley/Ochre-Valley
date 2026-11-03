@@ -59,10 +59,9 @@ export const ATCLoanBanner = (props: { atc_loan: AtcLoanState }) => {
             <b>
               {atc_loan.min}m to {atc_loan.max}m
             </b>
-            , at <b>{atc_loan.interest_pct}% interest</b>. While you owe the ATC,
-            the Burghers won&apos;t cover a missed payroll. Miss one and the
-            realm is sequestered. Loans close on Day{' '}
-            {atc_loan.closed_day}.
+            , at <b>{atc_loan.interest_pct}% interest</b>. While you owe the
+            ATC, the Burghers won&apos;t cover a missed payroll. Miss one and
+            the realm is sequestered. Loans close on Day {atc_loan.closed_day}.
           </>
         ) : (
           atc_loan.blocker || 'No loan available right now.'

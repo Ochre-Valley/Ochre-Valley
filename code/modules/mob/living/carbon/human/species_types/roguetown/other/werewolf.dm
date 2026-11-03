@@ -4,6 +4,7 @@
 	var/datum/language_holder/stored_language
 	var/list/stored_skills
 	var/list/stored_experience
+	//can_do_sex = FALSE //OV EDIT - You Know Why
 
 /mob/living/carbon/human/species/werewolf/updatehealth()
 	..()

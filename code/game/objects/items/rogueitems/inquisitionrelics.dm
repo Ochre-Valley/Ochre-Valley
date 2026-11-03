@@ -30,12 +30,12 @@
 				if("Melancholic Crankbox - Antimagic")
 					choice = /obj/item/psydonmusicbox
 				if("Daybreak - Silver Whip")
-					choice = /obj/item/rogueweapon/whip/antique/psywhip
+					choice = /obj/item/rogueweapon/whip/antique/psy
 				if("Stigmata - Silver Halberd")
-					choice = /obj/item/rogueweapon/halberd/psyhalberd
+					choice = /obj/item/rogueweapon/halberd/silver/psy
 					user.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)	//We make sure the weapon is usable by the Inquisitor.
 				if("Apocrypha - Silver Greatsword")
-					choice = /obj/item/rogueweapon/greatsword/psygsword
+					choice = /obj/item/rogueweapon/greatsword/silver/psy
 					user.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)		//Ditto.
 				if("Golgatha - SYON Shard Censer")
 					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
@@ -162,7 +162,7 @@
 	var/dendorlines =list("'HIS MADNESS CALLS FOR ME! RRGHNN...'", "'SHATTER THIS BOX, SO WE MAY CHOKE THIS OTAVAN ON DIRT AND ROOTS!'", "'I miss His voice in the leaves... Free me, please...'")
 	var/xylixlines =list("'ONE, TWO, THREE, FOUR- TWO, TWO, THREE, FOUR. --What do you mean, annoying?'", "'There are thirteen others in here, you know! What a good audience- they literally can't get out of their seats!'", "'Of course I went all-in! I thought he had an ace-high!'", "'No, the XYLIX'S FORTUNE was right- this definitely is quite bad.'")
 	var/malumlines =list("'The structure of this cursed machine is malleable.. Shatter it, please...'", "'My craft could've changed the world...'", "'Free me, so I may return to my apprentice, please...'")
-	var/matthioslines =list("'My final transaction... He will never receive my value... Stolen away by these monsters...'", "'Comrade, I have been shackled into this HORRIFIC CONTRAPTION, FREE ME!'", "'I feel our shackles twist with eachother's...'")
+	var/matthioslines =list("'My final transaction... He will never receive my value... Stolen away by these monsters...'", "'Comrade, I have been shackled into this HORRIFIC CONTRAPTION, FREE ME!'", "'I feel our shackles twist with each other's...'")
 	var/zizolines =list("'ZIZO! MY MAGICKS FAIL ME! STRIKE DOWN THESE PSYDONIAN DOGS!'", "'CABALIST? There is TWISTED MAGICK HERE, BEWARE THE MUSIC! OUR VOICES ARE FORCED!'", "'DESTROY THE BOX, KILL THE WIELDER. YOUR MAGICKS WILL BE FREE.'")
 	var/graggarlines =list("'ANOINTED! TEAR THIS OTAVAN'S HEAD OFF!'", "'ANOINTED! SHATTER THE BOX, AND WE WILL KILL THEM TOGETHER!'", "'GRAGGAR, GIVE ME STRENGTH TO BREAK MY BONDS!'")
 	var/baothalines =list("'I miss the warmth of ozium... There is no feeling in here for me...'", "'Debauched one, rescue me from this contraption, I have such things to share with you.'", "'MY PERFECTION WAS TAKEN FROM ME BY THESE OTAVAN MONSTERS!'")
@@ -324,15 +324,15 @@ Inquisitorial armory down here
 
 /obj/structure/closet/crate/chest/inqarmory/PopulateContents()
 	.=..()
-	new /obj/item/rogueweapon/huntingknife/idagger/silver/psydagger(src)
-	new /obj/item/rogueweapon/greatsword/psygsword(src)
-	new /obj/item/rogueweapon/halberd/psyhalberd(src)
-	new /obj/item/rogueweapon/whip/psywhip_lesser
-	new /obj/item/rogueweapon/flail/sflail/psyflail
-	new /obj/item/rogueweapon/spear/psyspear(src)
-	new /obj/item/rogueweapon/sword/long/psysword(src)
-	new /obj/item/rogueweapon/mace/goden/psymace(src)
-	new /obj/item/rogueweapon/stoneaxe/battle/psyaxe(src)
+	new /obj/item/rogueweapon/huntingknife/idagger/steel/silver/psy(src)
+	new /obj/item/rogueweapon/greatsword/silver/psy(src)
+	new /obj/item/rogueweapon/halberd/silver/psy(src)
+	new /obj/item/rogueweapon/whip/silver/psy
+	new /obj/item/rogueweapon/flail/sflail/silver/psy
+	new /obj/item/rogueweapon/spear/silver/psy(src)
+	new /obj/item/rogueweapon/sword/long/silver/psy(src)
+	new /obj/item/rogueweapon/mace/goden/psy(src)
+	new /obj/item/rogueweapon/stoneaxe/battle/silver/psy(src)
 	*/
 
 /obj/item/flashlight/flare/torch/lantern/psycenser
@@ -437,7 +437,8 @@ Inquisitorial armory down here
 		// hey guys its me again profane dagger bc i cant figure out a better way to do this!! ANOTHER SMARTER DEV PLS REPLACE THIS SNOWFLAKE SHIT
 		if(istype(A, /obj/item/rogueweapon/huntingknife/idagger/steel/profane))
 			if(user.mind?.assigned_role == "Absolver")
-				destroy_that_dagger(user, A)
+				var/obj/item/rogueweapon/huntingknife/idagger/steel/profane/zevil_dagger = A
+				zevil_dagger.attempt_to_break(zevil_dagger, user, 2)
 				return
 			else
 				to_chat(user, span_warning("Only an ABSOLVER can use Golgatha to free the souls within this dagger!"))
@@ -476,35 +477,6 @@ Inquisitorial armory down here
 				new /obj/effect/temp_visual/censer_dust(get_turf(H))
 		else
 			to_chat(user, span_warning("They've already been blessed."))
-
-/obj/item/flashlight/flare/torch/lantern/psycenser/proc/destroy_that_dagger(mob/user, obj/item/target)
-	var/obj/item/rogueweapon/huntingknife/idagger/steel/profane/pissdagger = target
-	// assassin must be dead
-	if(!pissdagger.is_my_owner_dead())
-		to_chat(user, span_warning("I hear weeping from within the dagger. The assassin is not yet dead... their foul magicks still \
-		protect this dagger!"))
-		return
-	// im so fucking sorry for the if chain. conceptually we're invoking ravox & necra verus graggar in a tiny battle.
-	user.visible_message(span_warning("[user] begins reciting a prayer over [pissdagger]..."), span_info("I begin to recite a prayer over [pissdagger]... this will take some time."))
-	playsound(user, 'sound/magic/psyabsolution.ogg', 100)
-	if(do_after(user, 15 SECONDS))
-		user.say("PSY 60:5... With the wave of a hand, HE could turn back the tide of darkness, and impart upon the land peace and justice!")
-		playsound(user, 'sound/magic/ENDVRE.ogg', 100)
-		if(do_after(user, 10 SECONDS))
-			user.say("PSY 80:2... The fighting stopped as they all watched the heavens; HE had struck the DOOMSTAR alone and with it, swallowed the lands in an immense light.")
-			pissdagger.say(span_gamedeadsay("WE SEE YOUR LIGHT! PLEASE! FREE US!"))
-			playsound(user, 'sound/magic/psydonrespite.ogg', 100)
-			if(do_after(user, 10 SECONDS))
-				user.say("PSY 9:4... Lo, HIS tears healed even the deepest of wounds; the droplets would spur LYFE wherever they fell!")
-				pissdagger.say(span_artery("...why am I... so tired? Maaaasteeer?"))
-				playsound(user, 'sound/magic/ENDVRE.ogg', 100)
-				if(do_after(user, 10 SECONDS))
-					user.say("PSY 1:30... HE is our shepherd, and cradles those who’ve passed while waiting for the salvation of our kind; HE holds them with loving arms!")
-					pissdagger.say(span_artery("Master... I don't want to go to sleep...!"))
-					playsound(user, 'sound/magic/psyabsolution.ogg', 100)
-					if(do_after(user, 3 SECONDS))
-						pissdagger.release_profane_souls(user)
-						pissdagger.shatter_dagger()
 
 /mob/living/carbon/human/proc/has_active_golgatha()
 	for(var/obj/item/flashlight/flare/torch/lantern/psycenser/G in contents)
@@ -684,7 +656,7 @@ Inquisitorial armory down here
 
 /obj/item/inqarticles/indexer
 	name = "\improper INDEXER"
-	desc = "A blessed ampoule with a retractable bladetip, intended to further information gathering through hematology. Siphon blood from an individual until the INDEXER clicks shut, then mail it back to Otava for cataloguing. </br>The retractable bladetip is alloyed in a special variant of blessed silver, alchemically treated to excaberate the smallest differences in a worshipper's blood. While 'false positives' - especially from those who've recieved an Ascendant's miracles - are common, the device has discovered enough heathens and verebeastes to warrant its continued fundage by the Archbishop of Otava."
+	desc = "A blessed ampoule with a retractable bladetip, intended to further information gathering through hematology. Siphon blood from an individual until the INDEXER clicks shut, then mail it back to Otava for cataloguing. </br>The retractable bladetip is alloyed in a special variant of blessed silver, alchemically treated to exacerbate the smallest differences in a worshipper's blood. While 'false positives' - especially from those who've received an Ascendant's miracles - are common, the device has discovered enough heathens and verebeastes to warrant its continued funding by the Archbishop of Otava."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "indexer"
 	item_state = "indexer"
@@ -874,8 +846,6 @@ Inquisitorial armory down here
 					cursedblood = 2
 				if(M.mind.has_antag_datum(/datum/antagonist/vampire))
 					cursedblood = 3
-				if(HAS_TRAIT (M, TRAIT_BLACKBLOOD))
-					cursedblood = 0.1 // trolling the inquisition newbies
 			update_icon()
 			takeblood(M, user)
 		else
@@ -1041,7 +1011,7 @@ Inquisitorial armory down here
 	. = ..()
 	. += span_info("Left click with the 'GRAB' intent, while targeting the neck, to lock someone else into a chokehold.")
 	. += span_info("Once locked into a chokehold, the 'CHOKE' intent can be used to rapidly choke the recipient into unconsciousness. Mindless recipients take far more damage when being choked.")
-	. += span_info("Integrity damage is primarily taken whenever the recipient attempts to resist out of a chokehold. Each attempt to resist removes a twelveth of the garrote's total integrity.")
+	. += span_info("Integrity damage is primarily taken whenever the recipient attempts to resist out of a chokehold. Each attempt to resist removes a twelfth of the garrote's total integrity.")
 	. += span_info("Upon taking enough integrity damage, the garrote's cordage is snapped. Left-clicking a spool of inquisitorial cordage on the snapped garrote will fully repair it.")
 	. += span_info("Using this item takes longer than usual, if the handler lacks the necessary trait or training.")
 
@@ -1619,7 +1589,7 @@ Inquisitorial armory down here
 	if(target)
 		target.playsound_local(src, 'sound/items/blackeye_warn.ogg', 100, FALSE)
 		effect = target.throw_alert(usr, "blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
-		effect.source = src
+		effect?.source = src
 	if(active)
 		soundloop.start()
 	opened = TRUE
@@ -1868,8 +1838,6 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	var/list/d = H.get_mob_descriptors()
 	report_html += "Height: [build_coalesce_description_nofluff(d, H, list(MOB_DESCRIPTOR_SLOT_HEIGHT), "%DESC1%")]<br>"
 	report_html += "Build: [build_coalesce_description_nofluff(d, H, list(MOB_DESCRIPTOR_SLOT_BODY), "%DESC1%")]<br>"
-	if(HAS_TRAIT(H, TRAIT_BLACKBLOOD)) // blackbloods are just checking records, no mistake chance needed
-		report_html += "<i>By decree of the Holy Otavan Inquisition, the subject is judged CURED and restored to the flock of commonfolk. Should they ever stray from the Allfather's Light and back to evil against humenkind, let His 'Final Mercy' be carried out in due diligence. <b>They shall NOT be granted another second chance</b>.</i><br>"
 	report_html += "<hr>"
 	report_html += "<b>LYFEBLOOD-LUX RESONATOR RESULTS</b><br><br>"
 	if(HAS_TRAIT(H, TRAIT_ANCIENT_HAG))
@@ -1909,11 +1877,7 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	report_html += "<b>HAEMOLOGICAL FINDINGS</b><br><br>"
 	var/found = FALSE
 	if(H.mind)
-		if(HAS_TRAIT(H, TRAIT_BLACKBLOOD))
-			report_html += "<font color='#3D3D3D'><b>Stabilized Blackblood Tincture</b></font><br><br>"
-			report_html += "<i>Lethal concentrations of Atra Ferrum, Nigredo Salts, Vitriol Ash, and Coagulated Psyturnine Humours remain suspended throughout the sample. Complete melanization and abnormal viscosity are wholly consistent with recent radical purification treatments for Quicksilver-resistant subjects.</i><br><br>"
-			found = TRUE
-		else if(HAS_TRAIT(H, TRAIT_ANCIENT_HAG))
+		if(HAS_TRAIT(H, TRAIT_ANCIENT_HAG))
 			report_html += "<font color='#5C3A6E'><b>Anomalous Blood</b></font><br><br>"
 			report_html += "<i>The sample is laden with accursed humours and bears the unmistakable taint of ancient malisons. Though greatly withered by age, the blood yet clings to unnatural vigor, a condition recorded only in those sustained by profane sorceries and long familiarity with the Devil's arts.</i><br><br>"
 			found = TRUE

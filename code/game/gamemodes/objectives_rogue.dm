@@ -26,7 +26,7 @@
 /datum/objective/werewolf
 	name = "conquer"
 	explanation_text = "You are touched by the Mad God of the Wilds, Dendor - be it through a bite... Or a terrible blessing. And you are SO, SO VERY HUNGRY. When exposed to the moonlit sky, an agonizing transformation will see you able to satisfy that hunger as a fearsome Nitebeast. Will you try to resist the allure of the Moon's gaze, or embrace the ravenous fervor welling within you?" // Caustic Edit: Rewrote text to be a bit more ambiguous
-	team_explanation_text = "Lycanthropy is a terrible disease that's been recorded in scattered accounts going back hundreds of years. Whatever madness drove Dendor to create such an aberration is beyond mortal minds - and whatever the reason, he has been unwilling or unable to undo it. Nightly transformations and prodigious increses in mass drive the body into an active state of insatiable starvation, driving animalistic, rabid behavior."
+	team_explanation_text = "Lycanthropy is a terrible disease that's been recorded in scattered accounts going back hundreds of years. Whatever madness drove Dendor to create such an aberration is beyond mortal minds - and whatever the reason, he has been unwilling or unable to undo it. Nightly transformations and prodigious increases in mass drive the body into an active state of insatiable starvation, driving animalistic, rabid behavior."
 	triumph_count = 5
 
 /datum/objective/werewolf/check_completion()

@@ -197,24 +197,16 @@ export const RecoveryAddendum = (props: {
   let lead: React.ReactNode;
   switch (category) {
     case 'beast':
-      lead = (
-        <>
-          And further: where the beast attacked, a carrier lost {what}.
-        </>
-      );
+      lead = <>And further: where the beast attacked, a carrier lost {what}.</>;
       break;
     case 'undead':
       lead = (
-        <>
-          And further: where the dead now wander, a carrier lost {what}.
-        </>
+        <>And further: where the dead now wander, a carrier lost {what}.</>
       );
       break;
     default:
       lead = (
-        <>
-          And further: this band holds {what}, taken from lawful carriage.
-        </>
+        <>And further: this band holds {what}, taken from lawful carriage.</>
       );
   }
   return (

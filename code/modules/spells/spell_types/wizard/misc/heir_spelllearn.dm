@@ -12,14 +12,14 @@
 		/datum/action/cooldown/spell/leap,
 		/datum/action/cooldown/spell/featherfall,
 		///datum/action/cooldown/spell/mirror_transform,
-		/obj/effect/proc_holder/spell/invoked/mirror_transform_ov, //OV Add - Replaced with our Mirror Transform
+		/datum/action/cooldown/spell/mirror_transform_ov, //OV Add - Replaced with our Mirror Transform
 	)
 	var/list/offensive_bundle = list(
 		/datum/action/cooldown/spell/projectile/arcyne_lance
 	)
 	var/list/buff_bundle = list( //Support a knight, maybe. Or like, ERP harder without stamcritting.
 		/datum/action/cooldown/spell/augment_buff/blood_rush,
-		/datum/action/cooldown/spell/augment_buff/fortitude
+		/datum/action/cooldown/spell/bestow_ward
 	)
 /obj/effect/proc_holder/spell/self/heir_spell_bundle/cast(list/targets, mob/user)
 	. = ..()

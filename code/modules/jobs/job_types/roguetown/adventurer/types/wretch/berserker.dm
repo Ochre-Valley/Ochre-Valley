@@ -3,6 +3,7 @@
 	tutorial = "You are a warrior feared for your brutality, dedicated to using your might for your own gain. Might equals right, and you are the reminder of such a saying."
 	allowed_sexes = list(MALE, FEMALE)
 
+	min_pq = 15 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/berserker
 	cmode_music = 'sound/music/cmode/antag/combat_darkstar.ogg'
 	class_select_category = CLASS_CAT_WARRIOR
@@ -37,9 +38,6 @@
 		"Sewing Kit" =	/obj/item/repair_kit,
 		"Stashed Funds" = /obj/item/roguecoin/silver/pile/wretchpile,
 	)
-
-/datum/outfit/job/roguetown/wretch/berserker
-	var/subclass_selected
 
 /datum/outfit/job/roguetown/wretch/berserker/pre_equip(mob/living/carbon/human/H)
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/brown

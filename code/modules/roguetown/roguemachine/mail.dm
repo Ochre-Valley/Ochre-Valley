@@ -193,7 +193,7 @@
 /obj/structure/roguemachine/mail/get_mechanics_examine(mob/user)
 	. = ..()
 	. += span_info("Right click to access the terminal for writing letters or purchasing supplies.")
-	. += span_info("Insert coins to purchase supplies or send a letters.")
+	. += span_info("Insert coins to purchase supplies or send letters.")
 	. += span_info("Left click with a paper or package to send a prewritten letter for free.")
 	. += span_info("You can wrap an item in paper to create a mailable package.")
 	if(isobserver(user) && ghosts_allowed())
@@ -468,7 +468,7 @@
 				mark_free_send(user)
 				to_chat(user, span_notice("Your free letter has been sent. Another may be sent in [HERMES_FREE_COOLDOWN / 600] minute\s."))
 			else
-				SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income")
+				SStreasury.mint(SStreasury.discretionary_fund, 1, "Mail Income", null, LEDGER_CROWN_REV_MAIL)
 				record_round_statistic(STATS_TAXES_COLLECTED, 1)
 				coin_loaded -= 1
 				if(coin_loaded <= 0)
@@ -497,6 +497,10 @@
 #define INDEXER_MISTAKE_MIN 20 // minimum false positive chance roll for heresy. a reduced value is used for the antag checks. used to be 1
 
 /obj/structure/roguemachine/mail/attackby(obj/item/P, mob/user, params)
+	if(istype(P, /obj/item/parcel/towner_caravan))
+		var/obj/item/parcel/towner_caravan/box = P
+		box.post_to_owner(src, user)
+		return
 	if(istype(P, /obj/item/merctoken))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
@@ -671,7 +675,7 @@
 					if(selfreport)
 						to_chat(user, span_notice("Why was that confession signed by an inquisition member? What?"))
 					if(indexed)
-						visible_message(span_warning("[user] recieves something."))
+						visible_message(span_warning("[user] receives something."))
 						var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
 						user.put_in_hands(replacement)
 					return
@@ -785,7 +789,7 @@
 								GLOB.cursedsamples += ", [I.paired.subject.mind]"
 							else
 								GLOB.cursedsamples += "[I.paired.subject.mind]"
-					else if (second_fp_chance && prob(mistake/((HAS_TRAIT(I.paired.subject, TRAIT_VAMP_BITTEN) || HAS_TRAIT(I.paired.subject, TRAIT_PALLID)) ? 2 : 4)))
+					else if (second_fp_chance && prob(mistake/((HAS_TRAIT(I.paired.subject, TRAIT_VAMP_BITTEN) || I.paired.subject.has_flaw(/datum/charflaw/sullied) || HAS_TRAIT(I.paired.subject, TRAIT_LYFE_DRINK)) ? 2 : 4))) //OV EDIT- add hemovores to mistake chance
 						if(HAS_TRAIT(I.paired.subject.mind, TRAIT_CBLOOD))
 							stopfarming = TRUE
 						if(!stopfarming)
@@ -825,7 +829,7 @@
 						visible_message(span_warning("[user] sends something."))
 						playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 						if(!cursedblood)
-							visible_message(span_warning("[user] recieves something."))
+							visible_message(span_warning("[user] receives something."))
 							var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
 							user.put_in_hands(replacement)
 							if(specialno)
@@ -981,6 +985,12 @@
 	anchored = TRUE
 	w_class = WEIGHT_CLASS_GIGANTIC
 	var/new_mail
+
+/obj/item/roguemachine/mastermail/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("All mail sent through the HERMES is stored here until collected. Opening its storage will allow one to intercept letters.")
+	. += span_info("Any letters removed and read can be re-sealed by clicking this machine with them, which will put them back into storage.")
+	. += span_info("If this is done before the recipient tries to withdraw the mail, they will never know.")
 
 /obj/item/roguemachine/mastermail/update_icon()
 	cut_overlays()

@@ -20,8 +20,8 @@ import {
   verticalDividerStyle,
 } from './styles';
 import type {
-  ContractsSnapshot,
   ContractStatRow,
+  ContractsSnapshot,
   RoyalFavorsSnapshot,
 } from './types';
 
@@ -51,13 +51,17 @@ const avgOf = (total: number, count: number) =>
   count > 0 ? (total / count).toFixed(1) : '-';
 
 const perHour = (row: ContractStatRow) =>
-  row.run_ds > 0 ? `${Math.round(row.paid / (row.run_ds / DS_PER_HOUR))}m` : '-';
+  row.run_ds > 0
+    ? `${Math.round(row.paid / (row.run_ds / DS_PER_HOUR))}m`
+    : '-';
 
 const isIdle = (row: ContractStatRow) => row.posted === 0 && row.taken === 0;
 
 const lowTake = (row: ContractStatRow) => {
   const rate = pct(row.taken, row.posted);
-  return row.posted >= LOW_TAKE_MIN_POSTED && rate !== null && rate < LOW_TAKE_RATE;
+  return (
+    row.posted >= LOW_TAKE_MIN_POSTED && rate !== null && rate < LOW_TAKE_RATE
+  );
 };
 
 const sumRows = (rows: ContractStatRow[], players: number): ContractStatRow =>
@@ -140,7 +144,11 @@ const StatTable = (props: {
     ...(i === lastIndex ? { paddingRight: 0 } : {}),
     color: dim ? INK_FAINT : col.color?.(row) || INK,
   });
-  const renderRow = (row: ContractStatRow, dim: boolean, style?: CSSProperties) => (
+  const renderRow = (
+    row: ContractStatRow,
+    dim: boolean,
+    style?: CSSProperties,
+  ) => (
     <tr key={row.name} style={style}>
       <td style={{ ...compactDataCell, color: dim ? INK_FAINT : INK }}>
         {row.name}

@@ -322,9 +322,6 @@
 
 //What we do after closing in
 /mob/living/simple_animal/hostile/proc/MeleeAction(patience = TRUE)
-	//Caustic Cove Edit
-	melee_cooled_down = world.time + melee_cooldown
-	//Caustic Cove Edit End
 
 	if(binded)
 		return FALSE

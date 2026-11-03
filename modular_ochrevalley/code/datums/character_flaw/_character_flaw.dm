@@ -86,8 +86,8 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 			var/blackblood = FALSE
 			if(HAS_TRAIT(victim, TRAIT_SEA_DRINKER))
 				salt = TRUE
-			if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
-				blackblood = TRUE
+			//if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
+				//blackblood = TRUE
 			if(salt && blackblood) //awful code incoming
 				if(HAS_TRAIT(src, TRAIT_SEA_DRINKER) && HAS_TRAIT(src, TRAIT_NASTY_EATER))//you're a fucking freak
 					gained_food *= 1.5
@@ -126,14 +126,14 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 			else
 				to_chat(src, span_warning("[victim]'s form is unlike any blood, but satisfying nonetheless"))
 		else
-			if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
+			/*if(HAS_TRAIT(victim, TRAIT_BLACKBLOOD))
 				if(HAS_TRAIT(src, TRAIT_NASTY_EATER))
 					to_chat(src, span_warning("[victim]'s blood has an exceedingly complex flavor "))
 				else
 					meal = FALSE
 					gained_food *= 0.5
 					nausea = 50
-					to_chat(src, span_warning("[victim]'s blood is replete with a vile, caustic bitterness!"))
+					to_chat(src, span_warning("[victim]'s blood is replete with a vile, caustic bitterness!"))*/
 			if(HAS_TRAIT(victim, TRAIT_DEATHLESS))
 				meal = FALSE
 				gained_food *= 0.75
@@ -261,3 +261,59 @@ GLOBAL_LIST_INIT(dendor_touched_animals, list(
 	points = 100
 	transmutable = TRUE
 	hag_curse = FALSE
+
+/datum/charflaw/dormancy
+	name = "Dormancy"
+	desc = "You require mana to maintain your form. Should your energy run out, you will become inanimate until it is restored"
+	var/obj/item/target
+	var/next_check = 0
+	var/check_interval = 10 SECONDS
+	var/warned = 0
+	needs_extra_vice = TRUE
+
+/datum/charflaw/dormancy/on_mob_creation(mob/user)
+	next_check = world.time
+
+/datum/charflaw/dormancy/apply_post_equipment(mob/user)
+	if(user.mind)
+		user.mind.AddSpell(new /datum/action/cooldown/spell/bind_item)
+
+/datum/charflaw/dormancy/flaw_on_life(mob/user)
+	if(!user)
+		return
+	if(!ishuman(user))
+		return
+	if(target && target.loc != user && user.loc != target) //Do not let this exist outside of the person with the flaw
+		target.forceMove(user)
+	if(user.stat) //If they're dying, un-tf them
+		if(target && user.loc == target)
+			user.forceMove(get_turf(target))
+			target.forceMove(user)
+			target.visible_message(span_warning("[target] glows momentarily, before its form morphs into that of [user]!"))
+			target.mob_possession = null
+		return
+	if(world.time > next_check)
+		next_check = world.time + check_interval
+		var/mob/living/carbon/human/H = user
+		if(!target)
+			H.add_stress(/datum/stressevent/unbound)
+			H.apply_status_effect(/datum/status_effect/debuff/unbound)
+			return
+		else
+			H.remove_stress(/datum/stressevent/unbound)
+			H.remove_status_effect(/datum/status_effect/debuff/unbound)
+		if(H.energy <= 0 && isturf(user.loc)) //Don't TF if eaten, already a thing, or a held micro.
+			if(warned)
+				warned = 0
+				target.forceMove(H.loc)
+				target.mob_possession = H
+				H.forceMove(target)
+				target.visible_message(span_warning("[user] collapses in exhaustion, their form changing into that of [target]!"))
+			else
+				warned = 1
+				to_chat(user, span_warning("My mana is spent, I should likely seek somewhere safe before I revert to [target]."))
+		if(user.loc == target)
+			if(H.energy < H.max_energy/2)
+				if(H.energy + H.max_energy/30 >= H.max_energy/2)
+					to_chat(user, span_warning("I feel enough of my mana return to change back to my usual state."))
+				H.energy_add(H.max_energy/30)

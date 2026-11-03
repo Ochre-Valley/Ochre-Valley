@@ -12,7 +12,7 @@
 	outfit_female = null
 	display_order = JDO_WRETCH
 	show_in_credits = FALSE
-	min_pq = 20 //OV EDIT
+	min_pq = 10 //OV EDIT
 	max_pq = null
 
 	obfuscated_job = TRUE

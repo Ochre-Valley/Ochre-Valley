@@ -40,6 +40,11 @@
 	. = ..()
 	. += span_info("Right click to adjust the coif's coverage. Certain coifs with multiple adjustments - like the heavy padded coif - might need to be right-clicked multiple times, in order to cycle back to its default state.")
 
+/obj/item/clothing/neck/roguetown/coif/ComponentInitialize()
+	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, null, null, (UPD_HEAD|UPD_MASK|UPD_NECK))	//Soundless coif
+	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+
 /obj/item/clothing/neck/roguetown/coif/padded
 	name = "padded coif"
 	desc = "A gambeson's coif, hewn from cloth. It can either be worn beneath a helmet to cushion one's skull from punishment, or worn on its own to keep one's cheeks warm in more frigid climates."
@@ -54,32 +59,6 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	sewrepair = TRUE
-
-/obj/item/clothing/neck/roguetown/coif/padded/ComponentInitialize()
-	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
-
-//OV ADD START
-/obj/item/clothing/neck/roguetown/coif/padded/AdjustClothes(mob/user)
-	if(loc == user)
-		if(adjustable == CAN_CADJUST)
-			adjustable = CADJUSTED
-			if(toggle_icon_state)
-				icon_state = "ccoif_t"
-			flags_inv = null
-			body_parts_covered = NECK
-			body_parts_covered_dynamic = body_parts_covered
-			if(ishuman(user))
-				var/mob/living/carbon/H = user
-				H.update_inv_neck()
-				H.update_inv_head()
-		else if(adjustable == CADJUSTED)
-			ResetAdjust(user)
-		if(ishuman(user))
-			var/mob/living/carbon/H = user
-			H.update_inv_neck()
-			H.update_inv_head()
-//OV ADD END
 
 /obj/item/clothing/neck/roguetown/coif/heavypadding
 	name = "heavy padded coif"
@@ -96,11 +75,6 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	sewrepair = TRUE
-
-/obj/item/clothing/neck/roguetown/coif/heavypadding/ComponentInitialize()
-	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
-	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
-	return
 
 /obj/item/clothing/neck/roguetown/coif/heavypadding/AdjustClothes(mob/user)
 	if(loc == user)
@@ -133,8 +107,7 @@
 			H.update_inv_neck()
 			H.update_inv_head()
 
-/obj/item/clothing/neck/roguetown/coif/ComponentInitialize()
-	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, null, null, (UPD_HEAD|UPD_MASK|UPD_NECK))	//Soundless coif
+/obj/item/clothing/neck/roguetown/coif/heavypadding/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_FENCERDEXTERITY)
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 
@@ -189,7 +162,7 @@
 
 /obj/item/clothing/neck/roguetown/chaincoif/iron/aalloy
 	name = "decrepit coif"
-	desc = "Rotted metal rings, linked together to form a billowing hood. Shrapnel peppers the linkage; arrowheads and speartips, brought along from a battlefield who's history - and legionnaires - have been lost to tyme."
+	desc = "Rotted metal rings, linked together to form a billowing hood. Shrapnel peppers the linkage; arrowheads and speartips, brought along from a battlefield whose history - and legionnaires - have been lost to tyme."
 	icon_state = "achaincoif"
 	max_integrity = ARMOR_INT_SIDE_DECREPIT
 	color = "#bb9696"
@@ -231,7 +204,7 @@
 	adjustable = CAN_CADJUST
 	smeltresult = /obj/item/ingot/iron
 
-/obj/item/clothing/neck/roguetown/chaincoif/iron/AdjustClothes(mob/user)
+/obj/item/clothing/neck/roguetown/chaincoif/iron/full/AdjustClothes(mob/user)
 	if(loc == user)
 		if(adjustable == CAN_CADJUST)
 			adjustable = CADJUSTED
@@ -261,6 +234,10 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_neck()
 			H.update_inv_head()
+
+/obj/item/clothing/neck/roguetown/chaincoif/iron/full/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
 
 /obj/item/clothing/neck/roguetown/chaincoif/bronze
 	name = "bronze chain coif"
@@ -310,12 +287,16 @@
 			H.update_inv_neck()
 			H.update_inv_head()
 
+/obj/item/clothing/neck/roguetown/chaincoif/full/ComponentInitialize()
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
+	AddComponent(/datum/component/armour_filtering/negative, TRAIT_HONORBOUND)
+
 /obj/item/clothing/neck/roguetown/chaincoif/full/black
 	color = "#323232"
 
 /obj/item/clothing/neck/roguetown/bevor
 	name = "bevor"
-	desc = "A steel neckguard, traditionally mounted to the collar of a cuirass. It restricts the head's motion, but ensures the absence of abuseable gaps."
+	desc = "A steel neckguard, traditionally mounted to the collar of a cuirass. It restricts the head's motion, but ensures the absence of abusable gaps."
 	icon_state = "bevor"
 	armor = ARMOR_PLATE
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -337,7 +318,7 @@
 
 /obj/item/clothing/neck/roguetown/bevor/iron
 	name = "iron bevor"
-	desc = "An iron neckguard, traditionally mounted to the collar of a cuirass. It restricts the head's motion, but ensures the absence of abuseable gaps."
+	desc = "An iron neckguard, traditionally mounted to the collar of a cuirass. It restricts the head's motion, but ensures the absence of abusable gaps."
 	icon_state = "ibevor"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
@@ -478,14 +459,14 @@
 
 /obj/item/clothing/neck/roguetown/gorget/steel
 	name = "steel gorget"
-	desc = "A series of steel plates designed to protect the neck, traditionally worn atop a jacket or cuirass. It bears a mammon-sized divet along its right flank; the certification of its 'proofedness' against a longbow's strike."
+	desc = "A series of steel plates designed to protect the neck, traditionally worn atop a jacket or cuirass. It bears a mammon-sized divot along its right flank; the certification of its 'proofedness' against a longbow's strike."
 	smeltresult = /obj/item/ingot/steel
 	max_integrity = ARMOR_INT_SIDE_STEEL + ARMOR_INT_SIDE_COVERAGE_BONUS
 	icon_state = "sgorget"
 
 /obj/item/clothing/neck/roguetown/gorget/gold
 	name = "golden gorget"
-	desc = "A series of resplendant golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
+	desc = "A series of resplendent golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
 	icon_state = "goldgorget"
 	armor_class = ARMOR_CLASS_HEAVY //Ceremonial. Heavy is the head that bears the burden.
 	armor = ARMOR_INDESTRUCTIBLE //Renders its wearer completely invulnerable to damage. The caveat is, however..
@@ -665,7 +646,7 @@
 
 /obj/item/clothing/neck/roguetown/psicross/inhumen/paalloy
 	name = "ancient zcross"
-	desc = "'Progress. Ascension. Destiny. A mandate, commanded by God, to be fufilled by Man. She called us forth from the edge of reality - and with Her dying breath, rasped out the final truth; the fire is gone, and the world will soon follow.'"
+	desc = "'Progress. Ascension. Destiny. A mandate, commanded by God, to be fulfilled by Man. She called us forth from the edge of reality - and with Her dying breath, rasped out the final truth; the fire is gone, and the world will soon follow.'"
 	icon_state = "zcross_a"
 	chunkcolor = "#532e25"
 	material_category = ARMOR_MAT_PLATE
@@ -910,7 +891,7 @@
 
 /obj/item/clothing/neck/roguetown/psicross/dendor/wood
 	name = "wooden amulet of Dendor"
-	desc = "The primordial life force thrumbs through your hands."
+	desc = "The primordial life force thrums through your hands."
 	icon_state = "dendor_w"
 	item_state = "dendor_w"
 	sellprice = 0

@@ -1,11 +1,6 @@
-#ifdef LOCALTEST
-	#define MINIMUM_FLAVOR_TEXT 0
-	#define MINIMUM_OOC_NOTES 0
-#endif
-#ifndef LOCALTEST
-	#define MINIMUM_FLAVOR_TEXT		200
-	#define MINIMUM_OOC_NOTES		5 //Just put something in there
-#endif
+// Set in config.txt (MINIMUM_FLAVOR_TEXT and MINIMUM_OOC_NOTES), 0 turns the requirement off.
+#define MINIMUM_FLAVOR_TEXT CONFIG_GET(number/minimum_flavor_text)
+#define MINIMUM_OOC_NOTES CONFIG_GET(number/minimum_ooc_notes)
 
 //Preference toggles
 #define SOUND_ADMINHELP			(1<<0)
@@ -131,7 +126,7 @@ GLOBAL_LIST_INIT(clothespref_list, list(CLOTHES_M, CLOTHES_F)) // INSTRUCTIONS F
 /// Toggle section entries. Add these, and a row in `GLOB.char_toggles` and then a bit in `preferences_*` wherever applicable
 GLOBAL_LIST_INIT(char_toggles, list(
 	list("flag" = CHAR_TOGGLE_DODGE, "name" = "Defense", "off" = "Parry", "on" = "Dodge", "desc" = "The defense stance this character spawns in with."),
-	list("flag" = CHAR_TOGGLE_FREEUSE, "name" = "Free Use", "off" = "Off", "on" = "On", "desc" = "Whether this character spawns with Free Use enabled in the ERP panel."),
+	list("flag" = CHAR_TOGGLE_FREEUSE, "name" = "Unrestricted ERP", "off" = "Off", "on" = "On", "desc" = "Whether this character spawns with Unrestricted ERP enabled in the ERP panel."), // OV Edit
 	list("flag" = CHAR_TOGGLE_DNR, "name" = "Unrevivable", "off" = "No", "on" = "Yes", "desc" = "Whether this character spawns unable to be revived."),
 ))
 
@@ -227,6 +222,7 @@ GLOBAL_LIST_INIT(attack_blip_pref_list, list(
 #define PREFERENCE_POPUP_MARKING_SELECT "\"marking_select\""
 #define PREFERENCE_POPUP_VERBOSE_LOGS "\"verbose_logs\""
 #define PREFERENCE_POPUP_PATRON_SELECT "\"patron_select\""
+#define PREFERENCE_POPUP_QUIRK "\"quirk\""
 
 // Keep in sync with tgui/packages/tgui/interfaces/PreferencesMenu/popups/Charflaw.tsx#
 #define PREFERENCE_CHARFLAW_APPROVED 0

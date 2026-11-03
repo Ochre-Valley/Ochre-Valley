@@ -355,6 +355,18 @@
 	show_runechat = FALSE
 	is_animal = TRUE
 
+/datum/emote/living/cackle/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		// Apply Xylix buff to those with the trait who hear the cackling
+		// Only apply if the hearer is not the one cackling
+		for(var/mob/living/carbon/human/H in hearers(7, user))
+			if(H == user || !H.client)
+				continue
+			if(HAS_TRAIT(H, TRAIT_XYLIX) && !H.has_status_effect(/datum/status_effect/buff/xylix_joy))
+				H.apply_status_effect(/datum/status_effect/buff/xylix_joy)
+				to_chat(H, span_info("The cackling brings a smile to my face, and fortune to my steps!"))
+
 /mob/living/carbon/human/proc/emote_cackle()
 	if(istype(usr.getorganslot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/wild_tongue) || istype(usr.getorganslot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/harpy)) // OV Edit
 		set name = "Cackle"
@@ -697,4 +709,3 @@
 		to_chat(src, span_warning("Your tongue doesn't do that"))
 		return
 	emote("thump", intentional = TRUE)
-

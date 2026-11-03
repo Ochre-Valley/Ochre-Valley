@@ -57,8 +57,7 @@ export const UndeadWrit = (props: {
       </p>
       <p style={writParagraph}>
         Put them down by steel or fire. This writ shall mark itself when they
-        are destroyed. Return it then to the Contract Ledger, that the sum
-        of{' '}
+        are destroyed. Return it then to the Contract Ledger, that the sum of{' '}
         <RewardClause
           reward={reward}
           levyRate={levyRate}

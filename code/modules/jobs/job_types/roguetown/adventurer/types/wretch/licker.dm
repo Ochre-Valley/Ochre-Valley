@@ -18,6 +18,7 @@
 	)
 
 	//OV Add Start
+	min_pq = 15 //OV EDIT
 	vice_limits = list(/datum/charflaw/hemovore)
 	//OV Add End
 

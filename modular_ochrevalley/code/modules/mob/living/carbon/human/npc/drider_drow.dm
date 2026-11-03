@@ -39,8 +39,8 @@
 		r_hand = /obj/item/rogueweapon/sword/sabre/stalker
 		l_hand = /obj/item/rogueweapon/sword/sabre/stalker
 	else // dual dirk
-		r_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
-		l_hand = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
+		r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/elvish
+		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/elvish
 
 	H.STASTR = 13
 	H.STASPD = 14 // 3 points

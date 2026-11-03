@@ -6,7 +6,7 @@
 /obj/item/proc/digest_act(atom/movable/item_storage = null, touchable_amount, splashing = 0)
 	if(!digestable)
 		return FALSE
-	
+
 	//OV edit
 	if(mob_possession)
 		if(!mob_possession.digestable)
@@ -85,7 +85,10 @@
 		//Allow those turned into items to become the recycled item
 		//OV edit
 		if(mob_possession)
+			var/datum/charflaw/dormancy/cf = mob_possession.get_flaw(/datum/charflaw/dormancy)
 			B.digestion_death(mob_possession)
+			if(cf && cf.target == src)
+				forceMove(mob_possession)
 			mob_possession = null
 		//OV edit end
 		/*var/recycled = B?.recycle(src)

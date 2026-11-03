@@ -75,8 +75,7 @@ export const Header = (props: Props) => {
             </span>
             {(tariffEvaded > 0 || dodging) && (
               <span style={{ color: SEAL_RED }}>
-                <b>Duty dodged:</b> {tariffEvaded}m
-                {dodging && ' (dodging now)'}
+                <b>Duty dodged:</b> {tariffEvaded}m{dodging && ' (dodging now)'}
               </span>
             )}
           </>

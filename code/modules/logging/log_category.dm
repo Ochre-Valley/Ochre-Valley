@@ -27,8 +27,8 @@
 	/// IF YOU CHANGE THIS VERIFY LOGS ARE STILL PARSED CORRECTLY
 	var/internal_formatting = FALSE
 
-	/// List of log entries for this category
-	var/list/entries = list()
+	/// List of log entries for this category //OV ADD
+	var/list/entries = list() //OV ADD
 
 	/// Total number of entries this round so far
 	var/entry_count = 0
@@ -49,8 +49,8 @@ GENERAL_PROTECT_DATUM(/datum/log_category)
 
 	write_entry(entry)
 	entry_count += 1
-	if(entry_count <= CONFIG_MAX_CACHED_LOG_ENTRIES)
-		entries += entry
+	if(entry_count <= CONFIG_MAX_CACHED_LOG_ENTRIES) //OV ADD
+		entries += entry //OV ADD
 
 /// Allows for category specific file splitting. Needs to accept a null entry for the default file.
 /// If master_category it will always return the output of master_category.get_output_file(entry)

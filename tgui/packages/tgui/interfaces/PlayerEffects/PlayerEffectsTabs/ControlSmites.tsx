@@ -52,6 +52,12 @@ export const ControlSmites = (props: any) => {
       <Button fluid onClick={() => act('sun_strike')}>
         Astrata Sun Strike
       </Button>
+      <Button fluid onClick={() => act('drop_object')}>
+        Crush With Object
+      </Button>
+      <Button fluid onClick={() => act('annoying_voice')}>
+        Annoying Voice
+      </Button>
     </Section>
   );
 };

@@ -390,6 +390,99 @@
 
 	return TRUE
 
+/mob/living/carbon/verb/reveal_bodypart()
+	set name = "Toggle Bodypart Visibility"
+	set desc = "PRIVATE SCENE TOOL: Toggles between always showing or hiding your chosen bodypart, regardless of clothing worn."
+	set category = "Vore.Misc"
+
+	var/list/ckeyblacklist
+	ckeyblacklist = list()
+
+	if(src.client && (src.client.ckey in ckeyblacklist))
+		to_chat(src, span_warningbig("YOU ARE BANNED FROM THIS TOOL"))
+		return
+
+	var/list/choices = list("Belly", "Belly Color", "Breasts", "Butt", "Penis", "Testicles", "Vagina")
+	var/chosen = tgui_input_list(src, "Toggle what part? (DO NOT VIOLATE BYSTANDER CONSENT)", "PRIVATE SCENE TOOL ONLY", choices)
+	if(!chosen)
+		return
+
+	if(tgui_alert(src, "Are you sure you want to toggle this bodypart?  Abuse of this to violate bystander consent may result in you being banned from using this tool.", "PRIVATE SCENE TOOL ONLY", list("No","Yes")) != "Yes")
+		return
+
+	switch(chosen)
+		if("Belly")
+			var/obj/item/organ/belly/tum = src.internal_organs_slot[ORGAN_SLOT_BELLY]
+			if(tum)
+				tum.always_show = !tum.always_show
+				to_chat(src, span_notice("You are now [tum.always_show ? "revealing" : "hiding"] your belly."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have a belly!"))
+			return
+		if("Belly Color")
+			var/obj/item/organ/belly/belly = src.getorganslot(ORGAN_SLOT_BELLY)
+			if(belly)
+				var/new_color = color_pick_sanitized(src, "Choose new belly color", "Belly Color", "#FFFFFF")
+				if(new_color)
+					belly.Remove(src)
+					var/list/colors = list()
+					if(belly.accessory_colors)
+						colors = color_string_to_list(belly.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF")
+					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
+					belly.accessory_colors = color_list_to_string(colors)
+					belly.Insert(src, TRUE, FALSE)
+					src.dna.features["belly_color"] = colors[1]
+					src.update_body_parts(TRUE)
+				return
+		if("Breasts")
+			var/obj/item/organ/breasts/booba = src.internal_organs_slot[ORGAN_SLOT_BREASTS]
+			if(booba)
+				booba.always_show = !booba.always_show
+				to_chat(src, span_notice("You are now [booba.always_show ? "revealing" : "hiding"] your breasts."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have breasts!"))
+			return
+		if("Butt")
+			var/obj/item/organ/butt/ass = src.internal_organs_slot[ORGAN_SLOT_BUTT]
+			if(ass)
+				ass.always_show = !ass.always_show
+				to_chat(src, span_notice("You are now [ass.always_show ? "revealing" : "hiding"] your butt."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have a butt!"))
+			return
+		if("Penis")
+			var/obj/item/organ/penis/dong = src.internal_organs_slot[ORGAN_SLOT_PENIS]
+			if(dong)
+				dong.always_show = !dong.always_show
+				to_chat(src, span_notice("You are now [dong.always_show ? "revealing" : "hiding"] your penis."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have a penis!"))
+			return
+		if("Testicles")
+			var/obj/item/organ/testicles/balls = src.internal_organs_slot[ORGAN_SLOT_TESTICLES]
+			if(balls)
+				balls.always_show = !balls.always_show
+				to_chat(src, span_notice("You are now [balls.always_show ? "revealing" : "hiding"] your testicles."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have testicles!"))
+			return
+		if("Vagina")
+			var/obj/item/organ/vagina/vag = src.internal_organs_slot[ORGAN_SLOT_VAGINA]
+			if(vag)
+				vag.always_show = !vag.always_show
+				to_chat(src, span_notice("You are now [vag.always_show ? "revealing" : "hiding"] your vagina."))
+				src.update_body_parts(TRUE)
+			else
+				to_chat(src, span_notice("You don't have a vagina!"))
+			return
+
 /mob/living/verb/petrification()
 	set name = "Petrification"
 	set desc = "Petrify yourself or a nearby player."
