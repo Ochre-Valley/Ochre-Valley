@@ -6,7 +6,7 @@
 /datum/quirk/amphibious
 	name = "Amphibious"
 	desc = "Through some quirk of my heritage, I can breathe in water just as readily as in air."
-	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold)
+	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold) // OV Edit: Kobold
 	restricted_virtues = list(/datum/virtue/combat/second_chance) // you're probably already unbreathing
 	added_traits = list(TRAIT_WATERBREATHING) // notably NOT breathless
 	ui_fa_icon = "lungs"
@@ -53,7 +53,7 @@
 	desc = "I feel at home in the water. Sleeping beneath the waves is almost as comfortable as a bed to me."
 	mechdesc = "Does not come with water breathing."
 	added_traits = list(TRAIT_WATERSLEEP)
-	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold, /datum/species/ooze, /datum/species/akula) // same as amphibious except with races that already can breathe water
+	allowed_species = list(/datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold, /datum/species/ooze, /datum/species/akula) // same as amphibious except with races that already can breathe water // OV Edit: Kobold
 	ui_fa_icon = "water"
 
 /datum/quirk/caustic
@@ -61,7 +61,7 @@
 	desc = "Through quills, spines, or a caustic makeup, touching me isn't exactly pleasant."
 	mechdesc = "Doesn't affect grabs."
 	added_traits = list(TRAIT_CAUSTIC)
-	allowed_species = list(/datum/species/ooze, /datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold, /datum/species/aasimar, /datum/species/dullahan)
+	allowed_species = list(/datum/species/ooze, /datum/species/anthromorph, /datum/species/anthromorphsmall, /datum/species/lizardfolk, /datum/species/kobold, /datum/species/aasimar, /datum/species/dullahan) // OV Edit: Kobold, lizardfolk
 	ui_fa_icon = "road-spikes"
 
 /datum/quirk/nightowl
