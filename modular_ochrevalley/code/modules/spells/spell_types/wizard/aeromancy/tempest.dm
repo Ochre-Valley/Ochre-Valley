@@ -27,7 +27,7 @@
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_swingdelay_type = SWINGDELAY_PENALTY
 	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 15 SECONDS
+	cooldown_time = 18 SECONDS
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
@@ -51,7 +51,7 @@
 
 /datum/action/cooldown/spell/tempest/toggle_alt_mode(mob/user)
 	tempest_mode = (tempest_mode == TEMPEST_MODE_TWISTER) ? TEMPEST_MODE_DOWNDRAFT : TEMPEST_MODE_TWISTER
-	cooldown_time = (tempest_mode == TEMPEST_MODE_TWISTER) ? 15 SECONDS : 12 SECONDS
+	cooldown_time = (tempest_mode == TEMPEST_MODE_TWISTER) ? 18 SECONDS : 12 SECONDS
 	invocations = (tempest_mode == TEMPEST_MODE_TWISTER) ? list("Vortix!") : list("Venti Conterite!")
 	to_chat(user, span_notice("Tempest set to: [tempest_mode]."))
 	update_mode_maptext()
