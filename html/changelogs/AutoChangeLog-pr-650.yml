@@ -1,0 +1,5 @@
+author: "TankTheBirb"
+delete-after: True
+changes:
+  - balance: "all witch subclasses now get jman staves instead of just old magick. They also get a staff option or selection menu on spawn now too"
+  - rscadd: "mystagogue and godsblood witches now have a patron appropriate cross upon spawning in"
