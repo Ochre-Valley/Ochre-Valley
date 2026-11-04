@@ -164,7 +164,6 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -263,7 +262,6 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -431,7 +429,7 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/orca,
 		/datum/sprite_accessory/tail/otie,
