@@ -106,7 +106,7 @@
 
 /obj/effect/tempest/cyclone/Destroy()
 	if(caster_beam)
-		caster_beam.End()
+		caster_beam.Destroy()
 		caster_beam = null
 	if(source_spell && istype(source_spell, /datum/action/cooldown/spell/cyclone))
 		var/datum/action/cooldown/spell/cyclone/C = source_spell
