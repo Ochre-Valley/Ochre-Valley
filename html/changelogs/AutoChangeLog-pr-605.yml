@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - bugfix: "Patchy fix for targeted subtles with identical names"
