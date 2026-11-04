@@ -15,3 +15,26 @@
 	if(slot == SLOT_WRISTS || (wrist_display && slot != SLOT_NECK))
 		mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/wrists.dmi'
 		sleeved = 'modular_ochrevalley/icons/roguetown/clothing/onmob/wrists.dmi'
+	else
+		mob_overlay_icon = initial(mob_overlay_icon)
+		sleeved = initial(sleeved)
+
+	return ..()
+
+/obj/item/clothing/neck/roguetown/psicross/kerse/attack_right(mob/user)
+	if(!ismob(loc))
+		return ..()
+
+	wrist_display = !wrist_display
+	to_chat(user, span_info("You adjust \the [src] to [wrist_display ? "display on your wrists" : "display around your neck"]."))
+	if(wrist_display)
+		mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/wrists.dmi'
+		sleeved = 'modular_ochrevalley/icons/roguetown/clothing/onmob/wrists.dmi'
+	else
+		mob_overlay_icon = initial(mob_overlay_icon)
+		sleeved = initial(sleeved)
+
+	if(isliving(loc))
+		var/mob/living/L = loc
+		L.regenerate_clothes()
+	return ..()
