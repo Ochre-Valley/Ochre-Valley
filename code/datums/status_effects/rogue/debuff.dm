@@ -1037,6 +1037,9 @@
 	if(harpy.stamina >= harpy.max_stamina)
 		to_chat(harpy, span_bloody("I can't flap my wings for much more! AGHH!!"))
 		harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
+	if(istype(harpy, /mob/living/carbon/human/species/werewolf))
+		to_chat(harpy, span_bloody("MY WINGS...ARE GONE!! AGHH!!"))
+		harpy.remove_status_effect(/datum/status_effect/debuff/harpy_flight)
 
 /datum/status_effect/debuff/harpy_flight/on_remove()
 	. = ..()
