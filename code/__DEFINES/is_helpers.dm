@@ -59,8 +59,6 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 
 #define istransparentturf(A) (istype(A, /turf/open/transparent) || istype(A, /turf/closed/transparent))
 
-#define isopenspace(A) (istype(A, /turf/open/transparent/openspace)) // OV Add
-
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
 
