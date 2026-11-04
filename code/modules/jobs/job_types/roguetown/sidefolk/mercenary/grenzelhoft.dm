@@ -218,7 +218,8 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,		// gotta get to a vantage point
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/axes = SKILL_LEVEL_JOURNEYMAN,		// this is not only a tool!
-		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER,		//every combat class with a ranged weapon gets this . eat my jorts. They have no dodge expert.
+		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,	//OV EDIT- SKILL APPLIED IN WEAPON CHOICE	//every combat class with a ranged weapon gets this . eat my jorts. They have no dodge expert.
+		/datum/skill/combat/firearms = SKILL_LEVEL_JOURNEYMAN, //ov edit- add firearms skill
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
@@ -245,17 +246,28 @@
 				armor = /obj/item/clothing/suit/roguetown/armor/brigandine/light	// find a smithy to fix it
 			if("Studded Leather Vest")
 				armor = /obj/item/clothing/suit/roguetown/armor/leather/studded		// or maintain it yourself!
-		var/weapons = list("Crossbow & 16 Bolts","Heavy Crossbow & 8 Heavy Bolts")
+		var/weapons = list("Crossbow & 16 Bolts","Heavy Crossbow & 8 Heavy Bolts", "Arquebus Rifle") //ov edit- add rifle
 		var/weapon_choice = input(H, "Choose your weapon.", "RENOCK AND REBOLT") as anything in weapons
 		switch(weapon_choice)
 			if("Crossbow & 16 Bolts")
+				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_MASTER, TRUE) // OV edit
 				beltr = /obj/item/quiver/bolt/standard
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			if("Heavy Crossbow & 8 Heavy Bolts")
+				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_MASTER, TRUE) // OV edit
 				beltr = /obj/item/quiver/bolt/heavy/standard/ //Eight bolts. More than enough to kill anything that moves.
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/heavy
 				H.change_stat(STATKEY_STR, 1) //Without any statpack or racial modifier, this meets the bare minimum for using the Siegebow as a melee weapon.
 				H.change_stat(STATKEY_SPD, -1)
+			//ov edit start
+			if("Arquebus Rifle")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_MASTER, TRUE)
+				beltr = /obj/item/quiver/bulletpouch/powderkit/hollowpoint
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus
+				to_chat(H, span_warning("I have an extra pouch of shot stashed away!"))
+				var/obj/item/I = /obj/item/quiver/bulletpouch/iron
+				H.mind?.special_items[capitalize(I::name)] = I
+			//ov edit end
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/clothing/neck/roguetown/gorget
