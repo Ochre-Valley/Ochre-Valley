@@ -385,14 +385,14 @@
 	created_item = /obj/item/gun/ballistic/arquebus_pistol
 	craftdiff = 5
 */ // OV Edit End
-
+//ov edit- change recipe
 /datum/anvil_recipe/engineering/powderbag
-	name = "Powder Flask (+1 Cured Hide, +1 Infernal ash, +1 Coal)"
-	req_bar = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/natural/hide/cured, /obj/item/magic/infernal/ash, /obj/item/rogueore/coal) //Expensive bag to not blow up
+	name = "Powder Flask (+1 Cured Hide, +1 Fire Essentia, +1 Coal Dust)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/natural/hide/cured, /obj/item/alch/firedust, /obj/item/alch/coaldust) //Expensive bag to not blow up
 	created_item = /obj/item/powderflask
 	craftdiff = 3
-
+//ov edit end
 /* OV Edit - Removes this confusing recipe.
 /datum/anvil_recipe/engineering/bulletpouch
 	name = "Bullet Pouch (+1 Cured Leather)"
