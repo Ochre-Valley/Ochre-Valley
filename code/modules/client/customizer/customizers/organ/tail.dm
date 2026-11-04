@@ -206,7 +206,9 @@
 		/datum/sprite_accessory/tail/haven,
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
+		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		//Caustic edit
 		/datum/sprite_accessory/tail/tiefling,
 		/datum/sprite_accessory/tail/tiefling/heart,
@@ -305,7 +307,8 @@
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
 		/datum/sprite_accessory/tail/large_snake,
-		/datum/sprite_accessory/tail/large_snake_plain
+		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_tails/flagtail
 		)
 
 /datum/customizer/organ/tail/dullahan
