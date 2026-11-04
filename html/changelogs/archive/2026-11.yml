@@ -125,18 +125,6 @@
     - rscadd:
         mystagogue and godsblood witches now have a patron appropriate cross upon
         spawning in
-  zeskorion:
-    - rscadd: " blunderbuss, and several new varieties of ammunition"
-    - rscadd:
-        Shotkit! a combination of powderflask and ammo pouch. Using a gun on it
-        will fill it with powder, and then load a piece of shot. Comes in mechanized
-        versions!
-    - qol:
-        right clicking a gun in your active hand will spin it. If it's ready to have
-        powder tamped down, you'll take out the ramrod and tamp powder down without
-        switching hands, instead!
-    - balance: rebalanced all guns in both combat and crafting.
-    - bugfix: Archery enchantment now affects firearm skill
   Etheo:
     - rscadd:
         "'Flagtail' added. A three color customizable tail, designed after a
@@ -217,5 +205,16 @@
   tmyqlfpir:
     - bugfix: Disable BYOND default verb panel for improved performance (Vanderlin port)
   zeskorion:
+    - rscadd: " blunderbuss, and several new varieties of ammunition"
+    - rscadd:
+        Shotkit! a combination of powderflask and ammo pouch. Using a gun on it
+        will fill it with powder, and then load a piece of shot. Comes in mechanized
+        versions!
+    - qol:
+        right clicking a gun in your active hand will spin it. If it's ready to have
+        powder tamped down, you'll take out the ramrod and tamp powder down without
+        switching hands, instead!
+    - balance: rebalanced all guns in both combat and crafting.
+    - bugfix: Archery enchantment now affects firearm skill
     - qol: wrench crafting now uses engineering
     - bugfix: wrenches can now parry properly
