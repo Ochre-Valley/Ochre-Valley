@@ -55,9 +55,11 @@
 /// Shared far travel cleanup: frees the job slot, clears the manifest, treasury, bounties etc.
 /// Used by the far travel tile and the admin send-to-lobby. Does not delete the mob.
 /mob/living/carbon/human/proc/process_far_travel(mob/user, atom/location)
-	var/dat = "[user ? ADMIN_LOOKUPFLW(user) : "Unknown"] has despawned [src == user ? "themselves" : src], job [job], at [AREACOORD(location || src)]. Contents despawned along:"
+	var/dat = "[user ? ADMIN_LOOKUPFLW(user) : "Unknown"] has despawned [src == user ? "themselves" : src], job [job], at [AREACOORD(location || src)].\n<details><summary>Contents despawned along:</summary>"
+	var/dat_log = "[key_name(user)] has despawned [src == user ? "themselves" : src], job [job], at [AREACOORD(location || src)]. Contents despawned along:" //OV ADD
 	if(!length(contents))
 		dat += " none."
+		dat_log += " none." //OV ADD
 	else
 		var/list/content_names = list()
 		for(var/atom/movable/content as anything in contents)
@@ -73,6 +75,7 @@
 						safe_round_remove(L)
 			//OV Edit End
 		dat += " [content_names.Join(", ")]."
+		dat_log += " [content_names.Join(", ")]." //OV ADD
 	if(mind)
 		release_far_travel_job()
 		mind.unknow_all_people()
@@ -91,8 +94,9 @@
 	LAZYREMOVE(GLOB.roleplay_ads, mobid) //OV ADD - Roleplay Ad Maint
 	if(SStreasury)
 		dat += process_far_travel_treasury()
+		dat_log += process_far_travel_treasury() //OV ADD
 	message_admins(dat)
-	log_admin(dat)
+	log_admin(dat_log) //OV EDIT
 	if(job in ANNOUNCE_ON_FAR_TRAVEL_ROLES)
 		var/datum/job/announce_job = SSjob.GetJob(job)
 		var/announce_title = announce_job ? announce_job.get_informed_title(src) : job
