@@ -158,6 +158,9 @@
 	var/legendcrossbow = FALSE
 	var/mastersling = FALSE
 	var/legendsling = FALSE
+	//ov edit
+	var/mastergun = FALSE
+	var/legendgun = FALSE
 
 /datum/magic_item/greater/archery/on_equip(obj/item/i, mob/living/user, slot)
 	if(slot == ITEM_SLOT_HANDS)
@@ -167,6 +170,18 @@
 	else
 		//stat boost — indexed to prevent stacking
 		user.change_stat(STATKEY_PER, 2, "archery_enchant")
+
+		//ov edit- gun boost
+		if (user.get_skill_level(/datum/skill/combat/firearms) == 6)
+			legendgun = TRUE
+			mastergun = FALSE
+		else
+			if (user.get_skill_level(/datum/skill/combat/firearms) == 5)
+				user.adjust_skillrank(/datum/skill/combat/firearms, 1, TRUE)
+				mastergun = TRUE
+			else
+				user.adjust_skillrank(/datum/skill/combat/firearms, 2, TRUE)
+		//ov edit end
 
 		//Bow boost
 		if (user.get_skill_level(/datum/skill/combat/bows) == 6)
@@ -228,6 +243,14 @@
 				user.adjust_skillrank(/datum/skill/combat/slings, -1, TRUE)
 			else
 				user.adjust_skillrank(/datum/skill/combat/slings, -2, TRUE)
+
+		//ov edit- correct firearms
+		if (!legendsling)
+			if (mastersling)
+				user.adjust_skillrank(/datum/skill/combat/firearms, -1, TRUE)
+			else
+				user.adjust_skillrank(/datum/skill/combat/firearms, -2, TRUE)
+		//ov edit end
 
 		to_chat(user, span_notice("I feel mundane once more"))
 
