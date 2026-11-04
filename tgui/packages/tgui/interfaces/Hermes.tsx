@@ -79,8 +79,8 @@ const FormattingHelp = () => (
       color="label"
       style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}
     >
-      A name in the From field is appended to the letter as a signature (or to
-      a package's wrapping note). Leave it blank to send anonymously, unsigned.
+      A name in the From field is appended to the letter as a signature (or to a
+      package's wrapping note). Leave it blank to send anonymously, unsigned.
     </Box>
   </Box>
 );
@@ -162,7 +162,12 @@ export const Hermes = (props: any, context: any) => {
         : 'some time';
 
     return (
-      <Window title={HERMES_TITLE} width={400} height={440} buttons={helpButton}>
+      <Window
+        title={HERMES_TITLE}
+        width={400}
+        height={440}
+        buttons={helpButton}
+      >
         <Window.Content>
           <Stack vertical fill>
             <Stack.Item>
