@@ -69,7 +69,7 @@
 	range = 12
 	dam_falloff_factor = DAM_FALLOFF_OVBULLET
 	speed = 0.1
-	npc_simple_damage_mult = 4
+	antibeast_factor = ANTIBEAST_SUPERIOR
 	damage_type = BRUTE
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
