@@ -72,7 +72,7 @@
 			holder = new(B)
 			B.vis_contents.Add(holder)
 		holder.maptext = MAPTEXT(tag)
-		holder.color = "#00ffd5"
+		holder.color = GLOW_COLOR_WIND
 
 /datum/action/cooldown/spell/projectile/windblade_volley/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
