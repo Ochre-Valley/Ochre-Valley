@@ -38,51 +38,6 @@
 	var/charge_steps = 5
 	var/step_delay = 1
 
-/datum/action/cooldown/spell/squall
-	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
-	name = "Squall"
-	desc = "Call forth a surge of fierce, if harmless winds, throwing back any nearby and hampering them briefly. \
-			Shares a cooldown with tailwind."
-	button_icon_state = "nondetection"
-	sound = 'sound/combat/wooshes/bladed/wooshsmall (1).ogg'
-	spell_color = GLOW_COLOR_WIND
-	glow_intensity = GLOW_INTENSITY_MEDIUM
-	attunement_school = ASPECT_NAME_AEROMANCY
-
-	click_to_activate = FALSE
-	cast_range = SPELL_RANGE_GROUND
-
-	primary_resource_type = SPELL_COST_STAMINA
-	primary_resource_cost = SPELLCOST_STAT_BUFF
-
-	invocations = list("Venti Custodite!")
-	invocation_type = INVOCATION_SHOUT
-
-	charge_required = TRUE
-	weapon_cast_penalized = TRUE
-	charge_time = CHARGETIME_POKE
-	charge_swingdelay_type = SWINGDELAY_PENALTY
-	hold_drain = 1
-	charge_slowdown = CHARGING_SLOWDOWN_SMALL
-	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 30 SECONDS
-	shared_cooldown = "aeromancy_util"
-
-	associated_skill = /datum/skill/magic/arcane
-	spell_tier = 2
-	point_cost = 3
-
-	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z | SPELL_REQUIRES_NO_MOVE
-
-
-/datum/action/cooldown/spell/squall/on_start_charge()
-	. = ..()
-	var/turf/center = get_turf(owner)
-	for(var/turf/T in range(1, center))
-		if(T == center)
-			continue
-		new /obj/effect/temp_visual/telegraph/pillar(T, charge_time)
-
 /datum/action/cooldown/spell/tailwind/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
@@ -137,25 +92,6 @@
 	log_combat(H, null, "used Tailwind!")
 	return TRUE
 
-/datum/action/cooldown/spell/squall/cast(atom/cast_on)
-	. = ..()
-	var/turf/center = get_turf(owner)
-	for(var/turf/T in range(1, center))
-		if(T == center)
-			continue
-		new /obj/effect/temp_visual/tempest(T, 5)
-		for(var/mob/living/victim in T)
-			if(victim == owner || victim.stat == DEAD)
-				continue
-			if(victim.anti_magic_check())
-				continue
-			if(spell_guard_check(victim, TRUE))
-				continue
-			victim.apply_status_effect(/datum/status_effect/tailwind_slow)
-			var/push_dir = get_dir(T, victim) || get_dir(owner, victim) || pick(GLOB.cardinals)
-			victim.safe_throw_at(get_ranged_target_turf(victim, push_dir, 1), 1, 1, owner, force = MOVE_FORCE_STRONG)
-	log_combat(owner, null, "used Squall!")
-	return TRUE
 /*
 /datum/action/cooldown/spell/tailwind/cast(atom/cast_on)
 	. = ..()

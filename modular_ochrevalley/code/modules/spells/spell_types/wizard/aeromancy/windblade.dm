@@ -35,9 +35,44 @@
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
 
-	displayed_damage = SPELL_DMG(60)
+	displayed_damage = SPELL_DMG(45)
 
 	var/spread_step = 8
+	var/current_mode = 1
+	var/list/modes = list(
+		list("name" = "Volley", "tag" = "VLLY", "proj" = /obj/projectile/magic/wind_sawblade, "invocation" = "Venti Caedite!", "projectiles" = 3),
+		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Caedite!", "projectiles" = 1),
+	)
+
+/datum/action/cooldown/spell/projectile/windblade_volley/Grant(mob/grant_to)
+	. = ..()
+	apply_mode(current_mode)
+
+/datum/action/cooldown/spell/projectile/windblade_volley/proc/apply_mode(index)
+	var/list/mode = modes[index]
+	name = "Razorwind [mode["name"]]"
+	projectile_type = mode["proj"]
+	projectiles_per_fire = mode["projectiles"]
+	invocations = list(mode["invocation"])
+	update_mode_maptext(mode["tag"])
+
+/datum/action/cooldown/spell/projectile/windblade_volley/toggle_arc_mode(mob/user)
+	current_mode = (current_mode % length(modes)) + 1
+	apply_mode(current_mode)
+	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode."))
+
+/datum/action/cooldown/spell/projectile/windblade_volley/proc/update_mode_maptext(tag)
+	for(var/datum/hud/hud as anything in viewers)
+		var/atom/movable/screen/movable/action_button/B = viewers[hud]
+		var/atom/movable/screen/arc_maptext_holder/holder
+		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
+			holder = existing
+			break
+		if(!holder)
+			holder = new(B)
+			B.vis_contents.Add(holder)
+		holder.maptext = MAPTEXT(tag)
+		holder.color = "#00ffd5"
 
 /datum/action/cooldown/spell/projectile/windblade_volley/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
@@ -95,6 +130,54 @@
 		qdel(src)
 		return . || BULLET_ACT_HIT
 	return BULLET_ACT_FORCE_PIERCE
+
+/obj/projectile/magic/wind_compaction
+	name = "condensed winds"
+	icon = 'icons/effects/wizard_spell_effects.dmi'
+	icon_state = "grassblade"
+	guard_deflectable = TRUE
+	intdamfactor = SPELL_INTDAM(1)
+	damage_type = BRUTE
+	woundclass = BCLASS_CUT
+	flag = "slash"
+	nodamage = TRUE
+	damage = 0
+	speed = MAGE_PROJ_MEDIUM
+	range = SPELL_RANGE_PROJECTILE
+	hitsound = 'sound/combat/newstuck.ogg'
+	var/slash_damage = SPELL_DMG(30)
+	var/hits = 3
+
+/obj/projectile/magic/wind_compaction/on_hit(target, blocked = FALSE)
+	. = ..()
+	if(ismob(target))
+		var/mob/living/M = target
+		if(M.anti_magic_check())
+			visible_message(span_warning("[src] fizzles on contact with [target]!"))
+			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
+			qdel(src)
+			return BULLET_ACT_BLOCK
+		if(out_of_effective_range())
+			return
+		if(blocked >= 100)
+			return
+		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(resolve_compaction), M, firer, slash_damage, hits, def_zone)
+	return . || BULLET_ACT_HIT
+
+/proc/resolve_compaction(mob/living/target, mob/living/caster, damage = 30, hits = 3, target_zone = BODY_ZONE_CHEST)
+	if(!istype(target))
+		return
+	if(isliving(caster) && !QDELETED(caster))
+		for(var/i in 1 to hits)
+			if(arcyne_strike(caster, target, null, damage, target_zone, BCLASS_CUT, spell_name = "cleaving winds", damage_type = BRUTE, skip_animation = FALSE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
+				return
+			sleep(2)
+	else
+		var/fallback_zone = check_zone(target_zone)
+		for(var/i in 1 to hits)
+			var/armor_block = target.run_armor_check(fallback_zone, "slash", blade_dulling = BCLASS_CUT, damage = damage, intdamfactor = SPELL_INTDAM(1), no_debuff = TRUE)
+			target.apply_damage(SPELL_DMG_VS(target, damage), BRUTE, fallback_zone, armor_block)
+			sleep(2)
 
 #undef MT_WINDBLADE
 #undef WINDBLADE_HIT_IMMUNITY
