@@ -4,9 +4,10 @@
 /datum/action/cooldown/spell/projectile/windblade_volley
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	name = "Razorwind Volley"
-	desc = "Unleash a windstorm honed into a trio of whirling blades that slice right through their victims. \
+	desc = "Volley: Unleash a windstorm honed into a trio of whirling blades that slice right through their victims. \
 			Each blade can pierce through up to three targets.\
-		    Repeated hits on a single target from the same volley do reduced damage."
+		    Repeated hits on a single target from the same volley do reduced damage.\n \
+			Compaction: Launch forth a compressed sphere of vicious gales that will burst upon contact with a target, delivering a brutal flurry of slashes in an instant."
 	button_icon_state = "caedo"
 	sound = 'sound/magic/blade_burst.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -35,13 +36,11 @@
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_MEDIUM
 
-	displayed_damage = SPELL_DMG(45)
-
 	var/spread_step = 8
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Volley", "tag" = "VLLY", "proj" = /obj/projectile/magic/wind_sawblade, "invocation" = "Venti Caedite!", "projectiles" = 3),
-		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Caedite!", "projectiles" = 1),
+		list("name" = "Volley", "tag" = "VLLY", "proj" = /obj/projectile/magic/wind_sawblade, "invocation" = "Venti Caedite!", "projectiles" = 3, "cooldown" = 14 SECONDS),
+		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Saevite!", "projectiles" = 1, "cooldown" = 16 SECONDS),
 	)
 
 /datum/action/cooldown/spell/projectile/windblade_volley/Grant(mob/grant_to)
@@ -53,6 +52,7 @@
 	name = "Razorwind [mode["name"]]"
 	projectile_type = mode["proj"]
 	projectiles_per_fire = mode["projectiles"]
+	cooldown_time = mode["cooldown"]
 	invocations = list(mode["invocation"])
 	update_mode_maptext(mode["tag"])
 
@@ -170,7 +170,7 @@
 	if(isliving(caster) && !QDELETED(caster))
 		for(var/i in 1 to hits)
 			if(arcyne_strike(caster, target, null, damage, target_zone, BCLASS_CUT, spell_name = "cleaving winds", damage_type = BRUTE, skip_animation = FALSE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
-				return
+				return //If any hits are blocked, just stop
 			sleep(2)
 	else
 		var/fallback_zone = check_zone(target_zone)
