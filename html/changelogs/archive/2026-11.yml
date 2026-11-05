@@ -23,3 +23,6 @@
       switching hands, instead!
   - balance: rebalanced all guns in both combat and crafting.
   - bugfix: Archery enchantment now affects firearm skill
+2026-11-05:
+  NickBelmont:
+  - rscadd: 'New major aspect: Aeromancy'
