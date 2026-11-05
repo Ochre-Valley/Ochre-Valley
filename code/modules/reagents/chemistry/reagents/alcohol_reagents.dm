@@ -5,7 +5,7 @@
 
 /datum/reagent/consumable/ethanol
 	name = "ethanol"
-	description = "A well-known alcohol with a variety of applications."
+	description = "Aqua Vitae, the water of lyfe. Burns almost as much as Lux itself." // OV edit!
 	color = "#404030" // rgb: 64, 64, 48
 	nutriment_factor = 0
 	taste_description = "alcohol"

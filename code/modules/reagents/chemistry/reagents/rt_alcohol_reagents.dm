@@ -67,6 +67,7 @@
 	cuisine = CUISINE_OTAVAIS|CUISINE_ETRUSCAN
 	drink_type = DRINKTYPE_CIDER
 	name = "apple cider"
+	description = "Humenkind always had a knack of looking at any fruit and grain to make alcoholic drink from. This cider is no different."//OV Edit
 	boozepwr = 40
 	taste_description = "crisp freshness of apple"
 	glass_name = "glass of cider"
@@ -93,6 +94,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_SPIRIT
 	name = "aqua vitae"
+	description = "Water of lyfe, lyfe of fire. Drink and yours shall expand away from your mortal flesh."//OV Edit
 	boozepwr = 150
 	taste_description = "death"
 	color = "#6e6e6e"
@@ -102,6 +104,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_SPIRIT
 	name = "apple brandy"
+	description = "The ochards of the Celestial Academy of Grenzelhoft is the reputed origin of the apple brandy as alcohol. Nobody can really say otherwise."//OV Edit
 	boozepwr = 60
 	taste_description = "caramel oak brandy"
 	glass_name = "glass of brandy"
@@ -110,6 +113,7 @@
 
 /datum/reagent/consumable/ethanol/brandy/pear
 	name = "pear brandy"
+	description = "Once decried as pale imitation of apple brandy and outlawed by many Grenzel princedoms, a recent imperial decree legalised it after visiting Otava for a tense negotiation that has been saved by a bottle of this stuff."//OV Edit
 	boozepwr = 60
 	taste_description = "ripe pear with a hint of spice"
 	color = "#b9b607"
@@ -117,6 +121,7 @@
 
 /datum/reagent/consumable/ethanol/brandy/strawberry
 	name = "strawberry brandy"
+	description = "Rossan elves have popularized this after Tovans traded in a huge surplus of delectably sweet forest strawberries. Now the production of it ties the two tribes together."//OV Edit
 	boozepwr = 60
 	taste_description = "overwhelming sweetness with a smooth finish"
 	color = "#bb1a1a"
@@ -124,6 +129,7 @@
 
 /datum/reagent/consumable/ethanol/brandy/tangerine
 	name = "tangerine brandy"
+	description = "Etruscans don't want you to know, but you can just make your own Limoncello."//OV Edit
 	boozepwr = 60
 	taste_description = "spice and a twist of citrus"
 	color = "#bb751a"
@@ -131,6 +137,7 @@
 
 /datum/reagent/consumable/ethanol/brandy/plum
 	name = "plum brandy"
+	description = "Once, a Kazengun emissary got into a fistfight with the Inquisition as they served him this as Umeshu. After the brawl subsided, he praised the inventiveness and departed with a keg of plum brandy."//OV Edit
 	boozepwr = 60
 	taste_description = "purple sweetness and vanilla"
 	color = "#5c0449"
@@ -140,6 +147,7 @@
 	cuisine = CUISINE_ETRUSCAN
 	drink_type = DRINKTYPE_WINE
 	name = "wine"
+	description = "A young wine of uncertain origin. Likely cut with jackberries, the peasant's grape."//OV Edit
 	boozepwr = 30
 	taste_description = "aromatic bitterness with notes of sweetly-fermented jackberries"
 	glass_name = "glass of wine"
@@ -149,7 +157,7 @@
 /datum/reagent/consumable/ethanol/light
 	cuisine = CUISINE_NORTH_IMPERIAL
 	name = "light beer"
-	description = "An alcoholic beverage brewed since ancient times on Old Earth. This variety has reduced calorie and alcohol content."
+	description = "Since Pre-SYON, Humenkind has brewed beer. Sadly, this batch is weakened and watery."//OV Edit
 	boozepwr = 5 //Space Europeans hate it
 	taste_description = "dish water"
 	glass_name = "glass of light beer"
@@ -158,7 +166,7 @@
 /datum/reagent/consumable/ethanol/green
 	cuisine = CUISINE_NORTH_IMPERIAL
 	name = "green beer"
-	description = "An alcoholic beverage brewed since ancient times on Old Earth. This variety is dyed a festive green."
+	description = "Since Pre-SYON, Humenkind has brewed beer. Some Dendorite has dyed it green. For reasons."//OV Edit
 	color = "#A8E61D"
 	taste_description = "green piss water"
 	glass_icon_state = "greenbeerglass"
@@ -193,6 +201,7 @@
 /datum/reagent/consumable/ethanol/zagul
 	cuisine = CUISINE_NORTH_IMPERIAL
 	name = "Zagul Brew"
+	description = "Zagul is known for two things. It's cheap price and its potence. There is nothing nice to be said about it otherwise."//OV Edit
 	boozepwr = 15
 	taste_description = "cheap pisswater"
 	color = "#DBD77F"
@@ -201,6 +210,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_SPIRIT
 	name = "gin"
+	description = "Grain spirits have been flavoured with tart berries of the North of Grenzelhoft. An acquired taste. A sailor's taste. Cheap, though."//OV Edit
 	boozepwr = 65
 	taste_description = "strong, piney flavor"
 	color = "#809978"
@@ -209,6 +219,7 @@
 /datum/reagent/consumable/ethanol/spottedhen
 	cuisine = CUISINE_NORTH_IMPERIAL
 	name = "Spotted Hen"
+	description = "Spotted Hen beer is reputed in Zenitstadt for disappearing people who say their beer is shit. Keep your mouth shut or Doppelsoldners will pay you a visit."//OV Edit
 	boozepwr = 15
 	taste_description = "cheap pisswater"
 	color = "#DBD77F"
@@ -217,6 +228,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_ALE
 	name = "Hagwood Bitter"
+	description = "It's rumoured that Zornite brewers fund secessionist movements. This be just rumours. Buy some more."//OV Edit
 	boozepwr = 25
 	taste_description = "dull crispness"
 	color = "#BBB525"
@@ -226,6 +238,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_ALE
 	name = "Black Gote Kriek"
+	description = "Sailors of Grenzelhoft swear on the Black Gote to get them going in the morning. It's to no surprise why."//OV Edit
 	boozepwr = 25
 	taste_description = "overwhelming sourness"
 	color = "#401806"
@@ -235,6 +248,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_SPIRIT
 	name = "onion cognac"
+	description = "A surprisingly wholesome, spicy drink fashioned out of the humble root vegetable, the onion."//OV Edit
 	boozepwr = 10
 	taste_description = "spicy sweet malty overtones"
 	color = "#683e00"
@@ -246,6 +260,7 @@
 	cuisine = CUISINE_SOUTH_IMPERIAL
 	drink_type = DRINKTYPE_WINE
 	name = "Aurorian"
+	description = "A light beer brewed by Tovan breweries, more an experiment than anything else, relying on various herbs instead of hops."//OV Edit
 	boozepwr = 5
 	taste_description = "subtle herbaceous undertones"
 	color = "#5D8A8A"
@@ -255,6 +270,7 @@
 	cuisine = CUISINE_SOUTH_IMPERIAL
 	drink_type = DRINKTYPE_WINE
 	name = "Fireleaf"
+	description = "Oooh, fireleaf. Who truly loves you? The desperate, the foolish, and Azurians."//OV Edit
 	boozepwr = 2
 	taste_description = "awful liquor"
 	color = "#475e45"
@@ -265,6 +281,7 @@
 /datum/reagent/consumable/ethanol/butterhairs
 	cuisine = CUISINE_NORTHERN
 	drink_type = DRINKTYPE_ALE
+	description = "Besides their silver rapiers, Hammerholdian witch-hunters popularized this beer. Mostly because they kept asking for it."//OV Edit
 	name = "Butterhairs"
 	boozepwr = 30
 	taste_description = "buttery richness"
@@ -275,6 +292,7 @@
 	cuisine = CUISINE_NORTHERN
 	drink_type = DRINKTYPE_ALE
 	name = "Stonebeard Reserve"
+	description = "It has been said clans have fought bitter feuds over a spilled cup of this legendary brew."//OV Edit
 	boozepwr = 40
 	taste_description = "potent oatlike liquor"
 	color = "#5D8A8A"
@@ -284,6 +302,7 @@
 	cuisine = CUISINE_NORTHERN
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Voddena"
+	description = "First it was made to preserve grain over yils. Now it is made to persevere through conversations with Reformist Freifechters."//OV Edit
 	boozepwr = 40	// now it's just vodka
 	taste_description = "clean liquor"
 	color = "#a1a1a1"
@@ -293,6 +312,7 @@
 	cuisine = CUISINE_RANESHENI
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Saz Distal"
+	description = "Stoutenson promises anyone who can drink a bottle of this and not become stonecold drunk a refund. Nobody ever claimed this refund."//OV Edit
 	boozepwr = 55	// holy shit
 	taste_description = "spicy chilis, ginger, and dirt"
 	color = "#2D1D1D"
@@ -302,6 +322,7 @@
 	cuisine = CUISINE_ETRUSCAN
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Limoncello"
+	description = "A common apperetif and digestive aid by Estrucans, there are a myriad of homebrew versions. This? This is the real deal."//OV Edit
 	boozepwr = 45	// holy shit
 	taste_description = "burning and lemony"
 	color = "#d2da63"
@@ -311,6 +332,7 @@
 /datum/reagent/consumable/ethanol/ricewine
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "Both Avar and Kazengun have a tradition of rice wines. Were there more contact between these two peoples, they would probably fight over who makes the better kind."//OV Edit
 	name = "rice wine"
 	taste_description = "floral sweetness with a subtle umami taste."
 	color = "#F5E6C4" // rgb: 210, 218, 99
@@ -320,6 +342,7 @@
 /datum/reagent/consumable/ethanol/ricespirit
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "Distilled down into its essence, the humble rice grain becomes a potent warrior, with precise and clean strength to knock you off your feet."//OV Edit
 	name = "rice spirit"
 	taste_description = "clean heat and dry finish."
 	color = "#F8FDFC" // rgb: 210, 218, 99
@@ -333,6 +356,7 @@
 /datum/reagent/consumable/ethanol/sourwine // Peasant grade shit.
 	cuisine = CUISINE_NORTH_IMPERIAL
 	name = "sour wine"
+	description = "Landsknecht companies often sour their wine with apple cider vinegar to keep it fresh. It's a mark of veterancy to drink this without making a face."//OV Edit
 	boozepwr = 20
 	taste_description = "sour wine"
 	color = "#552b4b"
@@ -341,6 +365,7 @@
 	cuisine = CUISINE_OTAVAIS
 	drink_type = DRINKTYPE_WINE
 	name = "white wine"
+	description = "Lesser known, but beloved, especially in the early autumn months where Otavais vineyards sell still-fermenting wine to the commonfolk."//OV Edit
 	boozepwr = 30
 	taste_description = "sweet white wine"
 	color = "#F3ED91"
@@ -350,6 +375,7 @@
 	cuisine = CUISINE_OTAVAIS
 	drink_type = DRINKTYPE_WINE
 	name = "red wine"
+	description = "Grenzelhoftians and Azurians both cannot think of anyone else but Otavans when they see red wine. A stigma - or sophistication?"//OV Edit
 	boozepwr = 30
 	taste_description = "tannin-stricken wine"
 	color = "#571111"
@@ -358,6 +384,7 @@
 /datum/reagent/consumable/ethanol/jackberrywine
 	cuisine = CUISINE_OTAVAIS
 	drink_type = DRINKTYPE_WINE
+	description = "Decried as wine for serfs, even nobles enjoy a good glass of well-made Jacque."//OV Edit
 	name = "jacksberried wine"
 	boozepwr = 15
 	taste_description = "sickly sweet young wine"
@@ -382,6 +409,7 @@
 	cuisine = CUISINE_OTAVAIS|CUISINE_ETRUSCAN
 	drink_type = DRINKTYPE_WINE
 	name = "umeshu"
+	description = "While not the true Umeshu of the East, Otavais and Etruscan markets produce this imitation, as plums grow well in their climates."//OV Edit
 	boozepwr = 15
 	taste_description = "sickly sour young wine"
 	color = "#c997d8"
@@ -405,6 +433,7 @@
 	cuisine = CUISINE_OTAVAIS|CUISINE_ETRUSCAN
 	drink_type = DRINKTYPE_WINE
 	name = "tangerine wine"
+	description = "Etruscans are famed for their citrus fruit cultivation on the Island Miralago. This wine comes close to their production vintages."//OV Edit
 	boozepwr = 15
 	taste_description = "bittersweet, citrusy young wine"
 	color = "#e7aa59"
@@ -428,6 +457,7 @@
 	cuisine = CUISINE_OTAVAIS
 	drink_type = DRINKTYPE_WINE
 	name = "raspberry wine"
+	description = "Just to confuse foreigners, Otavans call raspberry wine and a far stronger raspberry liquer Chambord."//OV Edit
 	boozepwr = 15
 	taste_description = "tart sweet young wine"
 	color = "#ee5ea6"
@@ -451,6 +481,7 @@
 	cuisine = CUISINE_OTAVAIS
 	drink_type = DRINKTYPE_WINE
 	name = "blackberry wine"
+	description = "A favoured drink of the eastern Arwiners and Otavan drow, blackberry wine is an acquired taste for everyone else."//OV Edit
 	boozepwr = 15
 	taste_description = "bitter tart young wine"
 	color = "#861491"
@@ -476,6 +507,7 @@
 	cuisine = CUISINE_RANESHENI
 	drink_type = DRINKTYPE_WINE
 	name = "spiced wine"
+	description = "Originally a drink of Raneshen, this kind of wine has found its niche during Nocmas celebrations for its warming properties."//OV Edit
 	boozepwr = 10
 	taste_description = "overpoweringly aromatic, sweetening the tongue and numbing the lips"
 	color = "#a11a00"
@@ -546,6 +578,7 @@
 	cuisine = CUISINE_SOUTH_IMPERIAL
 	drink_type = DRINKTYPE_WINE
 	name = "Elven Red"
+	description = "Elven Red is famous for its sweetness and ease of drinking it. While not strictly in drow hands anymore, it's still marketed as Mer product."//OV Edit
 	boozepwr = 15
 	taste_description = "delectable fruity notes"
 	color = "#6C0000"
@@ -554,6 +587,7 @@
 /datum/reagent/consumable/ethanol/elfblue
 	cuisine = CUISINE_SOUTH_IMPERIAL
 	drink_type = DRINKTYPE_WINE
+	description = "It is said it was only after Valmora has produced her first bottle of wine after she retired was she sainted by the Orthodoxy. Figures."//OV Edit
 	name = "Valmora Blue"
 	boozepwr = 50
 	taste_description = "saintly sweetness"
@@ -565,6 +599,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Jagdtrunk"
+	description = "A proprietary blend of many herbs and spices, this liquor is drunk as digestiv by Grenzelhoftan nobility, from the border princes to the Kaiser himself."//OV Edit
 	boozepwr = 55	// gotta be stronk
 	taste_description = "spicy herbal remedy"
 	color = "#331f18"
@@ -573,6 +608,7 @@
 /datum/reagent/consumable/ethanol/apfelweinheim
 	cuisine = CUISINE_NORTH_IMPERIAL
 	drink_type = DRINKTYPE_CIDER
+	description = "Apfelweinheim is famed for its crisp, tart apples, but its cider has reached acclaim by the addition of the humbler pear to mellow out the acidity."//OV Edit
 	name = "Appelheimer"
 	boozepwr = 45
 	taste_description = "tart crispness and mellow sweetness"
@@ -582,6 +618,7 @@
 /datum/reagent/consumable/ethanol/rtoper
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Lirvas Toper"
+	description = "Extremely sour. Like any coinslave when you tell them that you do not know what a portfolio is."//OV Edit
 	boozepwr = 40
 	taste_description = "overwhelming tartness"
 	color = "#e0a400"
@@ -591,6 +628,7 @@
 	cuisine = CUISINE_NORTHERN
 	drink_type = DRINKTYPE_WINE
 	name = "Norwardine Red"
+	description = "Gronnite spirits fashioned with Hammerholdian techniques. It would be an insult, were they not faithfully applying the learned skills."//OV Edit
 	boozepwr = 30
 	taste_description = "heavy caramel note and slight bitterness"
 	color = "#543633"
@@ -600,6 +638,7 @@
 	cuisine = CUISINE_NORTHERN
 	drink_type = DRINKTYPE_MEAD
 	name = "Ragnar's Brew"
+	description = "While honey-wine isn't unknown to the western continent, The Iskan people have a special talent of weaving nectar to spirit..."//OV Edit
 	boozepwr = 35
 	taste_description = "notes of honey and red berries" //I love red mead ok...
 	color = "#772C48"
@@ -610,6 +649,7 @@
 /datum/reagent/consumable/ethanol/avarmead
 	drink_type = DRINKTYPE_MEAD
 	name = "Zögiin bal"
+	description = "It was after a failed Gronnite raid that steppemen from the northern border figured they can make their own mead. Their version is oddly spicy, from the heath flowers."//OV Edit
 	boozepwr = 30
 	taste_description = "spicy honey"
 	color = "#e0a400"
@@ -618,6 +658,7 @@
 /datum/reagent/consumable/ethanol/avarrice
 	drink_type = DRINKTYPE_RICEWINE
 	name = "Makkolir"
+	description = "A rice wine from the coasts and lake regions of Avar. Don't ask a steppeman who made it first, you will hear the same answer all the time."//OV Edit
 	boozepwr = 30
 	taste_description = "tangy sweetness"
 	color = "#ddcbc9"
@@ -625,6 +666,7 @@
 
 /datum/reagent/consumable/ethanol/saigamilk //No way, kumys from avar!!!
 	name = "Bökhiin Arkhi"
+	description = "The nomadic peoples of Avar figured there must be a way to preserve their favoured mount's milk. Many foreigners claim they're still looking for one."//OV Edit
 	boozepwr = 15
 	taste_description = "bubbly saltiness with a sour aftertaste"
 	color = "#dddddd"
@@ -636,6 +678,7 @@
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_ALE
 	name = "Yamaguchi Pale"
+	description = "Kazengun usually does not brew beer, and wanted to distinguish themselves by adding a local flavour with green tea. Their success is in the eye of the beholder."//OV Edit
 	boozepwr = 10 //A PALE imitation actual beer...
 	taste_description = "mellow bitterness and a hint of green tea"
 	color = "#d7dbbc"
@@ -645,6 +688,7 @@
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
 	name = "Junmai-ginjo"
+	description = "And so we struck, naginatas raised high - we are the Lords of this land, by conquest and by strength. The Sun Goddess smiles upon our success."//OV Edit
 	boozepwr = 50
 	taste_description = "dry sweetness"
 	color = "#ccd7e0"
@@ -653,6 +697,7 @@
 /datum/reagent/consumable/ethanol/kgunshochu
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "To deny a man his Shochu is a grave insult. This is a warrior's drink. A right by blade. To deny a man his Shochu is a declaration of emnity."//OV Edit
 	name = "Shochu"
 	boozepwr = 60
 	taste_description = "dry, clean finish"
@@ -662,6 +707,7 @@
 /datum/reagent/consumable/ethanol/kgunplum
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_WINE
+	description = "Beloved by commoners and jealously guarded, this drink is exported with gusto to show Westerners how to make proper plum wine."//OV Edit
 	name = "Umeshu"
 	boozepwr = 30
 	taste_description = "a mix of sweet and sour"
@@ -672,6 +718,7 @@
 /datum/reagent/consumable/ethanol/huangjiu
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "Lingyuese prefers milder, sweeter rice wines and many households have their own, little spins on it. This one is export-made, however."//OV Edit
 	name = "Huangjiu"
 	boozepwr = 30
 	taste_description = "a mix of sweet and sour"
@@ -681,6 +728,7 @@
 /datum/reagent/consumable/ethanol/baijiu
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "Originally made because Huangjiu doesn't travel well in traditional vessels, Baijiu has become a show of bravery for its spiciness and waking properties."//OV Edit
 	name = "Baijiu"
 	boozepwr = 60
 	taste_description = "fiery and pungent alcohol with a hint of sweetness"
@@ -690,6 +738,7 @@
 /datum/reagent/consumable/ethanol/yaojiu
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
+	description = "Drink a cup for dropsy, gout, the shivers, bone-eating disease, the common cold, unbalanced humours, or when too many Kazengunite vixens visited your bedchambers."//OV Edit
 	name = "Yaojiu"
 	boozepwr = 50
 	taste_description = "bittersweet alcohol with deep herbal notes"
@@ -700,6 +749,7 @@
 	cuisine = CUISINE_SOUTHEASTERN
 	drink_type = DRINKTYPE_RICEWINE
 	name = "Shejiu"
+	description = "Although western medicine prefers enlightened arts of cutting someone open to improve circulation, Lingyuese prefer to drink this spirit instead."//OV Edit
 	boozepwr = 50
 	taste_description = "musky and strong alcohol with a hint of gameiness"
 	color = "#C49A6C"
@@ -726,6 +776,7 @@
 // Special Drugs
 /datum/reagent/consumable/ethanol/murkwine // not Toilet wine
 	name = "Mürkwine"
+	description = "Yes, this looks drinkable, from a particular point of view. It's a liquid, alright." //OV Edit
 	boozepwr = 50	// bubba's best
 	taste_description = "hints of questionable choices--a bouqet of murkwater and pure ethanol"
 	color = "#4b1e00"
@@ -742,6 +793,7 @@
 /datum/reagent/consumable/ethanol/nocshine // wait, no, NOCSHINE
 	drink_type = DRINKTYPE_SPIRIT
 	name = "Noc's Shine"
+	description = "How ironic that Noc's Wisdom has led to this, the distillation of bad choices."//OV Edit
 	boozepwr = 70	// YEEEEEHAAAWWWWWW
 	taste_description = "what might be my throat melting and nose hair burning"
 	color = "#d8fbfd63"

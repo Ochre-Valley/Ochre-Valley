@@ -2,6 +2,7 @@
 	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null)
 	name = "blood"
 	color = BLOOD_COLOR_RED
+	description = "...Should this be in a glass? This is just blood."//OV Edit
 	metabolization_rate = 5 //fast rate so it disappears fast.
 	taste_description = "iron"
 	taste_mult = 1.3
@@ -13,6 +14,7 @@
 /datum/reagent/blood/shitty
 	name = "dirty blood"
 	color = "#941010" // rgb: 148, 16, 16
+	description = "A Graggarite will, mayhaps, still drink this, just to pride themselves on it."//OV Edit
 	taste_description = "rancid iron"
 	taste_mult = 1.5
 	glass_name = "glass of dirty tomato juice"
@@ -136,6 +138,7 @@
 	taste_description = "repulsive sulfur and decaying shit"
 
 /datum/reagent/water/gross/sewage/well
+	description = "Water mixed in with all manners of unwholesomness. A drink unwelcome to many, many peoples."//OV Edit
 	taste_description = "funky juice"
 
 /datum/reagent/water/gross/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
