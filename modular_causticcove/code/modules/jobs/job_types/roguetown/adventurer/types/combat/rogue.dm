@@ -1,3 +1,4 @@
+/* OV Edit: Derelict code; abandoned in place
 /datum/advclass/rogue/buccaneer
 	name = "Buccaneer"
 	tutorial = "You are a daring rogue of the seas! Buccaneers wield deadly firearms and ruthless cunning - fighting dirty to outgun foes with swagger."
@@ -23,8 +24,6 @@
 		/datum/skill/misc/music = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
 	)
-
-/* OV Edit: Refactor arquebus pistol to inherit from arquebus.
 /datum/outfit/job/roguetown/adventurer/buccaneer/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_warning("You are a daring rogue of the seas! Buccaneers wield deadly firearms and ruthless cunning - fighting dirty to outgun foes with swagger."))
