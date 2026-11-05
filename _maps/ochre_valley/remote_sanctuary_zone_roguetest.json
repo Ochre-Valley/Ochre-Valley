@@ -1,0 +1,6 @@
+{
+	"map_name": "OV Remote Sanctuary Zone (ROGUETEST, DO NOT USE)",
+	"map_path": "ochre_valley",
+	"map_file": "remote_sanctuary_zone_roguetest.dmm",
+	"traits": [{"Name": "Remote Sanctuary Zone (ROGUETEST)", "Up": true}, {"Down": true}]
+}
