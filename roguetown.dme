@@ -3943,6 +3943,7 @@
 #include "modular_ochrevalley\code\datums\pollutants\foods.dm"
 #include "modular_causticcove\code\modules\grazer\virtue.dm"
 #include "modular_causticcove\code\modules\hallucinations\Hallucination.dm"
+#include "modular_causticcove\code\modules\jobs\job_types\roguetown\adventurer\types\combat\rogue.dm"
 #include "modular_ochrevalley\code\modules\jobs\job_types\roguetown\other\event_skeleton.dm"
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\voicepacks\female\harpy.dm"
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\voicepacks\male\harpy.dm"
