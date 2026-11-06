@@ -218,3 +218,6 @@
     - bugfix: Archery enchantment now affects firearm skill
     - qol: wrench crafting now uses engineering
     - bugfix: wrenches can now parry properly
+2026-11-05:
+  NickBelmont:
+    - rscadd: "New major aspect: Aeromancy"
