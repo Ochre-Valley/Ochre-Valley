@@ -197,7 +197,7 @@
 //crossbow and axe class. Rearguard. Utility skills, no medium armor, no dodge expert. This is NOT a go-face-first-into-war class.
 /datum/advclass/mercenary/grenzelhoft_crossbowman
 	name = "Armbrustschutze"
-	tutorial = "You're a proved marksman with a crossbow, and learned how to set up camp and defenses in the wild. The guild needs you."
+	tutorial = "You're a proved marksman with a crossbow or firearm, and learned how to set up camp and defenses in the wild. The guild needs you."//ov edit, firearms
 	allowed_sexes = list(MALE, FEMALE)
 
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft_crossbowman
