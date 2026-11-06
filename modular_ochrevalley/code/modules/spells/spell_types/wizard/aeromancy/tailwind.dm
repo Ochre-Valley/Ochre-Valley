@@ -3,7 +3,7 @@
 	button_icon = 'icons/mob/actions/mage_augmentation.dmi'
 	name = "Wind's Wake"
 	desc = "Surge forth like the wind, rushing ahead in a cardinal direction and flowing around those in your path. \
-			In your wake, leave behind turbulence that lightly hampers the movements of pursuers. Shares a cooldown with squall."
+			In your wake, leave behind turbulence that lightly hampers the movements of pursuers."
 	button_icon_state = "haste"
 	sound = 'sound/combat/wooshes/bladed/wooshsmall (1).ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -27,7 +27,6 @@
 	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 30 SECONDS
-	shared_cooldown = "aeromancy_util"
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
