@@ -1658,7 +1658,7 @@
 	inhand_y_dimension = 64
 	dropshrink = 0.75
 	max_blade_int = 230
-	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier, /datum/intent/sword/thrust/rapier/lunge)
+	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier, /datum/intent/sword/thrust/rapier/lungefast, /datum/intent/sword/thrust/rapier/lunge) // OV edit - add short lunge to allow medium thrust with more of a cost to it
 	gripped_intents = null
 	special = /datum/special_intent/piercing_lunge
 	parrysound = list(
