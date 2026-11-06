@@ -1765,7 +1765,7 @@
 	name = "deep lunge"
 	icon_state = "inlunge"
 	damfactor = 1.3
-	penfactor = PEN_HEAVY // OV edit - let platebeasts have a bit of protection, as a treat
+	penfactor = PEN_BSTEEL
 
 	swingdelay_type = SWINGDELAY_CANCELSLOW
 	canparry = FALSE
