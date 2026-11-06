@@ -64,6 +64,9 @@
 	if(!user.can_speak_vocal())
 		to_chat(user, span_bloody("I have no voice!"))
 		return
+	if(istype(user, /mob/living/carbon/human/species/werewolf))
+		to_chat(user, span_bloody("RRRAAAAAGH!!"))
+		return
 	if(!user.has_status_effect(/datum/status_effect/buff/playing_music))
 		user.emote("clearthroat", forced = TRUE)
 	var/mob/living/carbon/human/harpy = user

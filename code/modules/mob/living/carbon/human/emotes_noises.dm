@@ -709,3 +709,58 @@
 		to_chat(src, span_warning("Your tongue doesn't do that"))
 		return
 	emote("thump", intentional = TRUE)
+
+// counting construct emotes as "animal" for the same reason all of the above are (preferences)
+/datum/emote/living/emote_construct_tick
+	key = "tick"
+	key_third_person = "ticks"
+	message = "emits a mechanical ticking."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+	is_animal = TRUE
+
+/mob/living/carbon/human/proc/emote_construct_tick()
+	if(istype(usr.getorganslot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/construct))
+		set name = "Tick"
+		set category = "Emotes.Noises"
+		emote("tick", intentional = TRUE)
+	else
+		to_chat(usr, span_warning("Your tongue doesn't do that"))
+		return
+
+/datum/emote/living/emote_construct_creak
+	key = "creak"
+	key_third_person = "creaks"
+	message = "creaks."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+	is_animal = TRUE
+	vary = TRUE
+
+/mob/living/carbon/human/proc/emote_construct_creak()
+	if(istype(usr.getorganslot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/construct))
+		set name = "Creak"
+		set category = "Emotes.Noises"
+		emote("creak", intentional = TRUE)
+	else
+		to_chat(usr, span_warning("Your tongue doesn't do that"))
+		return
+
+/datum/emote/living/emote_construct_spark
+	key = "spark"
+	key_third_person = "sparks"
+	message = "twitches and emits a small arcyne spark."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+	is_animal = TRUE
+	snd_vol = 25
+	vary = TRUE
+
+/mob/living/carbon/human/proc/emote_construct_spark()
+	if(istype(usr.getorganslot(ORGAN_SLOT_TONGUE), /obj/item/organ/tongue/construct))
+		set name = "Spark"
+		set category = "Emotes.Noises"
+		emote("spark", intentional = TRUE)
+	else
+		to_chat(usr, span_warning("Your tongue doesn't do that"))
+		return

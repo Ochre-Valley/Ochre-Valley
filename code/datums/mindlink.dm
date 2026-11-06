@@ -46,16 +46,16 @@ GLOBAL_LIST_EMPTY(mindlinks)
 	// Check for the ,m prefix
 	if(findtext(message, ",m", 1, 3))
 		// if mindlink ever breaks ensure some dingus didnt set ,m to a language key
-		message = trim(copytext(message, 3))
+		message = capitalize(trim(copytext(message, 3)))
 		//message = span_centcomradio("[message]")
 		var/mob/living/recipient = (speaker == owner ? target : owner)
 
 		to_chat(speaker, span_purple("You project your thoughts to [recipient]: \"[message]\""))
 		to_chat(recipient, span_purple("[speaker] projects their thoughts to you: \"[message]\""))
-		//recipient.playsound_local(recipient, 'sound/magic/message.ogg', 100)
+		recipient.playsound_local(recipient, 'sound/magic/message.ogg', 100)
 
 
-		//var/audible_message = "The voice of [speaker] echoes, \"<i>[capitalize(message)]</i>\"."
+		//var/audible_message = "The voice of [speaker] echoes, \"<i>[message]</i>\"."
 		//___callbacknewrecipient.audible_message(audible_message, runechat_message = message, custom_spans = list("mindlink", "italic"))
 		playsound(recipient, 'sound/magic/mindlink.ogg', 100, TRUE)
 		playsound(speaker, 'sound/magic/mindlink.ogg', 100, TRUE)

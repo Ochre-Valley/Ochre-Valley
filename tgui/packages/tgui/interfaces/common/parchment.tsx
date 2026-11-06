@@ -294,9 +294,7 @@ export const PriceTag = (props: {
           style={{ color: INK_SOFT, fontSize: FONT_SMALL, marginLeft: '3px' }}
         >
           (incl.
-          <span style={{ color: SEAL_AMBER, marginLeft: '2px' }}>
-            {tariff}
-          </span>
+          <span style={{ color: SEAL_AMBER, marginLeft: '2px' }}>{tariff}</span>
           )
         </span>
       )}

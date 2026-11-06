@@ -59,8 +59,6 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 
 #define istransparentturf(A) (istype(A, /turf/open/transparent) || istype(A, /turf/closed/transparent))
 
-#define isopenspace(A) (istype(A, /turf/open/transparent/openspace)) // OV Add
-
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
 
@@ -226,3 +224,7 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 #define isgenerator(A) (istype(A, /generator))
 
 #define isalist(A) (istype(A, /alist))
+
+#define isfish(A) (istype(A, /obj/item/reagent_containers/food/snacks/fish))
+
+#define isopenspace(A) (istype(A, /turf/open/transparent/openspace))

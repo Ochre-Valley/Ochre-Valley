@@ -20,7 +20,7 @@
 	min_pq = 15 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
-	vice_restrictions = list(/datum/charflaw/silverweakness)
+	vice_restrictions = list(/datum/charflaw/silverweakness, /datum/charflaw/wanted)
 	job_subclasses = list(
 		/datum/advclass/inquisitor/inspector,
 		/datum/advclass/inquisitor/ordinator
