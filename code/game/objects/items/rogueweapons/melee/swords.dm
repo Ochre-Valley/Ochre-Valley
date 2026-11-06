@@ -1759,13 +1759,13 @@
 /datum/intent/sword/thrust/rapier
 	clickcd = 8
 	damfactor = 1.1
-	penfactor = PEN_MEDIUM
+	penfactor = PEN_LIGHT // OV edit - make the fast stab less of a murderblender for light armour folks
 
 /datum/intent/sword/thrust/rapier/lunge
 	name = "deep lunge"
 	icon_state = "inlunge"
 	damfactor = 1.3
-	penfactor = PEN_BSTEEL
+	penfactor = PEN_HEAVY // OV edit - let platebeasts have a bit of protection, as a treat
 
 	swingdelay_type = SWINGDELAY_CANCELSLOW
 	canparry = FALSE
