@@ -698,6 +698,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		to_chat(user, "<span class='notice'>I finish butchering: [butcher_summary(botch_count, normal_count, perfect_count, botch_chance, perfect_chance)].</span>")
 		if(user.mind)
 			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * BUTCHERING_EXP_FINISH)
+		gib(leave_gibs = FALSE)
 		clean_gib(dna_to_add) //OV NOTE - NORMALLY JUST gib() with nothing below
 
 // This will choose a random adjacent tile to spawn a gib on, and then edit it's offset accordingly so it's closer to the body
