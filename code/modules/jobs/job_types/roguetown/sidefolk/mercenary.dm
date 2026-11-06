@@ -41,7 +41,6 @@
 		/datum/advclass/mercenary/grenzelhoft_crossbowman,
 		/datum/advclass/mercenary/grenzelhoft_mage,
 		/datum/advclass/mercenary/grenzelhoft/fencer, //CC ADD
-		/datum/advclass/mercenary/grenzelhoft/arquebusier, //OV ADD
 		/datum/advclass/mercenary/gronn,
 		/datum/advclass/mercenary/gronn_heavy,
 		/datum/advclass/mercenary/routier,
