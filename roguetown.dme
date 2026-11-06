@@ -4097,6 +4097,7 @@
 #include "modular_ochrevalley\code\modules\client\character_setup\data\character_creator\identity.dm"
 #include "modular_ochrevalley\code\modules\client\character_setup\act\character_creator\villain.dm"
 #include "modular_ochrevalley\code\modules\client\character_setup\data\character_creator\villain.dm"
+#include "modular_ochrevalley\code\game\objects\items\weapons\intents.dm"
 #include "modular_ochrevalley\code\game\objects\items\weapons\ranged\ammo.dm"
 #include "modular_ochrevalley\code\game\objects\items\weapons\ranged\arquebus.dm"
 #include "modular_ochrevalley\code\modules\cargo\packsrogue\merchant\weapons\merch_weapons_foreign.dm"
