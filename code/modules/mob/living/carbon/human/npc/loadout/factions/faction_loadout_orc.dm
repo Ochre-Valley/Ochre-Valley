@@ -67,7 +67,7 @@
 /datum/npc_archetype/orc/berserker
 	name = "Orc Berserker"
 	threat_point = THREAT_DANGEROUS
-	body = /datum/npc_body/orc/berserker
+	body = /datum/npc_body/orc/berserker //OV Add
 	statpack = /datum/npc_statpack/line/t2
 	traits = list(TRAIT_NOPAINSTUN, TRAIT_CRITICAL_RESISTANCE)
 	brawl = SKILL_LEVEL_JOURNEYMAN
@@ -86,7 +86,7 @@
 /datum/npc_archetype/orc/warlord
 	name = "Orc Warlord"
 	threat_point = THREAT_DEADLY
-	body = /datum/npc_body/orc/warlord
+	body = /datum/npc_body/orc/warlord //OV Add
 	statpack = /datum/npc_statpack/heavy/t3
 	armor_training = ARMOR_CLASS_HEAVY
 	melee = SKILL_LEVEL_EXPERT
