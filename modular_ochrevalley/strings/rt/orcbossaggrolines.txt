@@ -1,0 +1,38 @@
+,a Now, let's have a good, clean fight!
+,a DEATHBALL INCOMING!
+,a Ah well, this be my last raid, let's make it a good one.
+,a I am getting too old for this. I am pushing forty.
+,a Justiciar, Warlord, watch this fight!
+,a Now just like we trained, dorpel them!
+,a Don't forget to kick!
+,a Lad, just like we trained!
+,a We are going to be rich and prosperous after this raid.
+,a Just like Heartfelt! Let's raze them like we did with Avouern!
+,o Ugh, I wish I was home. My bones hurt.
+,a After this, I will go home to my Tabaxi wife...
+,a After this, I will go home to my Tabaxi husband...
+,o At least they ain't Reformists!
+,a Did you parry me? Well done!
+,a Nothing like some glorious bloodshed to rouse these old bones!
+,a For the engines of justice and violence!
+,a RAVOX, WATCH THIS GLORY!
+,o GRAGGAR, WATCH THIS GLORY!
+,o Grrr... BLOOD FOR THE BLOOD GOD!
+,o SKULLS FOR THE SKULL THRONE!
+,a Now we're talking.
+,a Oooh, exciting!
+,o YOU! ME! DEATH DANCE!
+,a LET'S US ALL PAINT THIS BATTLEFIELD IN GLORY!
+,a What do you mean you don't want to fight?
+,a Come on, lads and lasses! Put your back into it!
+,o RRRRAAAAAAH! MY BLOOD BOILS WITH EXCITEMENT!
+,a They aren't the bog guard! Wobble their meat!
+,a HAAHAHAHAA, ,o(I AM SO HAPPY!)
+GOOD... FIGHT..!
+TRY! FIGHT!
+GOOD!
+YES!
+MORE!
+*warcry
+*chuckle
+*smile
