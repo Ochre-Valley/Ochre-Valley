@@ -24,6 +24,11 @@
 	cmode_music = FALSE
 	ambush_faction = "orcs"
 
+/mob/living/carbon/human/species/orc/npc/after_creation()
+	..()
+	src.grant_language(/datum/language/aavnic)
+	src.grant_language(/datum/language/orcish)
+
 /mob/living/carbon/human/species/orc/npc/archer
 	npc_archetype = /datum/npc_archetype/orc/savage/archer
 	threat_point = THREAT_HIGH
