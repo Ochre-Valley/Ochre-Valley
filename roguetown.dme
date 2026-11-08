@@ -3882,7 +3882,6 @@
 #include "modular\ze_genesis_call\genesis_call.dm"
 
 
-#include "modular_ochrevalley\code\datums\mercenaries\change_status.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_accessories.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_cloaks.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_hats.dm"
@@ -4162,4 +4161,5 @@
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\kiss_inside_belly.dm"
 #include "modular_ochrevalley\code\game\objects\items\donator_modkit.dm"
 #include "modular_ochrevalley\code\game\objects\items\donator_fluff_items.dm"
+#include "modular_ochrevalley\code\datums\mercenaries\change_status.dm"
 // END_INCLUDE
