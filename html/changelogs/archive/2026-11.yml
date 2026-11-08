@@ -26,3 +26,7 @@
 2026-11-05:
   NickBelmont:
   - rscadd: 'New major aspect: Aeromancy'
+2026-11-08:
+  pontifexminimus2:
+  - rscadd: Adds aggro lines to orcs, with default, berserker and boss lines.
+  - rscadd: Gives orcs aavnic and orcish as languages.
