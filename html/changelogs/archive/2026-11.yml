@@ -398,6 +398,9 @@
         an offer.
     - bugfix: Fixed overly sanitized Rose Wall text.
 2026-11-08:
+  pontifexminimus2:
+    - rscadd: Adds aggro lines to orcs, with default, berserker and boss lines.
+    - rscadd: Gives orcs aavnic and orcish as languages.
   Blacklist897:
     - rscadd: Donator Items for lockwood
   BobProductive:
