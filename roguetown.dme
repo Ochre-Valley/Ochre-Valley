@@ -921,10 +921,12 @@
 #include "code\datums\gods\faiths\old_god.dm"
 #include "code\datums\gods\patrons\godless.dm"
 #include "code\datums\gods\patrons\mossmother.dm"
+//OV ADD - THE PSY-JAKK NEEDS TO BE HERE.
 #include "code\datums\gods\patrons\old_god\_old_god.dm"
 #include "code\datums\gods\patrons\old_god\old_god.dm"
 #include "code\datums\gods\patrons\old_god\old_god_ortho.dm"
 #include "code\datums\gods\patrons\old_god\old_god_reformist.dm"
+//OV END
 #include "code\datums\gods\patrons\archdevil\archdevil.dm"
 #include "code\datums\gods\patrons\divine\_divine.dm"
 #include "code\datums\gods\patrons\divine\abyssor.dm"
