@@ -11,6 +11,7 @@
 	rogue_enabled = TRUE
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
 	storyteller_maxcaps = list(/datum/storyteller/gamemode/guaranteed_antag = 3)
+	storyteller_blacklisted = TRUE //OV EDIT
 	/// Skill levels still owed, handed out in order.
 	var/list/picks = list(SKILL_LEVEL_MASTER, SKILL_LEVEL_EXPERT, SKILL_LEVEL_EXPERT, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN)
 	/// Skill types already picked, so none is picked twice.
