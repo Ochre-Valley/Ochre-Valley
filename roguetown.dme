@@ -3944,6 +3944,7 @@
 #include "modular_causticcove\code\modules\grazer\stomach.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_triumph.dm"
 //OV ADD - THE JAKK IS ETERNAL
+#include "modular_ochrevalley\code\datums\gods\patrons\old_god\old_god_naledi.dm"
 #include "modular_ochrevalley\code\datums\gods\patrons\old_god\old_god_ortho.dm"
 #include "modular_ochrevalley\code\datums\gods\patrons\old_god\old_god_reformist.dm"
 //OV END

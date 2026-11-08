@@ -122,9 +122,11 @@
 			extra.forceMove(T)
 
 	return TRUE
-
-/datum/action/cooldown/spell/psydon/bootcheck/reformist  //OV Edit - Dude's dead, but hey, have a coin anyway.
+//OV ADD - Other messages depending on subtypes
+/datum/action/cooldown/spell/psydon/bootcheck/reformist
 	coin_message = "A coin in my boot? Lucky, karma rewards me!"
+/datum/action/cooldown/spell/psydon/bootcheck/naledi
+	coin_message = "My guilt lessens. A brief fortune, given by the Allfather. I am on the right path."
 
 /////////////////
 // T1 - ENDURE //
