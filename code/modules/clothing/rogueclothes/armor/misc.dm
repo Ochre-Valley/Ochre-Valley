@@ -83,3 +83,18 @@
 	. = ..()
 	color = pick(CLOTHING_PURPLE, null,CLOTHING_GREEN, CLOTHING_RED)
 
+//OV EDIT
+/obj/item/clothing/suit/roguetown/armor/corset_bust
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "overbust corset"
+	desc = "A leather binding to constrict one's figure... and lungs."
+	icon = 'modular_ochrevalley/icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'modular_ochrevalley/icons/roguetown/clothing/onmob/armor.dmi'
+	icon_state = "corsetbust"
+	body_parts_covered = CHEST
+	salvage_result = /obj/item/natural/hide/cured
+	sewrepair = TRUE
+	salvage_amount = 1
+	grid_height = 64
+	grid_width = 64
+//OV EDIT
