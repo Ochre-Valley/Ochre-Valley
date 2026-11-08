@@ -7,7 +7,7 @@
 	self_cast_possible = TRUE
 
 	charge_required = FALSE
-	cooldown_time = 5 SECONDS //give the game some time to process it
+	cooldown_time = 2 SECONDS //give the game some time to process it
 
 	primary_resource_type = SPELL_COST_NONE
 
