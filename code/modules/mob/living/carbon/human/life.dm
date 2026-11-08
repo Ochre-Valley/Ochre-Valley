@@ -100,10 +100,10 @@
 			cf.flaw_on_moved(src, OldLoc, Dir)
 //Caustic Edit End
 	// OV Edit Start - To prevent toggling scrying protections permanently
-	if(do_not_disturb) 
+	if(do_not_disturb)
 		if(!isbelly(loc))
 			do_not_disturb = FALSE
-			to_chat(src, span_notice("You are no longer marked as private and can be scried.")) 
+			to_chat(src, span_notice("You are no longer marked as private and can be scried."))
 	// OV Edit End
 
 
@@ -125,10 +125,6 @@
 			if(gender == MALE)
 				has_stubble = TRUE
 				update_hair()
-
-/mob/living/carbon/human/handle_environment()
-	
-	dna.species.handle_environment(src)
 
 /mob/living/carbon/human/proc/get_thermal_protection()
 	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures

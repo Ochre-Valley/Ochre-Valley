@@ -118,5 +118,5 @@
 	var/descriptor_body = build_coalesce_description_nofluff(d_list, H, list(MOB_DESCRIPTOR_SLOT_BODY), "%DESC1%")
 	var/descriptor_voice = build_coalesce_description_nofluff(d_list, H, list(MOB_DESCRIPTOR_SLOT_VOICE), "%DESC1%")
 
-	add_bounty(H.real_name, race, gender, descriptor_height, descriptor_body, descriptor_voice, bounty_total, FALSE, my_crime, bounty_poster)
+	add_bounty(H.real_name, race, gender, descriptor_height, descriptor_body, descriptor_voice, bounty_total, my_crime, bounty_poster, null, TRUE)
 	to_chat(H, span_danger("You are a bandit! Wanted, hunted, You are a somewhat powerful role with many resources at your disposal. This role just like wretch is a soft-antag role, You are still subjected to rules of escalation. Work with your fellow bandits to accomplish your goals, preferably creating a good and interesting round and not going RDM. ")) //Caustic Cove Edit

@@ -533,22 +533,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		virtuetwo = new /datum/virtue/none
 
 	if(length(virtue_choices))
-		var/error_found = FALSE
-		for(var/choice in virtue_choices)
-			if(!(choice in virtue.extra_choices))
-				error_found = TRUE
-				break
-		if(!error_found)
-			virtue.picked_choices = virtue_choices.Copy()
+		virtue.picked_choices = virtue_choices & virtue.extra_choices
 
 	if(length(virtuetwo_choices))
-		var/error_found = FALSE
-		for(var/choice in virtuetwo_choices)
-			if(!(choice in virtuetwo.extra_choices))
-				error_found = TRUE
-				break
-		if(!error_found)
-			virtuetwo.picked_choices = virtuetwo_choices.Copy()
+		virtuetwo.picked_choices = virtuetwo_choices & virtuetwo.extra_choices
 
 	virtue.on_load()
 	virtuetwo.on_load()
@@ -749,6 +737,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// OV Edit End
 	S["qsr"] 					>> qsr_pref
 	S["flavortext"]				>> flavortext
+	S["pen_name"]				>> pen_name
 	S["ooc_notes"]				>> ooc_notes
 	S["ooc_extra"]				>> ooc_extra
 	S["rumour"]					>> rumour
@@ -1086,6 +1075,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["preset_bounty_severity_v_key"] , preset_bounty_severity_v_key)
 	WRITE_FILE(S["preset_bounty_crime"] , preset_bounty_crime)
 	WRITE_FILE(S["flavortext"] , html_decode(flavortext))
+	WRITE_FILE(S["pen_name"] , pen_name)
 	WRITE_FILE(S["ooc_notes"] , html_decode(ooc_notes))
 	WRITE_FILE(S["ooc_extra"] ,	ooc_extra)
 	WRITE_FILE(S["rumour"] , html_decode(rumour))
