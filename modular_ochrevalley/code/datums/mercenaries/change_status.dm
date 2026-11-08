@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/mercenary_statusupdate
-	name = "Update Mercenary status"
+	name = "Update Mercenary Status"
 	desc = "Update your status at the mercenary statue. Cycles through Available, Contracted, and Do Not Disturb in that order."
 	button_icon_state = "book1"
 
@@ -21,3 +21,11 @@
 		return FALSE
 	SSroguemachine.mercenary_statue.cycle_mercenary_status(user)
 	return TRUE
+
+
+// Not actually a virtue, but kept in the category for convenience.
+/mob/living/carbon/human/proc/mercenary_statusupdate()
+	set name = "Update Mercenary Status"
+	set category = "RoleUnique.Virtue"
+	set desc = "Update your status at the mercenary statue. Cycles through Available, Contracted, and Do Not Disturb in that order."
+	SSroguemachine.mercenary_statue.cycle_mercenary_status(src)

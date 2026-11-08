@@ -123,6 +123,7 @@
 			addtimer(CALLBACK(statue, TYPE_PROC_REF(/obj/structure/roguemachine/talkstatue/mercenary, expire_registration), M.key), 5 MINUTES)
 			// OV add: give them the change status spell too
 			H.mind.AddSpell(new /datum/action/cooldown/spell/mercenary_statusupdate)
+			add_verb(H, /mob/living/carbon/human/proc/mercenary_statusupdate)
 
 /datum/advclass/mercenary/post_equip(mob/living/carbon/human/H) // has to be here because this is done AFTER subclass selection
 	. = ..()
