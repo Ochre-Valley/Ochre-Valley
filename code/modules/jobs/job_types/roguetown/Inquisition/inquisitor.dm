@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	allowed_sexes = list(MALE, FEMALE)
 	//forbidden_races = list(RACES_CONSTRUCT RACES_DESPISED RACES_OOZE)		//Would you trust a machine to handle a role that requires non-logical intuition and commanding? Maybe. Could undo this if the community likes it. Purpose-built supermachines sound cool, too. //OV Edit - Allows all for Good or Ill
-	allowed_patrons = list(/datum/patron/old_god) //Requires your character's patron to be Psydon. This role is explicitly designed to be played by Psydonites, only, and almost everything they have - down to the equipment and statblock - is rooted in Psydonism. Do NOT make this accessable to other faiths, unless you go through the efforts of redesigning it from the ground up.
+	allowed_patrons = list(/datum/patron/old_god/old_god_ortho) //OV EDIT - Requires your character's patron to be Puritanical Psydon. This role is explicitly designed to be played by Psydonites, only, and almost everything they have - down to the equipment and statblock - is rooted in Psydonism. Do NOT make this accessable to other faiths, unless you go through the efforts of redesigning it from the ground up.
 	tutorial = "You are a fervent adherent to the doctrine of PSYDON and entrusted to be an agent of the Missionata Psydonia, the missionary organisation of Otava - the largest Psydonic kingdom left on this world. They have entrusted you to represent the True Faith to the heathen world, to extend the hope and endurance it brings, to protect the flock and maintain cordial relations. You dance a narrow path between zeal and diplomacy in a world of wayward heathens, so be delicate, 'lest you end up strapped onto a pyre." //OV Edit per Lore Doc
 	whitelist_req = TRUE
 	cmode_music = 'sound/music/combat_inqcommander.ogg' //Formerly 'sound/music/inquisitorcombat.ogg'.
@@ -30,7 +30,7 @@
 	name = "Inquisitor" //OV Edit - Was "Inquisitor"
 	jobtype = /datum/job/roguetown/inquisitor
 	job_bitflag = BITFLAG_HOLY_WARRIOR	//Counts as church.
-	allowed_patrons = list(/datum/patron/old_god)
+	allowed_patrons = list(/datum/patron/old_god/old_god_ortho) //OV EDIT - Gotta be puritan!
 
 //// The Inquisitor. Jack of all trades, master of none. Respectable assortment of skills, stats, and equipment; good at both subterfuge and combat. Functions very well on their own, and even better with a full sect.
 
