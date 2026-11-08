@@ -1,5 +1,6 @@
 GLOBAL_LIST_INIT(time_change_tips, world.file2list("strings/rt/timechangetips.txt"))
 GLOBAL_LIST_INIT(time_change_quotes, world.file2list("strings/rt/timechangequotes.txt"))
+GLOBAL_LIST_INIT(time_change_quotes_ochrevalley, world.file2list("modular_ochrevalley/strings/rt/timechangequotes.txt"))
 
 //Returns the world time in english
 /proc/worldtime2text()
@@ -222,7 +223,7 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 		// thanks to kat for the idea here :)
 		var/static/list/tip_or_quote_list = list(
 			GLOB.time_change_tips,
-			GLOB.time_change_quotes
+			GLOB.time_change_quotes + GLOB.time_change_quotes_ochrevalley // OV EDIT - merge AP's time change quotes with our own
 		)
 		// needed for ternary in addition to accessing list #
 		var/modulo_day = (day_number%2)
