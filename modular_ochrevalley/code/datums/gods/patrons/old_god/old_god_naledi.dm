@@ -12,7 +12,7 @@
 	<br> Usually they regard them as simply isolated aspects of Psydon, that foolish people have mistaken for separate Gods."
 	worshippers = "Naledi Refugees, Warscholars, isolated Ranesheni"
 	associated_faith = /datum/faith/old_god
-	allow_gold_cross = TRUE
+	allow_golden_cross = TRUE
 	prayer_failure_message = "..yet, my guilt lessens not, for this is an insufficient supplication. I must stand before a structured cross, be grasping a silvered or golden psycross, be bleeding from a wound, or be standing in the rain. Just as He weeps, so must I."
 	mob_traits = list(TRAIT_PSYDONIAN_GRIT) //Assigned to all mobs with Psydon as the chosen patron. Gives a Willpower-scaling chance to resist succumbing to pain.
 	miracles = list(/datum/action/cooldown/spell/touch/orison						= CLERIC_ORI, // Should they get this? Whatever.
