@@ -921,12 +921,7 @@
 #include "code\datums\gods\faiths\old_god.dm"
 #include "code\datums\gods\patrons\godless.dm"
 #include "code\datums\gods\patrons\mossmother.dm"
-//OV ADD - THE PSY-JAKK NEEDS TO BE HERE.
-#include "code\datums\gods\patrons\old_god\_old_god.dm"
-#include "code\datums\gods\patrons\old_god\old_god.dm"
-#include "code\datums\gods\patrons\old_god\old_god_ortho.dm"
-#include "code\datums\gods\patrons\old_god\old_god_reformist.dm"
-//OV END
+#include "code\datums\gods\patrons\old_god.dm"
 #include "code\datums\gods\patrons\archdevil\archdevil.dm"
 #include "code\datums\gods\patrons\divine\_divine.dm"
 #include "code\datums\gods\patrons\divine\abyssor.dm"
@@ -3948,6 +3943,10 @@
 #include "modular_ochrevalley\code\modules\clothing\rogueclothes\armor\skin.dm"
 #include "modular_causticcove\code\modules\grazer\stomach.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_triumph.dm"
+//OV ADD - THE JAKK IS ETERNAL
+#include "modular_ochrevalley\code\datums\gods\patrons\old_god\old_god_ortho.dm"
+#include "modular_ochrevalley\code\datums\gods\patrons\old_god\old_god_reformist.dm"
+//OV END
 #include "modular_ochrevalley\code\datums\pollutants\foods.dm"
 #include "modular_causticcove\code\modules\grazer\virtue.dm"
 #include "modular_causticcove\code\modules\hallucinations\Hallucination.dm"
