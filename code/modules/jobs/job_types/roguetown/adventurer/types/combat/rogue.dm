@@ -223,7 +223,7 @@
 		STATKEY_WIL = 1,
 	)
 	subclass_skills = list(
-		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		//datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN, OV EDIT. given in weapon choice
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
@@ -251,14 +251,36 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	//beltl = /obj/item/flashlight/flare/torch/lantern OV edit
 	beltr = /obj/item/rogueweapon/sword/cutlass
 	backpack_contents = list(
 		/obj/item/bomb = 1,
 		/obj/item/lockpick = 1,
-		/obj/item/rogueweapon/huntingknife/idagger/steel/parrying = 1,
-		/obj/item/rogueweapon/scabbard/sheath = 1
+		//ov edit start
+		//obj/item/rogueweapon/huntingknife/idagger/steel/parrying = 1,
+		//obj/item/rogueweapon/scabbard/sheath = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1
+		//ov edit end
 		)
+	//OV edit start
+	if(H.mind)
+		var/guns = list("Parrying Dagger", "Pistol and Shot", "Blunderbuss and Scattershot")
+		var/gun_choice = input(H, "Choose a sidearm.", "POWDER AND SHOT") as anything in guns
+		H.set_blindness(0)
+		switch(gun_choice)
+			if("Parrying Dagger")
+				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/rogueweapon/scabbard/sheath
+				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
+			if("Pistol and Shot")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/quiver/bulletpouch/powderkit/iron
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+			if("Blunderbuss and Scattershot")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/quiver/bulletpouch/powderkit/bronzescatter
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
+	//OV edit end
 
 /datum/advclass/rogue/antiquarian
 	name = "Antiquarian"
