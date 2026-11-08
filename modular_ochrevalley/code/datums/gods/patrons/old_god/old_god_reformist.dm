@@ -11,6 +11,7 @@
 	<br> Given their apparent godlessness, they are confusing and somewhat beloathed by other Genesists, especially the more militant expressions."
 	worshippers = "Freifechters, Pacificists, and miniscule amounts of Aaavnics."
 	associated_faith = /datum/faith/old_god
+	prayer_failure_message = "..yet, I feel incomplete. To complete my communion, I must stand before a structured cross, be grasping a silvered psycross, be bleeding from a wound, or be standing in the rain. Just as He wept, so must I."
 	mob_traits = list(TRAIT_PSYDONIAN_GRIT) //Assigned to all mobs with Psydon as the chosen patron. Gives a Willpower-scaling chance to resist succumbing to pain.
 	miracles = list(/datum/action/cooldown/spell/touch/orison						= CLERIC_ORI, // Should they get this? Whatever.
 					/datum/action/cooldown/spell/psydon/bootcheck/reformist			= CLERIC_T0, //Personal spell - summons a completely random item upon use. Your mileage might vary.
@@ -31,43 +32,10 @@
 	)
 
 	titles = list(
+		"Psydon",
 		"God", // people call him this for. some reason. he has a name, y'all
 		"Architect",
 		"Allfather",
 		"Creator",
 		"Father",
 	)
-
-/////////////////////////////////
-// Does God Hear Your Prayer ? //
-/////////////////////////////////
-// no he's dead - But you can still commune.
-
-/datum/patron/old_god/can_pray(mob/living/follower)
-	. = ..()
-	. = TRUE
-	// Allows prayer near psycross.
-	for(var/obj/structure/fluff/psycross/cross in view(4, get_turf(follower)))
-		if(cross.divine == FALSE)
-			to_chat(follower, span_danger("That defiled cross interrupts my prayers!"))
-			return FALSE
-		return TRUE
-	// Allows prayer if raining and outside. Psydon weeps.
-	// this is a gpt'd fix after we updated our weather system. im pretty sure i get how it works, just didnt know how to call the SSParticleWeather.
-	var/datum/particle_weather/W = SSParticleWeather?.runningWeather
-	if(istype(W, /datum/particle_weather/rain_gentle) || istype(W, /datum/particle_weather/rain_storm))
-		if(istype(get_area(follower), /area/rogue/outdoors))
-			return TRUE
-	if(istype(W, /datum/particle_weather/blood_rain_gentle) || istype(W, /datum/particle_weather/blood_rain_storm))
-		if(istype(get_area(follower), /area/rogue/outdoors))
-			follower.add_stress(/datum/stressevent/something_stirs)
-			follower.playsound_local(follower, 'sound/magic/psydonbleeds.ogg', 40, TRUE)
-			return TRUE
-	// Allows prayer if bleeding.
-	if(follower.bleed_rate > 0)
-		return TRUE
-	// Allows prayer if holding silver psycross.
-	if(istype(follower.get_active_held_item(), /obj/item/clothing/neck/roguetown/psicross/silver))
-		return TRUE
-	to_chat(follower, span_danger("..yet, I feel incomplete. To complete my communion, I must stand before a structured cross, be grasping a silvered psycross, be bleeding from a wound, or be standing in the rain. Just as He wept, so must I."))
-	return FALSE

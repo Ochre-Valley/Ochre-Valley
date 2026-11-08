@@ -9,6 +9,8 @@
 	</br>''He, who yet slumbers to this dae; and who may yet still return.''"
 	worshippers = "Commonfolk, Zealots, Heroes, Villains, and the Esoteric"
 	associated_faith = /datum/faith/old_god
+	var/allow_golden_cross = FALSE //OV Edit to allow Naledi to pray with gold.
+	var/prayer_failure_message = "..yet, I feel incomplete. To complete my prayer, I must stand before a structured cross, be grasping a silvered psycross, be bleeding from a wound, or be standing in the rain. Just as He weeps, so must I." //OV Edit to allow different fail messages by override in the children.
 	mob_traits = list(TRAIT_PSYDONIAN_GRIT) //Assigned to all mobs with Psydon as the chosen patron. Gives a Willpower-scaling chance to resist succumbing to pain.
 	miracles = list(/datum/action/cooldown/spell/touch/orison		= CLERIC_ORI,
 					/datum/action/cooldown/spell/psydon/bootcheck	= CLERIC_T0, //Personal spell - summons a completely random item upon use. Your mileage might vary.
@@ -36,7 +38,6 @@
 		"Saidon",
 		"Saidun" // lingyue
 	)
-
 /////////////////////////////////
 // Does God Hear Your Prayer ? //
 /////////////////////////////////
@@ -65,8 +66,8 @@
 	// Allows prayer if bleeding.
 	if(follower.bleed_rate > 0)
 		return TRUE
-	// Allows prayer if holding silver psycross.
-	if(istype(follower.get_active_held_item(), /obj/item/clothing/neck/roguetown/psicross/silver))
+	// Allows prayer if holding silver psycross //OV EDIT or golden psycross for Naledi.
+	if(istype(follower.get_active_held_item(), /obj/item/clothing/neck/roguetown/psicross/silver) || (allow_golden_cross && istype(follower.get_active_held_item(), /obj/item/clothing/neck/roguetown/psicross/g)))
 		return TRUE
-	to_chat(follower, span_danger("..yet, I feel incomplete. To complete my prayer, I must stand before a structured cross, be grasping a silvered psycross, be bleeding from a wound, or be standing in the rain. Just as He weeps, so must I."))
+	to_chat(follower, span_danger(prayer_failure_message)) //OV EDIT, now calls var.
 	return FALSE
