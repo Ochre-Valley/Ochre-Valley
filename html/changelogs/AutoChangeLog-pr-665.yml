@@ -1,0 +1,5 @@
+author: "pontifexminimus2"
+delete-after: True
+changes:
+  - rscadd: "Adds aggro lines to orcs, with default, berserker and boss lines."
+  - rscadd: "Gives orcs aavnic and orcish as languages."
