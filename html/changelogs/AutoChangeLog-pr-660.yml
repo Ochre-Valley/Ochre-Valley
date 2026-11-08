@@ -1,0 +1,5 @@
+author: "pontifexminimus2"
+delete-after: True
+changes:
+  - rscadd: "New dialogue file in our modular folder."
+  - bugfix: "Lore compliance of gronnite raiders.\n:cl:"
