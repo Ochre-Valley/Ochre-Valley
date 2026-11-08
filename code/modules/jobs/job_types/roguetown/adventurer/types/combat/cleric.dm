@@ -104,7 +104,7 @@
 				wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
 				gloves = /obj/item/clothing/gloves/roguetown/bandages
 	H.cmode_music = 'sound/music/combat_holy.ogg' // left in bc i feel like monk players want their darktide TRAIT_DODGEEXPERT
-	switch(H.patron?.type)
+	switch(istype(H.patron, /datum/patron/old_god) ? /datum/patron/old_god : H.patron?.type) //OV Edit - Checks if you have any descendant type of Old_god
 		if(/datum/patron/old_god)
 			cloak = /obj/item/clothing/cloak/tabard/psydontabard/black
 			mask = /obj/item/clothing/head/roguetown/roguehood/psydon/black
@@ -219,10 +219,10 @@
 
 	//Armor varients here
 	var/armors = list("Hauberk")
-	if(H.patron?.type != /datum/patron/old_god)
+	if(!istype(H.patron, /datum/patron/old_god)) //OV Edit - Checks if you have any descendant type of Old_god
 		armors += list("Cuirass")
 		shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/light
-	if(H.patron?.type == /datum/patron/old_god)
+	if(istype(H.patron, /datum/patron/old_god)) //OV Edit - Checks if you have any descendant type of Old_god
 		armors += list("Psydonic Cuirass")
 		shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/inq/cleric
 
@@ -236,7 +236,7 @@
 			armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/ornate
 
 	//helmets and cloaks here
-	switch(H.patron?.type)
+	switch(istype(H.patron, /datum/patron/old_god) ? /datum/patron/old_god : H.patron?.type)
 		if(/datum/patron/old_god)
 			cloak = /obj/item/clothing/cloak/tabard/psydontabard/black
 			helmets += list(
@@ -427,7 +427,7 @@
 		/obj/item/rogueweapon/scabbard/sheath = 1
 		)
 	H.cmode_music = 'sound/music/cmode/church/combat_reckoning.ogg'
-	switch(H.patron?.type)
+	switch(istype(H.patron, /datum/patron/old_god) ? /datum/patron/old_god : H.patron?.type) //OV Edit - Checks if you have any descendant type of Old_god
 		if(/datum/patron/old_god)
 			if(H.mind)
 				var/cloaks = list("Robe", "Tabard")
@@ -545,7 +545,7 @@
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpot = 1,
 		)
 	H.cmode_music = 'sound/music/cmode/church/combat_acolyte.ogg' // our cleric pre_equip handles cmode music
-	switch(H.patron?.type)
+	switch(istype(H.patron, /datum/patron/old_god) ? /datum/patron/old_god : H.patron?.type) //OV Edit - Checks if you have any descendant type of Old_god
 		if(/datum/patron/old_god)
 			head = /obj/item/clothing/head/roguetown/roguehood/psydon/black
 			shoes = /obj/item/clothing/shoes/roguetown/sandals/toga
