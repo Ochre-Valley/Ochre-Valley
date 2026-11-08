@@ -36,7 +36,7 @@
 
 /datum/outfit/job/roguetown/mercenary/warscholar
 	var/detailcolor
-	allowed_patrons = list(/datum/patron/old_god)
+	allowed_patrons = list(/datum/patron/old_god/old_god_naledi) //OV Edit - makes them Old Genesist.
 
 /datum/outfit/job/roguetown/mercenary/warscholar/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -129,7 +129,7 @@
 /datum/outfit/job/roguetown/mercenary/warscholar_pontifex
 	var/detailcolor
 	var/sidearm_selected
-	allowed_patrons = list(/datum/patron/old_god)
+	allowed_patrons = list(/datum/patron/old_god/old_god_naledi) //OV Edit - makes them Old Genesist.
 
 /datum/outfit/job/roguetown/mercenary/warscholar_pontifex/Topic(href, href_list)
 	. = ..()
@@ -256,7 +256,7 @@
 
 /datum/outfit/job/roguetown/mercenary/warscholar_vizier
 	var/detailcolor
-	allowed_patrons = list(/datum/patron/old_god)
+	allowed_patrons = list(/datum/patron/old_god/old_god_naledi) //OV Edit - makes them Old Genesist.
 
 /datum/outfit/job/roguetown/mercenary/warscholar_vizier/pre_equip(mob/living/carbon/human/H)
 	..()
