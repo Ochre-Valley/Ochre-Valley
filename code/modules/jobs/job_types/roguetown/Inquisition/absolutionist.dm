@@ -73,7 +73,7 @@
 
 /datum/job/roguetown/absolver/New() //OV ADD - Needs to be done to allow all stripes of psydonites EXCEPT REFORMISTS.
 	. = ..()
-	allowed_patrons = list(/datum/patron/old_god) + (subtypesof(/datum/patron/old_god) - list(/datum/patron/old_god/old_god_reformist))
+	allowed_patrons = list(/datum/patron/old_god) + (subtypesof(/datum/patron/old_god) - list(/datum/patron/old_god/reformist))
 
 // REMEMBER FLAGELLANT? REMEMBER LASZLO? THIS IS HIM NOW. FEEL OLD YET?
 

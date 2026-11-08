@@ -2,8 +2,8 @@
 // EGYPT PSYDON   OV ADD   //
 ////////////////////////////
 
-/datum/patron/old_god/old_god_naledi
-	name = "Old Genenism"
+/datum/patron/old_god/naledi
+	name = "Old Genesism"
 	domain = "Naledi, Raneshen"
 	desc = "Reputed to be the oldest surviving expression of Psydon, Old Genesism is the majority faith of Naledi and still holds out in the deepest, most isolated parts of Raneshen. \
 	<br> Deistic in nature, they maintain that all of Creation is Psydon, except Sin and hardship, which spawns from the folly of Man for falling to the Archdevil's lies. Regretfully, Psydon has turned from his creation in turn. \

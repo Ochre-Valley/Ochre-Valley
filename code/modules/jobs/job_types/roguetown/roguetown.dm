@@ -101,7 +101,7 @@
 	switch(patron_type)
 		if(/datum/patron/old_god)
 			amulet = /obj/item/clothing/neck/roguetown/psicross
-			if(istype(H.patron, /datum/patron/old_god/old_god_reformist)) //OV Edit - Reoformists have their own cross. Other subtypes can get their own overide.
+			if(istype(H.patron, /datum/patron/old_god/reformist)) //OV Edit - Reoformists have their own cross. Other subtypes can get their own overide.
 				amulet = /obj/item/clothing/neck/roguetown/psicross/reform
 		if(/datum/patron/divine/undivided)
 			amulet = /obj/item/clothing/neck/roguetown/psicross/undivided

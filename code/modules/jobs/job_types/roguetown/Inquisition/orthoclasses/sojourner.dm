@@ -6,7 +6,7 @@
 	Where your fists fall short, your wits prevail. Where your magyck falters, your fists answer. \
 	His will be done." //OV Edit per Lore Doc
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_patrons = list(/datum/patron/old_god/old_god_naledi) //OV Edit - gotta be a Naledi adherent to be the Naledi class!
+	allowed_patrons = list(/datum/patron/old_god/naledi) //OV Edit - gotta be a Naledi adherent to be the Naledi class!
 	outfit = /datum/outfit/job/roguetown/sojourner
 	subclass_languages = list(/datum/language/otavan, /datum/language/celestial)
 	category_tags = list(CTAG_ORTHODOXIST)

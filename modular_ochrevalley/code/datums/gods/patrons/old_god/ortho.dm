@@ -2,7 +2,7 @@
 //MOSSAD  PSYDON   OV ADD   //
 /////////////////////////////
 
-/datum/patron/old_god/old_god_ortho
+/datum/patron/old_god/ortho
 	name = "Otavan Puritanism"
 	domain = "Otava"
 	desc = "''Otava's interpretation of Psydon, one of the most puritanical expressions of the Old God. \
