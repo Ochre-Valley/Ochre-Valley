@@ -108,10 +108,10 @@
 	else
 		found_thing = new /obj/item/roguecoin/copper(T)
 	var/coin_message = "A coin in my boot? Psydon smiles upon me!" //OV Edit, previous approach was less resilient to upstream changes.
-	if(istype(H.patron, /datum/patron/old_god/old_god_naledi)
-  		coin_message = "My guilt lessens. A brief fortune, given by the Allfather. I am on the right path."
-	else if(istype(H.patron, /datum/patron/old_god/old_god_reformist)
-   		coin_message = "A coin in my boot? Lucky, karma rewards me!"
+	if(istype(H.patron, /datum/patron/old_god/naledi))
+		coin_message = "My guilt lessens. A brief fortune, given by the Allfather. I am on the right path."
+	else if(istype(H.patron, /datum/patron/old_god/reformist))
+		coin_message = "A coin in my boot? Lucky, karma rewards me!"
 	to_chat(H, span_info(coin_message)) //OV Edit, refers to previous defined generic coin message.
 
 	if(!H.put_in_hands(found_thing, FALSE))
