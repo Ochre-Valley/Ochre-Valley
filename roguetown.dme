@@ -3882,6 +3882,7 @@
 #include "modular\ze_genesis_call\genesis_call.dm"
 
 
+#include "modular_ochrevalley\code\datums\mercenaries\change_status.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_accessories.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_cloaks.dm"
 #include "modular_causticcove\code\datums\loadout\loadout_hats.dm"
