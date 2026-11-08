@@ -345,7 +345,7 @@
 		/obj/item/repair_kit/metal/bad,
 		/obj/item/flint,
 		/obj/item/lockpick,
-		/obj/item/bomb,
+		/obj/item/explosive/fused/bottle,
 		/obj/item/reagent_containers/glass/bottle/rogue/manapot,
 		/obj/item/reagent_containers/glass/bottle/rogue/beer,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
@@ -412,7 +412,7 @@
 				/obj/item/rogueweapon/shield/iron,
 				/obj/item/rogueweapon/shield/wood,
 				/obj/item/rogueweapon/shield/tower/metal,
-				/obj/item/bomb,
+				/obj/item/explosive/fused/bottle,
 				/obj/item/bouquet,
 				/obj/item/cooking/pan,
 		)

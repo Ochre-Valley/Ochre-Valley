@@ -15,7 +15,7 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	beltr = /obj/item/rogueweapon/sword/cutlass
 	backpack_contents = list(
-		/obj/item/bomb = 1,
+		/obj/item/explosive/fused/bottle = 1,
 		/obj/item/lockpick = 1,
 		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
