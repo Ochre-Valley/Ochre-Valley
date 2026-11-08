@@ -95,9 +95,14 @@
 /// applies the proper cleric combat mode music per patron. applies trait_heresiarch if ascendent patron. returns the proper amulet/psicross for the patron, which will be assigned to either neck or wrist depending on the class
 /datum/outfit/job/roguetown/proc/apply_cleric_pre_equip(mob/living/carbon/human/H)
 	var/amulet
-	switch(H.patron?.type)
+	var/patron_type = H.patron?.type
+	if(istype(H.patron, /datum/patron/old_god))  //OV Edit - Fallback for all patron types to get a generic amulet if they are Psydonite.
+		patron_type = /datum/patron/old_god
+	switch(patron_type)
 		if(/datum/patron/old_god)
 			amulet = /obj/item/clothing/neck/roguetown/psicross
+			if(istype(H.patron, /datum/patron/old_god/old_god_reformist)) //OV Edit - Reoformists have their own cross. Other subtypes can get their own overide.
+				amulet = /obj/item/clothing/neck/roguetown/psicross/reform
 		if(/datum/patron/divine/undivided)
 			amulet = /obj/item/clothing/neck/roguetown/psicross/undivided
 		if(/datum/patron/divine/astrata)
