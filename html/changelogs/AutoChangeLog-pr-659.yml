@@ -1,0 +1,5 @@
+author: "zeskorion"
+delete-after: True
+changes:
+  - rscdel: "Armbrustschutze garten is merged with Armbrustschutze, as an alternate loadout option"
+  - rscdel: "Buccaneer is merged with Swashbuckler, with guns as an alternate option to the parrying dagger"
