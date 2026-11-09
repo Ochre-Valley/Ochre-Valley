@@ -82,6 +82,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/foreigner/lesserblackoak
 	)
 	has_subprefs = TRUE
+	default_subprefs = list("favorite_advclass" = null, "merc_ad" = null) // OV add: make sure we can use an ad here
 
 /datum/status_effect/advclass_selection
 	id = "advclass_selection"
