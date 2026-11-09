@@ -419,9 +419,7 @@ class FishingSim {
             : -data.gravity_velocity;
     }
     velocityChange = Math.floor(
-      velocityChange *
-        (fishOnBait ? data.overlap_velocity_mult : 1) *
-        seconds,
+      velocityChange * (fishOnBait ? data.overlap_velocity_mult : 1) * seconds,
     );
     if (this.activeEffect === 'antigrav') {
       velocityChange = -velocityChange;
@@ -637,8 +635,7 @@ const FishingMinigame = (props: FishingMinigameProps) => {
     }
   };
 
-  const lerp = (from: number, to: number) =>
-    from + (to - from) * interpolation;
+  const lerp = (from: number, to: number) => from + (to - from) * interpolation;
   const toPixels = (position: number) =>
     (MINIGAME_SLIDER_HEIGHT * position) / MINIGAME_AREA;
   const baitZ = toPixels(lerp(sim.previousBaitPosition, sim.baitPosition));
