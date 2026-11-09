@@ -1,4 +1,0 @@
-author: "Tenryumi"
-delete-after: True
-changes:
-  - refactor: "Ochre Valley-specific day change quotes are now in our own separate file."
