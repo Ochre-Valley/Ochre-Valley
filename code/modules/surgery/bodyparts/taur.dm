@@ -215,9 +215,10 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	has_taur_color = TRUE
 
 /obj/item/bodypart/taur/otie
-	name = "Virgo shit dog"
+	name = "Large Hound"
 
 	offset_x = -16
+	taur_clothing_category = "otie" //OV ADD
 	taur_icon_state = "otie_s"
 
 	has_taur_color = TRUE
