@@ -97,7 +97,9 @@
 			mobsadjacent |= M.held_mob
 		//OV Edit End
 		if(mobsadjacent.len)
-			chosenmob = input(user, "[key] who?") in mobsadjacent
+			chosenmob = input(user, "[key] who?") as null|anything in mobsadjacent
+			if(!chosenmob)
+				return FALSE
 		if(chosenmob)
 			if(target_origin.Adjacent(chosenmob) || targetrange > 2) //OV Edit
 				params = chosenmob.name
