@@ -118,7 +118,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 			to_chat(character, "Incorrect Second Virtue parameters! It will not be applied.")
 	//OV Add Start
 	if(extravirtue_type)
-		if(virtue_check(extravirtue_type, heretic, species))
+		if(virtue_check(extravirtue_type, species))
 			apply_virtue(character, extravirtue_type)
 		else
 			to_chat(character, "Incorrect Extra Virtue parameters! It will not be applied.")
