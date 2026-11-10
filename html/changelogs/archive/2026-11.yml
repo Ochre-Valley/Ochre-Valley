@@ -46,3 +46,10 @@
       loadout option
   - rscdel: Buccaneer is merged with Swashbuckler, with guns as an alternate option
       to the parrying dagger
+2026-11-10:
+  Jinshee:
+  - balance: Add Kobold to the Amphibious, Aquaphile, and Prickly quirks
+  - balance: Add Zardman to the Prickly quirk
+  Ryumi:
+  - rscadd: Harpies can now use bat back wings as a harpy wing option in character
+      creation.
