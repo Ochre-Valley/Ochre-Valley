@@ -8,6 +8,7 @@
 	antag_flag = ROLE_RENEGADE
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = TRUE //OV EDIT
 	storyteller_rumour_name = "renegades"
 
 	maximum_antags = 0
