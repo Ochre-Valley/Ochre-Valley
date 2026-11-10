@@ -251,7 +251,7 @@
 /// Names of the virtues in prefs that bar the character from this job
 /datum/job/proc/get_restricted_virtue_names(datum/preferences/prefs)
 	. = list()
-	for(var/datum/virtue/V in list(prefs.virtue, prefs.virtuetwo, prefs.virtue_origin))
+	for(var/datum/virtue/V in list(prefs.virtue, prefs.virtuetwo, prefs.virtue_origin, prefs.extravirtue)) //OV EDIT
 		if(V.type in virtue_restrictions)
 			. += V.name
 			continue
