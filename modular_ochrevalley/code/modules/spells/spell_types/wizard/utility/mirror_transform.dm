@@ -127,5 +127,3 @@
 	var/datum/appearance_changer/mirror_transform/M
 	M = new(H)
 	M.ui_interact(H)
-
-#include "hypnotic_gaze.dm" // Putting this in here because I do not want to touch the rougetown.dme
