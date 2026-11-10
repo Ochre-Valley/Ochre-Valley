@@ -40,7 +40,7 @@
 /mob/living/proc/start_sex_session(mob/living/target)
 	if(!target)
 		return
-	if(cmode)
+	if(cmode) // "OV Edit from Original:" var/datum/sex_session/old_session = get_sex_session(src, target)
 		to_chat(src, span_warning("There's a time and place for everything, but not now."))
 		return
 	// OV Edit Start
@@ -148,7 +148,7 @@
 	// OV Edit End
 
 	if(!user.start_sex_session(target))
-		if(!user.cmode)
+		if(!user.cmode) // "OV Edit from Original:" to_chat(user, "<span class='warning'>I'm already sexing.</span>")
 			to_chat(user, "<span class='warning'>I'm already sexing.</span>")
 		return
 
