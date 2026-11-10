@@ -238,7 +238,7 @@
 /datum/status_effect/hypnotic_gaze
 	id = "hypnotic_gaze"
 	duration = -1
-	tick_interval = 1 MINUTES
+	tick_interval = 15 MINUTES
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = /atom/movable/screen/alert/status_effect/hypnotic_gaze
 	var/command
