@@ -1,4 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/table/wood/large_table/north_west,
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 1
+	},
+/obj/item/deck/playing_cards{
+	pixel_x = 3
+	},
+/turf/open/floor/carpet/red,
+/area/rogue/indoors/remote_sanctuary)
 "ap" = (
 /obj/structure/table/wood/large_table/south_west,
 /obj/item/candle/yellow{
@@ -771,17 +782,6 @@
 /obj/machinery/light/rogue/campfire/fireplace,
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/indoors/remote_sanctuary)
-"QB" = (
-/obj/structure/table/wood/large_table/north_west,
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
-	dir = 1
-	},
-/obj/item/toy/cards/deck{
-	pixel_x = 3
-	},
-/turf/open/floor/carpet/red,
-/area/rogue/indoors/remote_sanctuary)
 "QE" = (
 /obj/machinery/light/rogue/candle/r,
 /turf/open/floor/rogue/ruinedwood/platform,
@@ -1300,7 +1300,7 @@ RL
 Gm
 kQ
 WG
-QB
+aa
 gy
 VW
 hr
