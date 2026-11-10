@@ -436,6 +436,24 @@
         look like a steel longsword - Technically image related but i consider it quality
         control, thuslie its a fix, suffer!
 2026-11-09:
+  SatinIsle:
+    - rscadd: Adds a new variant of corsets that covers your chest, the overbust corset.
+  Tenryumi:
+    - refactor:
+        Ochre Valley-specific day change quotes are now in our own separate
+        file.
+  pontifexminimus2:
+    - rscadd: New dialogue file in our modular folder.
+    - bugfix: "Lore compliance of gronnite raiders.
+
+        :cl:"
+  zeskorion:
+    - rscdel:
+        Armbrustschutze garten is merged with Armbrustschutze, as an alternate
+        loadout option
+    - rscdel:
+        Buccaneer is merged with Swashbuckler, with guns as an alternate option
+        to the parrying dagger
   OrbisAnima:
     - qol: Changes fishing rods category to normal so they can fit in satchels.
   Ryan180602:
