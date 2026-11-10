@@ -10,6 +10,7 @@
 #define FACTION_CABAL "cabal"
 #define FACTION_REVENANTS "revenants"
 #define FACTION_HERETICAL_FIEND "Heretical_Fiend"
+#define FACTION_LUX_PUPPETS "Lux_puppets" //OV ADD
 
 #define FACTION_ORCS "orcs"
 #define FACTION_CAVES "caves"
@@ -87,6 +88,7 @@ GLOBAL_LIST_INIT(gm_spawn_factions, list(
 	FACTION_LEYLINE,
 	FACTION_LICH,
 	FACTION_LIZARDS,
+	FACTION_LUX_PUPPETS, // OV ADD
 	FACTION_MAD,
 	FACTION_MADMEN,
 	FACTION_MIMIC,
