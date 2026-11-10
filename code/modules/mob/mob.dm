@@ -1344,7 +1344,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		nutrition = NUTRITION_LEVEL_FULL*/
 	verify_nutrition()
 	//Caustic edit end
-	if(old_nutrition < 990 && nutrition >= maxnutrition - 10)
+	if(old_nutrition < 990 && nutrition >= 990)
 		to_chat(src, span_warning("I can't eat anymore!")) //OV EDIT
 	else if(old_nutrition < 950 && nutrition >= 950)
 		to_chat(src, span_warning("I am stuffed."))
