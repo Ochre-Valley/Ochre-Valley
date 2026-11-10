@@ -124,8 +124,3 @@
 	name = "Mountable"
 	desc = "You have trained and become fit enough to function as a suitable mount. People may ride you as they would a saiga."
 	added_traits = list(TRAIT_MOUNTABLE)
-
-/datum/virtue/utility/niteyes
-	name = "Nite Eyes"
-	desc = "I don't need a light source when I'm travelling through darkened areas - my eyes are well used to the gloom of nite."
-	added_traits = list(TRAIT_NITEVISION)
