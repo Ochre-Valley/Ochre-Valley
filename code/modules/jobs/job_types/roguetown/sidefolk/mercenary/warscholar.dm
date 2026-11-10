@@ -89,6 +89,8 @@
 		)
 	H.merctype = 14
 
+	var/datum/devotion/C = new /datum/devotion(H, H.patron) //OV ADD , they are devoted. I considered T1, but frankly, they are squishy mages. Will disable tennite healing.
+	C.grant_miracles(H, cleric_tier = CLERIC_T0, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)
 
 /datum/advclass/mercenary/warscholar_pontifex
 	name = "Naledi Pontifex"
@@ -217,6 +219,9 @@
 		/obj/item/rogueweapon/spellbook/greater = 1,
 		)
 	H.merctype = 14
+
+	var/datum/devotion/C = new /datum/devotion(H, H.patron) //OV ADD - Some parity with Sojourner, still retains worse armour and less toys from inquis.
+	C.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)
 
 /datum/advclass/mercenary/warscholar_vizier
 	name = "Naledi Vizier"
@@ -348,3 +353,6 @@
 			V.color = detailcolor
 			V.update_icon()
 	H.regenerate_icons()
+
+	var/datum/devotion/C = new /datum/devotion(H, H.patron) //OV ADD - They don't get endure, but they have their own special bullshit anyway. Will disable tennite healing.
+	C.grant_miracles(H, cleric_tier = CLERIC_T0, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)
