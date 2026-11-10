@@ -42,6 +42,21 @@
 		return FALSE
 
 	var/datum/status_effect/hypnotic_gaze/existing_command = target.has_status_effect(/datum/status_effect/hypnotic_gaze)
+	if(existing_command && caster.mind && existing_command.original_caster_mind == caster.mind)
+		var/own_command_choice = tgui_alert(caster, "You already have a Hypnotic Command in [target.real_name]'s mind. What would you like to do?", "Existing Hypnotic Command", list("Remove It", "Change It", "Cancel"))
+		if(QDELETED(caster) || QDELETED(target) || target.stat == DEAD || QDELETED(existing_command) || target.has_status_effect(/datum/status_effect/hypnotic_gaze) != existing_command)
+			return FALSE
+		switch(own_command_choice)
+			if("Remove It")
+				qdel(existing_command)
+				to_chat(caster, span_notice("You release [target.real_name] from your Hypnotic Command."))
+				to_chat(target, span_notice("[caster.real_name] releases your mind from their Hypnotic Command."))
+				return TRUE
+			if("Change It")
+				to_chat(caster, span_notice("You prepare to change the Hypnotic Command in [target.real_name]'s mind."))
+			else
+				return FALSE
+
 	if(existing_command && (!caster.mind || existing_command.original_caster_mind != caster.mind))
 		if(target_has_blocked_hypnotic_command(caster, target))
 			return FALSE
@@ -135,6 +150,7 @@
 
 	if(QDELETED(caster) || QDELETED(target) || target.stat == DEAD)
 		return FALSE
+	to_chat(target, span_notice("You feel [caster.real_name]'s presence prying into your mind, searching for a place to plant a command."))
 
 	var/datum/status_effect/hypnotic_gaze_pending/pending = target.apply_status_effect(/datum/status_effect/hypnotic_gaze_pending)
 	if(!pending)
