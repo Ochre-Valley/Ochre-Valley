@@ -62,7 +62,7 @@
 
 //** WEAPONS **//
 
-/datum/npc_loadout/weapon/decaying_puppet,
+/datum/npc_loadout/weapon/decaying_puppet
 	weapons = list(
 		list(/obj/item/rogueweapon/katar/bronze, /obj/item/rogueweapon/katar/bronze)
 		list(/obj/item/rogueweapon/handclaw, /obj/item/rogueweapon/handclaw)
