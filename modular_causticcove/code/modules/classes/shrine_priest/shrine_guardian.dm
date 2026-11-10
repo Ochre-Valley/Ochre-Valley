@@ -8,6 +8,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)
 	category_tags = list(CTAG_ADVENTURER)
+	forbidden_races = list()
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT) // Hit fast, hit hard, but survive attacks by  avoidance. You have spacing tools to avoid getting whacked - use 'em!
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	//OV edit
