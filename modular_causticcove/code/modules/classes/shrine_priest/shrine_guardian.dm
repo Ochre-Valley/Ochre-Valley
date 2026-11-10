@@ -36,9 +36,6 @@
 
 	extra_context = "This class has access to tier 1 miracles, and can choose between four combinations of a weapon and bow: Naginata + Shortbow, Hwando + Shortbow, Kanabo + Shortbow, or Naginata + Recurve Bow."
 
-/*/datum/outfit/job/roguetown/adventurer/shrine_guardian //OV Edit - All Kazengun Patrons Unlocked
-	allowed_patrons = list(/datum/patron/divine/astrata)*/
-
 /datum/outfit/job/roguetown/adventurer/shrine_guardian/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_notice(SHRINEGUARDIAN_TUTORIAL))
