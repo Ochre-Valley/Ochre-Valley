@@ -26,7 +26,7 @@
 	name = "Decaying Lux Puppet"
 	statpack = /datum/npc_statpack/light/t2 // Speedier but fragile.
 	skills = (/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT)
-	loadout = list(
+	loadouts = list(
 		/datum/npc_loadout/armor/light/decaying_puppet,
 		/datum/npc_loadout/weapon/decaying_puppet,
 		/datum/npc_loadout/kit/lux_puppet
@@ -60,6 +60,22 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/aalloy
 	neck = /obj/item/clothing/neck/roguetown/chaincoif/iron/aalloy
 
+
+//** FLAVOUR **//
+
+/datum/npc_loadout/kit/lux_puppet // Shared by all of them.
+	id = list(
+		/obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy = 25
+		/obj/item/clothing/neck/roguetown/psicross/inhumen/wood = 25
+		/obj/item/clothing/neck/roguetown/psicross/inhumen/iron = 25
+		NPC_NOTHING = 25
+	)
+	cloak = list(
+		/obj/item/clothing/cloak/tabard/black = 30
+		/obj/item/clothing/cloak/tabard/stabard/bog = 20
+		/obj/item/clothing/cloak/apron/blacksmith = 10
+		NPC_NOTHING = 40
+	)
 //** WEAPONS **//
 
 /datum/npc_loadout/weapon/decaying_puppet
