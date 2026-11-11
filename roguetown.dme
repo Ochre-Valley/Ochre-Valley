@@ -4116,8 +4116,6 @@
 #include "modular_causticcove\code\modules\vore\eating\panel_databackend\vorepanel_vore_data.dm"
 #include "modular_causticcove\code\modules\vore\eating\panel_databackend\vorepanel_vore_subdata.dm"
 #include "modular_causticcove\code\modules\vore\objects\items\egg_vr.dm"
-#include "modular_causticcove\code\modules\events\adventure\random_patrols\random_patrols.dm"
-#include "modular_causticcove\code\modules\events\adventure\random_bosses\random_boss.dm"
 #include "modular_ochrevalley\code\inventory_return.dm"
 #include "modular_ochrevalley\code\ooc_escape.dm"
 #include "modular_ochrevalley\code\vore_verb.dm"
