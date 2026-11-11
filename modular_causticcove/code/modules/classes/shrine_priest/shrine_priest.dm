@@ -7,7 +7,7 @@
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 	shoes = /obj/item/clothing/shoes/roguetown/armor/rumaclan/shitty
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/black/kazengun
 	backl = /obj/item/storage/backpack/rogue/satchel
 	head = null // A lot of hoods are applied by normal Missionary...
 	to_chat(H, span_notice(SHRINEPRIEST_TUTORIAL))

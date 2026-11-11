@@ -50,7 +50,7 @@
 	shoes = /obj/item/clothing/shoes/roguetown/gladiator //OV Edit: Fixed pathing for sandals
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	gloves = /obj/item/clothing/gloves/roguetown/plate/kote //OV Edit: Parity with priest + fashion
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/black/kazengun
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/quiver/arrows
 	backpack_contents = list(
