@@ -16,16 +16,13 @@
 /mob/living/simple_animal/hostile/retaliate/rogue/ooze_blob/transformed
 	melee_damage_lower = 9
 	melee_damage_upper = 14
-	del_on_deaggro = null
 	defprob = 70
 
 /mob/living/simple_animal/hostile/retaliate/rogue/ooze_blob/suffering
 	name = "suffering ooze"
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	del_on_deaggro = null
 	defprob = 70
-	move_to_delay = 20
 	STASTR = 2
 	STASPD = 2
 
