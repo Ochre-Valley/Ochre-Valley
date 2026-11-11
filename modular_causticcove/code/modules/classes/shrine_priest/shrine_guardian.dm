@@ -57,7 +57,7 @@
 		/obj/item/flashlight/flare/torch,
 		/obj/item/needle/thorn/cleric
 		)
-	var/weapons = list("Naginata + Shortbow", "Hwando + Shortbow", "Kanabo + Shortbow", "Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
+	var/weapons = list("Naginata + Shortbow", "Hwando + Shortbow", "Kanabo + Shortbow", "Nodachi + Shortbow", "Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
 	if(H.mind)
 		var/weapon_choice = input(H, "Choose your weapons.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
@@ -79,6 +79,12 @@
 				r_hand = /obj/item/rogueweapon/sword/sabre/mulyeog
 				beltl = /obj/item/rogueweapon/scabbard/sword/kazengun
 				//OV Add End: Added option for Naginata Maxing on spawn
+			if("Nodachi + Shortbow")
+				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				backr = /obj/item/rogueweapon/scabbard/gwstrap/nodachi
+				r_hand = /obj/item/rogueweapon/greatsword/nodachi
+				l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+				//OV ADD END: Added Nodachi for Sword Memes
 			if("Naginata + Recurve Bow")
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_EXPERT, TRUE)
 				backr = /obj/item/rogueweapon/scabbard/gwstrap //OV Add: Added so can holster naginata
