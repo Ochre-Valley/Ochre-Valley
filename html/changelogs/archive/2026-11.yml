@@ -543,6 +543,8 @@
   radarseas:
     - balance: Tennite heretics can now access T4 miracles again.
 2026-11-11:
+  SatinIsle:
+    - rscadd: Readds "Make Quest Object"
   WeNeedMorePhoron:
     - rscadd:
         "Added hunting knife to adventurer classes missing a knife, and as far
