@@ -127,6 +127,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/log_viewer_new, //OV ADD
 	/client/proc/reenable_pq, //OV ADD
 	/client/proc/spawn_player, //OV ADD
+	/client/proc/item_gm_quest, //OV ADD
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(
 	/client/proc/unban_panel,
