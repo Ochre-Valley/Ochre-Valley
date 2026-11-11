@@ -3976,6 +3976,7 @@
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\aeromancy\airblade.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\aeromancy\tempest.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\aeromancy\windblade.dm"
+#include "modular_ochrevalley\code\modules\roguetown\roguemachine\gm_quest.dm"
 #include "modular_ochrevalley\code\modules\dcbot\add_donator.dm"
 #include "modular_causticcove\code\modules\merporgans\butt.dm"
 #include "modular_ochrevalley\code\modules\roguetown\roguecrafting\leather\leather_armor_recipes.dm"
