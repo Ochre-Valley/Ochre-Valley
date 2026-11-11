@@ -28,10 +28,8 @@
 
 /obj/item/udder/proc/beingmilked()
 	in_use = TRUE
-	//Caustic Edit
-	spawn(20)
-		in_use = FALSE
-	//Caustic Edit End
+	sleep(20)
+	in_use = FALSE
 
 //grenchensnacker
 
