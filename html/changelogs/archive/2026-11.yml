@@ -53,3 +53,6 @@
   Ryumi:
   - rscadd: Harpies can now use bat back wings as a harpy wing option in character
       creation.
+2026-11-11:
+  SatinIsle:
+  - rscadd: Readds "Make Quest Object"
