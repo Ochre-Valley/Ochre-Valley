@@ -30,6 +30,8 @@
 	wdefense = 5
 	smelt_bar_num = 3
 	special = /datum/special_intent/wave_swing/greatsword
+	twirly = SKILL_LEVEL_EXPERT // safely twirling like, a greatsword, is going to be harder than a blunt staff //OV ADD
+	twirl_speed = 6 //OV ADD
 
 /obj/item/rogueweapon/greatsword/getonmobprop(tag)
 	. = ..()
