@@ -1,7 +1,0 @@
-author: "SomeDeviant"
-delete-after: True
-changes:
-  - rscadd: "Added new AP Sync 10.30.26 - 11.11.26"
-  - bugfix: "Un-Blacklisted Werewolves"
-  - bugfix: "Re-Enables Vampires PROPERLY MY BAD"
-  - balance: "Removes Ochre Original Nite Eyes, for virtue parity with upstream"

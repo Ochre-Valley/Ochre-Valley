@@ -14,11 +14,6 @@
 2026-11-02:
   Alvaria-a:
     - rscadd: Militia now have voice lines to reflect that they are in fact not bandits.
-  SatinIsle:
-    - rscadd:
-        Gives an additional option for an "instant transform" spell, which does
-        not use a mirror.
-    - qol: Instant transform now uses the appearance changer UI
   BurpleBineapple:
     - image: Fixes some incorrectly offset icons for DasFox's donator items
   Etheo:
@@ -59,6 +54,11 @@
     - balance:
         Weep/Absolve need the Golgotha in hand and are a red-intent 3/5s (respectively)
         channel cast.
+  SatinIsle:
+    - rscadd:
+        Gives an additional option for an "instant transform" spell, which does
+        not use a mirror.
+    - qol: Instant transform now uses the appearance changer UI
   WatermelonsEverywhere:
     - rscadd: Added the helmetless visor to the SILVERFACE
   WeNeedMorePhoron:
@@ -116,8 +116,16 @@
         \ vinaigrette and croutons. Thanks to @limetease on Discord for the sprite!"
     - rscadd: Added seed oil, usable in deep-frying and vinaigrette.
 2026-11-04:
+  Etheo:
+    - rscadd:
+        "'Flagtail' added. A three color customizable tail, designed after a
+        jerboa's tail."
+    - image: Sprites for Flagtail added.
   NickBelmont:
     - bugfix: Patchy fix for targeted subtles with identical names
+  Ryan180602:
+    - admin: addition logs for health/loadout/inventory panel.
+    - refactor: optimises load() for log-viewer.
   TankTheBirb:
     - balance:
         all witch subclasses now get jman staves instead of just old magick.
@@ -125,14 +133,6 @@
     - rscadd:
         mystagogue and godsblood witches now have a patron appropriate cross upon
         spawning in
-  Etheo:
-    - rscadd:
-        "'Flagtail' added. A three color customizable tail, designed after a
-        jerboa's tail."
-    - image: Sprites for Flagtail added.
-  Ryan180602:
-    - admin: addition logs for health/loadout/inventory panel.
-    - refactor: optimises load() for log-viewer.
   WeNeedMorePhoron:
     - rscadd:
         Removed npc_simple_mob_modifier, and replaced it with an anti_beast_factor.
@@ -398,9 +398,6 @@
         an offer.
     - bugfix: Fixed overly sanitized Rose Wall text.
 2026-11-08:
-  pontifexminimus2:
-    - rscadd: Adds aggro lines to orcs, with default, berserker and boss lines.
-    - rscadd: Gives orcs aavnic and orcish as languages.
   Blacklist897:
     - rscadd: Donator Items for lockwood
   BobProductive:
@@ -429,6 +426,9 @@
     - bugfix: Fixed a problem with someone using lowertext instead of LOWER_TEXT.
   changelingonberry:
     - bugfix: Fix admin ooc color not saving & color drifting.
+  pontifexminimus2:
+    - rscadd: Adds aggro lines to orcs, with default, berserker and boss lines.
+    - rscadd: Gives orcs aavnic and orcish as languages.
   radarseas:
     - bugfix: fixes the ancient dagger sheath sprites not existing, whoops!
     - bugfix:
@@ -436,28 +436,16 @@
         look like a steel longsword - Technically image related but i consider it quality
         control, thuslie its a fix, suffer!
 2026-11-09:
+  OrbisAnima:
+    - qol: Changes fishing rods category to normal so they can fit in satchels.
+  Ryan180602:
+    - balance: if you have a tail and your nympho procs, it'll wag.
   SatinIsle:
     - rscadd: Adds a new variant of corsets that covers your chest, the overbust corset.
   Tenryumi:
     - refactor:
         Ochre Valley-specific day change quotes are now in our own separate
         file.
-  pontifexminimus2:
-    - rscadd: New dialogue file in our modular folder.
-    - bugfix: "Lore compliance of gronnite raiders.
-
-        :cl:"
-  zeskorion:
-    - rscdel:
-        Armbrustschutze garten is merged with Armbrustschutze, as an alternate
-        loadout option
-    - rscdel:
-        Buccaneer is merged with Swashbuckler, with guns as an alternate option
-        to the parrying dagger
-  OrbisAnima:
-    - qol: Changes fishing rods category to normal so they can fit in satchels.
-  Ryan180602:
-    - balance: if you have a tail and your nympho procs, it'll wag.
   WeNeedMorePhoron:
     - rscadd:
         Increased the amount of contracts generated, especially at the start of
@@ -491,18 +479,26 @@
     - bugfix:
         Fixed treasure seeker inheriting some unnecessary examine text from the
         head eater.
+  pontifexminimus2:
+    - rscadd: New dialogue file in our modular folder.
+    - bugfix: "Lore compliance of gronnite raiders.
+
+        :cl:"
   zRainbowcat:
     - bugfix: dodge chance abuse
+  zeskorion:
+    - rscdel:
+        Armbrustschutze garten is merged with Armbrustschutze, as an alternate
+        loadout option
+    - rscdel:
+        Buccaneer is merged with Swashbuckler, with guns as an alternate option
+        to the parrying dagger
 2026-11-10:
+  FreeStylaLT:
+    - bugfix: Fixed Clamorous not being satisfied by surrounding speech.
   Jinshee:
     - balance: Add Kobold to the Amphibious, Aquaphile, and Prickly quirks
     - balance: Add Zardman to the Prickly quirk
-  Ryumi:
-    - rscadd:
-        Harpies can now use bat back wings as a harpy wing option in character
-        creation.
-  FreeStylaLT:
-    - bugfix: Fixed Clamorous not being satisfied by surrounding speech.
   NonQueueingMatt:
     - rscadd: Changed a line you receive when you've almost drank too much.
   OrbisAnima:
@@ -515,6 +511,10 @@
         Psydonic Half-plate inherits steel fluff traits (like walk sounds and
         such)
     - bugfix: Let the apostle/robe donor kits not turn the psy plates into steel.
+  Ryumi:
+    - rscadd:
+        Harpies can now use bat back wings as a harpy wing option in character
+        creation.
   Sauna38:
     - bugfix: Fireplaces can now be placed on ANY wall - not just north-facing ones!
     - rscadd:
@@ -552,6 +552,13 @@
         Spellblade, Spellsinger, Aristocrat, Knight Errant, Bombardier, Antiquarian,
         Duelist, Ironclad, Exorcist"
 2026-11-12:
+  SomeDeviant:
+    - rscadd: Added new AP Sync 10.30.26 - 11.11.26
+    - bugfix: Un-Blacklisted Werewolves
+    - bugfix: Re-Enables Vampires PROPERLY MY BAD
+    - balance: Removes Ochre Original Nite Eyes, for virtue parity with upstream
+  pontifexminimus2:
+    - rscadd: More Ochre Valley quotes
   Guidesu:
     - rscadd:
         Quarterstaves now have two stances you can switch to with the alt-grip
