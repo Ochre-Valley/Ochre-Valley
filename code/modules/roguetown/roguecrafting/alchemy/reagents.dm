@@ -115,6 +115,7 @@
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
 		M.energy_add(30)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 	..()
 
 /datum/reagent/medicine/strongmana
@@ -129,6 +130,7 @@
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
 		M.energy_add(120)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 	..()
 
 /datum/reagent/medicine/restoration
@@ -158,6 +160,7 @@
 		M.adjustOrganLoss(ORGAN_SLOT_EYES, -1.75 * REAGENTS_EFFECT_MULTIPLIER)
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
 		M.energy_add(60)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 	..()
 
 // Stamina potion no longer grant green bar directly which led to it being far too powerful when abused

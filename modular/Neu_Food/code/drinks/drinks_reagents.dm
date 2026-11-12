@@ -76,6 +76,22 @@
 	apply_brew(M)
 	M.sate_addiction(/datum/charflaw/addiction/caffiend)
 
+/datum/reagent/consumable/puremana
+	name = "Pure Mana"
+	description = "Liquid mana, straight from the source."
+	color = "#0052c6"
+	quality = DRINK_GOOD
+	taste_description = "sickly sweet"
+	metabolization_rate = 0.8 * REAGENTS_METABOLISM
+	hydration_factor = 8
+
+/datum/reagent/consumable/puremana/on_mob_life(mob/living/carbon/M)
+	. = ..()
+	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
+		M.energy_add(5) // 1/6th of mana pot
+	apply_brew(M)
+	M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
+
 /datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)
 	. = ..()
 	M.Jitter(2)

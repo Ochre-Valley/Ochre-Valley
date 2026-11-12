@@ -75,6 +75,7 @@
 		playsound(user.loc, 'sound/misc/eat.ogg', rand(30,60), TRUE)
 		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
 		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 		qdel(src)
 
 /obj/item/chalk/attack_self(mob/living/carbon/human/user)

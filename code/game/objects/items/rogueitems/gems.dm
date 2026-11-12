@@ -151,10 +151,36 @@
 	name = "amythortz"
 	icon_state = "amethyst"
 	desc = "A deep lavender crystal, it surges with magical energy, yet its artificial nature means it is worth little."
+	possible_item_intents = list(/datum/intent/food)
+
+
+/obj/item/roguegem/amethyst/attack(mob/living/target, mob/living/user)
+
+	if (istype(user.used_intent, /datum/intent/food) && owner.has_flaw(/datum/charflaw/addiction/manathirst, manabroken))
+		user.visible_message(span_notice("[user] begins nibbling on [src]."), span_notice("I begin nibbling on [src]."))
+		if(!do_after(user, 2 SECONDS, target = src))
+			return
+		playsound(user.loc, 'sound/misc/eat.ogg', rand(30,60), TRUE)
+		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
+		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
+		qdel(src)
 
 /obj/item/roguegem/amethyst/naledi
 	name = "naledic amythortz"
 	desc = "A deep lavender crystal, crackling with magical energy. To a Disciple, it might simply be a keepsake from pilgrimages abroad: but to a Sojourner, it is the leyline to their arcyne-enchanted form of martial combat. </br>This gemstone can be applied to a yet-unfinished spelltome by those with arcyne potential, in order to recall more spells."
+
+/obj/item/roguegem/amethyst/naledi/attack(mob/living/target, mob/living/user)
+
+	if (istype(user.used_intent, /datum/intent/food) && owner.has_flaw(/datum/charflaw/addiction/manathirst, manabroken))
+		user.visible_message(span_notice("[user] begins nibbling on [src]."), span_notice("I begin nibbling on [src]."))
+		if(!do_after(user, 2 SECONDS, target = src))
+			return
+		playsound(user.loc, 'sound/misc/eat.ogg', rand(30,60), TRUE)
+		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
+		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
+		qdel(src) // Ponti told me to make this a delicious treat
 
 /obj/item/roguegem/random
 	name = "random gem"

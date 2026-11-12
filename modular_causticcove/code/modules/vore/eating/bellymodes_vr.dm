@@ -400,9 +400,11 @@
 
 //OV edit
 /obj/belly/proc/steal_mana(mob/living/L)
-	if((L.energy > 5) && (L.client))
-		L.energy_add(-5)
-		owner.adjust_nutrition(5)
-		if(prob(3))
-			to_chat(L, span_warning("Your energy is slowly being siphoned away..."))
+  if((L.energy > 5) && (L.client)
+    L.energy_add(-5)
+    owner.adjust_nutrition(5)
+    if(owner.has_flaw(/datum/charflaw/addiction/manathirst, manabroken))
+  owner.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
+    if(prob(3))
+      to_chat(L, span_warning("Your mana is slowly being siphoned away..."))
 //OV edit end
