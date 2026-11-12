@@ -42,7 +42,7 @@
 		)
 	quirk_restrictions = list(/datum/quirk/noble, /datum/quirk/feytouched)
 	//ov edit- add feycursed
-	vice_restrictions = list(/datum/charflaw/hunted, /datum/charflaw/targeted, /datum/charflaw/wanted, /datum/charflaw/changeling) // could you fucking imagine
+	vice_restrictions = list(/datum/charflaw/hunted, /datum/charflaw/targeted, /datum/charflaw/wanted, /datum/charflaw/forlorne, /datum/charflaw/changeling) // could you fucking imagine
 	//ov edit end
 	job_subclasses = list(
 		/datum/advclass/hag,

@@ -2,7 +2,7 @@
 	name = "Fate's Fool"
 	tutorial = "You are someone, from somewhere, with some skills, probably some equipment and some experiences. The ultimate true random experience, start with completely random and probably useless skills, stats and equipment."
 	allowed_sexes = list(MALE, FEMALE)
-	
+
 	outfit = /datum/outfit/job/roguetown/adventurer/true_random
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander2.ogg'
 	traits_applied = list()
@@ -20,7 +20,7 @@
 	to_chat(H, span_warning("Xylix laughs either at or with you, strange person with such unusual skills and tools."))
 	to_chat(H, span_warningbig("Do not leave and respawn as this class to get better rolls, live with what you are given. Admins will be informed if you try."))
 	log_and_message_admins("[H] has spawned as a Fate's Fool! Be aware of them leaving and rejoining.", H)
-	
+
 	var/list/possible_traits = list(
 						TRAIT_DODGEEXPERT,
 						TRAIT_OUTDOORSMAN,
@@ -65,24 +65,24 @@
 	var/trait_1 = pick(possible_traits)
 	if(trait_1)
 		ADD_TRAIT(H, trait_1, TRAIT_GENERIC)
-		possible_traits -= trait_1	
+		possible_traits -= trait_1
 	var/trait_2 = pick(possible_traits)
 	if(trait_2)
 		ADD_TRAIT(H, trait_2, TRAIT_GENERIC)
-		possible_traits -= trait_2	
+		possible_traits -= trait_2
 	var/trait_3 = pick(possible_traits)
 	if(trait_3 && prob(80))
 		ADD_TRAIT(H, trait_3, TRAIT_GENERIC)
-		possible_traits -= trait_3	
+		possible_traits -= trait_3
 	var/trait_4 = pick(possible_traits)
 	if(trait_4 && prob(70))
 		ADD_TRAIT(H, trait_4, TRAIT_GENERIC)
-		possible_traits -= trait_4	
+		possible_traits -= trait_4
 	var/trait_5 = pick(possible_traits)
 	if(trait_5 && prob(50))
 		ADD_TRAIT(H, trait_5, TRAIT_GENERIC)
-		possible_traits -= trait_5	
-	
+		possible_traits -= trait_5
+
 	if(prob(20))
 		ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
 		H.adjust_skillrank(/datum/skill/magic/arcane, rand(1,6), TRUE)
@@ -154,7 +154,7 @@
 		H.adjust_skillrank_up_to(/datum/skill/craft/ceramics, rand(1,6), TRUE)
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, rand(1,6), TRUE)
-	
+
 	//Labour skills
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/labor/farming, rand(1,6), TRUE)
@@ -166,7 +166,7 @@
 		H.adjust_skillrank_up_to(/datum/skill/labor/butchering, rand(1,6), TRUE)
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/labor/lumberjacking, rand(1,6), TRUE)
-	
+
 	//Misc
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/misc/athletics, rand(1,6), TRUE)
@@ -176,8 +176,6 @@
 		H.adjust_skillrank_up_to(/datum/skill/misc/reading, rand(1,6), TRUE)
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/misc/swimming, rand(1,6), TRUE)
-	if(prob(15))
-		H.adjust_skillrank_up_to(/datum/skill/misc/stealing, rand(1,6), TRUE)
 	if(prob(15))
 		H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, rand(1,6), TRUE)
 	if(prob(15))
@@ -347,7 +345,7 @@
 		/obj/item/repair_kit/metal/bad,
 		/obj/item/flint,
 		/obj/item/lockpick,
-		/obj/item/bomb,
+		/obj/item/explosive/fused/bottle,
 		/obj/item/reagent_containers/glass/bottle/rogue/manapot,
 		/obj/item/reagent_containers/glass/bottle/rogue/beer,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
@@ -414,7 +412,7 @@
 				/obj/item/rogueweapon/shield/iron,
 				/obj/item/rogueweapon/shield/wood,
 				/obj/item/rogueweapon/shield/tower/metal,
-				/obj/item/bomb,
+				/obj/item/explosive/fused/bottle,
 				/obj/item/bouquet,
 				/obj/item/cooking/pan,
 		)

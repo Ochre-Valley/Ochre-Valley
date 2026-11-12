@@ -130,9 +130,7 @@
 		/datum/body_marking_set/bellysocks,
 		/datum/body_marking_set/tiger,
 		/datum/body_marking_set/tiger_dark,
-		//Caustic edit
 		/datum/body_marking_set/gradient,
-		//Caustic edit end
 	)
 	body_markings = list(
 		/datum/body_marking/flushed_cheeks,
@@ -173,8 +171,8 @@
 		/datum/body_marking/drake_eyes,
 		/datum/body_marking/harlequin,
 		/datum/body_marking/harlequinreversed,
+		//Caustic Edit End
 		/datum/body_marking/gradient,
-		//Caustic edit end
 		/datum/body_marking/waist,
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
@@ -323,7 +321,7 @@
 /datum/species/dullahan/on_species_loss(mob/living/carbon/user)
 	. = ..()
 
-	//UnregisterSignal(user, COMSIG_MOB_SAY) //OV EDIT
+	UnregisterSignal(user, COMSIG_MOB_SAY)
 	UnregisterSignal(user, COMSIG_MOB_SAY_POSTPROCESS)
 	user.set_hearing_atom_override(null) //OV Add
 	UnregisterSignal(user, COMSIG_ERP_LOCATION_ACCESSIBLE)

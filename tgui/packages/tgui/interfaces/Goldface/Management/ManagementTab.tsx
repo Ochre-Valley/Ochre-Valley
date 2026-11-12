@@ -614,8 +614,8 @@ const SendForShip = (props: { favor: FavorData; act: ActFn }) => {
         </span>
       </div>
       <div style={{ ...noteStyle, marginBottom: '6px' }}>
-        Send for a ship from the realm of your choosing. She
-        waits offshore for your hail until the next dae. Once per dae.
+        Send for a ship from the realm of your choosing. She waits offshore for
+        your hail until the next dae. Once per dae.
       </div>
       <div
         style={{

@@ -574,7 +574,7 @@ GLOBAL_LIST_INIT(searaider_aggro, world.file2list("strings/rt/searaideraggroline
 
 
 //VOLF
-/mob/living/simple_animal/hostile/retaliate/rogue/wolf/legendary
+/*/mob/living/simple_animal/hostile/retaliate/rogue/wolf/legendary
 	name = "great volf"
 	desc = "A massive snarling beast of mangy fur and yellowed teeth. This volf is not only larger than most, it looks more aggressive, faster and more dangerous than any other."
 	gender = FEMALE
@@ -706,4 +706,4 @@ GLOBAL_LIST_INIT(searaider_aggro, world.file2list("strings/rt/searaideraggroline
 /obj/item/natural/head/rous/legendary
 	name = "rois head"
 	desc = "The head of an impossibly sizable rat."
-	sellprice = 30
+	sellprice = 30*/
