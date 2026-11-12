@@ -192,7 +192,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 	maxHealth = 3
 	ventcrawler = VENTCRAWLER_ALWAYS
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
-	mob_size = MOB_SIZE_TINY
+	mob_size = MOB_TINY //OV EDIT
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 	STACON = 3
 	STASTR = 3
