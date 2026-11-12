@@ -108,7 +108,7 @@
 
 /obj/structure/roguemachine/talkstatue/mercenary/proc/broadcast_to_mercenaries(mob/living/carbon/human/sender)
 	var/broadcast_key = "broadcast_[sender.real_name]"
-	var/list/stale_keys = list() //OV add: also doing stale cleanup because why wasn't this doing it too-
+	var/list/stale_keys = list() //OV edit start: also doing stale cleanup here because why wasn't this doing it too-
 	if(sender_cooldowns[broadcast_key])
 		var/time_left = sender_cooldowns[broadcast_key] + broadcast_cooldown_time - world.time
 		if(time_left > 0)
@@ -125,7 +125,7 @@
 		var/list/merc_data = mercenary_status[merc_key]
 		var/mob/living/carbon/human/merc = merc_data["mob"]
 
-		if(!merc || QDELETED(merc)) // OV add for the stale key check...
+		if(!merc || QDELETED(merc))
 			stale_keys += merc_key
 			continue
 		if(merc.stat == DEAD)
@@ -135,8 +135,8 @@
 
 		valid_recipients += merc
 
-	for(var/key in stale_keys) // and one last OV add to actually remove stale keys
-		mercenary_status -= key
+	for(var/key in stale_keys)
+		mercenary_status -= key //OV edit end here
 
 	if(valid_recipients.len == 0)
 		to_chat(sender, span_warning("There are no mercenaries available to broadcast to."))
