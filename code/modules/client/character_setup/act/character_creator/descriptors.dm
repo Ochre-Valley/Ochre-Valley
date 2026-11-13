@@ -376,13 +376,13 @@
 			to_chat(user, span_notice("You can only have a maximum of [span_bold("THREE IMAGES")] in your gallery at a time."))
 
 	// Get input
-	var/new_galleryimg = tgui_input_text(user, "Input the image link (https, hosts: gyazo, discord, lensdump, imgbox, catbox, file garden) (empty clears):", "[gallery_name] Image", default, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+	var/new_galleryimg = tgui_input_text(user, "Input the image link (https, hosts: gyazo, lensdump, imgbox, catbox, file garden) (empty clears):", "[gallery_name] Image", default, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Removed Discord
 
 	if(new_galleryimg == null || new_galleryimg == "")
 		return new_galleryimg
 
 	if(!valid_headshot_link(user, new_galleryimg, FALSE, valid_extensions))
-		to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, discord, lensdump, imgbox, catbox, file garden)."))
+		to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, lensdump, imgbox, catbox, file garden).")) //OV EDIT - Removed Discord
 		return null
 
 	return new_galleryimg
