@@ -36,7 +36,7 @@
 
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z | SPELL_REQUIRES_NO_MOVE
 
-	displayed_damage = CYCLONE_DAMAGE
+	displayed_damage = SPELL_DMG(CYCLONE_DAMAGE)
 
 	var/tempest_duration = CYCLONE_DURATION
 	/// Damage per tick
@@ -85,7 +85,7 @@
 	active_zone = null
 
 /obj/effect/tempest/cyclone
-	tick_damage = SPELL_DMG(30)
+	tick_damage = SPELL_DMG(CYCLONE_DAMAGE)
 	effect_radius = 3
 	var/datum/beam/caster_beam
 
