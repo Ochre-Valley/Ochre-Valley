@@ -25,6 +25,7 @@
 	antag_datum = /datum/antagonist/lich
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 50 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/lich/preRunEvent()
 	if(is_storyteller_villain_blocked())
