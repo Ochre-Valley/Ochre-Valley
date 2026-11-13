@@ -23,6 +23,7 @@
 	typepath = /datum/round_event/antagonist/solo/vampires_and_werewolves
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 50 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/vampires_and_werewolves/preRunEvent()
 	if(is_storyteller_villain_blocked())

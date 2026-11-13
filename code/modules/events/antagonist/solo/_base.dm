@@ -17,6 +17,7 @@
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
 	var/list/preferred_events
+	var/antag_pq = 0 //OV EDIT - Minimum PQ to be eligible for this antag
 
 // this is a hack-fix. solo antags, if they have an antag datum, will trim out people who already have said antag datum.
 // before this it seems like it could apply to people if they were already that antag. my chungus life.
@@ -27,6 +28,13 @@
 		for(var/mob/living/candidate in candidates)
 			if(candidate.mind.has_antag_datum(antag_datum))
 				candidates -= candidate
+	//OV edit
+	if(antag_pq)
+		for(var/mob/living/candidate in candidates)
+			if(candidate.client && (antag_pq > get_playerquality(candidate.client.ckey)))
+				log_and_message_admins("STORYTELLER: [candidate.client.ckey] was removed from [src] because their PQ ([get_playerquality(candidate.client.ckey)]) is lower than the required PQ ([antag_pq])") //Very spammy just for testing
+				candidates -= candidate
+	//OV edit end
 	return candidates
 
 
