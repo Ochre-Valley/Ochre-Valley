@@ -636,7 +636,7 @@ SUBSYSTEM_DEF(vote)
 			return vote
 	return FALSE
 
-/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, vote_period)
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, vote_period, isroundend = FALSE) //OV edit: check if it's round end
 	var/sound/vote_alert = new()
 	vote_alert.file = null
 	vote_alert.priority = 250
@@ -725,7 +725,7 @@ SUBSYSTEM_DEF(vote)
 			save_storyteller_vote_log(null, "active")
 		to_world("\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		for(var/client/C in GLOB.clients)
-			if(!isliving(C.mob))
+			if(!isliving(C.mob) || isroundend) //OV edit - ignore ghost check if we're coming here from round end
 				show_vote(C)
 		next_panel_refresh = world.time + panel_refresh_interval
 		time_remaining = round(vp/10)
