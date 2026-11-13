@@ -207,7 +207,7 @@
 	SSblackbox.Seal()
 
 	sleep(10 SECONDS)
-	SSvote.initiate_vote("map", "Actors")
+	SSvote.initiate_vote("map", "Actors",,TRUE) // OV edit: pop the vote panel on everybody, even if they're alive.
 	ready_for_reboot = TRUE
 	standard_reboot()
 
