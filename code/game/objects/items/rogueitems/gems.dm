@@ -162,7 +162,7 @@
 		user.visible_message(span_notice("[user] begins nibbling on [src]."), span_notice("I begin nibbling on [src]."))
 		if(!do_after(user, 2 SECONDS, target = src))
 			return
-		playsound(user.loc, 'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(user.loc, 'sound/misc/hit_rock.ogg', rand(30,60), TRUE)
 		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
 		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
@@ -178,7 +178,7 @@
 		user.visible_message(span_notice("[user] begins nibbling on [src]."), span_notice("I begin nibbling on [src]."))
 		if(!do_after(user, 2 SECONDS, target = src))
 			return
-		playsound(user.loc, 'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(user.loc, 'sound/misc/hit_rock.ogg', rand(30,60), TRUE)
 		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
 		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
