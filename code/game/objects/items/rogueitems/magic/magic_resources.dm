@@ -137,7 +137,7 @@
 		record_round_statistic(STATS_DRUGS_SNORTED)
 		user.visible_message(span_notice("[user] finishes sniffing [src]."), span_notice("I finish sniffing [src]. Teehee!"))
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
-		apply_scorch_stack(L, 2)
+		user.adjust_fire_stacks(8, /datum/status_effect/fire_handler/fire_stacks/vheslyn)
 		qdel(src) // Anyone want some mage drugs?
 
 		///OV edit end
