@@ -337,3 +337,11 @@
 			gen_cost = 150
 			reagentid = REAGENT_TAINTED_BLOOD
 			reagentcolor = "#941010"
+			if(REAGENT_PURE_MANA)
+			generated_reagents = list(REAGENT_ID_PURE_MANA = 1)
+			if(reagent_name in our_reagents)
+				reagent_name = lowertext(REAGENT_PURE_MANA)
+			gen_amount = 1
+			gen_cost = 5
+			reagentid = REAGENT_PURE_MANA
+			reagentcolor = "#0052c6"
