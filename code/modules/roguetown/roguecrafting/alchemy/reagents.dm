@@ -100,6 +100,7 @@
 	..()
 	. = 1
 
+///OV edit made it so mana and resto potions sate mana vices, I should've written this part in more spots but I'm kind of sleepy rn ngl.
 /datum/reagent/medicine/manapot
 	name = "mana potion"
 	description = "Gradually regenerates energy."
@@ -162,6 +163,8 @@
 		M.energy_add(60)
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 	..()
+
+///OV edit end
 
 // Stamina potion no longer grant green bar directly which led to it being far too powerful when abused
 /datum/reagent/medicine/stampot

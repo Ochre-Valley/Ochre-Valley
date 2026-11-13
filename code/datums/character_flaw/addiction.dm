@@ -260,6 +260,7 @@
 /datum/charflaw/addiction/masochist/on_mob_creation(mob/living/living)
 	living.pain_threshold += 10
 
+///OV edit
 /// MANATHIRST
 
 /datum/charflaw/addiction/manathirst
@@ -307,6 +308,8 @@
 	name = "Mana-Broken"
 	desc = "My mana is leaking from my body rapidly, without quick consumption of something alchemical or rich in mana, I'll be left empty in minutes."
 	icon_state = "manabroken"
+
+///OV edit end
 
 /// LOVEFIEND
 

@@ -147,6 +147,8 @@
 	..()
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = GLOW_COLOR_VAMPIRIC, "alpha" = 188, "size" = 1))
 
+///OV edit
+
 /obj/item/roguegem/amethyst
 	name = "amythortz"
 	icon_state = "amethyst"
@@ -181,6 +183,8 @@
 		user.reagents.add_reagent(/datum/reagent/medicine/manapot, 15)
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 		qdel(src) // Ponti told me to make this a delicious treat
+
+///OV edit end
 
 /obj/item/roguegem/random
 	name = "random gem"

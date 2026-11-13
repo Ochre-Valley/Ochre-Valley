@@ -58,6 +58,8 @@
 	alternate_worn_layer	= 8.9
 	materia = list(/datum/materia_aspect/arcyne, /datum/materia_aspect/herb)
 
+///OV edit
+
 /obj/item/reagent_containers/food/snacks/grown/manabloom/attack(mob/living/target, mob/living/user)
 
 	if (istype(user.used_intent, /datum/intent/food) && owner.has_flaw(/datum/charflaw/addiction/manathirst, manabroken))
@@ -85,6 +87,8 @@
 		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 		qdel(src) // All of the edible mana stuff is locked to mana vices, but if I could I think I would sunder people who ate it otherwise because it'd be funny but I think I would get murdered for it.
+
+///OV edit end
 
 /obj/item/magic/artifact
 	name = "runed artifact"
@@ -121,6 +125,8 @@
 	desc = "Ash burnt and burnt once again. Smells of brimstone and hellfire. Still has embers within."
 	tier = 1
 
+///OV edit
+
 /obj/item/magic/infernal/ash/attack(mob/living/target, mob/living/user)
 
 	if (istype(user.used_intent, /datum/intent/food) && owner.has_flaw(/datum/charflaw/addiction/manathirst, manabroken))
@@ -133,6 +139,8 @@
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 		apply_scorch_stack(L, 2)
 		qdel(src) // Anyone want some mage drugs?
+
+		///OV edit end
 
 /obj/item/magic/infernal/fang//T2 mage summon loot
 	name = "hellhound fang"
@@ -166,6 +174,7 @@
 	icon_state = "fairy_dust"
 	desc = "A glittering powder from a fae sprite."
 	tier = 1
+	///OV edit
 	eat_effect = /datum/status_effect/debuff/mishap_arcane_high
 
 /obj/item/magic/fae/fairydust/attack(mob/living/target, mob/living/user)
@@ -179,6 +188,8 @@
 		user.visible_message(span_notice("[user] finishes sniffing [src]."), span_notice("I finish sniffing [src]. Teehee!"))
 		M.sate_addiction(/datum/charflaw/addiction/manathirst, manabroken)
 		qdel(src) // Anyone want some mage drugs?
+
+///OV edit end
 
 /obj/item/magic/fae/iridescentscale	//T2 mage summon loot
 	name = "iridescent scales"
