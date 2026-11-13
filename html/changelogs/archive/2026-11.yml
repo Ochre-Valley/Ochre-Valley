@@ -505,3 +505,6 @@
   - bugfix: Violating the entire Geneva conventions over several-dozen tymelines in
       advance no longer means you aren't branded for this (T4 wretch bounties now
       properly OUTLAW!/HERETIC! you like the unforgivable lunatic you are!)
+2026-11-13:
+  Dunn:
+  - qol: ' map vote panel pops for everyone in a round at round end'
