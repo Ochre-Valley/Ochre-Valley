@@ -1,4 +1,0 @@
-author: "Dunn"
-delete-after: True
-changes:
-  - qol: " map vote panel pops for everyone in a round at round end"
