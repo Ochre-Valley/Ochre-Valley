@@ -4171,6 +4171,7 @@
 #include "modular_ochrevalley\virtues\combat.dm"
 #include "modular_ochrevalley\virtues\utility.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\appearance_changer.dm"
+#include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\hypnotic_gaze.dm"
 #include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\mirror_transform.dm"
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\npc\infernal\vheslyn_cult.dm"
 #include "modular_ochrevalley\code\datums\sexcon2\actions\oral\biting.dm"
