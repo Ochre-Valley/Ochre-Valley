@@ -288,7 +288,7 @@
 	name = "Mana-Broken"
 	desc = "My mana is unstable, barely able to remain within my body. Frequent consumption of alchemical or mana-rich substances to provide a semblance of stability is the only way to keep it within myself, else I'll be left without it and my ability to think. DISCLAIMER, THIS IS A VICE THAT WILL MAKE YOUR GAMEPLAY SIGNIFICANTLY HARDER, ESPECIALLY IF YOU HAVE THE DORMANCY VICE BECAUSE YOU WILL BE STUCK. YOUR BLUE WILL DRAIN AWAY."
 	ui_fa_icon = "vial"
-	time = ADDICT_TIME_STANDARD
+	time = ADDICT_TIME_FREQUENT
 	needsate_text = "My mana is leaving me!"
 	voyeur_descriptor = "in desperate need of something arcyne"
 	debuff = /datum/status_effect/debuff/addiction/manabroken
