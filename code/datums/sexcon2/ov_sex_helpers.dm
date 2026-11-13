@@ -36,7 +36,8 @@
 
 	// Sex time!
 	if(!start_sex_session(partner))
-		to_chat(src, span_warning("I am already sexing."))
+		if(!cmode) // OV Edit: Check added
+			to_chat(src, span_warning("I am already sexing."))
 		return FALSE
 
 	return TRUE
@@ -59,6 +60,9 @@
 	set name = "Open ERP panel"
 	set category = "IC"
 
+	if(cmode) // OV Edit. No opening ERP while fighting
+		to_chat(src, span_warning("There's a time and place for everything, but not now.")) // OV Edit. No opening ERP while fighting.
+		return // OV Edit. No opening ERP while fighting
 	if(stat)
 		to_chat(src,span_warning("You can't do that right now."))
 		return
@@ -155,5 +159,6 @@
 		return
 
 	if(!src.start_sex_session(target))
-		to_chat(src, "<span class='warning'>I'm already sexing.</span>")
+		if(!cmode) // OV Edit: Check added
+			to_chat(src, "<span class='warning'>I'm already sexing.</span>")
 		return
