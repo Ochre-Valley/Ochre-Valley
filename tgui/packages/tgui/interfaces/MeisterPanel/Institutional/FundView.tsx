@@ -53,9 +53,8 @@ export const FundView = ({
       {!!allowance && !!fund.can_issue && (
         <AllowanceSection fund={fund} allowance={allowance} act={act} />
       )}
-      {(fund.id === 'bathhouse' || fund.id === 'church') && !!fund.can_issue && (
-        <BathhouseOrdinanceSection data={data} act={act} />
-      )}
+      {(fund.id === 'bathhouse' || fund.id === 'church') &&
+        !!fund.can_issue && <BathhouseOrdinanceSection data={data} act={act} />}
       {!!view_only && (
         <div style={{ color: INK_FAINT, marginTop: 8 }}>
           {allowance?.viewer_limit_hit

@@ -3,16 +3,16 @@ import { DmIcon } from 'tgui-core/components';
 
 import {
   cardStyle,
+  FONT_BODY,
+  FONT_SMALL,
   fieldLabelStyle,
   fieldRowStyle,
   fieldValueStyle,
-  FONT_BODY,
-  FONT_SMALL,
   INK,
   INK_FAINT,
   INK_SOFT,
-  sectionHeaderStyle,
   SERIF,
+  sectionHeaderStyle,
   titleStyle,
 } from './parchment';
 
@@ -58,7 +58,7 @@ const Html = (props: { text: string }) => (
   />
 );
 
-const TierDots =(props: { tier: number; max: number }) => {
+const TierDots = (props: { tier: number; max: number }) => {
   const dots: React.ReactNode[] = [];
   for (let i = 1; i <= props.max; i++) {
     dots.push(
@@ -70,9 +70,7 @@ const TierDots =(props: { tier: number; max: number }) => {
       </span>,
     );
   }
-  return (
-    <span title={`Tier ${props.tier} of ${props.max}`}>{dots}</span>
-  );
+  return <span title={`Tier ${props.tier} of ${props.max}`}>{dots}</span>;
 };
 
 const narrowLabelStyle: CSSProperties = {
@@ -140,8 +138,7 @@ export const ItemStatCard = (props: {
   const armor = card.armor || [];
   const coverage = card.coverage || [];
   const groups = card.groups || [];
-  const hasAnything =
-    stats.length > 0 || armor.length > 0 || groups.length > 0;
+  const hasAnything = stats.length > 0 || armor.length > 0 || groups.length > 0;
   return (
     <div style={{ fontFamily: SERIF, color: INK, fontSize: FONT_BODY }}>
       {!hideHeader && (

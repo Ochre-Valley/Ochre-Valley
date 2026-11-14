@@ -288,7 +288,7 @@ export const BrowseTab = (props: {
                           textOverflow: 'ellipsis',
                         }}
                       >
-                        {!!entry.has_stats && canRead ? (
+                        {entry.has_stats && canRead ? (
                           <span
                             style={{
                               cursor: 'pointer',
