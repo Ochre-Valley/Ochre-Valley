@@ -101,6 +101,9 @@
 	// if(harpy_AC >= ARMOR_CLASS_MEDIUM)
 	// 	to_chat(user, span_bloody("THE ARMOR WEIGHS ME DOWN!!")) // LIGHT ON YO FEET SOULJA
 	// 	return
+	if(istype(user, /mob/living/carbon/human/species/werewolf))
+		to_chat(user, span_bloody("MY WINGS...ARE GONE!!"))
+		return
 	if(user.buckled)
 		to_chat(user, span_bloody("I CAN'T GET OFF THE GROUND WHILE... STUCK LIKE THIS!!"))
 		return

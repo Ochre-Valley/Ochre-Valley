@@ -419,7 +419,6 @@ GLOBAL_VAR(restart_counter)
 /world/proc/incrementMaxZ()
 	maxz++
 	SSmobs.MaxZChanged()
-	SSidlenpcpool.MaxZChanged()
 	SSai_controllers.on_max_z_changed()
 
 /*
@@ -435,7 +434,6 @@ GLOBAL_VAR(restart_counter)
 /world/proc/decrementMaxZ()
 	maxz = 1
 //	SSmobs.MaxZDec()
-//	SSidlenpcpool.MaxZdec()
 */
 /world/proc/change_fps(new_value = 20)
 	if(new_value <= 0)

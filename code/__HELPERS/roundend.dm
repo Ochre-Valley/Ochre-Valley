@@ -107,12 +107,9 @@
 	Stun(6000, 1, 1)
 	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
 	walk(src, 0) //stops them mid pathing even if they're stunimmune
-	if(isanimal(src))
-		var/mob/living/simple_animal/S = src
-		S.toggle_ai(AI_OFF)
-	if(ishostile(src))
-		var/mob/living/simple_animal/hostile/H = src
-		H.LoseTarget()
+	if(isanimal(src) && ai_controller)
+		ai_controller.CancelActions()
+		ai_controller.PauseAi(6000)
 
 /client/proc/show_game_over()
 	var/atom/movable/screen/splash/credits/S = new(src, FALSE)
@@ -210,7 +207,7 @@
 	SSblackbox.Seal()
 
 	sleep(10 SECONDS)
-	SSvote.initiate_vote("map", "Actors")
+	SSvote.initiate_vote("map", "Actors",,TRUE) // OV edit: pop the vote panel on everybody, even if they're alive.
 	ready_for_reboot = TRUE
 	standard_reboot()
 

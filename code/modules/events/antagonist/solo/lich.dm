@@ -9,15 +9,16 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = TRUE //OV EDIT
 	storyteller_rumour_name = "liches"
 
 	denominator = 80
 
-	base_antags = 0 //OV Edit - 1
-	maximum_antags = 0 //OV Edit - 1
+	base_antags = 1
+	maximum_antags = 1
 
-	weight = 0	//i hate you //OV Edit - Disabled, was 11
-	max_occurrences = 0 // mashallah //OV Edit - Disabled, was 1
+	weight = 11	//i hate you
+	max_occurrences = 1 // mashallah
 
 	earliest_start = 0 SECONDS
 

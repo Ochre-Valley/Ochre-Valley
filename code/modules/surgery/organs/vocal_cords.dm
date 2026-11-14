@@ -64,6 +64,9 @@
 	if(!user.can_speak_vocal())
 		to_chat(user, span_bloody("I have no voice!"))
 		return
+	if(istype(user, /mob/living/carbon/human/species/werewolf))
+		to_chat(user, span_bloody("RRRAAAAAGH!!"))
+		return
 	if(!user.has_status_effect(/datum/status_effect/buff/playing_music))
 		user.emote("clearthroat", forced = TRUE)
 	var/mob/living/carbon/human/harpy = user
@@ -356,20 +359,6 @@
 			var/mob/living/L = V
 			L.adjust_fire_stacks(1 * power_multiplier)
 			L.ignite_mob()
-
-	//HOT
-	else if((findtext(message, hot_words)))
-		cooldown = COOLDOWN_DAMAGE
-		for(var/V in listeners)
-			var/mob/living/L = V
-			L.adjust_bodytemperature(50 * power_multiplier)
-
-	//COLD
-	else if((findtext(message, cold_words)))
-		cooldown = COOLDOWN_DAMAGE
-		for(var/V in listeners)
-			var/mob/living/L = V
-			L.adjust_bodytemperature(-50 * power_multiplier)
 
 	//REPULSE
 	else if((findtext(message, repulse_words)))

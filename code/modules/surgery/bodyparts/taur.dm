@@ -122,6 +122,17 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 
 	has_taur_color = TRUE
 
+/obj/item/bodypart/taur/spider/drider
+	max_damage = 400 // Makes them tougher so it don't die in 1 hit
+	max_stamina_damage = 150
+
+// Severed bodies can be implanted on players, so they lose the NPC toughness
+/obj/item/bodypart/taur/spider/drider/drop_limb(special)
+	. = ..()
+	var/obj/item/bodypart/taur/spider/plain = /obj/item/bodypart/taur/spider
+	max_damage = initial(plain.max_damage)
+	max_stamina_damage = initial(plain.max_stamina_damage)
+
 /obj/item/bodypart/taur/horse
 	name = "Horse Body"
 
@@ -204,9 +215,10 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	has_taur_color = TRUE
 
 /obj/item/bodypart/taur/otie
-	name = "Virgo shit dog"
+	name = "Large Hound"
 
 	offset_x = -16
+	taur_clothing_category = "otie" //OV ADD
 	taur_icon_state = "otie_s"
 
 	has_taur_color = TRUE

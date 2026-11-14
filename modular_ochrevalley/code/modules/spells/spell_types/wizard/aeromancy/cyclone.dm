@@ -101,12 +101,12 @@
 
 /obj/effect/tempest/cyclone/proc/setup_visuals()
 	// Visible beam from zone center to caster
-	caster_beam = new(src, caster, 'icons/effects/beam.dmi', "b_beam", CYCLONE_DURATION + 1 SECONDS, maxdistance = 20)
+	caster_beam = new(src, caster, 'icons/effects/beam.dmi', "b_beam", CYCLONE_DURATION + 1 SECONDS, max_distance = 20)
 	caster_beam.Start()
 
 /obj/effect/tempest/cyclone/Destroy()
 	if(caster_beam)
-		caster_beam.End()
+		qdel(caster_beam)
 		caster_beam = null
 	if(source_spell && istype(source_spell, /datum/action/cooldown/spell/cyclone))
 		var/datum/action/cooldown/spell/cyclone/C = source_spell

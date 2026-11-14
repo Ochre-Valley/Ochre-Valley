@@ -28,7 +28,6 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_MASTER,
-		/datum/skill/misc/stealing = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/traps = SKILL_LEVEL_MASTER,
 	)
@@ -45,7 +44,7 @@
 	cloak = /obj/item/clothing/cloak/tabard/stabard/dungeon
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	backl = /obj/item/storage/backpack/rogue/satchel/short
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/steel
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/black/steel
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
 	neck = /obj/item/clothing/neck/roguetown/coif/heavypadding

@@ -51,8 +51,6 @@
 			continue
 		if (V.unlisted)
 			continue
-		if (istype(V, /datum/virtue/heretic) && !istype(selected_patron, /datum/patron/inhumen))
-			continue
 		if (V.restricted == TRUE)
 			if((pref_species.type in V.races))
 				continue

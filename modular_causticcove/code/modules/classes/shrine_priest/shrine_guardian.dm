@@ -8,6 +8,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/shrine_guardian
 	subclass_languages = list(/datum/language/kazengunese)
 	category_tags = list(CTAG_ADVENTURER)
+	forbidden_races = list()
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT) // Hit fast, hit hard, but survive attacks by  avoidance. You have spacing tools to avoid getting whacked - use 'em!
 	cmode_music = 'sound/music/combat_kazengite.ogg'
 	//OV edit
@@ -36,9 +37,6 @@
 
 	extra_context = "This class has access to tier 1 miracles, and can choose between four combinations of a weapon and bow: Naginata + Shortbow, Hwando + Shortbow, Kanabo + Shortbow, or Naginata + Recurve Bow."
 
-/*/datum/outfit/job/roguetown/adventurer/shrine_guardian //OV Edit - All Kazengun Patrons Unlocked
-	allowed_patrons = list(/datum/patron/divine/astrata)*/
-
 /datum/outfit/job/roguetown/adventurer/shrine_guardian/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_notice(SHRINEGUARDIAN_TUTORIAL))
@@ -52,14 +50,14 @@
 	shoes = /obj/item/clothing/shoes/roguetown/gladiator //OV Edit: Fixed pathing for sandals
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	gloves = /obj/item/clothing/gloves/roguetown/plate/kote //OV Edit: Parity with priest + fashion
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/black/kazengun
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/quiver/arrows
 	backpack_contents = list(
 		/obj/item/flashlight/flare/torch,
 		/obj/item/needle/thorn/cleric
 		)
-	var/weapons = list("Naginata + Shortbow", "Hwando + Shortbow", "Kanabo + Shortbow", "Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
+	var/weapons = list("Naginata + Shortbow", "Hwando + Shortbow", "Kanabo + Shortbow", "Nodachi + Shortbow", "Naginata + Recurve Bow") //OV Edit: Added Naginata + Shortbow
 	if(H.mind)
 		var/weapon_choice = input(H, "Choose your weapons.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
@@ -81,6 +79,12 @@
 				r_hand = /obj/item/rogueweapon/sword/sabre/mulyeog
 				beltl = /obj/item/rogueweapon/scabbard/sword/kazengun
 				//OV Add End: Added option for Naginata Maxing on spawn
+			if("Nodachi + Shortbow")
+				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				backr = /obj/item/rogueweapon/scabbard/gwstrap/nodachi
+				r_hand = /obj/item/rogueweapon/greatsword/nodachi
+				l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+				//OV ADD END: Added Nodachi for Sword Memes
 			if("Naginata + Recurve Bow")
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_EXPERT, TRUE)
 				backr = /obj/item/rogueweapon/scabbard/gwstrap //OV Add: Added so can holster naginata

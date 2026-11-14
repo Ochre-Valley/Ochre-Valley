@@ -18,46 +18,6 @@
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_BADTRAINER, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow)
-	resize(1.3)
-
-/datum/outfit/job/roguetown/human/species/elf/dark/drowraider/drider_drow/pre_equip(mob/living/carbon/human/H)
-	var/taur_colour = pick("#0f0463", "#1a1540", "#271633", "#212021", "#361213", "#540305")
-	H.Taurize(/obj/item/bodypart/taur/spider/drider_only, taur_colour)
-
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/shadowpants/drowraider
-	armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/shadowvest/drowraider
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shadowshirt/elflock/drowraider
-	gloves = /obj/item/clothing/gloves/roguetown/fingerless/shadowgloves/elflock
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
-	mask = /obj/item/clothing/mask/rogue/facemask/shadowfacemask
-	neck = /obj/item/clothing/neck/roguetown/coif/heavypadding
-	// Stopgap: archer roll removed because the ranged NPC AI is unreliable.
-	if(prob(45)) // whip
-		r_hand = /obj/item/rogueweapon/whip/spiderwhip
-	else if(prob(50)) // dual falx
-		r_hand = /obj/item/rogueweapon/sword/sabre/stalker
-		l_hand = /obj/item/rogueweapon/sword/sabre/stalker
-	else // dual dirk
-		r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/elvish
-		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/silver/elvish
-
-	H.STASTR = 13
-	H.STASPD = 14 // 3 points
-	H.STACON = 15 //Legs will be exposed, they need this, lmao
-	H.STAWIL = 9
-	H.STAPER = 10
-	H.STAINT = 10
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/maces, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axes, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-
 
 //LEGENDARY VARIANT FOR GM SPAWN ONLY
 /mob/living/carbon/human/species/elf/dark/drowraider/drider_drow/monstrous

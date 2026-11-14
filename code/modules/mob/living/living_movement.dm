@@ -97,7 +97,7 @@
 	if(HAS_TRAIT(src, TRAIT_TRAM_MOVER))
 		usedslow = 0
 	if(usedslow != 0)
-		add_movespeed_modifier(MOVESPEED_ID_LIVING_TURF_SPEEDMOD, update=TRUE, priority=100, multiplicative_slowdown=usedslow, movetypes=GROUND) // OV Edit End
+		add_movespeed_modifier(MOVESPEED_ID_LIVING_TURF_SPEEDMOD, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=usedslow, movetypes=GROUND) // OV Edit End
 	else
 		remove_movespeed_modifier(MOVESPEED_ID_LIVING_TURF_SPEEDMOD)
 
