@@ -4159,7 +4159,6 @@
 #include "modular_ochrevalley\code\datums\quirk\lesser.dm"
 #include "modular_ochrevalley\code\game\items\capture_crystals.dm"
 #include "modular_ochrevalley\code\modules\admin\give_buff.dm"
-#include "modular_ochrevalley\code\modules\mob\living\carbon\human\npc\doppelganger.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_cloaks.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_miscellaneous.dm"
 #include "modular_ochrevalley\code\modules\roguetown\roguejobs\mages\item_tf.dm"
