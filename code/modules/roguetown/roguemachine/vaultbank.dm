@@ -733,13 +733,13 @@
 /obj/structure/roguemachine/vaultbank/church/can_issue_loan(mob/user)
 	if(!user)
 		return FALSE
-	return user.job == "Bishop" || user.job == "Martyr" || user.job == "Acolyte" //OV Edit - Acolytes Can Spend Dosh
+	return user.job == "Bishop" || user.job == "Martyr"
 
 /obj/structure/roguemachine/vaultbank/church/allowed_rates()
 	return list(0, 10, 15, 20, 25, 50)
 
 /obj/structure/roguemachine/vaultbank/church/get_authority_label()
-	return "the Bishop, Martyr or Acolyte" //OV Edit - Acolytes Can Spend Dosh
+	return "the Bishop or Martyr"
 
 /obj/structure/roguemachine/vaultbank/church/get_patronage_writ_path()
 	return /obj/item/patronage_writ/benefactor
