@@ -89,6 +89,12 @@
 		SSticker.rulermob = null
 	if(SSticker.regentmob == src)
 		SSticker.regentmob = null
+	//OV add - check if this is a merc at the statue and drop them. Also doing it for adventurers while we're here anyway. Do check here in case the merc statue ever ends up being made optional for some maps
+	if(SSroguemachine.mercenary_statue.mercenary_status[real_name])
+		SSroguemachine.mercenary_statue.mercenary_status -= real_name
+	if(SSroguemachine.mercenary_statue.adventurer_status[real_name])
+		SSroguemachine.mercenary_statue.adventurer_status -= real_name
+	//OV end
 	GLOB.chosen_names -= real_name
 	LAZYREMOVE(GLOB.actors_list, mobid)
 	LAZYREMOVE(GLOB.roleplay_ads, mobid) //OV ADD - Roleplay Ad Maint
