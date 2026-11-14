@@ -240,7 +240,24 @@
 	if(isooze(H))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/ooze)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/mirror_transform/instant)
-	//OV edit end
+
+	var/datum/job/adv_job = SSjob.GetJob(H.job)
+	if(adv_job.title != "Adventurer") //skip if they're not an adventurer
+		return
+	var/list/subprefs = H.client?.prefs?.job_subprefs
+	if(!subprefs)
+		return
+	var/list/mercprefs = subprefs["Adventurer"]
+	if(!mercprefs)
+		return
+	if(mercprefs["merc_ad"])
+				// Get the mercenary statue from SSroguemachine
+		var/obj/structure/roguemachine/talkstatue/mercenary/statue = SSroguemachine.mercenary_statue
+		if(!statue && SSroguemachine.mercenary_statues.len)
+			statue = SSroguemachine.mercenary_statues[1]
+		statue.adventurer_status[H.real_name] = list("status" = "Available", "mob" = H, "message" = mercprefs["merc_ad"])
+		to_chat(H, span_notice("I am now advertising at the merc statue."))
+	//OV  edit end
 
 /*
 	Whoa! we are checking requirements here!
