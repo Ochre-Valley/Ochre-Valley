@@ -52,6 +52,7 @@
 
 	typepath = /datum/round_event/antagonist/solo/assassins
 	antag_datum = /datum/antagonist/assassin
+	antag_pq = 50 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/assassins/canSpawnEvent(players_amt, gamemode, fake_check)
 	if(!count_hunted_players())

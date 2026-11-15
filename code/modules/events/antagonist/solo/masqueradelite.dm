@@ -26,6 +26,7 @@
 	antag_datum = /datum/antagonist/vampire
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_COMBAT_ROLES
+	antag_pq = 50 //OV EDIT
 
 /datum/round_event/antagonist/solo/masqueradelite/add_datum_to_mind(datum/mind/antag_mind)
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(forced_clan = FALSE, generation = GENERATION_ANCILLAE)
