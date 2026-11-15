@@ -1,0 +1,4 @@
+author: "NickBelmont"
+delete-after: True
+changes:
+  - rscadd: "Two new dropdown options for VV on atoms, allowing their icon to be changed to one uploaded from outside the game, and another to reset the icon to its initial value"
