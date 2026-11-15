@@ -110,7 +110,7 @@
 		"You must wash your right foot",
 		"You must take a bath",
 		"The realm requires you cleanse yourself",
-		"A bath will save your life"
+		"A bath will save your lyfe" //OV EDIT
 	)
 	valid_roles = list("Grand Duke","Grand Duchess","Prince", "Princess")
 
