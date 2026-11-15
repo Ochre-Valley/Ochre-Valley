@@ -24,7 +24,7 @@
 	weight = 0 //CC edit, automatic injection disabled
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
-	antag_pq = 50 //OV EDIT
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/rebel/New()
 	..()
