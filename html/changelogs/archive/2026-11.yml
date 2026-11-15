@@ -655,6 +655,8 @@
         Magician's Brick and Aetherknife melee damage now properly scale with
         INT. Heavy is the hand that holds the brick.
 2026-11-15:
+  SatinIsle:
+    - balance: PQ limits (temporarily set to 50) for hard antags at roundstart.
   ?.:
     - code_imp:
         Necran Excommunicated can do lesser Necran rituals now, and spawn with
