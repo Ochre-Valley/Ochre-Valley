@@ -32,6 +32,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	min_pq = 30 //OV EDIT
 	max_pq = null
 	round_contrib_points = 4
+	quest_claim_barred = TRUE
 	give_bank_account = 250
 	cmode_music = 'sound/music/combat_noble.ogg'
 

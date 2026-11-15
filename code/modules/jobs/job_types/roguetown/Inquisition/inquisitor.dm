@@ -20,6 +20,7 @@
 	min_pq = 15 //OV EDIT
 	max_pq = null
 	round_contrib_points = 2
+	quest_claim_barred = TRUE
 	vice_restrictions = list(/datum/charflaw/silverweakness, /datum/charflaw/wanted)
 	job_subclasses = list(
 		/datum/advclass/inquisitor/inspector,

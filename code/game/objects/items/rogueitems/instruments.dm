@@ -122,7 +122,7 @@
 			if(!choice || !user)
 				return
 
-			if(playing || !(src in user.held_items) && !(not_held) || user.get_inactive_held_item()) // OV Edit
+			if(playing || !(src in user.held_items) && !(not_held)) // OV Edit
 				return
 
 			if(choice == "Upload New Song")
@@ -133,7 +133,7 @@
 				var/newfile = music_upload(user, src)
 				if(!newfile)
 					return
-				if(playing || !(src in user.held_items) && !(not_held) || user.get_inactive_held_item()) // OV Edit
+				if(playing || !(src in user.held_items) && !(not_held)) //OV EDIT
 					return
 
 				lastfilechange = world.time
@@ -151,11 +151,6 @@
 
 			curfile = song_list[choice]
 			if(!user || playing || !(src in user.held_items) && !(not_held) ) // OV Edit
-				return
-			if(user.get_inactive_held_item())
-				playing = FALSE
-				soundloop.stop(user) // OV Edit
-				user.remove_status_effect(/datum/status_effect/buff/playing_music)
 				return
 			if(curfile)
 				playing = TRUE
