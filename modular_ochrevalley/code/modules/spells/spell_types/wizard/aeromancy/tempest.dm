@@ -4,9 +4,9 @@
 /datum/action/cooldown/spell/tempest
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	name = "Tempest"
-	desc = "Conjure a swirling storm to lash out at a targeted area. \
-			Twister: Lacerating winds will swirl around the specified location for 10 seconds, leaving a small patch of safety within the storm's eye. \
-			Downburst: Direct a raging gust of air from above to crash down upon a designated location, doing a burst of damage in a 3x3 area after a short delay"
+	desc = "Conjure tempestous to lash out at a targeted area. \
+			Twister:  Cast forth a swirling storm in the form of a projectile to disperse over and lash out at a targeted area. Lacerating winds will swirl around the specified location for 10 seconds, leaving a small patch of safety within the storm’s eye. \
+			Downburst: Direct a raging gust of air from above to crash down upon a designated location, doing a burst of damage in a 3x3 area after a short delay and knocking enemies back from the point of impact.."
 	button_icon_state = "blade_storm"
 	sound = 'sound/magic/scrapeblade.ogg'
 	spell_color = GLOW_COLOR_WIND
@@ -133,6 +133,8 @@
 			else
 				L.adjustBruteLoss(SPELL_DMG_VS(L, damage))
 				SEND_SIGNAL(L, COMSIG_ATOM_WAS_ATTACKED, caster, damage)
+			var/push_dir = get_dir(epicenter, L) || pick(GLOB.cardinals)
+			L.safe_throw_at(get_ranged_target_turf(L, push_dir, 2), 2, 1, caster, force = MOVE_FORCE_STRONG)
 
 // --- Seed projectile — detonates into the cloud on impact ---
 
