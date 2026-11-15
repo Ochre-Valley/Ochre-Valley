@@ -13,6 +13,8 @@
 	VV_DROPDOWN_OPTION(VV_HK_MODIFY_TRANSFORM, "Modify Transform")
 	VV_DROPDOWN_OPTION(VV_HK_DEBUG_APPEARANCE, "Debug Appearance")
 	VV_DROPDOWN_OPTION(VV_HK_DOWNLOAD_SPRITE, "Download Sprite")
+	VV_DROPDOWN_OPTION(VV_HK_UPLOAD_SPRITE, "Upload Sprite") //OV Edit: Allow outside sprites to be applied to atoms
+	VV_DROPDOWN_OPTION(VV_HK_RESET_SPRITE, "Reset Sprite") //OV Edit: Allow sprites to be reset to initial state
 	VV_DROPDOWN_OPTION(VV_HK_SPIN_ANIMATION, "SpinAnimation")
 	VV_DROPDOWN_OPTION(VV_HK_STOP_ALL_ANIMATIONS, "Stop All Animations")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_REAGENT, "Add Reagent")
@@ -142,6 +144,34 @@
 	if(href_list[VV_HK_DOWNLOAD_SPRITE])
 		var/icon/target_icon = getFlatIcon(src)
 		usr << ftp(target_icon, "[name].png")
+
+	//OV Edit: Upload sprite!
+	if(href_list[VV_HK_UPLOAD_SPRITE])
+		var/icon/old_icon = getFlatIcon(src)
+		var/width = old_icon?.Width() || 0
+		var/height = old_icon?.Height() || 0
+		var/uploaded_file = input(usr, "Choose an image or gif to use as the icon for this atom. (Original is [width]x[height])", "Set atom Icon") as null|file
+		if(!uploaded_file)
+			return
+		var/icon/new_icon = new(uploaded_file)
+		if(new_icon.Width() != width || new_icon.Height() != height)
+			var/choice = tgui_input_list(usr, "The new icon is of different dimensions! Scale to match the old one? (It may look weird/big if you don't)", "Scale Icon?", list("By Width", "By Height", "Absolute", "No Scaling (Careful with big images!)"))
+			if(!choice)
+				return
+			if(choice == "By Width")
+				new_icon.Scale(width, round(width*(new_icon.Height()/new_icon.Width())))
+			if(choice == "By Height")
+				new_icon.Scale(round(height*(new_icon.Width()/new_icon.Height())), height)
+			if(choice == "Absolute")
+				new_icon.Scale(width, height)
+		icon = new_icon
+		icon_state = ""
+
+	if(href_list[VV_HK_RESET_SPRITE])
+		if(tgui_alert(usr, "Reset this atom's sprite? (This can mess more complicated sprites up, but should be fine for most items, structures, and simplemobs)", "Reset Sprite?", list("Yes","No")) == "Yes")
+			icon = src::icon
+			icon_state = src::icon_state
+	//OV Edit End
 
 /atom/vv_get_header()
 	. = ..()
