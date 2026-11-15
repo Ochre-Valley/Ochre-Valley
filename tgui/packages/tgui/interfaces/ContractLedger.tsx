@@ -617,18 +617,18 @@ const ContractCard = (props: { contract: Contract }) => {
           : soloLimited
             ? data.solo_limit_reason
             : takeCooldown > 0
-            ? `You've signed too many contracts recently. Wait ${takeCooldown}s before signing another.`
-            : atCap
-              ? fellowsHeld > 0
-                ? `Your fellowship already holds ${data.active_max} contracts.`
-                : `You already hold ${data.active_max} contracts.`
-              : cantAfford
-                ? `You need ${c.deposit} mammon in your account for the deposit.`
-                : fellowshipShort
-                  ? `You need a fellowship of ${c.required_fellowship_size}. Yours has ${data.user_fellowship_size || 0}.`
-                  : notLeader
-                    ? 'Only the fellowship leader can sign this contract.'
-                    : undefined;
+              ? `You've signed too many contracts recently. Wait ${takeCooldown}s before signing another.`
+              : atCap
+                ? fellowsHeld > 0
+                  ? `Your fellowship already holds ${data.active_max} contracts.`
+                  : `You already hold ${data.active_max} contracts.`
+                : cantAfford
+                  ? `You need ${c.deposit} mammon in your account for the deposit.`
+                  : fellowshipShort
+                    ? `You need a fellowship of ${c.required_fellowship_size}. Yours has ${data.user_fellowship_size || 0}.`
+                    : notLeader
+                      ? 'Only the fellowship leader can sign this contract.'
+                      : undefined;
   const stamps: { label: string; modifier: string }[] = [];
   if (c.is_rumor) stamps.push({ label: 'RUMORED!', modifier: 'rumor' });
   if (c.shows_commission_seal)
@@ -729,8 +729,7 @@ const ContractCard = (props: { contract: Contract }) => {
         const levy = Math.round(payout * levyRate);
         const guild = Math.round(payout * guildRate);
         const purse = payout - levy - guild;
-        const sizeRows =
-          (useVeteran && c.veteran_size_table) || c.size_table;
+        const sizeRows = (useVeteran && c.veteran_size_table) || c.size_table;
         const mySize = Math.min(
           Math.max(data.user_fellowship_size || 1, 1),
           sizeRows?.length || 1,
@@ -893,8 +892,8 @@ const ActiveStrip = (props: {
         : soloLimited
           ? data.solo_limit_reason
           : takeCooldown > 0
-          ? `You've signed too many contracts recently. Wait ${takeCooldown}s before signing another.`
-          : null;
+            ? `You've signed too many contracts recently. Wait ${takeCooldown}s before signing another.`
+            : null;
   const fellowshipBonus = data.active_fellowship_bonus || 0;
   const fellowsHeld = data.fellows_active_count || 0;
   const fellowshipNote =
@@ -986,9 +985,7 @@ const ActiveStrip = (props: {
                 {Math.ceil(gateRemaining / 60)}m.
               </div>
             )}
-            <div>
-              These jobs can never sign contracts: {barredList}.
-            </div>
+            <div>These jobs can never sign contracts: {barredList}.</div>
             {!!townerList && (
               <div style={{ marginTop: '6px' }}>
                 These jobs can always sign towner postings: {townerList}.

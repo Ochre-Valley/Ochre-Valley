@@ -139,9 +139,7 @@ const HirerView = () => {
         </div>
       </div>
       {blocked && (
-        <div style={{ color: SEAL_RED, marginTop: 8 }}>
-          {data.hire_blocker}
-        </div>
+        <div style={{ color: SEAL_RED, marginTop: 8 }}>{data.hire_blocker}</div>
       )}
       <div style={{ marginTop: 10, textAlign: 'right' }}>
         <button

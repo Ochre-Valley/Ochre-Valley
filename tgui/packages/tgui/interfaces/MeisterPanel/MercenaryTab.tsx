@@ -84,8 +84,8 @@ export const MercenaryTab = ({ data, act }: TabProps) => {
             </div>
           )}
           <div style={{ marginTop: 6, color: INK_SOFT }}>
-            Print a new contract here once your last one has ended. Printing
-            one voids any unsigned contract you still have, wherever it is.
+            Print a new contract here once your last one has ended. Printing one
+            voids any unsigned contract you still have, wherever it is.
           </div>
           <div style={{ marginTop: 6, textAlign: 'right' }}>
             <button
