@@ -1,6 +1,0 @@
-{
-	"map_name": "OV Wretch Coast",
-	"map_path": "map_files/otherz",
-	"map_file": "ovwretch_coast.dmm",
-	"traits": [{"Name": "ov wretch_coast", "Up": true}, {"Up": true, "Down": true}, {"Down": true}]
-}

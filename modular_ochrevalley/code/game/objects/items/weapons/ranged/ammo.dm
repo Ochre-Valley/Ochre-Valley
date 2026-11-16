@@ -23,25 +23,28 @@
 	flag = "piercing"
 	armor_penetration = PEN_HEAVY
 	speed = 0.1 // Nearly hitscan.
-	npc_simple_damage_mult = 4 // Allows it to keep it's old busted damage vs simple mobs
+	antibeast_factor = ANTIBEAST_SUPERIOR
 	wall_impact_break_probability = 100 // Same as heavy crossbow. Bullets will shatter if they hit a wall. With a range of 30, this will almost ALWAYS happen if you miss, so don't miss!
 	damages_turf_walls = FALSE // Bullets lack the mass to meaningfully damage walls.
 	min_range = MIN_OVBULLET_RANGE
 	max_range = MAX_OVBULLET_RANGE
 	dam_falloff_factor = DAM_FALLOFF_OVBULLET
+	var/trains_ranged_skill = TRUE
 
 /obj/projectile/bullet/reusable/bullet/on_hit(atom/target) // EXP for shooting live targets only.
-    ..()
-    var/mob/living/L = firer
-    if(!L?.mind)
-        return
-    var/skill_multiplier = 0
-    if(isliving(target))
-        var/mob/living/T = target
-        if(T.stat != DEAD)
-            skill_multiplier = 4
-    if(skill_multiplier && can_train_combat_skill(L, /datum/skill/combat/firearms, SKILL_LEVEL_EXPERT))
-        L.mind.add_sleep_experience(/datum/skill/combat/firearms, L.STAINT * skill_multiplier)
+	. = ..()
+	if(!trains_ranged_skill)
+		return
+	var/mob/living/L = firer
+	if(!L || !L.mind)
+		return
+	var/skill_multiplier = 0
+	if(isliving(target)) // If the target theyre shooting at is a mob/living
+		var/mob/living/T = target
+		if(T.stat != DEAD) // If theyre alive
+			skill_multiplier = 4
+	if(skill_multiplier && can_train_combat_skill(L, /datum/skill/combat/firearms, SKILL_LEVEL_EXPERT))
+		L.mind.add_sleep_experience(/datum/skill/combat/firearms, L.STAINT * skill_multiplier)
 
 /obj/projectile/bullet/reusable/bullet/bronze
 	name = "bronze bullet"
@@ -69,27 +72,28 @@
 	range = 12
 	dam_falloff_factor = DAM_FALLOFF_OVBULLET
 	speed = 0.1
-	npc_simple_damage_mult = 4
+	antibeast_factor = ANTIBEAST_SUPERIOR
 	damage_type = BRUTE
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bullet
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
 	embedchance = 100
 	no_crit = FALSE
+	var/trains_ranged_skill = TRUE
 	var/shrapnelprob = 50
 	var/shrapneltype = /obj/item/bomb_shrapnel
 
 /obj/projectile/bullet/scatter/on_hit(atom/target) // EXP for shooting live targets only.
-	..()
+	. = ..()
+	if(!trains_ranged_skill)
+		return
 	var/mob/living/L = firer
-	if(!L?.mind)
+	if(!L || !L.mind)
 		return
 	var/skill_multiplier = 0
-	if(isliving(target))
+	if(isliving(target)) // If the target theyre shooting at is a mob/living
 		var/mob/living/T = target
-		if(T.stat != DEAD)
-			skill_multiplier = 1
-		if(prob(shrapnelprob))
-			embed_bomb_shrapnel(target, shrapneltype, 1)
+		if(T.stat != DEAD) // If theyre alive
+			skill_multiplier = 4
 	if(skill_multiplier && can_train_combat_skill(L, /datum/skill/combat/firearms, SKILL_LEVEL_EXPERT))
 		L.mind.add_sleep_experience(/datum/skill/combat/firearms, L.STAINT * skill_multiplier)
 

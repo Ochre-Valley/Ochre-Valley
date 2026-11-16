@@ -178,6 +178,11 @@
 	name = "Corset"
 	path = /obj/item/clothing/suit/roguetown/armor/corset
 	sort_category = "Shirts"
+
+/datum/loadout_item/corset_bust
+	name = "Corset (Overbust)"
+	path = /obj/item/clothing/suit/roguetown/armor/corset_bust
+	sort_category = "Shirts"
 ///OV edit end
 
 /datum/loadout_item/nun_habit

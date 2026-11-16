@@ -95,10 +95,11 @@
 	preset_pool = GAMEMODE_POOL_GUARANTEED
 	guaranteed_hard = FALSE //OV EDIT
 	guarantees_roundstart_roleset = FALSE //OV Edit
-	roundstart_prob = 60 //100 //OV EDIT
+	roundstart_prob = 50 //100 //OV EDIT
 	block_hard = FALSE
 	block_soft = FALSE
 	allow_dreamwalker = TRUE
+	allow_renegade = TRUE
 	preferred_gnoll_mode = GNOLL_SCALING_FLAT	// max 2
 	// wretch_slot_cap = 9 // OV Remove
 

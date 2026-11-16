@@ -9,9 +9,7 @@
 	emote_hear = null
 	emote_see = null
 	speak_chance = 1
-	turns_per_move = 3
 	see_in_dark = 15
-	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/bite/volf)
 	botched_butcher_results = list()
 	butcher_results = list()
@@ -23,11 +21,7 @@
 	maxHealth = WOLF_HEALTH
 	melee_damage_lower = 10
 	melee_damage_upper = 15
-	vision_range = 7
-	aggro_vision_range = 9
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	retreat_distance = 0
-	minimum_distance = 0
 	milkies = FALSE
 	food_type = list()
 	pooptype = null
@@ -37,8 +31,6 @@
 	simple_detect_bonus = 20
 	deaggroprob = 0
 	defprob = 40
-	del_on_deaggro = null
-	retreat_health = 0.3
 	food = 0
 	dodgetime = 30
 	aggressive = 1
@@ -115,14 +107,14 @@
 
 	stored.forceMove(src)
 	stored.notransform = TRUE
-	
+
 	shape.visible_message(span_warning("[stored] has twisted brutally into an animal form."),span_warningbig("Shrouded within the darkness, you have been forced to transform into your cursed animal form."))
 	playsound(shape.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-	
+
 	slink = soullink(/datum/soullink/shapeshift, stored, shape)
 	if(slink)
 		slink.source = src
-	
+
 	shape.mob_belly_transfer(stored)
 	VORE_PREF_TRANSFER(shape, stored)
 
@@ -148,7 +140,7 @@
 	if(original_turf)
 		temp.forceMove(original_turf)
 		hard_reset_spatial(temp)
-	
+
 	if(isbelly(shape.loc))
 		var/obj/belly/B = shape.loc
 		temp.forceMove(B)
@@ -190,7 +182,7 @@
 		qdel(old_shape)
 
 	stored = temp
-	
+
 
 	qdel(src)
 

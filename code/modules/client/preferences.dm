@@ -172,6 +172,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/flavortext
 	var/flavortext_cached
 
+	var/pen_name
+
 	var/ooc_notes
 	var/ooc_notes_cached
 

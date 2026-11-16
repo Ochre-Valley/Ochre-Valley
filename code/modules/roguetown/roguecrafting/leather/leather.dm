@@ -43,6 +43,16 @@
 	tools = list(/obj/item/needle)
 	craftdiff = 2
 
+//OV edit
+/datum/crafting_recipe/roguetown/leather/corset
+	name = "corset (overbust)"
+	result = /obj/item/clothing/suit/roguetown/armor/corset_bust
+	reqs = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
+//OV edit end
+
 /datum/crafting_recipe/roguetown/leather/gloves
 	name = "leather gloves"
 	display_category = ITEM_CAT_ARMOR_GLOVES

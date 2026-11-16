@@ -283,7 +283,6 @@
 	STACON = 5
 	melee_damage_lower = 9
 	melee_damage_upper = 14
-	del_on_deaggro = null
 	defprob = 70
 
 /mob/living/simple_animal/pet/cat/witch_shifted
@@ -317,7 +316,6 @@
 	STACON = 4
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	del_on_deaggro = null
 	defprob = 70
 
 /mob/living/simple_animal/hostile/retaliate/smallrat/witch_shifted

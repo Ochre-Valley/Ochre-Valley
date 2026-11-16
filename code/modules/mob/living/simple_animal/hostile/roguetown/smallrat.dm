@@ -11,7 +11,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fried_type = /obj/item/reagent_containers/food/snacks/rogue/friedrat
 	max_integrity = 10
-	sellprice = 5 //It has... some light fur on it, I guess.
+	sellprice = 0
 	rotprocess = null
 	grid_width = 32
 	grid_height = 32
@@ -38,7 +38,7 @@
 
 /obj/item/reagent_containers/food/snacks/rogue/friedrat
 	name = "fried rat"
-	desc = "It's charred body looks rather sad. Better eat it before you grow too attached to your once, not so crispy friend..."
+	desc = "It's charred body looks rather sad. Better eat it before you grow too attached to your once, not so crispy friend..." //OV EDIT
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "cookedrat"
 	bitesize = 2
@@ -47,7 +47,7 @@
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null
 	rotprocess = SHELFLIFE_SHORT
-	sellprice = 2 //I-it's something?...
+	sellprice = 0
 
 /obj/item/reagent_containers/food/snacks/smallrat/burning(input as num)
 	if(!dead)

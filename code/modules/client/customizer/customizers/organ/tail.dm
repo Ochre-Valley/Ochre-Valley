@@ -164,7 +164,6 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -206,7 +205,9 @@
 		/datum/sprite_accessory/tail/haven,
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
+		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		//Caustic edit
 		/datum/sprite_accessory/tail/tiefling,
 		/datum/sprite_accessory/tail/tiefling/heart,
@@ -261,7 +262,6 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -305,7 +305,8 @@
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
 		/datum/sprite_accessory/tail/large_snake,
-		/datum/sprite_accessory/tail/large_snake_plain
+		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_tails/flagtail
 		)
 
 /datum/customizer/organ/tail/dullahan
@@ -428,7 +429,7 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/orca,
 		/datum/sprite_accessory/tail/otie,
