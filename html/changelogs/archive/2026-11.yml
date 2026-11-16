@@ -655,6 +655,18 @@
         Magician's Brick and Aetherknife melee damage now properly scale with
         INT. Heavy is the hand that holds the brick.
 2026-11-15:
+  NickBelmont:
+    - rscadd:
+        Two new dropdown options for VV on atoms, allowing their icon to be changed
+        to one uploaded from outside the game, and another to reset the icon to its
+        initial value
+    - rscdel: Squall is dead, long live squall
+    - rscadd: Alternate single-target mode for razorwind volley
+    - balance:
+        Downburst now knocks back targets, making up for it being slightly lower
+        damage than other similar aoe spells.
+  SomeDeviant:
+    - bugfix: fixed beam runtime when targeting self
   SatinIsle:
     - balance: PQ limits (temporarily set to 50) for hard antags at roundstart.
   ?.:

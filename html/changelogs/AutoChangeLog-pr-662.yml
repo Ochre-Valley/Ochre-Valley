@@ -1,6 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - rscdel: "Squall is dead, long live squall"
-  - rscadd: "Alternate single-target mode for razorwind volley"
-  - balance: "Downburst now knocks back targets, making up for it being slightly lower damage than other similar aoe spells."
