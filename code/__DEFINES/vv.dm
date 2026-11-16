@@ -93,6 +93,8 @@
 // /atom
 #define VV_HK_MODIFY_TRANSFORM "atom_transform"
 #define VV_HK_DOWNLOAD_SPRITE "download_sprite"
+#define VV_HK_UPLOAD_SPRITE "upload_sprite" //OV Edit: Allow outside sprites to be applied to atoms
+#define VV_HK_RESET_SPRITE "reset_sprite" //OV Edit: Allow sprites to be reset to their initial state
 #define VV_HK_SPIN_ANIMATION "atom_spin"
 #define VV_HK_STOP_ALL_ANIMATIONS "stop_animations"
 #define VV_HK_ADD_REAGENT "addreagent"
