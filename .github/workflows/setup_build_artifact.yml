@@ -26,25 +26,22 @@ jobs:
           minor: ${{ inputs.minor }}
 
       - name: Install BYOND dependencies
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libcurl4-openssl-dev:i386
-    
+        uses: ./.github/actions/install_byond_deps
+
       - name: Compile
         run: |
           source $HOME/BYOND/byond/bin/byondsetup
           tools/build/build.sh --ci dm -DCIBUILDING -DANSICOLORS -Werror -ITG0001 -I"loop_checks"
-      
+
       - name: Setup variable for output path
         run: |
           OUTPUT_DIR="target"
           echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
-      
+
       - name: Copy output files
         run: |
           bash tools/ci/copy_build_output.sh $OUTPUT_DIR
-      
+
       - name: Upload artifact
         if: success()
         uses: actions/upload-artifact@v4

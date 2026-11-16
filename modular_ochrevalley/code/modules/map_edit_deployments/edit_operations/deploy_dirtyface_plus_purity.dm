@@ -3,38 +3,38 @@
 
 	spawntypes_by_mappath = alist(
 		"map_files/ovdun_world" = list(
-			list(
+			/*list(
 				"type" = /obj/structure/roguemachine/bathvend/public,
 				"pixel_y" = 32,
 				"density" = FALSE,
 				"x" = 71,
 				"y" = 45,
 				"z" = 1,
-			),
+			),*/
 			list(
 				"type" = /obj/structure/roguemachine/goldface/public/toys,
-				"pixel_y" = -32,
+				"pixel_x" = -32,
 				"density" = FALSE,
-				"x" = 68,
-				"y" = 43,
+				"x" = 67,
+				"y" = 41,
 				"z" = 1,
 			),
 		),
 		"map_files/jagged_jaw" = list(
-			list(
+			/*list(
 				"type" = /obj/structure/roguemachine/bathvend/public,
 				"pixel_y" = -32,
 				"density" = FALSE,
 				"x" = 156,
 				"y" = 145,
 				"z" = 2,
-			),
+			),*/
 			list(
 				"type" = /obj/structure/roguemachine/goldface/public/toys,
-				"pixel_y" = 32,
+				"pixel_y" = -32,
 				"density" = FALSE,
-				"x" = 157,
-				"y" = 147,
+				"x" = 156,
+				"y" = 145,
 				"z" = 2,
 			),
 		),

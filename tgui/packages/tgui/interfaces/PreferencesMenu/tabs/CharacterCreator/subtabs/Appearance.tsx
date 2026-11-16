@@ -76,10 +76,7 @@ const SubtabAppearanceCardBody = () => {
       <LabeledGridList>
         <LabeledGridList.Item label="Body Type">
           {Object.keys(body_type_options).length ? (
-            <BodyTypeSelection
-              options={body_type_options}
-              value={body_type}
-            />
+            <BodyTypeSelection options={body_type_options} value={body_type} />
           ) : (
             <Button fluid onClick={() => act('bodytype')}>
               Other

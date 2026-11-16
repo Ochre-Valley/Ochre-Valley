@@ -1,0 +1,33 @@
+,a Well, what do we have here?
+,a Not the regular old levy are you?
+,a Bit more bite than the last one!
+,a I want this karker split open.
+,a Alright, lads, let's get to it.
+,a Fighty ones, EXCELLENT!
+,a You think I can afford a saiga after this?
+,a Let's make the God of Conquest proud!
+,a After this, I'll raise some nice saigas.
+,a Hey, when we plunder enough, you think the girl back home notices me?
+,a Haha! What fun! Let's die together!
+,a At least it's not another cabbit.
+,a Any chance we're related? You're good!
+,a You'd make a good orc, friend.
+,a Blood for the blood god! Let's see who prevails!
+,a Show me your strength, NOW!
+,a HAHA! LET'S DANCE!
+,a Lovely dae to die!
+,a Lovely dae to kill!
+,a Shit, this reminds me of Heartfelt! Good times.
+,a Come on now, I don't want to live forever!
+,a Oh, you're REALLY trying. Thank you!
+,a I'll honour your death, you fight well.
+,a A singular blow!
+,a WELL STRUCK!
+,a Come on now! Fight!
+,a Might makes!
+,a Let's make this world spin still!
+,a Conflict breeds conquest! Let's reach higher!
+,a WAR GODS! WATCH US IN YOUR HONOUR!
+*warcry
+*chuckle
+*smile

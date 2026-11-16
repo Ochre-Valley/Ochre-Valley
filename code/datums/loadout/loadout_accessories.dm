@@ -19,6 +19,11 @@
 	path = /obj/item/clothing/mask/rogue/spectacles
 	sort_category = "Accessories"
 
+/datum/loadout_item/thinspectacles
+	name = "Thin Spectacles"
+	path = /obj/item/clothing/mask/rogue/spectacles/thin
+	sort_category = "Accessories"
+
 /datum/loadout_item/fingerless
 	name = "Fingerless Gloves"
 	path = /obj/item/clothing/gloves/roguetown/fingerless
@@ -106,6 +111,16 @@
 	path = /obj/item/clothing/neck/roguetown/collar
 	sort_category = "Accessories"
 
+/datum/loadout_item/cravat
+	name = "Cravat"
+	path = /obj/item/clothing/neck/roguetown/cravat
+	sort_category = "Accessories"
+
+/datum/loadout_item/ruffle
+	name = "Ruffled Collar"
+	path = /obj/item/clothing/neck/roguetown/ruffle
+	sort_category = "Accessories"
+
 /datum/loadout_item/forlon_collar
 	name = "Light Forlorn Collar"
 	path = /obj/item/clothing/neck/roguetown/collar/forlorn
@@ -166,6 +181,11 @@
 	path = /obj/item/storage/belt/rogue/leather/battleskirt/breechcloth/blackbelt
 	sort_category = "Accessories"
 
+/datum/loadout_item/clothloincloth
+	name = "Belt with Loincloth"
+	path = /obj/item/storage/belt/rogue/leather/battleskirt/loincloth
+	sort_category = "Accessories"
+
 /datum/loadout_item/doublebelt
 	name = "Paired Slim Belts"
 	path = /obj/item/storage/belt/rogue/leather/double
@@ -173,7 +193,7 @@
 
 /datum/loadout_item/knifebelt // comes empty
 	name = "Tossblade Belt"
-	path = /obj/item/storage/belt/rogue/leather/knifebelt/black
+	path = /obj/item/storage/belt/rogue/leather/tossbelt/blade/black
 	sort_category = "Accessories"
 
 /datum/loadout_item/blackbelt

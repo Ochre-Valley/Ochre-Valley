@@ -146,7 +146,7 @@
 /datum/supply_pack/rogue/Knave/elfdagger
 	name = "Elven Dagger"
 	cost = 60
-	contains = list(/obj/item/rogueweapon/huntingknife/idagger/silver/elvish)
+	contains = list(/obj/item/rogueweapon/huntingknife/idagger/steel/silver/elvish)
 
 //////////////////////
 // WEAPONS - RANGED //
@@ -175,7 +175,7 @@
 /datum/supply_pack/rogue/Knave/steeltossblades
 	name = "Steel Tossblade Belt"
 	cost = 80
-	contains = list(/obj/item/storage/belt/rogue/leather/knifebelt/black/steel)
+	contains = list(/obj/item/storage/belt/rogue/leather/tossbelt/blade/black/steel)
 
 /////////////////////////////
 // WEAPONS - RANGED - AMMO //

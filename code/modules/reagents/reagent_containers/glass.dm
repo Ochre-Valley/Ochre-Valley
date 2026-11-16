@@ -83,6 +83,7 @@
 		if(M != user)
 			M.visible_message(span_danger("[user] attempts to feed [M] something."), \
 						span_danger("[user] attempts to feed you something."))
+			log_combat(user, M, "attempted to feed", reagents.log_list()) //OV ADD - Feeding Logging
 			if(!do_mob(user, M, double_progress = TRUE, can_move = FALSE))
 				return
 			if(!reagents || !reagents.total_volume)

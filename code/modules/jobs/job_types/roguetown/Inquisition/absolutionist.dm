@@ -17,7 +17,7 @@
 	wanderer_examine = FALSE
 	advjob_examine = FALSE
 	give_bank_account = 15
-	vice_restrictions = list(/datum/charflaw/silverweakness)
+	vice_restrictions = list(/datum/charflaw/silverweakness, /datum/charflaw/wanted)
 
 	job_traits = list(
 		TRAIT_NOPAINSTUN,
@@ -79,8 +79,8 @@
 		var/mob/living/carbon/human/H = L
 		if(H.mind)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/psydon/persist)
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/psydonlux_tamper)
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/psydonabsolve)
+			H.mind.AddSpell(new /datum/action/cooldown/spell/psydon/lux/weep)
+			H.mind.AddSpell(new /datum/action/cooldown/spell/psydon/lux/absolve)
 			H.mind.RemoveSpell(/datum/action/cooldown/spell/psydon/respite)
 			H.mind.teach_crafting_recipe(/datum/crafting_recipe/roguetown/alchemy/qsabsolution)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
@@ -98,11 +98,11 @@
 	backr = /obj/item/storage/backpack/rogue/satchel/otavan
 	belt = /obj/item/storage/belt/rogue/leather
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/otavan
-	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fencer/psydon
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fencer/ornate
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/inq
 	shoes = /obj/item/clothing/shoes/roguetown/boots/psydonboots
 	mask = /obj/item/clothing/head/roguetown/helmet/blacksteel/psythorns
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/absolver
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/ornate/absolver
 	id = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/book/rogue/bibble/psy = 1,

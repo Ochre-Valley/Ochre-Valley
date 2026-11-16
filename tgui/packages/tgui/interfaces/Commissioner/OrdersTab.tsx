@@ -296,7 +296,8 @@ const OrderCard = (props: {
               marginBottom: '4px',
             }}
           >
-            State your reason publicly. The commissioner will be notified and their deposit returned.
+            State your reason publicly. The commissioner will be notified and
+            their deposit returned.
           </div>
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             <Input

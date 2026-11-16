@@ -3,6 +3,7 @@
 	tutorial = "You are a man of stories and legends, an unmatched swordsman and renowned thief - the type that Peasants speak of in the Nite and Nobles warn of. A liberator of the downtrodden and selfish bastard in equal measures. You are the Nobility's symbols turned to their guillotine. Matthios stares over you, make him proud."
 	allowed_sexes = list(MALE, FEMALE)
 
+	min_pq = 20 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/freeblade
 	cmode_music = 'sound/music/cmode/antag/combat_cutpurse.ogg'
 	class_select_category = CLASS_CAT_WARRIOR

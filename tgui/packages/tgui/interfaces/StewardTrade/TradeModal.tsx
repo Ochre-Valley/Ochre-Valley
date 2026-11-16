@@ -267,7 +267,9 @@ export const TradeModal = (props: TradeModalProps) => {
   const fillTooltip = !quote
     ? 'Calculating...'
     : batchCapacity < 1
-      ? (isImport ? 'No supply left today.' : 'No demand left today.')
+      ? isImport
+        ? 'No supply left today.'
+        : 'No demand left today.'
       : !canFill
         ? isImport
           ? "The Treasury can't afford even one."

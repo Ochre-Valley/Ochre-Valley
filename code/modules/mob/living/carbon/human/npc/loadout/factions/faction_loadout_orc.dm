@@ -67,6 +67,7 @@
 /datum/npc_archetype/orc/berserker
 	name = "Orc Berserker"
 	threat_point = THREAT_DANGEROUS
+	body = /datum/npc_body/orc/berserker //OV Add
 	statpack = /datum/npc_statpack/line/t2
 	traits = list(TRAIT_NOPAINSTUN, TRAIT_CRITICAL_RESISTANCE)
 	brawl = SKILL_LEVEL_JOURNEYMAN
@@ -85,6 +86,7 @@
 /datum/npc_archetype/orc/warlord
 	name = "Orc Warlord"
 	threat_point = THREAT_DEADLY
+	body = /datum/npc_body/orc/warlord //OV Add
 	statpack = /datum/npc_statpack/heavy/t3
 	armor_training = ARMOR_CLASS_HEAVY
 	melee = SKILL_LEVEL_EXPERT
@@ -111,6 +113,17 @@
 	)
 
 //** BODY **//
+
+//OV Edit, all of these are our shit.
+/datum/npc_body/orc
+	aggro_lines_file = "modular_ochrevalley/strings/rt/orcaggrolines.txt"
+/datum/npc_body/orc/warlord
+	aggro_lines_file = "modular_ochrevalley/strings/rt/orcbossaggrolines.txt"
+/datum/npc_body/orc/juggernaut
+	aggro_lines_file = "modular_ochrevalley/strings/rt/orcbossaggrolines.txt"
+/datum/npc_body/orc/berserker
+	aggro_lines_file = "modular_ochrevalley/strings/rt/orcberserkaggrolines.txt"
+//OV Edit end
 
 /datum/npc_body/orc/juggernaut/get_head_sellprice()
 	return HEAD_BOUNTY_BIG_GUY
@@ -142,7 +155,8 @@
 	)
 	id = list(
 		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 10, //SHATTER MY BINDS
-		NPC_NOTHING = 90,
+		/obj/item/clothing/neck/roguetown/psicross/ravox = 5, //OV add - Ravox is the other war god of the setting and still probably has some old believers.
+		NPC_NOTHING = 85, // OV edit - adjusted to make room for the ravox necklace.
 	)
 	pants = /obj/item/clothing/under/roguetown/loincloth
 	shoes = /obj/item/clothing/shoes/roguetown/gladiator
@@ -154,7 +168,8 @@
 	)
 	id = list(
 		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 10, //SHATTER MY BINDS
-		NPC_NOTHING = 90,
+		/obj/item/clothing/neck/roguetown/psicross/ravox = 5, //OV add - Ravox is the other war god of the setting and still probably has some old believers.
+		NPC_NOTHING = 85, // OV edit - adjusted to make room for the ravox necklace.
 	)
 
 /datum/npc_loadout/kit/orc_fur_flavor/berserker
@@ -163,8 +178,8 @@
 		NPC_NOTHING = 85,
 	)
 	id = list(
-		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 20, //SHATTER MY BINDS
-		NPC_NOTHING = 80,
+		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 30, //SHATTER MY BINDS //OV Edit on the chance - More of a chance for Graggster, because you do mushrooms and shiiiit.
+		NPC_NOTHING = 70, // OV edit
 	)
 
 /datum/npc_loadout/kit/orc_fur_flavor/warlord
@@ -179,7 +194,7 @@
 	)
 	id = list(
 		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 60, //SHATTER MY BINDS
-		NPC_NOTHING = 40,
+		/obj/item/clothing/neck/roguetown/psicross/ravox = 40, //OV ADD - Yeah these guys either are religious, either to Graggy or Ravvy.
 	)
 
 //** WEAPONS **//

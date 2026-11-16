@@ -37,7 +37,7 @@ export const PetitionView = (props: { data: Data }) => {
   const cannotActReason = petition.is_alderman_acting
     ? "As Alderman, you can't petition regions."
     : !petition.is_steward_role
-      ? "Only Crown officials can petition regions."
+      ? 'Only Crown officials can petition regions.'
       : '';
 
   const select = (template: string) => act('petition_select', { template });
@@ -56,8 +56,8 @@ export const PetitionView = (props: { data: Data }) => {
       >
         Petition a region for a Standing Order of your choice. Costs Burgher
         Pledge. The order pays {petition_tax_pct}% less to cover the cost of
-        searching for such demands. The exact item mix is still set by
-        the region.
+        searching for such demands. The exact item mix is still set by the
+        region.
       </div>
 
       <PetitionStatusStrip data={props.data} />

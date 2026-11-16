@@ -1,4 +1,4 @@
-// If clothing appears on a bathmaiden. Then it should be sold here. 
+// If clothing appears on a bathmaiden. Then it should be sold here.
 /datum/supply_pack/rogue/bath_clothes
 	group = "Exotic Apparel"
 	crate_name = "bathmatron's crate"
@@ -98,6 +98,13 @@
 	name = "Corset"
 	cost = 15
 	contains = list(/obj/item/clothing/suit/roguetown/armor/corset)
+
+//OV edit
+/datum/supply_pack/rogue/bath_clothes/corset_bust
+	name = "Corset (Overbust)"
+	cost = 15
+	contains = list(/obj/item/clothing/suit/roguetown/armor/corset_bust)
+//OV edit end
 
 /datum/supply_pack/rogue/bath_clothes/silkydress
 	name = "Silky Dress"

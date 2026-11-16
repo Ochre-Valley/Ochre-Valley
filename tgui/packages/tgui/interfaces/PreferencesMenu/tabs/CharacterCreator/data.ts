@@ -237,6 +237,7 @@ export type IdentityData = {
   race_bonus: string | null; // null indicates no race bonus
 
   nickname: string;
+  pen_name: string | null; // null indicates unset
   highlight_color: Color;
   age: string;
 
@@ -282,6 +283,8 @@ export type IdentityData = {
 
   virtues: VirtueWithMetadata[];
 
+  quirks: QuirkWithMetadata[];
+
   charflaws: CharFlaw[]; // look at constant.MAX_VICES
   has_averse: BooleanLike;
   averse_chosen_faction: string;
@@ -308,10 +311,23 @@ export type VirtueChoice = {
   tooltip: string | null; // null indicates no details
 };
 
+export type QuirkWithMetadata = {
+  id: number;
+  slot_name: string;
+  quirk: Quirk;
+  spawn_error: string | null; // null indicates all is okay
+};
+
+export type Quirk = {
+  name: string;
+};
+
 export type CharFlaw = {
   name: string;
   type: Path;
   warning: BooleanLike;
+  max_choices: number;
+  picked_choices: { index: number; choice: string }[];
 };
 
 // --------------- VillainData ---------------

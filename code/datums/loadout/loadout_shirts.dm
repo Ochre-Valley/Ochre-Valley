@@ -124,7 +124,7 @@
 	sort_category = "Shirts"
 
 /datum/loadout_item/straplessdress/alt
-	name = "Strapless Dress, alt"
+	name = "Strapless Dress, Alt"
 	path = /obj/item/clothing/suit/roguetown/shirt/dress/gen/strapless/alt
 	sort_category = "Shirts"
 
@@ -177,6 +177,11 @@
 /datum/loadout_item/corset
 	name = "Corset"
 	path = /obj/item/clothing/suit/roguetown/armor/corset
+	sort_category = "Shirts"
+
+/datum/loadout_item/corset_bust
+	name = "Corset (Overbust)"
+	path = /obj/item/clothing/suit/roguetown/armor/corset_bust
 	sort_category = "Shirts"
 ///OV edit end
 

@@ -23,17 +23,18 @@ GLOBAL_REAL(logger, /datum/log_holder)
 	/// Whether or not logging as human readable text is enabled
 	var/human_readable_enabled = FALSE
 
-	/// Cached ui_data
-	var/list/data_cache = list()
+	/// Cached ui_data //OV ADD
+	var/list/data_cache = list() //OV ADD
 
-	/// Last time the ui_data was updated
-	var/last_data_update = 0
+	/// Last time the ui_data was updated //OV ADD
+	var/last_data_update = 0 //OV ADD
 
 	var/initialized = FALSE
 	var/shutdown = FALSE
 
 GENERAL_PROTECT_DATUM(/datum/log_holder)
 
+//OV ADD START
 /client/proc/log_viewer_new()
 	set category = "Admin.Admin"
 	set name = "View Round Logs"
@@ -117,6 +118,7 @@ GENERAL_PROTECT_DATUM(/datum/log_holder)
 			return TRUE
 		else
 			stack_trace("unknown ui_act action [action] for [type]")
+//OV ADD END
 
 /// Assembles basic information for logging, creating the log category datums and checking for config flags as required
 /datum/log_holder/proc/init_logging()
