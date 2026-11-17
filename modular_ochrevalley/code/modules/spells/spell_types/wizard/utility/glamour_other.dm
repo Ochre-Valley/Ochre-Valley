@@ -3,7 +3,7 @@
 	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
 	clothes_req = FALSE
 	spell_tier = 1
-	recharge_time = 2 SECONDS //MINUTES
+	recharge_time = 1 MINUTES
 	drawmessage = "I prepare to perform a arcyne incantation."
 	dropmessage = "I release my arcyne focus."
 	overlay_state = "size-change"
@@ -108,7 +108,7 @@
 		regenerate_icons()
 		var/image/I = currentappearance.theImage
 		I.override = TRUE
-		I.layer = ABOVE_ALL_MOB_LAYER
+		//I.layer = ABOVE_ALL_MOB_LAYER
 		remove_alt_appearance("glamoursprite_OVcode")
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode", I)
 	//var/image/I = image(icon = glamappearance.icon, icon_state = glamappearance.icon_state, loc = glamappearance, layer = glamappearance.layer, pixel_x = glamappearance.pixel_x, pixel_y = glamappearance.pixel_y)
