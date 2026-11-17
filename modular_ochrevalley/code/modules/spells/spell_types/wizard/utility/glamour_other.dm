@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/touch/glamourother
 	name = "Copy Glamour"
-	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. (( Abuse of this spell for combat purposes will lead to consequences from staff. ))"
+	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
 	clothes_req = FALSE
 	spell_tier = 1
 	recharge_time = 2 SECONDS //MINUTES
@@ -37,6 +37,10 @@
 	var/mob/living/target_live = target
 	if(user.cmode || target_live.cmode) // per request of staff, no using this while in combat
 		to_chat(user, span_userdanger("<span class='warning'>These magicks refuse to work while in combat!</span>"))
+		return
+
+	if(target_live?.client && !target_live.allow_mimicry)
+		to_chat(user, span_userdanger("<span class='warning'>The magicks fly away, refusing to copy from this one...</span>"))
 		return
 
 	user.apply_status_effect(/datum/status_effect/buff/glamourapplied)
