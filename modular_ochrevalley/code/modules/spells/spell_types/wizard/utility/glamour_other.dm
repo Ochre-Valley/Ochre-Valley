@@ -150,11 +150,16 @@
 		remove_alt_appearance("glamoursprite_OVcode")
 
 	if(!noglamour && target)
+		var/matrix/resize = matrix()
 		//var/image/I = image(icon = target.icon, icon_state = target.icon_state, loc = src, layer = target.layer, pixel_x = target.pixel_x, pixel_y = target.pixel_y)
-		var/image/I = image(icon = target.icon, icon_state = target.icon_state, loc = src, layer = target.layer, pixel_x = src.pixel_x, pixel_y = src.pixel_y)
+		var/image/I = image(icon = target.icon, icon_state = target.icon_state, loc = src, layer = target.layer, pixel_x = target.pixel_x, pixel_y = target.pixel_y)
 		I.override = TRUE
+		resize.Scale(src.size_multiplier /** icon_scale_x * special_x*/, size_multiplier /** icon_scale_y * special_y*/) //Change the size of the matrix
+		resize.Translate(center_offset * src.size_multiplier /** icon_scale_x * special_x*/, (vis_height/2) * (size_multiplier - 1)) //Move the player up in the tile so their feet align with the bottom
+		resize.Turn(src.lying)
+		animate(I, transform = resize, time = 5)
 		I.copy_overlays(target)
-		I.layer = ABOVE_ALL_MOB_LAYER
+		//I.layer = ABOVE_ALL_MOB_LAYER
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode", I)
 		currentlycopyglamoured = TRUE
 		regenerate_icons()
