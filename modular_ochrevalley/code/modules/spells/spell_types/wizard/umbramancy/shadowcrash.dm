@@ -190,9 +190,8 @@
 	var/turf/epicenter = get_turf(target)
 
 	if(epicenter)
-		playsound(epicenter, 'sound/spellbooks/crystal.ogg', 100, TRUE, 6)
-		playsound(epicenter, pick('sound/combat/fracture/fracturedry (1).ogg', 'sound/combat/fracture/fracturedry (2).ogg', 'sound/combat/fracture/fracturedry (3).ogg'), 80, TRUE)
-
+		playsound(epicenter, 'sound/magic/soulshot.ogg', 100, TRUE, 5)
+		new /obj/effect/temp_visual/umbral_explosion(epicenter)
 	if(aoe_radius > 0 && istype(firer, /mob/living/carbon/human))
 		var/mob/living/carbon/human/caster = firer
 		var/mob/living/direct_hit = M
