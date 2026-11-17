@@ -867,12 +867,16 @@
 		// OV Edit End
 		if(L.eyesclosed)
 			L.eyesclosed = 0
+			if(L.stat < UNCONSCIOUS && L.m_intent != MOVE_INTENT_SNEAK)
+				L.visible_message(span_info("[L] opens [L.p_their()] eyes."), vision_distance = 3)
 			L.cure_blind("eyelids")
 
 	if(modifiers["left"])
 		if(_y>=29 || _y<=4)
 			if(isliving(hud.mymob))
 				var/mob/living/L = hud.mymob
+				if(L.stat < UNCONSCIOUS && L.m_intent != MOVE_INTENT_SNEAK)
+					L.visible_message(span_info("[L] closes [L.p_their()] eyes."), vision_distance = 3)
 				L.eyesclosed = 1
 				L.become_blind("eyelids")
 		else

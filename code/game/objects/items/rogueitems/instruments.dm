@@ -27,6 +27,7 @@
 	var/playing = FALSE
 	grid_height = 64
 	grid_width = 32
+	obj_flags = UNIQUE_RENAME
 // OV Add Start
 	/// Instrument is in some other holder such as an organ or item.
 	var/not_held = FALSE
