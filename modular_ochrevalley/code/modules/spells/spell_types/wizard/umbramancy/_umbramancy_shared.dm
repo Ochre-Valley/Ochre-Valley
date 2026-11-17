@@ -253,6 +253,7 @@
 	L.emote("pain", forced = TRUE)
 
 //May move this to a more generalized file in the future. Patron locked aspects go here, though!
+/*
 /datum/patron/on_gain(mob/living/pious)
 	. = ..()
 	if(istype(src, /datum/patron/divine/noc) || istype(src, /datum/patron/inhumen/zizo))
@@ -264,7 +265,12 @@
 	if(istype(src, /datum/patron/divine/noc) || istype(src, /datum/patron/inhumen/zizo))
 		if(pious.mind && LAZYLEN(pious.mind.mage_aspect_config))
 			pious.mind.mage_aspect_config["unlocked_aspects"] -= list(/datum/magic_aspect/umbramancy)
-
+*/
+//Just manually inject it, I guess?
+/datum/aspect_picker/New()
+	..()
+	if(istype(owner.patron, /datum/patron/divine/noc) || istype(owner.patron, /datum/patron/inhumen/zizo))
+		unlocked_aspects += list(/datum/magic_aspect/umbramancy)
 #undef SHADOW_BURN_COOLDOWN
 #undef SHADOW_BURN_KEY
 #undef SHADOW_GRACE_KEY
