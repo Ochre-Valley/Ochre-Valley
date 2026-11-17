@@ -88,6 +88,10 @@
 	var/turf/dest = get_turf(active_portal)
 	if(!dest)
 		return
+	var/path_err = arcyne_validate_blink_path(get_turf(user), dest)
+	if(path_err)
+		to_chat(owner, span_warning(path_err))
+		return FALSE
 
 	var/turf/start = get_turf(user)
 	var/obj/effect/after_image/img = new(start, 0, 0, 0, 0, 0.5 SECONDS, 2 SECONDS, 0)
@@ -100,8 +104,8 @@
 	do_teleport(user, dest, channel = TELEPORT_CHANNEL_MAGIC)
 	playsound(dest, 'sound/magic/blink.ogg', 50, TRUE)
 	user.visible_message(
-		span_warning("[user] is pulled back through the leyline!"),
-		span_notice("The leyline pulls me back."))
+		span_warning("[user] is pulled back through the shadows!"),
+		span_notice("My shadow pulls me back."))
 	active_portal.parent_spell = null
 	qdel(active_portal)
 	active_portal = null
