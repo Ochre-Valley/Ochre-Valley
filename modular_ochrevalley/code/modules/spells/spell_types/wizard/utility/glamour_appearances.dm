@@ -14,7 +14,8 @@
 			resize.Turn(src.lying)
 			animate(I, transform = resize, time = 5)
 		I.copy_overlays(target)
-		I.layer = ABOVE_ALL_MOB_LAYER
+		I.layer = src.layer
+		I.plane = src.plane
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode" + src.ckey, I)
 		currentlycopyglamoured = TRUE
 		regenerate_icons()
@@ -66,7 +67,9 @@
 		regenerate_icons()
 		var/image/I = currentappearance.theImage
 		I.override = TRUE
-		I.layer = ABOVE_ALL_MOB_LAYER
+		I.layer = src.layer
+		I.plane = src.plane
 		remove_alt_appearance("glamoursprite_OVcode" + src.ckey)
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode" + src.ckey, I)
+
 
