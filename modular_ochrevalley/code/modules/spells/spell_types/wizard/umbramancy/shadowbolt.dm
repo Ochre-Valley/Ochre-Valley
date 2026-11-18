@@ -17,7 +17,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MINOR_PROJECTILE
 
-	invocations = list("Tenebra!")
+	invocations = list("Ictus Umbrae!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE
@@ -38,9 +38,9 @@
 	var/resonance_damage = SPELL_DMG(30)
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Shadow Bolt", "tag" = "BOLT", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Tenebra!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
-		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Tenebra!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
-		list("name" = "Umbral Resonance", "tag" = "RESN", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Tenebra Resonat!", "charge_time" = CHARGETIME_MINOR, "ground" = TRUE),
+		list("name" = "Shadow Bolt", "tag" = "BOLT", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
+		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
+		list("name" = "Umbral Resonance", "tag" = "RESN", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Resonantia Umbrae!", "charge_time" = CHARGETIME_MINOR, "ground" = TRUE),
 	)
 
 /datum/action/cooldown/spell/projectile/shadow_bolt/get_spell_statistics(mob/living/user)

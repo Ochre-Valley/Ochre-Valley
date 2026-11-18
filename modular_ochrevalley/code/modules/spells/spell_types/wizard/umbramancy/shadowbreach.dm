@@ -14,8 +14,8 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_AOE
 
-	invocations = list("Ancora Lineam!")
-	invocation_type = INVOCATION_WHISPER
+	invocations = list("Perruptio Umbrae!")
+	invocation_type = INVOCATION_SHOUT
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
 	charge_time = CHARGETIME_MAJOR
@@ -32,8 +32,8 @@
 	var/obj/effect/umbralfount/active_fount
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Shadow Breach", "tag" = "BREACH",  "invocation" = "Umbra Coeunt!", "cooldown" = 25 SECONDS),
-		list("name" = "Umbral Fountain", "tag" = "FOUNT",  "invocation" = "Umbra Coeunt!", "cooldown" = 30 SECONDS),
+		list("name" = "Shadow Breach", "tag" = "BREACH",  "invocation" = "Perruptio Umbrae!", "cooldown" = 25 SECONDS),
+		list("name" = "Umbral Fountain", "tag" = "FOUNT",  "invocation" = "Fons Obscurus!", "cooldown" = 30 SECONDS),
 	)
 
 /datum/action/cooldown/spell/shadowbreach/get_spell_statistics(mob/living/user)

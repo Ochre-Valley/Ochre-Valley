@@ -13,7 +13,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_ULTIMATE
 
-	invocations = list("Ventorum Letalium, Respondete Mihi!")
+	invocations = list("Nox Obscurissima!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE

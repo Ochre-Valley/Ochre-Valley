@@ -18,7 +18,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_PROJECTILE
 
-	invocations = list("Umbra Coeunt!")
+	invocations = list("Collisio Umbrae!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE
@@ -38,8 +38,8 @@
 	var/flow_damage = SPELL_DMG(50)
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Shadow Crash", "tag" = "CRSH", "invocation" = "Umbra Coeunt!", "ground" = FALSE, "cooldown" = 16 SECONDS),
-		list("name" = "Umbral Flow", "tag" = "FLOW", "invocation" = "Umbra Coeunt!", "ground" = TRUE, "cooldown" = 20 SECONDS),
+		list("name" = "Shadow Crash", "tag" = "CRSH", "invocation" = "Collisio Umbrae!", "ground" = FALSE, "cooldown" = 16 SECONDS),
+		list("name" = "Umbral Flow", "tag" = "FLOW", "invocation" = "Fluxus Umbrae!", "ground" = TRUE, "cooldown" = 20 SECONDS),
 	)
 /datum/action/cooldown/spell/projectile/shadowcrash/get_spell_statistics(mob/living/user)
 	var/list/stats = ..()

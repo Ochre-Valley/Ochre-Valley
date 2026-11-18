@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/nocfall
 	button_icon = 'icons/mob/actions/vheslynspells.dmi'
-	name = "Nocfall"
+	name = "Umbral Sundering"
 	expose_caster_on_deflect = FALSE
-	desc = "Call down a shard of condensed darkness from the void above on a location after a short delay. It damages structures across a 5x5 area and leaves an expanse of lingering darkness in its wake. You are not immune to your own darkness."
+	desc = "Form a crystallized mass of darkness overhead and violently cast it down upon a target area, dealing significant damage and leaving behind a sizeable pool of Lingering Shadows. Targets struck will be knocked down and afflicted with Shadowed, and structures hit by the spell will take increased damage."
 	button_icon_state = "conscindo"
 	sound = 'sound/magic/fireball.ogg'
 	spell_color = GLOW_COLOR_DARK
@@ -15,7 +15,7 @@
 	primary_resource_type = SPELL_COST_STAMINA
 	primary_resource_cost = SPELLCOST_MAJOR_AOE
 
-	invocations = list("Cadat Globus Umbrae!")
+	invocations = list("Noc Frange Ea!")
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = TRUE

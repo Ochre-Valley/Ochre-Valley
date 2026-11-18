@@ -8,22 +8,21 @@
 /datum/magic_aspect/umbramancy
 	name = "Umbramancy"
 	latin_name = "Maior Aspectus Umbrae"
-	desc = "A first-order school focused on wielding the air itself as a weapon. \
-			Utilizing arcyne force, Magi practicing Aeromancy conjure and shape vicious vicious winds to lacerate and devastate their foes. \
-			Historically, Aeromancy has its roots spread far across the eastern reaches of Psydonia, from the deserts of Raneshen to the grass sea of Lingyue — now mainland Kazengun."
+	desc = "Born of revelations gleaned by Noccite scholars, Umbramancy toes the line between First and Third Order aspects. \
+	While darkness is a primal matter, the arcyne truths necessary to manipulate it into a deadly force were the result of divine influence, inviting debate on the aspect's proper classification."
 	aspect_type = ASPECT_MAJOR
 	attuned_name = ASPECT_NAME_UMBRAMANCY
 	school_color = GLOW_COLOR_DARK
 	class_locked = TRUE
 	binding_chants = list(
-		"Invoco aeternos ventos!",
-		"I call upon the winds from on high, descend!",
-		"Aero, in me ligare!"
+		"Invoco tenebras aeternas! "
+		"I beckon the pall of nite, blacken! "
+		"Tenebrae, in me ligare!"
 	)
 	unbinding_chants = list(
-		"Solvo ventos vinctam!",
-		"I release the winds that ravage without, be calm.",
-		"Aero, a me discede!"
+		"Solvo tenebras vinctam! "
+		"I step free from umbral shade, unveil."
+		"Tenebrae, a me discede!"
 	)
 	fixed_spells = list(
 		/datum/action/cooldown/spell/projectile/shadow_bolt,
@@ -253,6 +252,7 @@
 	L.emote("pain", forced = TRUE)
 
 //May move this to a more generalized file in the future. Patron locked aspects go here, though!
+//This doesn't work because patron is assigned before mage aspects, keep it in mind for later though
 /*
 /datum/patron/on_gain(mob/living/pious)
 	. = ..()
