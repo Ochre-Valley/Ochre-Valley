@@ -169,6 +169,13 @@
 	for(var/turf/T in target_turfs)
 		new /obj/effect/temp_visual/telegraph/pillar/fadein(T, warning_period)
 
+/obj/effect/umbralfount/proc/delayedIntense(delay)
+	addtimer(CALLBACK(src, PROC_REF(toggleIntense)), delay)
+	//addtimer(CALLBACK(src, PROC_REF(telegraph_burst), pulse_warning - 1), delay + 1)
+
+/obj/effect/umbralfount/proc/toggleIntense()
+	intense = TRUE
+
 /obj/effect/umbralfount/proc/burst()
 	pulses++
 	playsound(get_turf(src), 'sound/magic/soulshot.ogg', 100, TRUE, 5)

@@ -133,7 +133,9 @@
 						U.intense = TRUE
 						if(U.last_pulse + U.pulse_period - world.time > 0) //Don't telegraph if we're waiting on the next processing tick anyways
 							U.telegraph_burst(U.last_pulse + U.pulse_period - world.time) //Redraw telegraph
-						U.visible_message(span_warning("The umbral flow interacts with the umbral fountain, next burst will be empowered!"))
+					else
+						U.delayedIntense(U.last_pulse + U.pulse_period - world.time + 0.2 SECONDS )
+					U.visible_message(span_warning("The umbral flow interacts with the umbral fountain, next burst will be empowered!"))
 				for(var/obj/structure/living_shadow/S in T)
 					S.visible_message(span_warning("The umbral flow interacts with the living shadow, causing it to burst into an umbral cloud!"))
 					qdel(S)
