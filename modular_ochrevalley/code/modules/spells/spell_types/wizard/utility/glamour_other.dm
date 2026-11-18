@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/touch/glamourother
 	name = "Copy Glamour"
-	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
+	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. The spell's notably weak, only visual and easy to peer through, but even a mere appearance can cause a lot of chaos. Click on the spell directly to adjust size. (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
 	clothes_req = FALSE
 	spell_tier = 1
 	recharge_time = 1 MINUTES
@@ -24,7 +24,7 @@
 	icon_state = "pulling"
 	icon_state = "grabbing_greyscale"
 	color = "#87d6f0"
-
+	var/retain_scale = TRUE
 /obj/item/melee/touch_attack/glamourother/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
 		return
@@ -40,18 +40,31 @@
 		return
 
 	if(target_live?.client && !target_live.allow_mimicry)
-		to_chat(user, span_userdanger("<span class='warning'>The magicks fly away, refusing to copy from this one...</span>"))
+		to_chat(user, span_userdanger("<span class='warning'>The magicks fly away, refusing to copy this one...</span>"))
 		return
+	playsound(loc, 'sound/magic/whiteflame.ogg', 100, FALSE, -1, ignore_walls = FALSE)
 
 	user.apply_status_effect(/datum/status_effect/buff/glamourapplied)
-	user.glamourize_sprite(target_live)
+	user.glamourize_sprite(target_live, FALSE, retain_scale)
 
 	qdel(src)
+/obj/item/melee/touch_attack/glamourother/attack_self(mob/user)
+	var/newscale_option = TRUE
+
+	if(tgui_alert(user, "Retain your current size instead of resetting to 100% size scale?", "Size Glamouring", list("No","Yes")) == "Yes")
+		to_chat(user, span_notice("You will retain your current size when you glamour as others."))
+		retain_scale = newscale_option
+		return
+	else
+		to_chat(user, span_notice("You will be 'normal' sized when you glamour as others."))
+		newscale_option = FALSE
+		retain_scale = newscale_option
+		return
+
 
 /datum/status_effect/buff/glamourapplied
 	var/removable = FALSE
 	var/last_check = 0
-
 	id = "glamourapplied"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/glamourapplied
 
@@ -94,6 +107,7 @@
 		return
 
 	if(human_user.cmode) //Check if the player is in combat mode
+		to_chat(human_user, span_userdanger("<span class='warning'>I can't maintain this guise in combat!</span>"))
 		human_user.remove_status_effect(/datum/status_effect/buff/glamourapplied)
 
 /mob/living
@@ -108,13 +122,9 @@
 		regenerate_icons()
 		var/image/I = currentappearance.theImage
 		I.override = TRUE
-		//I.layer = ABOVE_ALL_MOB_LAYER
+		I.layer = ABOVE_ALL_MOB_LAYER
 		remove_alt_appearance("glamoursprite_OVcode")
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode", I)
-	//var/image/I = image(icon = glamappearance.icon, icon_state = glamappearance.icon_state, loc = glamappearance, layer = glamappearance.layer, pixel_x = glamappearance.pixel_x, pixel_y = glamappearance.pixel_y)
-	//I.override = TRUE
-	//I.overlays += overlays
-	//add_alt_appearance(/datum/atom_hud/alternate_appearance/basic, "glamoursprite_OVcode", I)
 
 
 //might want to split these into other .dms but eh
@@ -145,7 +155,7 @@
 	cost = 15
 	contains = list(/obj/item/book/granter/spell/bonechill/glamourcopy)
 
-/mob/living/proc/glamourize_sprite(mob/living/target, noglamour = FALSE)
+/mob/living/proc/glamourize_sprite(mob/living/target, noglamour = FALSE, retain_scale = TRUE)
 	if(currentlycopyglamoured) //remove past glamour first
 		remove_alt_appearance("glamoursprite_OVcode")
 
@@ -154,12 +164,15 @@
 		//var/image/I = image(icon = target.icon, icon_state = target.icon_state, loc = src, layer = target.layer, pixel_x = target.pixel_x, pixel_y = target.pixel_y)
 		var/image/I = image(icon = target.icon, icon_state = target.icon_state, loc = src, layer = target.layer, pixel_x = target.pixel_x, pixel_y = target.pixel_y)
 		I.override = TRUE
-		resize.Scale(src.size_multiplier /** icon_scale_x * special_x*/, size_multiplier /** icon_scale_y * special_y*/) //Change the size of the matrix
-		resize.Translate(center_offset * src.size_multiplier /** icon_scale_x * special_x*/, (vis_height/2) * (size_multiplier - 1)) //Move the player up in the tile so their feet align with the bottom
-		resize.Turn(src.lying)
-		animate(I, transform = resize, time = 5)
+
+		if(retain_scale)
+			resize.Scale(src.size_multiplier /** icon_scale_x * special_x*/, size_multiplier /** icon_scale_y * special_y*/) //Change the size of the matrix
+			resize.Translate(center_offset * src.size_multiplier /** icon_scale_x * special_x*/, (vis_height/2) * (size_multiplier - 1)) //Move the player up in the tile so their feet align with the bottom
+			resize.Turn(src.lying)
+			animate(I, transform = resize, time = 5)
+
 		I.copy_overlays(target)
-		//I.layer = ABOVE_ALL_MOB_LAYER
+		I.layer = ABOVE_ALL_MOB_LAYER
 		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/glamour/, "glamoursprite_OVcode", I)
 		currentlycopyglamoured = TRUE
 		regenerate_icons()
@@ -185,6 +198,12 @@
 		ghost_image.alpha = 128
 		ghost_appearance = new /datum/atom_hud/alternate_appearance/basic/observers(key + "_observer", ghost_image, NONE)
 
+	for(var/mob in GLOB.mob_list)
+		if(mobShouldSee(mob))
+			add_hud_to(mob)
+
+/datum/atom_hud/alternate_appearance/basic/glamour/mobShouldSee(mob/M)
+	return TRUE //may change this to excluding observers, buuuut admins should be able to tell very easily anyway
 
 /atom/proc/get_alt_appearance(key)
 	if(alternate_appearances)
