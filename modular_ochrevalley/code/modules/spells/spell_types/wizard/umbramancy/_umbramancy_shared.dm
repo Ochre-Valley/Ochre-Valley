@@ -15,14 +15,14 @@
 	school_color = GLOW_COLOR_DARK
 	class_locked = TRUE
 	binding_chants = list(
-		"Invoco tenebras aeternas! "
-		"I beckon the pall of nite, blacken! "
-		"Tenebrae, in me ligare!"
+		"Invoco tenebras aeternas! ",
+		"I beckon the pall of nite, blacken! ",
+		"Tenebrae, in me ligare!",
 	)
 	unbinding_chants = list(
-		"Solvo tenebras vinctam! "
-		"I step free from umbral shade, unveil."
-		"Tenebrae, a me discede!"
+		"Solvo tenebras vinctam! ",
+		"I step free from umbral shade, unveil.",
+		"Tenebrae, a me discede!",
 	)
 	fixed_spells = list(
 		/datum/action/cooldown/spell/projectile/shadow_bolt,
