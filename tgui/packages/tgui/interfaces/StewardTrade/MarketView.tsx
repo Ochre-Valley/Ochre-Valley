@@ -51,8 +51,7 @@ export const MarketView = (props: { data: Data; onTrade: OnTrade }) => {
   } = props.data;
   const { onTrade } = props;
   const aldermanActing = !!props.data.is_alderman_acting;
-  const aldermanBlockTitle =
-    "As Alderman, you can't change this.";
+  const aldermanBlockTitle = "As Alderman, you can't change this.";
 
   const groups = groupByCategory(market_rows, good_catalog);
   const [activeCategory, setActiveCategory] = useState<string>(
@@ -124,7 +123,7 @@ export const MarketView = (props: { data: Data; onTrade: OnTrade }) => {
             title={
               aldermanActing
                 ? aldermanBlockTitle
-                : "Sell the surplus of every autopriced good to whichever region pays most, up to what it still wants today. Goods you priced by hand are skipped."
+                : 'Sell the surplus of every autopriced good to whichever region pays most, up to what it still wants today. Goods you priced by hand are skipped.'
             }
           >
             Export Surplus
@@ -171,7 +170,7 @@ export const MarketView = (props: { data: Data; onTrade: OnTrade }) => {
             title={
               aldermanActing
                 ? aldermanBlockTitle
-                : "Multiply all buy prices. Sets each entry to manual."
+                : 'Multiply all buy prices. Sets each entry to manual.'
             }
           >
             Buy ×
@@ -192,7 +191,7 @@ export const MarketView = (props: { data: Data; onTrade: OnTrade }) => {
             title={
               aldermanActing
                 ? aldermanBlockTitle
-                : "Multiply all sell prices. Sets each entry to manual."
+                : 'Multiply all sell prices. Sets each entry to manual.'
             }
           >
             Sell ×
@@ -781,8 +780,7 @@ const StockpileStrip = (props: { row: MarketRow; aldermanActing: boolean }) => {
   const autoexportDisabled = !!row.autoexport_disabled;
   const margin = row.margin_per_unit;
   const potential = row.arbitrage_potential;
-  const blockTitle =
-    "As Alderman, you can't change this.";
+  const blockTitle = "As Alderman, you can't change this.";
   const stripStyleEffective: React.CSSProperties = aldermanActing
     ? { ...stripStyle, opacity: 0.55, textDecoration: 'line-through' }
     : stripStyle;

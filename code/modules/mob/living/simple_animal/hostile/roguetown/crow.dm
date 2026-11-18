@@ -4,7 +4,6 @@
 	icon_state = "crow"
 	icon = 'icons/roguetown/mob/monster/crow.dmi'
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
-	foodtype = RAW
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	obj_flags = CAN_BE_HIT
@@ -12,7 +11,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fried_type = null
 	max_integrity = 10
-	sellprice = 10 //It's an animal! A living being! Oh wait it has feathers and meat?...
+	sellprice = 0
 	blade_dulling = DULLING_CUT
 	rotprocess = null
 	static_debris = list(/obj/item/natural/feather=1)
@@ -30,7 +29,7 @@
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null
 	rotprocess = SHELFLIFE_SHORT
-	sellprice = 12 //Yummy...
+	sellprice = 0
 
 /obj/item/reagent_containers/food/snacks/crow/burning(input as num)
 	. = ..()

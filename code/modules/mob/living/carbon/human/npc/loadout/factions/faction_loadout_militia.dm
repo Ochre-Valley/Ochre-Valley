@@ -26,8 +26,13 @@
 //** BODY **//
 
 /datum/npc_body/northern_commoner/soldier/militia
-	aggro_lines_file = "strings/rt/highwaymanaggrolines.txt"
+	aggro_lines_file = "modular_ochrevalley/strings/rt/militialines.txt" //OV edit - Gives the militia custom lines instead of bandit lines
 	death_line_chance = 25
+
+//OV edit - Deserters are still evil heckers
+/datum/npc_body/northern_commoner/soldier/militia/deserter
+	aggro_lines_file = "strings/rt/highwaymanaggrolines.txt"
+//OV edit end
 
 /datum/npc_body/northern_commoner/soldier/militia/deserter/get_head_sellprice()
 	return HEAD_BOUNTY_GOBLIN
@@ -42,7 +47,7 @@
 	)
 	belt = list(
 		/obj/item/storage/belt/rogue/leather = 90,
-		/obj/item/storage/belt/rogue/leather/knifebelt/iron = 10,
+		/obj/item/storage/belt/rogue/leather/tossbelt/blade/iron = 10,
 	)
 	neck = list(
 		/obj/item/clothing/neck/roguetown/leather = 19,

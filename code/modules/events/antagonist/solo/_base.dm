@@ -17,6 +17,7 @@
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
 	var/list/preferred_events
+	var/antag_pq = 0 //OV EDIT - Minimum PQ to be eligible for this antag
 
 // this is a hack-fix. solo antags, if they have an antag datum, will trim out people who already have said antag datum.
 // before this it seems like it could apply to people if they were already that antag. my chungus life.
@@ -27,6 +28,13 @@
 		for(var/mob/living/candidate in candidates)
 			if(candidate.mind.has_antag_datum(antag_datum))
 				candidates -= candidate
+	//OV edit
+	if(antag_pq)
+		for(var/mob/living/candidate in candidates)
+			if(candidate.client && (antag_pq > get_playerquality(candidate.client.ckey)))
+				log_and_message_admins("STORYTELLER: [candidate.client.ckey] was removed from [src] because their PQ ([get_playerquality(candidate.client.ckey)]) is lower than the required PQ ([antag_pq])") //Very spammy just for testing
+				candidates -= candidate
+	//OV edit end
 	return candidates
 
 
@@ -320,15 +328,15 @@
 
 /datum/round_event/antagonist/solo/proc/poll_and_assign(list/mob/living/possible_candidates)
 	var/datum/round_event_control/antagonist/solo/cast_control = control
-	var/list/willing_candidates = list()
-	var/poll_time = 20 SECONDS
-
-	for(var/mob/living/L in possible_candidates)
-		if(!L.client)
-			continue
-		INVOKE_ASYNC(src, PROC_REF(ask_candidate), L, willing_candidates, poll_time)
-
-	sleep(poll_time)
+	var/list/willing_candidates = SSpolling.poll_candidates(
+		question = "The storyteller is requesting a [antag_flag]. Would you like to play this role?",
+		check_jobban = antag_flag,
+		poll_time = 20 SECONDS,
+		group = possible_candidates,
+		role_name_text = cast_control.name,
+	)
+	if(!willing_candidates)
+		willing_candidates = list()
 
 	for(var/mob/M in willing_candidates)
 		if(QDELETED(M) || !M.client || (M.stat == DEAD && !istype(M, /mob/dead/observer)))
@@ -349,10 +357,3 @@
 		chosen.mind.special_role = antag_flag
 		add_datum_to_mind(chosen.mind)
 	message_admins("STORYTELLER: [cast_control.name] poll finished. [setup_minds.len] antags spawned.")
-
-/datum/round_event/antagonist/solo/proc/ask_candidate(mob/M, list/willing_list, poll_time)
-	var/ask_text = "The storyteller is requesting a [antag_flag]. Would you like to play this role?"
-	var/choice = tgui_alert(M, ask_text, "Antagonist Request", list("Yes", "No"), poll_time)
-
-	if(choice == "Yes")
-		willing_list += M

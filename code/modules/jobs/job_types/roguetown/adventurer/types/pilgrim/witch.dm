@@ -1,6 +1,6 @@
 /datum/advclass/witch
 	name = "Witch"
-	tutorial = "You are a witch, seen as wisefolk to some and a demon to many. Ostracized and sequestered for wrongthinks or outright heresy, your potions are what the commonfolk turn to when all else fails, and for this they tolerate you — at an arm's length. Take care not to end 'pon a pyre, for the church condemns your left handed arts."
+	tutorial = "You are a witch, seen as wisefolk to some and a demon to many. Ostracized and sequestered for wrongthink or outright heresy, your potions are what the commonfolk turn to when all else fails, and for this they tolerate you — at an arm's length. Take care not to end 'pon a pyre, for the church condemns your left handed arts."
 	allowed_sexes = list(MALE, FEMALE)
 
 	outfit = /datum/outfit/job/roguetown/adventurer/witch
@@ -20,6 +20,7 @@
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN // OV Edit - staves skill moved to all witch subclasses for parity, moved out of old magick exclusive
 	)
 	maximum_possible_slots = 20 // Should not fill, just a hack to make it shows what types of towners are in round
 
@@ -82,9 +83,8 @@
 			ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
 			H.adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/arcyne, SKILL_LEVEL_JOURNEYMAN, TRUE)
-			H.adjust_skillrank_up_to(/datum/skill/combat/staves, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			if(H.mind)
-				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 1, "utilities" = 5, "ward" = TRUE))
+				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 1, "minor" = 1, "utilities" = 8, "ward" = TRUE))
 			backl = /obj/item/storage/backpack/rogue/satchel
 			backr = choose_implement(H, "lesser")
 			backpack_contents = list(
@@ -106,9 +106,10 @@
 			if (istype (H.patron, /datum/patron/inhumen/zizo))
 				if(H.mind)
 					H.mind.AddSpell(new /datum/action/cooldown/spell/minion_order)
-					H.mind.AddSpell(new /datum/action/cooldown/spell/gravemark)
-			neck = /obj/item/clothing/neck/roguetown/psicross/wood
+					H.mind.AddSpell(new /datum/action/cooldown/spell/minion_mark)
+			neck = apply_cleric_pre_equip(H) // OV Edit - give them a psycross that fits their god
 			backl = /obj/item/storage/backpack/rogue/satchel
+			backr = /obj/item/rogueweapon/woodstaff/quarterstaff // OV Edit - godsblood gets a poking stick to go with their new staff skill
 			backpack_contents = list(
 								/obj/item/reagent_containers/glass/mortar = 1,
 								/obj/item/pestle = 1,
@@ -125,9 +126,10 @@
 			ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
 			H.adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_NOVICE, TRUE)
 			if(H.mind)
-				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 3))
-			neck = /obj/item/clothing/neck/roguetown/psicross/wood
+				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 5))
+			neck = apply_cleric_pre_equip(H) // OV Edit - give them a psycross that fits their god
 			backl = /obj/item/storage/backpack/rogue/satchel
+			backr = choose_implement(H, "lesser") // OV Edit - give mystagogues the choice of a magic staff because the qstaff impairs their magic
 			backpack_contents = list(
 								/obj/item/rogueweapon/spellbook = 1,
 								/obj/item/reagent_containers/glass/mortar = 1,
@@ -165,19 +167,18 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/lowcut
 		pants = /obj/item/clothing/under/roguetown/skirt/red
 
-	switch(H.patron?.type)
-		if(/datum/patron/inhumen/zizo)
-			H.cmode_music = 'sound/music/combat_heretic.ogg'
-			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
-		if(/datum/patron/inhumen/matthios)
-			H.cmode_music = 'sound/music/combat_matthios.ogg'
-			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
-		if(/datum/patron/inhumen/graggar)
-			H.cmode_music = 'sound/music/combat_graggar.ogg'
-			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
-		if(/datum/patron/inhumen/baotha)
-			H.cmode_music = 'sound/music/combat_baotha.ogg'
-			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
+//	switch(H.patron?.type) OV Edit - removed unecessary patron music swap since apply_cleric_pre_equip(H) does it for them
+//		if(/datum/patron/inhumen/zizo)
+//			H.cmode_music = 'sound/music/combat_heretic.ogg'
+//			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
+//		if(/datum/patron/inhumen/matthios)
+//			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
+//		if(/datum/patron/inhumen/graggar)
+//			H.cmode_music = 'sound/music/combat_graggar.ogg'
+//			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
+//		if(/datum/patron/inhumen/baotha)
+//			H.cmode_music = 'sound/music/combat_baotha.ogg'
+//			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
 	if(H.mind)
 		SStreasury.grant_savings(ECONOMIC_LOWER_MIDDLE_CLASS, H)
 
@@ -282,7 +283,6 @@
 	STACON = 5
 	melee_damage_lower = 9
 	melee_damage_upper = 14
-	del_on_deaggro = null
 	defprob = 70
 
 /mob/living/simple_animal/pet/cat/witch_shifted
@@ -316,7 +316,6 @@
 	STACON = 4
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	del_on_deaggro = null
 	defprob = 70
 
 /mob/living/simple_animal/hostile/retaliate/smallrat/witch_shifted

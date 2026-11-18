@@ -99,7 +99,7 @@ SUBSYSTEM_DEF(inventory_return)
 		dispense_loc = get_turf(dispense_loc)
 	var/msg = ""
 	var/not_first = FALSE
-	for(var/obj/item/I in ourlist)	
+	for(var/obj/item/I in ourlist)
 		master_inv -= I	//Unregister everything first, since we want to do that no matter what!
 		sorted_inv[to_dispense] -= I
 		UnregisterSignal(I,COMSIG_PARENT_QDELETING)
@@ -126,6 +126,9 @@ SUBSYSTEM_DEF(inventory_return)
 	if(!isliving(L))	//If it's not on a mob then we don't have a good way of knowing who it belongs to, and so can't really determine who to return it to
 		return FALSE
 	if(!L.last_login_key)
+		return FALSE
+	var/datum/charflaw/dormancy/cf = L.get_flaw(/datum/charflaw/dormancy)
+	if(cf && cf.target == candidate) //Don't catalogue dormancy items, we'll handle them separately
 		return FALSE
 	return TRUE
 
@@ -172,7 +175,7 @@ SUBSYSTEM_DEF(inventory_return)
 					preserve_object(thing,L)	//Preserve what can be preserved
 				else
 					catalogue_object(thing,L)
-	
+
 	L.release_vore_contents(include_absorbed = TRUE, silent = TRUE)	//Release what can't!
 
 /////////////

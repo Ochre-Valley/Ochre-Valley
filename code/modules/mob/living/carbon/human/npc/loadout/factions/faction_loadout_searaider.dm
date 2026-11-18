@@ -71,7 +71,7 @@
 /datum/npc_body/northern_commoner/searaider
 	male_name_file = "strings/rt/names/human/vikingm.txt"
 	female_name_file = "strings/rt/names/human/vikingf.txt"
-	aggro_lines_file = "strings/rt/searaideraggrolines.txt"
+	aggro_lines_file = "modular_ochrevalley/strings/rt/searaiderlines.txt" //OV Edit, old file is strings/rt/searaideraggrolines.txt.
 	voicepack_chance = 100
 	voicepacks = list(
 		list(/datum/voicepack/male/warrior, /datum/voicepack/female/warrior),
@@ -93,7 +93,7 @@
 		/obj/item/clothing/suit/roguetown/shirt/undershirt/sailor, //We don't want anything that dips below waist, looks bad w/kilt
 	)
 	id = list(
-		/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar = 20, //SHATTER MY BINDS
+		/obj/item/clothing/neck/roguetown/psicross/inhumen/gronn/special = 20, //OV Edit, was Graggar Amulet before. FOR TRIBE AND ISKA.
 		NPC_NOTHING = 80,
 	)
 	cloak = list(

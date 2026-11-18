@@ -58,8 +58,6 @@
 	default_features = MANDATORY_FEATURE_LIST
 	inherent_traits = list(TRAIT_EASYDECAPITATION, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_DEATHLESS, TRAIT_ZOMBIE_IMMUNE) //Given the deathless traits inherently as part of their nature as pseudo-undead.
 	use_skintones = TRUE
-	disliked_food = NONE
-	liked_food = NONE
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
@@ -87,7 +85,7 @@
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 		// Customizable eyes means overriden eyes get thrown out.
-		// HUD organ deals with less parenting problems aswell.
+		// HUD organ deals with less parenting problems as well.
 		ORGAN_SLOT_HUD = /obj/item/organ/dullahan_vision,
 		)
 	bodypart_features = list(
@@ -132,9 +130,7 @@
 		/datum/body_marking_set/bellysocks,
 		/datum/body_marking_set/tiger,
 		/datum/body_marking_set/tiger_dark,
-		//Caustic edit
 		/datum/body_marking_set/gradient,
-		//Caustic edit end
 	)
 	body_markings = list(
 		/datum/body_marking/flushed_cheeks,
@@ -175,8 +171,8 @@
 		/datum/body_marking/drake_eyes,
 		/datum/body_marking/harlequin,
 		/datum/body_marking/harlequinreversed,
+		//Caustic Edit End
 		/datum/body_marking/gradient,
-		//Caustic edit end
 		/datum/body_marking/waist,
 		/datum/body_marking/womb_tattoo,
 		/datum/body_marking/butterfly
@@ -325,7 +321,7 @@
 /datum/species/dullahan/on_species_loss(mob/living/carbon/user)
 	. = ..()
 
-	//UnregisterSignal(user, COMSIG_MOB_SAY) //OV EDIT
+	UnregisterSignal(user, COMSIG_MOB_SAY)
 	UnregisterSignal(user, COMSIG_MOB_SAY_POSTPROCESS)
 	user.set_hearing_atom_override(null) //OV Add
 	UnregisterSignal(user, COMSIG_ERP_LOCATION_ACCESSIBLE)
@@ -376,6 +372,7 @@
 /datum/species/dullahan/proc/soul_light_on(mob/living/carbon/human/user)
 	var/obj/item/organ/soul/soul_accessory = user.getorganslot(ORGAN_SLOT_SOUL)
 	if(soul_accessory && user.stat != DEAD)
+		QDEL_NULL(mob_light_obj)
 		mob_light_obj = user.mob_light(soul_accessory.accessory_colors, 2, 2)
 
 /datum/species/dullahan/proc/soul_light_off()

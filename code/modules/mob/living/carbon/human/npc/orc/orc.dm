@@ -23,7 +23,12 @@
 	ai_controller = /datum/ai_controller/human_npc
 	cmode_music = FALSE
 	ambush_faction = "orcs"
-
+//OV Add
+/mob/living/carbon/human/species/orc/npc/after_creation()
+	..()
+	src.grant_language(/datum/language/aavnic)
+	src.grant_language(/datum/language/orcish)
+//OV end
 /mob/living/carbon/human/species/orc/npc/archer
 	npc_archetype = /datum/npc_archetype/orc/savage/archer
 	threat_point = THREAT_HIGH

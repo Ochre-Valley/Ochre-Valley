@@ -501,6 +501,8 @@
 						vagina = new()
 						vagina.Insert(target, TRUE, FALSE)
 					vagina.accessory_type = valid_vaginas[params["vagina"]]
+					var/datum/sprite_accessory/vagina/vagina_type = SPRITE_ACCESSORY(vagina.accessory_type)
+					vagina.accessory_colors = vagina_type.get_default_colors(color_key_source_list_from_carbon(target))
 					should_update = TRUE
 		if("vagina_color")
 			var/obj/item/organ/vagina/vagina = target.getorganslot(ORGAN_SLOT_VAGINA)

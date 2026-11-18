@@ -3,6 +3,7 @@
 	tutorial = "You are a champion of the Ecclesial, bearing boons of your Patron into battle. By quill or sword their word shall be heard."
 	allowed_sexes = list(MALE, FEMALE)
 
+	min_pq = 20 //OV EDIT
 	outfit = /datum/outfit/job/roguetown/wretch/profane_champion
 	class_select_category = CLASS_CAT_CLERIC
 	category_tags = list(CTAG_WRETCH)

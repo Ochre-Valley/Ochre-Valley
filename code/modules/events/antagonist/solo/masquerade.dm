@@ -15,12 +15,10 @@
 
 	weight = 8
 
-	denominator = 80
+	denominator = 20
 
-	base_antags = 2
-	maximum_antags = 2
-
-	max_occurrences = 0 //OV Edit: Disabled. Was not listed
+	base_antags = 0
+	maximum_antags = 6
 
 	earliest_start = 0 SECONDS
 
@@ -28,6 +26,7 @@
 	antag_datum = /datum/antagonist/vampire
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 50 //OV EDIT
 
 /datum/round_event/antagonist/solo/masquerade/add_datum_to_mind(datum/mind/antag_mind)
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(forced_clan = FALSE, generation = GENERATION_ANCILLAE)

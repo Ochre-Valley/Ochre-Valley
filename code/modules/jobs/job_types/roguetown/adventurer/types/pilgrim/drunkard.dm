@@ -14,7 +14,6 @@
 		STATKEY_STR = 1,
 	)
 	subclass_skills = list(
-		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -40,7 +39,7 @@
 						/obj/item/storage/pill_bottle/dice = 1,
 						/obj/item/storage/pill_bottle/dice/farkle = 1,
 						/obj/item/reagent_containers/glass/cup = 1,
-						/obj/item/toy/cards/deck = 1,
+						/obj/item/deck/playing_cards = 1,
 						/obj/item/reagent_containers/glass/bottle/rogue/wine = 1,
 						/obj/item/flashlight/flare/torch = 1,
 						)

@@ -11,7 +11,7 @@
  */
 /mob/living/proc/perform_the_nom(mob/living/user, mob/living/prey, mob/living/pred, obj/belly/belly, delay_time)
 	//OV Edit: Check if a summon is eating its summoner
-	var/datum/component/conjured_minion/isMinion = pred.GetComponent(/datum/component/conjured_minion)	
+	var/datum/component/conjured_minion/isMinion = pred.GetComponent(/datum/component/conjured_minion)
 	if(isMinion && isMinion.summoner_ref == prey.weak_reference)
 		log_admin("[key_name(pred)] has eaten themselves using a summon. If they do this repeatedly, they may be abusing mechanics")
 		message_admins("[ADMIN_LOOKUPFLW(pred)] has eaten themselves using a summon. If they do this repeatedly, they may be abusing mechanics")
@@ -56,13 +56,13 @@
 		swallow_time = delay_time
 	else
 		swallow_time = ishuman(prey) ? belly.human_prey_swallow_time : belly.nonhuman_prey_swallow_time
-	
-	// Their AI should get notified so they can stab us
+
+	// Their AI should get notified so they can stab us //OV EDIT - Disabled 11.11.26 with AI changes
 	//prey.ai_holder?.react_to_attack(user)
-	if(istype(prey, /mob/living/simple_animal/hostile/retaliate))
-		var/mob/living/simple_animal/hostile/retaliate/retaliatePrey = prey
-		retaliatePrey.Retaliate()
-	
+	//if(istype(prey, /mob/living/simple_animal/hostile/retaliate))
+	//	var/mob/living/simple_animal/hostile/retaliate/retaliatePrey = prey
+	//	retaliatePrey.Retaliate() //OV EDIT END
+
 	//Timer and progress bar
 	if(!do_after(user, swallow_time, target = prey))
 		return FALSE // Prey escaped (or user disabled) before timer expired.
@@ -179,7 +179,7 @@
 
 	if(user_to_pred > 1 || user_to_prey > 1)
 		return FALSE
-	
+
 	if(!prey.mind) //A quick check for if the Prey has no mind datum, it likely wasn't controlled by a player ever, so we don't need to check prefs.
 		return TRUE
 

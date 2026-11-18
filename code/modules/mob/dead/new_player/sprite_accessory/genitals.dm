@@ -40,6 +40,10 @@
 //Caustic edit end
 
 /datum/sprite_accessory/penis/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
+	//OV EDIT START - Based on Caustic Cove Reveal Organ Work
+	if(organ.visible_organ && organ.always_show)
+		return TRUE
+	//OV EDIT END
 	if(owner.underwear)
 		return FALSE
 	return is_human_part_visible(owner, HIDEJUMPSUIT|HIDECROTCH)
@@ -121,6 +125,10 @@
 	return "[icon_state]_[testes.ball_size]"
 
 /datum/sprite_accessory/testicles/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
+	//OV EDIT START - Based on Caustic Cove Reveal Organ Work
+	if(organ.visible_organ && organ.always_show)
+		return TRUE
+	//OV EDIT END
 	if(owner.underwear)
 		return FALSE
 	//Caustic Edit - Allow visible balls even with a slit!
@@ -159,6 +167,10 @@
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_ID, OFFSET_ID_F)
 
 /datum/sprite_accessory/breasts/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
+	//OV EDIT START - Based on Caustic Cove Reveal Organ Work
+	if(organ.visible_organ && organ.always_show)
+		return TRUE
+	//OV EDIT END
 	if(owner.underwear && owner.underwear.covers_breasts)
 		return FALSE
 	return is_human_part_visible(owner, HIDEBOOB|HIDEJUMPSUIT)
@@ -190,6 +202,10 @@
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_BELT, OFFSET_BELT_F)
 
 /datum/sprite_accessory/vagina/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
+	//OV EDIT START - Based on Caustic Cove Reveal Organ Work
+	if(organ.visible_organ && organ.always_show)
+		return TRUE
+	//OV EDIT END
 	if(owner.underwear)
 		return FALSE
 	return is_human_part_visible(owner, HIDECROTCH|HIDEJUMPSUIT)

@@ -35,8 +35,7 @@ export const AutoImportView = (props: { data: Data }) => {
     history,
   } = auto_import;
   const aldermanActing = !!props.data.is_alderman_acting;
-  const aldermanBlockTitle =
-    "As Alderman, you can't change this.";
+  const aldermanBlockTitle = "As Alderman, you can't change this.";
 
   const [floorDraft, setFloorDraft] = useState<string>(String(purse_floor));
 

@@ -31,7 +31,7 @@
 	grid_width = 32
 
 /obj/item/quiver/bulletpouch
-	name = "arquebus bullet pouch"
+	name = "arquebus shot pouch" //ov edit- shot
 	desc = "A pouch carrying bullets for firearms."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "slingpouch"

@@ -384,10 +384,11 @@ export const MarketView = ({
             </p>
             <p style={{ margin: 0 }}>
               A <b style={{ color: SEAL_AMBER }}>Black Market</b> runs in the
-              shadows. It holds {market.bm_pool_pct}% of the capacity of the legitimate warehouse,
-              takes no demand boost from foreign ships, and its prices are
-              independent of the regular market. Each day, smugglers and small
-              boats clear {market.bm_daily_clear_pct}% of its capacity.
+              shadows. It holds {market.bm_pool_pct}% of the capacity of the
+              legitimate warehouse, takes no demand boost from foreign ships,
+              and its prices are independent of the regular market. Each day,
+              smugglers and small boats clear {market.bm_daily_clear_pct}% of
+              its capacity.
             </p>
           </div>
         )}
