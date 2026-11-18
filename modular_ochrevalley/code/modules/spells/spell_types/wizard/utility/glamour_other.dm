@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/touch/glamourother
 	name = "Copy Glamour"
-	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. The spell's notably weak, only visual and easy to peer through, but even a mere appearance can cause a lot of chaos. Click on the spell directly to adjust size. (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
+	desc = "A spell favoured by Xylixians and other tricksters to cause a bit of mischief, among other things. The spell's notably weak, only visual and easy to peer through, but even a mere appearance can cause a lot of chaos. Click on the spell in your hand to adjust size scaling. Sneak if you wish to use it silently. \n (( Abuse of this spell for OOC reasons will lead to consequences from staff. ))"
 	clothes_req = FALSE
 	spell_tier = 1
 	recharge_time = 1 MINUTES
@@ -41,7 +41,9 @@
 	if(target_live?.client && !target_live.allow_mimicry)
 		to_chat(user, span_userdanger("<span class='warning'>The magicks fly away, refusing to copy this one...</span>"))
 		return
-	playsound(loc, 'sound/magic/whiteflame.ogg', 100, FALSE, -1, ignore_walls = FALSE)
+
+	if(!user.m_intent == MOVE_INTENT_SNEAK)
+		playsound(loc, 'sound/magic/whiteflame.ogg', 100, FALSE, -1, ignore_walls = FALSE)
 
 	user.apply_status_effect(/datum/status_effect/buff/glamourapplied)
 	user.glamourize_sprite(target_live, FALSE, retain_scale)
