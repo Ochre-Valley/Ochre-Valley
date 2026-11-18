@@ -3,8 +3,7 @@
 	desc = "Call forth a bound humanoid servant to aid you. The servant may take on a myriad of forms, but is quite useless at near any task. (This is meant as a scene tool, do not use them as cheap meat shields or some other nonsense!)"
 	button_icon_state = "primetriangle"
 	invocations = list("Exsurge, serve!")
-	summon_noun = "champion"
-	recoil_energy_floor = 200
+	summon_noun = "servant"
 	modes = list(
 			list("name" = "Servant", "tag" = "SRV", "loadout" = "servant", "color" = GLOW_COLOR_ARCANE, "invocation" = "Exsurge, serve!"), //OV Edit: Add servant summon
 	)
