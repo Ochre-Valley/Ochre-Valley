@@ -375,6 +375,16 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/mob/living/character = create_character(TRUE)	//creates the human and transfers vars and mind
 
 	character.islatejoin = TRUE
+
+	// Place them before equipping, like roundstart, so relocations during equip (e.g. Forlorne) aren't undone
+	var/datum/job/job = SSjob.GetJob(rank)
+	if(job && !job.override_latejoin_spawn(character))
+
+		SSjob.SendToLateJoin(character)
+
+		var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
+		Spl.Fade(TRUE)
+
 	var/equip = SSjob.EquipRank(character, rank, TRUE)
 
 
@@ -386,17 +396,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	// OV Edit Start
 	cleanup_surrendered_petrified_body(surrendered_petrified_ckey, surrendered_petrified_character_name, character)
 	// OV Edit End
-
-	var/datum/job/job = SSjob.GetJob(rank)
-
-
-	if(job && !job.override_latejoin_spawn(character))
-
-		SSjob.SendToLateJoin(character)
-
-		var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
-		Spl.Fade(TRUE)
-
 
 	SSticker.minds += character.mind
 

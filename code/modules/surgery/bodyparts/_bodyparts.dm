@@ -651,6 +651,12 @@
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
+	var/datum/component/ooze_color_shift/color_shift
+	if(!dropped && owner && isooze(owner))
+		color_shift = owner.GetComponent(/datum/component/ooze_color_shift)
+		if(!color_shift?.shifting)
+			color_shift = null
+
 	//OV Add Start
 	var/mob/living/bodypart_owner = owner || original_owner
 	var/datum/status_effect/petrified/bodypart_owner_petrified = bodypart_owner?.IsPetrified()
@@ -664,6 +670,7 @@
 	if(petrified_limb || bodypart_owner_petrified)
 		petrification_debug("get_limb_icon start: [petrification_debug_bodypart_summary(src)] dropped=[dropped] hideaux=[hideaux] owner=[petrification_debug_value(bodypart_owner)] owner_petrified=[!!bodypart_owner_petrified] statue_color=[petrification_debug_value(statue_color)] matrix_len=[petrification_debug_len(petrified_color_matrix)]")
 	//OV Add End
+
 	var/icon_gender = (body_gender == FEMALE) ? "f" : "m" //gender of the icon, if applicable
 	var/render_as_organic_limb = is_organic_limb() || petrified_limb //OV Add
 
@@ -751,6 +758,14 @@
 				petrification_debug("get_limb_icon greyscale-color: zone=[body_zone] draw_color=[petrification_debug_value(draw_color)] limb_color=[petrification_debug_value(limb.color)] aux_color=[greyscale_aux_color_debug]")
 			//OV Add End
 
+			if(color_shift && !no_update && !rotted && !(HAS_TRAIT(owner, TRAIT_ROTMAN) && !owner.mind) && !mutation_color && draw_color == owner.dna.features["mcolor"])
+				var/list/limb_overlays = .
+				limb_overlays[1] = color_shift.add_body_visual(limb)
+				if(aux)
+					var/aux_index = limb_overlays.Find(aux)
+					if(aux_index)
+						limb_overlays[aux_index] = color_shift.add_body_visual(aux)
+
 	var/draw_organ_features = TRUE
 	var/draw_bodypart_features = TRUE
 	if(owner && owner.dna)
@@ -782,8 +797,12 @@
 						should_draw = TRUE
 				if(!should_draw)
 					continue
-			var/organ_appearance = organ.get_bodypart_overlay(src) //OV Edit
+			var/organ_appearance = organ.get_bodypart_overlay(src)
 			if(organ_appearance)
+				if(color_shift && islist(organ_appearance) && !istype(organ, /obj/item/organ/eyes) && color_shift.prepare_accessory(organ, organ.accessory_type, organ.accessory_colors))
+					var/datum/sprite_accessory/accessory = SPRITE_ACCESSORY(organ.accessory_type)
+					organ_appearance = color_shift.add_accessory_visuals(accessory, src, organ, organ_appearance, organ.accessory_colors)
+
 				//OV Add Start
 				if(petrified_limb)
 					petrification_debug("get_limb_icon organ-overlay before-tint: zone=[body_zone] skipped_soul=[istype(organ, /obj/item/organ/soul)] appearance_len=[petrification_debug_len(organ_appearance)] [petrification_debug_organ_summary(organ)]")
@@ -792,6 +811,7 @@
 				if(petrified_limb)
 					petrification_debug("get_limb_icon organ-overlay after-tint: zone=[body_zone] appearance_len=[petrification_debug_len(organ_appearance)] [petrification_debug_organ_summary(organ)]")
 				//OV Add End
+
 				. += organ_appearance
 
 	// Feature overlays
@@ -805,6 +825,10 @@
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)
 				continue
+			if(color_shift && color_shift.prepare_accessory(feature, feature.accessory_type, feature.accessory_colors))
+				var/datum/sprite_accessory/accessory = SPRITE_ACCESSORY(feature.accessory_type)
+				overlays = color_shift.add_accessory_visuals(accessory, src, null, overlays, feature.accessory_colors)
+
 			//OV Add start
 			if(petrified_limb)
 				petrification_debug("get_limb_icon feature-overlay before-tint: zone=[body_zone] overlays=[petrification_debug_len(overlays)] [petrification_debug_feature_summary(feature)]")
@@ -812,6 +836,7 @@
 				apply_petrified_overlay_color(overlays, null, petrified_color_matrix)
 				petrification_debug("get_limb_icon feature-overlay after-tint: zone=[body_zone] overlays=[petrification_debug_len(overlays)] [petrification_debug_feature_summary(feature)]")
 			//OV Add End
+
 			. += overlays
 	//OV Add
 	if(petrified_limb || bodypart_owner_petrified)
