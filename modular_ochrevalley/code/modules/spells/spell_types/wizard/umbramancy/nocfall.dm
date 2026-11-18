@@ -2,8 +2,7 @@
 	button_icon = 'icons/mob/actions/vheslynspells.dmi'
 	name = "Nocfall"
 	expose_caster_on_deflect = FALSE
-	desc = "Call down a fireball on a location after a short delay. It damages structures across a 5x5 area and leaves a cloud of smoke and a curtain of flame in its wake. You are not immune to your own fire.\n\
-	Fire spells apply scorched effects - at 4 scorched, an armor piercing wound is applied to the head or chest: whichever you are aiming at, and randomly if aiming elsewhere."
+	desc = "Call down a shard of condensed darkness from the void above on a location after a short delay. It damages structures across a 5x5 area and leaves an expanse of lingering darkness in its wake. You are not immune to your own darkness."
 	button_icon_state = "conscindo"
 	sound = 'sound/magic/fireball.ogg'
 	spell_color = GLOW_COLOR_DARK

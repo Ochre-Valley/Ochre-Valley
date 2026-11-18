@@ -1,9 +1,9 @@
 /datum/action/cooldown/spell/projectile/shadowcrash
 	button_icon = 'icons/mob/actions/nocmiracles.dmi'
 	name = "Shadow Crash"
-	desc = "Conjure ice and hurl it in one of two forms. Lance drives a single spear straight ahead, punching through up to three foes in a line, leaving two stacks of frost on each. \
-	Burst lobs an arcing shard that shatters on impact in a 3x3 area, dealing 66% damage to non primary targets while leaving one stack of frost on all of them. \
-	Toggle firing mode (Shift+G) while the spell is active: Lance or Burst."
+	desc = "Conjure forth a mass of shadow to bombard your foes with \n \
+	Crash: Lob a volatile mass of condensed darkness that will explode upon impact, leaving behind a pool of Lingering Shadows.\n \
+	Flow: Cast forth a wave of smothering darkness, leaving behind a trail of Lingering Shadows. Striking an Umbral Fountain or Living Shadow will cause a strengthened explosion of darkness."
 	button_icon_state = "blindness"
 	sound = 'sound/magic/shadowstep_destination.ogg'
 	spell_color = GLOW_COLOR_DARK
@@ -41,6 +41,14 @@
 		list("name" = "Shadow Crash", "tag" = "CRSH", "invocation" = "Umbra Coeunt!", "ground" = FALSE, "cooldown" = 16 SECONDS),
 		list("name" = "Umbral Flow", "tag" = "FLOW", "invocation" = "Umbra Coeunt!", "ground" = TRUE, "cooldown" = 20 SECONDS),
 	)
+/datum/action/cooldown/spell/projectile/shadowcrash/get_spell_statistics(mob/living/user)
+	var/list/stats = ..()
+	for(var/i in stats.Copy())
+		if(findtext(i, "Damage:") || findtext(i, "Arc Mode"))
+			stats -= i
+	stats += span_info("Damage: Shadow Crash [SPELL_DMG(60)] (+[SPELL_DMG(20)] splash)  / Umbral Flow [flow_damage] ")
+	stats += span_info("Firing mode (Shift+G): Shadow Crash (lobbed bombardment) / Umbral Flow (ground-rolling eruption).")
+	return stats
 
 /datum/action/cooldown/spell/projectile/shadowcrash/Grant(mob/grant_to)
 	. = ..()

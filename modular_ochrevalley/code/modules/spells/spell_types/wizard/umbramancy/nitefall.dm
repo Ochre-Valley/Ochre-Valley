@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/nitefall
 	name = "Nitefall"
-	desc = "Summon many unstable crystals of umbral energies, which will periodically release a burst that damages all nearby."
+	desc = " Conjure a spread of short-lyving Umbral Fountains across a wide area, each one only lingering long enough to release three bursts before expiring."
 	button_icon = 'icons/mob/actions/zizomiracles.dmi'
 	button_icon_state = "cataclysm"
 	sound = 'sound/misc/portalactivate.ogg'

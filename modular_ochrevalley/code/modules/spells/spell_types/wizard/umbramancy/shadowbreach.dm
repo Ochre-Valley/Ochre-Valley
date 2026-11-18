@@ -1,6 +1,8 @@
 /datum/action/cooldown/spell/shadowbreach
 	name = "Shadowbreach"
-	desc = "Summon an unstable crystal of umbral energies, which will periodically release a burst that damages all nearby."
+	desc = "Summon a persistent mass of umbral energies which will damage any who linger. \n \
+	Breach: Designate an area to explode with a surge of volatile darkness after a small delay, leaving behind a pool of Lingering Shadows. The explosion will repeat and expand after an additional delay. Targets already hit take decreased damage. \n \
+	Fountain: Conjure a pulsating crystal of darkness at a targeted location. It persists for 15 seconds, releasing damaging bursts every 3 seconds. When struck by Umbral Flow, Umbral Resonance, or upon its final burst, the Fountain will release a larger, more potent explosion."
 	button_icon = 'icons/mob/actions/classuniquespells/spellblade.dmi'
 	button_icon_state = "leyline_anchor"
 	sound = 'sound/misc/portalactivate.ogg'
@@ -33,6 +35,15 @@
 		list("name" = "Shadow Breach", "tag" = "BREACH",  "invocation" = "Umbra Coeunt!", "cooldown" = 25 SECONDS),
 		list("name" = "Umbral Fountain", "tag" = "FOUNT",  "invocation" = "Umbra Coeunt!", "cooldown" = 30 SECONDS),
 	)
+
+/datum/action/cooldown/spell/shadowbreach/get_spell_statistics(mob/living/user)
+	var/list/stats = ..()
+	for(var/i in stats.Copy())
+		if(findtext(i, "Damage:"))
+			stats -= i
+	stats += span_info("Damage: Shadow Breach [breach_damage] ([round(breach_damage*0.33)] on repeat hits)  / Umbral Fountain [SPELL_DMG(50)] ([SPELL_DMG(50*1.7)] when enhanced) ")
+	return stats
+
 
 /datum/action/cooldown/spell/shadowbreach/Grant(mob/grant_to)
 	. = ..()

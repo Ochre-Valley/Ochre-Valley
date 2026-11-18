@@ -1,10 +1,7 @@
 /datum/action/cooldown/spell/living_shadow
 	name = "Living Shadow"
-	desc = "Anchor your shadown to nearby ground. Recast to recall. \
-		The tether has 75 health and lasts 20 seconds. \
-		7 tile maximum recall range. Same level only. \
-		Cannot recall while grabbed, restrained, or buckled. \
-		If the tether is destroyed or expires, the spell goes on full cooldown."
+	desc = "Conjure a copy of your shadow at a distant location. The shade is fragile, immobile, and doesn't do anything on its own. When destroyed or struck with either Umbral Resonance or Umbral Flow, it releases potent, delayed bursts of darkness. \
+	Using this spell while a shadow is active allows you to teleport to your shadow's location, consuming it in the process. If the shadow is destroyed or expires, the spell goes on full cooldown."
 	button_icon = 'icons/mob/actions/vheslynspells.dmi'
 	button_icon_state = "phaseroll"
 	sound = 'sound/misc/portalactivate.ogg'

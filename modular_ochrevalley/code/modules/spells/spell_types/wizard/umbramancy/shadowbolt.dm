@@ -3,10 +3,9 @@
 /datum/action/cooldown/spell/projectile/shadow_bolt
 	button_icon = 'icons/mob/actions/mage_hex.dmi'
 	name = "Shadow Bolt"
-	desc = "Fire a precise jolt of lightning that sears a target's struck body part with heavy burn. \
-	Toggle firing mode (Shift+G) while active: Chain leaps to up to three foes behind the target, searing the same body part for half as much, \
-	Focus only strike one target, and Arc lobs a single weakened bolt over obstacles. \
-	The bolt loses power past 5 paces."
+	desc = "Utilise darkness to assault a single target, with additional effects if they are suffering from maximum stacks of pervasive darkness. \n \
+	Bolt: Launch a bolt of congealed darkness to sear the target struck. If the target is at maximum stacks of Pervasive Darkness, the stacks will be consumed to apply Vulnerable to the target and deal additional damage. Can be arced.\n \
+	Umbral Resonance: Cause a delayed explosion of volatile darkness at a targeted location, searing those struck and empowering your own lingering spells. If the target struck is at maximum stacks of Pervasive Darkness, the stacks will be consumed to deal additional damage, then cause a secondary explosion. Additionally, if the target struck is an Umbral Fountain or Living Shadow, a strengthened explosion will be generated."
 	button_icon_state = "wither"
 	sound = 'sound/magic/shadowstep_destination.ogg'
 	spell_color = GLOW_COLOR_DARK
@@ -43,6 +42,15 @@
 		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Tenebra!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
 		list("name" = "Umbral Resonance", "tag" = "RESN", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Tenebra Resonat!", "charge_time" = CHARGETIME_MINOR, "ground" = TRUE),
 	)
+
+/datum/action/cooldown/spell/projectile/shadow_bolt/get_spell_statistics(mob/living/user)
+	var/list/stats = ..()
+	for(var/i in stats.Copy())
+		if(findtext(i, "Damage:") || findtext(i, "Arc Mode"))
+			stats -= i
+	stats += span_info("Damage: Shadow Bolt [SPELL_DMG(45)]([SPELL_DMG(30)] arced) (+[SPELL_DMG(30)] on targets with full umbral stacks)  / Resonance [resonance_damage] (+[SPELL_DMG(30)] on targets with full umbral stacks) ")
+	stats += span_info("Firing mode (Shift+G): Shadow Bolt (direct) / Arced Shadow Bolt (arced projectile) / Resonance (ground-target eruption).")
+	return stats
 
 /datum/action/cooldown/spell/projectile/shadow_bolt/Grant(mob/grant_to)
 	. = ..()
