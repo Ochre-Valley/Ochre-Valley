@@ -72,7 +72,7 @@
 	if(!T || T.density)
 		to_chat(H, span_warning("I cannot anchor my shadow to the [T]!"))
 	active_portal = new /obj/structure/living_shadow(T, src)
-	invocation = "Gradus Umbratus!"
+	invocations = "Gradus Umbratus!"
 	to_chat(H, span_notice("I anchor my shadow to the [T]."))
 	playsound(T, 'sound/misc/portalactivate.ogg', 50, TRUE)
 	reset_spell_cooldown()
@@ -111,7 +111,7 @@
 
 /datum/action/cooldown/spell/living_shadow/proc/clear_portal()
 	active_portal = null
-	invocation = "Umbra Vivens!"
+	invocations = "Umbra Vivens!"
 	StartCooldown()
 	build_all_button_icons()
 
