@@ -80,13 +80,15 @@
 	if(!epicenter)
 		return FALSE
 	new /obj/effect/temp_visual/telegraph/pillar/fadein(epicenter, resonance_delay)
-	playsound(epicenter, 'sound/magic/charging_fire.ogg', 80, TRUE)
+	playsound(epicenter, 'sound/magic/charging.ogg', 80, TRUE)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(resonance_erupt), epicenter, owner, resonance_damage, 0, owner.zone_selected, FALSE), resonance_delay)
 	return TRUE
 
 /proc/resonance_erupt(turf/epicenter, mob/living/carbon/human/caster, damage, radius, aim_zone, chained)
 	if(!epicenter)
 		return
+	if(radius > 0)
+		new /obj/effect/temp_visual/umbral_explosion(epicenter)
 	var/has_exploded = FALSE //Keep any weirdness with a bunch of people with stacks on one tile from causing absolute death
 	playsound(epicenter, pick('sound/misc/explode/incendiary (1).ogg', 'sound/misc/explode/incendiary (2).ogg'), 100, TRUE, 5)
 	for(var/turf/T in range(radius, epicenter))
