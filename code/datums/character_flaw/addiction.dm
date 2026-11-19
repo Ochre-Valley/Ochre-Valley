@@ -283,7 +283,7 @@
 
 /datum/status_effect/debuff/addiction/manathirst
 	id = "addiction_manathirst"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction/manathirst
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/ochreaddiction/manathirst
 	effectedstats = list(STATKEY_INT = -2)
 
 /atom/movable/screen/alert/status_effect/debuff/ochreaddiction/manathirst
@@ -304,7 +304,7 @@
 
 /datum/status_effect/debuff/addiction/manabroken
 	id = "addiction_manabroken"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction/manabroken
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/ochreaddiction/manabroken
 	effectedstats = list(STATKEY_INT = -4)
 
 /datum/status_effect/debuff/addiction/manabroken/process()
