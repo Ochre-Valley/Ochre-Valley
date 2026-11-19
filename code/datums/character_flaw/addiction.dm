@@ -108,6 +108,15 @@
 	icon_state = "addiction"
 	icon = 'icons/mob/screen_alert_addiction.dmi'
 
+///OV edit
+
+/atom/movable/screen/alert/status_effect/debuff/ochreaddiction
+	name = "OchreAddiction"
+	desc = ""
+	icon_state = "addiction"
+	icon = 'modular_ochrevalley/icons/ochre_screen_alert_addiction.dmi'
+
+///OV edit end
 
 /// ALCOHOLIC
 
@@ -259,6 +268,55 @@
 
 /datum/charflaw/addiction/masochist/on_mob_creation(mob/living/living)
 	living.pain_threshold += 10
+
+///OV edit
+/// MANATHIRST
+
+/datum/charflaw/addiction/manathirst
+	name = "Mana-Thirst"
+	desc = "There's something wrong with the mana in my body, something that its deprived of, something that my body craves; without it, it's hard for me to think or use it. I need to frequently consume mana potions to give it what's missing, else I'll start to suffer from it being diluted."
+	ui_fa_icon = "flask"
+	time = ADDICT_TIME_STANDARD
+	needsate_text = "My mana feels diluted."
+	voyeur_descriptor = "in need of something arcyne"
+	debuff = /datum/status_effect/debuff/addiction/manathirst
+
+/datum/status_effect/debuff/addiction/manathirst
+	id = "addiction_manathirst"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction/manathirst
+	effectedstats = list(STATKEY_INT = -2)
+
+/atom/movable/screen/alert/status_effect/debuff/ochreaddiction/manathirst
+	name = "Mana-Thirst"
+	desc = "My mana is being deprived of something vital. I need something alchemical to revitalize it."
+	icon_state = "manathirst"
+
+/// MANABROKEN
+
+/datum/charflaw/addiction/manabroken
+	name = "Mana-Broken"
+	desc = "My mana is unstable, barely able to remain within my body. Frequent consumption of alchemical or mana-rich substances to provide a semblance of stability is the only way to keep it within myself, else I'll be left without it and my ability to think. DISCLAIMER, THIS IS A VICE THAT WILL MAKE YOUR GAMEPLAY SIGNIFICANTLY HARDER, ESPECIALLY IF YOU HAVE THE DORMANCY VICE BECAUSE YOU WILL BE STUCK. YOUR BLUE WILL DRAIN AWAY."
+	ui_fa_icon = "flask"
+	time = ADDICT_TIME_FREQUENT
+	needsate_text = "My mana is leaving me!"
+	voyeur_descriptor = "in desperate need of something arcyne"
+	debuff = /datum/status_effect/debuff/addiction/manabroken
+
+/datum/status_effect/debuff/addiction/manabroken
+	id = "addiction_manabroken"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction/manabroken
+	effectedstats = list(STATKEY_INT = -4)
+
+/datum/status_effect/debuff/addiction/manabroken/process()
+  . = ..()
+  owner.energy_add(-owner.max_energy/1000)
+
+/atom/movable/screen/alert/status_effect/debuff/ochreaddiction/manabroken
+	name = "Mana-Broken"
+	desc = "My mana is leaking from my body rapidly, without quick consumption of something alchemical or rich in mana, I'll be left empty in minutes."
+	icon_state = "manabroken"
+
+///OV edit end
 
 /// LOVEFIEND
 
