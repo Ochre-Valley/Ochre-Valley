@@ -38,8 +38,8 @@
 	var/flow_damage = SPELL_DMG(50)
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Shadow Crash", "tag" = "CRSH", "invocation" = "Collisio Umbrae!", "ground" = FALSE, "cooldown" = 16 SECONDS),
-		list("name" = "Umbral Flow", "tag" = "FLOW", "invocation" = "Fluxus Umbrae!", "ground" = TRUE, "cooldown" = 20 SECONDS),
+		list("name" = "Shadow Crash", "tag" = "CRSH","icon" = "blindness", "invocation" = "Collisio Umbrae!", "ground" = FALSE, "cooldown" = 16 SECONDS),
+		list("name" = "Umbral Flow", "tag" = "FLOW", "icon" = "noc_gaze", "invocation" = "Fluxus Umbrae!", "ground" = TRUE, "cooldown" = 20 SECONDS),
 	)
 /datum/action/cooldown/spell/projectile/shadowcrash/get_spell_statistics(mob/living/user)
 	var/list/stats = ..()
@@ -57,6 +57,7 @@
 /datum/action/cooldown/spell/projectile/shadowcrash/proc/apply_mode(index)
 	var/list/mode = modes[index]
 	cooldown_time = mode["cooldown"]
+	button_icon_state = mode["icon"]
 	invocations = list(mode["invocation"])
 	update_mode_maptext(mode["tag"])
 
