@@ -13,7 +13,7 @@
 	aspect_type = ASPECT_MAJOR
 	attuned_name = ASPECT_NAME_UMBRAMANCY
 	school_color = GLOW_COLOR_DARK
-	class_locked = TRUE
+	//class_locked = TRUE
 	binding_chants = list(
 		"Invoco tenebras aeternas! ",
 		"I beckon the pall of nite, blacken! ",
@@ -267,10 +267,12 @@
 			pious.mind.mage_aspect_config["unlocked_aspects"] -= list(/datum/magic_aspect/umbramancy)
 */
 //Just manually inject it, I guess?
+/*
 /datum/aspect_picker/New()
 	..()
 	if(istype(owner.patron, /datum/patron/divine/noc) || istype(owner.patron, /datum/patron/inhumen/zizo))
 		unlocked_aspects += list(/datum/magic_aspect/umbramancy)
+*/
 #undef SHADOW_BURN_COOLDOWN
 #undef SHADOW_BURN_KEY
 #undef SHADOW_GRACE_KEY
