@@ -750,6 +750,7 @@ SUBSYSTEM_DEF(vote)
 		//OV add once again, map vote stuff etc etc
 		if(mode == "map")
 			save_map_vote_log(null, "active")
+		//OV end
 		to_world("\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		for(var/client/C in GLOB.clients)
 			if(!isliving(C.mob) || isroundend) //OV edit - ignore ghost check if we're coming here from round end
@@ -905,6 +906,8 @@ SUBSYSTEM_DEF(vote)
 				if(mode == "storyteller")
 					save_storyteller_vote_log(null, "cancelled")
 				//OV add map vote etc etc
+				if(mode == "map")
+					save_map_vote_log(null, "cancelled") //OV end
 				if(mode == "endround")
 					GLOB.round_timer = world.time + ROUND_EXTENSION_TIME // admin cancels an endround, defaults to same as continue playing
 				log_admin("[key_name(usr)] canceled the [mode] vote.")
