@@ -64130,6 +64130,9 @@
 /obj/machinery/light/rogue/candle/l,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/dwarfin)
+"kRN" = (
+/turf/closed/wall/mineral/rogue/stone/unbreakable,
+/area/rogue/indoors/shelter/bog/skeletonfort)
 "kRX" = (
 /turf/open/floor/rogue/grasscold,
 /area/rogue/indoors/town/church/chapel)
@@ -86964,7 +86967,6 @@
 /area/rogue/outdoors/beach)
 "oGP" = (
 /obj/structure/rack/rogue,
-/obj/effect/spawner/lootdrop/general_loot_hi/x3,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "oGQ" = (
@@ -91877,6 +91879,9 @@
 "pwS" = (
 /turf/closed/wall/mineral/rogue/stone/moss,
 /area/rogue/under/underdark/north)
+"pwV" = (
+/turf/closed/wall/mineral/rogue/stone/moss/unbreakable,
+/area/rogue/indoors/shelter/bog/skeletonfort)
 "pwW" = (
 /obj/structure/mineral_door/wood/towner,
 /turf/open/floor/rogue/concrete,
@@ -117834,7 +117839,6 @@
 /area/rogue/outdoors/town)
 "tKf" = (
 /obj/structure/rack/rogue/shelf/biggest,
-/obj/effect/spawner/lootdrop/general_loot_low/x3,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "tKi" = (
@@ -118111,6 +118115,9 @@
 /obj/item/clothing/cloak/tabard/stabard/surcoat/guard,
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors/town/garrison)
+"tMI" = (
+/turf/closed/wall/mineral/rogue/stone/unbreakable,
+/area/rogue/outdoors/bog/south)
 "tMK" = (
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/rogue/twig,
@@ -377010,9 +377017,9 @@ qlt
 qlt
 qwK
 qwK
-pkl
-pkl
-pkl
+kRN
+kRN
+kRN
 qwK
 qwK
 qwK
@@ -377029,9 +377036,9 @@ jYu
 jYu
 kli
 mAW
-tNM
-pkl
-pkl
+pwV
+kRN
+kRN
 nNj
 sxN
 sxN
@@ -377461,11 +377468,11 @@ qlt
 qlt
 qlt
 qwK
-pkl
-pkl
+kRN
+kRN
 yjW
-pkl
-pkl
+kRN
+kRN
 fuN
 kxr
 kxr
@@ -377480,11 +377487,11 @@ kxr
 kxr
 kxr
 fuN
-tNM
-tNM
+pwV
+pwV
 gmW
-pkl
-pkl
+kRN
+kRN
 lCD
 aay
 aay
@@ -377912,12 +377919,12 @@ gUb
 gUb
 qlt
 qlt
-qwK
-pkl
+cxA
+kRN
 hvX
 qna
 ngg
-pkl
+kRN
 fuN
 fwB
 pge
@@ -377932,11 +377939,11 @@ fwB
 pge
 fwB
 fuN
-pkl
+kRN
 iHR
 qna
 gUT
-byS
+tMI
 wal
 jYu
 jYu
@@ -378365,11 +378372,11 @@ gUb
 gUb
 gUb
 qwK
-pkl
-pkl
+kRN
+kRN
 sVk
-tNM
-tNM
+pwV
+pwV
 fuN
 kxr
 kxr
@@ -378384,11 +378391,11 @@ kxr
 kxr
 kxr
 fuN
-pkl
-pkl
+kRN
+kRN
 rtZ
-pkl
-pkl
+kRN
+kRN
 eCO
 jYu
 jYu
@@ -378818,9 +378825,9 @@ gUb
 gUb
 sxN
 mAW
-pkl
-tNM
-tNM
+kRN
+pwV
+pwV
 edM
 edM
 prM
@@ -378837,9 +378844,9 @@ svX
 prM
 ewW
 ewW
-pkl
-pkl
-pkl
+kRN
+kRN
+kRN
 sxN
 eCO
 jYu
@@ -383338,7 +383345,7 @@ jYu
 xcc
 jYu
 jYu
-tNM
+pwV
 ewW
 edM
 wmY
@@ -383357,9 +383364,9 @@ pRW
 edM
 svX
 ewW
-pkl
-pkl
-pkl
+kRN
+kRN
+kRN
 sxN
 sxN
 sxN
@@ -383789,11 +383796,11 @@ eCO
 eCO
 xcc
 jYu
-tNM
-tNM
+pwV
+pwV
 ewW
 sNu
-tNM
+pwV
 fuN
 kxr
 kxr
@@ -383808,11 +383815,11 @@ kxr
 kxr
 kxr
 fuN
-pkl
-pkl
+kRN
+kRN
 vdf
-pkl
-pkl
+kRN
+kRN
 sxN
 sxN
 qwK
@@ -384241,11 +384248,11 @@ eCO
 jYu
 xcc
 jYu
-tNM
+pwV
 awr
 cSu
 rtZ
-pkl
+kRN
 fuN
 fwB
 pge
@@ -384260,11 +384267,11 @@ fwB
 pge
 fwB
 fuN
-pkl
+kRN
 gjs
 qna
 gUT
-tNM
+pwV
 sxN
 sxN
 qwK
@@ -384693,11 +384700,11 @@ eCO
 eCO
 xcc
 eCO
-pkl
-pkl
+kRN
+kRN
 kwC
-pkl
-pkl
+kRN
+kRN
 fuN
 kxr
 kxr
@@ -384712,11 +384719,11 @@ kxr
 kxr
 kxr
 fuN
-pkl
-pkl
+kRN
+kRN
 tTI
-tNM
-tNM
+pwV
+pwV
 sxN
 sxN
 qwK
@@ -385146,9 +385153,9 @@ aay
 xcc
 eCO
 eCO
-pkl
-pkl
-pkl
+kRN
+kRN
+kRN
 nNj
 lCD
 lCD
@@ -385165,9 +385172,9 @@ aay
 aay
 lCD
 sQQ
-pkl
-pkl
-tNM
+kRN
+kRN
+pwV
 nNj
 sxN
 sxN
