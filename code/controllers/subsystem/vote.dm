@@ -44,7 +44,8 @@ SUBSYSTEM_DEF(vote)
 	var/static/list/everyone_is_equal = list("custom")
 	/// Vote types that require lobby players to ready up before voting.
 	var/static/list/ready_required_modes = list("gamemode", "storyteller")
-
+	//OV add - doing the same thing for map votes that we do for storytellers, see more_votes.dm for more
+	var/list/map_vote_multipliers = list()
 /datum/controller/subsystem/vote/fire()	//called by master_controller
 	if(mode)
 		var/vote_period = custom_vote_period || CONFIG_GET(number/vote_period)
@@ -330,6 +331,9 @@ SUBSYSTEM_DEF(vote)
 		var/list/winning_pools = get_storyteller_pool_winners()
 		return get_storyteller_winning_choices(winning_pools)
 
+	//OV add - doing something similar for maps
+
+	//OV end
 	//get the highest number of votes
 	var/greatest_votes = 0
 	var/total_votes = 0
@@ -436,6 +440,8 @@ SUBSYSTEM_DEF(vote)
 						GLOB.master_mode = .
 			if("map")
 				SSmapping.changemap(global.config.maplist[.])
+				//OV add - doing some log recording here for map weighting
+				//OV end
 			if("endround")
 				if(. == "Continue Playing")
 					log_game("LOG VOTE: CONTINUE PLAYING AT [REALTIMEOFDAY]")
@@ -606,6 +612,8 @@ SUBSYSTEM_DEF(vote)
 	storyteller_vote_log -= voter_ckey
 	if(mode == "storyteller")
 		save_storyteller_vote_log(null, "active")
+	//OV add for map voting
+	//OV end
 	return TRUE
 
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
@@ -632,6 +640,7 @@ SUBSYSTEM_DEF(vote)
 					"vote_power" = vote_power,
 				)
 				save_storyteller_vote_log(null, "active")
+				//OV add for map voting
 			choices[selected_option] += vote_power //check this
 			return vote
 	return FALSE
@@ -723,6 +732,7 @@ SUBSYSTEM_DEF(vote)
 				SEND_SOUND(M, vote_alert)
 		if(mode == "storyteller")
 			save_storyteller_vote_log(null, "active")
+		//OV add once again, map vote stuff etc etc
 		to_world("\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		for(var/client/C in GLOB.clients)
 			if(!isliving(C.mob) || isroundend) //OV edit - ignore ghost check if we're coming here from round end
@@ -869,6 +879,7 @@ SUBSYSTEM_DEF(vote)
 					return
 				if(mode == "storyteller")
 					save_storyteller_vote_log(null, "cancelled")
+				//OV add map vote etc etc
 				if(mode == "endround")
 					GLOB.round_timer = world.time + ROUND_EXTENSION_TIME // admin cancels an endround, defaults to same as continue playing
 				log_admin("[key_name(usr)] canceled the [mode] vote.")
