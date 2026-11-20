@@ -240,13 +240,14 @@
 		L.mob_timers[SHADOW_GRACE_KEY] = world.time + SHADOW_BURN_COOLDOWN
 	var/hit_zone = aim_zone || BODY_ZONE_CHEST
 	var/mob/living/carbon/human/caster = caster_ref?.resolve()
+	var/damage = round(tick_damage * (1 + get_darkness_stacks(L)/3))
 	if(istype(caster) && !QDELETED(caster))
-		if(arcyne_strike(caster, L, null, tick_damage, hit_zone, BCLASS_BURN, spell_name = "lingering shadow", damage_type = BURN, skip_animation = TRUE, skip_message = TRUE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
+		if(arcyne_strike(caster, L, null, damage, hit_zone, BCLASS_BURN, spell_name = "lingering shadow", damage_type = BURN, skip_animation = TRUE, skip_message = TRUE, exact_zone = TRUE, SPELL_STRIKE_SCALING) == ARCYNE_STRIKE_WARDED)
 			return
 	else
 		var/fallback_zone = check_zone(hit_zone)
 		var/armor_block = L.run_armor_check(fallback_zone, "fire", blade_dulling = BCLASS_BURN, damage = tick_damage, intdamfactor = SPELL_INTDAM(1), no_debuff = TRUE)
-		L.apply_damage(SPELL_DMG_VS(L, tick_damage), BURN, fallback_zone, armor_block)
+		L.apply_damage(SPELL_DMG_VS(L, damage), BURN, fallback_zone, armor_block)
 	if(stacks)
 		apply_darkness_stack(L, stacks, hit_zone)
 	L.emote("pain", forced = TRUE)

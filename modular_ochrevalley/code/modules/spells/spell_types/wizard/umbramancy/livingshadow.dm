@@ -154,7 +154,7 @@
 				if(Ls.on)
 					Ls.extinguish()
 			if(!T.density)
-				new /obj/effect/lingering_shadows(T, 4 SECONDS, caster, caster.zone_selected)
+				new /obj/effect/lingering_shadows(T, 8 SECONDS, caster, caster.zone_selected)
 			for(var/mob/living/L in T)
 				if(L.stat == DEAD)
 					continue
