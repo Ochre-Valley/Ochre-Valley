@@ -1739,7 +1739,9 @@
 /obj/structure/fluff/psycross/attack_hand(mob/user)
 	. = ..()
 	var/mob/living/carbon/H = user
+	var/canpray = TRUE // New OV edit start - wretches get to be the exception to the no antags praying club
 	if(user.mind?.antag_datums)
+		canpray = FALSE //set this to false first
 		if(living_player_count() <= 999) //Only works if less than 25 people in a round. Otherwise good fucking luck lol // OV Edit: raised to 999
 			for(var/datum/antagonist/D in user.mind?.antag_datums)
 				if(istype(D, /datum/antagonist/zombie))
@@ -1747,9 +1749,13 @@
 					if(do_after(H, 1 MINUTES, TRUE, src))
 						self_revive(H)
 					return
+				else if(istype(D, /datum/antagonist/wretch) || istype(D, /datum/antagonist/gnoll) || istype(D, /datum/antagonist/assassin)) //wretches + gnolls and assassins since they're active and also not the biggest threats to deal with
+					canpray = TRUE //and it's back to true again
 		else
 			to_chat(H, span_warning("I can't use this... The god's refuse, I must seek aid from someone else..."))
-	else if(do_after(H, 5 SECONDS, TRUE, src)) //Fluff interaction for RP purposes and a tiny mood boost as an alternative to praying and spamming admin chats. Works anywhere.
+
+
+	if(do_after(H, 5 SECONDS, TRUE, src) && canpray) //Fluff interaction for RP purposes and a tiny mood boost as an alternative to praying and spamming admin chats. Works anywhere.
 		if(H.has_flaw(/datum/charflaw/addiction/godfearing))
 			H.sate_addiction(/datum/charflaw/addiction/godfearing) //For the especially devout... // OV Edit: Makes this prayer method ACTUALLY satisfy the vice
 		//OV edit: ok let's split this up so you at least get contextually appropriate quotes too
@@ -1763,6 +1769,7 @@
 			H.add_stress(/datum/stressevent/psyprayer)
 			H.visible_message(span_notice("[H] sends a silent prayer."), span_green("May the Ten forever grace us with their benevolent gaze..."))
 		//OV end
+
 
 //Most of this comes from Astrata, as she is benevolent enough to at least help bring those back to the light from the darkness they came...
 /obj/structure/fluff/psycross/proc/self_revive(mob/living/carbon/H)
