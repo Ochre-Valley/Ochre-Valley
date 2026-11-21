@@ -4,7 +4,7 @@
 
 	click_to_activate = FALSE
 
-	invocations = list("Materia Unita!")
+	invocations = list("Materia Unita.")
 	invocation_type = INVOCATION_SHOUT
 	//To prevent whatever chees you could somehow pull off, make it like casting a ward, no moving, easily canceled
 	charge_required = TRUE
