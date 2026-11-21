@@ -200,18 +200,21 @@
 		var/list/merc_data = mercenary_status[merc_key]
 		var/mob/living/carbon/human/merc = merc_data["mob"]
 
+		 //OV EDIT START
 		if(!merc || QDELETED(merc))
 			stale_keys += merc_key
 			continue
-		if(merc.stat == DEAD)
+		if(merc.stat == DEAD) //OV EDIT END
 			continue
 		if(merc_data["status"] == "Do not Disturb")
 			continue
 
 		valid_recipients += merc
 
+	//OV EDIT START
 	for(var/key in stale_keys)
-		mercenary_status -= key //OV edit end here
+		mercenary_status -= key
+	//OV EDIT END
 
 	if(valid_recipients.len == 0)
 		to_chat(sender, span_warning("There are no mercenaries available to broadcast to."))
