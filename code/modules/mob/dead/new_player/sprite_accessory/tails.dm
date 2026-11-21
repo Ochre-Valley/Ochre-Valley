@@ -198,6 +198,29 @@
 	name = "Large Snake Plain"
 	icon_state = "large_snake_plain"
 
+//OV edit
+/datum/sprite_accessory/tail/large_snake_banded
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Banded"
+	icon_state = "large_snake_banded"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Bands")
+
+/datum/sprite_accessory/tail/large_snake_streaked
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Streaked"
+	icon_state = "large_snake_streaked"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Streaks")
+
+/datum/sprite_accessory/tail/large_snake_ringed
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Ringed"
+	icon_state = "large_snake_ringed"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Rings")
+//OV edit end
+
 
 /datum/sprite_accessory/tail/large_tails
 	pixel_x = -16
