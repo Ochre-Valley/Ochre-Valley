@@ -44,7 +44,9 @@ SUBSYSTEM_DEF(vote)
 	var/static/list/everyone_is_equal = list("custom")
 	/// Vote types that require lobby players to ready up before voting.
 	var/static/list/ready_required_modes = list("gamemode", "storyteller")
-
+	//OV add - doing the same thing for map votes that we do for storytellers, see more_votes.dm for more
+	var/list/map_vote_multipliers = list()
+	var/list/map_vote_log = list()
 /datum/controller/subsystem/vote/fire()	//called by master_controller
 	if(mode)
 		var/vote_period = custom_vote_period || CONFIG_GET(number/vote_period)
@@ -330,6 +332,10 @@ SUBSYSTEM_DEF(vote)
 		var/list/winning_pools = get_storyteller_pool_winners()
 		return get_storyteller_winning_choices(winning_pools)
 
+	//OV add - doing something similar for maps
+	if(mode == "map" && !islowpop())
+		return get_map_winning_choices()
+	//OV end
 	//get the highest number of votes
 	var/greatest_votes = 0
 	var/total_votes = 0
@@ -436,6 +442,10 @@ SUBSYSTEM_DEF(vote)
 						GLOB.master_mode = .
 			if("map")
 				SSmapping.changemap(global.config.maplist[.])
+				//OV add - doing some log recording here for map weighting
+				save_map_vote_log(., "completed")
+				record_map_vote_win(.)
+				//OV end
 			if("endround")
 				if(. == "Continue Playing")
 					log_game("LOG VOTE: CONTINUE PLAYING AT [REALTIMEOFDAY]")
@@ -606,6 +616,10 @@ SUBSYSTEM_DEF(vote)
 	storyteller_vote_log -= voter_ckey
 	if(mode == "storyteller")
 		save_storyteller_vote_log(null, "active")
+	//OV add for map voting
+	if(mode == "map")
+		save_map_vote_log(null, "active")
+	//OV end
 	return TRUE
 
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
@@ -632,6 +646,13 @@ SUBSYSTEM_DEF(vote)
 					"vote_power" = vote_power,
 				)
 				save_storyteller_vote_log(null, "active")
+			//OV add for map voting
+			if(mode == "map")
+				map_vote_log[usr.ckey] = list(
+					"choice" = choice_name,
+					"vote_power" = vote_power,
+				)
+				save_map_vote_log(null, "active")
 			choices[selected_option] += vote_power //check this
 			return vote
 	return FALSE
@@ -680,6 +701,9 @@ SUBSYSTEM_DEF(vote)
 					if(VM.config_min_users > 0 && player_count <= VM.config_min_users)
 						continue
 					choices.Add(VM.map_name)
+					//OV add
+					load_map_vote_multipliers()
+					//OV end
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)
@@ -723,6 +747,10 @@ SUBSYSTEM_DEF(vote)
 				SEND_SOUND(M, vote_alert)
 		if(mode == "storyteller")
 			save_storyteller_vote_log(null, "active")
+		//OV add once again, map vote stuff etc etc
+		if(mode == "map")
+			save_map_vote_log(null, "active")
+		//OV end
 		to_world("\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		for(var/client/C in GLOB.clients)
 			if(!isliving(C.mob) || isroundend) //OV edit - ignore ghost check if we're coming here from round end
@@ -776,9 +804,17 @@ SUBSYSTEM_DEF(vote)
 			for(var/i=1,i<=choices.len,i++)
 				var/choice_text = choices[i]
 				var/votes = choices[choice_text]
+				//OV add - add indicator that a map is being up or downweighted
+				if(mode =="map" && !islowpop())
+					var/vote_percent = get_map_vote_percent(choice_text)
+					if(vote_percent != getmapvotebasepercent()) // NOTE: should match MAP_VOTE_BASE_PERCENT in more_votes.dm. Could just call a function for this but eh
+						var/reason = vote_percent > getmapvotebasepercent() ? " (has pity bonus of [get_map_vote_mult(choices[i])]) " : " (won recently, has malus of [get_map_vote_mult(choices[i])])"
+						choice_text = choices[i] + reason;
+				//OV end
 				if(!votes)
 					votes = 0
 				var/selected_text = selected_option == choice_text ? " <b>(current vote)</b>" : ""
+
 				if(can_vote)
 					. += "<li><a href='?src=[REF(src)];vote=[i]'>[choice_text]</a>[selected_text] ([votes] votepwr)</li>"
 				else
@@ -869,6 +905,9 @@ SUBSYSTEM_DEF(vote)
 					return
 				if(mode == "storyteller")
 					save_storyteller_vote_log(null, "cancelled")
+				//OV add map vote etc etc
+				if(mode == "map")
+					save_map_vote_log(null, "cancelled") //OV end
 				if(mode == "endround")
 					GLOB.round_timer = world.time + ROUND_EXTENSION_TIME // admin cancels an endround, defaults to same as continue playing
 				log_admin("[key_name(usr)] canceled the [mode] vote.")
