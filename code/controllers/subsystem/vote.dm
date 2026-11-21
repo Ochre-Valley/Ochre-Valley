@@ -333,7 +333,7 @@ SUBSYSTEM_DEF(vote)
 		return get_storyteller_winning_choices(winning_pools)
 
 	//OV add - doing something similar for maps
-	if(mode == "map" && !islowpop())
+	if(mode == "map")
 		return get_map_winning_choices()
 	//OV end
 	//get the highest number of votes
@@ -420,6 +420,8 @@ SUBSYSTEM_DEF(vote)
 			text += "\n<b>Vote Result: [.]</b>"
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
+	if(mode == "map" && islowpop())
+		text +="\n<b>Dun World wins due to low pop!"
 	log_vote(text)
 	remove_action_buttons()
 	to_world("\n<font color='purple'>[text]</font>")
@@ -809,7 +811,10 @@ SUBSYSTEM_DEF(vote)
 					var/vote_percent = get_map_vote_percent(choice_text)
 					if(vote_percent != getmapvotebasepercent()) // NOTE: should match MAP_VOTE_BASE_PERCENT in more_votes.dm. Could just call a function for this but eh
 						var/reason = vote_percent > getmapvotebasepercent() ? " (has pity bonus of [get_map_vote_mult(choices[i])]) " : " (won recently, has malus of [get_map_vote_mult(choices[i])])"
-						choice_text = choices[i] + reason;
+						choice_text = choices[i] + reason
+				else if(mode =="map") //map but low pop, make it clear dun world auto wins until we hit the threshold
+					var/reason = " (Dun World will auto win unless we get [getlowpop()] total voters!)"
+					choice_text = choices[i] + reason
 				//OV end
 				if(!votes)
 					votes = 0

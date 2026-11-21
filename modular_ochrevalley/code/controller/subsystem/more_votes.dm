@@ -9,7 +9,7 @@
 #define MAP_VOTE_MULTIPLIER_FILE "data/last_round/map_vote_multipliers.json"
 /// Multipliers are whole percentages because BYOND's 32-bit floats would turn e.g. 10 * 1.3 into 12.9
 
-#define MIN_REQUIRED_VOTEPOP 30 //if we're below this, we're just ignoring the whole thing in general
+#define MIN_REQUIRED_VOTEPOP 30 //if we're below this, we're just ignoring the whole thing in general and going straight to dunworld bb
 
 /* json file structure should look something like
 
@@ -55,7 +55,10 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 	WRITE_FILE(json_file, json_encode(file_data))
 
 /datum/controller/subsystem/vote/proc/islowpop()
-	return GLOB.clients.len < MIN_REQUIRED_VOTEPOP
+	return voted.len < MIN_REQUIRED_VOTEPOP
+
+/datum/controller/subsystem/vote/proc/getlowpop() //do make sure this returns a value!
+	return MIN_REQUIRED_VOTEPOP
 
 /// After a completed player vote, every votable preset's multiplier cli	mbs by the overdue step, then every preset
 /// in the winning pool drops to the cooldown multiplier. Cooling the whole pool keeps a pool with several options
@@ -122,6 +125,9 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 			winners = list(option)
 		else if(option_votes == greatest_votes && option_votes > 0)
 			winners += option
+
+	if(islowpop()) // too bad, dun world time
+		winners = list("OV Dun World")
 	return winners
 
 
