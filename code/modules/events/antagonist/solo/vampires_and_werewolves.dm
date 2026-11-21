@@ -60,3 +60,12 @@
 			antag_mind.current.unequip_everything()
 			antag_mind.add_antag_datum(/datum/antagonist/vampire)
 		return
+
+//OV add - filter out people who are silver-blessed or otherwise should never be able to become a werewolf (or vampire) in the first place
+/datum/round_event_control/antagonist/solo/vampires_and_werewolves/trim_candidates(list/candidates)
+	candidates = ..()
+	for(var/mob/living/candidate in candidates)
+		if(HAS_TRAIT(candidate, TRAIT_SILVER_BLESSED))
+			candidates -= candidate
+	return candidates
+//OV end
