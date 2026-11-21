@@ -54,6 +54,8 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))
 
+/datum/controller/subsystem/vote/proc/islowpop()
+	return GLOB.clients.len < MIN_REQUIRED_VOTEPOP
 
 /// After a completed player vote, every votable preset's multiplier cli	mbs by the overdue step, then every preset
 /// in the winning pool drops to the cooldown multiplier. Cooling the whole pool keeps a pool with several options
@@ -61,7 +63,7 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 /datum/controller/subsystem/vote/proc/record_map_vote_win(winning_choice)
 	load_map_vote_multipliers()
 
-	if(GLOB.clients.len >= MIN_REQUIRED_VOTEPOP) //essentially, we do nothing to adjust the vote multiplers from 1 vote, 1 votepwer if we're under a specific number of connected clients
+	if(!islowpop()) //essentially, we do nothing to adjust the vote multiplers from 1 vote, 1 votepwer if we're under a specific number of connected clients
 		for(var/othermaps in global.config.maplist)
 
 			/*var/datum/map_config/curMap = config.maplist[othermaps] //disable map penalizing for now.
