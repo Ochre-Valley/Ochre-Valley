@@ -522,3 +522,10 @@
       damage than other similar aoe spells.
   SomeDeviant:
   - bugfix: fixed beam runtime when targeting self
+2026-11-21:
+  Dunn:
+  - qol: Mercs that FT now automatically remove themselves from the statue listings.
+  - qol: Broadcasting to all mercenaries also now checks for mercenaries that have
+      left the game and removes them accordingly
+  - bugfix: Silver Blessed players can't be chosen for vampire and werewolf antags
+      at roundstart

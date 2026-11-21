@@ -1,4 +1,0 @@
-author: "Dunn"
-delete-after: True
-changes:
-  - bugfix: "Silver Blessed players can't be chosen for vampire and werewolf antags at roundstart"
