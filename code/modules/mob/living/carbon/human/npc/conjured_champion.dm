@@ -57,6 +57,8 @@
 		ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 		ADD_TRAIT(src, TRAIT_DUST_DELETE_GEAR, TRAIT_GENERIC)
 		ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	else
+		ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	//OV Edit End
 	var/mob/living/master = summoner_ref?.resolve()
 	if(master)
@@ -321,13 +323,14 @@
 /datum/outfit/job/roguetown/conjured_servant/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	//Low stats save speed, they are either a packmule or for scenes.
-	H.STASTR = 8
+	H.STASTR = 4
 	H.STASPD = 11 // To prevent NPC following problem
-	H.STACON = 8
-	H.STAWIL = 8
+	H.STACON = 4
+	H.STAWIL = 4
 	H.STAPER = 10
 	H.STAINT = 10
-	H.STALUC = 10
+	H.STALUC = 9
+	H.adjust_skillrank_up_to(/datum/skill/misc/reading, SKILL_EXP_NOVICE, TRUE)
 	pants = /obj/item/clothing/under/roguetown/tights
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
