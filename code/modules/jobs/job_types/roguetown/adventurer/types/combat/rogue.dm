@@ -17,6 +17,9 @@
 		STATKEY_WIL = 1,
 		STATKEY_SPD = 3,
 	)
+	subclass_stashed_items = list(
+		"Wax Putty" = /obj/item/waxputty,
+	)
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
@@ -79,6 +82,12 @@
 		STATKEY_WIL = 1,
 		STATKEY_SPD = 3,
 	)
+	// A bit awkward, but a pouch could only hold two and it's probably best if the user can commit to one at a time.
+	subclass_stashed_items = list(
+		"Wax Putty I" = /obj/item/waxputty,
+		"Wax Putty II" = /obj/item/waxputty,
+		"Wax Putty III" = /obj/item/waxputty,
+	)
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
@@ -139,6 +148,9 @@
 		STATKEY_INT = 2,
 		STATKEY_SPD = 2,
 		STATKEY_WIL = 1,
+	)
+	subclass_stashed_items = list(
+		"Wax Putty" = /obj/item/waxputty,
 	)
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
@@ -219,6 +231,10 @@
 		STATKEY_STR = 1,
 		STATKEY_WIL = 1,
 	)
+	subclass_stashed_items = list(
+		"Wax Putty I" = /obj/item/waxputty,
+		"Wax Putty II" = /obj/item/waxputty
+	)
 	subclass_skills = list(
 		//datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN, OV EDIT. given in weapon choice
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
@@ -228,7 +244,7 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/music = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE,

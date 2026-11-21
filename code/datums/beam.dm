@@ -103,8 +103,8 @@
 	visuals.vand_update_appearance()
 	Draw()
 	RegisterSignals(origin, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING), PROC_REF(redrawing))
-	if(target != origin) //OV EDIT - Runtime Fix?
-		RegisterSignals(target, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING), PROC_REF(redrawing)) //OV EDIT - Runtime Fix
+	if(target != origin)
+		RegisterSignals(target, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING), PROC_REF(redrawing))
 
 /**
  * Triggered by signals set up when the beam is set up. If it's still sane to create a beam, it removes the old beam, creates a new one. Otherwise it kills the beam.

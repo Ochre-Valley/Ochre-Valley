@@ -14,7 +14,6 @@
 	show_in_credits = FALSE
 	min_pq = 10 //OV EDIT
 	max_pq = null
-	vice_restrictions = list(/datum/charflaw/forlorne)
 
 	obfuscated_job = TRUE
 	class_categories = TRUE

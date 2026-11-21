@@ -110,7 +110,7 @@
 		"You must wash your right foot",
 		"You must take a bath",
 		"The realm requires you cleanse yourself",
-		"A bath will save your life"
+		"A bath will save your lyfe" //OV EDIT
 	)
 	valid_roles = list("Grand Duke","Grand Duchess","Prince", "Princess")
 
@@ -304,7 +304,7 @@
 		"you forged these chains yourself",
 		"learn to carry your sins"
 	)
-	valid_roles = list("Templar", "Knight", "Sergeant", "Men-at-arms", "Squire", "Mercenary", "Warden")
+	valid_roles = list("Templar", "Knight", "Sergeant", "Man at Arms", "Squire", "Mercenary", "Warden")
 
 /datum/vision_quest/tier_1/orthodoxist_echo
 	name = "Psydonic Vision"

@@ -24,6 +24,8 @@
 	if(!istype(outfit, /datum/outfit/job/roguetown/conjured_servant))
 		for(var/obj/item/equipped_item in get_equipped_items() + held_items)
 			equipped_item.AddComponent(/datum/component/item_on_drop/dust)
+			if(istype(equipped_item, /obj/item/rogueweapon) || istype(equipped_item, /obj/item/gun))
+				ADD_TRAIT(equipped_item, TRAIT_NODROP, TRAIT_GENERIC)
 		for(var/obj/item/held_item in held_items)
 			ADD_TRAIT(held_item, TRAIT_NODROP, TRAIT_GENERIC)
 	else //Make the initial fit qdel when dropped.

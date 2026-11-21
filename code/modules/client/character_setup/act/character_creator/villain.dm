@@ -6,7 +6,7 @@
 			to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, [span_bold("do not use a real life photo or use any image that is less than serious.")]"))
 			to_chat(user, span_notice("If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser."))
 			to_chat(user, span_notice("Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look."))
-			var/new_lich_headshot_link = tgui_input_text(user, "Input the Lich headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox, file garden):", "Lich Headshot", lich_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+			var/new_lich_headshot_link = tgui_input_text(user, "Input the Lich headshot link (https, hosts: gyazo, lensdump, imgbox, catbox, file garden):", "Lich Headshot", lich_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE)  //OV EDIT - Removed Discord
 			if(new_lich_headshot_link == null)
 				return CHARACTER_ACT_DATA_UPDATE
 			if(new_lich_headshot_link == "")
@@ -14,7 +14,7 @@
 				lich_headshot_link = null
 				return CHARACTER_ACT_DATA_UPDATE
 			if(!valid_headshot_link(user, new_lich_headshot_link))
-				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, discord, lensdump, imgbox, catbox, file garden)."))
+				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, lensdump, imgbox, catbox, file garden).")) //OV EDIT - Removed Discord
 				return CHARACTER_ACT_DATA_UPDATE
 			verbose_pref_log_change(user, "notice", "Lich Headshot", html_encode(lich_headshot_link), html_encode(new_lich_headshot_link))
 			lich_headshot_link = new_lich_headshot_link
@@ -58,7 +58,7 @@
 			to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, [span_bold("do not use a real life photo or use any image that is less than serious.")]"))
 			to_chat(user, span_notice("If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser."))
 			to_chat(user, span_notice("Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look."))
-			var/new_vampire_headshot_link = tgui_input_text(user, "Input the vampire headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox, file garden):", "Vampire Headshot", vampire_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+			var/new_vampire_headshot_link = tgui_input_text(user, "Input the vampire headshot link (https, hosts: gyazo, lensdump, imgbox, catbox, file garden):", "Vampire Headshot", vampire_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE) //OV EDIT - Removed Discord
 			if(new_vampire_headshot_link == null)
 				return CHARACTER_ACT_DATA_UPDATE
 			if(new_vampire_headshot_link == "")
@@ -66,7 +66,7 @@
 				vampire_headshot_link = null
 				return CHARACTER_ACT_DATA_UPDATE
 			if(!valid_headshot_link(user, new_vampire_headshot_link))
-				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, discord, lensdump, imgbox, catbox, file garden)."))
+				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, lensdump, imgbox, catbox, file garden).")) //OV EDIT - Removed Discord
 				return CHARACTER_ACT_DATA_UPDATE
 			verbose_pref_log_change(user, "notice", "Vampire Headshot", html_encode(vampire_headshot_link), html_encode(new_vampire_headshot_link))
 			vampire_headshot_link = new_vampire_headshot_link

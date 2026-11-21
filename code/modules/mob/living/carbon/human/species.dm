@@ -2165,7 +2165,7 @@ GLOBAL_LIST_INIT(body_builds, init_body_builds())
 			H.stop_pulling(TRUE)
 
 	if(user != H && user.mind && H.mind)	// Maso / Sadism check. No self-hits, it's already very easy to fulfill like this.
-		var/painpercent = H.get_complex_pain() / H.pain_threshold
+		var/painpercent = (H.get_complex_pain() / H.pain_threshold) * 100
 		if(painpercent >= 100)
 			if(H.get_flaw(/datum/charflaw/addiction/masochist))
 				H.sate_addiction(/datum/charflaw/addiction/masochist)
@@ -2215,7 +2215,7 @@ GLOBAL_LIST_INIT(body_builds, init_body_builds())
 					shake_camera(H, 2, 2)
 					H.stuttering += 5
 				if(damage_amount > 10 && !HAS_TRAIT(H, TRAIT_NOPAINSTUN) && !HAS_TRAIT(H, TRAIT_IRONMAN) && !HAS_TRAIT(H, TRAIT_IGNOREDAMAGESLOWDOWN))
-					H.Slowdown(clamp(damage_amount/10, 1, 5))
+					H.apply_slowdown(clamp(damage_amount / 5, 3, 9) SECONDS)
 					shake_camera(H, 1, 1)
 				if(H.show_redflash())
 					if(damage_amount < 10)

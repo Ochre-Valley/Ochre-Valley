@@ -183,7 +183,7 @@
 		M.visible_message(span_warning("[M] staggers back from the tremendous impact!"))
 		M.apply_status_effect(/datum/status_effect/debuff/staggered, 3 SECONDS)
 		M.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
-		M.Slowdown(3)
+		M.apply_slowdown(3 SECONDS)
 		M.OffBalance(1 SECONDS)
 		M.Immobilize(1 SECONDS)
 		var/throw_dir = get_dir(src, target)

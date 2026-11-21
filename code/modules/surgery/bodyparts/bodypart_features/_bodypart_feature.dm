@@ -78,6 +78,15 @@
 		owner.update_body()
 	return TRUE
 
+/datum/bodypart_feature/proc/copy_feature()
+	var/datum/bodypart_feature/copy = new type()
+	copy.accessory_type = accessory_type
+	copy.accessory_colors = accessory_colors
+	return copy
+
+/obj/item/bodypart/proc/clone_bodypart_feature(datum/bodypart_feature/feature)
+	return add_bodypart_feature(feature.copy_feature())
+
 /obj/item/bodypart/proc/remove_bodypart_feature(datum/bodypart_feature/feature)
 	if(!(feature in bodypart_features))
 		return
@@ -92,31 +101,6 @@
 	bodypart_features.Cut()
 	if(owner)
 		owner.update_body()
-
-//OV edit
-/obj/item/bodypart/proc/clone_bodypart_feature(datum/bodypart_feature/feature)
-	if(feature.body_zone != body_zone)
-		return FALSE
-	if(!bodypart_features)
-		bodypart_features = list()
-	for(var/datum/bodypart_feature/existing_feature as anything in bodypart_features)
-		if(!(existing_feature.feature_slot == feature.feature_slot))
-			continue
-		remove_bodypart_feature(existing_feature)
-	var/datum/bodypart_feature/new_feature = new feature.type(src)
-	new_feature.accessory_type = feature.accessory_type
-	new_feature.accessory_colors = feature.accessory_colors
-	bodypart_features += new_feature
-	if(owner)
-		owner.update_body()
-		/*
-		if(ishuman(owner))
-			var/mob/living/carbon/human/H = owner
-			H.icon_render_key = null
-		owner.queue_icon_update(PENDING_UPDATE_BODY)
-		*/
-	return TRUE
-//OV edit end
 
 /mob/living/carbon/proc/remove_all_bodypart_features()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
