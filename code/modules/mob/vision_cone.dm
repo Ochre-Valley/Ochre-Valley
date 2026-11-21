@@ -124,6 +124,10 @@
 	client.hidden_images += I
 	if(currentlystandardized)
 		refresh_standardized_sprite()
+	//OV add
+	if(currentlycopyglamoured)
+		refresh_glamourized_sprite()
+	//OV end
 	I.appearance_flags = RESET_TRANSFORM|KEEP_TOGETHER|PIXEL_SCALE
 	if(buckled)
 		var/image/IB = image(buckled, buckled)

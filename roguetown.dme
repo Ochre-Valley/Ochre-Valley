@@ -4190,4 +4190,6 @@
 #include "modular_ochrevalley\code\datums\sexcon2\actions\prey_actions\kiss_inside_belly.dm"
 #include "modular_ochrevalley\code\game\objects\items\donator_modkit.dm"
 #include "modular_ochrevalley\code\game\objects\items\donator_fluff_items.dm"
+#include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\glamour_other.dm"
+#include "modular_ochrevalley\code\modules\spells\spell_types\wizard\utility\glamour_appearances.dm"
 // END_INCLUDE

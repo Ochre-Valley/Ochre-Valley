@@ -568,7 +568,7 @@ export const VoreUserPreferences = (props: { prefs: PrefData }) => {
       action: 'toggle_mimicry',
       test: allow_mimicry,
       tooltip: {
-        main: 'Allows some creatures to mimick your apperance.',
+        main: 'Allows others to mimick your apperance. Note that this will not restrict certain antags that rely on mimicry for their core mechanic.',
         enable: ' Click here to allow mimicry.',
         disable: ' Click here to forbid mimicry.',
       },
