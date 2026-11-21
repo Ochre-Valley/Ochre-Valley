@@ -67,7 +67,11 @@
 	skillcraft = /datum/skill/craft/engineering
 	craftdiff = 0
 
-/*/datum/crafting_recipe/roguetown/engineering/burnscatter
+//ENCHANTED ROUNDS
+//balance is tentative- if these turn out to be too strong or available, make them need an arcyne silver dagger, not chalk. Alternatively, require higher tier components
+
+
+/datum/crafting_recipe/roguetown/engineering/burnscatter
 	name = "infernal scattershot (x3)"
 	category = "Ranged"
 	display_category = ITEM_CAT_ENG_COMBAT
@@ -84,9 +88,6 @@
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
 	craftdiff = 5
-
-//ENCHANTED ROUNDS
-//balance is tentative- if these turn out to be too strong or available, make them need an arcyne silver dagger, not chalk. Alternatively, require higher tier components
 
 /datum/crafting_recipe/roguetown/engineering/ricochet
 	name = "ricochet shot (x3)"
@@ -122,4 +123,4 @@
 	tools = list(/obj/item/chalk)
 	structurecraft = /obj/structure/artificer_table
 	skillcraft = /datum/skill/craft/engineering
-	craftdiff = 5*/
+	craftdiff = 5
