@@ -28,6 +28,9 @@
 #define REAGENT_ID_TEA_VALERIAN /datum/reagent/consumable/soothing_valerian_tea
 #define REAGENT_HONEY "Honey"
 #define REAGENT_ID_HONEY /datum/reagent/consumable/honey
+#define REAGENT_PURE_MANA "Pure Mana"
+#define REAGENT_ID_PURE_MANA /datum/reagent/consumable/puremana
+
 
 // Meds and Toxins!
 #define REAGENT_PARAPOISON "Paralytic venom"

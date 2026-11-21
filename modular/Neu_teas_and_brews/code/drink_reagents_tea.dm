@@ -121,6 +121,10 @@
 /datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M)
 	if(volume > 0.99)
 		M.energy_add(3) // 6.3 times weaker than normal manapot
+///OV edit
+		M.sate_addiction(/datum/charflaw/addiction/manathirst)
+		M.sate_addiction(/datum/charflaw/addiction/manabroken)
+///OV edit end
 	..()
 
 /datum/reagent/consumable/tea/manabloom/overdose_process(mob/living/M)
