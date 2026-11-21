@@ -1,7 +1,7 @@
 //OV add of vars here
 #define MAP_VOTE_BASE_PERCENT 100
-#define MAP_VOTE_OVERDUE_STEP_PERCENT 20
-#define MAP_VOTE_OVERDUE_MAX_PERCENT 150 //basically identical to how storyteller in vote.dm works.
+#define MAP_VOTE_OVERDUE_STEP_PERCENT 5
+#define MAP_VOTE_OVERDUE_MAX_PERCENT 130
 #define MAP_VOTE_WINNER_COOLDOWN_PERCENT 60
 //OV end
 #define LAST_MAP_VOTE_LOG_FILE "data/last_round/lastmap_vote.json"
@@ -9,6 +9,7 @@
 #define MAP_VOTE_MULTIPLIER_FILE "data/last_round/map_vote_multipliers.json"
 /// Multipliers are whole percentages because BYOND's 32-bit floats would turn e.g. 10 * 1.3 into 12.9
 
+#define MIN_REQUIRED_VOTEPOP 30 //if we're below this, we're just ignoring the whole thing in general
 
 /* json file structure should look something like
 
@@ -54,17 +55,20 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 	WRITE_FILE(json_file, json_encode(file_data))
 
 
-/// After a completed player vote, every votable preset's multiplier climbs by the overdue step, then every preset
+/// After a completed player vote, every votable preset's multiplier cli	mbs by the overdue step, then every preset
 /// in the winning pool drops to the cooldown multiplier. Cooling the whole pool keeps a pool with several options
 /// from chaining wins by shifting votes to a sibling preset that still carries its overdue bonus.
 /datum/controller/subsystem/vote/proc/record_map_vote_win(winning_choice)
 	load_map_vote_multipliers()
-	for(var/othermaps in global.config.maplist)
-		var/datum/map_config/curMap = config.maplist[othermaps]
-		if(curMap.map_name == winning_choice)
-			map_vote_multipliers[othermaps] = MAP_VOTE_WINNER_COOLDOWN_PERCENT
-			continue
-		map_vote_multipliers[othermaps] = min(get_map_vote_percent(othermaps) + MAP_VOTE_OVERDUE_STEP_PERCENT, MAP_VOTE_OVERDUE_MAX_PERCENT)
+
+	if(GLOB.clients.len >= MIN_REQUIRED_VOTEPOP) //essentially, we do nothing to adjust the vote multiplers from 1 vote, 1 votepwer if we're under a specific number of connected clients
+		for(var/othermaps in global.config.maplist)
+
+			/*var/datum/map_config/curMap = config.maplist[othermaps] //disable map penalizing for now.
+			if(curMap.map_name == winning_choice)
+				map_vote_multipliers[othermaps] = MAP_VOTE_WINNER_COOLDOWN_PERCENT
+				continue*/
+			map_vote_multipliers[othermaps] = min(get_map_vote_percent(othermaps) + MAP_VOTE_OVERDUE_STEP_PERCENT, MAP_VOTE_OVERDUE_MAX_PERCENT)
 	save_map_vote_multipliers()
 	var/list/mult_lines = list()
 	for(var/maps in map_vote_multipliers)
