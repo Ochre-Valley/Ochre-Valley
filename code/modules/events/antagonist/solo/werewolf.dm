@@ -33,3 +33,11 @@
 	return ..()
 
 /datum/round_event/antagonist/solo/werewolf
+//OV add - filter out people who are silver-blessed or otherwise should never be able to become a werewolf in the first place
+/datum/round_event_control/antagonist/solo/werewolf/trim_candidates(list/candidates)
+	candidates = ..()
+	for(var/mob/living/candidate in candidates)
+		if(HAS_TRAIT(candidate, TRAIT_SILVER_BLESSED))
+			candidates -= candidate
+	return candidates
+//OV end
