@@ -1136,6 +1136,14 @@
     - balance: zigs will once again be destroyed w/ 2 manual putout pinches
     - rscadd: zigs have a mechanical explanation for newbies
 2026-11-21:
+  Dunn:
+    - qol: Mercs that FT now automatically remove themselves from the statue listings.
+    - qol:
+        Broadcasting to all mercenaries also now checks for mercenaries that have
+        left the game and removes them accordingly
+    - bugfix:
+        Silver Blessed players can't be chosen for vampire and werewolf antags
+        at roundstart
   KatTheFox:
     - rscadd:
         Custom descriptors for fur, feathers, chitin, and scales are now available;
