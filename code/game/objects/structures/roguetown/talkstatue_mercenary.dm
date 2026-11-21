@@ -200,7 +200,7 @@
 		var/list/merc_data = mercenary_status[merc_key]
 		var/mob/living/carbon/human/merc = merc_data["mob"]
 
-		 //OV EDIT START
+		//OV EDIT START
 		if(!merc || QDELETED(merc))
 			stale_keys += merc_key
 			continue
