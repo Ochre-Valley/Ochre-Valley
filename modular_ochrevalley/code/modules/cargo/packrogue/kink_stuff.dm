@@ -108,6 +108,13 @@
 					/obj/item/book/granter/spell/bonechill/instant_transform
 				)
 
+/datum/supply_pack/rogue/kink_toy/spell_hypnotic_gaze
+	name = "Scroll of Hypnotic Command"
+	cost = 20
+	contains = list(
+					/obj/item/book/granter/spell/bonechill/hypnotic_gaze
+				)
+
 /datum/supply_pack/rogue/kink_toy/taur_potion
 	name = "Crurahol (Taur) Potion"
 	cost = 20
