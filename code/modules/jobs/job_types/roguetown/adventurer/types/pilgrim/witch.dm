@@ -6,7 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/witch
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	subclass_spells = list(/obj/effect/proc_holder/spell/invoked/takeapprentice)
-	traits_applied = list(TRAIT_DEATHSIGHT, TRAIT_WITCH, TRAIT_ALCHEMY_EXPERT)
+	traits_applied = list(TRAIT_DEATHSIGHT, TRAIT_WITCH, TRAIT_ALCHEMY_EXPERT, TRAIT_ARCYNE) //OV EDIT - added Arcyne so that all witches can do transmutation rather than just the two magick ones
 	townie_contract_gate_exempt = TRUE
 	subclass_stats = list(
 		STATKEY_INT = 3,
@@ -81,7 +81,7 @@
 
 	switch (classchoice)
 		if("Old Magick")
-			ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
+			//ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC) OV EDIT - now handled in the parent class
 			H.adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/arcyne, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			if(H.mind)
@@ -114,8 +114,9 @@
 			backpack_contents = list(
 								/obj/item/reagent_containers/glass/mortar = 1,
 								/obj/item/pestle = 1,
-								/obj/item/candle/yellow = 2
-								)
+								/obj/item/candle/yellow = 2,
+								/obj/item/trans_table_upgrade = 1
+								) //OV EDIT - added transmutation table to their kit since now they can use it, but no spellbook or chalk since its useless
 			if (H.age == AGE_OLD)
 				H.adjust_skillrank(/datum/skill/magic/holy, SKILL_LEVEL_NOVICE, TRUE)
 		if("Mystagogue")
@@ -124,7 +125,7 @@
 			H.adjust_skillrank(/datum/skill/magic/holy, SKILL_LEVEL_NOVICE, TRUE)
 			D.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_1)
 			D.max_devotion *= 0.5
-			ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC)
+			//ADD_TRAIT(H, TRAIT_ARCYNE, TRAIT_GENERIC) OV EDIT - now handled in the parent class
 			H.adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_NOVICE, TRUE)
 			if(H.mind)
 				H.mind.setup_mage_aspects(list("mastery" = FALSE, "major" = 0, "minor" = 1, "utilities" = 5))
