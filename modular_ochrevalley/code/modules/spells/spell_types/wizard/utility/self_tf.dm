@@ -32,6 +32,13 @@
 
 /datum/action/cooldown/spell/self_tf/cast(atom/cast_on)
 	. = ..()
+	//Stuff we should *not* be allowed to TF into. (Micros and touch spells)
+	var/static/list/tf_blacklist = list(
+		/obj/item/holder/micro,
+		/obj/item/melee/new_touch_attack,
+		/obj/item/melee/touch_attack,
+		/obj/item/handmirror/magic,
+	)
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
@@ -48,11 +55,13 @@
 	else
 		if(!the_item)
 			return FALSE
-		//Stuff we should *not* be allowed to TF into. (Micros and touch spells)
-		if(istype(the_item, /obj/item/holder/micro) || istype(the_item, /obj/item/melee/new_touch_attack) || istype(the_item, /obj/item/melee/touch_attack) || istype(the_item, /obj/item/handmirror/magic))
-			return FALSE
+		for(var/blacklisted_type in tf_blacklist)
+			if(istype(the_item, blacklisted_type))
+				to_chat(H, span_warning("I can't transform into this."))
+				return FALSE
 		var/datum/component/conjured_item/isConjured = the_item.GetComponent(/datum/component/conjured_item)
 		if(isConjured)
+			to_chat(H, span_warning("I can't transform into this."))
 			return FALSE
 		if(tgui_alert(H, "Are you certain you'd like to transform into [the_item]?", "Become Entrapped",list("No","Yes")) == "No")
 			return FALSE
