@@ -69,10 +69,10 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 	if(!islowpop()) //essentially, we do nothing to adjust the vote multiplers from 1 vote, 1 votepwer if we're under a specific number of connected clients
 		for(var/othermaps in global.config.maplist)
 
-			/*var/datum/map_config/curMap = config.maplist[othermaps] //disable map penalizing for now.
+			var/datum/map_config/curMap = config.maplist[othermaps] //disable map penalizing for now, instead reset to base
 			if(curMap.map_name == winning_choice)
-				map_vote_multipliers[othermaps] = MAP_VOTE_WINNER_COOLDOWN_PERCENT
-				continue*/
+				map_vote_multipliers[othermaps] = MAP_VOTE_BASE_PERCENT//MAP_VOTE_WINNER_COOLDOWN_PERCENT
+				continue
 			map_vote_multipliers[othermaps] = min(get_map_vote_percent(othermaps) + MAP_VOTE_OVERDUE_STEP_PERCENT, MAP_VOTE_OVERDUE_MAX_PERCENT)
 	save_map_vote_multipliers()
 	var/list/mult_lines = list()

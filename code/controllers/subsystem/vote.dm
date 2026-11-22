@@ -807,7 +807,7 @@ SUBSYSTEM_DEF(vote)
 				var/choice_text = choices[i]
 				var/votes = choices[choice_text]
 				//OV add - add indicator that a map is being up or downweighted
-				if(mode =="map" && !islowpop())
+				if(mode =="map")
 					var/vote_percent = get_map_vote_percent(choice_text)
 					if(vote_percent != getmapvotebasepercent()) // NOTE: should match MAP_VOTE_BASE_PERCENT in more_votes.dm. Could just call a function for this but eh
 						var/reason = vote_percent > getmapvotebasepercent() ? " (has pity bonus of [get_map_vote_mult(choices[i])]) " : " (won recently, has malus of [get_map_vote_mult(choices[i])])"
