@@ -8,7 +8,7 @@
 	roundstart = TRUE
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_MINOR_THREAT
-	storyteller_antag_flags = STORYTELLER_ANTAG_ROUNDSTART | STORYTELLER_ANTAG_MEDIUM
+	storyteller_antag_flags = STORYTELLER_ANTAG_LITE
 	storyteller_pill_label = "Masquerade Lite"
 	storyteller_rumour_name = "a vampire masquerade with only towners"
 	storyteller_slot_key = "Masquerade Lite"
@@ -18,7 +18,6 @@
 	denominator = 20
 
 	base_antags = 0
-	maximum_antags = 6
 
 	earliest_start = 0 SECONDS
 
@@ -26,7 +25,7 @@
 	antag_datum = /datum/antagonist/vampire
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_COMBAT_ROLES
-	antag_pq = 50 //OV EDIT
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event/antagonist/solo/masqueradelite/add_datum_to_mind(datum/mind/antag_mind)
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(forced_clan = FALSE, generation = GENERATION_ANCILLAE)

@@ -23,7 +23,7 @@
 
 	typepath = /datum/round_event/antagonist/solo/bandits
 	antag_datum = /datum/antagonist/bandit
-	antag_pq = 50 //OV EDIT
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event/antagonist/solo/bandits
 	var/leader = FALSE

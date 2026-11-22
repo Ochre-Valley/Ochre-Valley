@@ -56,6 +56,9 @@ GLOBAL_LIST_EMPTY(hellspawns)
 
 	var/mob/living/body_backup = null //Caustic Edit - Attempt to save the mob to the observer instead of just moving it to a place on the Centcom Level
 
+/mob/dead/observer/should_hear_dsay()
+	return TRUE
+
 /mob/dead/observer/proc/go2hell()
 	var/obj/effect/landmark/L = pick(GLOB.hellspawns)
 	if(L)

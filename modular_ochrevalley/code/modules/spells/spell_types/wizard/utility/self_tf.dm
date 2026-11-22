@@ -75,4 +75,5 @@
 
 /datum/loadout_item/self_tf_scroll //I'd have this even further up the list if I could, but I don't want to needlessly edit the Azure loadouts
 	name = "Scroll of Self-Transmutation"
+	cost = 0
 	path = /obj/item/book/granter/spell/bonechill/self_tf/loadout

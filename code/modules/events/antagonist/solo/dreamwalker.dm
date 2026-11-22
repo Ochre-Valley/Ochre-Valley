@@ -30,7 +30,7 @@
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
 	prompted_picking = TRUE
-	antag_pq = 50 //OV EDIT
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/dreamwalker/canSpawnEvent(players_amt, gamemode, fake_check)
 	var/datum/storyteller/preset = active_preset()
