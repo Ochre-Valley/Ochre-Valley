@@ -421,7 +421,7 @@ SUBSYSTEM_DEF(vote)
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	if(mode == "map" && islowpop())
-		text +="\n<b>Dun World wins due to low pop!"
+		text +="\n<b>Dun World wins due to low pop! (Was under [getlowpop()] voters!)"
 	log_vote(text)
 	remove_action_buttons()
 	to_world("\n<font color='purple'>[text]</font>")
@@ -812,9 +812,6 @@ SUBSYSTEM_DEF(vote)
 					if(vote_percent != getmapvotebasepercent()) // NOTE: should match MAP_VOTE_BASE_PERCENT in more_votes.dm. Could just call a function for this but eh
 						var/reason = vote_percent > getmapvotebasepercent() ? " (has pity bonus of [get_map_vote_mult(choices[i])]) " : " (won recently, has malus of [get_map_vote_mult(choices[i])])"
 						choice_text = choices[i] + reason
-				else if(mode =="map") //map but low pop, make it clear dun world auto wins until we hit the threshold
-					var/reason = " (Dun World will auto win unless we get [getlowpop()] total voters!)"
-					choice_text = choices[i] + reason
 				//OV end
 				if(!votes)
 					votes = 0
