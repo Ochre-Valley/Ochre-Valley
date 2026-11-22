@@ -75170,6 +75170,13 @@
 	},
 /turf/open/floor/rogue/churchmarble,
 /area/rogue/under/cave/licharena)
+"mGj" = (
+/obj/structure/bars/passage/steel{
+	redstone_id = "duke";
+	max_integrity = 50000
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach/central)
 "mGo" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/silver/small{
@@ -111105,6 +111112,13 @@
 	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
+"sEO" = (
+/obj/structure/bars/passage/steel{
+	redstone_id = "duke";
+	max_integrity = 50000
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/under/cave/dukecourt)
 "sER" = (
 /obj/structure/fluff/railing/border/west{
 	dir = 9
@@ -328424,7 +328438,7 @@ sWE
 sWE
 sWE
 mjA
-vRL
+sEO
 sWE
 xIJ
 ujm
@@ -329780,7 +329794,7 @@ rQa
 jfK
 jfK
 xIJ
-vRL
+sEO
 xIJ
 ujm
 qPv
@@ -333842,7 +333856,7 @@ rQa
 rQa
 rQa
 rQa
-rQa
+mGj
 rQa
 rQa
 rQa
@@ -334292,7 +334306,7 @@ ogs
 (165,1,2) = {"
 rQa
 rQa
-rQa
+mGj
 rQa
 rQa
 rQa
