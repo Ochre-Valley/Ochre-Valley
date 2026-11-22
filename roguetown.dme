@@ -3842,6 +3842,8 @@
 #include "modular\Neu_Food\code\cookware\bowl.dm"
 #include "modular\Neu_Food\code\cookware\cup.dm"
 #include "modular\Neu_Food\code\cookware\fork.dm"
+#include "modular_ochrevalley\code\datums\components\breakin_protection.dm"
+#include "modular_ochrevalley\code\datums\elements\breakin_rules_enforcement.dm"
 #include "modular\Neu_Food\code\cookware\innkeep_lootbox.dm"
 #include "modular\Neu_Food\code\cookware\misc_cookware.dm"
 #include "modular\Neu_Food\code\cookware\pan.dm"

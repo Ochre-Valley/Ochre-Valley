@@ -1045,6 +1045,14 @@
 	resident_role = /datum/job/roguetown/villager
 	lockid = null //Will be randomized
 
+// OV ADD BEGIN - Add breakin protection element
+/obj/structure/mineral_door/wood/towner/ComponentInitialize()
+	. = ..()
+	var/door_breakin_message = "Lockpicking this door is not allowed by the server rules and counts as breaking in to towner houses. Unless this is a house you've already claimed, stop breaking in now."
+	var/door_examine_message = "This is a towner house door. Unless you have claimed it, you are not allowed to break into the home it belongs to."
+	AddComponent(/datum/component/breakin_protection, breakin_prevented_message = door_breakin_message, examine_message = door_examine_message)
+// OV ADD END
+
 /obj/structure/mineral_door/wood/towner/generic
 
 /obj/structure/mineral_door/wood/towner/generic/two_keys

@@ -122,6 +122,12 @@
 	dropshrink = 0.7
 	is_important = TRUE
 
+// OV ADD BEGIN - Breakin rules enforcement element
+/obj/item/lockpickring/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/breakin_rules_enforcement)
+// OV ADD END
+
 /obj/item/lockpickring/get_mechanics_examine(mob/user)
 	. = ..()
 	. += span_info("Individual lockpicks can be plucked off the keyring by either right-clicking it, or by shift-clicking its inventory open and taking a specific lockpick out of it.")

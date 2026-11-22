@@ -63,6 +63,12 @@
 	. += span_info("Left-click a locked door to attempt unlocking it. If the door is already unlocked, left-clicking it will instead attempt to relock it.")
 	. += span_info("The chance to successfully lockpick a door scales with your Lockpicking skill, the lockpick's integrity, and the door's tier. The locks of more important doors are usually harder to manipulate.")
 
+// OV ADD BEGIN - Breakin rules enforcement element
+/obj/item/lockpick/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/breakin_rules_enforcement)
+// OV ADD END
+
 /obj/item/lockpick/goldpin
 	name = "gold hairpin"
 	desc = "Often used by wealthy courtesans and nobility to keep hair and clothing in place."

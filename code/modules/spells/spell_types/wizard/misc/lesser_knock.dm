@@ -51,5 +51,11 @@
 	destroy_sound = 'sound/items/pickbreak.ogg'
 	resistance_flags = FIRE_PROOF
 
+// OV ADD BEGIN - Breakin rules enforcement element
+/obj/item/melee/touch_attack/lesserknock/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/breakin_rules_enforcement)
+// OV ADD END
+
 /obj/item/melee/touch_attack/lesserknock/attack_self()
 	qdel(src)
