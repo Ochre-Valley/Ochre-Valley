@@ -421,7 +421,7 @@ SUBSYSTEM_DEF(vote)
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	if(mode == "map" && islowpop())
-		text +="\n<b>Dun World wins due to low pop! (Was under [getlowpop()] voters!)"
+		text +="\n<b>Dun World wins due to low pop!"
 	log_vote(text)
 	remove_action_buttons()
 	to_world("\n<font color='purple'>[text]</font>")
