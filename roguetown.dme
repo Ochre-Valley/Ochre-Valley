@@ -3874,6 +3874,7 @@
 #include "modular_ochrevalley\code\modules\admin\admin_items\admin_items.dm"
 #include "modular\Neu_Food\code\raw\raw_pies.dm"
 #include "modular\Neu_Food\code\raw\raw_shellfish.dm"
+#include "modular_ochrevalley\code\modules\map_edit_deployments\edit_operations\area_door_breakin_protections.dm"
 #include "modular\Neu_Food\code\raw\raw_veggies.dm"
 #include "modular\Neu_Food\code\recipes\baked_recipes.dm"
 #include "modular\Neu_Food\code\recipes\boiled_recipes.dm"

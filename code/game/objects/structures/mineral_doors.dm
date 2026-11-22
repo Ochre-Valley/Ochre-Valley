@@ -556,13 +556,6 @@
 		return
 	if(!keylock)
 		return
-	//OV edit
-	var/our_area = get_area(src)
-	if(istype(our_area, /area/rogue/indoors/town/bath) || istype(our_area, /area/rogue/indoors/town/tavern))
-		message_admins("[user.name]([key_name(user)]) was denied lockpicking [src.name]. [ADMIN_JMP(src)]")
-		to_chat(user, span_warning("This door can not be lockpicked."))
-		return
-	//OV edit end
 	if(lockbroken)
 		to_chat(user, "<span class='warning'>The lock to this door is broken.</span>")
 		user.changeNext_move(CLICK_CD_INTENTCAP)
