@@ -135540,7 +135540,6 @@
 /obj/structure/rack/rogue{
 	density = 0
 	},
-/obj/effect/spawner/lootdrop/general_loot_hi/x3,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "qoA" = (
@@ -174347,7 +174346,6 @@
 	icon_state = "shelf_biggest";
 	pixel_y = 0
 	},
-/obj/effect/spawner/lootdrop/general_loot_low/x3,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/under/cave/scarymaze)
 "uSW" = (
