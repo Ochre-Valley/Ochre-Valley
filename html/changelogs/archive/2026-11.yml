@@ -529,3 +529,7 @@
       left the game and removes them accordingly
   - bugfix: Silver Blessed players can't be chosen for vampire and werewolf antags
       at roundstart
+2026-11-22:
+  SatinIsle:
+  - rscadd: 'Added three variants of large snake tails with colourable markings: Banded,
+      Streaked and Ringed'
