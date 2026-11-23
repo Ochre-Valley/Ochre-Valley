@@ -23,6 +23,7 @@
 	to_chat(user, fieldset_block("OOC NOTICE", span_danger(BC.breakin_prevented_message), "breakin_protection_block"))
 	message_admins("[ADMIN_LOOKUPFLW(user)]) attempted to break into rules-protected door ([attacked.name]) with a lockpicking tool ([source.name]), but was denied by break-in protection mechanics. Likely failed to examine the door to see it is OOC protected, or worse ignored server rules. [ADMIN_JMP(attacked)]")
 	log_admin("([key_name(user)]) attempted to break into rules-protected door ([attacked.name]) at X:[attacked.x] Y:[attacked.y] Z:[attacked.z] with a lockpicking tool ([source.name]), but was denied by break-in protection mechanics. Likely failed to examine the door to see it is OOC protected, or worse ignored server rules.")
+	SEND_SOUND(user, sound('sound/misc/notice.ogg'))
 	user.changeNext_move(CLICK_CD_EXHAUSTED) // BIG fucking delay to make sure they actually read
 
 	return COMPONENT_NO_ATTACK
