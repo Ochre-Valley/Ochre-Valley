@@ -552,13 +552,6 @@
         Spellblade, Spellsinger, Aristocrat, Knight Errant, Bombardier, Antiquarian,
         Duelist, Ironclad, Exorcist"
 2026-11-12:
-  SomeDeviant:
-    - rscadd: Added new AP Sync 10.30.26 - 11.11.26
-    - bugfix: Un-Blacklisted Werewolves
-    - bugfix: Re-Enables Vampires PROPERLY MY BAD
-    - balance: Removes Ochre Original Nite Eyes, for virtue parity with upstream
-  pontifexminimus2:
-    - rscadd: More Ochre Valley quotes
   Guidesu:
     - rscadd:
         Quarterstaves now have two stances you can switch to with the alt-grip
@@ -578,6 +571,11 @@
     - bugfix:
         The quarterstaff jab no longer does half damage to adjacent targets. It
         now attacks at normal speed and counts as blunt.
+  SomeDeviant:
+    - rscadd: Added new AP Sync 10.30.26 - 11.11.26
+    - bugfix: Un-Blacklisted Werewolves
+    - bugfix: Re-Enables Vampires PROPERLY MY BAD
+    - balance: Removes Ochre Original Nite Eyes, for virtue parity with upstream
   WeNeedMorePhoron:
     - rscadd:
         Antagonist bans should be respected properly by dreamwalker and storyteller
@@ -607,6 +605,8 @@
     - bugfix:
         sui dust can now make ur body type masculine instead of Just feminine
         (it was broken this whole time)
+  pontifexminimus2:
+    - rscadd: More Ochre Valley quotes
   radarseas:
     - bugfix:
         Violating the entire Geneva conventions over several-dozen tymelines in
@@ -655,20 +655,6 @@
         Magician's Brick and Aetherknife melee damage now properly scale with
         INT. Heavy is the hand that holds the brick.
 2026-11-15:
-  NickBelmont:
-    - rscadd:
-        Two new dropdown options for VV on atoms, allowing their icon to be changed
-        to one uploaded from outside the game, and another to reset the icon to its
-        initial value
-    - rscdel: Squall is dead, long live squall
-    - rscadd: Alternate single-target mode for razorwind volley
-    - balance:
-        Downburst now knocks back targets, making up for it being slightly lower
-        damage than other similar aoe spells.
-  SomeDeviant:
-    - bugfix: fixed beam runtime when targeting self
-  SatinIsle:
-    - balance: PQ limits (temporarily set to 50) for hard antags at roundstart.
   ?.:
     - code_imp:
         Necran Excommunicated can do lesser Necran rituals now, and spawn with
@@ -682,6 +668,16 @@
         Added Nodachi as a kazengun weapon option to eastern warrior, mercenary
         gun-in & kouken, mistwalkers, disgraced knight, kazengun trading ships and the
         merchant silverface.
+  NickBelmont:
+    - rscadd:
+        Two new dropdown options for VV on atoms, allowing their icon to be changed
+        to one uploaded from outside the game, and another to reset the icon to its
+        initial value
+    - rscdel: Squall is dead, long live squall
+    - rscadd: Alternate single-target mode for razorwind volley
+    - balance:
+        Downburst now knocks back targets, making up for it being slightly lower
+        damage than other similar aoe spells.
   OMEGATHERION:
     - rscadd: more emote sounds in gnoll voicepack.dm
     - rscadd: Track *sniffs if you aren't sneaking
@@ -716,6 +712,10 @@
     - code_imp: High Intensity rolled on low pop now rolls Standard.
     - bugfix: Masq Lite rolls again on Medium.
     - code_imp: Add Renegade lite on Medium.
+  SatinIsle:
+    - balance: PQ limits (temporarily set to 50) for hard antags at roundstart.
+  SomeDeviant:
+    - bugfix: fixed beam runtime when targeting self
   ToasterStrudes:
     - rscadd: Added a new donator item for Toasterstrudes
     - rscdel: Deprecated donator item for Toasterstrudes
@@ -1202,10 +1202,6 @@
         Hunted vice now correctly informs you of what to expect + what escalation
         you'll receive upon taking it.
 2026-11-22:
-  SatinIsle:
-    - rscadd:
-        "Added three variants of large snake tails with colourable markings: Banded,
-        Streaked and Ringed"
   BobProductive:
     - bugfix: Fixed NPCs being added to the known list
     - bugfix: properly fixes the known list
@@ -1221,6 +1217,10 @@
     - bugfix: Fixed a lot of hag bugs idw to list here.
   Ryan180602:
     - balance: Renegades are now restricted to one crystal.
+  SatinIsle:
+    - rscadd:
+        "Added three variants of large snake tails with colourable markings: Banded,
+        Streaked and Ringed"
   WeNeedMorePhoron:
     - balance: Made blockade slightly cheaper to issue, same for Incursion
     - balance: Blockade handle 8 instead of 6 bands of threats
@@ -1269,6 +1269,8 @@
     - rscadd: Added a donator loadout entry for the same elixir for Lucine
     - image: Added the Enduring Codex tome sprite
 2026-11-23:
+  SomeDeviant:
+    - rscadd: Added AP Sync from 11.12.26 to 11.22.26
   BobProductive:
     - bugfix:
         Climbing code messages meant for the climber now only show for the climber
