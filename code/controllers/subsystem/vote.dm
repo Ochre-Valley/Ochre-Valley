@@ -47,6 +47,8 @@ SUBSYSTEM_DEF(vote)
 	//OV add - doing the same thing for map votes that we do for storytellers, see more_votes.dm for more
 	var/list/map_vote_multipliers = list()
 	var/list/map_vote_log = list()
+	var/list/highpoponlymaps = list("Pilgrim")
+	var/didhighpopwin = FALSE //OV end
 /datum/controller/subsystem/vote/fire()	//called by master_controller
 	if(mode)
 		var/vote_period = custom_vote_period || CONFIG_GET(number/vote_period)
@@ -98,6 +100,8 @@ SUBSYSTEM_DEF(vote)
 	vote_powers.Cut()
 	storyteller_vote_log.Cut()
 	remove_action_buttons()
+	//OV add
+	didhighpopwin = FALSE
 
 /datum/controller/subsystem/vote/proc/load_storyteller_vote_multipliers()
 	storyteller_vote_multipliers = list()
@@ -420,8 +424,8 @@ SUBSYSTEM_DEF(vote)
 			text += "\n<b>Vote Result: [.]</b>"
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
-	if(mode == "map" && islowpop())
-		text +="\n<b>Dun World wins due to low pop!"
+	if(mode == "map" && islowpop() && didhighpopwin) //low pop voters AND a high pop map could have won
+		text +="\n<b>Map vote result adjusted due to low pop!"
 	log_vote(text)
 	remove_action_buttons()
 	to_world("\n<font color='purple'>[text]</font>")
@@ -693,6 +697,9 @@ SUBSYSTEM_DEF(vote)
 			if("gamemode")
 				choices.Add(config.votable_modes)
 			if("map")
+				//OV add
+				load_map_vote_multipliers()
+				//OV end
 				for(var/map in global.config.maplist)
 					var/datum/map_config/VM = config.maplist[map]
 					if(!VM.votable)
@@ -703,9 +710,6 @@ SUBSYSTEM_DEF(vote)
 					if(VM.config_min_users > 0 && player_count <= VM.config_min_users)
 						continue
 					choices.Add(VM.map_name)
-					//OV add
-					load_map_vote_multipliers()
-					//OV end
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)

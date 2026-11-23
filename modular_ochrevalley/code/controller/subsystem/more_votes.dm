@@ -114,6 +114,7 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 /datum/controller/subsystem/vote/proc/get_map_winning_choices()
 	var/list/winners = list()
 	var/greatest_votes = 0
+	var/highpopwinner = FALSE
 	for(var/option in choices)
 		//for maps, we are getting a MAP NAME back from the voters
 		var/map_type = global.config.maplist[option]
@@ -123,11 +124,26 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 		if(option_votes > greatest_votes)
 			greatest_votes = option_votes
 			winners = list(option)
+
+			if(highpoponlymaps.Find(option))
+				highpopwinner = TRUE
+			else
+				highpopwinner = FALSE
 		else if(option_votes == greatest_votes && option_votes > 0)
 			winners += option
+			if(highpoponlymaps.Find(option)) //count it as high pop winning if nobody else wins
+				highpopwinner = TRUE
 
-	if(islowpop()) // too bad, dun world time
-		winners = list("OV Dun World")
+	if(islowpop() && highpopwinner) // too bad, dun world time...kinda
+		didhighpopwin = TRUE //make it clear we had to fudge the rolls a bit, otherwise we don't care
+		if(winners.len > 1)
+			for(var/highpop in highpoponlymaps)
+				if(winners.Find(highpop)) //if we can find it, get rid of it
+					winners -= highpop
+			if(winners.len < 1) // in case somehow only high pop maps won, we do some quick fixing
+				winners = list("OV Dun World")
+		else
+			winners = list("OV Dun World") //if we had a singular winner then we just auto replace it with Dun World
 	return winners
 
 
