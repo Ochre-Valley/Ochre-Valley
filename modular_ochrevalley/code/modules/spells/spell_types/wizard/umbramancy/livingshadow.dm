@@ -98,7 +98,7 @@
 	img.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	img.alpha = 80
 	QDEL_IN(img, 2 SECONDS)
-
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(shadow_burst), owner, start, burst_damage, 1)
 	do_teleport(user, dest, channel = TELEPORT_CHANNEL_MAGIC)
 	playsound(dest, 'sound/magic/blink.ogg', 50, TRUE)
 	user.visible_message(
@@ -107,7 +107,7 @@
 	active_portal.parent_spell = null
 	qdel(active_portal)
 	active_portal = null
-	StartCooldown(45 SECONDS)
+	StartCooldown(55 SECONDS)
 
 /datum/action/cooldown/spell/living_shadow/proc/clear_portal()
 	active_portal = null

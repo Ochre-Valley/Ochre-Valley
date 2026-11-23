@@ -188,7 +188,7 @@
 	light_color = GLOW_COLOR_DARK
 	ai_path_weight = 15
 	var/lifetime = 4 SECONDS
-	var/tick_damage = SPELL_DMG(20)
+	var/tick_damage = SPELL_DMG(30)
 	var/shadow_cooldown = 1 SECONDS
 	/// Scorched stacks applied per burn
 	var/stacks = 1
