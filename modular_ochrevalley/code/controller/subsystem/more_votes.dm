@@ -200,3 +200,26 @@ luckily we also don't need to delve too much, we just need map_vote and winner t
 		return map_type?.map_name
 
 	return strip_html("[choice_text]")
+
+/client/proc/reset_map_vote_multipliers()
+	set category = "Admin.Admin"
+	set name = "Reset Map Vote Multipliers"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	SSvote.load_map_vote_multipliers()
+	var/list/options = list("All maps" = null)
+
+	for(var/tracked_type in SSvote.map_vote_multipliers)
+		options["[tracked_type] (x[SSvote.get_map_vote_mult(tracked_type)])"] = tracked_type
+
+	var/picked = input(src, "Reset which map's vote multiplier back to x1? This clears both overdue bonuses and win cooldowns.", "Map Vote Multipliers") as null|anything in options
+	if(!picked)
+		return
+	var/storyteller_type = options[picked]
+	if(alert(src, "Reset the vote multiplier for [picked]?", "Map Vote Multipliers", "Yes", "No") != "Yes")
+		return
+	SSvote.reset_map_vote_multipliers(storyteller_type)
+	message_admins("[key_name_admin(src)] reset the map vote multiplier for [picked].")
+	log_admin("[key_name(src)] reset the map vote multiplier for [picked].")
