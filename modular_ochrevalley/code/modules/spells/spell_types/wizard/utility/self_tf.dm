@@ -5,7 +5,7 @@
 	click_to_activate = FALSE
 
 	invocations = list("Materia Unita.")
-	invocation_type = INVOCATION_SHOUT
+	invocation_type = INVOCATION_WHISPER
 	//To prevent whatever chees you could somehow pull off, make it like casting a ward, no moving, easily canceled
 	charge_required = TRUE
 	charge_swingdelay_type = SWINGDELAY_CANCEL
