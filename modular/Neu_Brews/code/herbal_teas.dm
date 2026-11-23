@@ -78,6 +78,14 @@
 	overdose_threshold = 0
 	metabolization_rate = REAGENTS_METABOLISM
 
+///OV edit
+/datum/reagent/consumable/caffeine/bloomtea/on_mob_life(mob/living/carbon/M)
+	if(volume > 0.99)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst)
+		M.sate_addiction(/datum/charflaw/addiction/manabroken)
+	..()
+///OV edit end
+
 /datum/reagent/consumable/caffeine/fyretea
 	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL|CUISINE_NORTHERN
 	quality = DRINK_NICE
