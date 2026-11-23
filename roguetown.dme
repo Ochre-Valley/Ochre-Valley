@@ -3857,7 +3857,6 @@
 #include "modular\Neu_Food\code\drinks\tea_coffee_drinks.dm"
 #include "modular\Neu_Food\code\others\dairy.dm"
 #include "modular\Neu_Food\code\others\dried_fruits.dm"
-#include "modular_ochrevalley\code\datums\elements\scene_tool.dm"
 #include "modular\Neu_Food\code\others\fat.dm"
 #include "modular\Neu_Food\code\others\honey.dm"
 #include "modular\Neu_Food\code\others\preserved_meat.dm"

@@ -266,9 +266,6 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 	oneuse = TRUE
 	remarks = list()
 
-/obj/item/book/granter/spell/bonechill/sizespell/ComponentInitialize()
-	AddElement(/datum/element/scene_tool)
-
 /obj/item/book/granter/spell/bonechill/mirror_transform // Mirror Transform Spell
 	name = "Scroll of Mirror Transform"
 	spell = /datum/action/cooldown/spell/mirror_transform_ov //OV Edit: Use the new mirror transform
