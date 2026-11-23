@@ -1,6 +1,8 @@
 /// Component intended to be used in conjunction with /datum/element/breakin_rules_enforcement. Items with that element will be unable to be used on atoms with this protection component.
 /datum/component/breakin_protection
+	/// Message sent to the user if they attempt to break into our parent and are stopped from doing so.
 	var/breakin_prevented_message
+	/// Message shown in an OOC notice when a player examines our parent.
 	var/examine_message
 
 /datum/component/breakin_protection/Initialize(breakin_prevented_message, examine_message)
