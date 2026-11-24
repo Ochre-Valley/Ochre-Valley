@@ -107,7 +107,7 @@
 	active_portal.parent_spell = null
 	qdel(active_portal)
 	active_portal = null
-	StartCooldown(round(450 * (1 - min(user.STAINT - 10, 5)*0.5)))
+	StartCooldown(round(450 * (1 - min(user.STAINT - 10, 5)*0.05)))
 
 /datum/action/cooldown/spell/living_shadow/proc/clear_portal()
 	active_portal = null
