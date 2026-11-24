@@ -1,5 +1,6 @@
 GLOBAL_LIST_INIT(time_change_tips, world.file2list("strings/rt/timechangetips.txt"))
 GLOBAL_LIST_INIT(time_change_quotes, world.file2list("strings/rt/timechangequotes.txt"))
+GLOBAL_LIST_INIT(time_change_quotes_ochrevalley, world.file2list("modular_ochrevalley/strings/rt/timechangequotes.txt"))
 
 //Returns the world time in english
 /proc/worldtime2text()
@@ -222,7 +223,7 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 		// thanks to kat for the idea here :)
 		var/static/list/tip_or_quote_list = list(
 			GLOB.time_change_tips,
-			GLOB.time_change_quotes
+			GLOB.time_change_quotes + GLOB.time_change_quotes_ochrevalley // OV EDIT - merge AP's time change quotes with our own
 		)
 		// needed for ternary in addition to accessing list #
 		var/modulo_day = (day_number%2)
@@ -280,6 +281,15 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 
 //Takes a value of time in deciseconds.
 //Returns a text value of that number in hours, minutes, or seconds.
+// Return them in daes / hours, IC units
+/proc/station_duration_text(real_time)
+	var/station_time = real_time * SSticker.station_time_rate_multiplier
+	var/daes = round(station_time / (24 HOURS), 1)
+	if(daes >= 1)
+		return "[daes] dae[daes != 1 ? "s" : ""]"
+	var/hours = max(round(station_time / (1 HOURS), 1), 1)
+	return "[hours] hour[hours != 1 ? "s" : ""]"
+
 /proc/DisplayTimeText(time_value, round_seconds_to = 0.1)
 	var/second = FLOOR(time_value * 0.1, round_seconds_to)
 	if(!second)

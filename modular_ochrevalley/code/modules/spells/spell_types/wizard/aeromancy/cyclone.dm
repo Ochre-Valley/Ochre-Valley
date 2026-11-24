@@ -36,7 +36,7 @@
 
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z | SPELL_REQUIRES_NO_MOVE
 
-	displayed_damage = CYCLONE_DAMAGE
+	displayed_damage = SPELL_DMG(CYCLONE_DAMAGE)
 
 	var/tempest_duration = CYCLONE_DURATION
 	/// Damage per tick
@@ -85,7 +85,7 @@
 	active_zone = null
 
 /obj/effect/tempest/cyclone
-	tick_damage = SPELL_DMG(30)
+	tick_damage = SPELL_DMG(CYCLONE_DAMAGE)
 	effect_radius = 3
 	var/datum/beam/caster_beam
 
@@ -101,12 +101,12 @@
 
 /obj/effect/tempest/cyclone/proc/setup_visuals()
 	// Visible beam from zone center to caster
-	caster_beam = new(src, caster, 'icons/effects/beam.dmi', "b_beam", CYCLONE_DURATION + 1 SECONDS, maxdistance = 20)
+	caster_beam = new(src, caster, 'icons/effects/beam.dmi', "b_beam", CYCLONE_DURATION + 1 SECONDS, max_distance = 20)
 	caster_beam.Start()
 
 /obj/effect/tempest/cyclone/Destroy()
 	if(caster_beam)
-		caster_beam.End()
+		qdel(caster_beam)
 		caster_beam = null
 	if(source_spell && istype(source_spell, /datum/action/cooldown/spell/cyclone))
 		var/datum/action/cooldown/spell/cyclone/C = source_spell

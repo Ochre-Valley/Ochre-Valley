@@ -9,6 +9,7 @@
 	antag_flag = ROLE_NBEAST
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = TRUE //OV EDIT
 	storyteller_pill_label = "Vampire Lord"
 	storyteller_rumour_name = "lycker lords"
 
@@ -26,6 +27,7 @@
 	antag_datum = /datum/antagonist/vampire
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/vampires/preRunEvent()
 	if(is_storyteller_villain_blocked())
@@ -62,3 +64,12 @@
 			var/datum/antagonist/vampire/servante = new /datum/antagonist/vampire(forced_clan = null, generation = GENERATION_ANCILLAE)
 			antag_mind.add_antag_datum(servante)
 			return
+
+//OV add - filter out people who are silver-blessed or otherwise should never be able to become a werewolf (or vampire) in the first place
+/datum/round_event_control/antagonist/solo/vampire/trim_candidates(list/candidates)
+	candidates = ..()
+	for(var/mob/living/candidate in candidates)
+		if(HAS_TRAIT(candidate, TRAIT_SILVER_BLESSED))
+			candidates -= candidate
+	return candidates
+//OV end

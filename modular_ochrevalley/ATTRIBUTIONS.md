@@ -26,7 +26,7 @@ Icon: chonksqrl
 Creator / Copyright: VerySoft, Created for Rogue Star
 License: CC BY-SA 3.0
 
-Folder: modular_ochrevalley\icons\mob\tails\
+Folder: icons\mob\tails\
 Title: large_tails.dmi
 Icon: flagtail
 Creator / Copyright: VerySoft, Created for Rogue Star

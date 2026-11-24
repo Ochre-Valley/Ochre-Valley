@@ -1,4 +1,66 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/table/wood/betting,
+/obj/item/deck/playing_cards/triple{
+	pixel_x = -4;
+	pixel_y = -2
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary/bath)
+"ab" = (
+/obj/machinery/light/rogue/campfire/fireplace{
+	pixel_x = 32;
+	pixel_y = 0;
+	color = "#ee76c2"
+	},
+/obj/effect/decal/edge{
+	color = "#3f3f3f";
+	dir = 4
+	},
+/obj/structure/table/wood/long_table/mid,
+/obj/item/deck/playing_cards{
+	pixel_x = -6;
+	pixel_y = 1
+	},
+/obj/item/deck/tarot/includes_minor_arcana{
+	pixel_x = 4;
+	pixel_y = -12
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary/bath)
+"ac" = (
+/obj/structure/table/wood/betting,
+/obj/item/storage/pill_bottle/dice{
+	pixel_y = -6;
+	pixel_x = -7
+	},
+/turf/open/floor/rogue/carpet,
+/area/rogue/indoors/remote_sanctuary/bath)
+"ad" = (
+/obj/structure/table/wood/long_table/mid/alt,
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 14;
+	pixel_x = 10
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 5;
+	pixel_x = 17
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 15;
+	pixel_x = -8
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 4;
+	pixel_x = -1
+	},
+/obj/item/roguecoin/aalloy/pile/rich{
+	pixel_y = 7;
+	pixel_x = -19
+	},
+/turf/open/floor/rogue/tile/masonic/single,
+/area/rogue/indoors/remote_sanctuary/bath)
 "af" = (
 /obj/effect/decal/edge{
 	color = "#3f3f3f";
@@ -179,31 +241,6 @@
 "hv" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/carpet/lord/left,
-/area/rogue/indoors/remote_sanctuary/bath)
-"hx" = (
-/obj/structure/table/wood/long_table/mid/alt,
-/obj/structure/fluff/walldeco/bigpainting,
-/obj/item/roguecoin/aalloy/pile/rich{
-	pixel_y = 14;
-	pixel_x = 10
-	},
-/obj/item/roguecoin/aalloy/pile/rich{
-	pixel_y = 7;
-	pixel_x = 18
-	},
-/obj/item/roguecoin/aalloy/pile/rich{
-	pixel_y = 14;
-	pixel_x = -7
-	},
-/obj/item/roguecoin/aalloy/pile/rich{
-	pixel_y = 5;
-	pixel_x = -1
-	},
-/obj/item/roguecoin/aalloy/pile/rich{
-	pixel_y = 5;
-	pixel_x = -18
-	},
-/turf/open/floor/rogue/tile/masonic/single,
 /area/rogue/indoors/remote_sanctuary/bath)
 "hz" = (
 /obj/machinery/light/rogue/candle/blue,
@@ -716,19 +753,6 @@
 /obj/machinery/light/rogue/candle/blue,
 /turf/open/floor/rogue/carpet/lord/left,
 /area/rogue/indoors/remote_sanctuary/bath)
-"CH" = (
-/obj/machinery/light/rogue/campfire/fireplace{
-	pixel_x = 32;
-	pixel_y = 0;
-	color = "#ee76c2"
-	},
-/obj/effect/decal/edge{
-	color = "#3f3f3f";
-	dir = 4
-	},
-/obj/structure/table/wood/long_table/mid,
-/turf/open/floor/rogue/carpet,
-/area/rogue/indoors/remote_sanctuary/bath)
 "Dx" = (
 /turf/closed/wall/mineral/rogue/stone{
 	max_integrity = 9999999
@@ -960,13 +984,6 @@
 	max_integrity = 9999999
 	},
 /area/rogue/indoors/remote_sanctuary/bath)
-"PD" = (
-/obj/structure/table/wood/betting,
-/obj/item/toy/cards/deck{
-	pixel_x = 4
-	},
-/turf/open/floor/rogue/carpet,
-/area/rogue/indoors/remote_sanctuary/bath)
 "PF" = (
 /obj/structure/mineral_door/swing_door,
 /turf/open/floor/rogue/blocks/stonered,
@@ -977,13 +994,6 @@
 /obj/machinery/light/rogue/oven/south,
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/indoors/remote_sanctuary)
-"QL" = (
-/obj/structure/table/wood/betting,
-/obj/item/storage/pill_bottle/dice{
-	pixel_y = -10
-	},
-/turf/open/floor/rogue/carpet,
-/area/rogue/indoors/remote_sanctuary/bath)
 "Rh" = (
 /obj/structure/chair/stool/rogue,
 /obj/effect/decal/edge_corner{
@@ -1340,11 +1350,11 @@ xK
 (11,1,1) = {"
 xK
 oI
-hx
+ad
 JF
 af
-QL
-PD
+ac
+aa
 FN
 gX
 JF
@@ -1395,7 +1405,7 @@ nQ
 YL
 kM
 yr
-CH
+ab
 aE
 kM
 kM

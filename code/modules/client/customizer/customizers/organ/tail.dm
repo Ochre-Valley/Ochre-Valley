@@ -110,6 +110,9 @@
 		/datum/sprite_accessory/tail/tiefling/spear,
 		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_snake_banded, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_streaked, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_ringed, //OV ADD
 		/datum/sprite_accessory/tail/batl,
 		/datum/sprite_accessory/tail/bats,
 		/datum/sprite_accessory/tail/murid,
@@ -164,7 +167,9 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
+		/datum/sprite_accessory/tail/large_snake_banded,
+		/datum/sprite_accessory/tail/large_snake_streaked,
+		/datum/sprite_accessory/tail/large_snake_ringed,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -194,6 +199,8 @@
 		/datum/sprite_accessory/tail/leopard,
 		/datum/sprite_accessory/tail/deer,
 		/datum/sprite_accessory/tail/raccoon,
+		/datum/sprite_accessory/tail/raccoon_new,
+		/datum/sprite_accessory/tail/raccoon_newer,
 		/datum/sprite_accessory/tail/sabresune,
 		/datum/sprite_accessory/tail/lizard/smooth,
 		/datum/sprite_accessory/tail/lizard/dtiger,
@@ -206,7 +213,12 @@
 		/datum/sprite_accessory/tail/haven,
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
+		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_snake_banded, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_streaked, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_ringed, //OV ADD
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		//Caustic edit
 		/datum/sprite_accessory/tail/tiefling,
 		/datum/sprite_accessory/tail/tiefling/heart,
@@ -261,7 +273,9 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
+		/datum/sprite_accessory/tail/large_snake_banded,
+		/datum/sprite_accessory/tail/large_snake_streaked,
+		/datum/sprite_accessory/tail/large_snake_ringed,
 		//OV edit end
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/murid_alt,
@@ -292,6 +306,8 @@
 		/datum/sprite_accessory/tail/leopard,
 		/datum/sprite_accessory/tail/deer,
 		/datum/sprite_accessory/tail/raccoon,
+		/datum/sprite_accessory/tail/raccoon_new,
+		/datum/sprite_accessory/tail/raccoon_newer,
 		/datum/sprite_accessory/tail/sabresune,
 		/datum/sprite_accessory/tail/lizard/smooth,
 		/datum/sprite_accessory/tail/lizard/dtiger,
@@ -305,7 +321,11 @@
 		/datum/sprite_accessory/tail/swallow,
 		/datum/sprite_accessory/tail/zorzor,
 		/datum/sprite_accessory/tail/large_snake,
-		/datum/sprite_accessory/tail/large_snake_plain
+		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_snake_banded, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_streaked, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_ringed, //OV ADD
+		/datum/sprite_accessory/tail/large_tails/flagtail
 		)
 
 /datum/customizer/organ/tail/dullahan
@@ -372,6 +392,8 @@
 		/datum/sprite_accessory/tail/leopard,
 		/datum/sprite_accessory/tail/deer,
 		/datum/sprite_accessory/tail/raccoon,
+		/datum/sprite_accessory/tail/raccoon_new,
+		/datum/sprite_accessory/tail/raccoon_newer,
 		/datum/sprite_accessory/tail/sabresune,
 		/datum/sprite_accessory/tail/lizard/smooth,
 		/datum/sprite_accessory/tail/lizard/dtiger,
@@ -418,6 +440,9 @@
 		/datum/sprite_accessory/tail/lab,
 		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_snake_banded, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_streaked, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_ringed, //OV ADD
 		/datum/sprite_accessory/tail/large_tails/large_shark,
 		/datum/sprite_accessory/tail/lizard/kobold,
 		/datum/sprite_accessory/tail/large_tails/alraune,
@@ -428,7 +453,7 @@
 		/datum/sprite_accessory/tail/kitsune_seven,
 		/datum/sprite_accessory/tail/kitsune_nine,
 		/datum/sprite_accessory/tail/large_tails/ochre/chonksqrl,
-		/datum/sprite_accessory/tail/large_tails/ochre/flagtail,
+		/datum/sprite_accessory/tail/large_tails/flagtail,
 		/datum/sprite_accessory/tail/murid,
 		/datum/sprite_accessory/tail/orca,
 		/datum/sprite_accessory/tail/otie,
@@ -470,6 +495,9 @@
 		/datum/sprite_accessory/tail/zorzor,
 		/datum/sprite_accessory/tail/large_snake,
 		/datum/sprite_accessory/tail/large_snake_plain,
+		/datum/sprite_accessory/tail/large_snake_banded, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_streaked, //OV ADD
+		/datum/sprite_accessory/tail/large_snake_ringed, //OV ADD
 		/datum/sprite_accessory/tail/ochre/narrowtail_2color,
 	)
 // OV Add End
@@ -535,6 +563,8 @@
 		/datum/sprite_accessory/tail/leopard,
 		/datum/sprite_accessory/tail/deer,
 		/datum/sprite_accessory/tail/raccoon,
+		/datum/sprite_accessory/tail/raccoon_new,
+		/datum/sprite_accessory/tail/raccoon_newer,
 		/datum/sprite_accessory/tail/sabresune,
 		/datum/sprite_accessory/tail/lizard/smooth,
 		/datum/sprite_accessory/tail/lizard/dtiger,

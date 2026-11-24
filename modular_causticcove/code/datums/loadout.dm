@@ -2,15 +2,18 @@
 
 /datum/loadout_item/sizespell //I'd have this even further up the list if I could, but I don't want to needlessly edit the Azure loadouts
 	name = "Scroll of Enlarge/Reduce"
+	cost = 0
 	path = /obj/item/book/granter/spell/bonechill/sizespell/loadout
 
-/datum/loadout_item/mirror_transform 
-    name = "Scroll of Mirror Transform"
-    path = /obj/item/book/granter/spell/bonechill/mirror_transform/loadout
+/datum/loadout_item/mirror_transform
+	name = "Scroll of Mirror Transform"
+	cost = 0
+	path = /obj/item/book/granter/spell/bonechill/mirror_transform/loadout
 
-/datum/loadout_item/instant_transform 
-    name = "Scroll of Instant Transform"
-    path = /obj/item/book/granter/spell/bonechill/instant_transform/loadout
+/datum/loadout_item/instant_transform
+	name = "Scroll of Instant Transform"
+	cost = 0
+	path = /obj/item/book/granter/spell/bonechill/instant_transform/loadout
 
 /obj/item/clothing/head/roguetown/mentorhat/loadout
 	armor = ARMOR_CLOTHING
@@ -65,7 +68,7 @@
 /datum/loadout_item/kitsunemask
 	name = "Kitsune Mask"
 	path = /obj/item/clothing/mask/rogue/facemask/yoruku_kitsune/loadout
-	
+
 /datum/loadout_item/onimask
 	name = "Oni Mask"
 	path = /obj/item/clothing/mask/rogue/facemask/yoruku_oni/loadout

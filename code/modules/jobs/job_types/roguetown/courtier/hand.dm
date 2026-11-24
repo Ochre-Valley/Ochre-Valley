@@ -19,6 +19,7 @@
 	min_pq = 10 //OV EDIT
 	max_pq = null
 	round_contrib_points = 3
+	quest_claim_barred = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_spymaster.ogg'
 	job_traits = list(TRAIT_NOBLE, TRAIT_EXPERT_HUNTER)
 	vice_restrictions = list(/datum/charflaw/mute, /datum/charflaw/unintelligible, /datum/charflaw/wanted) //Needs to use the throat - sometimes
@@ -136,7 +137,6 @@
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/tracking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_MASTER,
-		/datum/skill/misc/stealing = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER, // not like they're gonna break into the vault.
 		/datum/skill/misc/hunting = SKILL_LEVEL_APPRENTICE,
 	)

@@ -34,6 +34,9 @@ export const ControlAdmin = (props: any) => {
       <Button fluid onClick={() => act('far_travel')}>
         Safely Far Travel
       </Button>
+      <Button fluid onClick={() => act('make_quest_item')}>
+        Turn Into Quest Target
+      </Button>
     </Section>
   );
 };

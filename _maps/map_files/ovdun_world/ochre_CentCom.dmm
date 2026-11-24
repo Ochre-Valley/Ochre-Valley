@@ -1378,7 +1378,7 @@
 /area/rogue/indoors/shelter/bog_hag)
 "oc" = (
 /obj/machinery/light/rogue/hearth,
-/obj/item/reagent_containers/glass/bucket/pot,
+/obj/item/reagent_containers/glass/bucket/pot/aalloy,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/shelter/bog_hag)
 "oh" = (
@@ -1546,6 +1546,7 @@
 /obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison,
 /obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison,
 /obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison,
+/obj/item/cooking/pan/aalloy,
 /obj/structure/closet/crate/chest/crate,
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/cobble,
@@ -2143,6 +2144,10 @@
 "BY" = (
 /turf/closed/wall/mineral/rogue/stone/red_moss,
 /area/rogue/indoors/lich_start/lich_lair)
+"Cc" = (
+/obj/structure/flora/roguegrass/herb/valeriana,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/indoors/shelter/bog_hag)
 "Ci" = (
 /turf/open/floor/rogue/grasscold,
 /area/rogue/underworld/dream)
@@ -8689,7 +8694,7 @@ iz
 ZC
 nA
 nS
-KJ
+Cc
 mD
 KJ
 Ld

@@ -10,7 +10,7 @@
 			to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, [span_bold("do not use a real life photo or use any image that is less than serious.")]"))
 			to_chat(user, span_notice("If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser."))
 			to_chat(user, span_notice("Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look."))
-			var/new_werewolf_headshot_link = tgui_input_text(user, "Input the Werewolf Headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox, file garden):", "Werewolf Headshot", werewolf_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+			var/new_werewolf_headshot_link = tgui_input_text(user, "Input the Werewolf Headshot link (https, hosts: gyazo, lensdump, imgbox, catbox, file garden):", "Werewolf Headshot", werewolf_headshot_link, max_length = MAX_MESSAGE_LEN, encode = FALSE)
 			if(new_werewolf_headshot_link == null)
 				return CHARACTER_ACT_DATA_UPDATE
 			if(new_werewolf_headshot_link == "")
@@ -18,7 +18,7 @@
 				werewolf_headshot_link = null
 				return CHARACTER_ACT_DATA_UPDATE
 			if(!valid_headshot_link(user, new_werewolf_headshot_link))
-				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, discord, lensdump, imgbox, catbox, file garden)."))
+				to_chat(user, span_notice("Invalid image link. Make sure it's a direct link from a valid host (gyazo, lensdump, imgbox, catbox, file garden)."))
 				return CHARACTER_ACT_DATA_UPDATE
 			verbose_pref_log_change(user, "notice", "Werewolf Headshot", html_encode(werewolf_headshot_link), html_encode(new_werewolf_headshot_link))
 			werewolf_headshot_link = new_werewolf_headshot_link

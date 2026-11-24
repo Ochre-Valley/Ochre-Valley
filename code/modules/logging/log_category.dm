@@ -69,4 +69,10 @@ GENERAL_PROTECT_DATUM(/datum/log_category)
 
 	// config isn't loaded? assume we want json readable logs
 	if(isnull(config) || CONFIG_GET(flag/log_as_json))
+		//OV EDIT - MAINTAIN OLD LOG VIEWER AUGH
+		//var/path = get_output_file(entry)
 		entry.write_entry_to_file(get_output_file(entry))
+		//if(length(GLOB?.logview_live))
+		//	var/datum/log_source/live = GLOB.logview_live[path]
+		//	live?.feed(entry)
+		//OV EDIT END

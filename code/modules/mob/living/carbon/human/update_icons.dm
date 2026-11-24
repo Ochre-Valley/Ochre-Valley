@@ -318,6 +318,10 @@ There are several things that need to be remembered:
 	apply_overlay(LEG_DAMAGE_LAYER)
 	apply_overlay(ARM_DAMAGE_LAYER)
 
+/mob/living/carbon/human/proc/update_gargoyle_gender()
+	if(hud_used?.zone_select)
+		hud_used.zone_select.update_icon()
+
 
 /* --------------------------------------- */
 //For legacy support.
@@ -352,6 +356,9 @@ There are several things that need to be remembered:
 		update_transform()
 		//damage overlays
 		update_damage_overlays()
+		// updates gargoyle type if it needs to be changed
+		update_gargoyle_gender()
+
 
 /mob/proc/regenerate_clothes()
 	return
@@ -1950,6 +1957,12 @@ generate/load female uniform sprites matching all previously decided variables
 		petrification_debug("update_body_parts start: owner=[key_name(src)] redraw=[redraw] override=[petrification_debug_value(petrified_color_override)] status=[petrified_status_active] render_color=[petrification_debug_value(petrified_render_color)] old_key=[petrification_debug_value(icon_render_key)] bodyparts=[petrification_debug_len(bodyparts)]")
 //OV Edit End
 
+	var/datum/component/ooze_color_shift/color_shift = GetComponent(/datum/component/ooze_color_shift)
+	if(color_shift?.shifting)
+		color_shift.update_shift_colors()
+		var/datum/component/amorphous_landing/landing = GetComponent(/datum/component/amorphous_landing)
+		if(landing?.is_landing)
+			return
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()
@@ -1966,6 +1979,9 @@ generate/load female uniform sprites matching all previously decided variables
 		//OV Add End
 		return
 
+	if(color_shift?.shifting)
+		color_shift.clear_visuals()
+		redraw = TRUE
 	remove_overlay(BODYPARTS_LAYER)
 
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
@@ -2021,7 +2037,9 @@ generate/load female uniform sprites matching all previously decided variables
 
 	if(length(new_limbs))
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
-		limb_icon_cache[icon_render_key] = new_limbs
+		if(!color_shift?.shifting)
+			limb_icon_cache[icon_render_key] = new_limbs
+
 		//OV Add Start
 		if(petrified_status_active || petrified_render_color)
 			petrification_debug("update_body_parts cache-store: owner=[key_name(src)] key=[petrification_debug_value(icon_render_key)] new_limbs=[petrification_debug_len(new_limbs)]")

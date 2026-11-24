@@ -20,15 +20,23 @@
 	base_antags = 0
 	maximum_antags = 6
 
-	max_occurrences = 0 //OV Edit: Disabled. Was not listed
-
 	earliest_start = 0 SECONDS
 
 	typepath = /datum/round_event/antagonist/solo/masquerade
 	antag_datum = /datum/antagonist/vampire
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event/antagonist/solo/masquerade/add_datum_to_mind(datum/mind/antag_mind)
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(forced_clan = FALSE, generation = GENERATION_ANCILLAE)
 	antag_mind.add_antag_datum(new_antag)
+
+//OV add - filter out people who are silver-blessed or otherwise should never be able to become a werewolf (or vampire) in the first place
+/datum/round_event_control/antagonist/solo/masquerade/trim_candidates(list/candidates)
+	candidates = ..()
+	for(var/mob/living/candidate in candidates)
+		if(HAS_TRAIT(candidate, TRAIT_SILVER_BLESSED))
+			candidates -= candidate
+	return candidates
+//OV end

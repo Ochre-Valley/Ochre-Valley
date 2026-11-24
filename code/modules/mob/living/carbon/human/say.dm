@@ -16,7 +16,7 @@
 			formatted_name = replacetext(formatted_name,"%belly", B.get_belly_name())
 			formatted_name = replacetext(formatted_name,"%prey", name)
 			return formatted_name
-	return real_name
+	return get_unmasked_name()
 
 /mob/living/carbon/human/IsVocal()
 	// how do species that don't breathe talk? magic, that's what.

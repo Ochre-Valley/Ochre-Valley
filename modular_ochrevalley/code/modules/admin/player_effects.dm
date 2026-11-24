@@ -1090,6 +1090,12 @@
 				if(double_check == "Remove Them")
 					safe_round_remove(target)
 
+		if("make_quest_item")
+			var/mob/living/Tar = target
+			if(!istype(Tar))
+				return
+			Tar.mob_gm_quest(ui.user)
+
 		/*
 		if("quick_nif")
 			var/mob/living/carbon/human/Tar = target

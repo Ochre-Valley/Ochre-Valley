@@ -76,7 +76,7 @@
 /obj/item/psydonmusicbox/examine(mob/user)
 	. = ..()
 	if(HAS_TRAIT(usr, TRAIT_INQUISITION))
-		desc = "A relic from the bowels of the Grand Otavan Cathedral's thaumaturgical workshops. The spirits of fifteen heathens, bound within this infernal contraption, sign a haunting tune; one that disrupts the leylines, prevents the faithless from casting spells, and immunizing the faithful to all magicka. <b>It would be wise to not teach outsiders of its true nature</b>, and to only bring it to bear in dire circumstances."
+		desc = "A relic from the bowels of the Grand Otavan Cathedral's thaumaturgical workshops. The spirits of fifteen heathens, bound within this infernal contraption, sing a haunting tune; one that disrupts the leylines, prevents the faithless from casting spells, and immunizes the faithful to all magicka. <b>It would be wise to not teach outsiders of its true nature</b>, and to only bring it to bear in dire circumstances."
 	else
 		desc = "A cranked music box, bearing the seal of the Holy Otavan Inquisition on its side. It radiates with an inexplicable feeling of somberness."
 
@@ -101,7 +101,7 @@
 		soundloop.start()
 		var/songhearers = view(7, user)
 		for(var/mob/living/carbon/human/target in songhearers)
-			to_chat(target,span_cultsmall("[user] begins cranking the melancholic crankbox.."))
+			to_chat(target,span_cultsmall("[user] begins cranking the melancholic crankbox..."))
 	if(!cranking)
 		soundloop.stop()
 		user.remove_status_effect(/datum/status_effect/buff/cranking_soulchurner)
@@ -114,8 +114,8 @@
 /obj/item/psydonmusicbox/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	src.visible_message(span_cult("A great deluge of souls escapes the shattered box! Their wails of vengeance and peace coalesce into an ethereal swan song, as the spirits ascend into the sky.."))
-	src.visible_message(span_hypnophrase("..before, at last, their haunting symphony finally comes to a close."))
+	src.visible_message(span_cult("A great deluge of souls escapes the shattered box! Their wails of vengeance and peace coalesce into an ethereal swan song, as the spirits ascend into the sky..."))
+	src.visible_message(span_hypnophrase("...before, at last, their haunting symphony finally comes to a close."))
 	playsound(src, 'sound/misc/otavanlament.ogg', 70, TRUE, -1)
 	return ..()
 
@@ -355,7 +355,6 @@ Inquisitorial armory down here
 		. += span_info("When opened, the 'BLESS' intent can be used to anoint Psydonic silver weaponry. Blessing a Psydonic silver weapon greatly enhances the power of its critical hits and debuffs against sunderable opponents.")
 		. += span_info("Blessing someone else, who happens to be a worshipper of Psydon, will temporarily buff them with increased Willpower, Constitution, and Fortune.")
 		. += span_warning("If the 'SMASH' intent is used while it's opened, the residing shard will violently explode with unimaginable force.")
-		. += span_warning("<font color='#00e1ff'>While active, Golgatha burns and weakens anyone who attacks its bearer. The effect persists only while the attacker remains within the relic's light. This feature requires the bearer to be Silverblessed, and inflicts extra damage to mindless foes.</font>")
 	if(fuel <= 0)
 		. += span_info("It is gone.")
 
@@ -422,7 +421,7 @@ Inquisitorial armory down here
 	if(ismob(A) && on && (user.used_intent.type == /datum/intent/flail/smash/golgotha) && user.cmode)
 		user.visible_message(span_warningbig("[user] smashes the exposed [src], shattering the shard of SYON!"))
 		user.visible_message(span_blue(pick("WHY--!!","SYON BLAS--!!","ENDU--!!","ENDURE THI--!!","WHAT THE F--!!","OH MY ALLFA--!!","OH PSYDO--!!","KABOO--!!","MASHALLA--!!","OH ADONA--!!","OH SHI--!!","PSYDO--!!","PSYDON BLAS--!!")))
-		explosion(get_turf(A),devastation_range = 3, heavy_impact_range = 5, light_impact_range = 6, flame_range = 3, flash_range = 6, smoke = FALSE)
+		explosion(get_turf(A), extreme_impact_range = 3, heavy_impact_range = 5, light_impact_range = 6, flame_range = 3, flash_range = 6, smoke = FALSE)
 		fuel = 0
 		turn_off()
 		icon_state = "psycenser-broken"
@@ -477,177 +476,6 @@ Inquisitorial armory down here
 				new /obj/effect/temp_visual/censer_dust(get_turf(H))
 		else
 			to_chat(user, span_warning("They've already been blessed."))
-
-/mob/living/carbon/human/proc/has_active_golgatha()
-	for(var/obj/item/flashlight/flare/torch/lantern/psycenser/G in contents)
-		if(G.on)
-			return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/process_golgatha_rebuke(mob/living/attacker)
-	if(!has_active_golgatha())
-		return
-	if(!HAS_TRAIT(src, TRAIT_SILVER_BLESSED)) // only people who is silverblessed can use golgatha's hidden feature
-		return
-	if(HAS_TRAIT(attacker, TRAIT_INQUISITION)) // wife abuse
-		return
-	new /obj/effect/temp_visual/censer_dust(get_turf(attacker))
-	new /obj/effect/temp_visual/censer_dust(get_turf(attacker))
-	new /obj/effect/temp_visual/frozen_mist_tile(get_turf(attacker))
-	if(issimple(attacker) || !attacker.mind)
-		attacker.apply_status_effect(/datum/status_effect/syonchurn, src)
-	attacker.adjustFireLoss(5)
-	var/zone = pick(BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-	arcyne_strike(src, attacker, null, 15, zone, BCLASS_BURN, PEN_NONE, "grief", TRUE, TRUE, FALSE, BURN, null, null, null, null)
-
-#define SYONCHURN_FILTER "syonchurn glow"
-
-/atom/movable/screen/alert/status_effect/syonchurn
-	name = "Dying Light"
-	desc = "The shard of Syon rejects my hostility against Psydon's anointed! Luminous fragments scour my body and spirit!"
-	icon_state = "supersunder"
-
-/datum/status_effect/syonchurn
-	id = "syon_churned"
-	alert_type = /atom/movable/screen/alert/status_effect/syonchurn
-	duration = -1
-	tick_interval = 2 SECONDS
-	examine_text = "<font color='#00fff2'><b>SUBJECTPRONOUN is seared in body and soul by motes of lingering comet dust!</b></font>"
-	status_type = STATUS_EFFECT_REFRESH
-	effectedstats = list(STATKEY_LCK = -2, STATKEY_SPD = -3)
-	var/datum/weakref/debuffer
-	var/outline_colour = "#70d1e2"
-	var/intensity = 1
-	var/range = 4
-	var/damage_per_tick = 0.25
-	var/agony = 0
-
-/datum/status_effect/syonchurn/on_creation(mob/living/new_owner, mob/living/caster, potency)
-	if(potency)
-		intensity = potency
-	if(caster)
-		debuffer = WEAKREF(caster)
-	return ..()
-
-/datum/status_effect/syonchurn/on_apply()
-	var/filter = owner.get_filter(SYONCHURN_FILTER)
-	if(!filter)
-		owner.add_filter(SYONCHURN_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 200, "size" = 1))
-	to_chat(owner, span_warning("Brilliant fragments of comet-light burst around me, repelling my violent intent!"))
-	return TRUE
-
-/datum/status_effect/syonchurn/refresh()
-	. = ..()
-	if(intensity <= 10)
-		intensity++
-		if(prob(25))
-			to_chat(owner, span_boldwarning("The shard's radiance intensifies, scourging me for my aggression!"))
-
-/datum/status_effect/syonchurn/process()
-	. = ..()
-	if(!owner)
-		qdel(src)
-		return
-	var/mob/living/carbon/human/source = debuffer?.resolve()
-	if(!source)
-		qdel(src)
-		return
-	if(!source.has_active_golgatha())
-		to_chat(owner, span_blue("As the Golgatha is sealed, the searing dust fades into nothing."))
-		qdel(src)
-		return
-	if(get_dist(source, owner) > range)
-		to_chat(owner, span_blue("Away from the Golgatha's radiance, the searing dust fades into nothing."))
-		qdel(src)
-		return
-
-	owner.adjustFireLoss(damage_per_tick * intensity) // the 'damaging armor over time' noises were infuriating for me
-	if(owner.getFireLoss() >= 300 && !owner.mind)
-		owner.apply_status_effect(/datum/status_effect/syonforgive,	source)
-		qdel(src)
-		return
-
-	if(world.time >= agony)
-		agony = world.time + rand(5,15) SECONDS
-		to_chat(owner, span_blue("Blue motes of a dying light burn through my flesh and soul!"))
-		new /obj/effect/particle_effect/thick_steam(get_turf(owner))
-		if(prob(50) && !HAS_TRAIT(owner, TRAIT_NOPAIN))
-			owner.emote("pain")
-
-/datum/status_effect/syonchurn/on_remove()
-	owner.remove_filter(SYONCHURN_FILTER)
-
-#undef SYONCHURN_FILTER
-
-/datum/status_effect/syonforgive
-	id = "syon_forgive"
-	duration = 6 SECONDS
-	tick_interval = -1
-	status_type = STATUS_EFFECT_UNIQUE
-	var/forgiving = FALSE
-	var/datum/weakref/redeemer
-
-/datum/status_effect/syonforgive/on_creation(mob/living/new_owner, mob/living/caster)
-	if(caster)
-		redeemer = WEAKREF(caster)
-	return ..()
-
-/datum/status_effect/syonforgive/process()
-	if(forgiving)
-		return
-	forgiving = TRUE
-	var/mob/living/L = owner
-	if(!L)
-		return FALSE
-	if(L.mob_biotypes & MOB_UNDEAD)
-		L.Stun(5 SECONDS)
-		L.revive(full_heal = TRUE)
-		L.set_resting(FALSE, FALSE)
-		L.visible_message(span_blue("<i>[L] falls still as the dark forces keeping it together wane. Their body crumbles into ash.</i>"))
-		addtimer(CALLBACK(src, PROC_REF(exorcise)), 2 SECONDS)
-		return TRUE
-	var/list/guilt_messages = list(
-		"[L]'s guilt becomes too much to bear. They flee, weeping.",
-		"[L] breaks beneath the weight of their sins and staggers away in tears.",
-		"[L]'s resolve crumbles. They turn away, unable to face what they have done.",
-		"[L] is overcome by remorse, fleeing with tears in their eyes.",
-		"[L] lowers their head in shame and retreats, sobbing.",
-		"[L] trembles as their regrets consume them. They flee from sight.",
-		"[L]'s heart sinks beneath their guilt. They escape in sorrow.",
-		"[L] cannot bear the burden of their actions any longer and runs away.",
-		"[L] is haunted by their own conscience and flees in despair.",
-		"[L]'s soul cries out beneath the weight of their guilt. They retreat, weeping."
-	)
-	L.visible_message(span_blue(pick(guilt_messages)))
-	L.revive(full_heal = TRUE)
-	L.set_resting(FALSE, FALSE)
-	L.emote("cry")
-	L.Stun(5 SECONDS)
-	sleep(15)
-	if(L.ai_controller)
-		QDEL_NULL(L.ai_controller)
-	var/mob/living/source = redeemer?.resolve()
-	if(source)
-		walk_away(L, source, 100, 2)
-	addtimer(CALLBACK(src, PROC_REF(fade)), 5 SECONDS)
-	return TRUE
-
-/datum/status_effect/syonforgive/proc/exorcise()
-	if(QDELETED(owner))
-		return
-	var/mob/living/L = owner
-	L.dust()
-	qdel(src)
-/datum/status_effect/syonforgive/proc/fade()
-	if(QDELETED(owner))
-		return
-	animate(owner, alpha = 0, time = 4 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(delete_owner)), 4 SECONDS)
-/datum/status_effect/syonforgive/proc/delete_owner()
-	if(QDELETED(owner))
-		return
-	qdel(owner)
-	qdel(src)
 
 /obj/effect/temp_visual/censer_dust
 	icon = 'icons/effects/effects.dmi'
@@ -1441,14 +1269,18 @@ Inquisitorial armory down here
 		to_chat(user, span_warning("It looks like it needs blood to work properly."))
 		return
 	if(!active)
-		var/input = input(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID") as text|null
+		var/other = "Someone else..."
+		var/list/names = list(other) + sortList(user.mind.known_people.Copy())
+		var/input = tgui_input_list(user, "WHOM DO YOU SEEK?", "THE PRICE IS PAID", names)
+		if(input == other)
+			input = tgui_input_text(user, "WHOM DO YOU SEEK?", "THE PRICE IS PAID", max_length = MAX_NAME_LEN, encode = FALSE)
 		if(!input)
 			return
 		if(!user.key)
 			return
+		input = strip_diacritics(input)
 		for(var/mob/living/carbon/human/HL in GLOB.player_list)
-		//	to_world("going through mob: [HL] | real_name: [HL.real_name] | input: [input] | [world.time]") Mirror-bugsplatter. Disregard this.
-			if(HL.real_name == input)
+			if(strip_diacritics(HL.real_name) == input)
 				if(HAS_TRAIT(HL, TRAIT_ANTISCRYING))
 					to_chat(user, span_warning("They are not within the gaze of the Mirror."))
 					return
@@ -1467,11 +1299,10 @@ Inquisitorial armory down here
 		playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
 		to_chat(user, span_warning("[src] makes a grating sound."))
 		return
-	var/lookat = null
-	if(alert(user, "WHERE ARE YOU LOOKING?", "BLACK MIRROR", "BLOOD", "FIXATION") != "BLOOD")
-		lookat = target
-	else
-		lookat = whofedme
+	var/choice = tgui_alert(user, "WHERE ARE YOU LOOKING?", "BLACK MIRROR", list("BLOOD", "FIXATION"))
+	if(!choice)
+		return
+	var/lookat = choice == "BLOOD" ? whofedme : target
 	playsound(src, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(user, TRAIT_NOSSDINDICATOR, "blackmirror")
 	var/mob/dead/observer/eye/screye/blackmirror/S = user.scry_ghost()
@@ -1821,7 +1652,7 @@ GLOBAL_LIST_INIT(inquisition_used_ids, list())
 	report_html += "<hr>"
 	report_html += "<i>[pick(opening)]</i><br><br>"
 	report_html += "<b>INDEXED SUBJECT</b><br>"
-	report_html += "Name: [H.real_name]<br>"
+	report_html += "Name: [H.get_unmasked_name()]<br>"
 	report_html += "Race: [H.dna?.species?.name]<br>"
 	report_html += "Sex: [capitalize(H.gender)]<br>"
 	var/static/list/job_aliases = list(

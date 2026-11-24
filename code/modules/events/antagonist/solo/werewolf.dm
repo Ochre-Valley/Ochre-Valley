@@ -9,6 +9,7 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = FALSE //OV EDIT
 	storyteller_rumour_name = "werewolves"
 
 	denominator = 50
@@ -16,7 +17,7 @@
 	base_antags = 2
 	maximum_antags = 2
 	min_players = 15 //OV EDIT - Was 25
-	weight = 6 //OV EDIT - Was 7
+	weight = 7
 
 	earliest_start = 0 SECONDS
 
@@ -24,6 +25,7 @@
 	antag_datum = /datum/antagonist/werewolf
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/werewolf/preRunEvent()
 	if(is_storyteller_villain_blocked())
@@ -31,3 +33,11 @@
 	return ..()
 
 /datum/round_event/antagonist/solo/werewolf
+//OV add - filter out people who are silver-blessed or otherwise should never be able to become a werewolf in the first place
+/datum/round_event_control/antagonist/solo/werewolf/trim_candidates(list/candidates)
+	candidates = ..()
+	for(var/mob/living/candidate in candidates)
+		if(HAS_TRAIT(candidate, TRAIT_SILVER_BLESSED))
+			candidates -= candidate
+	return candidates
+//OV end

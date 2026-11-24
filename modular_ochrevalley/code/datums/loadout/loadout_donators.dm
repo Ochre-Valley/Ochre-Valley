@@ -9,3 +9,8 @@
 	name = "Donator Kit - Ornate Lirvas Firestaff"
 	path = /obj/item/enchantingkit/voidastra_staff
 	ckeywhitelist = list("voidastra")
+
+/datum/loadout_item/donator/kerse
+	name = "Donator Item - Enduring Psycross"
+	path = /obj/item/clothing/neck/roguetown/psicross/kerse
+	ckeywhitelist = list("kerse")

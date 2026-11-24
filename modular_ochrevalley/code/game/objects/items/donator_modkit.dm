@@ -47,3 +47,4 @@
 	desc = "A unique staff, ordained from rare, valuable metals and gems. Fire spills from the top, where a golden chunk of molten metal is constantly refined by the flame. With this gaudy design, one can assume that something of this appearance is heavily influenced by Lirvas culture."
 	icon_state = "voidastra_firestaff"
 	icon = 'modular_ochrevalley/icons/obj/items/donor_weapons_64.dmi'
+

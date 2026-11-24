@@ -1,4 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/table/wood/large_table/north_west,
+/obj/item/candle/candlestick/gold/lit{
+	pixel_y = 17;
+	pixel_x = 16
+	},
+/obj/item/deck/playing_cards{
+	pixel_y = -3
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue/indoors/remote_sanctuary)
 "av" = (
 /obj/effect/decal/cobbleedge{
 	dir = 8;
@@ -1560,17 +1571,6 @@
 	},
 /turf/open/floor/rogue/tile/brownbrick,
 /area/rogue/indoors/remote_sanctuary)
-"Yy" = (
-/obj/structure/table/wood/large_table/north_west,
-/obj/item/candle/candlestick/gold/lit{
-	pixel_y = 17;
-	pixel_x = 16
-	},
-/obj/item/toy/cards/deck{
-	pixel_y = -3
-	},
-/turf/open/floor/carpet/stellar,
-/area/rogue/indoors/remote_sanctuary)
 "YF" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4;
@@ -1818,7 +1818,7 @@ Do
 pu
 Lm
 BU
-Yy
+aa
 IQ
 BU
 Lm

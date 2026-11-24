@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	w_class = WEIGHT_CLASS_TINY
 	experimental_inhand = FALSE
 	mill_result = /obj/item/reagent_containers/powder/mineral
-	possible_item_intents = list(/datum/intent/hit, /datum/intent/mace/smash/wood, /datum/intent/dagger/cut)
+	possible_item_intents = list(/datum/intent/hit, /datum/intent/mace/smash/wood/stone, /datum/intent/dagger/cut)
 	sharpening_factor = 21
 	spark_chance = 80
 
@@ -234,7 +234,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/bonus_force = 0 // Total bonus force the rock will be getting
 	var/list/given_intent_list = list(/datum/intent/hit) // By default you get this at least
 	var/list/extra_intent_list = list() // List of intents that we can possibly give it by the end of this
-	var/list/blunt_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood)
+	var/list/blunt_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood/stone)
 	var/list/sharp_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 
 	var/bluntness_rating = rand(0,10)
@@ -443,6 +443,8 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(.)
 		if(!was_destroyed && obj_destroyed)
 			record_featured_stat(FEATURED_STATS_MINERS, user)
+		if(user.mind && (user.used_intent?.blade_class in list(BCLASS_PICK, BCLASS_SMASH, BCLASS_BLUNT)))
+			user.mind.add_sleep_experience(/datum/skill/labor/mining, user.STAINT * 0.2)
 
 /obj/item/natural/rock/deconstruct(disassembled = FALSE)
 	if(!disassembled)

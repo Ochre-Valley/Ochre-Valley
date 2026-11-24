@@ -137,6 +137,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/list/customizer_entries = list()
 	var/list/list/body_markings = list()
 	var/update_mutant_colors = TRUE // if TRUE, resets accessory and marking colors when mutant colors change
+	var/ooze_color_shifting = TRUE
 
 	///direct link to a headshot image on a whitelisted site. it would rather these 3 fields be a list, but that's actually less efficient at runtime
 	var/headshot_link
@@ -172,6 +173,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/flavortext
 	var/flavortext_cached
 
+	var/pen_name
+
 	var/ooc_notes
 	var/ooc_notes_cached
 
@@ -186,6 +189,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/noble_gossip
 	var/noble_gossip_cached
+
+	var/list/secrets = list()
 
 	var/list/img_gallery = list()
 	var/list/nsfw_img_gallery = list()

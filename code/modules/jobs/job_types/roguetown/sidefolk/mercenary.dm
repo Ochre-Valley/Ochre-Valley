@@ -13,6 +13,10 @@
 	min_pq = 5		//Will be handled by classes if PQ limiting is needed. --But Until then, learn escalation, mercs. //OV EDIT
 	max_pq = null
 	round_contrib_points = 1
+	quest_claim_barred = TRUE
+	quest_claim_towner_allowed = TRUE
+	quest_claim_lowpop_allowed = TRUE
+	quest_claim_solo_allowed = TRUE
 	townie_contract_gate_exempt = TRUE
 	outfit = null	//Handled by classes
 	outfit_female = null
@@ -41,7 +45,6 @@
 		/datum/advclass/mercenary/grenzelhoft_crossbowman,
 		/datum/advclass/mercenary/grenzelhoft_mage,
 		/datum/advclass/mercenary/grenzelhoft/fencer, //CC ADD
-		/datum/advclass/mercenary/grenzelhoft/arquebusier, //OV ADD
 		/datum/advclass/mercenary/gronn,
 		/datum/advclass/mercenary/gronn_heavy,
 		/datum/advclass/mercenary/routier,
@@ -49,12 +52,6 @@
 		/datum/advclass/mercenary/rumaclan_sasu,
 		/datum/advclass/mercenary/hangyaku,
 		/datum/advclass/mercenary/chonin,
-		/* OV Remove
-		//Caustic add start
-		/datum/advclass/mercenary/shrine_priest,
-		/datum/advclass/mercenary/shrine_guardian,
-		//Caustic add end
-		*/
 		/datum/advclass/mercenary/steppesman,
 		/datum/advclass/mercenary/warscholar,
 		/datum/advclass/mercenary/warscholar_pontifex,
@@ -124,6 +121,10 @@
 
 /datum/advclass/mercenary/post_equip(mob/living/carbon/human/H) // has to be here because this is done AFTER subclass selection
 	. = ..()
+	add_verb(H, /mob/living/carbon/human/proc/mercenary_statusupdate)
+	if(istype(SSjob.GetJob(H.job), /datum/job/roguetown/mercenary))
+		add_verb(H, /mob/living/carbon/human/proc/mercenary_end_contract)
+		grant_merc_contract(H)
 	var/list/subprefs = H.client?.prefs?.job_subprefs
 	if(!subprefs)
 		return

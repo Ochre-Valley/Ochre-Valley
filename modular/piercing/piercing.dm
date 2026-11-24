@@ -2,7 +2,7 @@
 	abstract_type = /datum/sprite_accessory/piercing
 	icon = 'modular/icons/mob/sprite_accessory/piercings/rings.dmi'
 	color_key_name = "Piercings"
-	layer = BODY_ADJ_LAYER
+	layer = BREASTS_LAYER //OV EDIT - BODY_ADJ_LAYER
 	color_disabled = TRUE
 	var/piercing_type
 

@@ -40,6 +40,8 @@ SUBSYSTEM_DEF(vote)
 	var/list/storyteller_vote_log = list()
 	/// Storyteller type path -> vote multiplier in percent. Persists via STORYTELLER_VOTE_MULTIPLIER_FILE.
 	var/list/storyteller_vote_multipliers = list()
+	/// Multipliers from before the last recorded win, so a roundstart preset swap can re-record the win.
+	var/list/prev_mults
 	var/list/generated_actions = list()
 	var/static/list/everyone_is_equal = list("custom")
 	/// Vote types that require lobby players to ready up before voting.
@@ -130,6 +132,7 @@ SUBSYSTEM_DEF(vote)
 /// from chaining wins by shifting votes to a sibling preset that still carries its overdue bonus.
 /datum/controller/subsystem/vote/proc/record_storyteller_vote_win(winning_choice)
 	load_storyteller_vote_multipliers()
+	prev_mults = storyteller_vote_multipliers.Copy()
 	var/winner_pool = get_storyteller_vote_pool(get_storyteller_choice_type(winning_choice))
 	for(var/storyteller_type in SSgamemode.storytellers)
 		var/datum/storyteller/storyboy = SSgamemode.storytellers[storyteller_type]
@@ -636,7 +639,7 @@ SUBSYSTEM_DEF(vote)
 			return vote
 	return FALSE
 
-/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, vote_period)
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, vote_period, isroundend = FALSE) //OV edit: check if it's round end
 	var/sound/vote_alert = new()
 	vote_alert.file = null
 	vote_alert.priority = 250
@@ -725,7 +728,7 @@ SUBSYSTEM_DEF(vote)
 			save_storyteller_vote_log(null, "active")
 		to_world("\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		for(var/client/C in GLOB.clients)
-			if(!isliving(C.mob))
+			if(!isliving(C.mob) || isroundend) //OV edit - ignore ghost check if we're coming here from round end
 				show_vote(C)
 		next_panel_refresh = world.time + panel_refresh_interval
 		time_remaining = round(vp/10)

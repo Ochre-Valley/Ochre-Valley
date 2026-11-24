@@ -8,6 +8,7 @@
 	antag_flag = ROLE_PREBEL
 	shared_occurence_type = SHARED_HIGH_THREAT
 	storyteller_antag_flags = STORYTELLER_ANTAG_VILLAIN | STORYTELLER_ANTAG_ROUNDSTART
+	storyteller_blacklisted = TRUE //OV EDIT
 	storyteller_rumour_name = "rebels"
 
 	base_antags = REBELLION_ROUNDSTART_TOTAL
@@ -23,6 +24,7 @@
 	weight = 0 //CC edit, automatic injection disabled
 
 	restricted_roles = DEFAULT_ANTAG_BLACKLISTED_ROLES
+	antag_pq = 5 //OV EDIT
 
 /datum/round_event_control/antagonist/solo/rebel/New()
 	..()
@@ -93,18 +95,6 @@
 	var/leader_cap = min(REBELLION_ROUNDSTART_LEADERS, antag_count)
 
 	var/list/mob/picked = list()
-	if(cast_control == SSgamemode.current_roundstart_event && length(SSgamemode.roundstart_antag_minds))
-		log_storyteller("Running roundstart antagonist assignment, event: [src], roundstart_antag_minds: [english_list(SSgamemode.roundstart_antag_minds)]")
-		for(var/datum/mind/antag_mind in SSgamemode.roundstart_antag_minds)
-			if(!antag_mind.current)
-				log_storyteller("Roundstart antagonist setup error: antag_mind([antag_mind]) in roundstart_antag_minds without a set mob")
-				continue
-			picked += antag_mind.current
-			if(length(leader_minds) < leader_cap)
-				leader_minds += antag_mind
-			SSgamemode.roundstart_antag_minds -= antag_mind
-			log_storyteller("Roundstart antag_mind, [antag_mind]")
-
 	var/list/leader_candidates = cast_control.get_leader_candidates()
 	while(length(leader_candidates) && length(leader_minds) < leader_cap)
 		var/mob/picked_ckey = weighted_take(leader_candidates, GLOB.burgher_positions)

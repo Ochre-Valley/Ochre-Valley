@@ -17,6 +17,9 @@
 		STATKEY_WIL = 1,
 		STATKEY_SPD = 3,
 	)
+	subclass_stashed_items = list(
+		"Wax Putty" = /obj/item/waxputty,
+	)
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
@@ -28,7 +31,6 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/traps = SKILL_LEVEL_JOURNEYMAN,
 	)
@@ -80,6 +82,12 @@
 		STATKEY_WIL = 1,
 		STATKEY_SPD = 3,
 	)
+	// A bit awkward, but a pouch could only hold two and it's probably best if the user can commit to one at a time.
+	subclass_stashed_items = list(
+		"Wax Putty I" = /obj/item/waxputty,
+		"Wax Putty II" = /obj/item/waxputty,
+		"Wax Putty III" = /obj/item/waxputty,
+	)
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
@@ -92,7 +100,6 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/traps = SKILL_LEVEL_EXPERT,
 	)
@@ -120,7 +127,7 @@
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/iron
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/iron
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	// beltl = /obj/item/quiver/Warrows // OV Edit
 	beltr = /obj/item/rogueweapon/mace/cudgel
@@ -142,6 +149,9 @@
 		STATKEY_SPD = 2,
 		STATKEY_WIL = 1,
 	)
+	subclass_stashed_items = list(
+		"Wax Putty" = /obj/item/waxputty,
+	)
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -152,7 +162,6 @@
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/music = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE,
@@ -222,8 +231,12 @@
 		STATKEY_STR = 1,
 		STATKEY_WIL = 1,
 	)
+	subclass_stashed_items = list(
+		"Wax Putty I" = /obj/item/waxputty,
+		"Wax Putty II" = /obj/item/waxputty
+	)
 	subclass_skills = list(
-		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		//datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN, OV EDIT. given in weapon choice
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
@@ -231,8 +244,7 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/music = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE,
@@ -247,18 +259,40 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor/red
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogue/instrument/hurdygurdy
-	belt = /obj/item/storage/belt/rogue/leather/knifebelt/iron
+	belt = /obj/item/storage/belt/rogue/leather/tossbelt/blade/iron
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	//beltl = /obj/item/flashlight/flare/torch/lantern OV edit
 	beltr = /obj/item/rogueweapon/sword/cutlass
 	backpack_contents = list(
-		/obj/item/bomb = 1,
+		/obj/item/explosive/fused/bottle = 1,
 		/obj/item/lockpick = 1,
-		/obj/item/rogueweapon/huntingknife/idagger/steel/parrying = 1,
-		/obj/item/rogueweapon/scabbard/sheath = 1
+		//ov edit start
+		//obj/item/rogueweapon/huntingknife/idagger/steel/parrying = 1,
+		//obj/item/rogueweapon/scabbard/sheath = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1
+		//ov edit end
 		)
+	//OV edit start
+	if(H.mind)
+		var/guns = list("Parrying Dagger", "Pistol and Shot", "Blunderbuss and Scattershot")
+		var/gun_choice = input(H, "Choose a sidearm.", "POWDER AND SHOT") as anything in guns
+		H.set_blindness(0)
+		switch(gun_choice)
+			if("Parrying Dagger")
+				H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/rogueweapon/scabbard/sheath
+				r_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
+			if("Pistol and Shot")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/quiver/bulletpouch/powderkit/iron
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/pistol
+			if("Blunderbuss and Scattershot")
+				H.adjust_skillrank_up_to(/datum/skill/combat/firearms, SKILL_LEVEL_JOURNEYMAN, TRUE)
+				beltl = /obj/item/quiver/bulletpouch/powderkit/bronzescatter
+				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/arquebus/blunderbuss
+	//OV edit end
 
 /datum/advclass/rogue/antiquarian
 	name = "Antiquarian"
@@ -308,7 +342,9 @@
 	backpack_contents = list(
 		/obj/item/lockpick = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
-		/obj/item/skillbook/unfinished = 1
+		/obj/item/skillbook/unfinished = 1,
+		/obj/item/rogueweapon/huntingknife = 1,
+		/obj/item/rogueweapon/scabbard/sheath = 1,
 		)
 
 	if(H.mind)

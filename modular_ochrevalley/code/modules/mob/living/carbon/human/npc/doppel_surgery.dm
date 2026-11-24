@@ -1,4 +1,4 @@
-/datum/surgery_step/doppel_empower
+/*/datum/surgery_step/doppel_empower //OV EDIT - DISABLED PENDING REWORKS WITH NEW DOPPELS
 	name = "Infuse Doppel Heart"
 	implements = list(
 		/obj/item/reagent_containers/doppel_heart = 80,
@@ -51,4 +51,4 @@
 	display_results(user, target, span_warning("I screwed up!"),
 		span_warning("[user] screws up!"),
 		span_notice("[user] works the doppel heart into [target]'s innards."), TRUE)
-	return TRUE
+	return TRUE*/

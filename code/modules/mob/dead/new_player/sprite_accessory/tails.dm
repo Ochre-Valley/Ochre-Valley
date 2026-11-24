@@ -150,88 +150,10 @@
 	color_keys = 2
 	color_key_names = list("Tails", "Tips")
 
-//OV edit
-/datum/sprite_accessory/tail/kitsune_two
-	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
-	name = "Kitsune, Double-Tail"
-	icon_state = "doublekitsune"
-	color_keys = 2
-	color_key_names = list("Tails", "Tips")
-
-/datum/sprite_accessory/tail/kitsune_three
-	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
-	name = "Kitsune, Tri-Tail"
-	icon_state = "triplekitsune"
-	color_keys = 2
-	color_key_names = list("Tails", "Tips")
-
-/datum/sprite_accessory/tail/kitsune_seven
-	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
-	name = "Kitsune, Seven-Tailed"
-	icon_state = "sevenkitsune"
-	color_keys = 2
-	color_key_names = list("Tails", "Tips")
-
-/datum/sprite_accessory/tail/kitsune_nine
-	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
-	name = "Kitsune, Nine-Tailed"
-	icon_state = "ninekitsune"
-	color_keys = 2
-	color_key_names = list("Tails", "Tips")
-//OV edit end
-
 /datum/sprite_accessory/tail/lab
 	name = "Lab"
 	icon_state = "lab"
 	can_wag = TRUE
-
-//Caustic Edit
-/datum/sprite_accessory/tail/large_snake
-	icon = 'modular_causticcove/icons/mob/tails/large_snake.dmi'
-	name = "Large Snake"
-	icon_state = "large_snake"
-	color_keys = 2
-	color_key_names = list("Tail", "Underbelly")
-
-/datum/sprite_accessory/tail/large_snake_plain
-	icon = 'modular_causticcove/icons/mob/tails/large_snake.dmi'
-	name = "Large Snake Plain"
-	icon_state = "large_snake_plain"
-
-
-/datum/sprite_accessory/tail/large_tails
-	pixel_x = -16
-
-/datum/sprite_accessory/tail/large_tails/large_shark
-	icon = 'modular_causticcove/icons/mob/tails/large_shark.dmi'
-	name = "Large Shark"
-	icon_state = "large_shark"
-	color_keys = 2
-	color_key_names = list("Tail", "Underbelly")
-
-/datum/sprite_accessory/tail/large_tails/alraune
-	icon = 'modular_causticcove/icons/mob/tails/alraune.dmi'
-	name = "Alraune flower pod"
-	icon_state = "alraune"
-	color_keys = 2
-	color_key_names = list("Leaves", "Flower")
-	can_wag = TRUE
-	pixel_y = -1
-//Caustic Edit end
-
-//OV edit
-/datum/sprite_accessory/tail/large_tails/small_shadekin
-	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
-	name = "Umbrakin, Short"
-	icon_state = "small_shadekin"
-	color_keys = 2
-	color_key_names = list("Tail", "Tailtip")
-
-/datum/sprite_accessory/tail/large_tails/large_shadekin
-	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
-	name = "Umbrakin, Long"
-	icon_state = "long_shadekin"
-//OV edit end
 
 /datum/sprite_accessory/tail/murid
 	name = "Murid"
@@ -401,6 +323,20 @@
 	color_key_names = list("Tail", "Stripes")
 	can_wag = TRUE
 
+/datum/sprite_accessory/tail/raccoon_new
+	name = "Raccoon (messy)"
+	icon_state = "racc2"
+	color_keys = 2
+	color_key_names = list("Tail", "Stripes")
+	can_wag = FALSE
+
+/datum/sprite_accessory/tail/raccoon_newer
+	name = "Raccoon (clean)"
+	icon_state = "racc3"
+	color_keys = 2
+	color_key_names = list("Tail", "Stripes")
+	can_wag = FALSE
+
 /datum/sprite_accessory/tail/sabresune
 	name = "Sabresune"
 	icon_state = "sabresune"
@@ -533,3 +469,93 @@
 
 /datum/sprite_accessory/tail/large_snake_plain/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return TRUE	//Always visible.
+
+// From Ochre Valley
+/datum/sprite_accessory/tail/large_tails
+	icon = 'icons/mob/sprite_accessory/tails/large_tails.dmi'
+	pixel_x = -16
+
+/datum/sprite_accessory/tail/large_tails/flagtail
+	icon_state = "flagtail"
+	name = "Flagtail"
+	color_keys = 3
+	color_key_names = list("Tail","Floof","Inner Floof")
+
+//OV EDIT START
+/datum/sprite_accessory/tail/large_tails/large_shark
+	icon = 'modular_causticcove/icons/mob/tails/large_shark.dmi'
+	name = "Large Shark"
+	icon_state = "large_shark"
+	color_keys = 2
+	color_key_names = list("Tail", "Underbelly")
+
+/datum/sprite_accessory/tail/large_tails/alraune
+	icon = 'modular_causticcove/icons/mob/tails/alraune.dmi'
+	name = "Alraune flower pod"
+	icon_state = "alraune"
+	color_keys = 2
+	color_key_names = list("Leaves", "Flower")
+	can_wag = TRUE
+	pixel_y = -1
+
+/datum/sprite_accessory/tail/large_tails/small_shadekin
+	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
+	name = "Umbrakin, Short"
+	icon_state = "small_shadekin"
+	color_keys = 2
+	color_key_names = list("Tail", "Tailtip")
+
+/datum/sprite_accessory/tail/large_tails/large_shadekin
+	icon = 'modular_ochrevalley/icons/mob/tails/large_tails.dmi'
+	name = "Umbrakin, Long"
+	icon_state = "long_shadekin"
+
+/datum/sprite_accessory/tail/kitsune_two
+	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
+	name = "Kitsune, Double-Tail"
+	icon_state = "doublekitsune"
+	color_keys = 2
+	color_key_names = list("Tails", "Tips")
+
+/datum/sprite_accessory/tail/kitsune_three
+	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
+	name = "Kitsune, Tri-Tail"
+	icon_state = "triplekitsune"
+	color_keys = 2
+	color_key_names = list("Tails", "Tips")
+
+/datum/sprite_accessory/tail/kitsune_seven
+	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
+	name = "Kitsune, Seven-Tailed"
+	icon_state = "sevenkitsune"
+	color_keys = 2
+	color_key_names = list("Tails", "Tips")
+
+/datum/sprite_accessory/tail/kitsune_nine
+	icon = 'modular_ochrevalley/icons/mob/tails/tails.dmi'
+	name = "Kitsune, Nine-Tailed"
+	icon_state = "ninekitsune"
+	color_keys = 2
+	color_key_names = list("Tails", "Tips")
+
+/datum/sprite_accessory/tail/large_snake_banded
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Banded"
+	icon_state = "large_snake_banded"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Bands")
+
+/datum/sprite_accessory/tail/large_snake_streaked
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Streaked"
+	icon_state = "large_snake_streaked"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Streaks")
+
+/datum/sprite_accessory/tail/large_snake_ringed
+	icon = 'modular_ochrevalley/icons/mob/tails/large_snake.dmi'
+	name = "Large Snake Ringed"
+	icon_state = "large_snake_ringed"
+	color_keys = 3
+	color_key_names = list("Tail", "Underbelly", "Rings")
+//OV EDIT END
