@@ -23,6 +23,7 @@
 /obj/item/reformation_gem/attack_self(mob/living/user)
 	..()
 	var/turf/target_turf = get_step(user, user.dir)
+	// Show a preview render of the spot the portal will go
 	var/image/preview = image('icons/effects/effects.dmi', target_turf, "launchpad_target")
 	preview.plane = ABOVE_HUD_PLANE
 	user.client.images += preview
@@ -31,7 +32,6 @@
 		remove_preview_after_delay(preview, user)
 		to_chat(user, span_warning("I can't make a portal in front of me; there's an obstruction there."))
 		return FALSE
-	// Show a preview render of the spot
 	var/confirm = tgui_alert(user, "Spawn a reformation portal in the highlighted spot?", "CONFIRM REFORMATION PORTAL", list("Yes", "No"))
 	delete_preview_render(preview, user)
 	if(confirm == "Yes")
