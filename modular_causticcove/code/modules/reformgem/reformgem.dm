@@ -22,16 +22,33 @@
 
 /obj/item/reformation_gem/attack_self(mob/living/user)
 	..()
-	var/confirm = alert(user,"Are you sure you wish to use your gem of reformation here?","Confirmation","Yes","Cancel")
+	var/turf/target_turf = get_step(user, user.dir)
+	var/image/preview = image('icons/effects/effects.dmi', target_turf, "launchpad_target")
+	preview.plane = ABOVE_HUD_PLANE
+	user.client.images += preview
+	if(target_turf.is_blocked_turf(TRUE) || !isfloorturf(target_turf))
+		preview.color = COLOR_RED
+		remove_preview_after_delay(preview, user)
+		to_chat(user, span_warning("I can't make a portal in front of me; there's an obstruction there."))
+		return FALSE
+	// Show a preview render of the spot
+	var/confirm = tgui_alert(user, "Spawn a reformation portal in the highlighted spot?", "CONFIRM REFORMATION PORTAL", list("Yes", "No"))
+	delete_preview_render(preview, user)
 	if(confirm == "Yes")
-		var/turf/target_turf = get_step(user, user.dir)
 		if(target_turf.is_blocked_turf(TRUE))
 			to_chat(user, span_warning("The targeted location is blocked, I cannot create a reformation gate here."))
 			return FALSE
-		if(isopenturf(target_turf))
+		if(isfloorturf(target_turf))
 			create_portal(user, target_turf)
 			return TRUE
-	return NONE
+	return FALSE
+
+/obj/item/reformation_gem/proc/remove_preview_after_delay(image/preview_render, mob/user)
+	animate(preview_render, alpha = 0, 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(delete_preview_render), preview_render, user), 1 SECONDS, TIMER_DELETE_ME)
+
+/obj/item/reformation_gem/proc/delete_preview_render(image/preview_render, mob/user)
+	user.client.images -= preview_render
 
 /obj/item/reformation_gem/proc/create_portal(mob/user, atom/location)
 	to_chat(user, "<span class='notice'>You create a reformation portal!</span>")
