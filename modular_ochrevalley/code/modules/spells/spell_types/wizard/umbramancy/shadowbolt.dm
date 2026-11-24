@@ -38,7 +38,6 @@
 	var/resonance_damage = SPELL_DMG(35)
 	modes = list(
 		list("name" = "Shadow Bolt", "tag" = "BOLT", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
-		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
 		list("name" = "Umbral Resonance", "tag" = "RESN", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Resonantia Umbrae!", "charge_time" = CHARGETIME_MINOR, "ground" = TRUE),
 	)
 
