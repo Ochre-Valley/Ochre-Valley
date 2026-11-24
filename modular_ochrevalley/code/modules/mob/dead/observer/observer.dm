@@ -16,7 +16,7 @@
 			raw_msg = trim(replacetext(raw_msg, "$n", original_identity.name))
 		else
 			raw_msg = "[original_identity.name] [raw_msg]"
-		log_talk(raw_msg, LOG_SAY, tag="displaced soul (to [vessel])")
+		log_talk(raw_msg, LOG_EMOTE, tag="displaced soul (to [vessel])")
 		to_chat(list(src, vessel), span_deadsay(autopunct_bare(raw_msg)))
 
 /mob/dead/observer/eye/screye/displaced_soul/me_big_verb(message as text)
@@ -37,5 +37,5 @@
 			raw_msg = trim(replacetext(raw_msg, "$n", original_identity.name))
 		else
 			raw_msg = "[original_identity.name] [raw_msg]"
-		log_talk(raw_msg, LOG_SAY, tag="displaced soul (to [vessel])")
+		log_talk(raw_msg, LOG_EMOTE, tag="displaced soul (to [vessel])")
 		to_chat(list(src, vessel), span_deadsay(autopunct_bare(raw_msg)))
