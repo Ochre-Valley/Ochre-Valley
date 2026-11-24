@@ -42,6 +42,13 @@
 		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Saevite!", "projectiles" = 1, "cooldown" = 16 SECONDS),
 	)
 
+/datum/action/cooldown/spell/projectile/windblade_volley/apply_mode(index)
+	..()
+	var/list/mode = modes[index]
+	name = "Razorwind [mode["name"]]"
+	cooldown_time = mode["cooldown"]
+	invocations = list(mode["invocation"])
+
 /datum/action/cooldown/spell/projectile/windblade_volley/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
 	var/base_angle = to_fire.Angle

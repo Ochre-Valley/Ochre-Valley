@@ -49,6 +49,13 @@
 		list("name" = "Downdraft", "tag" = "DRFT", "cooldown" = 12 SECONDS, "invocation" = "Venti Conterite!"),
 	)
 
+/datum/action/cooldown/spell/projectile/tempest/apply_mode(index)
+	..()
+	var/list/mode = modes[index]
+	name = mode["name"]
+	cooldown_time = mode["cooldown"]
+	invocations = list(mode["invocation"])
+
 /datum/action/cooldown/spell/tempest/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
