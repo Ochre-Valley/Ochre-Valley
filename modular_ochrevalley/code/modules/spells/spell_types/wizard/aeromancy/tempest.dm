@@ -51,6 +51,7 @@
 
 /datum/action/cooldown/spell/projectile/tempest/apply_mode(index)
 	..()
+	var/list/mode = modes[index]
 	name = mode["name"]
 	cooldown_time = mode["cooldown"]
 	invocations = list(mode["invocation"])
