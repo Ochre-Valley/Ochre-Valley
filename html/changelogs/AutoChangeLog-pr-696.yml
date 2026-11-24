@@ -1,4 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - qol: "Gems of reformation now indicate where the portal is going to be spawned, and better accounts for obstructions in where the portals can be spawned."
