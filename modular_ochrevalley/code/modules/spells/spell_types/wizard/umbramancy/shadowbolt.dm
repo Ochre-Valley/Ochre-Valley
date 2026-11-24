@@ -35,7 +35,7 @@
 
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 	var/resonance_delay = 0.5 SECONDS
-	var/resonance_damage = SPELL_DMG(30)
+	var/resonance_damage = SPELL_DMG(35)
 	modes = list(
 		list("name" = "Shadow Bolt", "tag" = "BOLT", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
 		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
