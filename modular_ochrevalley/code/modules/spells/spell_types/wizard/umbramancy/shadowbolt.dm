@@ -46,8 +46,8 @@
 	for(var/i in stats.Copy())
 		if(findtext(i, "Damage:") || findtext(i, "Arc Mode"))
 			stats -= i
-	stats += span_info("Damage: Shadow Bolt [SPELL_DMG(45)]([SPELL_DMG(30)] arced) (+[SPELL_DMG(30)] on targets with full umbral stacks)  / Resonance [resonance_damage] (+[SPELL_DMG(30)] on targets with full umbral stacks) ")
-	stats += span_info("Firing mode (Shift+G): Shadow Bolt (direct) / Arced Shadow Bolt (arced projectile) / Resonance (ground-target eruption).")
+	stats += span_info("Damage: Shadow Bolt [SPELL_DMG(45)] (+[SPELL_DMG(30)] on targets with full umbral stacks)  / Resonance [resonance_damage] (+[SPELL_DMG(30)] on targets with full umbral stacks) ")
+	stats += span_info("Firing mode (Shift+G): Shadow Bolt (direct) / Resonance (ground-target eruption).")
 	return stats
 
 /datum/action/cooldown/spell/projectile/shadow_bolt/Grant(mob/grant_to)
