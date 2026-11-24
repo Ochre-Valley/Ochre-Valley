@@ -36,8 +36,7 @@
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 	var/resonance_delay = 0.5 SECONDS
 	var/resonance_damage = SPELL_DMG(30)
-	var/current_mode = 1
-	var/list/modes = list(
+	modes = list(
 		list("name" = "Shadow Bolt", "tag" = "BOLT", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
 		list("name" = "Arced Shadow Bolt", "tag" = "ARC", "proj" = /obj/projectile/magic/shadow_bolt/arc, "invocation" = "Ictus Umbrae!", "charge_time" = CHARGETIME_POKE, "ground" = FALSE),
 		list("name" = "Umbral Resonance", "tag" = "RESN", "proj" = /obj/projectile/magic/shadow_bolt, "invocation" = "Resonantia Umbrae!", "charge_time" = CHARGETIME_MINOR, "ground" = TRUE),
@@ -56,30 +55,12 @@
 	. = ..()
 	apply_mode(current_mode)
 
-/datum/action/cooldown/spell/projectile/shadow_bolt/proc/apply_mode(index)
+/datum/action/cooldown/spell/projectile/shadow_bolt/apply_mode(index)
+	..()
 	var/list/mode = modes[index]
 	projectile_type = mode["proj"]
 	invocations = list(mode["invocation"])
 	charge_time = mode["charge_time"]
-	update_mode_maptext(mode["tag"])
-
-/datum/action/cooldown/spell/projectile/shadow_bolt/toggle_arc_mode(mob/user)
-	current_mode = (current_mode % length(modes)) + 1
-	apply_mode(current_mode)
-	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode."))
-
-/datum/action/cooldown/spell/projectile/shadow_bolt/proc/update_mode_maptext(tag)
-	for(var/datum/hud/hud as anything in viewers)
-		var/atom/movable/screen/movable/action_button/B = viewers[hud]
-		var/atom/movable/screen/arc_maptext_holder/holder
-		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
-			holder = existing
-			break
-		if(!holder)
-			holder = new(B)
-			B.vis_contents.Add(holder)
-		holder.maptext = MAPTEXT(tag)
-		holder.color = GLOW_COLOR_DARK
 
 /datum/action/cooldown/spell/projectile/shadow_bolt/fire_projectile(atom/target)
 	if(!modes[current_mode]["ground"])

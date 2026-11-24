@@ -30,8 +30,8 @@
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
 	var/breach_damage = SPELL_DMG(60)
 	var/obj/effect/umbralfount/active_fount
-	var/current_mode = 1
-	var/list/modes = list(
+	current_mode = 1
+	modes = list(
 		list("name" = "Shadow Breach", "tag" = "BREACH",  "invocation" = "Perruptio Umbrae!", "cooldown" = 25 SECONDS),
 		list("name" = "Umbral Fountain", "tag" = "FOUNT",  "invocation" = "Fons Obscurus!", "cooldown" = 30 SECONDS),
 	)
@@ -49,29 +49,11 @@
 	. = ..()
 	apply_mode(current_mode)
 
-/datum/action/cooldown/spell/shadowbreach/proc/apply_mode(index)
+/datum/action/cooldown/spell/shadowbreach/apply_mode(index)
+	..()
 	var/list/mode = modes[index]
 	invocations = list(mode["invocation"])
 	cooldown_time = mode["cooldown"]
-	update_mode_maptext(mode["tag"])
-
-/datum/action/cooldown/spell/shadowbreach/toggle_alt_mode(mob/user)
-	current_mode = (current_mode % length(modes)) + 1
-	apply_mode(current_mode)
-	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode."))
-
-/datum/action/cooldown/spell/shadowbreach/proc/update_mode_maptext(tag)
-	for(var/datum/hud/hud as anything in viewers)
-		var/atom/movable/screen/movable/action_button/B = viewers[hud]
-		var/atom/movable/screen/arc_maptext_holder/holder
-		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
-			holder = existing
-			break
-		if(!holder)
-			holder = new(B)
-			B.vis_contents.Add(holder)
-		holder.maptext = MAPTEXT(tag)
-		holder.color = GLOW_COLOR_DARK
 
 /datum/action/cooldown/spell/shadowbreach/cast(atom/cast_on)
 	. = ..()

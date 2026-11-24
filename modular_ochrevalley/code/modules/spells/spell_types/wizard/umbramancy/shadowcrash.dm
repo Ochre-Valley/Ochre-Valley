@@ -36,8 +36,8 @@
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
 
 	var/flow_damage = SPELL_DMG(50)
-	var/current_mode = 1
-	var/list/modes = list(
+	current_mode = 1
+	modes = list(
 		list("name" = "Shadow Crash", "tag" = "CRSH","icon" = "blindness", "invocation" = "Collisio Umbrae!", "ground" = FALSE, "cooldown" = 16 SECONDS),
 		list("name" = "Umbral Flow", "tag" = "FLOW", "icon" = "noc_gaze", "invocation" = "Fluxus Umbrae!", "ground" = TRUE, "cooldown" = 20 SECONDS),
 	)
@@ -54,30 +54,12 @@
 	. = ..()
 	apply_mode(current_mode)
 
-/datum/action/cooldown/spell/projectile/shadowcrash/proc/apply_mode(index)
+/datum/action/cooldown/spell/projectile/shadowcrash/apply_mode(index)
+	..()
 	var/list/mode = modes[index]
 	cooldown_time = mode["cooldown"]
 	button_icon_state = mode["icon"]
 	invocations = list(mode["invocation"])
-	update_mode_maptext(mode["tag"])
-
-/datum/action/cooldown/spell/projectile/shadowcrash/toggle_arc_mode(mob/user)
-	current_mode = (current_mode % length(modes)) + 1
-	apply_mode(current_mode)
-	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode."))
-
-/datum/action/cooldown/spell/projectile/shadowcrash/proc/update_mode_maptext(tag)
-	for(var/datum/hud/hud as anything in viewers)
-		var/atom/movable/screen/movable/action_button/B = viewers[hud]
-		var/atom/movable/screen/arc_maptext_holder/holder
-		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
-			holder = existing
-			break
-		if(!holder)
-			holder = new(B)
-			B.vis_contents.Add(holder)
-		holder.maptext = MAPTEXT(tag)
-		holder.color = GLOW_COLOR_DARK
 
 /datum/action/cooldown/spell/projectile/shadowcrash/fire_projectile(atom/target)
 	if(!modes[current_mode]["ground"])
