@@ -41,36 +41,13 @@
 	var/tempest_damage = SPELL_DMG(20)
 	/// Radius of the damage ring (center tile is safe)
 	var/tempest_radius = 1
-	var/static/list/mode_labels = list(TEMPEST_MODE_TWISTER = "TWST", TEMPEST_MODE_DOWNDRAFT = "DRFT")
 	var/blast_delay = 2 SECONDS
 	var/blast_damage = SPELL_DMG(60)
 
-/datum/action/cooldown/spell/tempest/Grant(mob/grant_to)
-	. = ..()
-	update_mode_maptext()
-
-/datum/action/cooldown/spell/tempest/toggle_alt_mode(mob/user)
-	tempest_mode = (tempest_mode == TEMPEST_MODE_TWISTER) ? TEMPEST_MODE_DOWNDRAFT : TEMPEST_MODE_TWISTER
-	cooldown_time = (tempest_mode == TEMPEST_MODE_TWISTER) ? 18 SECONDS : 12 SECONDS
-	invocations = (tempest_mode == TEMPEST_MODE_TWISTER) ? list("Vortix!") : list("Venti Conterite!")
-	to_chat(user, span_notice("Tempest set to: [tempest_mode]."))
-	update_mode_maptext()
-	return TRUE
-
-/datum/action/cooldown/spell/tempest/proc/update_mode_maptext()
-	var/label = mode_labels[tempest_mode]
-	for(var/datum/hud/hud as anything in viewers)
-		var/atom/movable/screen/movable/action_button/B = viewers[hud]
-		var/atom/movable/screen/arc_maptext_holder/holder
-		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
-			holder = existing
-			break
-		if(!holder)
-			holder = new(B)
-			B.vis_contents.Add(holder)
-		holder.maptext = MAPTEXT(label)
-		holder.maptext_x = 5
-		holder.color = GLOW_COLOR_WIND
+	modes = list(
+		list("name" = "Twister", "tag" = "TWST", "cooldown" = 18 SECONDS, "invocation" = "Vortix"),
+		list("name" = "Downdraft", "tag" = "DRFT", "cooldown" = 12 SECONDS, "invocation" = "Venti Conterite!"),
+	)
 
 /datum/action/cooldown/spell/tempest/cast(atom/cast_on)
 	. = ..()

@@ -60,7 +60,6 @@
 		return FALSE
 
 	user.doing = TRUE
-	SEND_SIGNAL(user, COMSIG_DO_AFTER_BEGAN)
 
 	var/atom/Tloc = null
 	if(target && !isturf(target))
@@ -99,6 +98,5 @@
 				break
 
 	user.doing = FALSE
-	SEND_SIGNAL(user, COMSIG_DO_AFTER_ENDED)
 	if (progress)
 		qdel(progbar)
