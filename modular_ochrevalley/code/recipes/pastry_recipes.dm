@@ -13,3 +13,12 @@
 		/obj/item/alch/wyldweed
 	)
 	result_type = /obj/item/reagent_containers/food/snacks/rogue/muffin/grow
+
+/datum/food_recipe/baked/jellytallowed_bookbread
+	name = "jellytallowed bookbread slice"
+	base_item = /obj/item/reagent_containers/food/snacks/rogue/bookbread_slice
+	ingredients = list(
+		/obj/item/reagent_containers/food/snacks/jellytallowslice
+	)
+	result_type = /obj/item/reagent_containers/food/snacks/rogue/bookbread_slice_jellytallowed
+	inline_ancestry = TRUE
