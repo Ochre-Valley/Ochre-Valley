@@ -5,7 +5,6 @@
 		var/list/holidays = get_calendar_events_for_week(current_date[2], current_date[1])
 		var/list/holiday_names = resolve_holidays_to_printable(holidays)
 		var/data = "?date=[url_encode(get_ic_date_short_as_string(GLOB.dayspassed))]&holidays=[json_encode(list(holiday_names))]"
-		message_admins(data)
 		var/list/response = world.Export(constring + data)
 		if(!islist(response))
 			log_runtime("Can't reach AMIA")
