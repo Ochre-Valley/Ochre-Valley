@@ -38,8 +38,8 @@
 
 	var/spread_step = 8
 	modes = list(
-		list("name" = "Volley", "tag" = "VLLY", "proj" = /obj/projectile/magic/wind_sawblade, "invocation" = "Venti Caedite!", "projectiles" = 3, "cooldown" = 14 SECONDS),
-		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Saevite!", "projectiles" = 1, "cooldown" = 16 SECONDS),
+		list("name" = "Volley", "tag" = "VLLY", "proj" = /obj/projectile/magic/wind_sawblade, "invocation" = "Venti Caedite!", "per_fire" = 3, "cooldown" = 14 SECONDS),
+		list("name" = "Compaction", "tag" = "COMP", "proj" = /obj/projectile/magic/wind_compaction, "invocation" = "Venti Saevite!", "per_fire" = 1, "cooldown" = 16 SECONDS),
 	)
 
 /datum/action/cooldown/spell/projectile/windblade_volley/apply_mode(index)
