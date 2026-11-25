@@ -178,6 +178,7 @@ GLOBAL_LIST_EMPTY(displaced_souls)
 
 	if(vessel && original_identity)
 		var/raw_msg = copytext(sanitize(message), 1, MAX_MESSAGE_LEN)
+		raw_msg = parsemarkdown_basic(raw_msg, limited = TRUE, barebones = TRUE) //OV Edit: Allow basic markdown
 		log_talk(raw_msg, LOG_SAY, tag="displaced soul (to [vessel])")
 		to_chat(list(src, vessel), span_deadsay("[original_identity.name] whispers, \"[autopunct_bare(raw_msg)]\""))
 
