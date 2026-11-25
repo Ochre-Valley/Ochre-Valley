@@ -3907,6 +3907,7 @@
 #include "modular\Neu_Food\code\raw\raw_fruit.dm"
 #include "modular\Neu_Food\code\raw\raw_meat.dm"
 #include "modular\Neu_Food\code\raw\raw_meat_saiga.dm"
+#include "modular_ochrevalley\code\__HELPERS\calendar.dm"
 #include "modular\Neu_Food\code\raw\raw_pies.dm"
 #include "modular\Neu_Food\code\raw\raw_shellfish.dm"
 #include "modular\Neu_Food\code\raw\raw_veggies.dm"
