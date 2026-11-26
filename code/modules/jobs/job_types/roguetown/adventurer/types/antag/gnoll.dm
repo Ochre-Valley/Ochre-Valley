@@ -85,6 +85,7 @@
 
 		var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/F = new()
 		var/obj/effect/proc_holder/spell/invoked/invisibility/gnoll/I = new()
+		H.AddComponent(/datum/component/gnoll_invisibility_restrictions) // OV ADD
 		I.sniff_spell = F // Link them
 
 		var/obj/effect/proc_holder/spell/invoked/abduct/S = new /obj/effect/proc_holder/spell/invoked/abduct()
