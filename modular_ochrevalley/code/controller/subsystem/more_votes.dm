@@ -9,7 +9,7 @@
 #define MAP_VOTE_MULTIPLIER_FILE "data/last_round/map_vote_multipliers.json"
 /// Multipliers are whole percentages because BYOND's 32-bit floats would turn e.g. 10 * 1.3 into 12.9
 
-#define MIN_REQUIRED_VOTEPOP 30 //if we're below this, we're just ignoring the whole thing in general and going straight to dunworld bb
+#define MIN_REQUIRED_VOTEPOP 40 //if we're below this, we're just ignoring the whole thing in general and going straight to dunworld bb
 
 /* json file structure should look something like
 
