@@ -1,5 +1,0 @@
-author: "Ryumi"
-delete-after: True
-changes:
-  - rscadd: "Added YE OLDE TABLETS O' CHEATING; admin-spawn only items to full-heal / full repair players and repair/sharpen their gear! They can be found by spawning /obj/item/cheat_tablet/repair_all_gear and /obj/item/cheat_tablet/full_heal ."
-  - rscadd: "Lockpicking tools can no longer be used on particular doors; the towner home doors, and all doors in the inn. These doors have OOC protections from break-ins. They can be identified by unique examine messages making it plain."
