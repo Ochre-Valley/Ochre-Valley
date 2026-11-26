@@ -73,3 +73,22 @@
 	armor_class = ARMOR_CLASS_LIGHT
 	armor = ARMOR_BRIGANDINE
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE - ARMOR_INT_CHEST_PLATE_BRIGANDINE_WEIGHT_MODIFIER //Light brig.
+
+///Skin armour coverage for boob hiding
+
+/datum/component/storage/concrete/roguetown/armor/skin
+
+/datum/component/storage/concrete/roguetown/armor/update_icon()
+	var/obj/item/clothing/suit/roguetown/armor/our_parent = parent
+	if(length(our_parent.contents))
+		for(var/obj/item/clothing/suit/roguetown/our_coverage in our_parent.contents)
+			our_parent.flags_inv = our_coverage.flags_inv
+	else
+		our_parent.flags_inv = null
+	. = ..()
+
+/obj/item/clothing/suit/roguetown/armor/regenerating/skin
+	attachment_component = /datum/component/storage/concrete/roguetown/armor
+
+/obj/item/clothing/suit/roguetown/armor/manual
+	attachment_component = /datum/component/storage/concrete/roguetown/armor
