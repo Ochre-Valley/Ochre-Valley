@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/food/snacks/jellytallow
 	dish_type = DISH_SWEET|DISH_MEAT
-	name = "stick of jellytallow"
-	desc = "An ingot of jellified raspberries, fit only for the finest slices of bread. It beckons to be sliced with proper cutlery."
+	name = "stick of jellytallow" //Usually you'd need pectin to make a jam or jelly out of raspberries but *shrug*
+	desc = "An Azurian cousin of blackberry Jamtallow; an ingot of jellified raspberries, fit only for the finest slices of bread. It beckons to be sliced with proper cutlery."
 	icon = 'modular_ochrevalley/icons/others/sweet.dmi'
 	icon_state = "jellytallow6"
 	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_HALF_MEAL)
@@ -37,7 +37,8 @@
 /obj/item/reagent_containers/food/snacks/jellytallowslice
 	dish_type = DISH_SWEET|DISH_MEAT
 	name = "slice of jellytallow"
-	desc = "A portion of jellied paradise, bearing the same hues as a fine Otavan red. It yearns to be savored not by its lonesome, but upon a slice of bread - ideally, bookbread or toasted."
+	desc = "A portion of jellied paradise, bearing the same hues as a fine Otavan wine. It yearns to be savored not \
+	by its lonesome, but upon a slice of bread - ideally, bookbread or toasted."
 	icon = 'modular_ochrevalley/icons/others/sweet.dmi'
 	icon_state = "jellytallow_slice"
 	faretype = FARE_POOR

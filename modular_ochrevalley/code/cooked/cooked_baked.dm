@@ -259,7 +259,7 @@
 /*	.................   Jellytallowed  ................... */
 /obj/item/reagent_containers/food/snacks/rogue/breadslice/toast/jellytallowed_slice
 	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
-	tastes = list("crunchy, sweetly-tart jamminess" = 1, "a wonderful start to the dae" = 1)
+	tastes = list("crunchy, jellied sweet-tartiness" = 1, "a wonderful start to the dae" = 1)
 	name = "jellytallowed toast"
 	desc = "A raspberried jelly, smeared across a slice of toast. Beloved by burghers, nobility and peasantry alike, this is a wonderful way to start a good dae."
 	faretype = FARE_FINE
@@ -275,7 +275,7 @@
 	desc = "A delicious treat to bring along for those long-and-lonesome hikes through the Azurian wetlands; \
 	doubly-so, if you happen to be repulsed by blackberries and tangerines."
 	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
-	tastes = list("sweetly-tart jamminess" = 1, "a lavish break from the dae's woes" = 1)
+	tastes = list("jellied sweet-tartiness" = 1, "a lavish break from the dae's woes" = 1)
 	icon_state = "bun_jellytallow"
 	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
 	faretype = FARE_FINE
@@ -288,7 +288,7 @@
 	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
 	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
 	name = "jellytallowed crossbun"
-	desc = "Colored like the sunrise - or sunset. Makes for a perfect Astratan breakfast or supper!"
+	desc = "Colored like the sunrise - or sunset, depending on your point of view. Makes for a perfect Astratan breakfast or supper!"
 	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
 	icon_state = "crossbun_jellytallow"
 	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
@@ -296,7 +296,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	bitesize = 4
 	rotprocess = SHELFLIFE_EXTREME
-	tastes = list("sweetly-tart jamminess" = 1, "a sense of divine gravitas" = 1)
+	tastes = list("jellied sweet-tartiness" = 1, "a sense of divine gravitas" = 1)
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/psycrossbun_jellytallowed
@@ -313,7 +313,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	bitesize = 4
 	rotprocess = SHELFLIFE_EXTREME
-	tastes = list("sweetly-tart jamminess" = 1, "a sense of enduring anguish" = 1)
+	tastes = list("jellied sweet-tartiness" = 1, "a sense of enduring anguish" = 1)
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/decabun_jellytallowed
@@ -329,15 +329,16 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	bitesize = 4
 	rotprocess = SHELFLIFE_EXTREME
-	tastes = list("sweetly-tart jamminess" = 1, "decadent sweetness" = 1)
+	tastes = list("jellied sweet-tartiness" = 1, "decadent sweetness" = 1)
 	eat_effect = /datum/status_effect/buff/greatsnackbuff
 
 /obj/item/reagent_containers/food/snacks/rogue/zbun_jellytallow
 	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
 	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
 	name = "jellytallowed zun"
-	desc = "A zun, cruelly parted and slathered with red deliciousness. The jellytallow is said to represent the blood \
-	spilled in the name of progress."
+	desc = "A zun, cruelly parted and slathered with red deliciousness. The jellytallow nestled within is \
+	said to represent the blood spilled in the name of wealth, might, passion and progress, though the \
+	spiritual implication tends to be lost on more eager-minded heretics." //more inclusive ZBuns, for all four Heretic faiths!
 	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
 	icon_state = "zbun_jellytallow"
 	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
@@ -345,5 +346,5 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	bitesize = 4
 	rotprocess = SHELFLIFE_EXTREME
-	tastes = list("sweetly-tart jamminess" = 1, "unholy sweetness" = 1)
+	tastes = list("jellied sweet-tartiness" = 1, "unholy sweetness" = 1)
 	eat_effect = /datum/status_effect/buff/greatsnackbuff

@@ -44,7 +44,7 @@
 	icon_state = "bookbread_slice_jellytallow"
 	faretype = FARE_LAVISH
 	w_class = WEIGHT_CLASS_NORMAL
-	tastes = list("chewy, crispy-edged butterdough" = 1, "sweetly-tart jamminess" = 1, "a lavish start to the dae" = 1)
+	tastes = list("chewy, crispy-edged butterdough" = 1, "jellied sweet-tartiness" = 1, "a lavish start to the dae" = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = BUTTERDOUGH_NUTRITION + NUTRITION_HALF_MEAL)
 	bitesize = 3
 	rotprocess = SHELFLIFE_EXTREME
