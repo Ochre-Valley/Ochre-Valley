@@ -2,7 +2,7 @@
 	name = "Consolidation rune"
 	desc = "arcane symbols pulse upon the ground..."
 	icon_state = "6"
-	invocation = "Materia Unita!"
+	invocation = "Materia Unita."
 	color = "#a0d145"
 	spellbonus = 15
 	scribe_damage = 10
@@ -45,7 +45,7 @@
 	for(var/i in humans_to_use)
 		message_admins("[i] in humans_to_use")
 	*/
-	
+
 	if(items_to_use.len != 1)
 		for(var/atom/invoker in invokers)
 			if(!isliving(invoker))
@@ -53,11 +53,11 @@
 			var/mob/living/living_invoker = invoker
 			to_chat(living_invoker, "There must be a single item on the rune to consolidate!")
 		return
-	
+
 	var/obj/item/the_item
 	for(var/obj/item/our_item in items_to_use)
 		the_item = our_item
-	
+
 	if(the_item.mob_possession)
 		if(the_item.mob_possession in the_item.contents)
 			var/our_loc = get_turf(the_item)
@@ -85,7 +85,7 @@
 			var/mob/living/living_invoker = invoker
 			to_chat(living_invoker, "The rune fails to invoke as [the_mob]'s lux refuses to combine with [the_item].")
 		return
-	
+
 	the_item.mob_possession = the_mob
 	the_mob.forceMove(the_item)
 	visible_message(src, span_warning("[the_mob] is merged into [the_item]!"))
@@ -99,7 +99,7 @@
 			continue
 		var/mob/living/living_invoker = invoker
 		if(invocation)
-			living_invoker.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
+			living_invoker.whisper(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 		if(invoke_damage)
 			living_invoker.apply_damage(invoke_damage, BRUTE)
 			to_chat(living_invoker,  span_italics("[src] saps your strength!"))
