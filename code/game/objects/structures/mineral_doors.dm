@@ -624,13 +624,6 @@
 		return
 	if(!keylock)
 		return
-	//OV edit
-	var/our_area = get_area(src)
-	if(istype(our_area, /area/rogue/indoors/town/bath) || istype(our_area, /area/rogue/indoors/town/tavern))
-		message_admins("[user.name]([key_name(user)]) was denied lockpicking [src.name]. [ADMIN_JMP(src)]")
-		to_chat(user, span_warning("This door can not be lockpicked."))
-		return
-	//OV edit end
 	if(lockbroken)
 		to_chat(user, "<span class='warning'>The lock to this door is broken.</span>")
 		user.changeNext_move(CLICK_CD_INTENTCAP)
@@ -1267,6 +1260,14 @@
 	resident_key_type = /obj/item/roguekey/townie
 	resident_role = /datum/job/roguetown/villager
 	lockid = null //Will be randomized
+
+// OV ADD BEGIN - Add breakin protection element
+/obj/structure/mineral_door/wood/towner/ComponentInitialize()
+	. = ..()
+	var/door_breakin_message = "Lockpicking this door is not allowed by the server rules and counts as breaking in to towner houses. Unless this is a house you've already claimed, stop breaking in now."
+	var/door_examine_message = "This is a towner house door. Unless you have claimed it, you are not allowed to break into the home it belongs to."
+	AddComponent(/datum/component/breakin_protection, breakin_prevented_message = door_breakin_message, examine_message = door_examine_message)
+// OV ADD END
 
 /obj/structure/mineral_door/wood/towner/generic
 
