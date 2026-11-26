@@ -352,7 +352,9 @@
 /obj/item/reagent_containers/food/snacks/grown/fruit/raspberry
 	name = "raspberry"
 	seed = /obj/item/seeds/raspberry
-	desc = "A small, red fruit with a sweet and slightly tart taste. It is often used in desserts."
+	//OV Edit
+	desc = "A small, red fruit with a sweet and slightly tart taste. It is often used in desserts, or - when smothered in sugar and doused in boiling tallow - jellies."
+	//OV Edit end
 	icon_state = "raspberry"
 	tastes = list("raspberry" = 1)
 	splat_color = "#A01600"

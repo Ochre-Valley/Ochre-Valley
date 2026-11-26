@@ -255,3 +255,96 @@
 	rotprocess = SHELFLIFE_EXTREME
 	dropshrink = 0.8
 	eat_effect = /datum/status_effect/buff/snackbuff
+
+/*	.................   Jellytallowed  ................... */
+/obj/item/reagent_containers/food/snacks/rogue/breadslice/toast/jellytallowed_slice
+	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
+	tastes = list("crunchy, jellied sweet-tartiness" = 1, "a wonderful start to the dae" = 1)
+	name = "jellytallowed toast"
+	desc = "A raspberried jelly, smeared across a slice of toast. Beloved by burghers, nobility and peasantry alike, this is a wonderful way to start a good dae."
+	faretype = FARE_FINE
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	icon_state = "toast_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_FULL_MEAL)
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
+
+/obj/item/reagent_containers/food/snacks/rogue/bun_jellytallow
+	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
+	dish_type = DISH_BREAD|DISH_MEAT
+	name = "jellytallowed bun"
+	desc = "A delicious treat to bring along for those long-and-lonesome hikes through the Azurian wetlands; \
+	doubly-so, if you happen to be repulsed by blackberries and tangerines."
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	tastes = list("jellied sweet-tartiness" = 1, "a lavish break from the dae's woes" = 1)
+	icon_state = "bun_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
+	faretype = FARE_FINE
+	w_class = WEIGHT_CLASS_NORMAL
+	bitesize = 4
+	rotprocess = SHELFLIFE_EXTREME
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
+
+/obj/item/reagent_containers/food/snacks/rogue/crossbun_jellytallowed
+	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
+	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
+	name = "jellytallowed crossbun"
+	desc = "Colored like the sunrise - or sunset, depending on your point of view. Makes for a perfect Astratan breakfast or supper!"
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	icon_state = "crossbun_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
+	faretype = FARE_LAVISH
+	w_class = WEIGHT_CLASS_NORMAL
+	bitesize = 4
+	rotprocess = SHELFLIFE_EXTREME
+	tastes = list("jellied sweet-tartiness" = 1, "a sense of divine gravitas" = 1)
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
+
+/obj/item/reagent_containers/food/snacks/rogue/psycrossbun_jellytallowed
+	cuisine = CUISINE_OTAVAIS
+	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
+	name = "jellytallowed psycrossbun"
+	desc = "A particularly favorite treat amongst Reformist sects, especially during the \
+	holidaes that pay reverence to Psydon's sacrifice. The jellytallow is said to represent the Weeping God's \
+	blood spilled on Psydonia's behalf, though the spiritual implication tends to be lost on more eager-minded children."
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	icon_state = "psycrossbun_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
+	faretype = FARE_LAVISH
+	w_class = WEIGHT_CLASS_NORMAL
+	bitesize = 4
+	rotprocess = SHELFLIFE_EXTREME
+	tastes = list("jellied sweet-tartiness" = 1, "a sense of enduring anguish" = 1)
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
+
+/obj/item/reagent_containers/food/snacks/rogue/decabun_jellytallowed
+
+	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
+	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
+	name = "jellytallowed decabun"
+	desc = "A decabun, cruelly parted to be slathered with a spread of jellytallow. Once whole, now wounded; but still bonded together in sweet unity."
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	icon_state = "decabun_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
+	faretype = FARE_LAVISH
+	w_class = WEIGHT_CLASS_NORMAL
+	bitesize = 4
+	rotprocess = SHELFLIFE_EXTREME
+	tastes = list("jellied sweet-tartiness" = 1, "decadent sweetness" = 1)
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
+
+/obj/item/reagent_containers/food/snacks/rogue/zbun_jellytallow
+	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_SOUTH_IMPERIAL
+	dish_type = DISH_BREAD|DISH_MEAT|DISH_FRUIT
+	name = "jellytallowed zun"
+	desc = "A zun, cruelly parted and slathered with red deliciousness. The jellytallow nestled within is \
+	said to represent the blood spilled in the name of wealth, might, passion and progress, though the \
+	spiritual implication tends to be lost on more eager-minded heretics." //more inclusive ZBuns, for all four Heretic faiths!
+	icon = 'modular_ochrevalley/icons/cooked/cooked_baked.dmi'
+	icon_state = "zbun_jellytallow"
+	list_reagents = list(/datum/reagent/consumable/nutriment = NUTRITION_THREE_QUARTER_MEAL)
+	faretype = FARE_LAVISH
+	w_class = WEIGHT_CLASS_NORMAL
+	bitesize = 4
+	rotprocess = SHELFLIFE_EXTREME
+	tastes = list("jellied sweet-tartiness" = 1, "unholy sweetness" = 1)
+	eat_effect = /datum/status_effect/buff/greatsnackbuff
