@@ -1,4 +1,0 @@
-author: "NickBelmont"
-delete-after: True
-changes:
-  - qol: "Possessed observers can now emote, and markdown now works as a possessed observer"
