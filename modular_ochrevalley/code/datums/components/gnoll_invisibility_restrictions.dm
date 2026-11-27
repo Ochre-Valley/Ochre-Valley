@@ -109,15 +109,24 @@
 
 /datum/component/gnoll_invisibility_restrictions/proc/is_area_forbidden(area/A)
 	var/mob/living/carbon/human/H = parent
-	// Never forbidden if we're not on the ground floor of the town
-	if(H.z != town_floor_zlevel)
-		return FALSE
-	var/static/list/forbidden_areas = list(
+	// Areas where gnolls can not be invisible if they're on the ground floor of the town
+	var/static/list/forbidden_areas_ground_zlevel = list(
 		/area/rogue/outdoors/town,
 		/area/rogue/indoors/town,
 		/area/rogue/outdoors/exposed/town,
 	)
-	for(var/area_type in forbidden_areas)
+	// Gnolls may not be invisible ANYWHERE on ANY z-levels in these areas.
+	var/static/list/forbidden_areas_all_zlevels = list(
+		/area/rogue/indoors/town/tavern,
+		/area/rogue/indoors/town/bath,
+	)
+	for(var/area_type in forbidden_areas_all_zlevels)
+		if(istype(A, area_type))
+			return TRUE
+	// Never forbidden if we're not on the ground floor of the town
+	if(H.z != town_floor_zlevel)
+		return FALSE
+	for(var/area_type in forbidden_areas_ground_zlevel)
 		if(istype(A, area_type))
 			return TRUE
 	return FALSE
@@ -143,9 +152,10 @@
 	var/mob/living/carbon/human/H = parent
 	var/area/A = get_area(H)
 	if(is_area_forbidden(A))
-		in_forbidden_area = TRUE
 		var/invisible = is_invisible()
-		sendmessage_area_forbidden(H, invisible)
+		if(!in_forbidden_area)
+			sendmessage_area_forbidden(H, invisible)
+		in_forbidden_area = TRUE
 		if(!invis_break_timer && invisible)
 			start_break_timer()
 	else if(in_forbidden_area)
