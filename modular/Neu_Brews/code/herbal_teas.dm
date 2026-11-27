@@ -78,6 +78,14 @@
 	cuisine = CUISINE_NORTH_IMPERIAL|CUISINE_NORTHERN
 	quality = DRINK_NICE
 
+///OV edit
+/datum/reagent/consumable/caffeine/bloomtea/on_mob_life(mob/living/carbon/M)
+	if(volume > 0.99)
+		M.sate_addiction(/datum/charflaw/addiction/manathirst)
+		M.sate_addiction(/datum/charflaw/addiction/manabroken)
+	..()
+///OV edit end
+
 /datum/reagent/consumable/caffeine/fyretea
 	name = "tì teine"
 	description = "Fire Tea. A brew that spawned from the desire from emboldened quisiners desire to enjoy the flavor of fyritius. The brewing process draws out the nectar's sweetness, and quenches the burn."

@@ -596,11 +596,30 @@
 	name = "manabloom powder"
 	icon_state = "bluepowder"
 	sellprice = SELLPRICE_ARCANE_DUST_HIGH
+    ///OV edit
+	possible_item_intents = list(/datum/intent/food)
+///OV edit end
 
 	major_pot = /datum/alch_cauldron_recipe/mana_potion
 	med_pot = /datum/alch_cauldron_recipe/int_potion
 	minor_pot = /datum/alch_cauldron_recipe/big_mana_potion
 	materia = list(/datum/materia_aspect/arcyne)
+
+///OV edit
+/obj/item/alch/manabloompowder/attack(mob/living/target, mob/living/user)
+
+	if (istype(user.used_intent, /datum/intent/food) && (user.has_flaw(/datum/charflaw/addiction/manathirst) || user.has_flaw(/datum/charflaw/addiction/manabroken)))
+		user.visible_message(span_notice("[user] begins sniffing [src]."), span_notice("I begin sniffing on [src]."))
+		if(!do_after(user, 2 SECONDS, target = src))
+			return
+		playsound(user.loc, 'sound/items/sniff.ogg', rand(30,60), TRUE)
+		user.visible_message(span_notice("[user] finishes sniffing [src]."), span_notice("I finish sniffing [src]. Teehee!"))
+		if(user.has_flaw(/datum/charflaw/addiction/manathirst))
+			user.sate_addiction(/datum/charflaw/addiction/manathirst)
+		if(user.has_flaw(/datum/charflaw/addiction/manabroken))
+			user.sate_addiction(/datum/charflaw/addiction/manabroken)
+
+///OV edit end
 
 /obj/item/alch/rosa
 	name = "rosa"

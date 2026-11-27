@@ -185,6 +185,23 @@
 	icon_state = "soap_mana"
 	fragrance_type = /datum/pollutant/fragrance/floral
 	medicine_type = /datum/reagent/medicine/manapot
+	possible_item_intents = list(/datum/intent/food)
+
+///OV edit
+/obj/item/soap/mana/attack(mob/living/target, mob/living/user)
+
+	if (istype(user.used_intent, /datum/intent/food) && (user.has_flaw(/datum/charflaw/addiction/manathirst) || user.has_flaw(/datum/charflaw/addiction/manabroken)))
+		user.visible_message(span_notice("[user] begins nibbling on [src]."), span_notice("I begin nibbling on [src]."))
+		if(!do_after(user, 2 SECONDS, target = src))
+			return
+		playsound(user.loc, 'sound/misc/slip.ogg', rand(30,60), TRUE)
+		user.visible_message(span_notice("[user] finishes eating [src]."), span_notice("I finish eating [src]. Yum!"))
+		if(user.has_flaw(/datum/charflaw/addiction/manathirst))
+			user.sate_addiction(/datum/charflaw/addiction/manathirst)
+		if(user.has_flaw(/datum/charflaw/addiction/manabroken))
+			user.sate_addiction(/datum/charflaw/addiction/manabroken)
+		qdel(src)
+///OV edit end
 
 /obj/item/soap/citrus
 	name = "citrus soap"
