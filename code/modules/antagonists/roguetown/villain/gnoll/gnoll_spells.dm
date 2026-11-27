@@ -340,7 +340,7 @@
 		return FALSE
 
 	// Practically indefinite
-	var/base_dur = 999 MINUTES
+	var/base_dur = 1 MINUTES // OV EDIT - NOT indefinite
 
 	target.visible_message(span_warning("[target] vanishes into the scent of the hunt!"), span_notice("You vanish, the hunt guides your shadows."))
 

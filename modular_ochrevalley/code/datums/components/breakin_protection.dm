@@ -13,10 +13,34 @@
 	src.examine_message = examine_message
 
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(on_crossed))
 
 /datum/component/breakin_protection/Destroy(force, silent)
-	. = ..()
-	UnregisterSignal(parent, COMSIG_PARENT_EXAMINE)
+	UnregisterSignal(parent, list(
+		COMSIG_PARENT_EXAMINE,
+		COMSIG_MOVABLE_CROSSED,
+	))
+	return ..()
+
+/datum/component/breakin_protection/proc/on_crossed(datum/source, atom/movable/AM)
+	// Check to see if what crossed us is a gnoll
+	if(!ishuman(AM))
+		return
+	var/mob/living/carbon/human/H = AM
+	var/datum/component/gnoll_invisibility_restrictions/IR = H.GetComponent(/datum/component/gnoll_invisibility_restrictions)
+	if(!IR)
+		return
+	// So they're a gnoll... Check if they're invisible and/or sneaking
+	// If they are, break invisibility/sneaking (any that apply)
+	if(IR.is_invisible())
+		IR.break_invisibility(FALSE)
+		var/obj/structure/mineral_door/D = parent
+		H.balloon_alert(H, "<font color = '#bb2b2b'>Read the chat!</font>")
+		// Log the break-in, inform admins, and give the gnoll a big warning to GTFO
+		to_chat(H, fieldset_block("OOC NOTICE", span_danger("The server rules protect [D.name] from break-ins and infiltration. By sneaking here, you are likely breaking server rules regarding breaking and entering. As such, your invisibility has been broken. Leave the area now."), "breakin_protection_block"))
+		message_admins("([ADMIN_LOOKUPFLW(H)]), a GNOLL, attempted to invisibly sneak through rules-protected door ([D.name]), but was revealed and had invisibility broken by break-in protection mechanics. Likely failed to examine the door to see it is OOC protected, or worse ignored server rules. [ADMIN_JMP(D)]")
+		log_admin("([key_name(H)]), a GNOLL, attempted to invisibly sneak through rules-protected door ([D.name]) at X:[D.x] Y:[D.y] Z:[D.z], but was revealed and had invisibility broken by break-in protection mechanics. Likely failed to examine the door to see it is OOC protected, or worse ignored server rules.")
+		playsound(H, 'sound/misc/notice.ogg', 100, FALSE)
 
 /datum/component/breakin_protection/proc/on_examine(atom/movable/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
