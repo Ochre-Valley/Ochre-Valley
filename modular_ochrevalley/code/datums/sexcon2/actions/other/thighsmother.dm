@@ -55,13 +55,13 @@
 
 /datum/sex_action/sex/other/thighsmother/proc/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
     target.muffled = TRUE
-    ADD_TRAIT(target, TRAIT_TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
+    ADD_TRAIT(target, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
 	target.visible_message(span_warning("My voice is quickly muffled as [user]'s thighs envelop my head"))
     .=..() //IMPORTANT!
 
 /datum/sex_action/sex/other/thighsmother/proc/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
     target.muffled = FALSE
-    REMOVE_TRAIT(target, TRAIT_TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
+    REMOVE_TRAIT(target, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
     .=..() //IMPORTANT!
 
 	sex_session.perform_sex_action(target, 2, 4, TRUE, sex_session.speed, sex_session.force)
