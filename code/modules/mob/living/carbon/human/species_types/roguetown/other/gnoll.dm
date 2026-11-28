@@ -31,6 +31,7 @@
 		TRAIT_NOSTINK,
 		TRAIT_NASTY_EATER,
 		TRAIT_ORGAN_EATER,
+		TRAIT_SILVER_WEAK, // It is lamentable that the only time you monsters are clean, is when you burn.
 		TRAIT_STEELHEARTED,
 		TRAIT_BASHDOORS,
 		TRAIT_STRONGBITE,
