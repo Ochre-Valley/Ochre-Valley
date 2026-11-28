@@ -46,6 +46,7 @@
 			target_effect = "buries"
 		if(SEX_FORCE_EXTREME)
 			target_effect = "suffocates"
+			choke_damage = 10
 	target.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective(do_subtle)] [target_effect] [target]'s head with [user.p_their()] thighs..."), vision_distance = (do_subtle ? 1 : DEFAULT_MESSAGE_RANGE))
 
 /datum/sex_action/sex/other/thighsmother/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -54,13 +55,13 @@
 	playsound(target, 'sound/misc/mat/fingering.ogg', 20, TRUE, (do_subtle ? -6 : -2), ignore_walls = FALSE, quiet = TRUE)
 
 /datum/sex_action/sex/other/thighsmother/proc/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
-    target.muffled = TRUE
+    target.muffled = TRUE ///If this doesn't work replace it with the mute trait.
     ADD_TRAIT(target, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
 	target.visible_message(span_warning("My voice is quickly muffled as [user]'s thighs envelop my head"))
     .=..() //IMPORTANT!
 
 /datum/sex_action/sex/other/thighsmother/proc/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
-    target.muffled = FALSE
+    target.muffled = FALSE ///If this doesn't work replace it with the mute trait.
     REMOVE_TRAIT(target, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
     .=..() //IMPORTANT!
 
