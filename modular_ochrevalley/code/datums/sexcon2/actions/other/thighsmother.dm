@@ -29,12 +29,12 @@
 	var/do_subtle = sex_session.doing_subtly
 	return span_warning("[user] [do_subtle ? "subtly " : ""]shoves [target]'s head between [user.p_their()] thighs!")
 
-	/datum/sex_action/sex/other/thighsmother/get_finish_message(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/sex/other/thighsmother/get_finish_message(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/do_subtle = sex_session.doing_subtly
 	return span_warning("[user] [do_subtle ? "subtly " : ""]pulls [target]'s head out from inbetween [user.p_their()] thighs.")
 
-	/datum/sex_action/sex/other/thighsmother/on_perform_message(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/sex/other/thighsmother/on_perform_message(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/do_subtle = sex_session.doing_subtly
 	switch(sex_session.force)
@@ -48,7 +48,7 @@
 			target_effect = "suffocates"
 	target.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective(do_subtle)] [target_effect] [target]'s head with [user.p_their()] thighs..."), vision_distance = (do_subtle ? 1 : DEFAULT_MESSAGE_RANGE))
 
-	/datum/sex_action/sex/other/thighsmother/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/sex/other/thighsmother/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/datum/sex_session/sex_session = get_sex_session(user, target)
 	var/do_subtle = sex_session.doing_subtly
 	playsound(target, 'sound/misc/mat/fingering.ogg', 20, TRUE, (do_subtle ? -6 : -2), ignore_walls = FALSE, quiet = TRUE)
