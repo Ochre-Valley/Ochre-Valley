@@ -46,7 +46,7 @@
 			target_effect = "buries"
 		if(SEX_FORCE_EXTREME)
 			target_effect = "suffocates"
-			choke_damage = 10
+			var/choke_damage = 10
 	target.visible_message(sex_session.spanify_force("[user] [sex_session.get_generic_force_adjective(do_subtle)] [target_effect] [target]'s head with [user.p_their()] thighs..."), vision_distance = (do_subtle ? 1 : DEFAULT_MESSAGE_RANGE))
 
 /datum/sex_action/sex/other/thighsmother/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
