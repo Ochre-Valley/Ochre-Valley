@@ -53,9 +53,16 @@
 	var/do_subtle = sex_session.doing_subtly
 	playsound(target, 'sound/misc/mat/fingering.ogg', 20, TRUE, (do_subtle ? -6 : -2), ignore_walls = FALSE, quiet = TRUE)
 
-///Figure out how to actually make the target muffled and prevent them from using spells/miracles, what is written here probably doesn't work.
-    /datum/sex_action/sex/other/thighsmother/on_perform(mob/living/carbon/human/target)
-	var/muffled = TRUE
+/datum/sex_action/sex/other/thighsmother/proc/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
+    ADD_TRAIT(target, TRAIT_MUTE, TRAIT_GENERIC)
+    ADD_TRAIT(target, TRAIT_TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
+	target.visible_message(span_warning("My voice is quickly muffled as [user]'s thighs envelop my head"))
+    .=..() //IMPORTANT!
+
+/datum/sex_action/sex/other/thighsmother/proc/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
+    REMOVE_TRAIT(target,TRAIT_MUTE, TRAIT_GENERIC)
+    REMOVE_TRAIT(target,TRAIT_TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
+    .=..() //IMPORTANT!
 
 	sex_session.perform_sex_action(target, 2, 4, TRUE, sex_session.speed, sex_session.force)
 	sex_session.handle_passive_ejaculation(target)
